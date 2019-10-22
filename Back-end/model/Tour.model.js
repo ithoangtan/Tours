@@ -2,6 +2,7 @@ var mysql = require("../dbconnection.js");
 
 //Task object constructor
 var Tour = function(tour) {
+  this.idTour = tour.idTour | 0;
   this.titleTour = tour.titleTour;
   this.price = tour.price;
   this.sale = tour.sale;
@@ -9,7 +10,7 @@ var Tour = function(tour) {
   this.departureDay = tour.departureDay;
   this.describe = tour.describe;
   this.address = tour.address;
-  this.vocationtime = tour.vocationtime;
+  this.vocationTime = tour.vocationTime;
 };
 Tour.getAllTour = function(result) {
   mysql.query("SELECT * FROM kinhdoanhtourdulichtest.tours ;", function(
@@ -33,7 +34,7 @@ Tour.createTour = function(newTour, result) {
   this.address = newTour.address;
   this.vocationTime = newTour.vocationTime;
   mysql.query(
-    "INSERT INTO kinhdoanhtourdulich.tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`) VALUES ('" +
+    "INSERT INTO kinhdoanhtourdulichtest.tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`) VALUES ('" +
       this.titleTour +
       "', '" +
       this.price +
@@ -71,10 +72,10 @@ Tour.getTourById = function(idTour, result) {
     }
   );
 };
-Tour.updateById = function(idTour, updateTour, result) {
+Tour.updateById = function(updateTour, result) {
   mysql.query(
     "UPDATE kinhdoanhtourdulichtest.tours SET ? WHERE (idTour = ?);",
-    [updateTour, idTour],
+    [updateTour, updateTour.idTour],
     function(err, res) {
       if (err) {
         result(null, err);
