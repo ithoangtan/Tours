@@ -2,9 +2,7 @@ var Images = require("../model/ImagesM.js");
 
 exports.list_all_image = function(req, res) {
   Image.getAllImage(function(err, image) {
-    console.log("controller");
     if (err) res.send(err);
-    console.log("res", image);
     res.send(image);
   });
 };
@@ -12,7 +10,6 @@ exports.list_all_image = function(req, res) {
 exports.create_a_image = function(req, res) {
   var new_image = new Image(req.body);
 
-  //handles null error
   if (!new_image.link) {
     res.status(400).send({ error: true, message: "Please provide link file" });
   } else {

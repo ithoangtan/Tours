@@ -2,7 +2,7 @@ var Tour = require("../model/Tour.model");
 
 exports.list_all_tour = function(req, res) {
   Tour.getAllTour(function(err, tour) {
-    if (err) res.send(err); 
+    if (err) res.send(err);
     res.send(tour);
   });
 };
@@ -24,10 +24,8 @@ exports.read_a_tour = function(req, res) {
 
 exports.update_a_tour = function(req, res) {
   // Phải truyền vào như v kh thì dăn lỗi ...
-  Tour.updateById(req.body.Tour.idTour, new Tour(req.body.Tour), function(
-    err,
-    tour
-  ) {
+  updateTour = new Tour(req.body);
+  Tour.updateById(updateTour, function(err, tour) {
     if (err) res.send(err);
     res.json(tour);
   });

@@ -1,12 +1,21 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require('path');
 var cors = require("cors");
 const app = express();
 
-app.use(express.static("public"));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// settings
+app.set('port', process.env.PORT || 8000);
+
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(
@@ -18,6 +27,6 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/", require("./routes/api"));
 
-app.listen(process.env.port || 8080, function() {
-  console.info("ithoangtan", "back end server port 8080");
+app.listen(app.get('port'), function() {
+  console.log(`server on port ${app.get('port')}`);
 });
