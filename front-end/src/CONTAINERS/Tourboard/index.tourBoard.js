@@ -6,7 +6,11 @@ import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
 class TourBoard extends Component {
-   state = {};
+   constructor(props) {
+      super(props);
+
+      this.state = {};
+   }
 
    componentDidMount() {
       const { tourAllActions } = this.props;
@@ -24,16 +28,8 @@ class TourBoard extends Component {
       this.setState({});
    };
 
-   renderForm() {
-      let xhtml = null;
-      const { open } = this.state;
-      xhtml = <div></div>;
-      return xhtml;
-   }
-
    render() {
-      const { classes } = this.props;
-      return <div className={classes.tourBoard}></div>;
+      return <div className="">ádas á da dá á đá ấ sdaas a sd</div>;
    }
 }
 

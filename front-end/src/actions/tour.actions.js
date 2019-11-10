@@ -1,5 +1,5 @@
 import * as tourApis from "../apis/tour.api";
-import * as tourConstants from "../constants/task.module";
+import * as tourConstants from "../constants/tour.module";
 
 export const fetchListTour = () => {
    return {
@@ -27,7 +27,7 @@ export const fetchListTourError = error => {
    };
 };
 /**
- * B1: fetch isTaskRequesr()
+ * B1: fetch isTaskRequest()
  * B2: ResetL state tasks --> []
  * B3: Khi API thành công thì vào then:
  * fetchListTourSucces (data response)

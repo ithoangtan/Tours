@@ -1,4 +1,4 @@
-import * as tourConstants from "./../constants/task.module";
+import * as tourConstants from "./../constants/tour.module";
 import { toastError, toastSuccess } from "../helper/toastify.helper";
 const initialState = {
    listTour: []

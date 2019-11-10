@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class TourItem extends Component {
    render() {
-      return <Card></Card>;
+      return <div></div>;
    }
 }
 export default TourItem;
