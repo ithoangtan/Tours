@@ -24,9 +24,9 @@ class App extends Component {
       );
    }
    showContent = routes => {
-      var result = null;
+      var resultPage = null;
       if (routes.length > 0) {
-         result = routes.map((route, index) => {
+         resultPage = routes.map((route, index) => {
             return (
                <Route
                   key={index}
@@ -36,7 +36,7 @@ class App extends Component {
                />
             );
          });
-         return <Switch>{result}</Switch>;
+         return <Switch>{resultPage}</Switch>;
       }
    };
 }
