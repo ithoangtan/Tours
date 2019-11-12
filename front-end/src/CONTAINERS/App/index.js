@@ -13,7 +13,13 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
 
 //import components:
-import HeaderAll from "../Header/index";
+import HeaderPage from "../Header/header.page";
+import FooterPage from "../Footer/footer.page";
+import SendMailPage from "../Footer/sendMail.page";
+import NavigationBlockPage from "../Header/navigationBlock.page";
+import NavigationFixedPage from "../Header/navigationFixed.page";
+import AllPageIndex from "../../components/All/all";
+import NavigationHeaderPage from "../Header/navigationHeader.page";
 
 const store = configStore();
 
@@ -22,8 +28,12 @@ class App extends Component {
       return (
          <Router>
             <Provider store={store}>
-               <HeaderAll />
+               <HeaderPage />
+               <NavigationBlockPage />
+               <NavigationFixedPage />
                {this.showContent(routes)}
+               <SendMailPage />
+               <FooterPage />
                <ToastContainer autoColse={3000} />
             </Provider>
          </Router>
