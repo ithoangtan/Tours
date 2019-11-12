@@ -5,9 +5,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
-import TourList from "../../components/TourList/index";
+import HeaderTitlePage from "../Header/headerTitle.page";
+import SeatchEnginePage from "../SearchEngine/seatchEngine.page";
+import TourBoardPage from "../TourBoard/tourBoard.page";
 
-class TourBoardPage extends Component {
+class IndexPage extends Component {
   constructor(props) {
     super(props);
 
@@ -31,11 +33,17 @@ class TourBoardPage extends Component {
   };
 
   render() {
-    return <TourList />;
+    return (
+      <div>
+        <HeaderTitlePage />
+        <SeatchEnginePage />
+        <TourBoardPage />
+      </div>
+    );
   }
 }
 
-TourBoardPage.propTypes = {
+IndexPage.propTypes = {
   classes: PropTypes.object,
   tourAllActions: PropTypes.shape({
     fetchListTourRequest: PropTypes.func
@@ -54,4 +62,4 @@ const mapDispatchToProps = dispatch => {
     //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TourBoardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);
