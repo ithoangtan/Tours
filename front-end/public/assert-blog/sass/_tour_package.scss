@@ -1,0 +1,86 @@
+/****** tour package scss *******/
+.tour_package{
+    @media #{$tab}{
+        padding: 0 0 70px;
+    }
+    @media #{$medium_device}{
+        padding: 0 0 80px;
+    }
+    .single_tour_package{
+        .tour_pack_content{
+            background-color: #fafafa;
+            padding: 45px 48px;
+            @media #{$tab}{
+                padding: 20px 25px;
+            }
+            h4{
+                font-size: 24px;
+                text-transform: capitalize;
+                margin-bottom: 10px;
+            }
+            p{
+                margin-bottom: 50px;
+            }
+        }
+    }
+    .tour_content_rating{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        ul{
+            li{
+                display: inline-block;
+                a{
+                    color: $primary_color;
+                }
+            }
+        }
+        .btn1{
+            margin-top: 0;
+        }
+    }
+    .tour_pack_content{
+        @media #{$tab}{
+            margin-bottom: 30px;
+        }
+        img{
+            margin-bottom: 40px;
+            @media #{$tab}{
+                margin-bottom: 15px;
+            }
+        }
+        h2{
+            font-size: 36px;
+            margin-bottom: 32px;
+            text-transform: capitalize;
+            @media #{$tab}{
+                margin-bottom: 15px;
+                font-size: 30px;
+            }
+        }
+        .btn_1{
+            margin-top: 60px;
+            @media #{$tab}{
+                margin-top: 25px;
+            }
+        }
+    }
+    .owl-nav{
+        position: absolute;
+        right: -66px;
+        top: 38px;
+        transform: rotate(90deg);
+        button{
+            text-transform: capitalize;
+            margin-right: 20px;
+        }
+    }
+}
+.single_pack{
+    @media #{$tab}{
+        padding: 70px 0;
+    }
+    @media #{$medium_device}{
+        padding: 80px 0;
+    }
+}

@@ -1,0 +1,90 @@
+/************** cta part css ****************/
+.cta_part{
+    position: relative;
+    background-image: url(../img/cta_bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 750px;
+    @media #{$tab}{
+        height: auto;
+    }
+    @media #{$medium_device}{
+        height: auto;
+    }
+    .cta_text{
+        h5{
+            font-size: 20px;
+            font-family: $font_stack_3;
+            color: $white_color;
+            margin-bottom: 35px;
+        }
+        h2{
+            font-size: 47px;
+            color: $white_color;
+            margin-bottom: 65px;
+            line-height: 60px;
+            
+            @media #{$tab}{
+                font-size: 30px;
+                margin-bottom: 20px;
+                line-height: 35px;
+            }
+            @media #{$small_mobile}{
+                font-size: 25px;
+                margin-bottom: 15px;
+            }
+            @media #{$medium_device}{
+                font-size: 35px;
+                margin-bottom: 16px;
+            }
+        }
+        p{
+            color: $white_color;
+            font-size: 18px;
+            margin-bottom: 50px;
+            @media #{$tab}{
+                margin-bottom: 20px;
+            }
+            @media #{$small_mobile}{
+                margin-bottom: 15px;
+            }
+            @media #{$medium_device}{
+                margin-bottom: 30px;
+            }
+        }
+    }
+    .input-group{
+        @media #{$tab}{
+            justify-content: center;
+        }
+        input{
+            height: 60px;
+            border: 0px solid transparent;
+            border-radius: 0;
+            &:hover, &:focus{
+                box-shadow: none;
+            }
+            @media #{$tab}{
+                display: block;
+                width: 100%;
+            }
+        }
+        .subs_btn{
+            background-color: #ffcc00;
+            padding: 19px 29px;
+            text-transform: uppercase;
+            color: #000;
+            margin-left: 10px;
+            @media #{$tab}{
+                display: block;
+                width: 100%;
+                margin-top: 20px;
+                margin-left: 0;
+            }
+        }
+        .form-control{
+            padding-left: 20px;
+        }
+    }
+}
+    

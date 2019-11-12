@@ -1,0 +1,61 @@
+.breadcrumb_bg {
+	background-color: #00c0ff;
+}
+
+.breadcrumb {
+	position: relative;
+	z-index: 1;
+	text-align: center;
+
+	.breadcrumb_iner {
+		height: 500px;
+		width: 100%;
+		display: table;
+		@media #{$tab} {
+			height: 350px;
+		}
+
+		.breadcrumb_iner_item {
+			display: table-cell;
+			vertical-align: middle;
+			h2 {
+				color: $white_color;
+				font-size: 80px;
+				font-weight: 500;
+				margin-bottom: 10px;
+				text-transform: capitalize;
+				@media #{$small_mobile} {
+					font-size: 35px;
+				}
+
+				@media #{$large_mobile} {
+					font-size: 35px;
+				}
+
+				@media #{$tab_device} {
+					font-size: 40px;
+				}
+
+				@media #{$medium_device} {
+					font-size: 50px;
+				}
+			}
+
+			p {
+				font-size: 15px;
+				color: $white_color;
+			}
+
+			span {
+				margin: 0px 5px;
+				font-size: 12px;
+			}
+
+		}
+	}
+
+}
+
+.breadcrumb {
+	margin-bottom: 0px !important;
+}

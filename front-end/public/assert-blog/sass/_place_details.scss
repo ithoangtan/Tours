@@ -1,0 +1,86 @@
+/**** place details css ****/
+.place_details{
+    position: relative;
+    .container-fluid{
+        padding-left: 0;
+        padding-right: 0;
+        overflow: hidden;
+        @media #{$tab}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    .place_details_content{
+        img{
+            margin-bottom: 45px;
+        }
+        h2{
+           font-size: 36px;
+           margin-bottom: 30px;
+           @media #{$tab}{
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+        }
+        p{
+            margin-bottom: 10px;
+        }
+        span{
+            font-style: italic;
+            font-weight: 300;
+            color: #000;
+            line-height: 30px;
+            font-family: "Poppins", sans-serif;
+            display: inline-block;
+            margin-bottom: 120px;
+            @media #{$tab}{
+                margin-bottom: 40px;
+            }
+            @media #{$medium_device}{
+                margin-bottom: 40px;
+            }
+        }
+    }
+    .place_details_img{
+        img{
+            width: 100%;
+        }
+    }
+    .view_all_btn{
+            text-align: center;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 9;
+            margin-top: -400px;
+            @media #{$tab}{
+                margin-top: 20px;
+            }
+            @media #{$medium_device}{
+                margin-top: 20px;
+            }
+            
+        .view_btn{
+            width: 265px;
+            height: 215px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $primary_color;
+            color: $black_color;
+            font-size: 24px;
+            font-family: $font_stack_3;
+            text-transform: capitalize;
+            @media #{$tab}{
+                width: 150px;
+                height: 80px;
+            }
+            @media #{$medium_device}{
+                width: 150px;
+                height: 80px;
+            }
+        }
+    }
+}

@@ -10,50 +10,51 @@ import ResultSuccessful from "./CONTAINERS/ResultBoard/ResultSuccessful";
 import ResultWarning from "./CONTAINERS/ResultBoard/ResultWarning";
 
 const router = [
-   {
-      path: "/",
-      exact: true,
-      main: () => <TourBoard />
-   },
-   {
-      path: "/notAuthorized",
-      exact: true,
-      main: () => <Result403 />
-   },
-   {
-      path: "/notExist",
-      exact: true,
-      main: () => <Result404 />
-   },
-   {
-      path: "/serverIsWrong",
-      exact: true,
-      main: () => <Result500 />
-   },
-   {
-      path: "/doneResult",
-      exact: true,
-      main: () => <ResultDone />
-   },
-   {
-      path: "/processingResult",
-      exact: true,
-      main: () => <ResultProcessing />
-   },
-   {
-      path: "/complexError",
-      exact: true,
-      main: () => <ResultSubmissionFailed />
-   },
-   {
-      path: "/successfulResult",
-      exact: true,
-      main: () => <ResultSuccessful />
-   },
-   {
-      path: "/warningResult",
-      exact: true,
-      main: () => <ResultWarning />
-   }
+  {
+    path: "/",
+    exact: true,
+    main: () => <TourBoard />
+  },
+  {
+    path: "/notAuthorized",
+    exact: true,
+    main: () => <Result403 />
+  },
+
+  {
+    path: "/serverIsWrong",
+    exact: true,
+    main: () => <Result500 />
+  },
+  {
+    path: "/doneResult",
+    exact: true,
+    main: () => <ResultDone />
+  },
+  {
+    path: "/processingResult",
+    exact: true,
+    main: () => <ResultProcessing />
+  },
+  {
+    path: "/complexError",
+    exact: true,
+    main: () => <ResultSubmissionFailed />
+  },
+  {
+    path: "/successfulResult",
+    exact: true,
+    main: () => <ResultSuccessful />
+  },
+  {
+    path: "/warningResult",
+    exact: true,
+    main: () => <ResultWarning />
+  },
+  {
+    path: "/",
+    exact: true,
+    main: () => <Result404 />
+  }
 ];
 export default router;

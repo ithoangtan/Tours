@@ -1,0 +1,66 @@
+/**************** blog part css start ****************/
+.blog_part{
+    position: relative;
+    .single_blog_part{
+        background-color: $white_color;
+        @media #{$tab}{
+            margin-bottom: 20px;
+            img{
+                width: 100%;
+            }
+        }
+        .blog_text{
+            padding: 43px 0;
+            @media #{$tab}{
+                padding: 20px 0;
+            }
+            @media #{$medium_device}{
+                padding: 20px 0;
+            }
+
+            h2{
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+            ul{
+                display: flex;
+                align-items: center;
+                margin-top: 40px;
+                @media #{$tab}{
+                    margin-top: 20px;
+                }
+                @media #{$medium_device}{
+                    margin-top: 20px;
+                }
+                li{
+                    display: flex;
+                    align-items: center;
+                    margin-right: 30px;
+                    @media #{$large_mobile}{
+                        margin-right: 20px;
+                    }
+                    i{
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+        
+    }
+    .blog_img{
+        position: absolute;
+        right: 0;
+        top: 20%;
+        @media #{$tab}{
+            display: none;
+        }
+        @media #{$medium_device}{
+            display: none;
+        }
+        @media #{$big_screen}{
+            display: none;
+        }
+    }
+}
+
+  

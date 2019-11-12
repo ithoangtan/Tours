@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-
+//lib package.json
 import { Provider } from "react-redux";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import routes from "../../router";
 import configStore from "../../redux/configStore.redux";
 
+//Third lib
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 
+//style
+import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
+
+//import components:
+import HeaderAll from "../Header/index";
 
 const store = configStore();
 
@@ -17,6 +22,7 @@ class App extends Component {
       return (
          <Router>
             <Provider store={store}>
+               <HeaderAll />
                {this.showContent(routes)}
                <ToastContainer autoColse={3000} />
             </Provider>
