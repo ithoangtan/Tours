@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-class TourItem extends Component {
-   render() {
-      return <Card></Card>;
-   }
+class IndexTourItem extends Component {
+  render() {
+    return <div></div>;
+  }
 }
-export default TourItem;
+export default IndexTourItem;
