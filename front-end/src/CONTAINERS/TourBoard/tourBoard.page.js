@@ -29,7 +29,7 @@ class TourBoardPage extends Component {
   };
 
   render() {
-    return <div className="">ádas á da dá á đá ấ sdaas a sd</div>;
+    return <div></div>;
   }
 }
 

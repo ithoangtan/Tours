@@ -17,9 +17,7 @@ import HeaderPage from "../Header/header.page";
 import FooterPage from "../Footer/footer.page";
 import SendMailPage from "../Footer/sendMail.page";
 import NavigationBlockPage from "../Header/navigationBlock.page";
-import NavigationFixedPage from "../Header/navigationFixed.page";
-import AllPageIndex from "../../components/All/all";
-import NavigationHeaderPage from "../Header/navigationHeader.page";
+import HeaderTitlePage from "../Header/headerTitle.page";
 import SeatchEnginePage from "../SearchEngine/seatchEngine.page";
 
 const store = configStore();
@@ -31,7 +29,7 @@ class App extends Component {
         <Provider store={store}>
           <HeaderPage />
           <NavigationBlockPage />
-          <NavigationFixedPage />
+          <HeaderTitlePage />
           <SeatchEnginePage />
           {this.showContent(routes)}
           <SendMailPage />

@@ -1,5 +1,5 @@
 import React from "react";
-import TourBoard from "./CONTAINERS/TourBoard/index.TourBoard";
+import TourBoard from "./CONTAINERS/TourBoard/tourBoard.page";
 import Result403 from "./CONTAINERS/ResultBoard/Result403";
 import Result404 from "./CONTAINERS/ResultBoard/Result404";
 import Result500 from "./CONTAINERS/ResultBoard/Result500";
