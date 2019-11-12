@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-import TaskItem from "../TaskItem";
-
-class TourList extends Component {
+class IndexTourList extends Component {
   render() {
     return (
       <section className="ftco-section">
@@ -137,4 +135,4 @@ class TourList extends Component {
     );
   }
 }
-export default TourList;
+export default IndexTourList;
