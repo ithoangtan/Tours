@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
-class TourBoard extends Component {
+class TourBoardPage extends Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +33,7 @@ class TourBoard extends Component {
   }
 }
 
-TourBoard.propTypes = {
+TourBoardPage.propTypes = {
   classes: PropTypes.object,
   tourAllActions: PropTypes.shape({
     fetchListTourRequest: PropTypes.func
@@ -52,4 +52,4 @@ const mapDispatchToProps = dispatch => {
     //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TourBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(TourBoardPage);
