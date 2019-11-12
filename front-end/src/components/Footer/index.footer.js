@@ -15,17 +15,17 @@ export default class IndexFooter extends Component {
                 </p>
                 <ul className="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                   <li className="ftco-animate">
-                    <a href="#">
+                    <a href="s">
                       <span className="icon-twitter" />
                     </a>
                   </li>
                   <li className="ftco-animate">
-                    <a href="#">
+                    <a href="s">
                       <span className="icon-facebook" />
                     </a>
                   </li>
                   <li className="ftco-animate">
-                    <a href="#">
+                    <a href="s">
                       <span className="icon-instagram" />
                     </a>
                   </li>
@@ -37,32 +37,32 @@ export default class IndexFooter extends Component {
                 <h2 className="ftco-heading-2">Infromation</h2>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Online Enquiry
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       General Enquiries
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Booking Conditions
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Privacy and Policy
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Refund Policy
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Call Us
                     </a>
                   </li>
@@ -74,32 +74,32 @@ export default class IndexFooter extends Component {
                 <h2 className="ftco-heading-2">Experience</h2>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Adventure
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Hotel and Restaurant
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Beach
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Nature
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Camping
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="py-2 d-block">
+                    <a href="s" className="py-2 d-block">
                       Party
                     </a>
                   </li>
@@ -119,13 +119,13 @@ export default class IndexFooter extends Component {
                       </span>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="s">
                         <span className="icon icon-phone" />
                         <span className="text">+2 392 3929 210</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="s">
                         <span className="icon icon-envelope" />
                         <span className="text">info@yourdomain.com</span>
                       </a>
@@ -141,7 +141,7 @@ export default class IndexFooter extends Component {
                 {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
                 Copyright © All rights reserved | This template is made with{" "}
                 <i className="icon-heart color-danger" aria-hidden="true" /> by{" "}
-                <a href="https://colorlib.com" target="_blank">
+                <a href="https://colorlib.com" rel="noopener noreferrer">
                   Colorlib
                 </a>
                 {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}

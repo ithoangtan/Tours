@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
 
 //import components:
-import HeaderPage from "../Header/header.page";
 import FooterPage from "../Footer/footer.page";
 import SendMailPage from "../Footer/sendMail.page";
 import NavigationBlockPage from "../Header/navigationBlock.page";
@@ -27,7 +26,6 @@ class App extends Component {
     return (
       <Router>
         <Provider store={store}>
-          <HeaderPage />
           <NavigationBlockPage />
           <HeaderTitlePage />
           <SeatchEnginePage />

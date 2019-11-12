@@ -63,7 +63,11 @@ export default class IndexSearchEngine extends Component {
                             <div className="icon">
                               <span className="ion-ios-arrow-down" />
                             </div>
-                            <select name id className="form-control">
+                            <select
+                              name="search-price"
+                              id="searchPrice"
+                              className="form-control"
+                            >
                               <option value>$5,000</option>
                               <option value>$10,000</option>
                               <option value>$50,000</option>
