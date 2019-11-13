@@ -6,13 +6,13 @@ import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
 //import components
-import BannerApp from "../Banner/banner.app";
-import BookingPartApp from "../BookingPart/bookingPart.app";
-import TopPlace1App from "../TopPlace/topPlace1.app";
-import TopPlace2App from "../TopPlace/topPlace2.app";
-import IndestriesApp from "../Industries/industries2.app";
-import TopPlace3App from "../TopPlace/topPlace3.app";
-import IndestriesApp2 from "../Industries/Industries.app";
+import BannerContainer from "../Banner/banner.container";
+import BookingPartContainer from "../BookingPart/bookingPart.container";
+import TopPlace1Container from "../TopPlace/topPlace1.container";
+import TopPlace2Container from "../TopPlace/topPlace2.container";
+import IndestriesContainer from "../Industries/industries2.container";
+import TopPlace3Container from "../TopPlace/topPlace3.container";
+import Indestries2Container from "../Industries/Industries.container";
 
 class IndexPage extends Component {
    constructor(props) {
@@ -40,13 +40,13 @@ class IndexPage extends Component {
    render() {
       return (
          <div>
-            <BannerApp />
-            <BookingPartApp />
-            <TopPlace1App />
-            <TopPlace2App />
-            <IndestriesApp />
-            <TopPlace3App />
-            <IndestriesApp2 />
+            <BannerContainer />
+            <BookingPartContainer />
+            <TopPlace1Container />
+            <TopPlace2Container />
+            <IndestriesContainer />
+            <TopPlace3Container />
+            <Indestries2Container />
          </div>
       );
    }
