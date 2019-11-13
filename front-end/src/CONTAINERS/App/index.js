@@ -33,7 +33,8 @@ const arrayExternalScript = [
    "/js/scrollax.min.js",
    "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false",
    "/js/google-map.js",
-   "/js/main.js"
+   "/js/main.js",
+   "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 ];
 
 const store = configStore();

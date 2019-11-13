@@ -17,6 +17,7 @@ import ConcactPage from "./CONTAINERS/ContactPage/concact.container";
 import DestinationPage from "./CONTAINERS/DestinationPage/destination.container";
 
 import All from "./CONTAINERS/App/all";
+import TourPage from "./CONTAINERS/TourPage/tour.container";
 
 const router = [
    {
@@ -26,6 +27,16 @@ const router = [
          <div>
             <NavigationContainer />
             <IndexPage />
+         </div>
+      )
+   },
+   {
+      path: "/tour",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <TourPage />
          </div>
       )
    },

@@ -317,6 +317,17 @@ h5, .h5 {
 h6, .h6 {
   font-size: 1rem; }
 
+.fix-video-gallery{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fix-video-size{
+  max-width: 100%;
+  height: auto;
+}
+
 .lead {
   font-size: 1.25rem;
   font-weight: 300; }
@@ -9522,3 +9533,5 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+    
