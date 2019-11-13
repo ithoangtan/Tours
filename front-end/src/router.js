@@ -12,6 +12,9 @@ import NavigationContainer from "./CONTAINERS/Header/navigation.container.";
 import IndexPage from "./CONTAINERS/IndexPage/index.page";
 import AboutPage from "./CONTAINERS/AboutPage/about.container";
 import BlogPage from "./CONTAINERS/BlogPage/blog.container";
+import BlogSinglePage from "./CONTAINERS/BlogSinglePage/blogSingle.container";
+import ConcactPage from "./CONTAINERS/ContactPage/concact.container";
+import DestinationPage from "./CONTAINERS/DestinationPage/destination.container";
 
 import All from "./CONTAINERS/App/all";
 
@@ -37,12 +40,42 @@ const router = [
       )
    },
    {
+      path: "/concact",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <ConcactPage />
+         </div>
+      )
+   },
+   {
+      path: "/destination",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <DestinationPage />
+         </div>
+      )
+   },
+   {
       path: "/blog",
       exact: true,
       main: () => (
          <div>
             <NavigationContainer />
             <BlogPage />
+         </div>
+      )
+   },
+   {
+      path: "/blog-single",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <BlogSinglePage />
          </div>
       )
    },
