@@ -45,7 +45,6 @@ class App extends Component {
          const script = document.createElement("script");
          script.src = item;
          script.async = true;
-         script.onload = () => this.scriptLoaded();
          document.body.appendChild(script);
       });
    }
