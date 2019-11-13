@@ -7,54 +7,54 @@ import ResultProcessing from "./CONTAINERS/ResultBoard/ResultProcessing";
 import ResultSubmissionFailed from "./CONTAINERS/ResultBoard/ResultSubmissionFailed";
 import ResultSuccessful from "./CONTAINERS/ResultBoard/ResultSuccessful";
 import ResultWarning from "./CONTAINERS/ResultBoard/ResultWarning";
-import IndexPage from "./CONTAINERS/Index/index.page";
+import IndexPage from "./CONTAINERS/IndexPage/index.page";
 
 const router = [
-  {
-    path: "/",
-    exact: true,
-    main: () => <IndexPage />
-  },
-  {
-    path: "/notAuthorized",
-    exact: true,
-    main: () => <Result403 />
-  },
+   {
+      path: "/",
+      exact: true,
+      main: () => <IndexPage />
+   },
+   {
+      path: "/notAuthorized",
+      exact: true,
+      main: () => <Result403 />
+   },
 
-  {
-    path: "/serverIsWrong",
-    exact: true,
-    main: () => <Result500 />
-  },
-  {
-    path: "/doneResult",
-    exact: true,
-    main: () => <ResultDone />
-  },
-  {
-    path: "/processingResult",
-    exact: true,
-    main: () => <ResultProcessing />
-  },
-  {
-    path: "/complexError",
-    exact: true,
-    main: () => <ResultSubmissionFailed />
-  },
-  {
-    path: "/successfulResult",
-    exact: true,
-    main: () => <ResultSuccessful />
-  },
-  {
-    path: "/warningResult",
-    exact: true,
-    main: () => <ResultWarning />
-  },
-  {
-    path: "/",
-    exact: false,
-    main: () => <Result404 />
-  }
+   {
+      path: "/serverIsWrong",
+      exact: true,
+      main: () => <Result500 />
+   },
+   {
+      path: "/doneResult",
+      exact: true,
+      main: () => <ResultDone />
+   },
+   {
+      path: "/processingResult",
+      exact: true,
+      main: () => <ResultProcessing />
+   },
+   {
+      path: "/complexError",
+      exact: true,
+      main: () => <ResultSubmissionFailed />
+   },
+   {
+      path: "/successfulResult",
+      exact: true,
+      main: () => <ResultSuccessful />
+   },
+   {
+      path: "/warningResult",
+      exact: true,
+      main: () => <ResultWarning />
+   },
+   {
+      path: "/",
+      exact: false,
+      main: () => <Result404 />
+   }
 ];
 export default router;

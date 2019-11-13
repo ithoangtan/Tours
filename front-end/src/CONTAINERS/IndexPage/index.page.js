@@ -5,7 +5,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
-import All from "../App/all";
+import HeaderContainer from "../Header/header.container";
+import SearchEngineContainer from "../SearchEngine/searchEngine.container";
+import BestTourContainer from "../Tour/bestTour.container";
+import ServiceSection from "../ServiceSection/serviceSection.container";
+import AboutTravelandContainer from "../AboutTraveland/aboutTraveland.container";
+import ThingsToKnowContainer from "../ThingsToKnow/thingsToKnow.container";
+import HappyTravelerSaysContainer from "../HappyTravelerSays/happyTravelerSay.container";
+import RecentStoriesContainer from "../RecentStories/recentStories.container";
 
 class IndexPage extends Component {
    constructor(props) {
@@ -31,7 +38,18 @@ class IndexPage extends Component {
    };
 
    render() {
-      return <All />;
+      return (
+         <div>
+            <HeaderContainer />
+            <SearchEngineContainer />
+            <BestTourContainer />
+            <ServiceSection />
+            <AboutTravelandContainer />
+            <ThingsToKnowContainer />
+            <HappyTravelerSaysContainer />
+            <RecentStoriesContainer />
+         </div>
+      );
    }
 }
 

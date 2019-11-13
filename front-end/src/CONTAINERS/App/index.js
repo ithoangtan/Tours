@@ -13,6 +13,11 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
 
 //import components:
+import Loaded from "./loaded";
+import NavigationContainer from "../Header/navigation.container.";
+
+import SubcribeContainer from "../Footer/subcribe.container";
+import FooterContainer from "../Footer/footer.container";
 
 const arrayExternalScript = [
    "/js/jquery.min.js",
@@ -52,7 +57,11 @@ class App extends Component {
       return (
          <Router>
             <Provider store={store}>
+               <NavigationContainer />
                {this.showContent(routes)}
+               <SubcribeContainer />
+               <FooterContainer />
+               <Loaded />
                <ToastContainer autoColse={3000} />
             </Provider>
          </Router>
