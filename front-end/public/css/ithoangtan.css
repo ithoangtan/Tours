@@ -1,0 +1,13 @@
+.tour-single-title {
+   display: flex;
+   text-align: left;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-content: flex-start;
+   justify-items: flex-start;
+}
+
+.tour-single-action {
+   display: flex;
+   justify-content: space-around;
+}

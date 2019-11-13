@@ -5,7 +5,7 @@ export default class RecentStoriesContainer extends Component {
       return (
          <section className="ftco-section bg-light">
             <div className="container">
-               <div className="row justify-content-center mb-5 pb-3">
+               <div className="row justify-content-center mb-2 pb-1">
                   <div className="col-md-7 heading-section text-center ftco-animate">
                      <h2>Recent Stories</h2>
                   </div>

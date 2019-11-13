@@ -16,6 +16,7 @@ import "antd/dist/antd.less";
 import Loaded from "./loaded";
 import SubcribeContainer from "../Footer/subcribe.container";
 import FooterContainer from "../Footer/footer.container";
+import BackToTop from "../App/backTop";
 
 const arrayExternalScript = [
    "/js/jquery.min.js",
@@ -60,6 +61,7 @@ class App extends Component {
                <SubcribeContainer />
                <FooterContainer />
                <Loaded />
+               <BackToTop />
                <ToastContainer autoColse={3000} />
             </Provider>
          </Router>

@@ -5,7 +5,7 @@ export default class BestTourContainer extends Component {
       return (
          <section className="ftco-section">
             <div className="container">
-               <div className="row justify-content-center pb-5">
+               <div className="row justify-content-center pb-1">
                   <div className="col-md-12 heading-section text-center ftco-animate">
                      <h2 className="mb-4">Best Place to Travel</h2>
                      <p>

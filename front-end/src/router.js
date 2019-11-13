@@ -8,6 +8,7 @@ import ResultSubmissionFailed from "./CONTAINERS/ResultBoard/ResultSubmissionFai
 import ResultSuccessful from "./CONTAINERS/ResultBoard/ResultSuccessful";
 import ResultWarning from "./CONTAINERS/ResultBoard/ResultWarning";
 import NavigationContainer from "./CONTAINERS/Header/navigation.container.";
+import HeaderBreadcrumbContainer from "./CONTAINERS/Header/headerBreadcrumb.container";
 
 import IndexPage from "./CONTAINERS/IndexPage/index.page";
 import AboutPage from "./CONTAINERS/AboutPage/about.container";
@@ -15,9 +16,11 @@ import BlogPage from "./CONTAINERS/BlogPage/blog.container";
 import BlogSinglePage from "./CONTAINERS/BlogSinglePage/blogSingle.container";
 import ConcactPage from "./CONTAINERS/ContactPage/concact.container";
 import DestinationPage from "./CONTAINERS/DestinationPage/destination.container";
+import TourSinglePage from "./CONTAINERS/TourPage/tourSingle.page";
+import TourBestPage from "./CONTAINERS/TourPage/tourBest.page";
+import TourPage from "./CONTAINERS/TourPage/tour.page";
 
 import All from "./CONTAINERS/App/all";
-import TourPage from "./CONTAINERS/TourPage/tour.container";
 
 const router = [
    {
@@ -36,7 +39,30 @@ const router = [
       main: () => (
          <div>
             <NavigationContainer />
+            <HeaderBreadcrumbContainer />
             <TourPage />
+         </div>
+      )
+   },
+   {
+      path: "/tour-best",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <HeaderBreadcrumbContainer />
+            <TourBestPage />
+         </div>
+      )
+   },
+   {
+      path: "/tour-single",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <HeaderBreadcrumbContainer />
+            <TourSinglePage />
          </div>
       )
    },
@@ -46,6 +72,7 @@ const router = [
       main: () => (
          <div>
             <NavigationContainer />
+            <HeaderBreadcrumbContainer />
             <AboutPage />
          </div>
       )
@@ -56,6 +83,7 @@ const router = [
       main: () => (
          <div>
             <NavigationContainer />
+            <HeaderBreadcrumbContainer />
             <ConcactPage />
          </div>
       )
@@ -66,6 +94,7 @@ const router = [
       main: () => (
          <div>
             <NavigationContainer />
+            <HeaderBreadcrumbContainer />
             <DestinationPage />
          </div>
       )
@@ -76,6 +105,7 @@ const router = [
       main: () => (
          <div>
             <NavigationContainer />
+            <HeaderBreadcrumbContainer />
             <BlogPage />
          </div>
       )
@@ -86,6 +116,7 @@ const router = [
       main: () => (
          <div>
             <NavigationContainer />
+            <HeaderBreadcrumbContainer />
             <BlogSinglePage />
          </div>
       )
