@@ -18,7 +18,37 @@ import FooterApp from "../Footer/footer.app";
 
 const store = configStore();
 
+const arrayScript = [
+   "/js/jquery-1.12.1.min.js",
+   "/js/popper.min.js",
+   "/js/bootstrap.min.js",
+   "/js/jquery.magnific-popup.js",
+   "/js/owl.carousel.min.js",
+   "/js/masonry.pkgd.js",
+   "/js/jquery.nice-select.min.js",
+   "/js/gijgo.min.js",
+   "/js/jquery.ajaxchimp.min.js",
+   "/js/jquery.form.js",
+   "/js/jquery.validate.min.js",
+   "/js/mail-script.js",
+   "/js/contact.js",
+   "/js/custom.js"
+];
+
 class App extends Component {
+   scriptLoaded() {
+      // window.sort();
+   }
+
+   componentDidMount() {
+      arrayScript.forEach(item => {
+         const script = document.createElement("script");
+         script.src = item;
+         script.async = true;
+         script.onload = () => this.scriptLoaded();
+         document.body.appendChild(script);
+      });
+   }
    render() {
       return (
          <Router>

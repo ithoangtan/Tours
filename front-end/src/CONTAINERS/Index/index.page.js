@@ -37,17 +37,6 @@ class IndexPage extends Component {
       this.setState({});
    };
 
-   scriptLoaded() {
-      // window.sort();
-   }
-
-   componentDidMount() {
-      const script = document.createElement("script");
-      script.src = "/js/custom.js";
-      script.async = true;
-      script.onload = () => this.scriptLoaded();
-      document.body.appendChild(script);
-   }
    render() {
       return (
          <div>
