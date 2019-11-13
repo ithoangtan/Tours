@@ -7,14 +7,51 @@ import ResultProcessing from "./CONTAINERS/ResultBoard/ResultProcessing";
 import ResultSubmissionFailed from "./CONTAINERS/ResultBoard/ResultSubmissionFailed";
 import ResultSuccessful from "./CONTAINERS/ResultBoard/ResultSuccessful";
 import ResultWarning from "./CONTAINERS/ResultBoard/ResultWarning";
+import NavigationContainer from "./CONTAINERS/Header/navigation.container.";
+
 import IndexPage from "./CONTAINERS/IndexPage/index.page";
+import AboutPage from "./CONTAINERS/AboutPage/about.container";
+import BlogPage from "./CONTAINERS/BlogPage/blog.container";
+
+import All from "./CONTAINERS/App/all";
 
 const router = [
    {
       path: "/",
       exact: true,
-      main: () => <IndexPage />
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <IndexPage />
+         </div>
+      )
    },
+   {
+      path: "/about",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <AboutPage />
+         </div>
+      )
+   },
+   {
+      path: "/blog",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <BlogPage />
+         </div>
+      )
+   },
+   {
+      path: "/all",
+      exact: true,
+      main: () => <All />
+   },
+
    {
       path: "/notAuthorized",
       exact: true,

@@ -14,8 +14,6 @@ import "antd/dist/antd.less";
 
 //import components:
 import Loaded from "./loaded";
-import NavigationContainer from "../Header/navigation.container.";
-
 import SubcribeContainer from "../Footer/subcribe.container";
 import FooterContainer from "../Footer/footer.container";
 
@@ -57,7 +55,6 @@ class App extends Component {
       return (
          <Router>
             <Provider store={store}>
-               <NavigationContainer />
                {this.showContent(routes)}
                <SubcribeContainer />
                <FooterContainer />

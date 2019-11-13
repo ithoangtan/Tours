@@ -1,5 +1,24 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
+import { Menu, Dropdown, Icon, Button } from "antd";
+
+const menu = (
+   <Menu>
+      <Menu.Item key="0">
+         <Link to="/nas">Hotels &amp</Link>
+      </Menu.Item>
+      <Menu.Item key="1">
+         <Link to="/nas">Hotels &amp</Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="3" disabled>
+         3rd menu item（disabled）
+      </Menu.Item>
+   </Menu>
+);
+
 export default class Navigation extends Component {
    render() {
       return (
@@ -11,6 +30,7 @@ export default class Navigation extends Component {
                <a className="navbar-brand" href="index.html">
                   <span>Traveland</span>
                </a>
+
                <button
                   className="navbar-toggler"
                   type="button"
@@ -40,8 +60,12 @@ export default class Navigation extends Component {
                         </a>
                      </li>
                      <li className="nav-item">
-                        <a href="hotel-resto.html" className="nav-link">
-                           Hotels &amp; Restaurant
+                        <a className="nav-link">
+                           <Dropdown overlay={menu}>
+                              <Link className="ant-dropdown-link" href="s">
+                                 Tours <Icon type="down" />
+                              </Link>
+                           </Dropdown>
                         </a>
                      </li>
                      <li className="nav-item">
@@ -54,10 +78,14 @@ export default class Navigation extends Component {
                            Contact
                         </a>
                      </li>
-                     <li className="nav-item cta">
-                        <a href="s" className="nav-link">
+                     <li className="nav-item" style={{ alignSelf: "center" }}>
+                        <Button
+                           type="secondary"
+                           icon="shopping-cart"
+                           size={"large"}
+                        >
                            Book Now
-                        </a>
+                        </Button>
                      </li>
                   </ul>
                </div>
