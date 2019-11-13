@@ -13,27 +13,27 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
 
 //import components:
-import HeaderContainer from "../Header/header.container";
-import FooterContainer from "../Footer/footer.container";
 
-const store = configStore();
-
-const arrayScript = [
-   "/js/jquery-1.12.1.min.js",
+const arrayExternalScript = [
+   "/js/jquery.min.js",
+   "/js/jquery-migrate-3.0.1.min.js",
    "/js/popper.min.js",
    "/js/bootstrap.min.js",
-   "/js/jquery.magnific-popup.js",
+   "/js/jquery.easing.1.3.js",
+   "/js/jquery.waypoints.min.js",
+   "/js/jquery.stellar.min.js",
    "/js/owl.carousel.min.js",
-   "/js/masonry.pkgd.js",
-   "/js/jquery.nice-select.min.js",
-   "/js/gijgo.min.js",
-   "/js/jquery.ajaxchimp.min.js",
-   "/js/jquery.form.js",
-   "/js/jquery.validate.min.js",
-   "/js/mail-script.js",
-   "/js/contact.js",
-   "/js/custom.js"
+   "/js/jquery.magnific-popup.min.js",
+   "/js/aos.js",
+   "/js/jquery.animateNumber.min.js",
+   "/js/bootstrap-datepicker.js",
+   "/js/scrollax.min.js",
+   "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false",
+   "/js/google-map.js",
+   "/js/main.js"
 ];
+
+const store = configStore();
 
 class App extends Component {
    scriptLoaded() {
@@ -41,7 +41,7 @@ class App extends Component {
    }
 
    componentDidMount() {
-      arrayScript.forEach(item => {
+      arrayExternalScript.forEach(item => {
          const script = document.createElement("script");
          script.src = item;
          script.async = true;
@@ -53,9 +53,7 @@ class App extends Component {
       return (
          <Router>
             <Provider store={store}>
-               <HeaderContainer />
                {this.showContent(routes)}
-               <FooterContainer />
                <ToastContainer autoColse={3000} />
             </Provider>
          </Router>

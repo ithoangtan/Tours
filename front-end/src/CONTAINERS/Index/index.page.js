@@ -5,14 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
-//import components
-import BannerContainer from "../Banner/banner.container";
-import BookingPartContainer from "../BookingPart/bookingPart.container";
-import TopPlace1Container from "../TopPlace/topPlace1.container";
-import TopPlace2Container from "../TopPlace/topPlace2.container";
-import IndestriesContainer from "../Industries/industries2.container";
-import TopPlace3Container from "../TopPlace/topPlace3.container";
-import Indestries2Container from "../Industries/Industries.container";
+import All from "../App/all";
 
 class IndexPage extends Component {
    constructor(props) {
@@ -38,17 +31,7 @@ class IndexPage extends Component {
    };
 
    render() {
-      return (
-         <div>
-            <BannerContainer />
-            <BookingPartContainer />
-            <TopPlace1Container />
-            <TopPlace2Container />
-            <IndestriesContainer />
-            <TopPlace3Container />
-            <Indestries2Container />
-         </div>
-      );
+      return <All />;
    }
 }
 
