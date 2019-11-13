@@ -13,41 +13,56 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
 
 //import components:
-import FooterPage from "../Footer/footer.page";
-import SendMailPage from "../Footer/sendMail.page";
-import NavigationBlockPage from "../Header/navigationBlock.page";
+import Loaded from "./loaded";
+import SubcribeContainer from "../Footer/subcribe.container";
+import FooterContainer from "../Footer/footer.container";
+import BackToTop from "../App/backTop";
+
+const arrayExternalScript = [
+   "/js/jquery.min.js",
+   "/js/jquery-migrate-3.0.1.min.js",
+   "/js/popper.min.js",
+   "/js/bootstrap.min.js",
+   "/js/jquery.easing.1.3.js",
+   "/js/jquery.waypoints.min.js",
+   "/js/jquery.stellar.min.js",
+   "/js/owl.carousel.min.js",
+   "/js/jquery.magnific-popup.min.js",
+   "/js/aos.js",
+   "/js/jquery.animateNumber.min.js",
+   "/js/bootstrap-datepicker.js",
+   "/js/scrollax.min.js",
+   "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false",
+   "/js/google-map.js",
+   "/js/main.js",
+   "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+];
 
 const store = configStore();
 
 class App extends Component {
+   scriptLoaded() {
+      // window.sort();
+   }
+
+   componentDidMount() {
+      arrayExternalScript.forEach(item => {
+         const script = document.createElement("script");
+         script.src = item;
+         script.async = true;
+         document.body.appendChild(script);
+      });
+   }
    render() {
       return (
          <Router>
             <Provider store={store}>
-               <NavigationBlockPage />
                {this.showContent(routes)}
-               <SendMailPage />
-               <FooterPage />
+               <SubcribeContainer />
+               <FooterContainer />
+               <Loaded />
+               <BackToTop />
                <ToastContainer autoColse={3000} />
-               <script src="./js/jquery.min.js"></script>
-               <script src="./js/jquery-migrate-3.0.1.min.js"></script>
-               <script src="./js/jquery.animateNumber.min.js"></script>
-               <script src="./js/jquery.easing.1.3.js"></script>
-               <script src="./js/jquery.magnific-popup.min.js"></script>
-               <script src="./js/jquery.stellar.min.js"></script>
-               <script src="./js/jquery.waypoints.min.js"></script>
-               <script src="./js/popper.min.js"></script>
-
-               <script src="./js/aos.js"></script>
-               <script src="./js/bootstrap-datepicker.js"></script>
-               <script src="./js/bootstrap.min.js"></script>
-               <script src="./js/google-map.js"></script>
-
-               <script src="./js/main.js"></script>
-               <script src="./js/owl.carousel.min.js"></script>
-               <script src="./js/popper.min.js"></script>
-               <script src="./js/range.js"></script>
-               <script src="./js/scrollax.min.js"></script>
             </Provider>
          </Router>
       );
