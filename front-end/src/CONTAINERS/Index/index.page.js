@@ -5,6 +5,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
+//import components
+import BannerApp from "../Banner/banner.app";
+import BookingPartApp from "../BookingPart/bookingPart.app";
+import TopPlace1App from "../TopPlace/topPlace1.app";
+import TopPlace2App from "../TopPlace/topPlace2.app";
+import IndestriesApp from "../Industries/industries2.app";
+import TopPlace3App from "../TopPlace/topPlace3.app";
+import IndestriesApp2 from "../Industries/Industries.app";
+
 class IndexPage extends Component {
    constructor(props) {
       super(props);
@@ -28,8 +37,29 @@ class IndexPage extends Component {
       this.setState({});
    };
 
+   scriptLoaded() {
+      // window.sort();
+   }
+
+   componentDidMount() {
+      const script = document.createElement("script");
+      script.src = "/js/custom.js";
+      script.async = true;
+      script.onload = () => this.scriptLoaded();
+      document.body.appendChild(script);
+   }
    render() {
-      return <div></div>;
+      return (
+         <div>
+            <BannerApp />
+            <BookingPartApp />
+            <TopPlace1App />
+            <TopPlace2App />
+            <IndestriesApp />
+            <TopPlace3App />
+            <IndestriesApp2 />
+         </div>
+      );
    }
 }
 

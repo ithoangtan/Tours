@@ -13,6 +13,8 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
 
 //import components:
+import HeaderApp from "../Header/header.app";
+import FooterApp from "../Footer/footer.app";
 
 const store = configStore();
 
@@ -21,7 +23,9 @@ class App extends Component {
       return (
          <Router>
             <Provider store={store}>
+               <HeaderApp />
                {this.showContent(routes)}
+               <FooterApp />
                <ToastContainer autoColse={3000} />
             </Provider>
          </Router>
