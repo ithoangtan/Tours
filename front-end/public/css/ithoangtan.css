@@ -52,3 +52,13 @@
    padding: 5px;
    margin: 5px;
 }
+
+.login-form {
+   max-width: auto;
+}
+.login-form-forgot {
+   float: right;
+}
+.login-form-button {
+   width: 100%;
+}
