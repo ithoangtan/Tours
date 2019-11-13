@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import {
    Form,
@@ -265,7 +265,10 @@ class RegistrationContainer extends React.Component {
                   valuePropName: "checked"
                })(
                   <Checkbox>
-                     I have read the <a href="">agreement</a>
+                     I have read the{" "}
+                     <a href="s" rel="noopener noreferrer">
+                        agreement
+                     </a>
                   </Checkbox>
                )}
             </Form.Item>

@@ -110,24 +110,28 @@ export default class TourContainer extends Component {
                                  <Carousel autoplay>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-1.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-2.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-3.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-4.jpg"
                                           className="img-tour"
                                        />
@@ -184,24 +188,28 @@ export default class TourContainer extends Component {
                                  <Carousel autoplay>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-1.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-2.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-3.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-4.jpg"
                                           className="img-tour"
                                        />
@@ -258,24 +266,28 @@ export default class TourContainer extends Component {
                                  <Carousel autoplay>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-1.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-2.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-3.jpg"
                                           className="img-tour"
                                        />
                                     </div>
                                     <div>
                                        <img
+                                          alt="notFound"
                                           src="./images/tour-4.jpg"
                                           className="img-tour"
                                        />

@@ -40,7 +40,7 @@ export default class BestTourContainer extends Component {
                               </div>
                               <div className="float-right">
                                  <span className="rate">
-                                    <a href="#">(120)</a>
+                                    <a href="s">(120)</a>
                                  </span>
                               </div>
                            </div>
@@ -78,7 +78,7 @@ export default class BestTourContainer extends Component {
                               </div>
                               <div className="float-right">
                                  <span className="rate">
-                                    <a href="#">(120)</a>
+                                    <a href="s">(120)</a>
                                  </span>
                               </div>
                            </div>
@@ -116,7 +116,7 @@ export default class BestTourContainer extends Component {
                               </div>
                               <div className="float-right">
                                  <span className="rate">
-                                    <a href="#">(120)</a>
+                                    <a href="s">(120)</a>
                                  </span>
                               </div>
                            </div>
@@ -154,7 +154,7 @@ export default class BestTourContainer extends Component {
                               </div>
                               <div className="float-right">
                                  <span className="rate">
-                                    <a href="#">(120)</a>
+                                    <a href="s">(120)</a>
                                  </span>
                               </div>
                            </div>
