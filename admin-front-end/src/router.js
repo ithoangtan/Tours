@@ -9,10 +9,25 @@ import ResultSuccessful from "./CONTAINERS/ResultBoard/ResultSuccessful";
 import ResultWarning from "./CONTAINERS/ResultBoard/ResultWarning";
 
 import IndexPage from "./CONTAINERS/IndexPage/index.page";
+import ForgotPasswordPage from "./CONTAINERS/ForgotPassword/forgotPassword.page";
+import LoginPage from "./CONTAINERS/LoginPage/login.page";
+import RegisterPage from "./CONTAINERS/RegisterPage/registerPage.page";
 
 import All from "./CONTAINERS/App/all";
 
+//test
+import TableTest from "./CONTAINERS/Table/table.test";
+
 const router = [
+   {
+      path: "/test",
+      exact: true,
+      main: () => (
+         <div>
+            <TableTest />
+         </div>
+      )
+   },
    {
       path: "/",
       exact: true,
@@ -21,6 +36,21 @@ const router = [
             <IndexPage />
          </div>
       )
+   },
+   {
+      path: "/forgot-password",
+      exact: true,
+      main: () => <ForgotPasswordPage />
+   },
+   {
+      path: "/login",
+      exact: true,
+      main: () => <LoginPage />
+   },
+   {
+      path: "/register",
+      exact: true,
+      main: () => <RegisterPage />
    },
    {
       path: "/all",

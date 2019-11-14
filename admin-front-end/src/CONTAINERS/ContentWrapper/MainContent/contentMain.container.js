@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TopBarHeading from "./Heading/topBar.container";
+
 import ReportViewNumberContainer from "./ContentDetail/reportViewNumber.container";
 import ReportViewChartContainer from "./ContentDetail/reportViewChart.container";
 import ReportProjectSliderAndIllustrationsContainer from "./ContentDetail/reportProjectSliderAndIllustrations.container";
