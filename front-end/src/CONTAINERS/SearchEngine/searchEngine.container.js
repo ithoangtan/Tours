@@ -172,8 +172,8 @@ export default class SearchEngineContainer extends Component {
                                              </Option>
                                           </Select>
                                           <select
-                                             name
-                                             id
+                                             name="limitPrice"
+                                             id="limitPrice"
                                              className="form-control"
                                           ></select>
                                        </div>

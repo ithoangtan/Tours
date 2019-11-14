@@ -103,7 +103,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -130,7 +130,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -157,7 +157,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -184,7 +184,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -211,7 +211,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -238,7 +238,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -265,7 +265,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -292,7 +292,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -319,7 +319,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -346,7 +346,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -373,7 +373,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -400,7 +400,7 @@ export default class DestinationContainer extends Component {
                         <span className="ion-ios-star" />
                       </div>
                       <div className="float-right">
-                        <span className="rate"><a href="#">(120)</a></span>
+                        <span className="rate"><a href="s">(120)</a></span>
                       </div>
                     </div>
                   </div>
@@ -414,13 +414,13 @@ export default class DestinationContainer extends Component {
               <div className="col text-center">
                 <div className="block-27">
                   <ul>
-                    <li><a href="#">&lt;</a></li>
+                    <li><a href="s">&lt;</a></li>
                     <li className="active"><span>1</span></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
+                    <li><a href="s">2</a></li>
+                    <li><a href="s">3</a></li>
+                    <li><a href="s">4</a></li>
+                    <li><a href="s">5</a></li>
+                    <li><a href="s">&gt;</a></li>
                   </ul>
                 </div>
               </div>

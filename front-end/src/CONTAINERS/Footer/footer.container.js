@@ -151,7 +151,11 @@ export default class FooterContainer extends Component {
                            aria-hidden="true"
                         />{" "}
                         by{" "}
-                        <a href="https://colorlib.com" target="_blank">
+                        <a
+                           href="https://colorlib.com"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                        >
                            Colorlib
                         </a>
                         {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}

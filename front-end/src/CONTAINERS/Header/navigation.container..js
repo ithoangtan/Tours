@@ -62,7 +62,7 @@ export default class Navigation extends Component {
                      <li className="nav-item">
                         <a className="nav-link">
                            <Dropdown overlay={menu}>
-                              <Link className="ant-dropdown-link" href="s">
+                              <Link to="/s">
                                  Tours <Icon type="down" />
                               </Link>
                            </Dropdown>

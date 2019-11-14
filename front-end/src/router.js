@@ -16,9 +16,11 @@ import BlogPage from "./CONTAINERS/BlogPage/blog.container";
 import BlogSinglePage from "./CONTAINERS/BlogSinglePage/blogSingle.container";
 import ConcactPage from "./CONTAINERS/ContactPage/concact.container";
 import DestinationPage from "./CONTAINERS/DestinationPage/destination.container";
-import TourSinglePage from "./CONTAINERS/TourPage/tourSingle.page";
+import TourSinglePage from "./CONTAINERS/TourSinglePage/tourSingle.page";
 import TourBestPage from "./CONTAINERS/TourPage/tourBest.page";
 import TourPage from "./CONTAINERS/TourPage/tour.page";
+import LoginPage from "./CONTAINERS/PageLoginAndRegister/login.page";
+import RegisterPage from "./CONTAINERS/PageLoginAndRegister/register.page";
 
 import All from "./CONTAINERS/App/all";
 
@@ -30,6 +32,26 @@ const router = [
          <div>
             <NavigationContainer />
             <IndexPage />
+         </div>
+      )
+   },
+   {
+      path: "/login",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <LoginPage />
+         </div>
+      )
+   },
+   {
+      path: "/register",
+      exact: true,
+      main: () => (
+         <div>
+            <NavigationContainer />
+            <RegisterPage />
          </div>
       )
    },

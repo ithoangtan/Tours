@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 
-import { Carousel, Typography, Rate, Icon, Tag, Collapse, Button } from "antd";
+import {
+   Carousel,
+   Typography,
+   Rate,
+   Icon,
+   Tag,
+   Collapse,
+   Button,
+   Checkbox
+} from "antd";
 
 import MoreTourSingle from "./moreTourSingle.container";
 
@@ -21,8 +30,22 @@ const customPanelStyle = {
    overflow: "hidden"
 };
 
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+
 export default class TourSingleContainer extends Component {
+   onChange(e) {
+      console.log(`checked = ${e.target.checked}`);
+   }
+
+   state = {
+      value: 3
+   };
+
+   handleChange = value => {
+      this.setState({ value });
+   };
    render() {
+      const { value } = this.state;
       return (
          <section className="ftco-section">
             <div className="container">
@@ -53,10 +76,18 @@ export default class TourSingleContainer extends Component {
                                     <Rate
                                        disabled
                                        allowHalf
-                                       defaultValue={4.5}
+                                       tooltips={desc}
+                                       onChange={this.handleChange}
+                                       value={value}
                                        character={<Icon type="star" />}
                                     />
-                                    <span className="ant-rate-text">(123)</span>
+                                    {value ? (
+                                       <span className="ant-rate-text">
+                                          {desc[value - 1]}
+                                       </span>
+                                    ) : (
+                                       ""
+                                    )}
                                  </div>
                               </div>
                               <div className="col-md-12 col-lg-6 text-right">
@@ -117,6 +148,9 @@ export default class TourSingleContainer extends Component {
                               >
                                  BOOK NOW
                               </Button>
+                              <Checkbox onChange={this.onChange}>
+                                 Favorites
+                              </Checkbox>
                            </div>
                         </div>
                      </div>
@@ -241,7 +275,9 @@ export default class TourSingleContainer extends Component {
                                  <td>Remove tag attributes</td>
                                  <td>
                                     <img
-                                       style={{ margin: "1px 15px" }}
+                                       style={{
+                                          margin: "1px 15px"
+                                       }}
                                        src="images/smiley.png"
                                        alt="laughing"
                                        width={40}
@@ -446,7 +482,11 @@ export default class TourSingleContainer extends Component {
                                     >
                                        ♥
                                     </span>{" "}
-                                    <strong style={{ fontSize: "20px" }}>
+                                    <strong
+                                       style={{
+                                          fontSize: "20px"
+                                       }}
+                                    >
                                        ☺ ★
                                     </strong>{" "}
                                     &gt;&lt;

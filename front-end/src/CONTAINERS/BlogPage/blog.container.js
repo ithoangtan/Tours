@@ -26,7 +26,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="#">
+                              <a href="s">
                                  Why Lead Generation is Key for Business Growth
                               </a>
                            </h3>
@@ -57,7 +57,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="#">
+                              <a href="s">
                                  Why Lead Generation is Key for Business Growth
                               </a>
                            </h3>
@@ -88,7 +88,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="#">
+                              <a href="s">
                                  Why Lead Generation is Key for Business Growth
                               </a>
                            </h3>
@@ -119,7 +119,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="#">
+                              <a href="s">
                                  Why Lead Generation is Key for Business Growth
                               </a>
                            </h3>
@@ -150,7 +150,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="#">
+                              <a href="s">
                                  Why Lead Generation is Key for Business Growth
                               </a>
                            </h3>
@@ -181,7 +181,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="#">
+                              <a href="s">
                                  Why Lead Generation is Key for Business Growth
                               </a>
                            </h3>
@@ -198,25 +198,25 @@ export default class BlogContainer extends Component {
                      <div className="block-27">
                         <ul>
                            <li>
-                              <a href="#">&lt;</a>
+                              <a href="s">&lt;</a>
                            </li>
                            <li className="active">
                               <span>1</span>
                            </li>
                            <li>
-                              <a href="#">2</a>
+                              <a href="s">2</a>
                            </li>
                            <li>
-                              <a href="#">3</a>
+                              <a href="s">3</a>
                            </li>
                            <li>
-                              <a href="#">4</a>
+                              <a href="s">4</a>
                            </li>
                            <li>
-                              <a href="#">5</a>
+                              <a href="s">5</a>
                            </li>
                            <li>
-                              <a href="#">&gt;</a>
+                              <a href="s">&gt;</a>
                            </li>
                         </ul>
                      </div>

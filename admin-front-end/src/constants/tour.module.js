@@ -1,0 +1,3 @@
+export const FETCH_TOUR = "FETCH_TOUR";
+export const FETCH_TOUR_SUCCESS = "FETCH_TOUR_SUCCESS";
+export const FETCH_TOUR_FAILED = "FETCH_TOUR_FAILED";

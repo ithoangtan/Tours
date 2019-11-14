@@ -44,7 +44,7 @@ export default class ThingsToKnowContainer extends Component {
                               mouth.
                            </p>
                            <p className="ftco-animate mt-4">
-                              <a href="#" className="btn btn-primary py-3 px-5">
+                              <a href="s" className="btn btn-primary py-3 px-5">
                                  Read more
                               </a>
                            </p>
