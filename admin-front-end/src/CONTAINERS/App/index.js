@@ -13,10 +13,16 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less";
 
 //import components:
-import Loaded from "./loaded";
-import BackToTop from "../App/backTop";
 
-const arrayExternalScript = ["/js/jquery.min.js"];
+const arrayExternalScript = [
+   "./vendor/jquery/jquery.min.js",
+   "./vendor/bootstrap/js/bootstrap.bundle.min.js",
+   "./vendor/jquery-easing/jquery.easing.min.js",
+   "./js/sb-admin-2.min.js",
+   "./vendor/chart.js/Chart.min.js",
+   "./js/demo/chart-area-demo.js",
+   "./js/demo/chart-pie-demo.js"
+];
 
 const store = configStore();
 
@@ -39,7 +45,6 @@ class App extends Component {
             <Provider store={store}>
                {this.showContent(routes)}
                {/* <Loaded /> */}
-               <BackToTop />
                <ToastContainer autoColse={3000} />
             </Provider>
          </Router>
