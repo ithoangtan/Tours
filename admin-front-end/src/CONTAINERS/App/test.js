@@ -28,6 +28,25 @@ for (let i = 0; i < 100; i++) {
 }
 const EditableContext = React.createContext();
 
+const ResizeableTitle = props => {
+   const { onResize, width, ...restProps } = props;
+
+   if (!width) {
+      return <th {...restProps} />;
+   }
+
+   return (
+      <Resizable
+         width={width}
+         height={0}
+         onResize={onResize}
+         draggableOpts={{ enableUserSelectHack: false }}
+      >
+         <th {...restProps} />
+      </Resizable>
+   );
+};
+
 class EditableCell extends React.Component {
    getInput = () => {
       if (this.props.inputType === "number") {
@@ -154,7 +173,8 @@ class EditableTable extends React.Component {
       };
       this.setState({
          data: [...data, newData],
-         count: count + 1
+         count: count + 1,
+         pagination: { total: data.length }
       });
    };
    handleSave = row => {
@@ -202,8 +222,6 @@ class EditableTable extends React.Component {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
-         console.log(data);
-
          //  pagination.total = 200;
          this.setState({
             loading: false,
@@ -283,12 +301,18 @@ class EditableTable extends React.Component {
 
    handleSearch = (selectedKeys, confirm) => {
       confirm();
-      this.setState({ searchText: selectedKeys[0] });
+      this.setState({
+         searchText: selectedKeys[0],
+         pagination: { total: this.state.data.length }
+      });
    };
 
    handleReset = clearFilters => {
       clearFilters();
-      this.setState({ searchText: "" });
+      this.setState({
+         searchText: "",
+         pagination: { total: this.state.data.length }
+      });
    };
    //EndSearch
 
@@ -349,12 +373,25 @@ class EditableTable extends React.Component {
       });
    };
 
+   /** Resize */
+   handleResize = index => (e, { size }) => {
+      const nextColumns = [...this.columns];
+      nextColumns[index] = {
+         ...nextColumns[index],
+         width: size.width
+      };
+      return { columns: nextColumns };
+   };
+
    render() {
       const { state } = this;
       const { data } = this.state;
       const components = {
          body: {
             cell: EditableCell
+         },
+         header: {
+            cell: ResizeableTitle
          }
       };
 
@@ -366,20 +403,18 @@ class EditableTable extends React.Component {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            width: "10%",
             ...this.getColumnSearchProps("name"),
             sorter: (a, b) => a.name.length - b.name.length,
             sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
             ellipsis: true,
-            editable: true,
-            render: text => text
+            editable: true
+            // render: text => text
          },
          {
             title: "Age",
             dataIndex: "age",
             key: "age",
             ...this.getColumnSearchProps("age"),
-            width: "10%",
             sorter: (a, b) => a.age - b.age,
             sortOrder: sortedInfo.columnKey === "age" && sortedInfo.order,
             ellipsis: true,
@@ -389,7 +424,6 @@ class EditableTable extends React.Component {
             title: "Address",
             dataIndex: "address",
             key: "address",
-            width: "",
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
@@ -449,7 +483,7 @@ class EditableTable extends React.Component {
          {
             title: "Delete",
             dataIndex: "delete",
-            width: "6%",
+            width: "10%",
             render: (text, record) =>
                this.state.data.length >= 1 ? (
                   <Popconfirm
@@ -501,12 +535,12 @@ class EditableTable extends React.Component {
                   dataSource={state.hasData ? data : null}
                   columns={columns.map((item, index) => ({
                      ...item,
-                     ellipsis: state.ellipsis
-                     // onHeaderCell: column => ({
-                     //    //resize
-                     //    width: column.width,
-                     //    onResize: this.handleResize(index)
-                     // }) //end resize
+                     ellipsis: state.ellipsis,
+                     onHeaderCell: column => ({
+                        //resize
+                        width: column.width,
+                        onResize: this.handleResize(index)
+                     }) //end resize
                   }))}
                   rowClassName={() => "editable-row"}
                   onChange={this.handleChange}

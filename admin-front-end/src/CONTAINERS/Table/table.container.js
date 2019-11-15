@@ -1,43 +1,32 @@
-import React, { Component } from "react";
-
+import React from "react";
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
 import { Resizable } from "react-resizable";
 
-import { Table, Icon, Divider, Button, Input, Typography } from "antd";
+import {
+   Table,
+   Input,
+   InputNumber,
+   Popconfirm,
+   Form,
+   Button,
+   Icon
+} from "antd";
 
-import TableGallery from "./table.gallery";
-
-const { Paragraph } = Typography;
+import TableGallery from "../Table/table.gallery";
 
 const data = [];
-let i2 = 100;
-for (let i = 1; i <= i2; i++) {
+for (let i = 0; i < 100; i++) {
    data.push({
       key: i,
-      name: "John Bn",
-      age: `${i}2`,
-      address: `New York No. ${i} Lake Park`,
+      name: `Edrward ${i}`,
+      age: Math.floor(Math.random() * 100),
+      address: `London Park no. ${i}`,
       description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
       url: `./img/hotel-1.jpg`
    });
-   data.push({
-      key: i + i2,
-      name: "Aim Lincol",
-      age: `${i + i2}2`,
-      address: `London  No. ${i + i2} Lake Park`,
-      description: `My name is John Brown, I am ${i +
-         i2}2 years old, living in New York No. ${i + i2} Lake Park.`,
-      url: `./img/hotel-1.jpg`
-   });
 }
-
-const expandedRowRender = record => <TableGallery />;
-const title = () => "Here is title";
-const showHeader = true;
-const footer = () => "Here is footer";
-const scroll = { y: 240 };
-const pagination = { position: "both" };
+const EditableContext = React.createContext();
 
 const ResizeableTitle = props => {
    const { onResize, width, ...restProps } = props;
@@ -58,48 +47,192 @@ const ResizeableTitle = props => {
    );
 };
 
-class TableContainer extends Component {
-   state = {
-      bordered: true,
-      loading: false,
-      size: "default",
-      expandedRowRender,
-      showHeader,
-      title,
-      footer,
-      rowSelection: {},
-      scroll: undefined,
-      hasData: true,
-      tableLayout: "auto",
-      filteredInfo: null,
-      sortedInfo: null,
-      searchText: "",
-      data: [],
-      pagination,
-      //editing
-      recordEdit: {},
-      //resize
-      columns: []
-   };
-
-   //resize
-   components = {
-      header: {
-         cell: ResizeableTitle
+class EditableCell extends React.Component {
+   getInput = () => {
+      if (this.props.inputType === "number") {
+         return <InputNumber />;
       }
+      return <Input />;
    };
 
-   handleResize = index => (e, { size }) => {
-      this.setState(({ columns }) => {
-         const nextColumns = [...columns];
-         nextColumns[index] = {
-            ...nextColumns[index],
-            width: size.width
-         };
-         return { columns: nextColumns };
+   renderCell = ({ getFieldDecorator }) => {
+      const {
+         editing,
+         dataIndex,
+         title,
+         inputType,
+         record,
+         index,
+         children,
+         ...restProps
+      } = this.props;
+      return (
+         <td {...restProps}>
+            {editing ? (
+               <Form.Item style={{ margin: 0 }}>
+                  {getFieldDecorator(dataIndex, {
+                     rules: [
+                        {
+                           required: true,
+                           message: `Please Input ${title}!`
+                        }
+                     ],
+                     initialValue: record[dataIndex]
+                  })(this.getInput())}
+               </Form.Item>
+            ) : (
+               children
+            )}
+         </td>
+      );
+   };
+
+   render() {
+      return (
+         <EditableContext.Consumer>{this.renderCell}</EditableContext.Consumer>
+      );
+   }
+}
+
+const expandedRowRender = record => <TableGallery />;
+const title = () => "Tạm thời không biết phải ghi gì";
+const showHeader = true;
+const footer = () => "Tạm thời không biết nên ghi gì";
+const scroll = { y: 240 };
+const pagination = { position: "both" };
+
+class EditableTable extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         data,
+         editingKey: "",
+         count: data.length,
+         bordered: true,
+         loading: false,
+         size: "default",
+         expandedRowRender,
+         showHeader,
+         title,
+         footer,
+         rowSelection: {},
+         scroll: undefined,
+         hasData: true,
+         tableLayout: "auto",
+         filteredInfo: null,
+         sortedInfo: null,
+         searchText: "",
+         pagination
+      };
+   }
+
+   isEditing = record => record.key === this.state.editingKey;
+
+   cancel = () => {
+      this.setState({ editingKey: "" });
+   };
+
+   save(form, key) {
+      form.validateFields((error, row) => {
+         if (error) {
+            return;
+         }
+         const newData = [...this.state.data];
+         const index = newData.findIndex(item => key === item.key);
+         if (index > -1) {
+            const item = newData[index];
+            newData.splice(index, 1, {
+               ...item,
+               ...row
+            });
+            this.setState({ data: newData, editingKey: "" });
+         } else {
+            newData.push(row);
+            this.setState({ data: newData, editingKey: "" });
+         }
+      });
+   }
+
+   edit(key) {
+      this.setState({ editingKey: key });
+   }
+   handleDelete = key => {
+      const data = [...this.state.data];
+      this.setState({
+         data: data.filter(item => item.key !== key)
       });
    };
-   //end resize
+
+   handleAdd = () => {
+      const { count, data } = this.state;
+      const newData = {
+         key: count,
+         name: `Edward King ${count}`,
+         age: 32,
+         address: `London, Park Lane no. ${count}`
+      };
+      this.setState({
+         data: [...data, newData],
+         count: count + 1,
+         pagination: { total: data.length }
+      });
+   };
+   handleSave = row => {
+      const newData = [...this.state.data];
+      const index = newData.findIndex(item => row.key === item.key);
+      const item = newData[index];
+      newData.splice(index, 1, {
+         ...item,
+         ...row
+      });
+      this.setState({ data: newData });
+   };
+
+   /**Preload */
+   //    Preload
+   componentDidMount() {
+      this.fetch();
+   }
+   handleTableChange = (pagination, filters, sorter) => {
+      const pager = { ...this.state.pagination };
+      pager.current = pagination.current;
+      this.setState({
+         pagination: pager
+      });
+      this.fetch({
+         results: pagination.pageSize,
+         page: pagination.current,
+         sortField: sorter.field,
+         sortOrder: sorter.order,
+         ...filters
+      });
+   };
+
+   fetch = (params = {}) => {
+      this.setState({ loading: true });
+      reqwest({
+         url: "http://localhost:3000/tasks",
+         method: "get",
+         data: {
+            tasks: 1000,
+            ...params
+         },
+         type: "json"
+      }).then(data => {
+         const pagination = { ...this.state.pagination };
+         // Read total count from server
+         pagination.total = data.length;
+         //  pagination.total = 200;
+         this.setState({
+            loading: false,
+            data: data,
+            pagination
+         });
+      });
+   };
+   //    EndPreload
+
+   /**Search */
 
    //Search
    getColumnSearchProps = dataIndex => ({
@@ -168,59 +301,22 @@ class TableContainer extends Component {
 
    handleSearch = (selectedKeys, confirm) => {
       confirm();
-      this.setState({ searchText: selectedKeys[0] });
+      this.setState({
+         searchText: selectedKeys[0],
+         pagination: { total: this.state.data.length }
+      });
    };
 
    handleReset = clearFilters => {
       clearFilters();
-      this.setState({ searchText: "" });
+      this.setState({
+         searchText: "",
+         pagination: { total: this.state.data.length }
+      });
    };
    //EndSearch
 
-   //    Preload
-   componentDidMount() {
-      this.fetch();
-   }
-   handleTableChange = (pagination, filters, sorter) => {
-      const pager = { ...this.state.pagination };
-      pager.current = pagination.current;
-      this.setState({
-         pagination: pager
-      });
-      this.fetch({
-         results: pagination.pageSize,
-         page: pagination.current,
-         sortField: sorter.field,
-         sortOrder: sorter.order,
-         ...filters
-      });
-   };
-
-   fetch = (params = {}) => {
-      console.log("params:", params);
-      this.setState({ loading: true });
-      reqwest({
-         url: "https://randomuser.me/api",
-         method: "get",
-         data: {
-            results: 10,
-            ...params
-         },
-         type: "json"
-      }).then(data => {
-         const pagination = { ...this.state.pagination };
-         // Read total count from server
-         pagination.total = data.totalCount;
-         //  pagination.total = 200;
-         this.setState({
-            loading: false,
-            data: data.results,
-            pagination
-         });
-      });
-   };
-   //    EndPreload
-
+   /**More function */
    handleToggle = prop => enable => {
       this.setState({ [prop]: enable });
    };
@@ -249,8 +345,8 @@ class TableContainer extends Component {
       this.setState({ hasData });
    };
 
-   handleChange = (pagination, filters, sorter) => {
-      console.log("Various parameters", pagination, filters, sorter);
+   handleChange = (pagination, filters, sorter, extra) => {
+      console.log("Various parameters", pagination, filters, sorter, extra);
       this.setState({
          filteredInfo: filters,
          sortedInfo: sorter
@@ -268,57 +364,48 @@ class TableContainer extends Component {
       });
    };
 
-   setAgeSort = () => {
-      this.setState({
-         sortedInfo: {
-            order: "descend",
-            columnKey: "age"
-         }
-      });
+   /** Resize */
+   handleResize = index => (e, { size }) => {
+      const nextColumns = [...this.columns];
+      nextColumns[index] = {
+         ...nextColumns[index],
+         width: size.width
+      };
+      return { columns: nextColumns };
    };
 
-   onEdit(record) {
-      return event => {
-         event.preventDefault();
-         this.setState({ recordEdit: record });
-         console.log(record);
-      };
-   }
-
-   onDelte(record) {
-      return event => {
-         event.preventDefault();
-         console.log(record);
-      };
-   }
-
-   onChangeEdit = recordEdit => {
-      this.setState({ recordEdit });
-   };
    render() {
       const { state } = this;
+      const { data } = this.state;
+      const components = {
+         body: {
+            cell: EditableCell
+         },
+         header: {
+            cell: ResizeableTitle
+         }
+      };
+
       let { sortedInfo, filteredInfo } = this.state;
       sortedInfo = sortedInfo || {};
       filteredInfo = filteredInfo || {};
-      const columns = [
+      this.columns = [
          {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            width: "10%",
             ...this.getColumnSearchProps("name"),
             sorter: (a, b) => a.name.length - b.name.length,
             sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
             ellipsis: true,
-            editable: true,
-            render: text => text
+            editable: true
+            // render: text => text
          },
          {
             title: "Age",
             dataIndex: "age",
             key: "age",
             ...this.getColumnSearchProps("age"),
-            width: "5%",
             sorter: (a, b) => a.age - b.age,
             sortOrder: sortedInfo.columnKey === "age" && sortedInfo.order,
             ellipsis: true,
@@ -328,7 +415,6 @@ class TableContainer extends Component {
             title: "Address",
             dataIndex: "address",
             key: "address",
-            width: "15%",
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
@@ -350,61 +436,115 @@ class TableContainer extends Component {
             ellipsis: true
          },
          {
-            title: "Action",
-            key: "action",
-            width: "20%",
-            filters: [
-               { text: "Joe", value: "Joe" },
-               { text: "Jim", value: "Jim" }
-            ],
-            filteredValue: filteredInfo.name || null,
-            onFilter: (value, record) => record.name.includes(value),
-            render: (text, record) => (
-               <span>
-                  <Button type="dash" icon="edit" onClick={this.onEdit(record)}>
-                     Edit
-                  </Button>
-                  <Divider type="vertical" />
-                  <Button
-                     type="danger"
-                     icon="delete"
-                     onClick={this.onDelte(record)}
+            title: "Edit",
+            dataIndex: "edit",
+            width: "10%",
+            render: (text, record) => {
+               const { editingKey } = this.state;
+               const editable = this.isEditing(record);
+               return editable ? (
+                  <span>
+                     <EditableContext.Consumer>
+                        {form => (
+                           <a
+                              onClick={() => this.save(form, record.key)}
+                              style={{ marginRight: 8 }}
+                           >
+                              Save
+                           </a>
+                        )}
+                     </EditableContext.Consumer>
+                     <Popconfirm
+                        title="Sure to cancel?"
+                        onConfirm={() => this.cancel(record.key)}
+                     >
+                        <a>Cancel</a>
+                     </Popconfirm>
+                  </span>
+               ) : (
+                  <a
+                     disabled={editingKey !== ""}
+                     onClick={() => this.edit(record.key)}
                   >
-                     Delete
-                  </Button>
-               </span>
-            )
+                     Edit
+                  </a>
+               );
+            }
+         },
+         {
+            title: "Delete",
+            dataIndex: "delete",
+            width: "10%",
+            render: (text, record) =>
+               this.state.data.length >= 1 ? (
+                  <Popconfirm
+                     title="Sure to delete?"
+                     onConfirm={() => this.handleDelete(record.key)}
+                  >
+                     <a>Delete</a>
+                  </Popconfirm>
+               ) : null
          }
       ];
 
+      const columns = this.columns.map(col => {
+         if (!col.editable) {
+            return col;
+         }
+         return {
+            ...col,
+            onCell: record => ({
+               record,
+               inputType: col.dataIndex === "age" ? "number" : "text",
+               dataIndex: col.dataIndex,
+               title: col.title,
+               editing: this.isEditing(record),
+               handleSave: this.handleSave
+            })
+         };
+      });
+
       return (
-         <div>
-            <div className="table-operations">
-               <Button onClick={this.setAgeSort}>Sort age</Button>
-               <Button onClick={this.clearFilters}>Clear filters</Button>
-               <Button onClick={this.clearAll}>
+         <div className="container-fluid card shadow">
+            <div className="row">
+               <Button
+                  onClick={this.handleAdd}
+                  type="primary"
+                  style={{ margin: 8 }}
+               >
+                  Add a row
+               </Button>
+               <Button onClick={this.clearAll} style={{ margin: 8 }}>
                   Clear filters and sorters
                </Button>
             </div>
-            <Table
-               {...this.state}
-               components={this.components} //resize
-               columns={columns.map((item, index) => ({
-                  ...item,
-                  ellipsis: state.ellipsis,
-                  onHeaderCell: column => ({
-                     //resize
-                     width: column.width,
-                     onResize: this.handleResize(index)
-                  }) //end resize
-               }))}
-               dataSource={state.hasData ? data : null}
-               onChange={this.handleChange}
-               loading={this.state.loading} //loading
-            />
+            <EditableContext.Provider value={this.props.form}>
+               <Table
+                  components={components}
+                  pagination={{
+                     onChange: this.cancel
+                  }}
+                  // dataSource={data}
+                  dataSource={state.hasData ? data : null}
+                  columns={columns.map((item, index) => ({
+                     ...item,
+                     ellipsis: state.ellipsis,
+                     onHeaderCell: column => ({
+                        //resize
+                        width: column.width,
+                        onResize: this.handleResize(index)
+                     }) //end resize
+                  }))}
+                  rowClassName={() => "editable-row"}
+                  onChange={this.handleChange}
+                  {...this.state}
+               />
+            </EditableContext.Provider>
          </div>
       );
    }
 }
 
-export default TableContainer;
+const TablesContainer = Form.create()(EditableTable);
+
+export default TablesContainer;

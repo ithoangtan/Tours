@@ -1,4 +1,4 @@
-var Tour = require("../model/Tour.model");
+var Tour = require("../models/Tour.model");
 
 exports.list_all_tour = function(req, res) {
   Tour.getAllTour(function(err, tour) {
