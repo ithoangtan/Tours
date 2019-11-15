@@ -310,34 +310,30 @@ class TableContainer extends Component {
             sorter: (a, b) => a.name.length - b.name.length,
             sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
             ellipsis: true,
-            render: text =>
-               !state.recordEdit ? (
-                  <Paragraph editable={{ onChange: this.onChangeEdit }}>
-                     {state.recordEdit.name}
-                  </Paragraph>
-               ) : (
-                  text
-               )
+            editable: true,
+            render: text => text
          },
          {
             title: "Age",
             dataIndex: "age",
             key: "age",
             ...this.getColumnSearchProps("age"),
-            width: "10%",
+            width: "5%",
             sorter: (a, b) => a.age - b.age,
             sortOrder: sortedInfo.columnKey === "age" && sortedInfo.order,
-            ellipsis: true
+            ellipsis: true,
+            editable: true
          },
          {
             title: "Address",
             dataIndex: "address",
             key: "address",
-            width: "",
+            width: "15%",
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
-            ellipsis: true
+            ellipsis: true,
+            editable: true
          },
          {
             title: "url",
@@ -349,7 +345,9 @@ class TableContainer extends Component {
                { text: "New York", value: "New York" }
             ],
             filteredValue: filteredInfo.address || null,
-            onFilter: (value, record) => record.address.includes(value)
+            onFilter: (value, record) => record.address.includes(value),
+            editable: true,
+            ellipsis: true
          },
          {
             title: "Action",

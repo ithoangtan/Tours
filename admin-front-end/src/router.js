@@ -21,6 +21,16 @@ import TestPage from "./CONTAINERS/App/test";
 
 const router = [
    {
+      path: "/all",
+      exact: true,
+      main: () => <All />
+   },
+   {
+      path: "/test",
+      exact: true,
+      main: () => <TestPage />
+   },
+   {
       path: "/",
       exact: true,
       main: () => <IndexPage />
@@ -44,16 +54,6 @@ const router = [
       path: "/register",
       exact: true,
       main: () => <RegisterPage />
-   },
-   {
-      path: "/all",
-      exact: true,
-      main: () => <All />
-   },
-   {
-      path: "/test",
-      exact: true,
-      main: () => <TestPage />
    },
 
    {
