@@ -168,50 +168,51 @@ class EditableTable extends React.Component {
       this.setState({ data: newData });
    };
 
-   // /**Preload */
-   // //    Preload
-   // componentDidMount() {
-   //    this.fetch();
-   // }
-   // handleTableChange = (pagination, filters, sorter) => {
-   //    const pager = { ...this.state.pagination };
-   //    pager.current = pagination.current;
-   //    this.setState({
-   //       pagination: pager
-   //    });
-   //    this.fetch({
-   //       results: pagination.pageSize,
-   //       page: pagination.current,
-   //       sortField: sorter.field,
-   //       sortOrder: sorter.order,
-   //       ...filters
-   //    });
-   // };
+   /**Preload */
+   //    Preload
+   componentDidMount() {
+      this.fetch();
+   }
+   handleTableChange = (pagination, filters, sorter) => {
+      const pager = { ...this.state.pagination };
+      pager.current = pagination.current;
+      this.setState({
+         pagination: pager
+      });
+      this.fetch({
+         results: pagination.pageSize,
+         page: pagination.current,
+         sortField: sorter.field,
+         sortOrder: sorter.order,
+         ...filters
+      });
+   };
 
-   // fetch = (params = {}) => {
-   //    console.log("params:", params);
-   //    this.setState({ loading: true });
-   //    reqwest({
-   //       url: "https://randomuser.me/api",
-   //       method: "get",
-   //       data: {
-   //          results: 10,
-   //          ...params
-   //       },
-   //       type: "json"
-   //    }).then(data => {
-   //       const pagination = { ...this.state.pagination };
-   //       // Read total count from server
-   //       pagination.total = data.totalCount;
-   //       //  pagination.total = 200;
-   //       this.setState({
-   //          loading: false,
-   //          data: data.results,
-   //          pagination
-   //       });
-   //    });
-   // };
-   // //    EndPreload
+   fetch = (params = {}) => {
+      this.setState({ loading: true });
+      reqwest({
+         url: "http://localhost:3000/tasks",
+         method: "get",
+         data: {
+            tasks: 1000,
+            ...params
+         },
+         type: "json"
+      }).then(data => {
+         const pagination = { ...this.state.pagination };
+         // Read total count from server
+         pagination.total = data.length;
+         console.log(data);
+
+         //  pagination.total = 200;
+         this.setState({
+            loading: false,
+            data: data,
+            pagination
+         });
+      });
+   };
+   //    EndPreload
 
    /**Search */
 
@@ -493,6 +494,9 @@ class EditableTable extends React.Component {
             <EditableContext.Provider value={this.props.form}>
                <Table
                   components={components}
+                  pagination={{
+                     onChange: this.cancel
+                  }}
                   // dataSource={data}
                   dataSource={state.hasData ? data : null}
                   columns={columns.map((item, index) => ({
@@ -505,9 +509,6 @@ class EditableTable extends React.Component {
                      // }) //end resize
                   }))}
                   rowClassName={() => "editable-row"}
-                  pagination={{
-                     onChange: this.cancel
-                  }}
                   onChange={this.handleChange}
                   {...this.state}
                />
