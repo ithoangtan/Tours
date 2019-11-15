@@ -12,28 +12,28 @@ import IndexPage from "./CONTAINERS/IndexPage/index.page";
 import ForgotPasswordPage from "./CONTAINERS/ForgotPassword/forgotPassword.page";
 import LoginPage from "./CONTAINERS/LoginPage/login.page";
 import RegisterPage from "./CONTAINERS/RegisterPage/registerPage.page";
+import TourAdminPage from "./CONTAINERS/Tours/tour.admin";
 
 import All from "./CONTAINERS/App/all";
 
 //test
-import TableTest from "./CONTAINERS/Table/table.test";
 
 const router = [
-   {
-      path: "/test",
-      exact: true,
-      main: () => (
-         <div>
-            <TableTest />
-         </div>
-      )
-   },
    {
       path: "/",
       exact: true,
       main: () => (
          <div>
             <IndexPage />
+         </div>
+      )
+   },
+   {
+      path: "/tour",
+      exact: true,
+      main: () => (
+         <div>
+            <TourAdminPage />
          </div>
       )
    },

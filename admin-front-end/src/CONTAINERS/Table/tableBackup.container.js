@@ -2,19 +2,14 @@ import React, { Component } from "react";
 
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
-import { Resizable } from "react-resizable";
 
-import { Table, Icon, Divider, Button, Input, Typography } from "antd";
-
-import TableGallery from "./table.gallery";
-
-const { Paragraph } = Typography;
+import { Table, Icon, Divider, Button, Input } from "antd";
 
 const data = [];
 for (let i = 1; i <= 13; i++) {
    data.push({
       key: i,
-      name: "John Bn",
+      name: "John Brown",
       age: `${i}2`,
       address: `New York No. ${i} Lake Park`,
       description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
@@ -22,7 +17,7 @@ for (let i = 1; i <= 13; i++) {
    });
    data.push({
       key: i + 13,
-      name: "Aim Lincol",
+      name: "Jim Lincol",
       age: `${i + 13}2`,
       address: `London  No. ${i + 13} Lake Park`,
       description: `My name is John Brown, I am ${i +
@@ -31,31 +26,12 @@ for (let i = 1; i <= 13; i++) {
    });
 }
 
-const expandedRowRender = record => <TableGallery />;
+const expandedRowRender = record => <p>{record.description}</p>;
 const title = () => "Here is title";
 const showHeader = true;
 const footer = () => "Here is footer";
 const scroll = { y: 240 };
 const pagination = { position: "both" };
-
-const ResizeableTitle = props => {
-   const { onResize, width, ...restProps } = props;
-
-   if (!width) {
-      return <th {...restProps} />;
-   }
-
-   return (
-      <Resizable
-         width={width}
-         height={0}
-         onResize={onResize}
-         draggableOpts={{ enableUserSelectHack: false }}
-      >
-         <th {...restProps} />
-      </Resizable>
-   );
-};
 
 class TableContainer extends Component {
    state = {
@@ -63,6 +39,7 @@ class TableContainer extends Component {
       loading: false,
       size: "default",
       expandedRowRender,
+      title: undefined,
       showHeader,
       title,
       footer,
@@ -74,28 +51,10 @@ class TableContainer extends Component {
       sortedInfo: null,
       searchText: "",
       data: [],
-      pagination,
-      //editing
-      recordEdit: {}
+      pagination: {},
+      loading: false
    };
 
-   //resize
-   components = {
-      header: {
-         cell: ResizeableTitle
-      }
-   };
-
-   handleResize = index => (e, { size }) => {
-      this.setState(({ columns }) => {
-         const nextColumns = [...columns];
-         nextColumns[index] = {
-            ...nextColumns[index],
-            width: size.width
-         };
-         return { columns: nextColumns };
-      });
-   };
    //Search
    getColumnSearchProps = dataIndex => ({
       filterDropdown: ({
@@ -272,24 +231,6 @@ class TableContainer extends Component {
       });
    };
 
-   onEdit(record) {
-      return event => {
-         event.preventDefault();
-         this.setState({ recordEdit: record });
-         console.log(record);
-      };
-   }
-
-   onDelte(record) {
-      return event => {
-         event.preventDefault();
-         console.log(record);
-      };
-   }
-
-   onChangeEdit = recordEdit => {
-      this.setState({ recordEdit });
-   };
    render() {
       const { state } = this;
       let { sortedInfo, filteredInfo } = this.state;
@@ -305,14 +246,8 @@ class TableContainer extends Component {
             sorter: (a, b) => a.name.length - b.name.length,
             sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
             ellipsis: true,
-            render: text =>
-               !state.recordEdit ? (
-                  <Paragraph editable={{ onChange: this.onChangeEdit }}>
-                     {state.recordEdit.name}
-                  </Paragraph>
-               ) : (
-                  text
-               )
+
+            render: text => <a>{text}</a>
          },
          {
             title: "Age",
@@ -329,6 +264,7 @@ class TableContainer extends Component {
             dataIndex: "address",
             key: "address",
             ...this.getColumnSearchProps("address"),
+
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
             ellipsis: true
@@ -355,17 +291,13 @@ class TableContainer extends Component {
             onFilter: (value, record) => record.name.includes(value),
             render: (text, record) => (
                <span>
-                  <Button type="dash" icon="edit" onClick={this.onEdit(record)}>
-                     Edit
-                  </Button>
+                  <a>Action 一 {record.name}</a>
                   <Divider type="vertical" />
-                  <Button
-                     type="danger"
-                     icon="delete"
-                     onClick={this.onDelte(record)}
-                  >
-                     Delete
-                  </Button>
+                  <a>Delete</a>
+                  <Divider type="vertical" />
+                  <a className="ant-dropdown-link">
+                     More actions <Icon type="down" />
+                  </a>
                </span>
             )
          }
@@ -382,14 +314,9 @@ class TableContainer extends Component {
             </div>
             <Table
                {...this.state}
-               components={this.components}
-               columns={columns.map((item, index) => ({
+               columns={columns.map(item => ({
                   ...item,
-                  ellipsis: state.ellipsis,
-                  onHeaderCell: column => ({
-                     width: column.width,
-                     onResize: this.handleResize(index)
-                  })
+                  ellipsis: state.ellipsis
                }))}
                dataSource={state.hasData ? data : null}
                //    dataSource={this.state.data}
