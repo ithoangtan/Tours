@@ -12,30 +12,33 @@ import IndexPage from "./CONTAINERS/IndexPage/index.page";
 import ForgotPasswordPage from "./CONTAINERS/ForgotPassword/forgotPassword.page";
 import LoginPage from "./CONTAINERS/LoginPage/login.page";
 import RegisterPage from "./CONTAINERS/RegisterPage/registerPage.page";
+import TourAdminPage from "./CONTAINERS/Tours/tour.admin";
 
 import All from "./CONTAINERS/App/all";
+import TestPage from "./CONTAINERS/App/test";
 
 //test
-import TableTest from "./CONTAINERS/Table/table.test";
 
 const router = [
    {
+      path: "/all",
+      exact: true,
+      main: () => <All />
+   },
+   {
       path: "/test",
       exact: true,
-      main: () => (
-         <div>
-            <TableTest />
-         </div>
-      )
+      main: () => <TestPage />
    },
    {
       path: "/",
       exact: true,
-      main: () => (
-         <div>
-            <IndexPage />
-         </div>
-      )
+      main: () => <IndexPage />
+   },
+   {
+      path: "/tour",
+      exact: true,
+      main: () => <TourAdminPage />
    },
    {
       path: "/forgot-password",
@@ -51,11 +54,6 @@ const router = [
       path: "/register",
       exact: true,
       main: () => <RegisterPage />
-   },
-   {
-      path: "/all",
-      exact: true,
-      main: () => <All />
    },
 
    {

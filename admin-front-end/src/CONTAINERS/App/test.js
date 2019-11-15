@@ -95,9 +95,9 @@ class EditableCell extends React.Component {
 }
 
 const expandedRowRender = record => <TableGallery />;
-const title = () => "Tạm thời không biết phải ghi gì";
+const title = () => "Here is title";
 const showHeader = true;
-const footer = () => "Tạm thời không biết nên ghi gì";
+const footer = () => "Here is footer";
 const scroll = { y: 240 };
 const pagination = { position: "both" };
 
@@ -364,6 +364,15 @@ class EditableTable extends React.Component {
       });
    };
 
+   setAgeSort = () => {
+      this.setState({
+         sortedInfo: {
+            order: "descend",
+            columnKey: "age"
+         }
+      });
+   };
+
    /** Resize */
    handleResize = index => (e, { size }) => {
       const nextColumns = [...this.columns];
@@ -505,19 +514,17 @@ class EditableTable extends React.Component {
       });
 
       return (
-         <div className="container-fluid card shadow">
-            <div className="row">
-               <Button
-                  onClick={this.handleAdd}
-                  type="primary"
-                  style={{ margin: 8 }}
-               >
-                  Add a row
-               </Button>
-               <Button onClick={this.clearAll} style={{ margin: 8 }}>
-                  Clear filters and sorters
-               </Button>
-            </div>
+         <div>
+            <Button
+               onClick={this.handleAdd}
+               type="primary"
+               style={{ marginBottom: 16 }}
+            >
+               Add a row
+            </Button>
+            <Button onClick={this.setAgeSort}>Sort age</Button>
+            <Button onClick={this.clearFilters}>Clear filters</Button>
+            <Button onClick={this.clearAll}>Clear filters and sorters</Button>
             <EditableContext.Provider value={this.props.form}>
                <Table
                   components={components}
@@ -545,6 +552,6 @@ class EditableTable extends React.Component {
    }
 }
 
-const TablesContainer = Form.create()(EditableTable);
+const EditableFormTable = Form.create()(EditableTable);
 
-export default TablesContainer;
+export default EditableFormTable;
