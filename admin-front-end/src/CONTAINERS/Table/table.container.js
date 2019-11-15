@@ -11,7 +11,8 @@ import TableGallery from "./table.gallery";
 const { Paragraph } = Typography;
 
 const data = [];
-for (let i = 1; i <= 13; i++) {
+let i2 = 100;
+for (let i = 1; i <= i2; i++) {
    data.push({
       key: i,
       name: "John Bn",
@@ -21,12 +22,12 @@ for (let i = 1; i <= 13; i++) {
       url: `./img/hotel-1.jpg`
    });
    data.push({
-      key: i + 13,
+      key: i + i2,
       name: "Aim Lincol",
-      age: `${i + 13}2`,
-      address: `London  No. ${i + 13} Lake Park`,
+      age: `${i + i2}2`,
+      address: `London  No. ${i + i2} Lake Park`,
       description: `My name is John Brown, I am ${i +
-         13}2 years old, living in New York No. ${i + 13} Lake Park.`,
+         i2}2 years old, living in New York No. ${i + i2} Lake Park.`,
       url: `./img/hotel-1.jpg`
    });
 }
@@ -76,7 +77,9 @@ class TableContainer extends Component {
       data: [],
       pagination,
       //editing
-      recordEdit: {}
+      recordEdit: {},
+      //resize
+      columns: []
    };
 
    //resize
@@ -96,6 +99,8 @@ class TableContainer extends Component {
          return { columns: nextColumns };
       });
    };
+   //end resize
+
    //Search
    getColumnSearchProps = dataIndex => ({
       filterDropdown: ({
@@ -319,7 +324,7 @@ class TableContainer extends Component {
             dataIndex: "age",
             key: "age",
             ...this.getColumnSearchProps("age"),
-            width: "auto",
+            width: "10%",
             sorter: (a, b) => a.age - b.age,
             sortOrder: sortedInfo.columnKey === "age" && sortedInfo.order,
             ellipsis: true
@@ -328,6 +333,7 @@ class TableContainer extends Component {
             title: "Address",
             dataIndex: "address",
             key: "address",
+            width: "",
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
@@ -337,6 +343,7 @@ class TableContainer extends Component {
             title: "url",
             dataIndex: "url",
             key: "url",
+            width: "10%",
             filters: [
                { text: "London", value: "London" },
                { text: "New York", value: "New York" }
@@ -347,6 +354,7 @@ class TableContainer extends Component {
          {
             title: "Action",
             key: "action",
+            width: "20%",
             filters: [
                { text: "Joe", value: "Joe" },
                { text: "Jim", value: "Jim" }
@@ -382,21 +390,19 @@ class TableContainer extends Component {
             </div>
             <Table
                {...this.state}
-               components={this.components}
+               components={this.components} //resize
                columns={columns.map((item, index) => ({
                   ...item,
                   ellipsis: state.ellipsis,
                   onHeaderCell: column => ({
+                     //resize
                      width: column.width,
                      onResize: this.handleResize(index)
-                  })
+                  }) //end resize
                }))}
                dataSource={state.hasData ? data : null}
-               //    dataSource={this.state.data}
                onChange={this.handleChange}
-               //    rowKey={record => record.login.uuid}
-               loading={this.state.loading}
-               //    onChange={(this.handleTableChange, this.handleChange)}
+               loading={this.state.loading} //loading
             />
          </div>
       );

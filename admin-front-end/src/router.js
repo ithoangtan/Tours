@@ -15,6 +15,7 @@ import RegisterPage from "./CONTAINERS/RegisterPage/registerPage.page";
 import TourAdminPage from "./CONTAINERS/Tours/tour.admin";
 
 import All from "./CONTAINERS/App/all";
+import TestPage from "./CONTAINERS/App/test";
 
 //test
 
@@ -22,20 +23,12 @@ const router = [
    {
       path: "/",
       exact: true,
-      main: () => (
-         <div>
-            <IndexPage />
-         </div>
-      )
+      main: () => <IndexPage />
    },
    {
       path: "/tour",
       exact: true,
-      main: () => (
-         <div>
-            <TourAdminPage />
-         </div>
-      )
+      main: () => <TourAdminPage />
    },
    {
       path: "/forgot-password",
@@ -56,6 +49,11 @@ const router = [
       path: "/all",
       exact: true,
       main: () => <All />
+   },
+   {
+      path: "/test",
+      exact: true,
+      main: () => <TestPage />
    },
 
    {

@@ -329,5 +329,21 @@ class TableContainer extends Component {
       );
    }
 }
-
+<span>
+   <Button
+      type="dash"
+      icon="edit"
+      // onClick={this.onEdit(record.key)}
+   >
+      Edit
+   </Button>
+   <Divider type="vertical" />
+   <Button
+      type="danger"
+      icon="delete"
+      // onClick={this.onDelte(record.key)}
+   >
+      Delete
+   </Button>
+</span>;
 export default TableContainer;
