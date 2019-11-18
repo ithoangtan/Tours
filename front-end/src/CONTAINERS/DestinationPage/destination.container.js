@@ -1,6 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+    import * as INDEX_CONSTANTS from "../../constants/index.constants";
+    import funcLoadJs from "../../constants/loadJs.constants";
 
 export default class DestinationContainer extends Component {
+
+  componentDidMount(){
+
+    funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
+  }
+
     render() {
         return (
             <div>

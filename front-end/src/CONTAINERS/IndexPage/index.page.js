@@ -14,6 +14,8 @@ import ThingsToKnowContainer from "../ThingsToKnow/thingsToKnow.container";
 import HappyTravelerSaysContainer from "../HappyTravelerSays/happyTravelerSay.container";
 import RecentStoriesContainer from "../RecentStories/recentStories.container";
 
+import * as INDEX_CONSTANTS from "../../constants/index.constants";
+import funcLoadJs from "../../constants/loadJs.constants";
 class IndexPage extends Component {
    constructor(props) {
       super(props);
@@ -25,6 +27,8 @@ class IndexPage extends Component {
       const { tourAllActions } = this.props;
       const { fetchListTourRequest } = tourAllActions;
       fetchListTourRequest();
+
+      funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
    }
 
    renderBoard() {
