@@ -60,7 +60,7 @@ class App extends Component {
                {this.showContent(routes)}
                <SubcribeContainer />
                <FooterContainer />
-               <Loaded />
+               {/* <Loaded /> */}
                <BackToTop />
                <ToastContainer autoColse={3000} />
             </Provider>
