@@ -51,12 +51,12 @@ export default class ReportViewNumberContainer extends Component {
                      <div className="row no-gutters align-items-center">
                         <div className="col mr-2">
                            <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
-                              Tasks
+                              Tours
                            </div>
                            <div className="row no-gutters align-items-center">
                               <div className="col-auto">
                                  <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                    50%
+                                    80%
                                  </div>
                               </div>
                               <div className="col">
@@ -64,8 +64,8 @@ export default class ReportViewNumberContainer extends Component {
                                     <div
                                        className="progress-bar bg-info"
                                        role="progressbar"
-                                       style={{ width: "50%" }}
-                                       aria-valuenow={50}
+                                       style={{ width: "80%" }}
+                                       aria-valuenow={80}
                                        aria-valuemin={0}
                                        aria-valuemax={100}
                                     />

@@ -16,14 +16,17 @@ import {
 import TableGallery from "../Table/table.gallery";
 
 const data = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
    data.push({
       key: i,
-      name: `Edrward ${i}`,
-      age: Math.floor(Math.random() * 100),
-      address: `London Park no. ${i}`,
-      description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-      url: `./img/hotel-1.jpg`
+      titleTour: "Tarantula",
+      price: 865,
+      sale: 48,
+      dateAdded: "12/13/2018",
+      departureDay: "6/5/2019",
+      describe: "Other superficial bite of vagina and vulva, initial encounter",
+      address: "2 Golf View Lane",
+      vocationTime: i
    });
 }
 const EditableContext = React.createContext();
@@ -94,11 +97,11 @@ class EditableCell extends React.Component {
    }
 }
 
-const expandedRowRender = record => <TableGallery />;
+const expandedRowRender = record => <TableGallery record={record} />;
 const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Tạm thời không biết nên ghi gì";
-const scroll = { y: 240 };
+const scroll = { x: 1780, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -116,7 +119,7 @@ class EditableTable extends React.Component {
          title,
          footer,
          rowSelection: {},
-         scroll: undefined,
+         scroll: scroll,
          hasData: true,
          tableLayout: "auto",
          filteredInfo: null,
@@ -167,9 +170,15 @@ class EditableTable extends React.Component {
       const { count, data } = this.state;
       const newData = {
          key: count,
-         name: `Edward King ${count}`,
-         age: 32,
-         address: `London, Park Lane no. ${count}`
+         titleTour: "Tarantula",
+         price: 865,
+         sale: 48,
+         dateAdded: "12/13/2018",
+         departureDay: "6/5/2019",
+         describe:
+            "Other superficial bite of vagina and vulva, initial encounter",
+         address: "2 Golf View Lane",
+         vocationTime: count
       };
       this.setState({
          data: [...data, newData],
@@ -211,10 +220,10 @@ class EditableTable extends React.Component {
    fetch = (params = {}) => {
       this.setState({ loading: true });
       reqwest({
-         url: "http://localhost:3000/tasks",
+         url: "http://localhost:3000/tours",
          method: "get",
          data: {
-            tasks: 1000,
+            tours: 1000,
             ...params
          },
          type: "json"
@@ -391,23 +400,26 @@ class EditableTable extends React.Component {
       filteredInfo = filteredInfo || {};
       this.columns = [
          {
-            title: "Name",
-            dataIndex: "name",
-            key: "name",
-            ...this.getColumnSearchProps("name"),
-            sorter: (a, b) => a.name.length - b.name.length,
-            sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
+            title: "Title",
+            dataIndex: "titleTour",
+            key: "titleTour",
+            width: 200,
+            // fixed: "left",
+            ...this.getColumnSearchProps("titleTour"),
+            sorter: (a, b) => a.titleTour.length - b.titleTour.length,
+            sortOrder: sortedInfo.columnKey === "titleTour" && sortedInfo.order,
             ellipsis: true,
             editable: true
             // render: text => text
          },
          {
-            title: "Age",
-            dataIndex: "age",
-            key: "age",
-            ...this.getColumnSearchProps("age"),
-            sorter: (a, b) => a.age - b.age,
-            sortOrder: sortedInfo.columnKey === "age" && sortedInfo.order,
+            title: "Price($)",
+            dataIndex: "price",
+            key: "price",
+            width: 120,
+            ...this.getColumnSearchProps("price"),
+            sorter: (a, b) => a.price - b.price,
+            sortOrder: sortedInfo.columnKey === "price" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -415,6 +427,7 @@ class EditableTable extends React.Component {
             title: "Address",
             dataIndex: "address",
             key: "address",
+            width: 200,
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
@@ -422,23 +435,71 @@ class EditableTable extends React.Component {
             editable: true
          },
          {
-            title: "url",
-            dataIndex: "url",
-            key: "url",
-            width: "10%",
+            title: "Sale(%)",
+            dataIndex: "sale",
+            key: "sale",
+            width: 100,
             filters: [
-               { text: "London", value: "London" },
-               { text: "New York", value: "New York" }
+               { text: "10%", value: 9 },
+               { text: "20%", value: 43 }
             ],
-            filteredValue: filteredInfo.address || null,
-            onFilter: (value, record) => record.address.includes(value),
+            filteredValue: filteredInfo.sale || null,
+            filterMultiple: false,
+            onFilter: (value, record) => record.sale.indexOf(value) === 0,
             editable: true,
             ellipsis: true
          },
          {
+            title: "Added",
+            dataIndex: "dateAdded",
+            key: "dateAdded",
+            width: 150,
+            ...this.getColumnSearchProps("dateAdded"),
+            sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
+            sortOrder: sortedInfo.columnKey === "dateAdded" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+         {
+            title: "Departure",
+            dataIndex: "departureDay",
+            key: "departureDay",
+            width: 160,
+            ...this.getColumnSearchProps("departureDay"),
+            sorter: (a, b) => a.departureDay.length - b.departureDay.length,
+            sortOrder:
+               sortedInfo.columnKey === "departureDay" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+         {
+            title: "Time",
+            dataIndex: "vocationTime",
+            key: "vocationTime",
+            width: 120,
+            ...this.getColumnSearchProps("vocationTime"),
+            sorter: (a, b) => a.vocationTime - b.vocationTime,
+            sortOrder:
+               sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+         {
+            title: "describe",
+            dataIndex: "describe",
+            key: "describe",
+            width: 400,
+            ...this.getColumnSearchProps("describe"),
+            sorter: (a, b) => a.describe.length - b.describe.length,
+            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+         {
             title: "Edit",
             dataIndex: "edit",
-            width: "10%",
+            width: 120,
+            fixed: "right",
             render: (text, record) => {
                const { editingKey } = this.state;
                const editable = this.isEditing(record);
@@ -474,7 +535,8 @@ class EditableTable extends React.Component {
          {
             title: "Delete",
             dataIndex: "delete",
-            width: "10%",
+            width: 80,
+            fixed: "right",
             render: (text, record) =>
                this.state.data.length >= 1 ? (
                   <Popconfirm
@@ -495,7 +557,7 @@ class EditableTable extends React.Component {
             ...col,
             onCell: record => ({
                record,
-               inputType: col.dataIndex === "age" ? "number" : "text",
+               inputType: col.dataIndex === "price" ? "number" : "text",
                dataIndex: col.dataIndex,
                title: col.title,
                editing: this.isEditing(record),

@@ -15,7 +15,7 @@ export default class ReportViewChartContainer extends Component {
                      <div className="dropdown no-arrow">
                         <a
                            className="dropdown-toggle"
-                           href="s"
+                           href="/"
                            role="button"
                            id="dropdownMenuLink"
                            data-toggle="dropdown"
@@ -31,14 +31,14 @@ export default class ReportViewChartContainer extends Component {
                            <div className="dropdown-header">
                               Dropdown Header:
                            </div>
-                           <a className="dropdown-item" href="s">
+                           <a className="dropdown-item" href="/">
                               Action
                            </a>
-                           <a className="dropdown-item" href="s">
+                           <a className="dropdown-item" href="/">
                               Another action
                            </a>
                            <div className="dropdown-divider" />
-                           <a className="dropdown-item" href="s">
+                           <a className="dropdown-item" href="/">
                               Something else here
                            </a>
                         </div>
@@ -58,12 +58,12 @@ export default class ReportViewChartContainer extends Component {
                   {/* Card Header - Dropdown */}
                   <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                      <h6 className="m-0 font-weight-bold text-primary">
-                        Revenue Sources
+                        Tour was bought
                      </h6>
                      <div className="dropdown no-arrow">
                         <a
                            className="dropdown-toggle"
-                           href="s"
+                           href="/"
                            role="button"
                            id="dropdownMenuLink"
                            data-toggle="dropdown"
@@ -79,14 +79,14 @@ export default class ReportViewChartContainer extends Component {
                            <div className="dropdown-header">
                               Dropdown Header:
                            </div>
-                           <a className="dropdown-item" href="s">
+                           <a className="dropdown-item" href="/">
                               Action
                            </a>
-                           <a className="dropdown-item" href="s">
+                           <a className="dropdown-item" href="/">
                               Another action
                            </a>
                            <div className="dropdown-divider" />
-                           <a className="dropdown-item" href="s">
+                           <a className="dropdown-item" href="/">
                               Something else here
                            </a>
                         </div>
@@ -99,10 +99,11 @@ export default class ReportViewChartContainer extends Component {
                      </div>
                      <div className="mt-4 text-center small">
                         <span className="mr-2">
-                           <i className="fas fa-circle text-primary" /> Direct
+                           <i className="fas fa-circle text-primary" /> Domestic
                         </span>
                         <span className="mr-2">
-                           <i className="fas fa-circle text-success" /> Social
+                           <i className="fas fa-circle text-success" />
+                           International
                         </span>
                         <span className="mr-2">
                            <i className="fas fa-circle text-info" /> Referral
