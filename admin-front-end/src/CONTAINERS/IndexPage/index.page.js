@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -75,9 +76,9 @@ class IndexPage extends Component {
                         >
                            Cancel
                         </button>
-                        <a className="btn btn-primary" href="login.html">
+                        <Link className="btn btn-primary" to="login">
                            Logout
-                        </a>
+                        </Link>
                      </div>
                   </div>
                </div>

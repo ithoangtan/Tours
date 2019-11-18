@@ -100,7 +100,7 @@ const router = [
       )
    },
    {
-      path: "/concact",
+      path: "/contact",
       exact: true,
       main: () => (
          <div>

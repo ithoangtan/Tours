@@ -19,29 +19,25 @@ class TableGallery extends Component {
             uid: "-1",
             name: "image.png",
             status: "done",
-            url:
-               "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
          },
          {
             uid: "-2",
             name: "image.png",
             status: "done",
-            url:
-               "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
          },
          {
             uid: "-3",
             name: "image.png",
             status: "done",
-            url:
-               "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
          },
          {
             uid: "-4",
             name: "image.png",
             status: "done",
-            url:
-               "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
          },
          {
             uid: "-5",
@@ -67,6 +63,7 @@ class TableGallery extends Component {
    handleChange = ({ fileList }) => this.setState({ fileList });
 
    render() {
+      const { record } = this.props;
       const { previewVisible, previewImage, fileList } = this.state;
       const uploadButton = (
          <div>
@@ -75,27 +72,30 @@ class TableGallery extends Component {
          </div>
       );
       return (
-         <div className="clearfix">
-            <Upload
-               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-               listType="picture-card"
-               fileList={fileList}
-               onPreview={this.handlePreview}
-               onChange={this.handleChange}
-            >
-               {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
-            <Modal
-               visible={previewVisible}
-               footer={null}
-               onCancel={this.handleCancel}
-            >
-               <img
-                  alt="example"
-                  style={{ width: "100%" }}
-                  src={previewImage}
-               />
-            </Modal>
+         <div>
+            <p>Describe: {record.describe}</p>
+            <div className="clearfix">
+               <Upload
+                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  listType="picture-card"
+                  fileList={fileList}
+                  onPreview={this.handlePreview}
+                  onChange={this.handleChange}
+               >
+                  {fileList.length >= 8 ? null : uploadButton}
+               </Upload>
+               <Modal
+                  visible={previewVisible}
+                  footer={null}
+                  onCancel={this.handleCancel}
+               >
+                  <img
+                     alt="example"
+                     style={{ width: "100%" }}
+                     src={previewImage}
+                  />
+               </Modal>
+            </div>
          </div>
       );
    }
