@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 export default class TopBarContainer extends Component {
    render() {
       return (
@@ -34,7 +36,7 @@ export default class TopBarContainer extends Component {
                <li className="nav-item dropdown no-arrow d-sm-none">
                   <a
                      className="nav-link dropdown-toggle"
-                     href="s"
+                     href="/"
                      id="searchDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -70,7 +72,7 @@ export default class TopBarContainer extends Component {
                <li className="nav-item dropdown no-arrow mx-1">
                   <a
                      className="nav-link dropdown-toggle"
-                     href="s"
+                     href="/"
                      id="alertsDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -91,7 +93,7 @@ export default class TopBarContainer extends Component {
                      <h6 className="dropdown-header">Alerts Center</h6>
                      <a
                         className="dropdown-item d-flex align-items-center"
-                        href="s"
+                        href="/"
                      >
                         <div className="mr-3">
                            <div className="icon-circle bg-primary">
@@ -100,16 +102,16 @@ export default class TopBarContainer extends Component {
                         </div>
                         <div>
                            <div className="small text-gray-500">
-                              December 12, 2019
+                              Nov 1, 2019
                            </div>
                            <span className="font-weight-bold">
-                              A new monthly report is ready to download!
+                              Something................................
                            </span>
                         </div>
                      </a>
                      <a
                         className="dropdown-item d-flex align-items-center"
-                        href="s"
+                        href="/"
                      >
                         <div className="mr-3">
                            <div className="icon-circle bg-success">
@@ -118,14 +120,14 @@ export default class TopBarContainer extends Component {
                         </div>
                         <div>
                            <div className="small text-gray-500">
-                              December 7, 2019
+                              Nov 7, 2019
                            </div>
-                           $290.29 has been deposited into your account!
+                           Something................................
                         </div>
                      </a>
                      <a
                         className="dropdown-item d-flex align-items-center"
-                        href="s"
+                        href="/"
                      >
                         <div className="mr-3">
                            <div className="icon-circle bg-warning">
@@ -134,25 +136,26 @@ export default class TopBarContainer extends Component {
                         </div>
                         <div>
                            <div className="small text-gray-500">
-                              December 2, 2019
+                              Nov 2, 2019
                            </div>
-                           Spending Alert: We've noticed unusually high spending
-                           for your account.
+                           Something................................
                         </div>
                      </a>
-                     <a
-                        className="dropdown-item text-center small text-gray-500"
-                        href="s"
-                     >
-                        Show All Alerts
-                     </a>
+                     <Link to="notifications">
+                        <a
+                           className="dropdown-item text-center small text-gray-500"
+                           href="/"
+                        >
+                           Show All Alerts
+                        </a>
+                     </Link>
                   </div>
                </li>
                {/* Nav Item - Messages */}
                <li className="nav-item dropdown no-arrow mx-1">
                   <a
                      className="nav-link dropdown-toggle"
-                     href="s"
+                     href="/"
                      id="messagesDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -171,7 +174,7 @@ export default class TopBarContainer extends Component {
                      <h6 className="dropdown-header">Message Center</h6>
                      <a
                         className="dropdown-item d-flex align-items-center"
-                        href="s"
+                        href="/"
                      >
                         <div className="dropdown-list-image mr-3">
                            <img
@@ -183,17 +186,16 @@ export default class TopBarContainer extends Component {
                         </div>
                         <div className="font-weight-bold">
                            <div className="text-truncate">
-                              Hi there! I am wondering if you can help me with a
-                              problem I've been having.
+                              Hi there! I am .......
                            </div>
                            <div className="small text-gray-500">
-                              Emily Fowler · 58m
+                              Emily · 58m
                            </div>
                         </div>
                      </a>
                      <a
                         className="dropdown-item d-flex align-items-center"
-                        href="s"
+                        href="/"
                      >
                         <div className="dropdown-list-image mr-3">
                            <img
@@ -205,17 +207,14 @@ export default class TopBarContainer extends Component {
                         </div>
                         <div>
                            <div className="text-truncate">
-                              I have the photos that you ordered last month, how
-                              would you like them sent to you?
+                              I have the problem..........
                            </div>
-                           <div className="small text-gray-500">
-                              Jae Chun · 1d
-                           </div>
+                           <div className="small text-gray-500">Jae · 1d</div>
                         </div>
                      </a>
                      <a
                         className="dropdown-item d-flex align-items-center"
-                        href="s"
+                        href="/"
                      >
                         <div className="dropdown-list-image mr-3">
                            <img
@@ -227,17 +226,14 @@ export default class TopBarContainer extends Component {
                         </div>
                         <div>
                            <div className="text-truncate">
-                              Last month's report looks great, I am very happy
-                              with the progress so far, keep up the good work!
+                              Something...........
                            </div>
-                           <div className="small text-gray-500">
-                              Morgan Alvarez · 2d
-                           </div>
+                           <div className="small text-gray-500">Mor · 2d</div>
                         </div>
                      </a>
                      <a
                         className="dropdown-item d-flex align-items-center"
-                        href="s"
+                        href="/"
                      >
                         <div className="dropdown-list-image mr-3">
                            <img
@@ -249,21 +245,19 @@ export default class TopBarContainer extends Component {
                         </div>
                         <div>
                            <div className="text-truncate">
-                              Am I a good boy? The reason I ask is because
-                              someone told me that people say this to all dogs,
-                              even if they aren't good...
+                              Something...........
                            </div>
-                           <div className="small text-gray-500">
-                              Chicken the Dog · 2w
-                           </div>
+                           <div className="small text-gray-500">Dog · 2w</div>
                         </div>
                      </a>
-                     <a
-                        className="dropdown-item text-center small text-gray-500"
-                        href="s"
-                     >
-                        Read More Messages
-                     </a>
+                     <Link to="mails">
+                        <a
+                           className="dropdown-item text-center small text-gray-500"
+                           href="/"
+                        >
+                           Read More Messages
+                        </a>
+                     </Link>
                   </div>
                </li>
                <div className="topbar-divider d-none d-sm-block" />
@@ -271,7 +265,7 @@ export default class TopBarContainer extends Component {
                <li className="nav-item dropdown no-arrow">
                   <a
                      className="nav-link dropdown-toggle"
-                     href="s"
+                     href="/"
                      id="userDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -279,11 +273,11 @@ export default class TopBarContainer extends Component {
                      aria-expanded="false"
                   >
                      <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                        Valerie Luna
+                        ithoangtan
                      </span>
                      <img
                         className="img-profile rounded-circle"
-                        src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
+                        src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/p960x960/71271983_1008712472794144_9121213280486948864_o.jpg?_nc_cat=107&_nc_oc=AQnFmInfydKQlqJMLyQDpfF6O1EnXv9TNXmLwV6jx2IblIuImYWlsMbFoW2quRU4UlQ&_nc_ht=scontent.fsgn5-2.fna&oh=4b4477b8eba19763e5e22b44c114c3fd&oe=5E40FCAB"
                      />
                   </a>
                   {/* Dropdown - User Information */}
@@ -291,22 +285,22 @@ export default class TopBarContainer extends Component {
                      className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="userDropdown"
                   >
-                     <a className="dropdown-item" href="s">
+                     <a className="dropdown-item" href="/">
                         <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                         Profile
                      </a>
-                     <a className="dropdown-item" href="s">
+                     <a className="dropdown-item" href="/">
                         <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
                         Settings
                      </a>
-                     <a className="dropdown-item" href="s">
+                     <a className="dropdown-item" href="/">
                         <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
                         Activity Log
                      </a>
                      <div className="dropdown-divider" />
                      <a
                         className="dropdown-item"
-                        href="s"
+                        href="/"
                         data-toggle="modal"
                         data-target="#logoutModal"
                      >

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 export default class SideBarContainer extends Component {
    render() {
       return (
@@ -8,42 +10,44 @@ export default class SideBarContainer extends Component {
             id="accordionSidebar"
          >
             {/* Sidebar - Brand */}
-            <a
-               className="sidebar-brand d-flex align-items-center justify-content-center"
-               href="index.html"
-            >
-               <div className="sidebar-brand-icon rotate-n-15">
-                  <i className="fas fa-laugh-wink" />
-               </div>
-               <div className="sidebar-brand-text mx-3">
-                  SB Admin <sup>2</sup>
-               </div>
-            </a>
+            <Link to="/">
+               <a
+                  className="sidebar-brand d-flex align-items-center justify-content-center"
+                  href="/"
+               >
+                  <div className="sidebar-brand-icon rotate-n-15">
+                     <i className="fas fa-laugh-wink" />
+                  </div>
+                  <div className="sidebar-brand-text mx-3">SB Admin</div>
+               </a>
+            </Link>
             {/* Divider */}
             <hr className="sidebar-divider my-0" />
             {/* Nav Item - Dashboard */}
             <li className="nav-item active">
-               <a className="nav-link" href="index.html">
-                  <i className="fas fa-fw fa-tachometer-alt" />
-                  <span>Dashboard</span>
-               </a>
+               <Link to="/">
+                  <a className="nav-link">
+                     <i className="fas fa-fw fa-tachometer-alt" />
+                     <span>Dashboard</span>
+                  </a>
+               </Link>
             </li>
             {/* Divider */}
             <hr className="sidebar-divider" />
             {/* Heading */}
-            <div className="sidebar-heading">Interface</div>
+            <div className="sidebar-heading">Tours Management</div>
             {/* Nav Item - Pages Collapse Menu */}
             <li className="nav-item">
                <a
                   className="nav-link collapsed"
-                  href="s"
+                  href="/"
                   data-toggle="collapse"
                   data-target="#collapseTwo"
                   aria-expanded="true"
                   aria-controls="collapseTwo"
                >
-                  <i className="fas fa-fw fa-cog" />
-                  <span>Components</span>
+                  <i class="fas fa-th-large"></i>
+                  <span>Tours</span>
                </a>
                <div
                   id="collapseTwo"
@@ -52,13 +56,17 @@ export default class SideBarContainer extends Component {
                   data-parent="#accordionSidebar"
                >
                   <div className="bg-white py-2 collapse-inner rounded">
-                     <h6 className="collapse-header">Custom Components:</h6>
-                     <a className="collapse-item" href="buttons.html">
-                        Buttons
-                     </a>
-                     <a className="collapse-item" href="cards.html">
-                        Cards
-                     </a>
+                     <h6 className="collapse-header">Tours</h6>
+                     <Link to="tour">
+                        <a className="collapse-item" href="/">
+                           Tours and Details
+                        </a>
+                     </Link>
+                     <Link to="schedule">
+                        <a className="collapse-item" href="/">
+                           Schedule
+                        </a>
+                     </Link>
                   </div>
                </div>
             </li>
@@ -72,8 +80,8 @@ export default class SideBarContainer extends Component {
                   aria-expanded="true"
                   aria-controls="collapseUtilities"
                >
-                  <i className="fas fa-fw fa-wrench" />
-                  <span>Utilities</span>
+                  <i class="fas fa-blog"></i>
+                  <span>Blogs</span>
                </a>
                <div
                   id="collapseUtilities"
@@ -82,29 +90,34 @@ export default class SideBarContainer extends Component {
                   data-parent="#accordionSidebar"
                >
                   <div className="bg-white py-2 collapse-inner rounded">
-                     <h6 className="collapse-header">Custom Utilities:</h6>
-                     <a className="collapse-item" href="utilities-color.html">
-                        Colors
-                     </a>
-                     <a className="collapse-item" href="utilities-border.html">
-                        Borders
-                     </a>
-                     <a
-                        className="collapse-item"
-                        href="utilities-animation.html"
-                     >
-                        Animations
-                     </a>
-                     <a className="collapse-item" href="utilities-other.html">
-                        Other
-                     </a>
+                     <h6 className="collapse-header">Blog</h6>
+                     <Link to="posts">
+                        <a className="collapse-item" href="/">
+                           Posts
+                        </a>
+                     </Link>
+                     <Link to="approved-post">
+                        <a className="collapse-item" href="/">
+                           Approved post
+                        </a>
+                     </Link>
+                     <Link to="comments">
+                        <a className="collapse-item" href="/">
+                           Comments
+                        </a>
+                     </Link>
+                     <Link to="other">
+                        <a className="collapse-item" href="/">
+                           Other
+                        </a>
+                     </Link>
                   </div>
                </div>
             </li>
             {/* Divider */}
             <hr className="sidebar-divider" />
             {/* Heading */}
-            <div className="sidebar-heading">Addons</div>
+            <div className="sidebar-heading">Account Management</div>
             {/* Nav Item - Pages Collapse Menu */}
             <li className="nav-item">
                <a
@@ -115,8 +128,8 @@ export default class SideBarContainer extends Component {
                   aria-expanded="true"
                   aria-controls="collapsePages"
                >
-                  <i className="fas fa-fw fa-folder" />
-                  <span>Pages</span>
+                  <i class="fas fa-user-circle"></i>
+                  <span>Accounts</span>
                </a>
                <div
                   id="collapsePages"
@@ -125,41 +138,45 @@ export default class SideBarContainer extends Component {
                   data-parent="#accordionSidebar"
                >
                   <div className="bg-white py-2 collapse-inner rounded">
-                     <h6 className="collapse-header">Login Screens:</h6>
-                     <a className="collapse-item" href="login.html">
-                        Login
-                     </a>
-                     <a className="collapse-item" href="register.html">
-                        Register
-                     </a>
-                     <a className="collapse-item" href="forgot-password.html">
-                        Forgot Password
-                     </a>
+                     <h6 className="collapse-header">Types</h6>
+                     <Link to="user-management">
+                        <a className="collapse-item" href="/">
+                           User manager
+                        </a>
+                     </Link>
+                     <Link to="accounts">
+                        <a className="collapse-item" href="/">
+                           Accounts
+                        </a>
+                     </Link>
+                     <Link to="guests">
+                        <a className="collapse-item" href="/">
+                           Guests
+                        </a>
+                     </Link>
                      <div className="collapse-divider" />
-                     <h6 className="collapse-header">Other Pages:</h6>
-                     <a className="collapse-item" href="404.html">
-                        404 Page
-                     </a>
-                     <a className="collapse-item" href="blank.html">
-                        Blank Page
-                     </a>
                   </div>
                </div>
             </li>
             {/* Nav Item - Charts */}
             <li className="nav-item">
-               <a className="nav-link" href="charts.html">
-                  <i className="fas fa-fw fa-chart-area" />
-                  <span>Charts</span>
-               </a>
+               <Link to="notification">
+                  <a className="nav-link" href="/">
+                     <i class="fas fa-bell"></i>
+                     <span>Notifications</span>
+                  </a>
+               </Link>
             </li>
             {/* Nav Item - Tables */}
             <li className="nav-item">
-               <a className="nav-link" href="tables.html">
-                  <i className="fas fa-fw fa-table" />
-                  <span>Tables</span>
-               </a>
+               <Link to="mails">
+                  <a className="nav-link" href="/">
+                     <i class="fas fa-envelope-square"></i>
+                     <span>Mails</span>
+                  </a>
+               </Link>
             </li>
+            {/* Divider */}
             {/* Divider */}
             <hr className="sidebar-divider d-none d-md-block" />
             {/* Sidebar Toggler (Sidebar) */}
