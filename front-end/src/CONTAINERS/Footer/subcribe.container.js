@@ -23,7 +23,7 @@ export default class SubcribeContainer extends Component {
                                     />
                                     <input
                                        type="submit"
-                                       defaultValue="Subscribe"
+                                       defaultValue="Subscribe us!"
                                        className="submit px-3"
                                     />
                                  </div>
