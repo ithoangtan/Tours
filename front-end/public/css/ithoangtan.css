@@ -1,0 +1,64 @@
+.tour-single-title {
+   display: flex;
+   text-align: left;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-content: flex-start;
+   justify-items: flex-start;
+}
+
+.tour-single-action {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+
+.left-tour-page {
+}
+
+.check-group-tour-left {
+   display: flex !important;
+   flex-direction: column;
+   align-items: flex-start !important;
+}
+
+.img-tour {
+   max-width: 100% !important;
+   height: auto !important;
+}
+
+.right-detail-tour {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+@media (max-width: 992px) {
+   .right-detail-tour {
+      display: left;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+   }
+}
+
+.text-price-tour-detail {
+   font-weight: 600;
+   font-size: 1.3rem;
+}
+
+.right-tour-detail-page {
+   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.1);
+   padding: 5px;
+   margin: 5px;
+}
+
+.login-form {
+   max-width: auto;
+}
+.login-form-forgot {
+   float: right;
+}
+.login-form-button {
+   width: 100%;
+}
