@@ -7,10 +7,10 @@ import { Menu, Dropdown, Icon, Button } from "antd";
 const menu = (
    <Menu>
       <Menu.Item key="0">
-         <Link to="/nas">Hotels &amp</Link>
+         <Link to="/tour">Tours</Link>
       </Menu.Item>
       <Menu.Item key="1">
-         <Link to="/nas">Hotels &amp</Link>
+         <Link to="/tour">Tours2</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="3" disabled>
@@ -28,7 +28,9 @@ export default class Navigation extends Component {
          >
             <div className="container">
                <a className="navbar-brand" href="index.html">
-                  <span>Traveland</span>
+                  <Link to="/">
+                     <span>Traveland</span>
+                  </Link>
                </a>
 
                <button
@@ -45,38 +47,38 @@ export default class Navigation extends Component {
                <div className="collapse navbar-collapse" id="ftco-nav">
                   <ul className="navbar-nav ml-auto">
                      <li className="nav-item active">
-                        <a href="index.html" className="nav-link">
-                           Home
-                        </a>
+                        <Link to="/" className="nav-link">
+                           <a href="index.html">Home</a>
+                        </Link>
                      </li>
                      <li className="nav-item">
-                        <a href="about.html" className="nav-link">
-                           About
-                        </a>
+                        <Link to="/about" className="nav-link">
+                           <a href="about.html">About</a>
+                        </Link>
                      </li>
                      <li className="nav-item">
-                        <a href="destination.html" className="nav-link">
-                           Destination
-                        </a>
+                        <Link to="/destination" className="nav-link">
+                           <a href="destination.html">Destination</a>
+                        </Link>
                      </li>
                      <li className="nav-item">
                         <a className="nav-link">
                            <Dropdown overlay={menu}>
-                              <Link to="/s">
+                              <Link to="/">
                                  Tours <Icon type="down" />
                               </Link>
                            </Dropdown>
                         </a>
                      </li>
                      <li className="nav-item">
-                        <a href="blog.html" className="nav-link">
-                           Blog
-                        </a>
+                        <Link to="blog" className="nav-link">
+                           <a href="blog.html">Blog</a>
+                        </Link>
                      </li>
                      <li className="nav-item">
-                        <a href="contact.html" className="nav-link">
-                           Contact
-                        </a>
+                        <Link to="contact" className="nav-link">
+                           <a href="contact.html">Contact</a>
+                        </Link>
                      </li>
                      <li className="nav-item" style={{ alignSelf: "center" }}>
                         <Button

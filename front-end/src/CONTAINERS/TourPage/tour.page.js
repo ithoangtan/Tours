@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
+import * as INDEX_CONSTANTS from "../../constants/index.constants";
+import funcLoadJs from "../../constants/loadJs.constants";
+
 import { Typography, Rate, Checkbox, Carousel, Tag, Button } from "antd";
 
 const { Text, Title, Paragraph } = Typography;
@@ -47,6 +52,9 @@ export default class TourContainer extends Component {
       });
    };
 
+   componentDidMount() {
+      funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
+   }
    render() {
       const { value } = this.state;
       return (
@@ -107,197 +115,45 @@ export default class TourContainer extends Component {
                         <div className="tour-content">
                            <div className="row justify-conten-center">
                               <div className="col-md-12 col-lg-4 ftco-animate">
-                                 <Carousel autoplay>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-1.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-2.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-3.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-4.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                 </Carousel>
+                                 <Link to="/tour-single">
+                                    <Carousel autoplay>
+                                       <div>
+                                          <img
+                                             alt="notFound"
+                                             src="./images/tour-1.jpg"
+                                             className="img-tour"
+                                          />
+                                       </div>
+                                       <div>
+                                          <img
+                                             alt="notFound"
+                                             src="./images/tour-2.jpg"
+                                             className="img-tour"
+                                          />
+                                       </div>
+                                       <div>
+                                          <img
+                                             alt="notFound"
+                                             src="./images/tour-3.jpg"
+                                             className="img-tour"
+                                          />
+                                       </div>
+                                       <div>
+                                          <img
+                                             alt="notFound"
+                                             src="./images/tour-4.jpg"
+                                             className="img-tour"
+                                          />
+                                       </div>
+                                    </Carousel>
+                                 </Link>
                               </div>
                               <div className="col-md-12 col-lg-5 ftco-animate">
-                                 <Title level={4}>
-                                    Name toursasdl alskdja sd
-                                 </Title>
-                                 <Rate disabled defaultValue={2} />
-                                 <br />
-                                 <Paragraph className="mt-1" ellipsis>
-                                    Dont know write anythingDont know write
-                                    anythingDont know write anythingDont know
-                                    write anythingDont know write anythingDont
-                                    know write anything
-                                 </Paragraph>
-                                 <div className="mt-2">
-                                    <Tag color="#f50">
-                                       Khuyễn mãi miễn phí 50% luôn á nè
-                                    </Tag>
-                                 </div>
-                                 <div className="mt-2">
-                                    <Button type="dashed">More</Button>
-                                 </div>
-                              </div>
-                              <div className="col-md-12 col-lg-3 ftco-animate right-detail-tour">
-                                 <div className="mt-2">
-                                    <Tag color="#87d068">
-                                       Nhiều người đi nhất
-                                    </Tag>
-                                 </div>
-                                 <div className="mt-1">
-                                    <Text>(233) Reviews</Text>
-                                 </div>
-                                 <div className="mt-1 text-price-tour-detail">
-                                    $140
-                                 </div>
-                                 <div className="mt-1">
-                                    <Text delete>$70</Text>
-                                 </div>
-                                 <div>
-                                    <Button type="primary">BOOK NOW</Button>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="right-tour-detail-page mt-5">
-                        <div className="tour-content">
-                           <div className="row justify-conten-center">
-                              <div className="col-md-12 col-lg-4 ftco-animate">
-                                 <Carousel autoplay>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-1.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-2.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-3.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-4.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                 </Carousel>
-                              </div>
-                              <div className="col-md-12 col-lg-5 ftco-animate">
-                                 <Title level={4}>
-                                    Name toursasdl alskdja sd
-                                 </Title>
-                                 <Rate disabled defaultValue={2} />
-                                 <br />
-                                 <Paragraph className="mt-1" ellipsis>
-                                    Dont know write anythingDont know write
-                                    anythingDont know write anythingDont know
-                                    write anythingDont know write anythingDont
-                                    know write anything
-                                 </Paragraph>
-                                 <div className="mt-2">
-                                    <Tag color="#f50">
-                                       Khuyễn mãi miễn phí 50% luôn á nè
-                                    </Tag>
-                                 </div>
-                                 <div className="mt-2">
-                                    <Button type="dashed">More</Button>
-                                 </div>
-                              </div>
-                              <div className="col-md-12 col-lg-3 ftco-animate right-detail-tour">
-                                 <div className="mt-2">
-                                    <Tag color="#87d068">
-                                       Nhiều người đi nhất
-                                    </Tag>
-                                 </div>
-                                 <div className="mt-1">
-                                    <Text>(233) Reviews</Text>
-                                 </div>
-                                 <div className="mt-1 text-price-tour-detail">
-                                    $140
-                                 </div>
-                                 <div className="mt-1">
-                                    <Text delete>$70</Text>
-                                 </div>
-                                 <div>
-                                    <Button type="primary">BOOK NOW</Button>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="right-tour-detail-page mt-5">
-                        <div className="tour-content">
-                           <div className="row justify-conten-center">
-                              <div className="col-md-12 col-lg-4 ftco-animate">
-                                 <Carousel autoplay>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-1.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-2.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-3.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                    <div>
-                                       <img
-                                          alt="notFound"
-                                          src="./images/tour-4.jpg"
-                                          className="img-tour"
-                                       />
-                                    </div>
-                                 </Carousel>
-                              </div>
-                              <div className="col-md-12 col-lg-5 ftco-animate">
-                                 <Title level={4}>
-                                    Name toursasdl alskdja sd
-                                 </Title>
+                                 <Link to="tour-single">
+                                    <Title level={4}>
+                                       Name toursasdl alskdja sd
+                                    </Title>
+                                 </Link>
                                  <Rate disabled defaultValue={2} />
                                  <br />
                                  <Paragraph className="mt-1" ellipsis>

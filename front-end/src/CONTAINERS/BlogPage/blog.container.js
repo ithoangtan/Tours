@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
+import * as INDEX_CONSTANTS from "../../constants/index.constants";
+import funcLoadJs from "../../constants/loadJs.constants";
 export default class BlogContainer extends Component {
+   componentDidMount() {
+      funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
+   }
+
    render() {
       return (
          <section className="ftco-section bg-light">
@@ -8,13 +16,15 @@ export default class BlogContainer extends Component {
                <div className="row d-flex">
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <a
-                           href="blog-single.html"
-                           className="block-20"
-                           style={{
-                              backgroundImage: 'url("images/image_1.jpg")'
-                           }}
-                        ></a>
+                        <Link to="blog-single">
+                           <a
+                              href="blog-single.html"
+                              className="block-20"
+                              style={{
+                                 backgroundImage: 'url("images/image_1.jpg")'
+                              }}
+                           ></a>
+                        </Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -26,9 +36,12 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
-                                 Why Lead Generation is Key for Business Growth
-                              </a>
+                              <Link to="blog-single">
+                                 <a href="/">
+                                    Why Lead Generation is Key for Business
+                                    Growth
+                                 </a>
+                              </Link>
                            </h3>
                            <p>
                               A small river named Duden flows by their place and
@@ -39,13 +52,15 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <a
-                           href="blog-single.html"
-                           className="block-20"
-                           style={{
-                              backgroundImage: 'url("images/image_2.jpg")'
-                           }}
-                        ></a>
+                        <Link to="blog-single">
+                           <a
+                              href="blog-single.html"
+                              className="block-20"
+                              style={{
+                                 backgroundImage: 'url("images/image_2.jpg")'
+                              }}
+                           ></a>
+                        </Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -57,9 +72,12 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
-                                 Why Lead Generation is Key for Business Growth
-                              </a>
+                              <Link to="blog-single">
+                                 <a href="/">
+                                    Why Lead Generation is Key for Business
+                                    Growth
+                                 </a>
+                              </Link>
                            </h3>
                            <p>
                               A small river named Duden flows by their place and
@@ -70,13 +88,15 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry">
-                        <a
-                           href="blog-single.html"
-                           className="block-20"
-                           style={{
-                              backgroundImage: 'url("images/image_3.jpg")'
-                           }}
-                        ></a>
+                        <Link to="blog-single">
+                           <a
+                              href="blog-single.html"
+                              className="block-20"
+                              style={{
+                                 backgroundImage: 'url("images/image_3.jpg")'
+                              }}
+                           ></a>
+                        </Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -88,9 +108,12 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
-                                 Why Lead Generation is Key for Business Growth
-                              </a>
+                              <Link to="blog-single">
+                                 <a href="/">
+                                    Why Lead Generation is Key for Business
+                                    Growth
+                                 </a>
+                              </Link>
                            </h3>
                            <p>
                               A small river named Duden flows by their place and
@@ -101,13 +124,15 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <a
-                           href="blog-single.html"
-                           className="block-20"
-                           style={{
-                              backgroundImage: 'url("images/image_4.jpg")'
-                           }}
-                        ></a>
+                        <Link to="blog-single">
+                           <a
+                              href="blog-single.html"
+                              className="block-20"
+                              style={{
+                                 backgroundImage: 'url("images/image_4.jpg")'
+                              }}
+                           ></a>
+                        </Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -119,9 +144,12 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
-                                 Why Lead Generation is Key for Business Growth
-                              </a>
+                              <Link to="blog-single">
+                                 <a href="/">
+                                    Why Lead Generation is Key for Business
+                                    Growth
+                                 </a>
+                              </Link>
                            </h3>
                            <p>
                               A small river named Duden flows by their place and
@@ -132,13 +160,15 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <a
-                           href="blog-single.html"
-                           className="block-20"
-                           style={{
-                              backgroundImage: 'url("images/image_5.jpg")'
-                           }}
-                        ></a>
+                        <Link to="blog-single">
+                           <a
+                              href="blog-single.html"
+                              className="block-20"
+                              style={{
+                                 backgroundImage: 'url("images/image_5.jpg")'
+                              }}
+                           ></a>
+                        </Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -150,9 +180,12 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
-                                 Why Lead Generation is Key for Business Growth
-                              </a>
+                              <Link to="blog-single">
+                                 <a href="/">
+                                    Why Lead Generation is Key for Business
+                                    Growth
+                                 </a>
+                              </Link>
                            </h3>
                            <p>
                               A small river named Duden flows by their place and
@@ -163,13 +196,15 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry">
-                        <a
-                           href="blog-single.html"
-                           className="block-20"
-                           style={{
-                              backgroundImage: 'url("images/image_6.jpg")'
-                           }}
-                        ></a>
+                        <Link to="blog-single">
+                           <a
+                              href="blog-single.html"
+                              className="block-20"
+                              style={{
+                                 backgroundImage: 'url("images/image_6.jpg")'
+                              }}
+                           ></a>
+                        </Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -181,9 +216,12 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
-                                 Why Lead Generation is Key for Business Growth
-                              </a>
+                              <Link to="blog-single">
+                                 <a href="/">
+                                    Why Lead Generation is Key for Business
+                                    Growth
+                                 </a>
+                              </Link>
                            </h3>
                            <p>
                               A small river named Duden flows by their place and
@@ -198,25 +236,25 @@ export default class BlogContainer extends Component {
                      <div className="block-27">
                         <ul>
                            <li>
-                              <a href="s">&lt;</a>
+                              <a href="/">&lt;</a>
                            </li>
                            <li className="active">
                               <span>1</span>
                            </li>
                            <li>
-                              <a href="s">2</a>
+                              <a href="/">2</a>
                            </li>
                            <li>
-                              <a href="s">3</a>
+                              <a href="/">3</a>
                            </li>
                            <li>
-                              <a href="s">4</a>
+                              <a href="/">4</a>
                            </li>
                            <li>
-                              <a href="s">5</a>
+                              <a href="/">5</a>
                            </li>
                            <li>
-                              <a href="s">&gt;</a>
+                              <a href="/">&gt;</a>
                            </li>
                         </ul>
                      </div>
