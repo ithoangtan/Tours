@@ -16,7 +16,7 @@ import {
 import TableGallery from "../Table/table.gallery";
 
 const data = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 0; i++) {
    data.push({
       key: i,
       titleTour: "Tarantula",
