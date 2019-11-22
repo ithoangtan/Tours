@@ -11,7 +11,7 @@ export const fetchListTourSuccess = data => {
    return {
       type: tourConstants.FETCH_TOUR_SUCCESS,
       payload: {
-         // Thường đi làm thì người ta hay gọi
+         // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
          data
       }
@@ -28,24 +28,22 @@ export const fetchListTourError = error => {
 };
 /**
  * B1: fetch isTaskRequest()
- * B2: ResetL state tasks --> []
+ * B2: ResetL state tours --> []
  * B3: Khi API thành công thì vào then:
  * fetchListTourSucces (data response)
  *
  */
 export const fetchListTourRequest = () => {
    return dispatch => {
-      dispatch(fetchListTour()); //reset state tasks-->[]
+      dispatch(fetchListTour()); //reset state tours-->[]
       tourApis
          .getListTour()
          .then(resp => {
             const { data } = resp;
-            console.log("data: ", data);
             dispatch(fetchListTourSuccess(data));
          })
          .catch(error => {
             dispatch(fetchListTourError(error));
-            console.log("error: ", error);
          });
    };
 };

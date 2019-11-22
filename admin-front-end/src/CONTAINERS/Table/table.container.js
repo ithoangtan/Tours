@@ -1,4 +1,11 @@
 import React from "react";
+
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as tourActions from "../../actions/tour.actions";
+
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
 import { Resizable } from "react-resizable";
@@ -18,7 +25,7 @@ import TableGallery from "../Table/table.gallery";
 const data = [];
 for (let i = 0; i < 0; i++) {
    data.push({
-      key: i,
+      idTour: i,
       titleTour: "Tarantula",
       price: 865,
       sale: 48,
@@ -169,7 +176,7 @@ class EditableTable extends React.Component {
    handleAdd = () => {
       const { count, data } = this.state;
       const newData = {
-         key: count,
+         idTour: count,
          titleTour: "Tarantula",
          price: 865,
          sale: 48,
@@ -209,7 +216,7 @@ class EditableTable extends React.Component {
          pagination: pager
       });
       this.fetch({
-         results: pagination.pageSize,
+         tours: pagination.pageSize,
          page: pagination.current,
          sortField: sorter.field,
          sortOrder: sorter.order,
@@ -219,8 +226,11 @@ class EditableTable extends React.Component {
 
    fetch = (params = {}) => {
       this.setState({ loading: true });
+      const { tourAllActions } = this.props;
+      const { fetchListTourRequest } = tourAllActions;
+      fetchListTourRequest();
       reqwest({
-         url: "http://localhost:3000/tours",
+         url: "http://localhost:8000/tours",
          method: "get",
          data: {
             tours: 1000,
@@ -231,7 +241,6 @@ class EditableTable extends React.Component {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
-         //  pagination.total = 200;
          this.setState({
             loading: false,
             data: data,
@@ -385,7 +394,7 @@ class EditableTable extends React.Component {
 
    render() {
       const { state } = this;
-      const { data } = this.state;
+      const { listTour } = this.props;
       const components = {
          body: {
             cell: EditableCell
@@ -587,7 +596,7 @@ class EditableTable extends React.Component {
                      onChange: this.cancel
                   }}
                   // dataSource={data}
-                  dataSource={state.hasData ? data : null}
+                  dataSource={state.hasData ? listTour : null}
                   columns={columns.map((item, index) => ({
                      ...item,
                      ellipsis: state.ellipsis,
@@ -609,4 +618,23 @@ class EditableTable extends React.Component {
 
 const TablesContainer = Form.create()(EditableTable);
 
-export default TablesContainer;
+TablesContainer.propTypes = {
+   classes: PropTypes.object,
+   tourAllActions: PropTypes.shape({
+      fetchListTourRequest: PropTypes.func
+   }),
+   listTour: PropTypes.array
+};
+
+const mapStateToProps = state => {
+   return {
+      listTour: state.tour.listTour
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      tourAllActions: bindActionCreators(tourActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TablesContainer);

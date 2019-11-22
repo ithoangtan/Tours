@@ -3,11 +3,10 @@ const router = express.Router();
 
 const Tour = require("../controllers/Tour.Controller");
 
-router.get("/listTour", Tour.list_all_tour);
-router.post("/createTour", Tour.create_a_tour);
-router.get("/readTour", Tour.read_a_tour);
-router.post("/updateTour", Tour.update_a_tour);
-router.delete("/deleteTour", Tour.delete_a_tour);
-// router.get("/getCommentTour", Tour.get_Comment);
+router.get("/tour", Tour.read);
+router.get("/tours", Tour.listAll);
+router.post("/tour", Tour.create);
+router.patch("/tour", Tour.update);
+router.delete("/tour", Tour.delete);
 
 module.exports = router;

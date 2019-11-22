@@ -6,17 +6,13 @@ var Tour = function(tour) {
   this.titleTour = tour.titleTour;
   this.price = tour.price;
   this.sale = tour.sale;
-  // this.dateAdded = tour.dateAdded;
-  this.departureDay = tour.departureDay;
+  this.departureDay = tour.departureDay.slice(0, 10).replace(/-/g, "/");
   this.describe = tour.describe;
   this.address = tour.address;
   this.vocationTime = tour.vocationTime;
 };
 Tour.getAllTour = function(result) {
-  mysql.query("SELECT * FROM kinhdoanhtourdulichtest.tours ;", function(
-    err,
-    res
-  ) {
+  mysql.query("SELECT * FROM kinhdoanhtourdulich.tours ;", function(err, res) {
     if (err) {
       result(null, err);
     } else {
@@ -34,7 +30,7 @@ Tour.createTour = function(newTour, result) {
   this.address = newTour.address;
   this.vocationTime = newTour.vocationTime;
   mysql.query(
-    "INSERT INTO kinhdoanhtourdulichtest.tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`) VALUES ('" +
+    "INSERT INTO kinhdoanhtourdulich.tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`) VALUES ('" +
       this.titleTour +
       "', '" +
       this.price +
@@ -60,8 +56,10 @@ Tour.createTour = function(newTour, result) {
 };
 
 Tour.getTourById = function(idTour, result) {
+  console.log(idTour);
+
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulichtest.tours  WHERE idTour = ? ;",
+    "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? ;",
     [idTour],
     function(err, res) {
       if (err) {
@@ -74,7 +72,7 @@ Tour.getTourById = function(idTour, result) {
 };
 Tour.updateById = function(updateTour, result) {
   mysql.query(
-    "UPDATE kinhdoanhtourdulichtest.tours SET ? WHERE (idTour = ?);",
+    "UPDATE kinhdoanhtourdulich.tours SET ? WHERE (idTour = ?);",
     [updateTour, updateTour.idTour],
     function(err, res) {
       if (err) {
@@ -86,8 +84,10 @@ Tour.updateById = function(updateTour, result) {
   );
 };
 Tour.remove = function(idTour, result) {
+  console.log(idTour);
+
   mysql.query(
-    "DELETE FROM kinhdoanhtourdulichtest.tours WHERE idTour = ?",
+    "DELETE FROM kinhdoanhtourdulich.tours WHERE idTour = ?",
     [idTour],
     function(err, res) {
       if (err) {
