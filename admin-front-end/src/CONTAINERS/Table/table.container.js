@@ -94,7 +94,7 @@ const expandedRowRender = record => <TableGallery record={record} />;
 const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Tạm thời không biết nên ghi gì";
-const scroll = { x: 1780, y: 400 };
+const scroll = { x: 1840, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -129,6 +129,9 @@ class EditableTable extends React.Component {
    };
 
    save(form, idTour) {
+      const { tourAllActions } = this.props;
+      const { fetchPatchTourRequest } = tourAllActions;
+
       form.validateFields((error, row) => {
          if (error) {
             return;
@@ -141,9 +144,16 @@ class EditableTable extends React.Component {
                ...item,
                ...row
             });
+            //Gọi API update dưới CSDL
+            fetchPatchTourRequest(row);
+
+            //Kết thúc gọi API update dươi CSDL
             this.setState({ data: newData, editingidTour: "" });
          } else {
             newData.push(row);
+            //Gọi API update dưới CSDL
+            fetchPatchTourRequest(row);
+            //Kết thúc gọi API update dươi CSDL
             this.setState({ data: newData, editingidTour: "" });
          }
       });
@@ -152,17 +162,22 @@ class EditableTable extends React.Component {
    edit(idTour) {
       this.setState({ editingidTour: idTour });
    }
-   handleDelete = idTour => {
+   handleDelete = record => {
       const data = [...this.state.data];
+      //Gọi API xóa dưới CSDL
+      const { tourAllActions } = this.props;
+      const { fetchDeleteTourRequest } = tourAllActions;
+      fetchDeleteTourRequest(record);
+      //Kết thúc gọi API xóa dươi CSDL
       this.setState({
-         data: data.filter(item => item.idTour !== idTour)
+         data: data.filter(item => item.idTour !== record.idTour)
       });
    };
 
    handleAdd = () => {
       const { count, data } = this.state;
       const newData = {
-         idTour: count,
+         key: count,
          titleTour: "Tarantula",
          price: 865,
          sale: 48,
@@ -351,7 +366,6 @@ class EditableTable extends React.Component {
    };
 
    handleChange = (pagination, filters, sorter, extra) => {
-      console.log("Various parameters", pagination, filters, sorter, extra);
       this.setState({
          filteredInfo: filters,
          sortedInfo: sorter
@@ -396,9 +410,19 @@ class EditableTable extends React.Component {
       filteredInfo = filteredInfo || {};
       this.columns = [
          {
+            title: "ID",
+            dataIndex: "idTour",
+            key: "idTour",
+            width: 80,
+            // fixed: "left",
+            ellipsis: true,
+            editable: true
+            // render: text => text
+         },
+         {
             title: "Title",
             dataIndex: "titleTour",
-            idTour: "titleTour",
+            key: "titleTour",
             width: 200,
             // fixed: "left",
             ...this.getColumnSearchProps("titleTour"),
@@ -412,7 +436,7 @@ class EditableTable extends React.Component {
          {
             title: "Price($)",
             dataIndex: "price",
-            idTour: "price",
+            key: "price",
             width: 120,
             ...this.getColumnSearchProps("price"),
             sorter: (a, b) => a.price - b.price,
@@ -423,7 +447,7 @@ class EditableTable extends React.Component {
          {
             title: "Address",
             dataIndex: "address",
-            idTour: "address",
+            key: "address",
             width: 200,
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
@@ -435,7 +459,7 @@ class EditableTable extends React.Component {
          {
             title: "Sale(%)",
             dataIndex: "sale",
-            idTour: "sale",
+            key: "sale",
             width: 100,
             filters: [
                { text: "10%", value: 9 },
@@ -450,7 +474,7 @@ class EditableTable extends React.Component {
          {
             title: "Added",
             dataIndex: "dateAdded",
-            idTour: "dateAdded",
+            key: "dateAdded",
             width: 150,
             ...this.getColumnSearchProps("dateAdded"),
             sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
@@ -462,7 +486,7 @@ class EditableTable extends React.Component {
          {
             title: "Departure",
             dataIndex: "departureDay",
-            idTour: "departureDay",
+            key: "departureDay",
             width: 160,
             ...this.getColumnSearchProps("departureDay"),
             sorter: (a, b) => a.departureDay.length - b.departureDay.length,
@@ -474,7 +498,7 @@ class EditableTable extends React.Component {
          {
             title: "Time",
             dataIndex: "vocationTime",
-            idTour: "vocationTime",
+            key: "vocationTime",
             width: 120,
             ...this.getColumnSearchProps("vocationTime"),
             sorter: (a, b) => a.vocationTime - b.vocationTime,
@@ -486,7 +510,7 @@ class EditableTable extends React.Component {
          {
             title: "describe",
             dataIndex: "describe",
-            idTour: "describe",
+            key: "describe",
             width: 400,
             ...this.getColumnSearchProps("describe"),
             sorter: (a, b) => a.describe.length - b.describe.length,
@@ -541,7 +565,7 @@ class EditableTable extends React.Component {
                this.state.data.length >= 1 ? (
                   <Popconfirm
                      title="Sure to delete?"
-                     onConfirm={() => this.handleDelete(record.idTour)}
+                     onConfirm={() => this.handleDelete(record)}
                   >
                      <a>Delete</a>
                   </Popconfirm>
@@ -612,7 +636,9 @@ const TablesContainer = Form.create()(EditableTable);
 TablesContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
-      fetchListTourRequest: PropTypes.func
+      fetchListTourRequest: PropTypes.func,
+      fetchDeleteTourRequest: PropTypes.func,
+      fetchPatchTourRequest: PropTypes.func
    }),
    listTour: PropTypes.array
 };

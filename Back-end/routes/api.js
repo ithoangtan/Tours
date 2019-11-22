@@ -9,4 +9,7 @@ router.post("/tour", Tour.create);
 router.patch("/tour", Tour.update);
 router.delete("/tour", Tour.delete);
 
+//for img
+router.post("/tour-img", Tour.postImg);
+
 module.exports = router;

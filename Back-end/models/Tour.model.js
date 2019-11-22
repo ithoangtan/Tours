@@ -7,6 +7,7 @@ var Tour = function(tour) {
   this.price = tour.price;
   this.sale = tour.sale;
   this.departureDay = tour.departureDay.slice(0, 10).replace(/-/g, "/");
+  //Chúng ta cần format date lại khi đưa xuống CSDL;
   this.describe = tour.describe;
   this.address = tour.address;
   this.vocationTime = tour.vocationTime;
@@ -14,7 +15,7 @@ var Tour = function(tour) {
 Tour.getAllTour = function(result) {
   mysql.query("SELECT * FROM kinhdoanhtourdulich.tours ;", function(err, res) {
     if (err) {
-      result(null, err);
+      result(err, null);
     } else {
       result(null, res);
     }
@@ -56,8 +57,6 @@ Tour.createTour = function(newTour, result) {
 };
 
 Tour.getTourById = function(idTour, result) {
-  console.log(idTour);
-
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? ;",
     [idTour],
@@ -76,7 +75,7 @@ Tour.updateById = function(updateTour, result) {
     [updateTour, updateTour.idTour],
     function(err, res) {
       if (err) {
-        result(null, err);
+        result(err, null);
       } else {
         result(null, res);
       }
@@ -84,29 +83,32 @@ Tour.updateById = function(updateTour, result) {
   );
 };
 Tour.remove = function(idTour, result) {
-  console.log(idTour);
-
   mysql.query(
     "DELETE FROM kinhdoanhtourdulich.tours WHERE idTour = ?",
     [idTour],
     function(err, res) {
       if (err) {
-        result(null, err);
+        result(err, null);
       } else {
         result(null, res);
       }
     }
   );
 };
-// Tour.ComentTour = function(result) {
-//   mysql.query("CALL countCommentTour()", function(err, res) {
-//     if (err) {
-//       console.log("error: ", err);
-//       result(null, err);
-//     } else {
-//       console.log("comment : ", res[0]);
-//       result(null, res[0]);
-//     }
-//   });
-// };
+
+Tour.createImageTour = function(idTour, name, result) {
+  var link = `/img/${name}`;
+  var status = "done";
+  mysql.query(
+    `INSERT INTO kinhdoanhtourdulich.images (link, status, name, idTour) VALUES ('${link}', '${status}', ' ${name}' , '${idTour}')`,
+    function(err, res) {
+      if (err) {
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 module.exports = Tour;

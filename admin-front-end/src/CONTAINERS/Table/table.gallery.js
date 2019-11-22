@@ -1,4 +1,13 @@
 import React, { Component } from "react";
+
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as tourActions from "../../actions/tour.actions";
+
+import { API_ENDPOINT } from "../../constants/index.constants";
+
 import { Upload, Icon, Modal } from "antd";
 
 function getBase64(file) {
@@ -14,35 +23,13 @@ class TableGallery extends Component {
    state = {
       previewVisible: false,
       previewImage: "",
+      action: `${API_ENDPOINT}/tour-img`,
       fileList: [
          {
             uid: "-1",
             name: "image.png",
             status: "done",
             url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
-         },
-         {
-            uid: "-2",
-            name: "image.png",
-            status: "done",
-            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
-         },
-         {
-            uid: "-3",
-            name: "image.png",
-            status: "done",
-            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
-         },
-         {
-            uid: "-4",
-            name: "image.png",
-            status: "done",
-            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
-         },
-         {
-            uid: "-5",
-            name: "image.png",
-            status: "error"
          }
       ]
    };
@@ -62,9 +49,16 @@ class TableGallery extends Component {
 
    handleChange = ({ fileList }) => this.setState({ fileList });
 
+   actionUpload = () => {
+      const { record } = this.props;
+      const { action } = this.state;
+      const actionUpload = `${action}?idTour=${record.idTour}`;
+   };
+
    render() {
       const { record } = this.props;
       const { previewVisible, previewImage, fileList } = this.state;
+      // const actionUpload = `${action}?idTour=${record.idTour}`;
       const uploadButton = (
          <div>
             <Icon type="plus" />
@@ -76,7 +70,7 @@ class TableGallery extends Component {
             <p>Describe: {record.describe}</p>
             <div className="clearfix">
                <Upload
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  action={this.actionUpload}
                   listType="picture-card"
                   fileList={fileList}
                   onPreview={this.handlePreview}
@@ -101,4 +95,24 @@ class TableGallery extends Component {
    }
 }
 
-export default TableGallery;
+TableGallery.propTypes = {
+   tourAllActions: PropTypes.shape({
+      fetchListImageTourRequest: PropTypes.func,
+      fetchDeleteImageTourRequest: PropTypes.func,
+      fetchCreateImageTourRequest: PropTypes.func
+   }),
+   listImageTour: PropTypes.array
+};
+
+const mapStateToProps = state => {
+   return {
+      listImageTour: state.tour.listImageTour
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      tourAllActions: bindActionCreators(tourActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TableGallery);
