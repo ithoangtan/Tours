@@ -22,20 +22,6 @@ import {
 
 import TableGallery from "../Table/table.gallery";
 
-const data = [];
-for (let i = 0; i < 0; i++) {
-   data.push({
-      idTour: i,
-      titleTour: "Tarantula",
-      price: 865,
-      sale: 48,
-      dateAdded: "12/13/2018",
-      departureDay: "6/5/2019",
-      describe: "Other superficial bite of vagina and vulva, initial encounter",
-      address: "2 Golf View Lane",
-      vocationTime: i
-   });
-}
 const EditableContext = React.createContext();
 
 const ResizeableTitle = props => {
@@ -115,9 +101,9 @@ class EditableTable extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         data,
-         editingKey: "",
-         count: data.length,
+         data: this.props.listTour,
+         editingidTour: "",
+         count: this.props.listTour.length,
          bordered: true,
          loading: false,
          size: "default",
@@ -136,40 +122,40 @@ class EditableTable extends React.Component {
       };
    }
 
-   isEditing = record => record.key === this.state.editingKey;
+   isEditing = record => record.idTour === this.state.editingidTour;
 
    cancel = () => {
-      this.setState({ editingKey: "" });
+      this.setState({ editingidTour: "" });
    };
 
-   save(form, key) {
+   save(form, idTour) {
       form.validateFields((error, row) => {
          if (error) {
             return;
          }
          const newData = [...this.state.data];
-         const index = newData.findIndex(item => key === item.key);
+         const index = newData.findIndex(item => idTour === item.idTour);
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
                ...item,
                ...row
             });
-            this.setState({ data: newData, editingKey: "" });
+            this.setState({ data: newData, editingidTour: "" });
          } else {
             newData.push(row);
-            this.setState({ data: newData, editingKey: "" });
+            this.setState({ data: newData, editingidTour: "" });
          }
       });
    }
 
-   edit(key) {
-      this.setState({ editingKey: key });
+   edit(idTour) {
+      this.setState({ editingidTour: idTour });
    }
-   handleDelete = key => {
+   handleDelete = idTour => {
       const data = [...this.state.data];
       this.setState({
-         data: data.filter(item => item.key !== key)
+         data: data.filter(item => item.idTour !== idTour)
       });
    };
 
@@ -195,7 +181,7 @@ class EditableTable extends React.Component {
    };
    handleSave = row => {
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => row.key === item.key);
+      const index = newData.findIndex(item => row.idTour === item.idTour);
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
@@ -241,9 +227,10 @@ class EditableTable extends React.Component {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
+         const { listTour } = this.props;
          this.setState({
             loading: false,
-            data: data,
+            data: listTour,
             pagination
          });
       });
@@ -394,7 +381,7 @@ class EditableTable extends React.Component {
 
    render() {
       const { state } = this;
-      const { listTour } = this.props;
+      const { data } = this.state;
       const components = {
          body: {
             cell: EditableCell
@@ -411,12 +398,13 @@ class EditableTable extends React.Component {
          {
             title: "Title",
             dataIndex: "titleTour",
-            key: "titleTour",
+            idTour: "titleTour",
             width: 200,
             // fixed: "left",
             ...this.getColumnSearchProps("titleTour"),
             sorter: (a, b) => a.titleTour.length - b.titleTour.length,
-            sortOrder: sortedInfo.columnKey === "titleTour" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "titleTour" && sortedInfo.order,
             ellipsis: true,
             editable: true
             // render: text => text
@@ -424,29 +412,30 @@ class EditableTable extends React.Component {
          {
             title: "Price($)",
             dataIndex: "price",
-            key: "price",
+            idTour: "price",
             width: 120,
             ...this.getColumnSearchProps("price"),
             sorter: (a, b) => a.price - b.price,
-            sortOrder: sortedInfo.columnKey === "price" && sortedInfo.order,
+            sortOrder: sortedInfo.columnidTour === "price" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
             title: "Address",
             dataIndex: "address",
-            key: "address",
+            idTour: "address",
             width: 200,
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
-            sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "address" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
             title: "Sale(%)",
             dataIndex: "sale",
-            key: "sale",
+            idTour: "sale",
             width: 100,
             filters: [
                { text: "10%", value: 9 },
@@ -461,46 +450,48 @@ class EditableTable extends React.Component {
          {
             title: "Added",
             dataIndex: "dateAdded",
-            key: "dateAdded",
+            idTour: "dateAdded",
             width: 150,
             ...this.getColumnSearchProps("dateAdded"),
             sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
-            sortOrder: sortedInfo.columnKey === "dateAdded" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "dateAdded" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
             title: "Departure",
             dataIndex: "departureDay",
-            key: "departureDay",
+            idTour: "departureDay",
             width: 160,
             ...this.getColumnSearchProps("departureDay"),
             sorter: (a, b) => a.departureDay.length - b.departureDay.length,
             sortOrder:
-               sortedInfo.columnKey === "departureDay" && sortedInfo.order,
+               sortedInfo.columnidTour === "departureDay" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
             title: "Time",
             dataIndex: "vocationTime",
-            key: "vocationTime",
+            idTour: "vocationTime",
             width: 120,
             ...this.getColumnSearchProps("vocationTime"),
             sorter: (a, b) => a.vocationTime - b.vocationTime,
             sortOrder:
-               sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
+               sortedInfo.columnidTour === "vocationTime" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
             title: "describe",
             dataIndex: "describe",
-            key: "describe",
+            idTour: "describe",
             width: 400,
             ...this.getColumnSearchProps("describe"),
             sorter: (a, b) => a.describe.length - b.describe.length,
-            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "describe" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -510,14 +501,14 @@ class EditableTable extends React.Component {
             width: 120,
             fixed: "right",
             render: (text, record) => {
-               const { editingKey } = this.state;
+               const { editingidTour } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
                      <EditableContext.Consumer>
                         {form => (
                            <a
-                              onClick={() => this.save(form, record.key)}
+                              onClick={() => this.save(form, record.idTour)}
                               style={{ marginRight: 8 }}
                            >
                               Save
@@ -526,15 +517,15 @@ class EditableTable extends React.Component {
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
-                        onConfirm={() => this.cancel(record.key)}
+                        onConfirm={() => this.cancel(record.idTour)}
                      >
                         <a>Cancel</a>
                      </Popconfirm>
                   </span>
                ) : (
                   <a
-                     disabled={editingKey !== ""}
-                     onClick={() => this.edit(record.key)}
+                     disabled={editingidTour !== ""}
+                     onClick={() => this.edit(record.idTour)}
                   >
                      Edit
                   </a>
@@ -550,7 +541,7 @@ class EditableTable extends React.Component {
                this.state.data.length >= 1 ? (
                   <Popconfirm
                      title="Sure to delete?"
-                     onConfirm={() => this.handleDelete(record.key)}
+                     onConfirm={() => this.handleDelete(record.idTour)}
                   >
                      <a>Delete</a>
                   </Popconfirm>
@@ -596,7 +587,7 @@ class EditableTable extends React.Component {
                      onChange: this.cancel
                   }}
                   // dataSource={data}
-                  dataSource={state.hasData ? listTour : null}
+                  dataSource={state.hasData ? data : null}
                   columns={columns.map((item, index) => ({
                      ...item,
                      ellipsis: state.ellipsis,
