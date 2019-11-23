@@ -18,9 +18,9 @@ export const toastSuccess = data => {
    }
 };
 
-export const toastCreateSuccess = newRecord => {
-   if (newRecord !== null && newRecord !== "") {
-      toast.success(`ID: ${newRecord.idTour}, ${newRecord.titleTour} created!`);
+export const toastCreateSuccess = newData => {
+   if (newData !== null && newData !== "") {
+      toast.success(`ID: ${newData.idTour}, ${newData.titleTour} created!`);
    }
 };
 

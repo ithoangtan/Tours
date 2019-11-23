@@ -52,7 +52,7 @@ export const fetchListTourRequest = () => {
 //POST Tour - create
 export const fetchPostTourSuccess = (newRecord, data) => {
    return {
-      type: tourConstants.FETCH_TOUR_PATCH_SUCCESS,
+      type: tourConstants.FETCH_TOUR_CREATE_SUCCESS,
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
@@ -64,7 +64,7 @@ export const fetchPostTourSuccess = (newRecord, data) => {
 
 export const fetchPostTourError = error => {
    return {
-      type: tourConstants.FETCH_TOUR_PATCH_FAILED,
+      type: tourConstants.FETCH_TOUR_CREATE_FAILED,
       payload: {
          error
       }
