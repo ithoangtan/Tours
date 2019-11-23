@@ -10,26 +10,22 @@ export default class SideBarContainer extends Component {
             id="accordionSidebar"
          >
             {/* Sidebar - Brand */}
-            <Link to="/">
-               <a
-                  className="sidebar-brand d-flex align-items-center justify-content-center"
-                  href="/"
-               >
-                  <div className="sidebar-brand-icon rotate-n-15">
-                     <i className="fas fa-laugh-wink" />
-                  </div>
-                  <div className="sidebar-brand-text mx-3">SB Admin</div>
-               </a>
+            <Link
+               to="/"
+               className="sidebar-brand d-flex align-items-center justify-content-center"
+            >
+               <div className="sidebar-brand-icon rotate-n-15">
+                  <i className="fas fa-laugh-wink" />
+               </div>
+               <div className="sidebar-brand-text mx-3">SB Admin</div>
             </Link>
             {/* Divider */}
             <hr className="sidebar-divider my-0" />
             {/* Nav Item - Dashboard */}
             <li className="nav-item active">
-               <Link to="/">
-                  <a className="nav-link">
-                     <i className="fas fa-fw fa-tachometer-alt" />
-                     <span>Dashboard</span>
-                  </a>
+               <Link to="/" className="nav-link">
+                  <i className="fas fa-fw fa-tachometer-alt" />
+                  <span>Dashboard</span>
                </Link>
             </li>
             {/* Divider */}
@@ -46,7 +42,7 @@ export default class SideBarContainer extends Component {
                   aria-expanded="true"
                   aria-controls="collapseTwo"
                >
-                  <i class="fas fa-th-large"></i>
+                  <i className="fas fa-th-large"></i>
                   <span>Tours</span>
                </a>
                <div
@@ -57,15 +53,11 @@ export default class SideBarContainer extends Component {
                >
                   <div className="bg-white py-2 collapse-inner rounded">
                      <h6 className="collapse-header">Tours</h6>
-                     <Link to="tour">
-                        <a className="collapse-item" href="/">
-                           Tours and Details
-                        </a>
+                     <Link to="tour" className="collapse-item">
+                        Tours and Details
                      </Link>
-                     <Link to="schedule">
-                        <a className="collapse-item" href="/">
-                           Schedule
-                        </a>
+                     <Link to="schedule" className="collapse-item">
+                        Schedule
                      </Link>
                   </div>
                </div>
@@ -80,7 +72,7 @@ export default class SideBarContainer extends Component {
                   aria-expanded="true"
                   aria-controls="collapseUtilities"
                >
-                  <i class="fas fa-blog"></i>
+                  <i className="fas fa-blog"></i>
                   <span>Blogs</span>
                </a>
                <div
@@ -91,25 +83,17 @@ export default class SideBarContainer extends Component {
                >
                   <div className="bg-white py-2 collapse-inner rounded">
                      <h6 className="collapse-header">Blog</h6>
-                     <Link to="posts">
-                        <a className="collapse-item" href="/">
-                           Posts
-                        </a>
+                     <Link to="posts" className="collapse-item">
+                        Posts
                      </Link>
-                     <Link to="approved-post">
-                        <a className="collapse-item" href="/">
-                           Approved post
-                        </a>
+                     <Link to="approved-post" className="collapse-item">
+                        Approved post
                      </Link>
-                     <Link to="comments">
-                        <a className="collapse-item" href="/">
-                           Comments
-                        </a>
+                     <Link to="comments" className="collapse-item">
+                        Comments
                      </Link>
-                     <Link to="other">
-                        <a className="collapse-item" href="/">
-                           Other
-                        </a>
+                     <Link to="other" className="collapse-item">
+                        Other
                      </Link>
                   </div>
                </div>
@@ -128,7 +112,7 @@ export default class SideBarContainer extends Component {
                   aria-expanded="true"
                   aria-controls="collapsePages"
                >
-                  <i class="fas fa-user-circle"></i>
+                  <i className="fas fa-user-circle"></i>
                   <span>Accounts</span>
                </a>
                <div
@@ -139,20 +123,14 @@ export default class SideBarContainer extends Component {
                >
                   <div className="bg-white py-2 collapse-inner rounded">
                      <h6 className="collapse-header">Types</h6>
-                     <Link to="user-management">
-                        <a className="collapse-item" href="/">
-                           User manager
-                        </a>
+                     <Link to="user-management" className="collapse-item">
+                        User manager
                      </Link>
-                     <Link to="accounts">
-                        <a className="collapse-item" href="/">
-                           Accounts
-                        </a>
+                     <Link to="accounts" className="collapse-item">
+                        Accounts
                      </Link>
-                     <Link to="guests">
-                        <a className="collapse-item" href="/">
-                           Guests
-                        </a>
+                     <Link to="guests" className="collapse-item">
+                        Guests
                      </Link>
                      <div className="collapse-divider" />
                   </div>
@@ -160,20 +138,16 @@ export default class SideBarContainer extends Component {
             </li>
             {/* Nav Item - Charts */}
             <li className="nav-item">
-               <Link to="notification">
-                  <a className="nav-link" href="/">
-                     <i class="fas fa-bell"></i>
-                     <span>Notifications</span>
-                  </a>
+               <Link to="notification" className="nav-link">
+                  <i className="fas fa-bell"></i>
+                  <span>Notifications</span>
                </Link>
             </li>
             {/* Nav Item - Tables */}
             <li className="nav-item">
-               <Link to="mails">
-                  <a className="nav-link" href="/">
-                     <i class="fas fa-envelope-square"></i>
-                     <span>Mails</span>
-                  </a>
+               <Link to="mails" className="nav-link">
+                  <i className="fas fa-envelope-square"></i>
+                  <span>Mails</span>
                </Link>
             </li>
             {/* Divider */}

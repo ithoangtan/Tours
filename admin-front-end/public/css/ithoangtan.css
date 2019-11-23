@@ -33,3 +33,23 @@
    font-size: 12px;
    margin-top: -4px;
 }
+
+.ant-form-new-tour {
+   background: #fbfbfb;
+   border: 1px solid #d9d9d9;
+   border-radius: 6px;
+   margin: 10px 0px !important;
+   padding: 30px 10px 10px !important;
+}
+
+.ant-form-new-tour .ant-form-item {
+   display: flex;
+}
+
+.ant-form-new-tour .ant-form-item-control-wrapper {
+   flex: 1;
+}
+
+.notice-load-data {
+   color: rgb(44, 44, 44) !important;
+}

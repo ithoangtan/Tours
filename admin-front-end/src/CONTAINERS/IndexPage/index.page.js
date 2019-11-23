@@ -15,13 +15,12 @@ class IndexPage extends Component {
    }
 
    componentDidMount() {
-      const { tourAllActions } = this.props;
-      const { fetchListTourRequest } = tourAllActions;
-      fetchListTourRequest();
+      // const { tourAllActions } = this.props;
+      // const { fetchListTourRequest } = tourAllActions;
+      // fetchListTourRequest();
    }
 
    renderBoard() {
-      const { listTour } = this.props;
       let xhtml = null;
       return xhtml;
    }

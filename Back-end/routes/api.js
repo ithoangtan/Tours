@@ -2,12 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const Tour = require("../controllers/Tour.Controller");
+const Image = require("../controllers/TourImage.Controller");
+//for tour
+router.get("/tour", Tour.read);
+router.get("/tours", Tour.listAll);
+router.post("/tour", Tour.create);
+router.patch("/tour", Tour.update);
+router.delete("/tour", Tour.delete);
 
-router.get("/listTour", Tour.list_all_tour);
-router.post("/createTour", Tour.create_a_tour);
-router.get("/readTour", Tour.read_a_tour);
-router.post("/updateTour", Tour.update_a_tour);
-router.delete("/deleteTour", Tour.delete_a_tour);
-// router.get("/getCommentTour", Tour.get_Comment);
+//for img
+router.get("/images", Image.listAllImageTour);
+router.get("/image", Image.listAllImageTourById);
+router.delete("/image", Image.delete);
+router.post("/image", Image.create);
 
 module.exports = router;

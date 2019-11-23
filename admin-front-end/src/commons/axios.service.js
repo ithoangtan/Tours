@@ -23,8 +23,8 @@ class AxiosService {
       return this.instance.get(url);
    }
 
-   post(url) {
-      return this.instance.post(url);
+   post(url, data) {
+      return this.instance.post(url, data);
    }
 
    put(url) {
@@ -33,8 +33,11 @@ class AxiosService {
    delete(url) {
       return this.instance.delete(url);
    }
-   update(url) {
-      return this.instance.update(url);
+   patch(url, data) {
+      return this.instance.patch(url, data);
+   }
+   update(url, data) {
+      return this.instance.update(url, data);
    }
 }
 

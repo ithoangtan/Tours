@@ -106,7 +106,6 @@ export default class ReportProjectSliderAndIllustrationsContainer extends Compon
                      <a
                         target="_blank"
                         rel="noopener noreferrer nofollow"
-                        rel="nofollow"
                         href="https://facebook.com/ithoangtan"
                      >
                         Click on!!!

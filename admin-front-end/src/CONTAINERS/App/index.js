@@ -44,7 +44,6 @@ class App extends Component {
          <Router>
             <Provider store={store}>
                {this.showContent(routes)}
-               {/* <Loaded /> */}
                <ToastContainer autoColse={3000} />
             </Provider>
          </Router>

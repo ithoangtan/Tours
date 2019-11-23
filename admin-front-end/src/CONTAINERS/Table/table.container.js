@@ -1,4 +1,11 @@
 import React from "react";
+
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as tourActions from "../../actions/tour.actions";
+
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
 import { Resizable } from "react-resizable";
@@ -13,22 +20,9 @@ import {
    Icon
 } from "antd";
 
-import TableGallery from "../Table/table.gallery";
+import TableGallery from "./tableGallery";
+import TableNewRow from "./tableNewRow";
 
-const data = [];
-for (let i = 0; i < 0; i++) {
-   data.push({
-      key: i,
-      titleTour: "Tarantula",
-      price: 865,
-      sale: 48,
-      dateAdded: "12/13/2018",
-      departureDay: "6/5/2019",
-      describe: "Other superficial bite of vagina and vulva, initial encounter",
-      address: "2 Golf View Lane",
-      vocationTime: i
-   });
-}
 const EditableContext = React.createContext();
 
 const ResizeableTitle = props => {
@@ -97,24 +91,23 @@ class EditableCell extends React.Component {
    }
 }
 
-const expandedRowRender = record => <TableGallery record={record} />;
 const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Tạm thời không biết nên ghi gì";
-const scroll = { x: 1780, y: 400 };
+//Tùy chọn scroll bằng tổng các chiệu rộng
+const scroll = { x: 1840, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         data,
-         editingKey: "",
-         count: data.length,
+         data: this.props.listTour,
+         editingidTour: "",
+         count: this.props.listTour.length,
          bordered: true,
          loading: false,
          size: "default",
-         expandedRowRender,
          showHeader,
          title,
          footer,
@@ -125,70 +118,98 @@ class EditableTable extends React.Component {
          filteredInfo: null,
          sortedInfo: null,
          searchText: "",
-         pagination
+         pagination,
+         //add Show
+         showAdd: false
       };
    }
 
-   isEditing = record => record.key === this.state.editingKey;
+   isEditing = record => record.idTour === this.state.editingidTour;
 
    cancel = () => {
-      this.setState({ editingKey: "" });
+      this.setState({ editingidTour: "" });
    };
 
-   save(form, key) {
+   save(form, idTour) {
+      const { tourAllActions } = this.props;
+      const { fetchPatchTourRequest } = tourAllActions;
+
       form.validateFields((error, row) => {
          if (error) {
             return;
          }
          const newData = [...this.state.data];
-         const index = newData.findIndex(item => key === item.key);
+         const index = newData.findIndex(item => idTour === item.idTour);
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
                ...item,
                ...row
             });
-            this.setState({ data: newData, editingKey: "" });
+            //Gọi API update dưới CSDL
+            fetchPatchTourRequest(row);
+
+            //Kết thúc gọi API update dươi CSDL
+            this.setState({ data: newData, editingidTour: "" });
          } else {
             newData.push(row);
-            this.setState({ data: newData, editingKey: "" });
+            //Gọi API update dưới CSDL
+            fetchPatchTourRequest(row);
+            //Kết thúc gọi API update dươi CSDL
+            this.setState({ data: newData, editingidTour: "" });
          }
       });
    }
 
-   edit(key) {
-      this.setState({ editingKey: key });
+   edit(idTour) {
+      this.setState({ editingidTour: idTour });
    }
-   handleDelete = key => {
+   handleDelete = record => {
       const data = [...this.state.data];
+      //Gọi API xóa dưới CSDL
+      const { tourAllActions } = this.props;
+      const { fetchDeleteTourRequest } = tourAllActions;
+      fetchDeleteTourRequest(record);
+      //Kết thúc gọi API xóa dươi CSDL
       this.setState({
-         data: data.filter(item => item.key !== key)
+         data: data.filter(item => item.idTour !== record.idTour)
       });
    };
 
-   handleAdd = () => {
+   handleShowAdd = () => {
+      this.setState({ showAdd: true });
+   };
+   handleAdd = newTour => {
       const { count, data } = this.state;
       const newData = {
-         key: count,
-         titleTour: "Tarantula",
-         price: 865,
-         sale: 48,
-         dateAdded: "12/13/2018",
-         departureDay: "6/5/2019",
-         describe:
-            "Other superficial bite of vagina and vulva, initial encounter",
-         address: "2 Golf View Lane",
-         vocationTime: count
+         idTour: newTour.idTour | (data[data.length - 1].idTour + 1),
+         titleTour: newTour.titleTour,
+         price: newTour.price,
+         sale: newTour.sale,
+         dateAdded: new Date()
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-"),
+         departureDay: newTour.departureDay,
+         describe: newTour.describe,
+         address: newTour.address,
+         vocationTime: newTour.vocationTime
       };
+      //Gọi API create dưới CSDL
+      const { tourAllActions } = this.props;
+      const { fetchPostTourRequest } = tourAllActions;
+      fetchPostTourRequest(newData);
+      //Kết thúc gọi API create dươi CSDL
       this.setState({
-         data: [...data, newData],
+         data: [newData, ...data],
          count: count + 1,
          pagination: { total: data.length }
       });
    };
+
    handleSave = row => {
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => row.key === item.key);
+      const index = newData.findIndex(item => row.idTour === item.idTour);
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
@@ -200,6 +221,9 @@ class EditableTable extends React.Component {
    /**Preload */
    //    Preload
    componentDidMount() {
+      const { tourAllActions } = this.props;
+      const { fetchListTourImageRequest } = tourAllActions;
+      fetchListTourImageRequest();
       this.fetch();
    }
    handleTableChange = (pagination, filters, sorter) => {
@@ -209,7 +233,7 @@ class EditableTable extends React.Component {
          pagination: pager
       });
       this.fetch({
-         results: pagination.pageSize,
+         tours: pagination.pageSize,
          page: pagination.current,
          sortField: sorter.field,
          sortOrder: sorter.order,
@@ -219,8 +243,11 @@ class EditableTable extends React.Component {
 
    fetch = (params = {}) => {
       this.setState({ loading: true });
+      const { tourAllActions } = this.props;
+      const { fetchListTourRequest } = tourAllActions;
+      fetchListTourRequest();
       reqwest({
-         url: "http://localhost:3000/tours",
+         url: "http://localhost:8000/tours",
          method: "get",
          data: {
             tours: 1000,
@@ -231,10 +258,20 @@ class EditableTable extends React.Component {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
-         //  pagination.total = 200;
+         const { listTour } = this.props;
+         const listTourFormatOK = listTour.forEach(element => {
+            element.dateAdded = element.dateAdded
+               .slice(0, 10)
+               .replace(/-/g, "-");
+            element.departureDay = element.departureDay
+               .slice(0, 10)
+               .replace(/-/g, "-");
+         });
+         console.log(listTourFormatOK);
+
          this.setState({
             loading: false,
-            data: data,
+            data: listTour,
             pagination
          });
       });
@@ -355,7 +392,6 @@ class EditableTable extends React.Component {
    };
 
    handleChange = (pagination, filters, sorter, extra) => {
-      console.log("Various parameters", pagination, filters, sorter, extra);
       this.setState({
          filteredInfo: filters,
          sortedInfo: sorter
@@ -383,6 +419,21 @@ class EditableTable extends React.Component {
       return { columns: nextColumns };
    };
 
+   //Add
+   handleShowAdd = () => {
+      this.setState({ showAdd: !this.state.showAdd });
+   };
+   onCancle = () => {
+      this.setState({ showAdd: false });
+   };
+   //end Add
+
+   //Expanded Row Render
+   expandedRowRender = record => {
+      const { listImageTour } = this.props;
+      return <TableGallery record={record} listImage={listImageTour} />;
+   };
+
    render() {
       const { state } = this;
       const { data } = this.state;
@@ -400,6 +451,16 @@ class EditableTable extends React.Component {
       filteredInfo = filteredInfo || {};
       this.columns = [
          {
+            title: "ID",
+            dataIndex: "idTour",
+            key: "idTour",
+            width: 80,
+            // fixed: "left",
+            ellipsis: true,
+            editable: true
+            // render: text => text
+         },
+         {
             title: "Title",
             dataIndex: "titleTour",
             key: "titleTour",
@@ -407,7 +468,8 @@ class EditableTable extends React.Component {
             // fixed: "left",
             ...this.getColumnSearchProps("titleTour"),
             sorter: (a, b) => a.titleTour.length - b.titleTour.length,
-            sortOrder: sortedInfo.columnKey === "titleTour" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "titleTour" && sortedInfo.order,
             ellipsis: true,
             editable: true
             // render: text => text
@@ -419,7 +481,7 @@ class EditableTable extends React.Component {
             width: 120,
             ...this.getColumnSearchProps("price"),
             sorter: (a, b) => a.price - b.price,
-            sortOrder: sortedInfo.columnKey === "price" && sortedInfo.order,
+            sortOrder: sortedInfo.columnidTour === "price" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -430,7 +492,8 @@ class EditableTable extends React.Component {
             width: 200,
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
-            sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "address" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -454,9 +517,11 @@ class EditableTable extends React.Component {
             dataIndex: "dateAdded",
             key: "dateAdded",
             width: 150,
+
             ...this.getColumnSearchProps("dateAdded"),
             sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
-            sortOrder: sortedInfo.columnKey === "dateAdded" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "dateAdded" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -468,7 +533,7 @@ class EditableTable extends React.Component {
             ...this.getColumnSearchProps("departureDay"),
             sorter: (a, b) => a.departureDay.length - b.departureDay.length,
             sortOrder:
-               sortedInfo.columnKey === "departureDay" && sortedInfo.order,
+               sortedInfo.columnidTour === "departureDay" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -480,7 +545,7 @@ class EditableTable extends React.Component {
             ...this.getColumnSearchProps("vocationTime"),
             sorter: (a, b) => a.vocationTime - b.vocationTime,
             sortOrder:
-               sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
+               sortedInfo.columnidTour === "vocationTime" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -491,7 +556,8 @@ class EditableTable extends React.Component {
             width: 400,
             ...this.getColumnSearchProps("describe"),
             sorter: (a, b) => a.describe.length - b.describe.length,
-            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
+            sortOrder:
+               sortedInfo.columnidTour === "describe" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -499,16 +565,17 @@ class EditableTable extends React.Component {
             title: "Edit",
             dataIndex: "edit",
             width: 120,
-            fixed: "right",
+            key: "edit",
+            // fixed: "right",
             render: (text, record) => {
-               const { editingKey } = this.state;
+               const { editingidTour } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
                      <EditableContext.Consumer>
                         {form => (
                            <a
-                              onClick={() => this.save(form, record.key)}
+                              onClick={() => this.save(form, record.idTour)}
                               style={{ marginRight: 8 }}
                            >
                               Save
@@ -517,15 +584,15 @@ class EditableTable extends React.Component {
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
-                        onConfirm={() => this.cancel(record.key)}
+                        onConfirm={() => this.cancel(record.idTour)}
                      >
                         <a>Cancel</a>
                      </Popconfirm>
                   </span>
                ) : (
                   <a
-                     disabled={editingKey !== ""}
-                     onClick={() => this.edit(record.key)}
+                     disabled={editingidTour !== ""}
+                     onClick={() => this.edit(record.idTour)}
                   >
                      Edit
                   </a>
@@ -536,18 +603,25 @@ class EditableTable extends React.Component {
             title: "Delete",
             dataIndex: "delete",
             width: 80,
-            fixed: "right",
+            key: "delete",
+            // fixed: "right",
             render: (text, record) =>
                this.state.data.length >= 1 ? (
                   <Popconfirm
                      title="Sure to delete?"
-                     onConfirm={() => this.handleDelete(record.key)}
+                     onConfirm={() => this.handleDelete(record)}
                   >
                      <a>Delete</a>
                   </Popconfirm>
                ) : null
          }
       ];
+
+      function chooseType(type) {
+         if (type === "price") return "number";
+         else if (type === "depatureDay") return "date";
+         else if (type === "dateAdd") return "disable";
+      }
 
       const columns = this.columns.map(col => {
          if (!col.editable) {
@@ -557,7 +631,8 @@ class EditableTable extends React.Component {
             ...col,
             onCell: record => ({
                record,
-               inputType: col.dataIndex === "price" ? "number" : "text",
+               inputType: chooseType(col.dataIndex),
+               // inputType: col.dataIndex === "price" ? "number" : "text",
                dataIndex: col.dataIndex,
                title: col.title,
                editing: this.isEditing(record),
@@ -566,22 +641,35 @@ class EditableTable extends React.Component {
          };
       });
 
+      //Show ADD
+      const { showAdd } = this.state;
       return (
          <div className="container-fluid card shadow">
-            <div className="row">
-               <Button
-                  onClick={this.handleAdd}
-                  type="primary"
-                  style={{ margin: 8 }}
-               >
-                  Add a row
-               </Button>
-               <Button onClick={this.clearAll} style={{ margin: 8 }}>
-                  Clear filters and sorters
-               </Button>
-            </div>
+            {showAdd ? (
+               <TableNewRow
+                  onCancle={this.onCancle}
+                  handleAdd={this.handleAdd}
+               />
+            ) : (
+               <div className="row">
+                  <Button
+                     onClick={this.handleShowAdd}
+                     type="primary"
+                     style={{ margin: "12px 12px 0px" }}
+                  >
+                     Add a row
+                  </Button>
+                  <Button
+                     onClick={this.clearAll}
+                     style={{ margin: "12px 12px 0px" }}
+                  >
+                     Clear filters and sorters
+                  </Button>
+               </div>
+            )}
             <EditableContext.Provider value={this.props.form}>
                <Table
+                  rowKey={"idTour"}
                   components={components}
                   pagination={{
                      onChange: this.cancel
@@ -600,6 +688,8 @@ class EditableTable extends React.Component {
                   rowClassName={() => "editable-row"}
                   onChange={this.handleChange}
                   {...this.state}
+                  //Expanded Row Render
+                  expandedRowRender={this.expandedRowRender}
                />
             </EditableContext.Provider>
          </div>
@@ -609,4 +699,28 @@ class EditableTable extends React.Component {
 
 const TablesContainer = Form.create()(EditableTable);
 
-export default TablesContainer;
+TablesContainer.propTypes = {
+   classes: PropTypes.object,
+   tourAllActions: PropTypes.shape({
+      fetchListTourRequest: PropTypes.func,
+      fetchPostTourRequest: PropTypes.func,
+      fetchDeleteTourRequest: PropTypes.func,
+      fetchPatchTourRequest: PropTypes.func,
+      fetchListTourImageRequest: PropTypes.func
+   }),
+   listTour: PropTypes.array
+};
+
+const mapStateToProps = state => {
+   return {
+      listTour: state.tour.listTour,
+      listImageTour: state.tour.listImageTour
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      tourAllActions: bindActionCreators(tourActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TablesContainer);
