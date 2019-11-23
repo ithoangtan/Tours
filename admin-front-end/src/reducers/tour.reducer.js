@@ -3,13 +3,15 @@ import {
    toastError,
    toastSuccess,
    toastPatchSuccess,
-   toastDeleteSuccess
+   toastDeleteSuccess,
+   toastCreateSuccess
 } from "../helper/toastify.helper";
 const initialState = {
    listTour: [],
    listImageTour: [],
    delete: [],
-   patch: []
+   patch: [],
+   create: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +35,24 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             listTour: error
+         };
+      }
+      //Post - Create
+      case tourConstants.FETCH_TOUR_CREATE_SUCCESS: {
+         const { data } = action.payload;
+         const { newRecord } = action.newRecord;
+         toastCreateSuccess(newRecord);
+         return {
+            ...state,
+            create: data
+         };
+      }
+      case tourConstants.FETCH_TOUR_CREATE_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            create: error
          };
       }
       //Delete
@@ -69,6 +89,25 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             patch: error
+         };
+      }
+
+      //Post - Create
+      case tourConstants.FETCH_TOUR_CREATE_SUCCESS: {
+         const { data } = action.payload;
+         const { newRecord } = action.newRecord;
+         toastCreateSuccess(newRecord);
+         return {
+            ...state,
+            create: data
+         };
+      }
+      case tourConstants.FETCH_TOUR_CREATE_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            create: error
          };
       }
       //Image Tour

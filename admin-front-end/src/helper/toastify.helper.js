@@ -10,7 +10,17 @@ export const toastError = error => {
 
 export const toastSuccess = data => {
    if (data !== null && data !== "") {
-      toast.success(`${data.length} record loaded!`);
+      toast(`${data.length} record loaded!`, {
+         position: toast.POSITION.BOTTOM_RIGHT,
+         className: "notice-load-data"
+      });
+      // toast.done(`${data.length} record loaded!`);
+   }
+};
+
+export const toastCreateSuccess = newRecord => {
+   if (newRecord !== null && newRecord !== "") {
+      toast.success(`ID: ${newRecord.idTour}, ${newRecord.titleTour} created!`);
    }
 };
 

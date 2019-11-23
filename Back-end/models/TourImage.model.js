@@ -36,8 +36,6 @@ Image.getAllImageTourById = function(idTour, fncResult) {
 };
 
 Image.remove = function(idImage, name, fncResult) {
-  console.log(name.trim());
-
   mysql.query(
     "DELETE FROM kinhdoanhtourdulich.images WHERE idImage = ?",
     [idImage],

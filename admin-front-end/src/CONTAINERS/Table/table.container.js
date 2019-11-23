@@ -20,7 +20,8 @@ import {
    Icon
 } from "antd";
 
-import TableGallery from "./table.gallery";
+import TableGallery from "./tableGallery";
+import TableNewRow from "./tableNewRow";
 
 const EditableContext = React.createContext();
 
@@ -117,7 +118,9 @@ class EditableTable extends React.Component {
          filteredInfo: null,
          sortedInfo: null,
          searchText: "",
-         pagination
+         pagination,
+         //add Show
+         showAdd: false
       };
    }
 
@@ -173,26 +176,37 @@ class EditableTable extends React.Component {
       });
    };
 
-   handleAdd = () => {
+   handleShowAdd = () => {
+      this.setState({ showAdd: true });
+   };
+   handleAdd = newTour => {
       const { count, data } = this.state;
       const newData = {
-         key: count,
-         titleTour: "Tarantula",
-         price: 865,
-         sale: 48,
-         dateAdded: "12/13/2018",
-         departureDay: "6/5/2019",
-         describe:
-            "Other superficial bite of vagina and vulva, initial encounter",
-         address: "2 Golf View Lane",
-         vocationTime: count
+         idTour: newTour.idTour | (data[data.length - 1].idTour + 1),
+         titleTour: newTour.titleTour,
+         price: newTour.price,
+         sale: newTour.sale,
+         dateAdded: new Date()
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-"),
+         departureDay: newTour.departureDay,
+         describe: newTour.describe,
+         address: newTour.address,
+         vocationTime: newTour.vocationTime
       };
+      //Gọi API create dưới CSDL
+      const { tourAllActions } = this.props;
+      const { fetchPostTourRequest } = tourAllActions;
+      fetchPostTourRequest(newData);
+      //Kết thúc gọi API create dươi CSDL
       this.setState({
-         data: [...data, newData],
+         data: [newData, ...data],
          count: count + 1,
          pagination: { total: data.length }
       });
    };
+
    handleSave = row => {
       const newData = [...this.state.data];
       const index = newData.findIndex(item => row.idTour === item.idTour);
@@ -245,6 +259,16 @@ class EditableTable extends React.Component {
          // Read total count from server
          pagination.total = data.length;
          const { listTour } = this.props;
+         const listTourFormatOK = listTour.forEach(element => {
+            element.dateAdded = element.dateAdded
+               .slice(0, 10)
+               .replace(/-/g, "-");
+            element.departureDay = element.departureDay
+               .slice(0, 10)
+               .replace(/-/g, "-");
+         });
+         console.log(listTourFormatOK);
+
          this.setState({
             loading: false,
             data: listTour,
@@ -395,6 +419,15 @@ class EditableTable extends React.Component {
       return { columns: nextColumns };
    };
 
+   //Add
+   handleShowAdd = () => {
+      this.setState({ showAdd: !this.state.showAdd });
+   };
+   onCancle = () => {
+      this.setState({ showAdd: false });
+   };
+   //end Add
+
    //Expanded Row Render
    expandedRowRender = record => {
       const { listImageTour } = this.props;
@@ -484,6 +517,7 @@ class EditableTable extends React.Component {
             dataIndex: "dateAdded",
             key: "dateAdded",
             width: 150,
+
             ...this.getColumnSearchProps("dateAdded"),
             sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
             sortOrder:
@@ -543,7 +577,6 @@ class EditableTable extends React.Component {
                            <a
                               onClick={() => this.save(form, record.idTour)}
                               style={{ marginRight: 8 }}
-                              href="/"
                            >
                               Save
                            </a>
@@ -553,14 +586,13 @@ class EditableTable extends React.Component {
                         title="Sure to cancel?"
                         onConfirm={() => this.cancel(record.idTour)}
                      >
-                        <a href="/">Cancel</a>
+                        <a>Cancel</a>
                      </Popconfirm>
                   </span>
                ) : (
                   <a
                      disabled={editingidTour !== ""}
                      onClick={() => this.edit(record.idTour)}
-                     href="/"
                   >
                      Edit
                   </a>
@@ -579,11 +611,17 @@ class EditableTable extends React.Component {
                      title="Sure to delete?"
                      onConfirm={() => this.handleDelete(record)}
                   >
-                     <a href="/">Delete</a>
+                     <a>Delete</a>
                   </Popconfirm>
                ) : null
          }
       ];
+
+      function chooseType(type) {
+         if (type === "price") return "number";
+         else if (type === "depatureDay") return "date";
+         else if (type === "dateAdd") return "disable";
+      }
 
       const columns = this.columns.map(col => {
          if (!col.editable) {
@@ -593,7 +631,8 @@ class EditableTable extends React.Component {
             ...col,
             onCell: record => ({
                record,
-               inputType: col.dataIndex === "price" ? "number" : "text",
+               inputType: chooseType(col.dataIndex),
+               // inputType: col.dataIndex === "price" ? "number" : "text",
                dataIndex: col.dataIndex,
                title: col.title,
                editing: this.isEditing(record),
@@ -602,20 +641,32 @@ class EditableTable extends React.Component {
          };
       });
 
+      //Show ADD
+      const { showAdd } = this.state;
       return (
          <div className="container-fluid card shadow">
-            <div className="row">
-               <Button
-                  onClick={this.handleAdd}
-                  type="primary"
-                  style={{ margin: 8 }}
-               >
-                  Add a row
-               </Button>
-               <Button onClick={this.clearAll} style={{ margin: 8 }}>
-                  Clear filters and sorters
-               </Button>
-            </div>
+            {showAdd ? (
+               <TableNewRow
+                  onCancle={this.onCancle}
+                  handleAdd={this.handleAdd}
+               />
+            ) : (
+               <div className="row">
+                  <Button
+                     onClick={this.handleShowAdd}
+                     type="primary"
+                     style={{ margin: "12px 12px 0px" }}
+                  >
+                     Add a row
+                  </Button>
+                  <Button
+                     onClick={this.clearAll}
+                     style={{ margin: "12px 12px 0px" }}
+                  >
+                     Clear filters and sorters
+                  </Button>
+               </div>
+            )}
             <EditableContext.Provider value={this.props.form}>
                <Table
                   rowKey={"idTour"}
@@ -652,6 +703,7 @@ TablesContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
       fetchListTourRequest: PropTypes.func,
+      fetchPostTourRequest: PropTypes.func,
       fetchDeleteTourRequest: PropTypes.func,
       fetchPatchTourRequest: PropTypes.func,
       fetchListTourImageRequest: PropTypes.func

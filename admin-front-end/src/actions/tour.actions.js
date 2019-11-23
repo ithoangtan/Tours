@@ -49,6 +49,43 @@ export const fetchListTourRequest = () => {
    };
 };
 
+//POST Tour - create
+export const fetchPostTourSuccess = (newRecord, data) => {
+   return {
+      type: tourConstants.FETCH_TOUR_PATCH_SUCCESS,
+      payload: {
+         // Thường đi làm thì người ta hay gọi là FETCH
+         //data gửi kèm trong actions là payload ở vị trí này
+         data
+      },
+      newRecord: { newRecord }
+   };
+};
+
+export const fetchPostTourError = error => {
+   return {
+      type: tourConstants.FETCH_TOUR_PATCH_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchPostTourRequest = newRecord => {
+   return dispatch => {
+      tourApis
+         .postTour(newRecord)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchPostTourSuccess(newRecord, data));
+         })
+         .catch(error => {
+            dispatch(fetchPostTourError(error));
+         });
+   };
+};
+//end Create Tour
+
 //Delete Tour
 export const fetchDeleteTourSuccess = (record, data) => {
    return {
@@ -128,7 +165,7 @@ export const fetchListTourImage = () => {
    };
 };
 
-//List Tour
+//List Tour image
 export const fetchListTourImageSuccess = data => {
    return {
       type: tourConstants.FETCH_TOUR_IMAGE_SUCCESS,
