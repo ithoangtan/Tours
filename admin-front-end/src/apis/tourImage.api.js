@@ -12,9 +12,14 @@ export const deleteImageTour = idImage => {
    return axiosService.delete(`${API_ENDPOINT}/${url}/?idImage=${idImage}`);
 };
 
-export const uploadImageTour = (formData, idTour) => {
+export const uploadImageTour = (file, idTour) => {
    return axiosService.post(
       `${API_ENDPOINT}/${url}/?idTour=${idTour}`,
-      formData
+      { body: file },
+      {
+         headers: {
+            "Content-Type": "multipart/form-data"
+         }
+      }
    );
 };

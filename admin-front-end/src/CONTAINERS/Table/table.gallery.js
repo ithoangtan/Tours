@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import * as tourImageActions from "../../actions/tourImage.actions";
 import { API_ENDPOINT } from "../../constants/index.constants";
 
-import { Upload, Icon, Modal } from "antd";
+import { Upload, Icon, Modal, message } from "antd";
 
 function getBase64(file) {
    return new Promise((resolve, reject) => {
@@ -25,24 +25,35 @@ class TableGallery extends Component {
       this.state = {
          previewVisible: false,
          previewImage: "",
-         action: `${API_ENDPOINT}/images`,
+         action: `${API_ENDPOINT}/image`,
          fileList: []
       };
    }
 
    componentDidMount() {
       const { listImage, record } = this.props;
-      const listImageFilterIdTour = listImage.filter(
-         image => image.idTour === record.idTour
-      );
-
+      const listImageFilterIdTour = listImage
+         .filter(image => image.idTour === record.idTour)
+         .map(image => ({
+            ...image,
+            uid: image.idImage
+         }));
       this.setState({ fileList: listImageFilterIdTour });
       // const { tourImageAllActions, record } = this.props;
-      // const { fetchListTourImageRequest } = tourImageAllActions;
-      // fetchListTourImageRequest(record.idTour);
+      // const { fetchDeleteTourImageRequest } = tourImageAllActions;
+      // fetchDeleteTourImageRequest(record.idTour);
    }
 
    handleCancel = () => this.setState({ previewVisible: false });
+
+   beforeUpload = file => {
+      const isJpgOrPng =
+         file.type === "image/jpeg" || file.type === "image/png";
+      if (!isJpgOrPng) {
+         message.error("You can only upload JPG/PNG file!");
+      }
+      return isJpgOrPng;
+   };
 
    handlePreview = async file => {
       if (!file.url && !file.preview) {
@@ -57,10 +68,16 @@ class TableGallery extends Component {
 
    handleChange = ({ fileList }) => this.setState({ fileList });
 
-   actionUpload = () => {
+   actionUpload = file => {
       const { record } = this.props;
+      /**
+       * If you return, action will call again
+       * */
       const { action } = this.state;
       const actionUpload = `${action}?idTour=${record.idTour}`;
+      return (
+         actionUpload, message.loading(`${file.name} is uploading.....`, 0.5)
+      );
    };
 
    render() {
@@ -73,19 +90,20 @@ class TableGallery extends Component {
             <div className="ant-upload-text">Upload</div>
          </div>
       );
+
       return (
          <div>
             <p>Describe: {record.describe}</p>
             <div className="clearfix">
                <Upload
+                  name={"imgUploader"} //This is important similar backend name field
+                  multiple={false}
                   action={this.actionUpload}
                   listType="picture-card"
-                  fileList={fileList.map(image => ({
-                     ...image,
-                     uid: image.idImage
-                  }))}
+                  fileList={fileList}
                   onPreview={this.handlePreview}
                   onChange={this.handleChange}
+                  beforeUpload={this.beforeUpload}
                >
                   {fileList.length >= 8 ? null : uploadButton}
                </Upload>
@@ -108,9 +126,7 @@ class TableGallery extends Component {
 
 TableGallery.propTypes = {
    tourImageAllActions: PropTypes.shape({
-      // fetchListTourImageRequest: PropTypes.func,
-      fetchDeleteTourImageRequest: PropTypes.func,
-      fetchCreateTourImageRequest: PropTypes.func
+      fetchDeleteTourImageRequest: PropTypes.func
    }),
    listImageTour: PropTypes.array
 };

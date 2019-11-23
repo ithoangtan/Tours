@@ -48,10 +48,10 @@ Image.remove = function(idImage, fncResult) {
 };
 
 Image.createImageTour = function(idTour, name, fncResult) {
-  var link = `/img/${name}`;
+  var url = `/img/${name}`;
   var status = "done";
   mysql.query(
-    `INSERT INTO kinhdoanhtourdulich.images (link, status, name, idTour) VALUES ('${link}', '${status}', ' ${name}' , '${idTour}')`,
+    `INSERT INTO kinhdoanhtourdulich.images (url, status, name, idTour) VALUES ('${url}', '${status}', ' ${name}' , '${idTour}')`,
     function(err, res) {
       if (err) {
         fncResult(err, null);

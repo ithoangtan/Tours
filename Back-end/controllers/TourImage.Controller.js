@@ -24,7 +24,7 @@ exports.create = function(req, res) {
     } else {
       Image.createImageTour(req.query.idTour, nameFile, function(err, resp) {
         if (err) res.send(err);
-        else res.send(req.query.idTour);
+        else res.send({ idTour: req.query.idTour, nameFile: nameFile });
       });
     }
   });
