@@ -2,13 +2,13 @@ import * as tourApis from "../apis/tourImage.api";
 import * as tourConstants from "../constants/tourImage.module";
 
 //Delete Tour
-export const fetchDeleteTourImageSuccess = (record, data) => {
+export const fetchDeleteTourImageSuccess = (file, data) => {
    return {
       type: tourConstants.FETCH_TOUR_IMAGE_DELETE_SUCCESS,
       payload: {
          data
       },
-      record: { record }
+      file: { file }
    };
 };
 
@@ -21,13 +21,13 @@ export const fetchDeleteTourImageError = error => {
    };
 };
 
-export const fetchDeleteTourImageRequest = record => {
+export const fetchDeleteTourImageRequest = file => {
    return dispatch => {
       tourApis
-         .deleteImageTour(record.idTour)
+         .deleteImageTour(file.idImage, file.name)
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchDeleteTourImageSuccess(record, data));
+            dispatch(fetchDeleteTourImageSuccess(file, data));
          })
          .catch(error => {
             dispatch(fetchDeleteTourImageError(error));

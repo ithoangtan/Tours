@@ -8,8 +8,10 @@ export const getListImageTourById = idTour => {
    return axiosService.get(`${API_ENDPOINT}/${urls}/?idTour=${idTour}`);
 };
 
-export const deleteImageTour = idImage => {
-   return axiosService.delete(`${API_ENDPOINT}/${url}/?idImage=${idImage}`);
+export const deleteImageTour = (idImage, name) => {
+   return axiosService.delete(
+      `${API_ENDPOINT}/${url}/?idImage=${idImage}&name=${name}`
+   );
 };
 
 export const uploadImageTour = (file, idTour) => {

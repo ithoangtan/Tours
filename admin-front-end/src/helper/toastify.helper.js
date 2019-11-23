@@ -16,9 +16,16 @@ export const toastSuccess = data => {
 
 export const toastDeleteSuccess = record => {
    if (record !== null && record !== "") {
-      toast.info(`ID: ${record.idTour}, ${record.titleTour} deleted!`);
+      toast.warn(`ID: ${record.idTour}, ${record.titleTour} deleted!`);
    }
 };
+
+export const toastDeleteImageSuccess = file => {
+   if (file !== null && file !== "") {
+      toast.warn(`ID: ${file.idImage}, ${file.name} deleted!`);
+   }
+};
+
 export const toastPatchSuccess = newRecord => {
    if (newRecord !== null && newRecord !== "") {
       toast.info(`ID: ${newRecord.idTour}, ${newRecord.titleTour} updated!`);

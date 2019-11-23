@@ -39,9 +39,6 @@ class TableGallery extends Component {
             uid: image.idImage
          }));
       this.setState({ fileList: listImageFilterIdTour });
-      // const { tourImageAllActions, record } = this.props;
-      // const { fetchDeleteTourImageRequest } = tourImageAllActions;
-      // fetchDeleteTourImageRequest(record.idTour);
    }
 
    handleCancel = () => this.setState({ previewVisible: false });
@@ -70,14 +67,27 @@ class TableGallery extends Component {
 
    actionUpload = file => {
       const { record } = this.props;
+      const { action } = this.state;
       /**
        * If you return, action will call again
        * */
-      const { action } = this.state;
       const actionUpload = `${action}?idTour=${record.idTour}`;
+
+      const newListImage = [...this.state.fileList];
+      this.setState({
+         fileList: newListImage
+      });
+
       return (
-         actionUpload, message.loading(`${file.name} is uploading.....`, 0.5)
+         message.loading(`${file.name} is uploading.....`, 0.6), actionUpload
       );
+   };
+
+   onRemove = file => {
+      const { tourImageAllActions } = this.props;
+      const { fetchDeleteTourImageRequest } = tourImageAllActions;
+      fetchDeleteTourImageRequest(file);
+      message.warn(`${file.idImage}, ${file.name} deleted!`);
    };
 
    render() {
@@ -104,6 +114,7 @@ class TableGallery extends Component {
                   onPreview={this.handlePreview}
                   onChange={this.handleChange}
                   beforeUpload={this.beforeUpload}
+                  onRemove={this.onRemove}
                >
                   {fileList.length >= 8 ? null : uploadButton}
                </Upload>

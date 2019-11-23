@@ -1,5 +1,5 @@
 import * as tourConstants from "./../constants/tourImage.module";
-import { toastError, toastDeleteSuccess } from "../helper/toastify.helper";
+import { toastError, toastDeleteImageSuccess } from "../helper/toastify.helper";
 const initialState = {
    listImageTour: [],
    delete: [],
@@ -11,8 +11,8 @@ const reducer = (state = initialState, action) => {
       //Delete
       case tourConstants.FETCH_TOUR_IMAGE_DELETE_SUCCESS: {
          const { data } = action.payload;
-         const { record } = action.record;
-         toastDeleteSuccess(record);
+         const { file } = action.file;
+         toastDeleteImageSuccess(file);
          return {
             ...state,
             delete: data

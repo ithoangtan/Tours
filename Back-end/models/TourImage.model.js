@@ -1,5 +1,7 @@
 var mysql = require("../dbconnection.js");
 
+var fs = require("fs");
+
 //Task object constructor
 var Image = function(image) {
   this.idImage = image.idImage | 0;
@@ -33,7 +35,9 @@ Image.getAllImageTourById = function(idTour, fncResult) {
   );
 };
 
-Image.remove = function(idImage, fncResult) {
+Image.remove = function(idImage, name, fncResult) {
+  console.log(name.trim());
+
   mysql.query(
     "DELETE FROM kinhdoanhtourdulich.images WHERE idImage = ?",
     [idImage],
@@ -41,6 +45,13 @@ Image.remove = function(idImage, fncResult) {
       if (err) {
         fncResult(err, null);
       } else {
+        var path = `../admin-front-end/public/img/${name}`;
+        path = path.replace(" ", "");
+        fs.unlink(path, err => {
+          if (err) {
+            console.log(err);
+          }
+        });
         fncResult(null, res);
       }
     }

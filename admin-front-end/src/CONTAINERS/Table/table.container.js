@@ -531,7 +531,8 @@ class EditableTable extends React.Component {
             title: "Edit",
             dataIndex: "edit",
             width: 120,
-            fixed: "right",
+            key: "edit",
+            // fixed: "right",
             render: (text, record) => {
                const { editingidTour } = this.state;
                const editable = this.isEditing(record);
@@ -542,6 +543,7 @@ class EditableTable extends React.Component {
                            <a
                               onClick={() => this.save(form, record.idTour)}
                               style={{ marginRight: 8 }}
+                              href="/"
                            >
                               Save
                            </a>
@@ -551,13 +553,14 @@ class EditableTable extends React.Component {
                         title="Sure to cancel?"
                         onConfirm={() => this.cancel(record.idTour)}
                      >
-                        <a>Cancel</a>
+                        <a href="/">Cancel</a>
                      </Popconfirm>
                   </span>
                ) : (
                   <a
                      disabled={editingidTour !== ""}
                      onClick={() => this.edit(record.idTour)}
+                     href="/"
                   >
                      Edit
                   </a>
@@ -568,14 +571,15 @@ class EditableTable extends React.Component {
             title: "Delete",
             dataIndex: "delete",
             width: 80,
-            fixed: "right",
+            key: "delete",
+            // fixed: "right",
             render: (text, record) =>
                this.state.data.length >= 1 ? (
                   <Popconfirm
                      title="Sure to delete?"
                      onConfirm={() => this.handleDelete(record)}
                   >
-                     <a>Delete</a>
+                     <a href="/">Delete</a>
                   </Popconfirm>
                ) : null
          }
@@ -614,6 +618,7 @@ class EditableTable extends React.Component {
             </div>
             <EditableContext.Provider value={this.props.form}>
                <Table
+                  rowKey={"idTour"}
                   components={components}
                   pagination={{
                      onChange: this.cancel
@@ -631,8 +636,8 @@ class EditableTable extends React.Component {
                   }))}
                   rowClassName={() => "editable-row"}
                   onChange={this.handleChange}
-                  //Expanded Row Render  {...this.state}
                   {...this.state}
+                  //Expanded Row Render
                   expandedRowRender={this.expandedRowRender}
                />
             </EditableContext.Provider>

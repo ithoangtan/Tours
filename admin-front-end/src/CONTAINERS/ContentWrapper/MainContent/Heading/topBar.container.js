@@ -141,13 +141,11 @@ export default class TopBarContainer extends Component {
                            Something................................
                         </div>
                      </a>
-                     <Link to="notifications">
-                        <a
-                           className="dropdown-item text-center small text-gray-500"
-                           href="/"
-                        >
-                           Show All Alerts
-                        </a>
+                     <Link
+                        to="notifications"
+                        className="dropdown-item text-center small text-gray-500"
+                     >
+                        Show All Alerts
                      </Link>
                   </div>
                </li>
@@ -180,7 +178,7 @@ export default class TopBarContainer extends Component {
                            <img
                               className="rounded-circle"
                               src="https://source.unsplash.com/fn_BT9fwg_E/60x60"
-                              alt=""
+                              alt="error"
                            />
                            <div className="status-indicator bg-success" />
                         </div>
@@ -220,7 +218,7 @@ export default class TopBarContainer extends Component {
                            <img
                               className="rounded-circle"
                               src="https://source.unsplash.com/CS2uCrpNzJY/60x60"
-                              alt=""
+                              alt="error"
                            />
                            <div className="status-indicator bg-warning" />
                         </div>
@@ -250,13 +248,11 @@ export default class TopBarContainer extends Component {
                            <div className="small text-gray-500">Dog · 2w</div>
                         </div>
                      </a>
-                     <Link to="mails">
-                        <a
-                           className="dropdown-item text-center small text-gray-500"
-                           href="/"
-                        >
-                           Read More Messages
-                        </a>
+                     <Link
+                        to="mails"
+                        className="dropdown-item text-center small text-gray-500"
+                     >
+                        Read More Messages
                      </Link>
                   </div>
                </li>
@@ -278,6 +274,7 @@ export default class TopBarContainer extends Component {
                      <img
                         className="img-profile rounded-circle"
                         src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/p960x960/71271983_1008712472794144_9121213280486948864_o.jpg?_nc_cat=107&_nc_oc=AQnFmInfydKQlqJMLyQDpfF6O1EnXv9TNXmLwV6jx2IblIuImYWlsMbFoW2quRU4UlQ&_nc_ht=scontent.fsgn5-2.fna&oh=4b4477b8eba19763e5e22b44c114c3fd&oe=5E40FCAB"
+                        alt="error"
                      />
                   </a>
                   {/* Dropdown - User Information */}

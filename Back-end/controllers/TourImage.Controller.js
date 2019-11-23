@@ -45,7 +45,7 @@ exports.listAllImageTourById = function(req, res) {
 };
 
 exports.delete = function(req, res) {
-  Image.remove(req.query.idImage, function(err, idImage) {
+  Image.remove(req.query.idImage, req.query.name, function(err, idImage) {
     if (err) res.send(err);
     res.send(idImage);
   });
