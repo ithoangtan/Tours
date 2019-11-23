@@ -95,7 +95,7 @@ const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Tạm thời không biết nên ghi gì";
 //Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 1840, y: 400 };
+const scroll = { x: 2120, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -468,8 +468,7 @@ class EditableTable extends React.Component {
             // fixed: "left",
             ...this.getColumnSearchProps("titleTour"),
             sorter: (a, b) => a.titleTour.length - b.titleTour.length,
-            sortOrder:
-               sortedInfo.columnidTour === "titleTour" && sortedInfo.order,
+            sortOrder: sortedInfo.columnKey === "titleTour" && sortedInfo.order,
             ellipsis: true,
             editable: true
             // render: text => text
@@ -481,7 +480,7 @@ class EditableTable extends React.Component {
             width: 120,
             ...this.getColumnSearchProps("price"),
             sorter: (a, b) => a.price - b.price,
-            sortOrder: sortedInfo.columnidTour === "price" && sortedInfo.order,
+            sortOrder: sortedInfo.columnKey === "price" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -492,8 +491,7 @@ class EditableTable extends React.Component {
             width: 200,
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
-            sortOrder:
-               sortedInfo.columnidTour === "address" && sortedInfo.order,
+            sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -501,14 +499,17 @@ class EditableTable extends React.Component {
             title: "Sale(%)",
             dataIndex: "sale",
             key: "sale",
-            width: 100,
+            width: 120,
             filters: [
                { text: "10%", value: 9 },
                { text: "20%", value: 43 }
             ],
-            filteredValue: filteredInfo.sale || null,
-            filterMultiple: false,
-            onFilter: (value, record) => record.sale.indexOf(value) === 0,
+            // filteredValue: filteredInfo.sale || null,
+            // filterMultiple: false,
+            // onFilter: (value, record) => record.sale.indexOf(value) === 0,
+            ...this.getColumnSearchProps("sale"),
+            sorter: (a, b) => a.sale.length - b.sale.length,
+            sortOrder: sortedInfo.columnKey === "sale" && sortedInfo.order,
             editable: true,
             ellipsis: true
          },
@@ -520,8 +521,7 @@ class EditableTable extends React.Component {
 
             ...this.getColumnSearchProps("dateAdded"),
             sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
-            sortOrder:
-               sortedInfo.columnidTour === "dateAdded" && sortedInfo.order,
+            sortOrder: sortedInfo.columnKey === "dateAdded" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -533,7 +533,7 @@ class EditableTable extends React.Component {
             ...this.getColumnSearchProps("departureDay"),
             sorter: (a, b) => a.departureDay.length - b.departureDay.length,
             sortOrder:
-               sortedInfo.columnidTour === "departureDay" && sortedInfo.order,
+               sortedInfo.columnKey === "departureDay" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -545,7 +545,7 @@ class EditableTable extends React.Component {
             ...this.getColumnSearchProps("vocationTime"),
             sorter: (a, b) => a.vocationTime - b.vocationTime,
             sortOrder:
-               sortedInfo.columnidTour === "vocationTime" && sortedInfo.order,
+               sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -556,17 +556,16 @@ class EditableTable extends React.Component {
             width: 400,
             ...this.getColumnSearchProps("describe"),
             sorter: (a, b) => a.describe.length - b.describe.length,
-            sortOrder:
-               sortedInfo.columnidTour === "describe" && sortedInfo.order,
+            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
             title: "Edit",
             dataIndex: "edit",
-            width: 120,
+            width: 180,
             key: "edit",
-            // fixed: "right",
+            fixed: "right",
             render: (text, record) => {
                const { editingidTour } = this.state;
                const editable = this.isEditing(record);
@@ -574,44 +573,46 @@ class EditableTable extends React.Component {
                   <span>
                      <EditableContext.Consumer>
                         {form => (
-                           <a
+                           <Button
+                              type="primary"
                               onClick={() => this.save(form, record.idTour)}
                               style={{ marginRight: 8 }}
                            >
                               Save
-                           </a>
+                           </Button>
                         )}
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
                         onConfirm={() => this.cancel(record.idTour)}
                      >
-                        <a>Cancel</a>
+                        <Button type="dashed">Cancel</Button>
                      </Popconfirm>
                   </span>
                ) : (
-                  <a
+                  <Button
+                     type="default"
                      disabled={editingidTour !== ""}
                      onClick={() => this.edit(record.idTour)}
                   >
                      Edit
-                  </a>
+                  </Button>
                );
             }
          },
          {
             title: "Delete",
             dataIndex: "delete",
-            width: 80,
+            width: 110,
             key: "delete",
-            // fixed: "right",
+            fixed: "right",
             render: (text, record) =>
                this.state.data.length >= 1 ? (
                   <Popconfirm
                      title="Sure to delete?"
                      onConfirm={() => this.handleDelete(record)}
                   >
-                     <a>Delete</a>
+                     <Button type="danger">Delete</Button>
                   </Popconfirm>
                ) : null
          }

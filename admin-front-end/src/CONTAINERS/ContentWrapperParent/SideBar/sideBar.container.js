@@ -6,7 +6,7 @@ export default class SideBarContainer extends Component {
    render() {
       return (
          <ul
-            className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+            className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
             id="accordionSidebar"
          >
             {/* Sidebar - Brand */}
