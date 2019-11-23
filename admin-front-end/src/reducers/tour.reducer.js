@@ -7,6 +7,7 @@ import {
 } from "../helper/toastify.helper";
 const initialState = {
    listTour: [],
+   listImageTour: [],
    delete: [],
    patch: []
 };
@@ -68,6 +69,28 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             patch: error
+         };
+      }
+      //Image Tour
+      case tourConstants.FETCH_TOUR_IMAGE:
+         return {
+            ...state,
+            listImageTour: []
+         };
+      case tourConstants.FETCH_TOUR_IMAGE_SUCCESS: {
+         const { data } = action.payload;
+         toastSuccess(data);
+         return {
+            ...state,
+            listImageTour: data
+         };
+      }
+      case tourConstants.FETCH_TOUR_IMAGE_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            listImageTour: error
          };
       }
       default:

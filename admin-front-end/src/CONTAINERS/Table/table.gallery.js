@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as tourActions from "../../actions/tour.actions";
 
+import * as tourImageActions from "../../actions/tourImage.actions";
 import { API_ENDPOINT } from "../../constants/index.constants";
 
 import { Upload, Icon, Modal } from "antd";
@@ -20,19 +20,27 @@ function getBase64(file) {
 }
 
 class TableGallery extends Component {
-   state = {
-      previewVisible: false,
-      previewImage: "",
-      action: `${API_ENDPOINT}/tour-img`,
-      fileList: [
-         {
-            uid: "-1",
-            name: "image.png",
-            status: "done",
-            url: "https://source.unsplash.com/WLUHO9A_xik/1600x900"
-         }
-      ]
-   };
+   constructor(props) {
+      super(props);
+      this.state = {
+         previewVisible: false,
+         previewImage: "",
+         action: `${API_ENDPOINT}/images`,
+         fileList: []
+      };
+   }
+
+   componentDidMount() {
+      const { listImage, record } = this.props;
+      const listImageFilterIdTour = listImage.filter(
+         image => image.idTour === record.idTour
+      );
+
+      this.setState({ fileList: listImageFilterIdTour });
+      // const { tourImageAllActions, record } = this.props;
+      // const { fetchListTourImageRequest } = tourImageAllActions;
+      // fetchListTourImageRequest(record.idTour);
+   }
 
    handleCancel = () => this.setState({ previewVisible: false });
 
@@ -58,7 +66,7 @@ class TableGallery extends Component {
    render() {
       const { record } = this.props;
       const { previewVisible, previewImage, fileList } = this.state;
-      // const actionUpload = `${action}?idTour=${record.idTour}`;
+
       const uploadButton = (
          <div>
             <Icon type="plus" />
@@ -72,7 +80,10 @@ class TableGallery extends Component {
                <Upload
                   action={this.actionUpload}
                   listType="picture-card"
-                  fileList={fileList}
+                  fileList={fileList.map(image => ({
+                     ...image,
+                     uid: image.idImage
+                  }))}
                   onPreview={this.handlePreview}
                   onChange={this.handleChange}
                >
@@ -96,22 +107,22 @@ class TableGallery extends Component {
 }
 
 TableGallery.propTypes = {
-   tourAllActions: PropTypes.shape({
-      fetchListImageTourRequest: PropTypes.func,
-      fetchDeleteImageTourRequest: PropTypes.func,
-      fetchCreateImageTourRequest: PropTypes.func
+   tourImageAllActions: PropTypes.shape({
+      // fetchListTourImageRequest: PropTypes.func,
+      fetchDeleteTourImageRequest: PropTypes.func,
+      fetchCreateTourImageRequest: PropTypes.func
    }),
    listImageTour: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listImageTour: state.tour.listImageTour
+      listImageTour: state.tourImage.listImageTour
    };
 };
 const mapDispatchToProps = dispatch => {
    return {
-      tourAllActions: bindActionCreators(tourActions, dispatch)
+      tourImageAllActions: bindActionCreators(tourImageActions, dispatch)
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

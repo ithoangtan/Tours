@@ -20,7 +20,7 @@ import {
    Icon
 } from "antd";
 
-import TableGallery from "../Table/table.gallery";
+import TableGallery from "./table.gallery";
 
 const EditableContext = React.createContext();
 
@@ -90,10 +90,10 @@ class EditableCell extends React.Component {
    }
 }
 
-const expandedRowRender = record => <TableGallery record={record} />;
 const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Tạm thời không biết nên ghi gì";
+//Tùy chọn scroll bằng tổng các chiệu rộng
 const scroll = { x: 1840, y: 400 };
 const pagination = { position: "both" };
 
@@ -107,7 +107,6 @@ class EditableTable extends React.Component {
          bordered: true,
          loading: false,
          size: "default",
-         expandedRowRender,
          showHeader,
          title,
          footer,
@@ -208,6 +207,9 @@ class EditableTable extends React.Component {
    /**Preload */
    //    Preload
    componentDidMount() {
+      const { tourAllActions } = this.props;
+      const { fetchListTourImageRequest } = tourAllActions;
+      fetchListTourImageRequest();
       this.fetch();
    }
    handleTableChange = (pagination, filters, sorter) => {
@@ -391,6 +393,12 @@ class EditableTable extends React.Component {
          width: size.width
       };
       return { columns: nextColumns };
+   };
+
+   //Expanded Row Render
+   expandedRowRender = record => {
+      const { listImageTour } = this.props;
+      return <TableGallery record={record} listImage={listImageTour} />;
    };
 
    render() {
@@ -623,7 +631,9 @@ class EditableTable extends React.Component {
                   }))}
                   rowClassName={() => "editable-row"}
                   onChange={this.handleChange}
+                  //Expanded Row Render  {...this.state}
                   {...this.state}
+                  expandedRowRender={this.expandedRowRender}
                />
             </EditableContext.Provider>
          </div>
@@ -638,14 +648,16 @@ TablesContainer.propTypes = {
    tourAllActions: PropTypes.shape({
       fetchListTourRequest: PropTypes.func,
       fetchDeleteTourRequest: PropTypes.func,
-      fetchPatchTourRequest: PropTypes.func
+      fetchPatchTourRequest: PropTypes.func,
+      fetchListTourImageRequest: PropTypes.func
    }),
    listTour: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listTour: state.tour.listTour
+      listTour: state.tour.listTour,
+      listImageTour: state.tour.listImageTour
    };
 };
 const mapDispatchToProps = dispatch => {

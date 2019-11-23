@@ -15,3 +15,10 @@ export const deleteTour = idTour => {
 export const patchTour = data => {
    return axiosService.patch(`${API_ENDPOINT}/${url}`, data);
 };
+
+const urlImage = "image";
+const urlImages = "images";
+
+export const getListImageTourById = () => {
+   return axiosService.get(`${API_ENDPOINT}/${urlImages}`);
+};

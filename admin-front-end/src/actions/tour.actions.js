@@ -7,6 +7,7 @@ export const fetchListTour = () => {
    };
 };
 
+//List Tour
 export const fetchListTourSuccess = data => {
    return {
       type: tourConstants.FETCH_TOUR_SUCCESS,
@@ -48,6 +49,7 @@ export const fetchListTourRequest = () => {
    };
 };
 
+//Delete Tour
 export const fetchDeleteTourSuccess = (record, data) => {
    return {
       type: tourConstants.FETCH_TOUR_DELETE_SUCCESS,
@@ -83,6 +85,7 @@ export const fetchDeleteTourRequest = record => {
    };
 };
 
+//PATCH Tour
 export const fetchPatchTourSuccess = (newRecord, data) => {
    return {
       type: tourConstants.FETCH_TOUR_PATCH_SUCCESS,
@@ -114,6 +117,54 @@ export const fetchPatchTourRequest = newRecord => {
          })
          .catch(error => {
             dispatch(fetchPatchTourError(error));
+         });
+   };
+};
+//Image Tour
+export const fetchListTourImage = () => {
+   return {
+      type: tourConstants.FETCH_TOUR_IMAGE
+   };
+};
+
+//List Tour
+export const fetchListTourImageSuccess = data => {
+   return {
+      type: tourConstants.FETCH_TOUR_IMAGE_SUCCESS,
+      payload: {
+         // Thường đi làm thì người ta hay gọi là FETCH
+         //data gửi kèm trong actions là payload ở vị trí này
+         data
+      }
+   };
+};
+
+export const fetchListTourImageError = error => {
+   return {
+      type: tourConstants.FETCH_TOUR_IMAGE_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+/**
+ * B1: fetch isImageRequest()
+ * B2: ResetL state Images --> []
+ * B3: Khi API thành công thì vào then:
+ * fetchListTourImageSucces (data response)
+ *
+ */
+export const fetchListTourImageRequest = () => {
+   return dispatch => {
+      dispatch(fetchListTourImage()); //reset state Images-->[]
+      tourApis
+         .getListImageTourById()
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchListTourImageSuccess(data));
+         })
+         .catch(error => {
+            dispatch(fetchListTourImageError(error));
          });
    };
 };
