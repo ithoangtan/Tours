@@ -65,7 +65,20 @@
 }
 
 .ht-card-title-schedule {
-   margin: 10px 10px 0px 20px;
+   margin: 10px 20px 5px 20px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.ht-describe-wrapper {
+   margin: 2px 20px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.ht-button-save-schedule {
+   margin: 2px 20px;
 }
 
 .ck-editor__editable {

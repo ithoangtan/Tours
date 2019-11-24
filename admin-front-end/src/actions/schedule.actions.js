@@ -43,7 +43,7 @@ export const fetchListScheduleRequest = () => {
    };
 };
 
-//Get Schedule By  ID
+//Get Schedule By  ID Tour
 export const fetchScheduleByIdTourSuccess = data => {
    return {
       type: scheduleConstants.FETCH_SCHEDULE_GET_BYID_SUCCESS,
@@ -65,13 +65,46 @@ export const fetchScheduleByIdTourError = error => {
 export const fetchScheduleByIdTourRequest = idTour => {
    return dispatch => {
       scheduleApis
-         .getScheduleById(idTour)
+         .getScheduleByIdTour(idTour)
          .then(resp => {
             const { data } = resp;
             dispatch(fetchScheduleByIdTourSuccess(data));
          })
          .catch(error => {
             dispatch(fetchScheduleByIdTourError(error));
+         });
+   };
+};
+
+//Get Schedule By  ID SCHEDULE
+export const fetchScheduleByIdSuccess = data => {
+   return {
+      type: scheduleConstants.FETCH_SCHEDULE_GET_BYID_SUCCESS,
+      payload: {
+         data
+      }
+   };
+};
+
+export const fetchScheduleByIdError = error => {
+   return {
+      type: scheduleConstants.FETCH_SCHEDULE_GET_BYID_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchScheduleByIdRequest = idSchedule => {
+   return dispatch => {
+      scheduleApis
+         .getScheduleById(idSchedule)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchScheduleByIdSuccess(data));
+         })
+         .catch(error => {
+            dispatch(fetchScheduleByIdError(error));
          });
    };
 };

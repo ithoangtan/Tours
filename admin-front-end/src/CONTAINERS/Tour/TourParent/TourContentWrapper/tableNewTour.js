@@ -164,18 +164,20 @@ class TableNewRow extends Component {
                   <Select
                      name="vocationTime"
                      labelInValue
-                     style={{ width: 140 }}
+                     style={{ width: 195 }}
                      onChange={this.handleChange}
                   >
-                     <Select.Option value="2-1">2 Ngày 1 Đêm</Select.Option>
-                     <Select.Option value="3-2">3 Ngày 2 Đêm</Select.Option>
-                     <Select.Option value="4-3">4 Ngày 3 Đêm</Select.Option>
-                     <Select.Option value="5-4">5 Ngày 4 Đêm</Select.Option>
-                     <Select.Option value="6-5">6 Ngày 5 Đêm</Select.Option>
-                     <Select.Option value="7-6">7 Ngày 6 Đêm</Select.Option>
-                     <Select.Option value="8-7">8 Ngày 7 Đêm</Select.Option>
-                     <Select.Option value="9-8">9 Ngày 8 Đêm</Select.Option>
-                     <Select.Option value="10-8">10 Ngày 9 Đêm</Select.Option>
+                     <Select.Option value="2-1">2 days 1 nights</Select.Option>
+                     <Select.Option value="3-2">3 days 2 nights</Select.Option>
+                     <Select.Option value="4-3">4 days 3 nights</Select.Option>
+                     <Select.Option value="5-4">5 days 4 nights</Select.Option>
+                     <Select.Option value="6-5">6 days 5 nights</Select.Option>
+                     <Select.Option value="7-6">7 days 6 nights</Select.Option>
+                     <Select.Option value="8-7">8 days 7 nights</Select.Option>
+                     <Select.Option value="9-8">9 days 8 nights</Select.Option>
+                     <Select.Option value="10-8">
+                        10 days 9 nights
+                     </Select.Option>
                   </Select>
                )}
             </Form.Item>
@@ -343,7 +345,14 @@ class TableNewRow extends Component {
          >
             {this.getFields()}
             <Row>
-               <Col span={24} style={{ textAlign: "right" }}>
+               {" "}
+               <Col span={12} style={{ textAlign: "right" }}>
+                  <p>
+                     You can edit your travle schedule how you expand record
+                     tour (+)
+                  </p>
+               </Col>
+               <Col span={12} style={{ textAlign: "center" }}>
                   <Button type="dashed" onClick={this.handleReset}>
                      Clear
                   </Button>
