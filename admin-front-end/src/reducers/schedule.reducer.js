@@ -1,16 +1,14 @@
-import * as tourConstants from "../constants/tour.module";
+import * as scheduleConstants from "../constants/schedule.module";
 import {
    toastError,
    toastSuccess,
    toastPatchSuccess,
    toastDeleteSuccess,
-   toastCreateSuccess,
-   toastGetByIdSuccess
+   toastCreateSuccess
 } from "../helper/toastify.helper";
 const initialState = {
-   listTour: [],
-   listImageTour: [],
-   tourById: {},
+   listSchedule: [],
+   scheduleByIdTour: {},
    delete: [],
    patch: [],
    create: []
@@ -18,57 +16,57 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
    switch (action.type) {
-      case tourConstants.FETCH_TOUR:
+      case scheduleConstants.FETCH_SCHEDULE:
          return {
             ...state,
-            listTour: []
+            listSchedule: []
          };
-      case tourConstants.FETCH_TOUR_SUCCESS: {
+      case scheduleConstants.FETCH_SCHEDULE_SUCCESS: {
          const { data } = action.payload;
          toastSuccess(data);
          return {
             ...state,
-            listTour: data
+            listSchedule: data
          };
       }
-      case tourConstants.FETCH_TOUR_FAILED: {
+      case scheduleConstants.FETCH_SCHEDULE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            listTour: error
+            listSchedule: error
          };
       }
 
-      //Get Schedule By  Id Tour
-      case tourConstants.FETCH_TOUR_GET_BYID_SUCCESS: {
+      //Schedule Get By Id Tour
+      case scheduleConstants.FETCH_SCHEDULE_GET_BYID_SUCCESS: {
          const { data } = action.payload;
-         toastGetByIdSuccess(data);
+         toastCreateSuccess(data);
          return {
             ...state,
-            tourById: data
+            scheduleByIdTour: data
          };
       }
-      case tourConstants.FETCH_TOUR_GET_BYID_FAILED: {
+      case scheduleConstants.FETCH_SCHEDULE_GET_BYID_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            tourById: error
+            scheduleByIdTour: error
          };
       }
 
       //Post - Create
-      case tourConstants.FETCH_TOUR_CREATE_SUCCESS: {
+      case scheduleConstants.FETCH_SCHEDULE_CREATE_SUCCESS: {
          const { data } = action.payload;
-         const { newRecord } = action.newRecord;
-         toastCreateSuccess(newRecord);
+         const { newSchedule } = action.newSchedule;
+         toastCreateSuccess(newSchedule);
          return {
             ...state,
             create: data
          };
       }
-      case tourConstants.FETCH_TOUR_CREATE_FAILED: {
+      case scheduleConstants.FETCH_SCHEDULE_CREATE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
@@ -76,9 +74,8 @@ const reducer = (state = initialState, action) => {
             create: error
          };
       }
-
       //Delete
-      case tourConstants.FETCH_TOUR_DELETE_SUCCESS: {
+      case scheduleConstants.FETCH_SCHEDULE_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
          toastDeleteSuccess(record);
@@ -87,7 +84,7 @@ const reducer = (state = initialState, action) => {
             delete: data
          };
       }
-      case tourConstants.FETCH_TOUR_DELETE_FAILED: {
+      case scheduleConstants.FETCH_SCHEDULE_DELETE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
@@ -97,16 +94,16 @@ const reducer = (state = initialState, action) => {
       }
 
       //Patch - update
-      case tourConstants.FETCH_TOUR_PATCH_SUCCESS: {
+      case scheduleConstants.FETCH_SCHEDULE_PATCH_SUCCESS: {
          const { data } = action.payload;
-         const { newRecord } = action.newRecord;
-         toastPatchSuccess(newRecord);
+         const { newSchedule } = action.newSchedule;
+         toastPatchSuccess(newSchedule);
          return {
             ...state,
             patch: data
          };
       }
-      case tourConstants.FETCH_TOUR_PATCH_FAILED: {
+      case scheduleConstants.FETCH_SCHEDULE_PATCH_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
@@ -115,28 +112,6 @@ const reducer = (state = initialState, action) => {
          };
       }
 
-      //Image Tour
-      case tourConstants.FETCH_TOUR_IMAGE:
-         return {
-            ...state,
-            listImageTour: []
-         };
-      case tourConstants.FETCH_TOUR_IMAGE_SUCCESS: {
-         const { data } = action.payload;
-         // toastSuccess(data);
-         return {
-            ...state,
-            listImageTour: data
-         };
-      }
-      case tourConstants.FETCH_TOUR_IMAGE_FAILED: {
-         const { error } = action.payload;
-         toastError(error);
-         return {
-            ...state,
-            listImageTour: error
-         };
-      }
       default:
          return state;
    }

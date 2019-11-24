@@ -14,7 +14,7 @@ import LoginPage from "./CONTAINERS/Login/Login.Page";
 import RegisterPage from "./CONTAINERS/Register/RegisterPage.Page";
 import TourAdminPage from "./CONTAINERS/Tour/Tour.Page";
 
-import ScheduleDetailPage from "./CONTAINERS/Schedule/ScheduleDetail.page";
+import ScheduleDetailPage from "./CONTAINERS/Schedule/ScheduleDetail.Page";
 
 import All from "./CONTAINERS/App/all";
 import TestPage from "./CONTAINERS/App/test";
@@ -43,7 +43,7 @@ const router = [
       main: ({ match }, props) => <TourAdminPage match={match} {...props} />
    },
    {
-      path: "/schedule-detail",
+      path: "/schedule-detail/:idTour",
       exact: true,
       main: ({ match }, props) => (
          <ScheduleDetailPage match={match} {...props} />

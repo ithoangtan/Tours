@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import tourReducer from "./tour.Reducer";
-import tourImageReducer from "./tourImage.Reducer";
+import tourReducer from "./tour.reducer";
+import scheduleReducer from "./schedule.reducer";
+import tourImageReducer from "./tourImage.reducer";
 
 const rootReducer = combineReducers({
    tour: tourReducer,
-   tourImage: tourImageReducer
+   tourImage: tourImageReducer,
+   schedule: scheduleReducer
 });
 
 export default rootReducer;

@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 
+//FOR ALL
 export const toastError = error => {
    let message = null;
    if (typeof error === "object" && error.message) ({ message } = error);
@@ -8,6 +9,7 @@ export const toastError = error => {
    }
 };
 
+// FOR TOUR
 export const toastSuccess = data => {
    if (data !== null && data !== "") {
       toast(`${data.length} record loaded!`, {
@@ -41,3 +43,11 @@ export const toastPatchSuccess = newRecord => {
       toast.info(`ID: ${newRecord.idTour}, ${newRecord.titleTour} updated!`);
    }
 };
+
+export const toastGetByIdSuccess = data => {
+   if (data !== null && data !== "") {
+      toast.success(`ID: ${data.idTour}, ${data.titleTour} got!`);
+   }
+};
+
+//For SCHEDULE

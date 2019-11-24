@@ -49,6 +49,40 @@ export const fetchListTourRequest = () => {
    };
 };
 
+//GET TOUR BY ID
+export const fetchTourByIdSuccess = data => {
+   return {
+      type: tourConstants.FETCH_TOUR_GET_BYID_SUCCESS,
+      payload: {
+         data
+      }
+   };
+};
+
+export const fetchTourByIdError = error => {
+   return {
+      type: tourConstants.FETCH_TOUR_GET_BYID_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchTourByIdRequest = idTour => {
+   return dispatch => {
+      tourApis
+         .getTourById(idTour)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchTourByIdSuccess(data));
+         })
+         .catch(error => {
+            dispatch(fetchTourByIdError(error));
+         });
+   };
+};
+//end Get Tour By ID
+
 //POST Tour - create
 export const fetchPostTourSuccess = (newRecord, data) => {
    return {

@@ -8,6 +8,10 @@ export const getListTour = () => {
    return axiosService.get(`${API_ENDPOINT}/${urls}`);
 };
 
+export const getTourById = idTour => {
+   return axiosService.get(`${API_ENDPOINT}/${url}?idTour=${idTour}`);
+};
+
 export const postTour = data => {
    return axiosService.post(`${API_ENDPOINT}/${url}`, data);
 };

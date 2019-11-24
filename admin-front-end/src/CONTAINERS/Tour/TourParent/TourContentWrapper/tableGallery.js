@@ -108,7 +108,7 @@ class TableGallery extends Component {
             <Link
                type="primary"
                to={{
-                  pathname: `/schedule-detail`,
+                  pathname: `/schedule-detail/${record.idTour}`,
                   state: {
                      record: true
                   }
