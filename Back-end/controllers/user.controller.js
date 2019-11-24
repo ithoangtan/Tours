@@ -1,4 +1,4 @@
-var Users = require("../model/User.model");
+var Users = require("../model/user.model");
 exports.list_all_users = function(req, res) {
   Users.getAlluser(function(err, users) {
     if (err) res.send(err);

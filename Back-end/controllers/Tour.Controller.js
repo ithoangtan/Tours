@@ -1,4 +1,4 @@
-var Tour = require("../models/Tour.model");
+var Tour = require("../models/tour.model");
 
 //
 //Upload image with multer
