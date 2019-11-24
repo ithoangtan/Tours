@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
-import WrapperParentContainer from "../ContentWrapperParent/wrapperParent.container";
+import IndexParentContainer from "./IndexParent/indexParent.container";
 
 class IndexPage extends Component {
    constructor(props) {
@@ -33,7 +33,7 @@ class IndexPage extends Component {
       return (
          <div id="page-top">
             {/* Page Wrapper */}
-            <WrapperParentContainer />
+            <IndexParentContainer />
             {/* End of Page Wrapper */}
             {/* Scroll to Top Button*/}
             <a className="scroll-to-top rounded" href="#page-top">

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import tourReducer from "./tour.reducer";
-import tourImageReducer from "./tourImage.reducer";
+import tourReducer from "./tour.Reducer";
+import tourImageReducer from "./tourImage.Reducer";
 
 const rootReducer = combineReducers({
    tour: tourReducer,

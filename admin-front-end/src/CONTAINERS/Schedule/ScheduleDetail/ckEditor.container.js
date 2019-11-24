@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-class EditorComponent extends Component {
+class EditorContainer extends Component {
    constructor(props) {
       super(props);
 
@@ -58,4 +58,4 @@ class EditorComponent extends Component {
    }
 }
 
-export default EditorComponent;
+export default EditorContainer;

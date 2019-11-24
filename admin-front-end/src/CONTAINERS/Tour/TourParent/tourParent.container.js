@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import SideBarContainer from "../ContentWrapperParent/SideBar/sideBar.container";
-import ContentWrapperContainer from "../ContentWrapper/contentWrapper.container";
+import SideBarContainer from "../../ParentContainer/sideBar.container";
+import TourWrapperContainer from "./TourContentWrapper/tourWrapper.container";
 
-export default class WrapperParentContainer extends Component {
+export default class WrapperTableParentContainer extends Component {
    render() {
       return (
          <div id="wrapper">
@@ -11,7 +11,7 @@ export default class WrapperParentContainer extends Component {
             <SideBarContainer />
             {/* End of Sidebar */}
             {/* Content Wrapper */}
-            <ContentWrapperContainer />
+            <TourWrapperContainer />
             {/* End of Content Wrapper */}
          </div>
       );

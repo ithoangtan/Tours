@@ -20,8 +20,8 @@ import {
    Icon
 } from "antd";
 
-import TableGallery from "./tableGallery";
-import TableNewRow from "./tableNewRow";
+import TableGallery from "./TableGallery";
+import TableNewRow from "./tableNewTour";
 
 const EditableContext = React.createContext();
 

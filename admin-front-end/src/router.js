@@ -8,11 +8,13 @@ import ResultSubmissionFailed from "./CONTAINERS/ResultBoard/ResultSubmissionFai
 import ResultSuccessful from "./CONTAINERS/ResultBoard/ResultSuccessful";
 import ResultWarning from "./CONTAINERS/ResultBoard/ResultWarning";
 
-import IndexPage from "./CONTAINERS/IndexPage/index.page";
-import ForgotPasswordPage from "./CONTAINERS/ForgotPassword/forgotPassword.page";
-import LoginPage from "./CONTAINERS/LoginPage/login.page";
-import RegisterPage from "./CONTAINERS/RegisterPage/registerPage.page";
-import TourAdminPage from "./CONTAINERS/Tours/tour.admin";
+import IndexPage from "./CONTAINERS/Index/Index.Page";
+import ForgotPasswordPage from "./CONTAINERS/ForgotPassword/ForgotPassword.Page";
+import LoginPage from "./CONTAINERS/Login/Login.Page";
+import RegisterPage from "./CONTAINERS/Register/RegisterPage.Page";
+import TourAdminPage from "./CONTAINERS/Tour/Tour.Page";
+
+import ScheduleDetailPage from "./CONTAINERS/Schedule/ScheduleDetail/scheduleDetail.page";
 
 import All from "./CONTAINERS/App/all";
 import TestPage from "./CONTAINERS/App/test";
@@ -39,6 +41,11 @@ const router = [
       path: "/tour",
       exact: true,
       main: () => <TourAdminPage />
+   },
+   {
+      path: "/schedule-detail",
+      exact: true,
+      main: () => <ScheduleDetailPage />
    },
    {
       path: "/forgot-password",

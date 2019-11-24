@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-import TopBarContainer from "./MainContent/Heading/topBar.container";
-import ContentMainContainer from "./MainContent/contentMain.container";
-import FooterContainer from "./Footer/footer.container";
+import TopBarContainer from "../../../ParentContainer/topBar.container";
+import TourTableContainer from "./tourTable.container";
+import FooterContainer from "../../../ParentContainer/footer.Container";
 
-export default class ContentWrapperContainer extends Component {
+export default class ContentTableWrapperContainer extends Component {
    render() {
       return (
          <div id="content-wrapper" className="d-flex flex-column">
@@ -12,7 +12,7 @@ export default class ContentWrapperContainer extends Component {
             <TopBarContainer />
             {/* End of Topbar */}
             {/* Main Content */}
-            <ContentMainContainer />
+            <TourTableContainer />
             {/* End of Main Content */}
             {/* Footer */}
             <FooterContainer />

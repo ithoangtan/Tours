@@ -1,0 +1,15 @@
+TourPage
+    /ContentParent/tourParent.container
+        /SideBar/sideBar.container
+        /ContentWrapper/tourWrapper.container
+            /topBar.container
+            /table.container
+            /footer.container
+
+ScheduleDetailAdmin
+    /ContentWrapperParent/scheduleDetailParent.container
+        /SideBar/sideBar.container
+        /ContentWrapper/contentScheduleDetailWrapper.container
+            /MainContent/Heading/topBar.container
+            /Schedule/scheduleDetail.admin
+            /Footer/footer.container

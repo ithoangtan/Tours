@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as tourImageActions from "../../actions/tourImage.actions";
-import { API_ENDPOINT } from "../../constants/index.constants";
+import * as tourImageActions from "../../../../actions/tourImage.actions";
+import { API_ENDPOINT } from "../../../../constants/index.constants";
 
 import { Upload, Icon, Modal, message } from "antd";
 
