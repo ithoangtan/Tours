@@ -53,3 +53,21 @@
 .notice-load-data {
    color: rgb(44, 44, 44) !important;
 }
+
+.ht-style-editor {
+   margin: 10px;
+   padding: 10px;
+}
+
+.ht-style-card {
+   margin: 10px;
+   padding: 10px;
+}
+
+.ht-card-title-schedule {
+   margin: 10px 10px 0px 20px;
+}
+
+.ck-editor__editable {
+   min-height: 400px !important;
+}

@@ -12,6 +12,6 @@ export default class TourPage extends Component {
       // fetchListTourRequest();
    }
    render() {
-      return <TourParentContainer />;
+      return <TourParentContainer {...this.props} />;
    }
 }

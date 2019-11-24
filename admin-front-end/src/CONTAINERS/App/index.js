@@ -54,6 +54,7 @@ class App extends Component {
                   key={index}
                   path={route.path}
                   exact={route.exact}
+                  // render={props => route.main(props)}
                   component={route.main}
                />
             );

@@ -267,8 +267,6 @@ class EditableTable extends React.Component {
                .slice(0, 10)
                .replace(/-/g, "-");
          });
-         console.log(listTourFormatOK);
-
          this.setState({
             loading: false,
             data: listTour,
@@ -431,7 +429,13 @@ class EditableTable extends React.Component {
    //Expanded Row Render
    expandedRowRender = record => {
       const { listImageTour } = this.props;
-      return <TableGallery record={record} listImage={listImageTour} />;
+      return (
+         <TableGallery
+            record={record}
+            listImage={listImageTour}
+            {...this.props}
+         />
+      );
    };
 
    render() {

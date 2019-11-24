@@ -11,7 +11,7 @@ export default class WrapperTableParentContainer extends Component {
             <SideBarContainer />
             {/* End of Sidebar */}
             {/* Content Wrapper */}
-            <TourWrapperContainer />
+            <TourWrapperContainer {...this.props} />
             {/* End of Content Wrapper */}
          </div>
       );

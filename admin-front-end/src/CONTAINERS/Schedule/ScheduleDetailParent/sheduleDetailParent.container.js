@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 
 import SideBarContainer from "../../ParentContainer/sideBar.container";
-import ContentScheduleDetailWrapperContainer from "../ContentWrapper/contentScheduleDetailWrapperContainer.container";
+import ScheduleDetailWrapperContainer from "./ScheduleDetailContentWrapper/scheduleDetailWrapper.container";
 
 export default class WrapperTableParentContainer extends Component {
    render() {
       return (
          <div id="wrapper">
             {/* Sidebar */}
-            <SideBarContainer />
+            <SideBarContainer {...this.props} />
             {/* End of Sidebar */}
             {/* Content Wrapper */}
-            <ContentScheduleDetailWrapperContainer />
+            <ScheduleDetailWrapperContainer {...this.props} />
             {/* End of Content Wrapper */}
          </div>
       );

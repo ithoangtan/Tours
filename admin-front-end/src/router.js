@@ -14,7 +14,7 @@ import LoginPage from "./CONTAINERS/Login/Login.Page";
 import RegisterPage from "./CONTAINERS/Register/RegisterPage.Page";
 import TourAdminPage from "./CONTAINERS/Tour/Tour.Page";
 
-import ScheduleDetailPage from "./CONTAINERS/Schedule/ScheduleDetail/scheduleDetail.page";
+import ScheduleDetailPage from "./CONTAINERS/Schedule/ScheduleDetail.page";
 
 import All from "./CONTAINERS/App/all";
 import TestPage from "./CONTAINERS/App/test";
@@ -25,84 +25,86 @@ const router = [
    {
       path: "/all",
       exact: true,
-      main: () => <All />
+      main: ({ match }) => <All match={match} />
    },
    {
       path: "/test",
       exact: true,
-      main: () => <TestPage />
+      main: ({ match }) => <TestPage match={match} />
    },
    {
       path: "/",
       exact: true,
-      main: () => <IndexPage />
+      main: ({ match }) => <IndexPage match={match} />
    },
    {
       path: "/tour",
       exact: true,
-      main: () => <TourAdminPage />
+      main: ({ match }, props) => <TourAdminPage match={match} {...props} />
    },
    {
       path: "/schedule-detail",
       exact: true,
-      main: () => <ScheduleDetailPage />
+      main: ({ match }, props) => (
+         <ScheduleDetailPage match={match} {...props} />
+      )
    },
    {
       path: "/forgot-password",
       exact: true,
-      main: () => <ForgotPasswordPage />
+      main: ({ match }) => <ForgotPasswordPage match={match} />
    },
    {
       path: "/login",
       exact: true,
-      main: () => <LoginPage />
+      main: ({ match }) => <LoginPage match={match} />
    },
    {
       path: "/register",
       exact: true,
-      main: () => <RegisterPage />
+      main: ({ match }) => <RegisterPage match={match} />
    },
 
    {
       path: "/notAuthorized",
       exact: true,
-      main: () => <Result403 />
+      main: ({ match }) => <Result403 match={match} />
    },
 
    {
       path: "/serverIsWrong",
       exact: true,
-      main: () => <Result500 />
+      main: ({ match }) => <Result500 match={match} />
    },
    {
       path: "/doneResult",
       exact: true,
-      main: () => <ResultDone />
+      main: ({ match }) => <ResultDone match={match} />
    },
    {
       path: "/processingResult",
       exact: true,
-      main: () => <ResultProcessing />
+      main: ({ match }) => <ResultProcessing match={match} />
    },
    {
       path: "/complexError",
       exact: true,
-      main: () => <ResultSubmissionFailed />
+      main: ({ match }) => <ResultSubmissionFailed match={match} />
    },
    {
       path: "/successfulResult",
       exact: true,
-      main: () => <ResultSuccessful />
+      main: ({ match }) => <ResultSuccessful match={match} />
    },
    {
       path: "/warningResult",
       exact: true,
-      main: () => <ResultWarning />
+      main: ({ match }) => <ResultWarning match={match} />
    },
    {
       path: "/",
       exact: false,
-      main: () => <Result404 />
+      main: ({ match }) => <Result404 match={match} />
    }
 ];
 export default router;
