@@ -8,13 +8,16 @@ import * as tourActions from "../../actions/tour.actions";
 
 import IndexParentContainer from "./IndexParent/indexParent.container";
 
+import * as INDEX_CONSTANTS from "../../constants/index.constants";
+import funcLoadJs from "../../constants/func.contants";
+
 class IndexPage extends Component {
    constructor(props) {
       super(props);
       this.state = {};
    }
-
    componentDidMount() {
+      funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
       // const { tourAllActions } = this.props;
       // const { fetchListTourRequest } = tourAllActions;
       // fetchListTourRequest();
