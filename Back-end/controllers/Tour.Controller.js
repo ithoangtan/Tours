@@ -49,7 +49,8 @@ exports.create = function(req, res) {
 exports.read = function(req, res) {
   Tour.getTourById(req.query.idTour, function(err, tour) {
     if (err) res.send(err);
-    res.json(tour);
+    res.json(tour[0]); //Đã là API thì trả về phải chuẩn
+    //Chỉ có một phần tử thì không lý do gì phải res về một mảng
   });
 };
 

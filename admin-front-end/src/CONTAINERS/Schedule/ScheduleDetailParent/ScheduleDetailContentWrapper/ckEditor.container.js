@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as tourActions from "../../../../actions/tour.actions";
+import * as scheduleActions from "../../../../actions/schedule.actions";
+
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
@@ -12,21 +19,26 @@ class EditorContainer extends Component {
          content: props.content,
          handleWYSIWYGInput: props.handleWYSIWYGInput,
          editor: ClassicEditor,
-         schedule: {},
-         recordTour: {}
+         scheduleTour: {},
+         tour: {}
       };
    }
 
    componentDidMount() {
-      // const { handle } = this.props.match.params;
       // const { record } = this.props.location.state;
-      // console.log(record);
+      if (this.props.match !== null) {
+         const { idTour } = this.props.match.params;
 
-      if (this.props !== null) {
-         // const { record } = this.props.location.state;
-         console.log(this.props);
-         // this.setState({ record: record });
-      }
+         //Load data tour by Id tour
+         const { tourAllActions } = this.props;
+         const { fetchTourByIdRequest } = tourAllActions;
+         fetchTourByIdRequest(idTour);
+
+         //Load data schedule by id tour
+         const { scheduleAllActions } = this.props;
+         const { fetchScheduleByIdTourRequest } = scheduleAllActions;
+         fetchScheduleByIdTourRequest(idTour);
+      }//end if
    }
 
    onChange = (event, editor) => {
@@ -78,4 +90,27 @@ class EditorContainer extends Component {
    }
 }
 
-export default EditorContainer;
+EditorContainer.propTypes = {
+   classes: PropTypes.object,
+   tourAllActions: PropTypes.shape({
+      fetchTourByIdRequest: PropTypes.func,
+      fetchScheduleByIdTourRequest: PropTypes.func
+   }),
+   scheduleByIdTour: PropTypes.object,
+   tour: PropTypes.object
+};
+
+const mapStateToProps = state => {
+   return {
+      tour: state.tour.tourById,
+      scheduleByIdTour: state.schedule.scheduleByIdTour
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      tourAllActions: bindActionCreators(tourActions, dispatch),
+      scheduleAllActions: bindActionCreators(scheduleActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(EditorContainer);
