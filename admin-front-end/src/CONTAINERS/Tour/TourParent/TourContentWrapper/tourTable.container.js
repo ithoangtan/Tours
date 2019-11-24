@@ -1,5 +1,7 @@
 import React from "react";
 
+import moment from "moment";
+
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -24,6 +26,9 @@ import TableGallery from "./tableGallery";
 import TableNewRow from "./tableNewTour";
 
 const EditableContext = React.createContext();
+
+const dateFormat = "YYYY-DD-MM";
+const dateTimeFormat = "YYYY-DD-MM HH:mm:ss";
 
 const ResizeableTitle = props => {
    const { onResize, width, ...restProps } = props;
@@ -182,7 +187,10 @@ class EditableTable extends React.Component {
    handleAdd = newTour => {
       const { count, data } = this.state;
       const newData = {
-         idTour: newTour.idTour | (data[data.length - 1].idTour + 1),
+         idTour:
+            newTour.idTour | (data.length !== 0)
+               ? data[data.length - 1].idTour + 1
+               : 0,
          titleTour: newTour.titleTour,
          price: newTour.price,
          sale: newTour.sale,
@@ -259,13 +267,15 @@ class EditableTable extends React.Component {
          // Read total count from server
          pagination.total = data.length;
          const { listTour } = this.props;
-         const listTourFormatOK = listTour.forEach(element => {
-            element.dateAdded = element.dateAdded
-               .slice(0, 10)
-               .replace(/-/g, "-");
-            element.departureDay = element.departureDay
-               .slice(0, 10)
-               .replace(/-/g, "-");
+
+         //Lọc lại ngày tháng cho nó đẹp
+         listTour.forEach(element => {
+            element.dateAdded = element.dateAdded = moment(element.dateAdded)
+               .utc()
+               .format(dateFormat);
+            element.departureDay = moment(element.departureDay)
+               .utc()
+               .format(dateTimeFormat);
          });
          this.setState({
             loading: false,

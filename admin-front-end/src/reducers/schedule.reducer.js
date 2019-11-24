@@ -1,10 +1,11 @@
 import * as scheduleConstants from "../constants/schedule.module";
 import {
    toastError,
-   toastSuccess,
-   toastPatchSuccess,
-   toastDeleteSuccess,
-   toastCreateSuccess
+   toastScheduleSuccess,
+   toastPatchScheduleSuccess,
+   toastDeleteScheduleSuccess,
+   toastCreateScheduleSuccess,
+   toastScheduleGetByIdSuccess
 } from "../helper/toastify.helper";
 const initialState = {
    listSchedule: [],
@@ -23,7 +24,7 @@ const reducer = (state = initialState, action) => {
          };
       case scheduleConstants.FETCH_SCHEDULE_SUCCESS: {
          const { data } = action.payload;
-         toastSuccess(data);
+         toastScheduleSuccess(data);
          return {
             ...state,
             listSchedule: data
@@ -41,7 +42,7 @@ const reducer = (state = initialState, action) => {
       //Schedule Get By Id Tour
       case scheduleConstants.FETCH_SCHEDULE_GET_BYID_SUCCESS: {
          const { data } = action.payload;
-         toastCreateSuccess(data);
+         toastScheduleGetByIdSuccess(data);
          return {
             ...state,
             scheduleByIdTour: data
@@ -60,7 +61,7 @@ const reducer = (state = initialState, action) => {
       case scheduleConstants.FETCH_SCHEDULE_CREATE_SUCCESS: {
          const { data } = action.payload;
          const { newSchedule } = action.newSchedule;
-         toastCreateSuccess(newSchedule);
+         toastCreateScheduleSuccess(newSchedule);
          return {
             ...state,
             create: data
@@ -74,11 +75,12 @@ const reducer = (state = initialState, action) => {
             create: error
          };
       }
+
       //Delete
       case scheduleConstants.FETCH_SCHEDULE_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
-         toastDeleteSuccess(record);
+         toastDeleteScheduleSuccess(record);
          return {
             ...state,
             delete: data
@@ -96,8 +98,8 @@ const reducer = (state = initialState, action) => {
       //Patch - update
       case scheduleConstants.FETCH_SCHEDULE_PATCH_SUCCESS: {
          const { data } = action.payload;
-         const { newSchedule } = action.newSchedule;
-         toastPatchSuccess(newSchedule);
+         const { schedule } = action.schedule;
+         toastPatchScheduleSuccess(schedule);
          return {
             ...state,
             patch: data

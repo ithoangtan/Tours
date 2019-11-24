@@ -51,3 +51,39 @@ export const toastGetByIdSuccess = data => {
 };
 
 //For SCHEDULE
+export const toastScheduleSuccess = data => {
+   if (data !== null && data !== "") {
+      toast(`${data.length} record loaded!`, {
+         position: toast.POSITION.BOTTOM_RIGHT,
+         className: "notice-load-data"
+      });
+      // toast.done(`${data.length} record loaded!`);
+   }
+};
+
+export const toastCreateScheduleSuccess = newData => {
+   if (newData !== null && newData !== "") {
+      toast.success(`ID: ${newData.idTour}, ${newData.titleTour} created!`);
+   }
+};
+
+export const toastDeleteScheduleSuccess = record => {
+   if (record !== null && record !== "") {
+      toast.warn(`ID: ${record.idTour}, ${record.titleTour} deleted!`);
+   }
+};
+
+export const toastPatchScheduleSuccess = newRecord => {
+   if (newRecord !== null && newRecord !== "") {
+      toast.info(`ID: ${newRecord.idTour}, ${newRecord.titleTour} updated!`);
+   }
+};
+
+export const toastScheduleGetByIdSuccess = data => {
+   if (data !== null && data !== "") {
+      toast(`ID: ${data.idTour} got!`, {
+         position: toast.POSITION.BOTTOM_RIGHT,
+         className: "notice-load-data"
+      });
+   }
+};

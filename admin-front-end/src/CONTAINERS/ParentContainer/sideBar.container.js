@@ -34,9 +34,9 @@ export default class SideBarContainer extends Component {
             <div className="sidebar-heading">Tours Management</div>
             {/* Nav Item - Pages Collapse Menu */}
             <li className="nav-item">
-               <a
+               <Link
                   className="nav-link collapsed"
-                  href="/"
+                  // href=""
                   data-toggle="collapse"
                   data-target="#collapseTwo"
                   aria-expanded="true"
@@ -44,7 +44,7 @@ export default class SideBarContainer extends Component {
                >
                   <i className="fas fa-th-large"></i>
                   <span>Tours</span>
-               </a>
+               </Link>
                <div
                   id="collapseTwo"
                   className="collapse"
@@ -53,10 +53,10 @@ export default class SideBarContainer extends Component {
                >
                   <div className="bg-white py-2 collapse-inner rounded">
                      <h6 className="collapse-header">Tours</h6>
-                     <Link to="tour" className="collapse-item">
+                     <Link to="/tour" className="collapse-item">
                         Tours and Details
                      </Link>
-                     <Link to="schedule" className="collapse-item">
+                     <Link to="/schedule" className="collapse-item">
                         Schedule
                      </Link>
                   </div>
@@ -64,9 +64,8 @@ export default class SideBarContainer extends Component {
             </li>
             {/* Nav Item - Utilities Collapse Menu */}
             <li className="nav-item">
-               <a
+               <Link
                   className="nav-link collapsed"
-                  href="s"
                   data-toggle="collapse"
                   data-target="#collapseUtilities"
                   aria-expanded="true"
@@ -74,7 +73,7 @@ export default class SideBarContainer extends Component {
                >
                   <i className="fas fa-blog"></i>
                   <span>Blogs</span>
-               </a>
+               </Link>
                <div
                   id="collapseUtilities"
                   className="collapse"
@@ -83,16 +82,16 @@ export default class SideBarContainer extends Component {
                >
                   <div className="bg-white py-2 collapse-inner rounded">
                      <h6 className="collapse-header">Blog</h6>
-                     <Link to="posts" className="collapse-item">
+                     <Link to="/posts" className="collapse-item">
                         Posts
                      </Link>
-                     <Link to="approved-post" className="collapse-item">
+                     <Link to="/approved-post" className="collapse-item">
                         Approved post
                      </Link>
-                     <Link to="comments" className="collapse-item">
+                     <Link to="/comments" className="collapse-item">
                         Comments
                      </Link>
-                     <Link to="other" className="collapse-item">
+                     <Link to="/other" className="collapse-item">
                         Other
                      </Link>
                   </div>
@@ -104,9 +103,8 @@ export default class SideBarContainer extends Component {
             <div className="sidebar-heading">Account Management</div>
             {/* Nav Item - Pages Collapse Menu */}
             <li className="nav-item">
-               <a
+               <Link
                   className="nav-link collapsed"
-                  href="s"
                   data-toggle="collapse"
                   data-target="#collapsePages"
                   aria-expanded="true"
@@ -114,7 +112,7 @@ export default class SideBarContainer extends Component {
                >
                   <i className="fas fa-user-circle"></i>
                   <span>Accounts</span>
-               </a>
+               </Link>
                <div
                   id="collapsePages"
                   className="collapse"
@@ -123,13 +121,13 @@ export default class SideBarContainer extends Component {
                >
                   <div className="bg-white py-2 collapse-inner rounded">
                      <h6 className="collapse-header">Types</h6>
-                     <Link to="user-management" className="collapse-item">
+                     <Link to="/user-management" className="collapse-item">
                         User manager
                      </Link>
-                     <Link to="accounts" className="collapse-item">
+                     <Link to="/accounts" className="collapse-item">
                         Accounts
                      </Link>
-                     <Link to="guests" className="collapse-item">
+                     <Link to="/guests" className="collapse-item">
                         Guests
                      </Link>
                      <div className="collapse-divider" />
@@ -138,14 +136,14 @@ export default class SideBarContainer extends Component {
             </li>
             {/* Nav Item - Charts */}
             <li className="nav-item">
-               <Link to="notification" className="nav-link">
+               <Link to="/notification" className="nav-link">
                   <i className="fas fa-bell"></i>
                   <span>Notifications</span>
                </Link>
             </li>
             {/* Nav Item - Tables */}
             <li className="nav-item">
-               <Link to="mails" className="nav-link">
+               <Link to="/mails" className="nav-link">
                   <i className="fas fa-envelope-square"></i>
                   <span>Mails</span>
                </Link>

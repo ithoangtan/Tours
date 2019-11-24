@@ -34,9 +34,8 @@ export default class TopBarContainer extends Component {
             <ul className="navbar-nav ml-auto">
                {/* Nav Item - Search Dropdown (Visible Only XS) */}
                <li className="nav-item dropdown no-arrow d-sm-none">
-                  <a
+                  <Link
                      className="nav-link dropdown-toggle"
-                     href="/"
                      id="searchDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -44,7 +43,7 @@ export default class TopBarContainer extends Component {
                      aria-expanded="false"
                   >
                      <i className="fas fa-search fa-fw" />
-                  </a>
+                  </Link>
                   {/* Dropdown - Messages */}
                   <div
                      className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
@@ -70,9 +69,8 @@ export default class TopBarContainer extends Component {
                </li>
                {/* Nav Item - Alerts */}
                <li className="nav-item dropdown no-arrow mx-1">
-                  <a
+                  <Link
                      className="nav-link dropdown-toggle"
-                     href="/"
                      id="alertsDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -84,17 +82,14 @@ export default class TopBarContainer extends Component {
                      <span className="badge badge-danger badge-counter">
                         3+
                      </span>
-                  </a>
+                  </Link>
                   {/* Dropdown - Alerts */}
                   <div
                      className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="alertsDropdown"
                   >
                      <h6 className="dropdown-header">Alerts Center</h6>
-                     <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="/"
-                     >
+                     <Link className="dropdown-item d-flex align-items-center">
                         <div className="mr-3">
                            <div className="icon-circle bg-primary">
                               <i className="fas fa-file-alt text-white" />
@@ -108,11 +103,8 @@ export default class TopBarContainer extends Component {
                               Something................................
                            </span>
                         </div>
-                     </a>
-                     <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="/"
-                     >
+                     </Link>
+                     <Link className="dropdown-item d-flex align-items-center">
                         <div className="mr-3">
                            <div className="icon-circle bg-success">
                               <i className="fas fa-donate text-white" />
@@ -124,11 +116,8 @@ export default class TopBarContainer extends Component {
                            </div>
                            Something................................
                         </div>
-                     </a>
-                     <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="/"
-                     >
+                     </Link>
+                     <Link className="dropdown-item d-flex align-items-center">
                         <div className="mr-3">
                            <div className="icon-circle bg-warning">
                               <i className="fas fa-exclamation-triangle text-white" />
@@ -140,9 +129,9 @@ export default class TopBarContainer extends Component {
                            </div>
                            Something................................
                         </div>
-                     </a>
+                     </Link>
                      <Link
-                        to="notifications"
+                        to="/notifications"
                         className="dropdown-item text-center small text-gray-500"
                      >
                         Show All Alerts
@@ -151,9 +140,8 @@ export default class TopBarContainer extends Component {
                </li>
                {/* Nav Item - Messages */}
                <li className="nav-item dropdown no-arrow mx-1">
-                  <a
+                  <Link
                      className="nav-link dropdown-toggle"
-                     href="/"
                      id="messagesDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -163,17 +151,14 @@ export default class TopBarContainer extends Component {
                      <i className="fas fa-envelope fa-fw" />
                      {/* Counter - Messages */}
                      <span className="badge badge-danger badge-counter">7</span>
-                  </a>
+                  </Link>
                   {/* Dropdown - Messages */}
                   <div
                      className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="messagesDropdown"
                   >
                      <h6 className="dropdown-header">Message Center</h6>
-                     <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="/"
-                     >
+                     <Link className="dropdown-item d-flex align-items-center">
                         <div className="dropdown-list-image mr-3">
                            <img
                               className="rounded-circle"
@@ -190,11 +175,8 @@ export default class TopBarContainer extends Component {
                               Emily · 58m
                            </div>
                         </div>
-                     </a>
-                     <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="/"
-                     >
+                     </Link>
+                     <Link className="dropdown-item d-flex align-items-center">
                         <div className="dropdown-list-image mr-3">
                            <img
                               className="rounded-circle"
@@ -209,11 +191,8 @@ export default class TopBarContainer extends Component {
                            </div>
                            <div className="small text-gray-500">Jae · 1d</div>
                         </div>
-                     </a>
-                     <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="/"
-                     >
+                     </Link>
+                     <Link className="dropdown-item d-flex align-items-center">
                         <div className="dropdown-list-image mr-3">
                            <img
                               className="rounded-circle"
@@ -228,11 +207,8 @@ export default class TopBarContainer extends Component {
                            </div>
                            <div className="small text-gray-500">Mor · 2d</div>
                         </div>
-                     </a>
-                     <a
-                        className="dropdown-item d-flex align-items-center"
-                        href="/"
-                     >
+                     </Link>
+                     <Link className="dropdown-item d-flex align-items-center">
                         <div className="dropdown-list-image mr-3">
                            <img
                               className="rounded-circle"
@@ -247,9 +223,9 @@ export default class TopBarContainer extends Component {
                            </div>
                            <div className="small text-gray-500">Dog · 2w</div>
                         </div>
-                     </a>
+                     </Link>
                      <Link
-                        to="mails"
+                        to="/mails"
                         className="dropdown-item text-center small text-gray-500"
                      >
                         Read More Messages
@@ -259,9 +235,8 @@ export default class TopBarContainer extends Component {
                <div className="topbar-divider d-none d-sm-block" />
                {/* Nav Item - User Information */}
                <li className="nav-item dropdown no-arrow">
-                  <a
+                  <Link
                      className="nav-link dropdown-toggle"
-                     href="/"
                      id="userDropdown"
                      role="button"
                      data-toggle="dropdown"
@@ -276,34 +251,34 @@ export default class TopBarContainer extends Component {
                         src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/p960x960/71271983_1008712472794144_9121213280486948864_o.jpg?_nc_cat=107&_nc_oc=AQnFmInfydKQlqJMLyQDpfF6O1EnXv9TNXmLwV6jx2IblIuImYWlsMbFoW2quRU4UlQ&_nc_ht=scontent.fsgn5-2.fna&oh=4b4477b8eba19763e5e22b44c114c3fd&oe=5E40FCAB"
                         alt="error"
                      />
-                  </a>
+                  </Link>
                   {/* Dropdown - User Information */}
                   <div
                      className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="userDropdown"
                   >
-                     <a className="dropdown-item" href="/">
+                     <Link className="dropdown-item" to="/profile">
                         <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                         Profile
-                     </a>
-                     <a className="dropdown-item" href="/">
+                     </Link>
+                     <Link className="dropdown-item" to="/settings">
                         <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
                         Settings
-                     </a>
-                     <a className="dropdown-item" href="/">
+                     </Link>
+                     <Link className="dropdown-item" to="/activity-log">
                         <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
                         Activity Log
-                     </a>
+                     </Link>
                      <div className="dropdown-divider" />
-                     <a
+                     <Link
+                        to="/login"
                         className="dropdown-item"
-                        href="/"
                         data-toggle="modal"
                         data-target="#logoutModal"
                      >
                         <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
                         Logout
-                     </a>
+                     </Link>
                   </div>
                </li>
             </ul>

@@ -9,7 +9,11 @@ export const getListSchedule = () => {
 };
 
 export const getScheduleById = idSchedule => {
-   return axiosService.get(`${API_ENDPOINT}?idSchedule=${idSchedule}`);
+   return axiosService.get(`${API_ENDPOINT}/${url}?idSchedule=${idSchedule}`);
+};
+
+export const getScheduleByIdTour = idTour => {
+   return axiosService.get(`${API_ENDPOINT}/${url}?idTour=${idTour}`);
 };
 
 export const postSchedule = data => {
