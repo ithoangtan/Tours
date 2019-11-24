@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-class EditorContainer extends Component {
+class EditorComponent extends Component {
    constructor(props) {
       super(props);
 
@@ -40,7 +40,7 @@ class EditorContainer extends Component {
                      uploadUrl: "https://43967.cke-cs.com/easyimage/upload/"
                   }
                }}
-               extraPlugins={"easyimage"}
+               // extraPlugins={"easyimage"}
                onInit={editor => {
                   // You can store the "editor" and use when it is needed.
                   console.log("Editor is ready to use!", editor);
@@ -58,4 +58,4 @@ class EditorContainer extends Component {
    }
 }
 
-export default EditorContainer;
+export default EditorComponent;

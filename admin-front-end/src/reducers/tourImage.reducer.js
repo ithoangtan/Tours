@@ -1,4 +1,4 @@
-import * as tourConstants from "./../constants/tourImage.module";
+import * as tourConstants from "../constants/tourImage.module";
 import { toastError, toastDeleteImageSuccess } from "../helper/toastify.helper";
 const initialState = {
    listImageTour: [],

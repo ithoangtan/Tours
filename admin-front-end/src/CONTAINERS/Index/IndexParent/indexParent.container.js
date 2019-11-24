@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import SideBarContainer from "../ContentWrapperParent/SideBar/sideBar.container";
-import ContentTableWrapperContainer from "../ContentWrapper/contentTableWrapper.container";
+import SideBarContainer from "../../ParentContainer/sideBar.container";
+import IndexWrapperContainer from "./IndexContentWrapper/indexWrapper.container";
 
-export default class WrapperTableParentContainer extends Component {
+export default class IndexParentContainer extends Component {
    render() {
       return (
          <div id="wrapper">
@@ -11,7 +11,7 @@ export default class WrapperTableParentContainer extends Component {
             <SideBarContainer />
             {/* End of Sidebar */}
             {/* Content Wrapper */}
-            <ContentTableWrapperContainer />
+            <IndexWrapperContainer />
             {/* End of Content Wrapper */}
          </div>
       );

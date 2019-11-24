@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as tourImageActions from "../../actions/tourImage.actions";
-import { API_ENDPOINT } from "../../constants/index.constants";
+import * as tourImageActions from "../../../../actions/tourImage.actions";
+import { API_ENDPOINT } from "../../../../constants/index.constants";
 
-import { Upload, Icon, Modal, message } from "antd";
+import { Upload, Icon, Modal, message, Button } from "antd";
 
 function getBase64(file) {
    return new Promise((resolve, reject) => {
@@ -92,6 +93,7 @@ class TableGallery extends Component {
 
    render() {
       const { record } = this.props;
+
       const { previewVisible, previewImage, fileList } = this.state;
 
       const uploadButton = (
@@ -103,7 +105,17 @@ class TableGallery extends Component {
 
       return (
          <div>
-            <p>Describe: {record.describe}</p>
+            <Link
+               type="primary"
+               to={{
+                  pathname: `/schedule-detail`,
+                  state: {
+                     record: true
+                  }
+               }}
+            >
+               Go To Schedule
+            </Link>
             <div className="clearfix">
                <Upload
                   name={"imgUploader"} //This is important similar backend name field

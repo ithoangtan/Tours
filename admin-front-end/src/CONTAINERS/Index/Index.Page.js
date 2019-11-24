@@ -6,15 +6,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
-import WrapperParentContainer from "../ContentWrapperParent/wrapperParent.container";
+import IndexParentContainer from "./IndexParent/indexParent.container";
+
+import * as INDEX_CONSTANTS from "../../constants/index.constants";
+import funcLoadJs from "../../constants/func.contants";
 
 class IndexPage extends Component {
    constructor(props) {
       super(props);
       this.state = {};
    }
-
    componentDidMount() {
+      funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
       // const { tourAllActions } = this.props;
       // const { fetchListTourRequest } = tourAllActions;
       // fetchListTourRequest();
@@ -33,7 +36,7 @@ class IndexPage extends Component {
       return (
          <div id="page-top">
             {/* Page Wrapper */}
-            <WrapperParentContainer />
+            <IndexParentContainer />
             {/* End of Page Wrapper */}
             {/* Scroll to Top Button*/}
             <a className="scroll-to-top rounded" href="#page-top">

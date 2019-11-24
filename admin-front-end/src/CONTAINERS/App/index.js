@@ -27,10 +27,6 @@ const arrayExternalScript = [
 const store = configStore();
 
 class App extends Component {
-   scriptLoaded() {
-      // window.sort();
-   }
-
    componentDidMount() {
       arrayExternalScript.forEach(item => {
          const script = document.createElement("script");
@@ -58,6 +54,7 @@ class App extends Component {
                   key={index}
                   path={route.path}
                   exact={route.exact}
+                  // render={props => route.main(props)}
                   component={route.main}
                />
             );

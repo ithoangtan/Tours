@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 
-import TableContainer from "../Table/table.container";
+import CkEditor from "../Schedule/ScheduleDetailParent/ScheduleDetailContentWrapper/ckEditor.container";
+
 export default class All extends Component {
    render() {
-      return <TableContainer />;
+      return (
+         <div>
+            <CkEditor />
+            <br />
+         </div>
+      );
    }
 }

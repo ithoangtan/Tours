@@ -1,4 +1,4 @@
-import * as tourConstants from "./../constants/tour.module";
+import * as tourConstants from "../constants/tour.module";
 import {
    toastError,
    toastSuccess,
@@ -118,7 +118,7 @@ const reducer = (state = initialState, action) => {
          };
       case tourConstants.FETCH_TOUR_IMAGE_SUCCESS: {
          const { data } = action.payload;
-         toastSuccess(data);
+         // toastSuccess(data);
          return {
             ...state,
             listImageTour: data
