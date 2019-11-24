@@ -29,6 +29,13 @@ exports.create = function(req, res) {
     }
   });
 };
+exports.upload = function(req, res) {
+  upload(req, res, function(err) {
+    if (err) {
+      return res.send(err);
+    }
+  });
+};
 
 exports.listAllImageTour = function(req, res) {
   Image.getAllImageTour(function(err, tourImage) {

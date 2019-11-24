@@ -15,5 +15,6 @@ router.get("/images", Image.listAllImageTour);
 router.get("/image", Image.listAllImageTourById);
 router.delete("/image", Image.delete);
 router.post("/image", Image.create);
+router.post("/upload", Image.upload);
 
 module.exports = router;
