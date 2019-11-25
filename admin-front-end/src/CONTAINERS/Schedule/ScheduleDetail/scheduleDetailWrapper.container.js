@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import TopBarContainer from "../../../ParentContainer/topBar.container";
+import TopBarContainer from "../../ParentContainer/topBar.container";
 import CkEditorContainer from "./ckEditor.container";
-import FooterContainer from "../../../ParentContainer/footer.Container";
+import FooterContainer from "../../ParentContainer/footer.Container";
 
 export default class ContentTableWrapperContainer extends Component {
    render() {

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as tourActions from "../../../../actions/tour.actions";
+import * as tourActions from "../../../actions/tour.actions";
 
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
@@ -270,6 +270,7 @@ class EditableTable extends React.Component {
 
          //Lọc lại ngày tháng cho nó đẹp
          listTour.forEach(element => {
+            //format date
             element.dateAdded = element.dateAdded = moment(element.dateAdded)
                .utc()
                .format(dateFormat);

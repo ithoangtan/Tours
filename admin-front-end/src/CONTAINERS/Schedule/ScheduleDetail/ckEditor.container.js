@@ -7,13 +7,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as tourActions from "../../../../actions/tour.actions";
-import * as scheduleActions from "../../../../actions/schedule.actions";
+import * as tourActions from "../../../actions/tour.actions";
+import * as scheduleActions from "../../../actions/schedule.actions";
 
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import { DatePicker, Button } from "antd";
+import { Button } from "antd";
 const dateFormat = "YYYY-DD-MM HH:mm:ss";
 
 class EditorContainer extends Component {
