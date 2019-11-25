@@ -6,11 +6,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as tourActions from "../../actions/tour.actions";
 
-import IndexParentContainer from "./IndexParent/indexParent.container";
-
 import * as INDEX_CONSTANTS from "../../constants/index.constants";
 import funcLoadJs from "../../constants/func.contants";
 
+import SideBarContainer from "../ParentContainer/sideBar.container";
+import IndexWrapperContainer from "./IndexContent/indexWrapper.container";
 class IndexPage extends Component {
    constructor(props) {
       super(props);
@@ -36,55 +36,19 @@ class IndexPage extends Component {
       return (
          <div id="page-top">
             {/* Page Wrapper */}
-            <IndexParentContainer />
+            <div id="wrapper">
+               {/* Sidebar */}
+               <SideBarContainer />
+               {/* End of Sidebar */}
+               {/* Content Wrapper */}
+               <IndexWrapperContainer />
+               {/* End of Content Wrapper */}
+            </div>
             {/* End of Page Wrapper */}
             {/* Scroll to Top Button*/}
             <a className="scroll-to-top rounded" href="#page-top">
                <i className="fas fa-angle-up" />
             </a>
-            {/* Logout Modal*/}
-            <div
-               className="modal fade"
-               id="logoutModal"
-               tabIndex={-1}
-               role="dialog"
-               aria-labelledby="exampleModalLabel"
-               aria-hidden="true"
-            >
-               <div className="modal-dialog" role="document">
-                  <div className="modal-content">
-                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">
-                           Ready to Leave?
-                        </h5>
-                        <button
-                           className="close"
-                           type="button"
-                           data-dismiss="modal"
-                           aria-label="Close"
-                        >
-                           <span aria-hidden="true">×</span>
-                        </button>
-                     </div>
-                     <div className="modal-body">
-                        Select "Logout" below if you are ready to end your
-                        current session.
-                     </div>
-                     <div className="modal-footer">
-                        <button
-                           className="btn btn-secondary"
-                           type="button"
-                           data-dismiss="modal"
-                        >
-                           Cancel
-                        </button>
-                        <Link className="btn btn-primary" to="login">
-                           Logout
-                        </Link>
-                     </div>
-                  </div>
-               </div>
-            </div>
          </div>
       );
    }

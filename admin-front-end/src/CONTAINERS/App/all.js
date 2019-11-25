@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import CkEditor from "../Schedule/ScheduleDetailParent/ScheduleDetailContentWrapper/ckEditor.container";
+import CkEditor from "../Schedule/ScheduleDetail/ckEditor.container";
 
 export default class All extends Component {
    render() {

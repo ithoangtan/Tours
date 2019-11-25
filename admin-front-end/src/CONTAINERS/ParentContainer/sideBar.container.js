@@ -35,6 +35,7 @@ export default class SideBarContainer extends Component {
             {/* Nav Item - Pages Collapse Menu */}
             <li className="nav-item">
                <Link
+                  to="#"
                   className="nav-link collapsed"
                   // href=""
                   data-toggle="collapse"
@@ -65,6 +66,7 @@ export default class SideBarContainer extends Component {
             {/* Nav Item - Utilities Collapse Menu */}
             <li className="nav-item">
                <Link
+                  to="#"
                   className="nav-link collapsed"
                   data-toggle="collapse"
                   data-target="#collapseUtilities"
@@ -104,6 +106,7 @@ export default class SideBarContainer extends Component {
             {/* Nav Item - Pages Collapse Menu */}
             <li className="nav-item">
                <Link
+                  to="#"
                   className="nav-link collapsed"
                   data-toggle="collapse"
                   data-target="#collapsePages"

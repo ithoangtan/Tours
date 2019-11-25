@@ -7,7 +7,7 @@ const image = require("../controllers/tourImage.controller");
 //for tour
 router.get("/tour", tour.read);
 router.get("/tours", tour.listAll);
-router.post("/tour", tour.create);
+router.post("/tour", tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
 router.patch("/tour", tour.update);
 router.delete("/tour", tour.delete);
 

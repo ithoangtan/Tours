@@ -1,5 +1,5 @@
 var Tour = require("../models/tour.model");
-
+var Schedule = require("../models/schedule.model");
 //
 //Upload image with multer
 var multer = require("multer");

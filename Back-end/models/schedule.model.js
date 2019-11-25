@@ -2,7 +2,6 @@ var mysql = require("../dbconnection.js");
 
 //Task object constructor
 var Schedule = function(schedule) {
-  this.idSchedule = schedule.idSchedule | 0;
   this.data = schedule.data;
   this.idTour = schedule.idTour;
 };
@@ -19,6 +18,9 @@ Schedule.getAllSchedule = function(result) {
   });
 };
 
+/**
+ * Chủ yếu là gọi khi tạo tour, tour được tạo thì sẽ có một schedule được tạo theo
+ */
 Schedule.createSchedule = function(newSchedule, result) {
   this.data = newSchedule.data;
   this.idTour = newSchedule.idTour;
@@ -32,7 +34,7 @@ Schedule.createSchedule = function(newSchedule, result) {
       if (err) {
         result(err, null);
       } else {
-        result(null, result);
+        result(null, res);
       }
     }
   );
@@ -68,8 +70,8 @@ Schedule.getScheduleByIdTour = function(idTour, result) {
 
 Schedule.updateById = function(updateTour, result) {
   mysql.query(
-    "UPDATE kinhdoanhtourdulich.schedules SET ? WHERE (idSchedule = ?);",
-    [updateTour, updateSchedule.idSchedule],
+    "UPDATE kinhdoanhtourdulich.schedules SET ? WHERE (idTour = ?);",
+    [updateTour, updateSchedule.idTour],
     function(err, res) {
       if (err) {
         result(err, null);
@@ -79,6 +81,9 @@ Schedule.updateById = function(updateTour, result) {
     }
   );
 };
+/**
+ * Do cơ sở dữ liệu là casade nên khi xóa tour, schedule cũng sẽ đi theo
+ */
 Schedule.remove = function(idSchedule, result) {
   mysql.query(
     "DELETE FROM kinhdoanhtourdulich.schedules WHERE idSchedule = ?",
