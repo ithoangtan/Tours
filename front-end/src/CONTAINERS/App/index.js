@@ -31,6 +31,7 @@ class App extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
    }
+
    render() {
       return (
          <Router>
