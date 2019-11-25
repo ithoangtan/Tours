@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as INDEX_CONSTANTS from "../../constants/index.constants";
 import funcLoadJs from "../../constants/loadJs.constants";
+
 export default class ConcactContainer extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);

@@ -24,11 +24,10 @@ class IndexPage extends Component {
    }
 
    componentDidMount() {
+      funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
       const { tourAllActions } = this.props;
       const { fetchListTourRequest } = tourAllActions;
       fetchListTourRequest();
-
-      funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
    }
 
    renderBoard() {
