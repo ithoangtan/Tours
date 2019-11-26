@@ -58,11 +58,11 @@ const router = [
    {
       path: "/tour",
       exact: true,
-      main: () => (
+      main: ({ match }, props) => (
          <div>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <TourPage />
+            <NavigationContainer {...props} />
+            <HeaderBreadcrumbContainer {...props} />
+            <TourPage match={match} {...props} />
          </div>
       )
    },
@@ -78,13 +78,13 @@ const router = [
       )
    },
    {
-      path: "/tour-single",
+      path: "/tour-single/:idTour",
       exact: true,
-      main: () => (
+      main: ({ match }, props) => (
          <div>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <TourSinglePage />
+            <NavigationContainer {...props} />
+            <HeaderBreadcrumbContainer {...props} />
+            <TourSinglePage match={match} {...props} />
          </div>
       )
    },

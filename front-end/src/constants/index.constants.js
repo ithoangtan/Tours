@@ -12,10 +12,12 @@ export const ArrayExternalScript = [
    "/js/jquery.magnific-popup.min.js",
    "/js/aos.js",
    "/js/jquery.animateNumber.min.js",
-   // "/js/bootstrap-datepicker.js",
+   "/js/bootstrap-datepicker.js",
    "/js/scrollax.min.js",
    // "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false",
    // "/js/google-map.js",
-   "/js/main.js"
-   // "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+   "/js/main.js",
+   "/js/ithoangtan.js",
+   "http://cdn.iframe.ly/embed.js"
+   // "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",,
 ];

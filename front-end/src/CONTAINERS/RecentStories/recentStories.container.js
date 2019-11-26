@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 export default class RecentStoriesContainer extends Component {
    render() {
       return (
@@ -13,13 +15,13 @@ export default class RecentStoriesContainer extends Component {
                <div className="row d-flex">
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <a
-                           href="blog-single.html"
+                        <Link
+                           to="#"
                            className="block-20"
                            style={{
                               backgroundImage: 'url("images/image_1.jpg")'
                            }}
-                        ></a>
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -31,22 +33,22 @@ export default class RecentStoriesContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
+                              <Link to="#">
                                  Why Lead Generation is Key for Business Growth
-                              </a>
+                              </Link>
                            </h3>
                         </div>
                      </div>
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <a
-                           href="blog-single.html"
+                        <Link
+                           to="#"
                            className="block-20"
                            style={{
                               backgroundImage: 'url("images/image_2.jpg")'
                            }}
-                        ></a>
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -58,22 +60,22 @@ export default class RecentStoriesContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
+                              <Link to="#">
                                  Why Lead Generation is Key for Business Growth
-                              </a>
+                              </Link>
                            </h3>
                         </div>
                      </div>
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry">
-                        <a
-                           href="blog-single.html"
+                        <Link
+                           to="#"
                            className="block-20"
                            style={{
                               backgroundImage: 'url("images/image_3.jpg")'
                            }}
-                        ></a>
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -85,9 +87,9 @@ export default class RecentStoriesContainer extends Component {
                               </div>
                            </div>
                            <h3 className="heading">
-                              <a href="s">
+                              <Link to="#">
                                  Why Lead Generation is Key for Business Growth
-                              </a>
+                              </Link>
                            </h3>
                         </div>
                      </div>

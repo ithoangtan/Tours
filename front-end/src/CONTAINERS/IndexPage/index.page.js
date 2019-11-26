@@ -31,7 +31,6 @@ class IndexPage extends Component {
    }
 
    renderBoard() {
-      const { listTour } = this.props;
       let xhtml = null;
       return xhtml;
    }

@@ -15,23 +15,17 @@ export default class FooterContainer extends Component {
                         <ul className="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                            <li className="ftco-animate">
                               <Link to="https://github.com/ithoangtan">
-                                 <a href="/">
-                                    <span className="icon-twitter" />
-                                 </a>
+                                 <span className="icon-twitter" />
                               </Link>
                            </li>
                            <li className="ftco-animate">
                               <Link to="https://facebook.com/ithoangtan">
-                                 <a href="/">
-                                    <span className="icon-facebook" />
-                                 </a>
+                                 <span className="icon-facebook" />
                               </Link>
                            </li>
                            <li className="ftco-animate">
                               <Link to="https://github.com/ithoangtan">
-                                 <a href="/">
-                                    <span className="icon-instagram" />
-                                 </a>
+                                 <span className="icon-instagram" />
                               </Link>
                            </li>
                         </ul>
@@ -79,45 +73,33 @@ export default class FooterContainer extends Component {
                         <h2 className="ftco-heading-2">Experience</h2>
                         <ul className="list-unstyled">
                            <li>
-                              <Link to="/">
-                                 <a href="/" className="py-2 d-block">
-                                    Adventure
-                                 </a>
+                              <Link to="#" className="py-2 d-block">
+                                 Adventure
                               </Link>
                            </li>
                            <li>
-                              <Link to="/">
-                                 <a href="/" className="py-2 d-block">
-                                    Hotel and Restaurant
-                                 </a>
+                              <Link to="#" className="py-2 d-block">
+                                 Hotel and Restaurant
                               </Link>
                            </li>
                            <li>
-                              <Link to="/">
-                                 <a href="/" className="py-2 d-block">
-                                    Beach
-                                 </a>
+                              <Link to="#" className="py-2 d-block">
+                                 Beach
                               </Link>
                            </li>
                            <li>
-                              <Link to="/">
-                                 <a href="/" className="py-2 d-block">
-                                    Nature
-                                 </a>
+                              <Link to="#" className="py-2 d-block">
+                                 Nature
                               </Link>
                            </li>
                            <li>
-                              <Link to="/">
-                                 <a href="/" className="py-2 d-block">
-                                    Camping
-                                 </a>
+                              <Link to="#" className="py-2 d-block">
+                                 Camping
                               </Link>
                            </li>
                            <li>
-                              <Link to="/">
-                                 <a href="/" className="py-2 d-block">
-                                    Party
-                                 </a>
+                              <Link to="#" className="py-2 d-block">
+                                 Party
                               </Link>
                            </li>
                         </ul>
@@ -133,18 +115,18 @@ export default class FooterContainer extends Component {
                                  <span className="text">1 Vo Van Ngan VN</span>
                               </li>
                               <li>
-                                 <a href="/">
+                                 <Link to="#">
                                     <span className="icon icon-phone" />
                                     <span className="text">+983 982 933</span>
-                                 </a>
+                                 </Link>
                               </li>
                               <li>
-                                 <a href="/">
+                                 <Link to="#">
                                     <span className="icon icon-envelope" />
                                     <span className="text">
                                        ithoangtan@gmail.com
                                     </span>
-                                 </a>
+                                 </Link>
                               </li>
                            </ul>
                         </div>
