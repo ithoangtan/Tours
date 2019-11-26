@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import * as tourImageActions from "../../../actions/tourImage.actions";
 import { API_ENDPOINT } from "../../../constants/index.constants";
 
-import { Upload, Icon, Modal, message, Button } from "antd";
+import { Upload, Icon, Modal, message } from "antd";
 
 function getBase64(file) {
    return new Promise((resolve, reject) => {
@@ -106,6 +106,7 @@ class TableGallery extends Component {
       return (
          <div>
             <Link
+               className="button btn btn-primary ht-mb-1 ht-float-left"
                type="primary"
                to={{
                   pathname: `/schedule-detail/${record.idTour}`,

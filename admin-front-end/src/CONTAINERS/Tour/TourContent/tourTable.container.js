@@ -461,9 +461,11 @@ class EditableTable extends React.Component {
          }
       };
 
-      let { sortedInfo, filteredInfo } = this.state;
+      let { sortedInfo } = this.state;
+      // let { sortedInfo, filteredInfo } = this.state;
       sortedInfo = sortedInfo || {};
-      filteredInfo = filteredInfo || {};
+      // filteredInfo = filteredInfo || {};
+
       this.columns = [
          {
             title: "ID",

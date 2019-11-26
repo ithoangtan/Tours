@@ -84,3 +84,29 @@
 .ck-editor__editable {
    min-height: 400px !important;
 }
+
+.ht-flex-center-center {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.ht-mb-1 {
+   margin-bottom: 8px;
+}
+
+.ht-float-left {
+   float: left;
+}
+
+.ht-img-tour {
+   width: auto;
+   max-height: 100%;
+   background-attachment: fixed !important;
+   background-size: cover !important;
+   border-radius: 5px !important;
+}
+
+.ht-boder-radius-1 {
+   border-radius: 8px;
+}

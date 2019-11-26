@@ -26,7 +26,8 @@ class EditorContainer extends Component {
          handleWYSIWYGInput: props.handleWYSIWYGInput,
          editor: ClassicEditor,
          scheduleByIdTour: props.scheduleByIdTour,
-         tour: props.tour
+         tour: props.tour,
+         previewsInData: true
       };
    }
 
@@ -85,6 +86,9 @@ class EditorContainer extends Component {
                   tokenUrl:
                      "https://43967.cke-cs.com/token/dev/PLTDrOf3tlrbQxO14HqGZdCdWnqVWTV991y772AEWgYmoonLkUTIHZbiiEa2",
                   uploadUrl: "https://43967.cke-cs.com/easyimage/upload/"
+               },
+               mediaEmbed: {
+                  previewsInData: true
                }
             }}
             // extraPlugins={"easyimage"}
