@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 import parseHtml from "html-react-parser";
 
 import {
@@ -166,7 +168,13 @@ export default class TourSingleContainer extends Component {
                                  icon="caret-left"
                                  size={"large"}
                               >
-                                 MORE TOURS
+                                 <Link
+                                    to={{
+                                       pathname: "/tour"
+                                    }}
+                                 >
+                                    MORE TOURS
+                                 </Link>
                               </Button>
                               <Button
                                  type="primary"
@@ -186,7 +194,7 @@ export default class TourSingleContainer extends Component {
                <br />
                <div className="row justify-content-center pb-1 pt-2 mt-3">
                   <div className="col-md-12 col-lg-8 heading-section ftco-animate">
-                     <div className="row justify-content-center">
+                     <div className="row justify-content-center ftco-animate">
                         <Title level={3}>SCHEDULE DETAILS</Title>
                      </div>
                      <div className="ck-content">
@@ -194,9 +202,11 @@ export default class TourSingleContainer extends Component {
                      </div>
                   </div>
                   <div className="col-md-12 col-lg-4 heading-section ftco-animate">
-                     <Title level={3}>POPULAR TOURS</Title>
-                     <MoreTourSingle />
-                     <MoreTourSingle />
+                     <Title level={3} className="ftco-animate">
+                        POPULAR TOURS
+                     </Title>
+                     <MoreTourSingle className="ftco-animate" />
+                     <MoreTourSingle idImage={1} className="ftco-animate" />
                   </div>
                </div>
             </div>

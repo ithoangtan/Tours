@@ -38,7 +38,14 @@ export default class TourDetailContainer extends Component {
                <div className="row justify-conten-center">
                   <div className="col-md-12 col-lg-4 ftco-animate ht-boder-radius-1">
                      {/* Render Image of Tour */}
-                     <Link to="/tour-single">
+                     <Link
+                        to={{
+                           pathname: `/tour-single/${tour.idTour}`,
+                           state: {
+                              tour: tour
+                           }
+                        }}
+                     >
                         <Carousel autoplay>{this.renderImage()}</Carousel>
                      </Link>
                      {/* end Render Image of Tour */}
