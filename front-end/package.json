@@ -25,7 +25,7 @@
     "resize-observer-polyfill": "^1.5.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "set PORT=9999 && react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"

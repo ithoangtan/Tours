@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 
 class LoginContainer extends Component {
@@ -56,9 +58,9 @@ class LoginContainer extends Component {
                   valuePropName: "checked",
                   initialValue: true
                })(<Checkbox>Remember me</Checkbox>)}
-               <a className="login-form-forgot" href="">
+               <Link className="login-form-forgot" to="/forgot-password">
                   Forgot password
-               </a>
+               </Link>
                <Button
                   type="primary"
                   htmlType="submit"
@@ -66,7 +68,7 @@ class LoginContainer extends Component {
                >
                   Log in
                </Button>
-               Or <a href="">register now!</a>
+               Or <Link to="/register">register now!</Link>
             </Form.Item>
          </Form>
       );

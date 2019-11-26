@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 import * as INDEX_CONSTANTS from "../../constants/index.constants";
 import funcLoadJs from "../../constants/loadJs.constants";
 
@@ -29,7 +31,7 @@ export default class BlogSingleContainer extends Component {
                      <p>
                         <img
                            src="images/image_6.jpg"
-                           alt=""
+                           alt="#"
                            className="img-fluid"
                         />
                      </p>
@@ -58,7 +60,7 @@ export default class BlogSingleContainer extends Component {
                      <p>
                         <img
                            src="images/image_4.jpg"
-                           alt=""
+                           alt="#"
                            className="img-fluid"
                         />
                      </p>
@@ -102,25 +104,25 @@ export default class BlogSingleContainer extends Component {
                      </p>
                      <div className="tag-widget post-tag-container mb-5 mt-5">
                         <div className="tagcloud">
-                           <a href="#" className="tag-cloud-link">
+                           <Link to="#" className="tag-cloud-link">
                               Life
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               Sport
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               Tech
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               Travel
-                           </a>
+                           </Link>
                         </div>
                      </div>
                      <div className="about-author d-flex p-4 bg-light">
                         <div className="bio mr-5">
                            <img
                               src="images/person_1.jpg"
-                              alt="Image placeholder"
+                              alt="#"
                               className="img-fluid mb-4"
                            />
                         </div>
@@ -141,10 +143,7 @@ export default class BlogSingleContainer extends Component {
                         <ul className="comment-list">
                            <li className="comment">
                               <div className="vcard bio">
-                                 <img
-                                    src="images/person_1.jpg"
-                                    alt="Image placeholder"
-                                 />
+                                 <img src="images/person_1.jpg" alt="#" />
                               </div>
                               <div className="comment-body">
                                  <h3>John Doe</h3>
@@ -160,18 +159,15 @@ export default class BlogSingleContainer extends Component {
                                     necessitatibus, nihil?
                                  </p>
                                  <p>
-                                    <a href="#" className="reply">
+                                    <Link to="#" className="reply">
                                        Reply
-                                    </a>
+                                    </Link>
                                  </p>
                               </div>
                            </li>
                            <li className="comment">
                               <div className="vcard bio">
-                                 <img
-                                    src="images/person_1.jpg"
-                                    alt="Image placeholder"
-                                 />
+                                 <img src="images/person_1.jpg" alt="#" />
                               </div>
                               <div className="comment-body">
                                  <h3>John Doe</h3>
@@ -187,18 +183,15 @@ export default class BlogSingleContainer extends Component {
                                     necessitatibus, nihil?
                                  </p>
                                  <p>
-                                    <a href="#" className="reply">
+                                    <Link to="#" className="reply">
                                        Reply
-                                    </a>
+                                    </Link>
                                  </p>
                               </div>
                               <ul className="children">
                                  <li className="comment">
                                     <div className="vcard bio">
-                                       <img
-                                          src="images/person_1.jpg"
-                                          alt="Image placeholder"
-                                       />
+                                       <img src="images/person_1.jpg" alt="#" />
                                     </div>
                                     <div className="comment-body">
                                        <h3>John Doe</h3>
@@ -215,9 +208,9 @@ export default class BlogSingleContainer extends Component {
                                           necessitatibus, nihil?
                                        </p>
                                        <p>
-                                          <a href="#" className="reply">
+                                          <Link to="#" className="reply">
                                              Reply
-                                          </a>
+                                          </Link>
                                        </p>
                                     </div>
                                     <ul className="children">
@@ -225,7 +218,7 @@ export default class BlogSingleContainer extends Component {
                                           <div className="vcard bio">
                                              <img
                                                 src="images/person_1.jpg"
-                                                alt="Image placeholder"
+                                                alt="#"
                                              />
                                           </div>
                                           <div className="comment-body">
@@ -244,9 +237,9 @@ export default class BlogSingleContainer extends Component {
                                                 necessitatibus, nihil?
                                              </p>
                                              <p>
-                                                <a href="#" className="reply">
+                                                <Link to="#" className="reply">
                                                    Reply
-                                                </a>
+                                                </Link>
                                              </p>
                                           </div>
                                           <ul className="children">
@@ -254,7 +247,7 @@ export default class BlogSingleContainer extends Component {
                                                 <div className="vcard bio">
                                                    <img
                                                       src="images/person_1.jpg"
-                                                      alt="Image placeholder"
+                                                      alt="#"
                                                    />
                                                 </div>
                                                 <div className="comment-body">
@@ -275,12 +268,12 @@ export default class BlogSingleContainer extends Component {
                                                       necessitatibus, nihil?
                                                    </p>
                                                    <p>
-                                                      <a
-                                                         href="#"
+                                                      <Link
+                                                         to="#"
                                                          className="reply"
                                                       >
                                                          Reply
-                                                      </a>
+                                                      </Link>
                                                    </p>
                                                 </div>
                                              </li>
@@ -292,10 +285,7 @@ export default class BlogSingleContainer extends Component {
                            </li>
                            <li className="comment">
                               <div className="vcard bio">
-                                 <img
-                                    src="images/person_1.jpg"
-                                    alt="Image placeholder"
-                                 />
+                                 <img src="images/person_1.jpg" alt="#" />
                               </div>
                               <div className="comment-body">
                                  <h3>John Doe</h3>
@@ -311,9 +301,9 @@ export default class BlogSingleContainer extends Component {
                                     necessitatibus, nihil?
                                  </p>
                                  <p>
-                                    <a href="#" className="reply">
+                                    <Link to="#" className="reply">
                                        Reply
-                                    </a>
+                                    </Link>
                                  </p>
                               </div>
                            </li>
@@ -386,41 +376,41 @@ export default class BlogSingleContainer extends Component {
                         <div className="categories">
                            <h3>Categories</h3>
                            <li>
-                              <a href="#">
+                              <Link to="#">
                                  Travel <span>(12)</span>
-                              </a>
+                              </Link>
                            </li>
                            <li>
-                              <a href="#">
+                              <Link to="#">
                                  Tour <span>(22)</span>
-                              </a>
+                              </Link>
                            </li>
                            <li>
-                              <a href="#">
+                              <Link to="#">
                                  Destination <span>(37)</span>
-                              </a>
+                              </Link>
                            </li>
                            <li>
-                              <a href="#">
+                              <Link to="#">
                                  Drinks <span>(42)</span>
-                              </a>
+                              </Link>
                            </li>
                            <li>
-                              <a href="#">
+                              <Link to="#">
                                  Foods <span>(14)</span>
-                              </a>
+                              </Link>
                            </li>
                            <li>
-                              <a href="#">
+                              <Link to="#">
                                  Travel <span>(140)</span>
-                              </a>
+                              </Link>
                            </li>
                         </div>
                      </div>
                      <div className="sidebar-box ftco-animate">
                         <h3>Recent Blog</h3>
                         <div className="block-21 mb-4 d-flex">
-                           <a
+                           <Link
                               className="blog-img mr-4"
                               style={{
                                  backgroundImage: "url(images/image_1.jpg)"
@@ -428,33 +418,33 @@ export default class BlogSingleContainer extends Component {
                            />
                            <div className="text">
                               <h3 className="heading">
-                                 <a href="#">
+                                 <Link to="#">
                                     Even the all-powerful Pointing has no
                                     control about the blind texts
-                                 </a>
+                                 </Link>
                               </h3>
                               <div className="meta">
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-calendar" />{" "}
                                        February 12, 2019
-                                    </a>
+                                    </Link>
                                  </div>
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-person" /> Admin
-                                    </a>
+                                    </Link>
                                  </div>
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-chat" /> 19
-                                    </a>
+                                    </Link>
                                  </div>
                               </div>
                            </div>
                         </div>
                         <div className="block-21 mb-4 d-flex">
-                           <a
+                           <Link
                               className="blog-img mr-4"
                               style={{
                                  backgroundImage: "url(images/image_2.jpg)"
@@ -462,33 +452,33 @@ export default class BlogSingleContainer extends Component {
                            />
                            <div className="text">
                               <h3 className="heading">
-                                 <a href="#">
+                                 <Link to="#">
                                     Even the all-powerful Pointing has no
                                     control about the blind texts
-                                 </a>
+                                 </Link>
                               </h3>
                               <div className="meta">
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-calendar" />{" "}
                                        February 12, 2019
-                                    </a>
+                                    </Link>
                                  </div>
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-person" /> Admin
-                                    </a>
+                                    </Link>
                                  </div>
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-chat" /> 19
-                                    </a>
+                                    </Link>
                                  </div>
                               </div>
                            </div>
                         </div>
                         <div className="block-21 mb-4 d-flex">
-                           <a
+                           <Link
                               className="blog-img mr-4"
                               style={{
                                  backgroundImage: "url(images/image_3.jpg)"
@@ -496,27 +486,27 @@ export default class BlogSingleContainer extends Component {
                            />
                            <div className="text">
                               <h3 className="heading">
-                                 <a href="#">
+                                 <Link to="#">
                                     Even the all-powerful Pointing has no
                                     control about the blind texts
-                                 </a>
+                                 </Link>
                               </h3>
                               <div className="meta">
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-calendar" />{" "}
                                        February 12, 2019
-                                    </a>
+                                    </Link>
                                  </div>
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-person" /> Admin
-                                    </a>
+                                    </Link>
                                  </div>
                                  <div>
-                                    <a href="#">
+                                    <Link to="#">
                                        <span className="icon-chat" /> 19
-                                    </a>
+                                    </Link>
                                  </div>
                               </div>
                            </div>
@@ -525,30 +515,30 @@ export default class BlogSingleContainer extends Component {
                      <div className="sidebar-box ftco-animate">
                         <h3>Tag Cloud</h3>
                         <div className="tagcloud">
-                           <a href="#" className="tag-cloud-link">
+                           <Link to="#" className="tag-cloud-link">
                               dish
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               menu
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               food
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               sweet
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               tasty
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               delicious
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               desserts
-                           </a>
-                           <a href="#" className="tag-cloud-link">
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
                               drinks
-                           </a>
+                           </Link>
                         </div>
                      </div>
                      <div className="sidebar-box ftco-animate">

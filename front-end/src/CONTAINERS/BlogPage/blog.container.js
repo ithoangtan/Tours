@@ -16,15 +16,13 @@ export default class BlogContainer extends Component {
                <div className="row d-flex">
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <Link to="blog-single">
-                           <a
-                              href="blog-single.html"
-                              className="block-20"
-                              style={{
-                                 backgroundImage: 'url("images/image_1.jpg")'
-                              }}
-                           ></a>
-                        </Link>
+                        <Link
+                           to="/blog-single"
+                           className="block-20"
+                           style={{
+                              backgroundImage: 'url("images/image_1.jpg")'
+                           }}
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -37,10 +35,7 @@ export default class BlogContainer extends Component {
                            </div>
                            <h3 className="heading">
                               <Link to="blog-single">
-                                 <a href="/">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </a>
+                                 Why Lead Generation is Key for Business Growth
                               </Link>
                            </h3>
                            <p>
@@ -52,15 +47,13 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <Link to="blog-single">
-                           <a
-                              href="blog-single.html"
-                              className="block-20"
-                              style={{
-                                 backgroundImage: 'url("images/image_2.jpg")'
-                              }}
-                           ></a>
-                        </Link>
+                        <Link
+                           to="/blog-single"
+                           className="block-20"
+                           style={{
+                              backgroundImage: 'url("images/image_2.jpg")'
+                           }}
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -73,10 +66,7 @@ export default class BlogContainer extends Component {
                            </div>
                            <h3 className="heading">
                               <Link to="blog-single">
-                                 <a href="/">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </a>
+                                 Why Lead Generation is Key for Business Growth
                               </Link>
                            </h3>
                            <p>
@@ -88,15 +78,13 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry">
-                        <Link to="blog-single">
-                           <a
-                              href="blog-single.html"
-                              className="block-20"
-                              style={{
-                                 backgroundImage: 'url("images/image_3.jpg")'
-                              }}
-                           ></a>
-                        </Link>
+                        <Link
+                           to="blog-single"
+                           className="block-20"
+                           style={{
+                              backgroundImage: 'url("images/image_3.jpg")'
+                           }}
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -109,10 +97,7 @@ export default class BlogContainer extends Component {
                            </div>
                            <h3 className="heading">
                               <Link to="blog-single">
-                                 <a href="/">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </a>
+                                 Why Lead Generation is Key for Business Growth
                               </Link>
                            </h3>
                            <p>
@@ -124,15 +109,13 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <Link to="blog-single">
-                           <a
-                              href="blog-single.html"
-                              className="block-20"
-                              style={{
-                                 backgroundImage: 'url("images/image_4.jpg")'
-                              }}
-                           ></a>
-                        </Link>
+                        <Link
+                           to="blog-single"
+                           className="block-20"
+                           style={{
+                              backgroundImage: 'url("images/image_4.jpg")'
+                           }}
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -145,10 +128,7 @@ export default class BlogContainer extends Component {
                            </div>
                            <h3 className="heading">
                               <Link to="blog-single">
-                                 <a href="/">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </a>
+                                 Why Lead Generation is Key for Business Growth
                               </Link>
                            </h3>
                            <p>
@@ -160,15 +140,13 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry justify-content-end">
-                        <Link to="blog-single">
-                           <a
-                              href="blog-single.html"
-                              className="block-20"
-                              style={{
-                                 backgroundImage: 'url("images/image_5.jpg")'
-                              }}
-                           ></a>
-                        </Link>
+                        <Link
+                           to="blog-single"
+                           className="block-20"
+                           style={{
+                              backgroundImage: 'url("images/image_5.jpg")'
+                           }}
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -181,10 +159,7 @@ export default class BlogContainer extends Component {
                            </div>
                            <h3 className="heading">
                               <Link to="blog-single">
-                                 <a href="/">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </a>
+                                 Why Lead Generation is Key for Business Growth
                               </Link>
                            </h3>
                            <p>
@@ -196,15 +171,13 @@ export default class BlogContainer extends Component {
                   </div>
                   <div className="col-md-4 d-flex ftco-animate">
                      <div className="blog-entry">
-                        <Link to="blog-single">
-                           <a
-                              href="blog-single.html"
-                              className="block-20"
-                              style={{
-                                 backgroundImage: 'url("images/image_6.jpg")'
-                              }}
-                           ></a>
-                        </Link>
+                        <Link
+                           to="blog-single"
+                           className="block-20"
+                           style={{
+                              backgroundImage: 'url("images/image_6.jpg")'
+                           }}
+                        ></Link>
                         <div className="text mt-3 float-right d-block">
                            <div className="d-flex align-items-center pt-2 mb-4 topp">
                               <div className="one">
@@ -217,10 +190,7 @@ export default class BlogContainer extends Component {
                            </div>
                            <h3 className="heading">
                               <Link to="blog-single">
-                                 <a href="/">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </a>
+                                 Why Lead Generation is Key for Business Growth
                               </Link>
                            </h3>
                            <p>
@@ -236,25 +206,25 @@ export default class BlogContainer extends Component {
                      <div className="block-27">
                         <ul>
                            <li>
-                              <a href="/">&lt;</a>
+                              <Link to="#">&lt;</Link>
                            </li>
                            <li className="active">
                               <span>1</span>
                            </li>
                            <li>
-                              <a href="/">2</a>
+                              <Link to="#">2</Link>
                            </li>
                            <li>
-                              <a href="/">3</a>
+                              <Link to="#">3</Link>
                            </li>
                            <li>
-                              <a href="/">4</a>
+                              <Link to="#">4</Link>
                            </li>
                            <li>
-                              <a href="/">5</a>
+                              <Link to="#">5</Link>
                            </li>
                            <li>
-                              <a href="/">&gt;</a>
+                              <Link to="#">&gt;</Link>
                            </li>
                         </ul>
                      </div>

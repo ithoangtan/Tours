@@ -27,11 +27,9 @@ export default class Navigation extends Component {
             id="ftco-navbar"
          >
             <div className="container">
-               <a className="navbar-brand" href="index.html">
-                  <Link to="/">
-                     <span>Traveland</span>
-                  </Link>
-               </a>
+               <Link to="/" className="navbar-brand">
+                  <span>Traveland</span>
+               </Link>
 
                <button
                   className="navbar-toggler"
@@ -48,36 +46,34 @@ export default class Navigation extends Component {
                   <ul className="navbar-nav ml-auto">
                      <li className="nav-item active">
                         <Link to="/" className="nav-link">
-                           <a href="index.html">Home</a>
+                           Home
                         </Link>
                      </li>
                      <li className="nav-item">
                         <Link to="/about" className="nav-link">
-                           <a href="about.html">About</a>
+                           About
                         </Link>
                      </li>
                      <li className="nav-item">
                         <Link to="/destination" className="nav-link">
-                           <a href="destination.html">Destination</a>
+                           Destination
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <a className="nav-link">
-                           <Dropdown overlay={menu}>
-                              <Link to="/">
-                                 Tours <Icon type="down" />
-                              </Link>
-                           </Dropdown>
-                        </a>
+                        <Dropdown overlay={menu} className="nav-link">
+                           <Link to="/">
+                              Tours <Icon type="down" />
+                           </Link>
+                        </Dropdown>
                      </li>
                      <li className="nav-item">
-                        <Link to="blog" className="nav-link">
-                           <a href="blog.html">Blog</a>
+                        <Link to="/blog" className="nav-link">
+                           Blog
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link to="contact" className="nav-link">
-                           <a href="contact.html">Contact</a>
+                        <Link to="/contact" className="nav-link">
+                           Contact
                         </Link>
                      </li>
                      <li className="nav-item" style={{ alignSelf: "center" }}>

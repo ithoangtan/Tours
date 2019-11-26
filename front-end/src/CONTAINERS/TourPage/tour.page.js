@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as tourActions from "../../actions/tour.actions";
 
 import * as INDEX_CONSTANTS from "../../constants/index.constants";
 import funcLoadJs from "../../constants/loadJs.constants";
 
-import { Typography, Rate, Checkbox, Carousel, Tag, Button } from "antd";
+import TourDetailContainer from "./tourDetail.container";
 
-const { Text, Title, Paragraph } = Typography;
+import { Typography, Rate, Checkbox } from "antd";
+
+const { Title } = Typography;
 
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
@@ -23,13 +29,18 @@ const plainOptions = [
 ];
 const defaultCheckedList = ["Apple"];
 
-export default class TourContainer extends Component {
-   state = {
-      value: 1,
-      checkedList: defaultCheckedList,
-      indeterminate: true,
-      checkAll: false
-   };
+class TourContainer extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         value: 1,
+         checkedList: defaultCheckedList,
+         indeterminate: true,
+         checkAll: false,
+         haveData: false,
+         listTour: {}
+      };
+   }
 
    handleChange = value => {
       this.setState({ value });
@@ -53,8 +64,47 @@ export default class TourContainer extends Component {
    };
 
    componentDidMount() {
+      const { tourAllActions } = this.props;
+      const {
+         fetchListTourRequest,
+         fetchListTourImageRequest
+      } = tourAllActions;
+
+      fetchListTourRequest();
+      fetchListTourImageRequest();
+
       funcLoadJs(INDEX_CONSTANTS.ArrayExternalScript);
+
+      const { listTour } = this.props;
+      this.setState({ listTour, haveData: true });
    }
+
+   renderTours() {
+      let result = null;
+      const { listTour, listImageTour } = this.props;
+
+      if (this.state.haveData === true) {
+         result = listTour.map((tour, index) => {
+            return (
+               <TourDetailContainer
+                  {...this.props}
+                  tour={tour}
+                  key={index}
+                  listImageTour={listImageTour.filter(
+                     imageTour => imageTour.idTour === tour.idTour
+                  )}
+               />
+            );
+         });
+      } else {
+         result = <div>Không có dữ liệu</div>;
+      }
+
+      //Ở đây truyền fulloption dữ liệu vào
+      //Gọi api, fetch,...... ở container này hết
+      return result;
+   }
+
    render() {
       const { value } = this.state;
       return (
@@ -84,7 +134,7 @@ export default class TourContainer extends Component {
                            )}
                         </span>
                      </div>
-                     <div className="">
+                     <div className="ht-filter-tour">
                         <Title level={4}>Price per day</Title>
                         <div>
                            <div
@@ -111,88 +161,9 @@ export default class TourContainer extends Component {
                      </div>
                   </div>
                   <div className="col-md-12 col-lg-9 ftco-animate right-tour-page">
-                     <div className="right-tour-detail-page mt-5">
-                        <div className="tour-content">
-                           <div className="row justify-conten-center">
-                              <div className="col-md-12 col-lg-4 ftco-animate">
-                                 <Link to="/tour-single">
-                                    <Carousel autoplay>
-                                       <div>
-                                          <img
-                                             alt="notFound"
-                                             src="./images/tour-1.jpg"
-                                             className="img-tour"
-                                          />
-                                       </div>
-                                       <div>
-                                          <img
-                                             alt="notFound"
-                                             src="./images/tour-2.jpg"
-                                             className="img-tour"
-                                          />
-                                       </div>
-                                       <div>
-                                          <img
-                                             alt="notFound"
-                                             src="./images/tour-3.jpg"
-                                             className="img-tour"
-                                          />
-                                       </div>
-                                       <div>
-                                          <img
-                                             alt="notFound"
-                                             src="./images/tour-4.jpg"
-                                             className="img-tour"
-                                          />
-                                       </div>
-                                    </Carousel>
-                                 </Link>
-                              </div>
-                              <div className="col-md-12 col-lg-5 ftco-animate">
-                                 <Link to="tour-single">
-                                    <Title level={4}>
-                                       Name toursasdl alskdja sd
-                                    </Title>
-                                 </Link>
-                                 <Rate disabled defaultValue={2} />
-                                 <br />
-                                 <Paragraph className="mt-1" ellipsis>
-                                    Dont know write anythingDont know write
-                                    anythingDont know write anythingDont know
-                                    write anythingDont know write anythingDont
-                                    know write anything
-                                 </Paragraph>
-                                 <div className="mt-2">
-                                    <Tag color="#f50">
-                                       Khuyễn mãi miễn phí 50% luôn á nè
-                                    </Tag>
-                                 </div>
-                                 <div className="mt-2">
-                                    <Button type="dashed">More</Button>
-                                 </div>
-                              </div>
-                              <div className="col-md-12 col-lg-3 ftco-animate right-detail-tour">
-                                 <div className="mt-2">
-                                    <Tag color="#87d068">
-                                       Nhiều người đi nhất
-                                    </Tag>
-                                 </div>
-                                 <div className="mt-1">
-                                    <Text>(233) Reviews</Text>
-                                 </div>
-                                 <div className="mt-1 text-price-tour-detail">
-                                    $140
-                                 </div>
-                                 <div className="mt-1">
-                                    <Text delete>$70</Text>
-                                 </div>
-                                 <div>
-                                    <Button type="primary">BOOK NOW</Button>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                     {/* Rendder TOURS */}
+                     {this.renderTours()}
+                     {/* end Render Tours */}
                   </div>
                </div>
             </div>
@@ -200,3 +171,29 @@ export default class TourContainer extends Component {
       );
    }
 }
+TourContainer.propTypes = {
+   classes: PropTypes.object,
+   tourAllActions: PropTypes.shape({
+      fetchListTourRequest: PropTypes.func,
+      fetchPostTourRequest: PropTypes.func,
+      fetchDeleteTourRequest: PropTypes.func,
+      fetchPatchTourRequest: PropTypes.func,
+      fetchListTourImageRequest: PropTypes.func
+   }),
+   listTour: PropTypes.array,
+   listImageTour: PropTypes.array
+};
+
+const mapStateToProps = state => {
+   return {
+      listTour: state.tour.listTour,
+      listImageTour: state.tour.listImageTour
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      tourAllActions: bindActionCreators(tourActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TourContainer);
