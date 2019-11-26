@@ -5,7 +5,7 @@ TLCN - CNPM - demo TLCN CNPM Khóa 2016-2020
 ### Tech
 
 -  [ReactJS] - HTML enhanced for web apps!
--  [Ace-Editor] - awesome web-based text editor
+-  [CkEditor] - awesome web-based text editor
 -  [markdown-it] - Markdown parser done right. Fast and easy to extend.
 -  [Ant-Design] - great UI boilerplate for modern web apps
 -  [node.js] - evented I/O for the backend
@@ -24,7 +24,7 @@ For back-end...
 $ cd back-end
 $ npm install -d
 $ nodemon index.js
-...port 8080
+...port 8000
 ```
 
 For front-end...
@@ -33,8 +33,18 @@ For front-end...
 $ cd front-end
 $ npm install -d
 $ npm start
-...port 3000
+...port 9999
 ```
+
+For admin-front-end...
+
+```sh
+$ cd admin-front-end
+$ npm install -d
+$ npm start
+...port 9000
+```
+
 
 ### Todos
 
