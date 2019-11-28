@@ -19,7 +19,16 @@ if (process.env.NODE_ENV === "production") {
     cors({ origin: "http://frontend-dev22.us-west-2.elasticbeanstalk.com" })
   );
 } else {
-  app.use(cors({ origin: "http://localhost:9000" }));
+  app.use(
+    cors({
+      origin: [
+        "http://localhost:9000",
+        "http://localhost:3000",
+        "http://localhost:9999"
+      ],
+      default: "http://localhost:9000"
+    })
+  );
 }
 
 app.use("/", require("./routes/api"));

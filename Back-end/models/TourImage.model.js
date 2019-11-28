@@ -49,7 +49,15 @@ Image.remove = function(idImage, name, fncResult) {
           if (err) {
             console.log(err);
           }
+          var path2 = `../front-end/public/img/${name}`;
+          path2 = path2.replace(" ", "");
+          fs.unlink(path2, err => {
+            if (err) {
+              console.log(err);
+            }
+          });
         });
+
         fncResult(null, res);
       }
     }

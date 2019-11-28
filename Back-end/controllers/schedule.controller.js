@@ -16,14 +16,14 @@ exports.create = function(req, res) {
 };
 
 exports.read = function(req, res) {
-  if (req.query.idSchedule) {
+  if (req.query.idSchedule !== null && req.query.idSchedule !== undefined) {
     //Get follow idSchedule
     Schedule.getScheduleById(req.query.idSchedule, function(err, schedule) {
       if (err) res.send(err);
       res.json(schedule[0]); //Đã là API thì trả về phải chuẩn
       //Chỉ có một phần tử thì không lý do gì phải res về một mảng
     });
-  } else if (req.query.idTour) {
+  } else if (req.query.idTour !== null && req.query.idTour !== undefined) {
     //Get follow idTour
     Schedule.getScheduleByIdTour(req.query.idTour, function(err, schedule) {
       if (err) res.send(err);

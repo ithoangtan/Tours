@@ -1,0 +1,112 @@
+.react-resizable {
+   position: relative;
+   background-clip: padding-box;
+}
+
+.react-resizable-handle {
+   position: absolute;
+   width: 10px;
+   height: 100%;
+   bottom: 0;
+   right: -5px;
+   cursor: col-resize;
+   z-index: 1;
+}
+
+.editable-cell {
+   position: relative;
+}
+
+.editable-cell-value-wrap {
+   padding: 5px 12px;
+   cursor: pointer;
+}
+
+.editable-row:hover .editable-cell-value-wrap {
+   border: 1px solid #d9d9d9;
+   border-radius: 4px;
+   padding: 4px 11px;
+}
+
+.editable-row .ant-form-explain {
+   position: absolute;
+   font-size: 12px;
+   margin-top: -4px;
+}
+
+.ant-form-new-tour {
+   background: #fbfbfb;
+   border: 1px solid #d9d9d9;
+   border-radius: 6px;
+   margin: 10px 0px !important;
+   padding: 30px 10px 10px !important;
+}
+
+.ant-form-new-tour .ant-form-item {
+   display: flex;
+}
+
+.ant-form-new-tour .ant-form-item-control-wrapper {
+   flex: 1;
+}
+
+.notice-load-data {
+   color: rgb(44, 44, 44) !important;
+}
+
+.ht-style-editor {
+   margin: 10px;
+   padding: 10px;
+}
+
+.ht-style-card {
+   margin: 10px;
+   padding: 10px;
+}
+
+.ht-card-title-schedule {
+   margin: 10px 20px 5px 20px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.ht-describe-wrapper {
+   margin: 2px 20px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.ht-button-save-schedule {
+   margin: 2px 20px;
+}
+
+.ck-editor__editable {
+   min-height: 400px !important;
+}
+
+.ht-flex-center-center {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.ht-mb-1 {
+   margin-bottom: 8px;
+}
+
+.ht-float-left {
+   float: left;
+}
+
+.ht-img-tour {
+   width: auto;
+   max-height: 100%;
+   background-attachment: fixed !important;
+   background-size: cover !important;
+   border-radius: 5px !important;
+}
+
+.ht-boder-radius-1 {
+   border-radius: 8px;
+}
