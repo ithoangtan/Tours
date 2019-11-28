@@ -58,10 +58,6 @@ class TourSinglePage extends Component {
 
    render() {
       const { tourById, listImageByIdTour, scheduleByIdTour } = this.props;
-      console.log(tourById);
-      console.log(listImageByIdTour);
-      console.log(scheduleByIdTour); //not loaded
-
       return (
          <TourSingleContainer
             tourById={tourById}

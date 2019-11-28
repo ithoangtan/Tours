@@ -72,8 +72,8 @@ export default class DestinationContainer extends Component {
                                                 <span className="ion-ios-arrow-down" />
                                              </div>
                                              <select
-                                                name
-                                                id
+                                                name="price"
+                                                id="select-price"
                                                 className="form-control"
                                              >
                                                 <option value>$100</option>

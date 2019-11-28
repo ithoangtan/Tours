@@ -7,7 +7,7 @@ var dateNow = Date.now();
 
 var Storage = multer.diskStorage({
   destination: function(req, file, callback) {
-    callback(null, "../admin-front-end/public/img");
+    callback(null, "../front-end/public/img");
   },
   filename: function(req, file, callback) {
     nameFile = dateNow + "_" + file.originalname;
@@ -17,19 +17,6 @@ var Storage = multer.diskStorage({
 
 var upload = multer({
   storage: Storage
-}).array("imgUploader", 3); //Field name and max count
-
-var Storage2 = multer.diskStorage({
-  destination: function(req, file, callback) {
-    callback(null, "../front-end/public/img");
-  },
-  filename: function(req, file, callback) {
-    nameFile = dateNow + "_" + file.originalname;
-    callback(null, nameFile);
-  }
-});
-var upload2 = multer({
-  storage: Storage2
 }).array("imgUploader", 3); //Field name and max count
 
 exports.create = function(req, res) {
@@ -44,10 +31,8 @@ exports.create = function(req, res) {
       });
     }
   });
-  upload2(req, res, function(err) {
-    if (err) return res.send(err);
-  });
 };
+
 exports.upload = function(req, res) {
   upload(req, res, function(err) {
     if (err) {

@@ -339,7 +339,7 @@ export default class BlogSingleContainer extends Component {
                               <div className="form-group">
                                  <label htmlFor="message">Message</label>
                                  <textarea
-                                    name
+                                    name="message"
                                     id="message"
                                     cols={30}
                                     rows={10}
@@ -411,6 +411,7 @@ export default class BlogSingleContainer extends Component {
                         <h3>Recent Blog</h3>
                         <div className="block-21 mb-4 d-flex">
                            <Link
+                              to="#"
                               className="blog-img mr-4"
                               style={{
                                  backgroundImage: "url(images/image_1.jpg)"
@@ -445,6 +446,7 @@ export default class BlogSingleContainer extends Component {
                         </div>
                         <div className="block-21 mb-4 d-flex">
                            <Link
+                              to="#"
                               className="blog-img mr-4"
                               style={{
                                  backgroundImage: "url(images/image_2.jpg)"
@@ -479,6 +481,7 @@ export default class BlogSingleContainer extends Component {
                         </div>
                         <div className="block-21 mb-4 d-flex">
                            <Link
+                              to="#"
                               className="blog-img mr-4"
                               style={{
                                  backgroundImage: "url(images/image_3.jpg)"
