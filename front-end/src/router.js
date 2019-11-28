@@ -1,194 +1,284 @@
 import React from "react";
-import Result403 from "./CONTAINERS/ResultBoard/Result403";
-import Result404 from "./CONTAINERS/ResultBoard/Result404";
-import Result500 from "./CONTAINERS/ResultBoard/Result500";
-import ResultDone from "./CONTAINERS/ResultBoard/ResultDone";
-import ResultProcessing from "./CONTAINERS/ResultBoard/ResultProcessing";
-import ResultSubmissionFailed from "./CONTAINERS/ResultBoard/ResultSubmissionFailed";
-import ResultSuccessful from "./CONTAINERS/ResultBoard/ResultSuccessful";
-import ResultWarning from "./CONTAINERS/ResultBoard/ResultWarning";
-import NavigationContainer from "./CONTAINERS/Header/navigation.container.";
-import HeaderBreadcrumbContainer from "./CONTAINERS/Header/headerBreadcrumb.container";
+import Result403 from "./ResultBoardPage/Result403";
+import Result404 from "./ResultBoardPage/Result404";
+import Result500 from "./ResultBoardPage/Result500";
+import ResultDone from "./ResultBoardPage/ResultDone";
+import ResultProcessing from "./ResultBoardPage/ResultProcessing";
+import ResultSubmissionFailed from "./ResultBoardPage/ResultSubmissionFailed";
+import ResultSuccessful from "./ResultBoardPage/ResultSuccessful";
+import ResultWarning from "./ResultBoardPage/ResultWarning";
+import NavigationContainer from "./_components/Header/navigation.container";
+import HeaderBreadcrumbContainer from "./_components/Header/headerBreadcrumb.container";
 
-import IndexPage from "./CONTAINERS/IndexPage/index.page";
-import AboutPage from "./CONTAINERS/AboutPage/about.container";
-import BlogPage from "./CONTAINERS/BlogPage/blog.container";
-import BlogSinglePage from "./CONTAINERS/BlogSinglePage/blogSingle.container";
-import ContactPage from "./CONTAINERS/ContactPage/concact.container";
-import DestinationPage from "./CONTAINERS/DestinationPage/destination.container";
-import TourSinglePage from "./CONTAINERS/TourSinglePage/tourSingle.page";
-import TourBestPage from "./CONTAINERS/TourPage/tourBest.page";
-import TourPage from "./CONTAINERS/TourPage/tour.page";
-import LoginPage from "./CONTAINERS/PageLoginAndRegister/login.page";
-import RegisterPage from "./CONTAINERS/PageLoginAndRegister/register.page";
+import IndexPage from "./IndexPage/index.page";
+import AboutPage from "./AboutPage/about.container";
+import BlogPage from "./BlogPage/blog.container";
+import BlogSinglePage from "./BlogSinglePage/blogSingle.container";
+import ContactPage from "./ContactPage/concact.container";
+import DestinationPage from "./DestinationPage/destination.container";
+import TourSinglePage from "./TourSinglePage/tourSingle.page";
+import TourBestPage from "./TourPage/tourBest.page";
+import TourPage from "./TourPage/tour.page";
+import LoginPage from "./LoginAndRegisterPage/login.page";
+import RegisterPage from "./LoginAndRegisterPage/register.page";
+//common Customer
+import SubcribeContainer from "./_components/Footer/subcribe.container";
+import FooterContainer from "./_components/Footer/footer.container";
+import Loaded from "./App/loaded";
+import BackToTop from "./App/backTop";
 
-import All from "./CONTAINERS/App/all";
+//Admin
+import AdminIndexPage from "./AdminIndex/Index.Page";
+import AdminForgotPasswordPage from "./AdminForgotPassword/ForgotPassword.Page";
+import AdminLoginPage from "./AdminLogin/Login.Page";
+import AdminRegisterPage from "./AdminRegister/RegisterPage.Page";
+import AdminTourPage from "./AdminTour/Tour.Page";
+import AdminScheduleDetailPage from "./AdminSchedule/ScheduleDetail.Page";
+//end Admin
 
 const router = [
+   //for customer
    {
       path: "/",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <IndexPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/login",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <LoginPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/register",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <RegisterPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/tour",
       exact: true,
-      main: ({ match }, props) => (
+      component: ({ match }, props) => (
          <div>
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourPage match={match} {...props} />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/tour-best",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <TourBestPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/tour-single/:idTour",
       exact: true,
-      main: ({ match }, props) => (
+      component: ({ match }, props) => (
          <div>
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourSinglePage match={match} {...props} />
+            <SubcribeContainer />
+            <FooterContainer />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/about",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <AboutPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/contact",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <ContactPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/destination",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <DestinationPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/blog",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <BlogPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
          </div>
       )
    },
    {
       path: "/blog-single",
       exact: true,
-      main: () => (
+      component: () => (
          <div>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <BlogSinglePage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <BackToTop />
          </div>
       )
    },
+   //end for customer
+
+   //for admin
    {
-      path: "/all",
+      path: "/admin/",
       exact: true,
-      main: () => <All />
+      component: ({ match }, props) => (
+         <AdminIndexPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/tour",
+      exact: true,
+      component: ({ match }, props) => (
+         <AdminTourPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/schedule-detail/:idTour",
+      exact: true,
+      component: ({ match }, props) => (
+         <AdminScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/forgot-password",
+      exact: true,
+      component: ({ match }) => <AdminForgotPasswordPage match={match} />
+   },
+   {
+      path: "/admin/login",
+      exact: true,
+      component: ({ match }) => <AdminLoginPage match={match} />
+   },
+   {
+      path: "/admin/register",
+      exact: true,
+      component: ({ match }) => <AdminRegisterPage match={match} />
    },
 
+   //for  commons
    {
       path: "/notAuthorized",
       exact: true,
-      main: () => <Result403 />
+      component: () => <Result403 />
    },
 
    {
       path: "/serverIsWrong",
       exact: true,
-      main: () => <Result500 />
+      component: () => <Result500 />
    },
    {
       path: "/doneResult",
       exact: true,
-      main: () => <ResultDone />
+      component: () => <ResultDone />
    },
    {
       path: "/processingResult",
       exact: true,
-      main: () => <ResultProcessing />
+      component: () => <ResultProcessing />
    },
    {
       path: "/complexError",
       exact: true,
-      main: () => <ResultSubmissionFailed />
+      component: () => <ResultSubmissionFailed />
    },
    {
       path: "/successfulResult",
       exact: true,
-      main: () => <ResultSuccessful />
+      component: () => <ResultSuccessful />
    },
    {
       path: "/warningResult",
       exact: true,
-      main: () => <ResultWarning />
+      component: () => <ResultWarning />
    },
    {
       path: "/",
       exact: false,
-      main: () => <Result404 />
+      component: () => <Result404 />
    }
 ];
 export default router;
