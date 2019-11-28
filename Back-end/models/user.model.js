@@ -1,6 +1,6 @@
-var mysql = require("../dbconnection");
+const mysql = require("../dbconnection");
 
-var Account = function(account) {
+const Account = function(account) {
   this.name = account.name;
   this.email = account.email;
   this.phone = account.phone;
@@ -20,8 +20,8 @@ Account.getAlluser = function(result) {
   });
 };
 Account.loginUser = function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.accounts WHERE username = ?",
     [username],

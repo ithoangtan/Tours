@@ -1,7 +1,7 @@
-var mysql = require("../dbconnection.js");
+const mysql = require("../dbconnection.js");
 
 //Task object constructor
-var Schedule = function(schedule) {
+const Schedule = function(schedule) {
   this.data = schedule.data;
   this.idTour = schedule.idTour;
 };

@@ -1,6 +1,11 @@
-var Schedule = require("../models/schedule.model");
+const Schedule = require("../models/schedule.model");
 
 exports.listAll = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Schedule.getAllSchedule(function(err, schedule) {
     if (err) res.send(err);
     res.json(schedule);
@@ -8,6 +13,11 @@ exports.listAll = function(req, res) {
 };
 
 exports.create = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   var newSchedule = new Schedule(req.body);
   Schedule.createSchedule(newSchedule, function(err, schedule) {
     if (err) res.send(err);
@@ -16,6 +26,11 @@ exports.create = function(req, res) {
 };
 
 exports.read = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   if (req.query.idSchedule !== null && req.query.idSchedule !== undefined) {
     //Get follow idSchedule
     Schedule.getScheduleById(req.query.idSchedule, function(err, schedule) {
@@ -33,7 +48,12 @@ exports.read = function(req, res) {
 };
 
 exports.update = function(req, res) {
-  // Phải truyền vào như v kh thì dăn lỗi ...
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+
   updateSchedule = new Schedule(req.body);
   Schedule.updateById(updateSchedule, function(err, schedule) {
     if (err) res.send(err);
@@ -42,6 +62,11 @@ exports.update = function(req, res) {
 };
 
 exports.delete = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Schedule.remove(req.query.idSchedule, function(err, idSchedule) {
     if (err) res.send(err);
     res.send(idSchedule);

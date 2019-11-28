@@ -1,5 +1,8 @@
 var mysql = require("mysql");
 
+//Tạm thời sẽ dùng callback cho các controller image, schedule, tour
+//Các controller khác ta sẽ dùng mysql with Promise code trong file dbconnectMySql.js
+
 const config = {
   host: "localhost",
   user: "root",
