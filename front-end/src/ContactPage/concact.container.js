@@ -89,8 +89,8 @@ export default class ConcactContainer extends Component {
                            </div>
                            <div className="form-group">
                               <textarea
-                                 name
-                                 id
+                                 name="message"
+                                 id="message"
                                  cols={30}
                                  rows={7}
                                  className="form-control"
