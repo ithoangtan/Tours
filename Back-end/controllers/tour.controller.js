@@ -1,10 +1,10 @@
-var Tour = require("../models/tour.model");
-var Schedule = require("../models/schedule.model");
-//
 //Upload image with multer
-var multer = require("multer");
-var nameFile;
-var Storage = multer.diskStorage({
+const multer = require("multer");
+
+const Tour = require("../models/tour.model");
+
+let nameFile;
+let Storage = multer.diskStorage({
   destination: function(req, file, callback) {
     callback(null, "../admin-front-end/public/img");
   },
@@ -14,11 +14,16 @@ var Storage = multer.diskStorage({
   }
 });
 
-var upload = multer({
+let upload = multer({
   storage: Storage
 }).array("imgUploader", 3); //Field name and max count
 
 exports.postImg = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   upload(req, res, function(err) {
     if (err) {
       return res.send(err);
@@ -32,6 +37,11 @@ exports.postImg = function(req, res) {
 };
 
 exports.listAll = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Tour.getAllTour(function(err, tour) {
     if (err) res.send(err);
     res.json(tour);
@@ -39,7 +49,12 @@ exports.listAll = function(req, res) {
 };
 
 exports.create = function(req, res) {
-  var newTour = new Tour(req.body);
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  let newTour = new Tour(req.body);
   Tour.createTour(newTour, function(err, tour) {
     if (err) res.send(err);
     res.json(tour);
@@ -47,6 +62,11 @@ exports.create = function(req, res) {
 };
 
 exports.read = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Tour.getTourById(req.query.idTour, function(err, tour) {
     if (err) res.send(err);
     res.json(tour[0]); //Đã là API thì trả về phải chuẩn
@@ -55,6 +75,11 @@ exports.read = function(req, res) {
 };
 
 exports.update = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   // Phải truyền vào như v kh thì dăn lỗi ...
   updateTour = new Tour(req.body);
   Tour.updateById(updateTour, function(err, tour) {
@@ -64,6 +89,11 @@ exports.update = function(req, res) {
 };
 
 exports.delete = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Tour.remove(req.query.idTour, function(err, idTour) {
     if (err) res.send(err);
     res.send(idTour);

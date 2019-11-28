@@ -1,11 +1,12 @@
-var Image = require("../models/tourImage.model");
-
 //Upload image with multer
-var multer = require("multer");
-var nameFile;
-var dateNow = Date.now();
+const multer = require("multer");
 
-var Storage = multer.diskStorage({
+const Image = require("../models/tourImage.model");
+
+let nameFile = "";
+let dateNow = Date.now();
+
+let Storage = multer.diskStorage({
   destination: function(req, file, callback) {
     callback(null, "../front-end/public/img");
   },
@@ -15,11 +16,16 @@ var Storage = multer.diskStorage({
   }
 });
 
-var upload = multer({
+let upload = multer({
   storage: Storage
 }).array("imgUploader", 3); //Field name and max count
 
 exports.create = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   dateNow = Date.now();
   upload(req, res, function(err) {
     if (err) {
@@ -27,13 +33,22 @@ exports.create = function(req, res) {
     } else {
       Image.createImageTour(req.query.idTour, nameFile, function(err, resp) {
         if (err) res.send(err);
-        else res.send({ idTour: req.query.idTour, nameFile: nameFile });
+        else
+          res.send({
+            idTour: req.query.idTour,
+            nameFile: nameFile
+          });
       });
     }
   });
 };
 
 exports.upload = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   upload(req, res, function(err) {
     if (err) {
       return res.send(err);
@@ -42,6 +57,11 @@ exports.upload = function(req, res) {
 };
 
 exports.listAllImageTour = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Image.getAllImageTour(function(err, tourImage) {
     if (err) res.send(err);
     res.json(tourImage);
@@ -49,6 +69,11 @@ exports.listAllImageTour = function(req, res) {
 };
 
 exports.listAllImageTourById = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Image.getAllImageTourById(req.query.idTour, function(err, tourImage) {
     if (err) res.send(err);
     res.json(tourImage);
@@ -56,6 +81,11 @@ exports.listAllImageTourById = function(req, res) {
 };
 
 exports.delete = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Image.remove(req.query.idImage, req.query.name, function(err, idImage) {
     if (err) res.send(err);
     res.send(idImage);

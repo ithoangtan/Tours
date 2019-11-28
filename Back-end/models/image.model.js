@@ -1,13 +1,10 @@
-var mysql = require("../dbconnection.js");
+const mysql = require("../dbconnection.js");
+const fs = require("fs");
 
-var fs = require("fs");
-
-//Task object constructor
-var Image = function(image) {
+const Image = function(image) {
   this.idImage = image.idImage | 0;
   this.link = image.link;
-  this.dateAdded = image.dateAdded.slice(0, 10).replace(/-/g, "/");
-  //Chúng ta cần format date lại khi đưa xuống CSDL;
+  this.dateAdded = image.dateAdded.slice(0, 10).replace(/-/g, "/"); //format date YYYY-MM-DD
   this.status = image.status;
   this.name = image.name;
   this.idTour = image.idTour;
