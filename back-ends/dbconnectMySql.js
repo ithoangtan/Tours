@@ -2,7 +2,7 @@ const mysql = require("mysql");
 
 //Ở đây ta nên dùng Promise thay vì
 //  sync\await(ES7)(bản chất của thằng này -> Promise)
-//  để tránh làm mất đi tính song song
+//  chúng ta có thể sử dụng nó cho dự án tiếp theo(cần một lời khuyên từ dev back-end nào đó)
 
 class Database {
   constructor(config) {

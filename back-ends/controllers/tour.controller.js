@@ -16,14 +16,14 @@ let Storage = multer.diskStorage({
 
 let upload = multer({
   storage: Storage
-}).array("imgUploader", 3); //Field name and max count
+}).array("imgUploader", 8); //Field name and max count
 
 exports.postImg = function(req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
-  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   upload(req, res, function(err) {
     if (err) {
       return res.send(err);
@@ -41,7 +41,7 @@ exports.listAll = function(req, res) {
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
-  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   Tour.getAllTour(function(err, tour) {
     if (err) res.send(err);
     res.json(tour);
@@ -53,7 +53,7 @@ exports.create = function(req, res) {
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
-  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   let newTour = new Tour(req.body);
   Tour.createTour(newTour, function(err, tour) {
     if (err) res.send(err);
@@ -66,7 +66,7 @@ exports.read = function(req, res) {
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
-  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   Tour.getTourById(req.query.idTour, function(err, tour) {
     if (err) res.send(err);
     res.json(tour[0]); //Đã là API thì trả về phải chuẩn
@@ -79,7 +79,7 @@ exports.update = function(req, res) {
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
-  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   // Phải truyền vào như v kh thì dăn lỗi ...
   updateTour = new Tour(req.body);
   Tour.updateById(updateTour, function(err, tour) {
@@ -93,7 +93,7 @@ exports.delete = function(req, res) {
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
-  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   Tour.remove(req.query.idTour, function(err, idTour) {
     if (err) res.send(err);
     res.send(idTour);
