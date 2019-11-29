@@ -1,7 +1,7 @@
 //Upload image with multer
 const multer = require("multer");
 
-const Image = require("../models/tourImage.model");
+const Image = require("../models/image.model");
 
 let nameFile = "";
 let dateNow = Date.now();
