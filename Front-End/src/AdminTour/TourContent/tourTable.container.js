@@ -190,7 +190,7 @@ class EditableTable extends React.Component {
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = async newTour => {
+   handleAdd = newTour => {
       const { count, data } = this.state;
       const newData = {
          idTour:
@@ -213,7 +213,7 @@ class EditableTable extends React.Component {
       //Gọi API create dưới CSDL
       const { tourAllActions } = this.props;
       const { fetchPostTourRequest } = tourAllActions;
-      await fetchPostTourRequest(newData);
+      fetchPostTourRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
