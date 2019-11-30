@@ -97,11 +97,20 @@ export const toastScheduleGetByIdSuccess = data => {
    }
 };
 
-
 //FOR IMAGES
 export const toastListImageGetByIdTourSuccess = data => {
    if (data !== null && data !== "") {
       toast(`ID: ${data.idTour} got!`, {
+         position: toast.POSITION.BOTTOM_RIGHT,
+         className: "notice-load-data"
+      });
+   }
+};
+
+//FOR LOGIN
+export const toastLoginSuccess = data => {
+   if (data !== null && data !== "") {
+      toast(`$Welcome ${data.name} come back!!!`, {
          position: toast.POSITION.BOTTOM_RIGHT,
          className: "notice-load-data"
       });

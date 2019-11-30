@@ -1,15 +1,66 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import * as authActions from "../../_actions/auth.actions";
+
+import { Form, Icon, Input, Button, Checkbox, Radio } from "antd";
 
 class LoginContainer extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         email: "",
+         password: "",
+         redirect: false
+      };
+   }
+
+   componentWillMount() {
+      const name = sessionStorage.getItem("name");
+      console.log(name);
+      if (name !== "" && name !== undefined && name !== null) {
+         this.setState({
+            redirect: true
+         });
+      }
+   }
+
+   componentWillUpdate(nextProps) {
+      if (
+         nextProps.auth.role !== "" &&
+         nextProps.auth.role !== undefined &&
+         nextProps.auth.role !== null
+      ) {
+         this.setState({
+            redirect: true
+         });
+      }
+   }
+
+   haveRedirect() {
+      if (this.state.redirect === true) {
+         this.setState({ redirect: false });
+         return <Redirect to="/" {...this.props} />;
+      }
+   }
+
    handleSubmit = e => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
          if (!err) {
             console.log("Received values of form: ", values);
+
+            const { authAllActions } = this.props;
+            const { fetchLoginRequest } = authAllActions;
+            fetchLoginRequest(values);
+         } else {
+            throw err;
          }
       });
    };
@@ -18,30 +69,33 @@ class LoginContainer extends Component {
       const { getFieldDecorator } = this.props.form;
       return (
          <Form onSubmit={this.handleSubmit} className="login-form">
+            {this.haveRedirect()}
             <Form.Item>
-               {getFieldDecorator("username", {
+               {getFieldDecorator("email", {
                   rules: [
-                     { required: true, message: "Please input your username!" }
+                     { required: true, message: "Please input your email!" }
                   ]
                })(
                   <Input
+                     name="email"
                      prefix={
                         <Icon
-                           type="user"
+                           type="mail"
                            style={{ color: "rgba(0,0,0,.25)" }}
                         />
                      }
-                     placeholder="Username"
+                     placeholder="Email"
                   />
                )}
             </Form.Item>
             <Form.Item>
                {getFieldDecorator("password", {
                   rules: [
-                     { required: true, message: "Please input your Password!" }
+                     { required: true, message: "Please input your password!" }
                   ]
                })(
                   <Input
+                     name="password"
                      prefix={
                         <Icon
                            type="lock"
@@ -50,7 +104,29 @@ class LoginContainer extends Component {
                      }
                      type="password"
                      placeholder="Password"
+                     onChange={this.onChange}
                   />
+               )}
+            </Form.Item>
+            <Form.Item>
+               {getFieldDecorator("role", {
+                  valuePropName: "radio",
+                  initialValue: true
+               })(
+                  <Radio.Group
+                     defaultValue="user"
+                     buttonStyle="solid"
+                     className="role"
+                  >
+                     <Radio.Button value="role" disabled>
+                        Roles:{" "}
+                     </Radio.Button>
+                     <Radio.Button value="user">User</Radio.Button>
+                     <Radio.Button value="admin">Admin</Radio.Button>
+                     <Radio.Button value="administrator">
+                        Administrator
+                     </Radio.Button>
+                  </Radio.Group>
                )}
             </Form.Item>
             <Form.Item>
@@ -79,4 +155,26 @@ const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(
    LoginContainer
 );
 
-export default WrappedNormalLoginForm;
+WrappedNormalLoginForm.propTypes = {
+   classes: PropTypes.object,
+   authAllActions: PropTypes.shape({
+      fetchLoginRequest: PropTypes.func
+   }),
+   auth: PropTypes.object
+};
+
+const mapStateToProps = state => {
+   return {
+      auth: state.auth.auth
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      authAllActions: bindActionCreators(authActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   };
+};
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(WrappedNormalLoginForm);

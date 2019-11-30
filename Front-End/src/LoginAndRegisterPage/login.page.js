@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
+
 import LoginContainer from "../_components/Login/login.container";
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
@@ -21,3 +22,5 @@ export default class LoginPage extends Component {
       );
    }
 }
+
+export default LoginPage;

@@ -44,9 +44,10 @@ exports.login = (req, res, next) => {
   Accounts.getByEmail(email)
     .then(account => {
       if (!account) {
-        const error = new Error("User with this email could not found!!!");
-        error.statusCode = 401;
-        res.status(500).json(error);
+        const error = new Error();
+        error.statusCode = 200;
+        error.message = "User with this email could not found!!!";
+        res.status(200).json(error);
         throw error;
       }
       loadAccount = account;
@@ -54,9 +55,10 @@ exports.login = (req, res, next) => {
     })
     .then(isEqual => {
       if (!isEqual) {
-        const error = new Error("Wrong password!");
-        error.statusCode = 401;
-        res.status(500).json(error);
+        const error = new Error();
+        error.statusCode = 200;
+        error.message = "Wrong password!";
+        res.status(200).json(error);
         throw error;
       }
       const token = jwt.sign(
@@ -67,10 +69,23 @@ exports.login = (req, res, next) => {
         },
         "ithoangtansecurity"
       );
-      res.status(200).json({
-        token: token,
-        name: loadAccount.name
-      });
+
+      let options = {
+        maxAge: 60 * 60 * 24, // would expire after 24h
+        httpOnly: true, // The cookie only accessible by the web server
+        signed: true // Indicates if the cookie should be signed
+      };
+
+      // no: set a new cookie
+      res
+        .cookie("token", token, options) // options is optional
+        .json({
+          token: token,
+          name: loadAccount.name,
+          role: loadAccount.role,
+          avatar: loadAccount.avatar
+        })
+        .status(200);
     })
     .catch(err => {
       if (!err.statusCode) {
@@ -94,10 +109,8 @@ exports.loginByFacebook = async (req, res, next) => {
         name: name,
         email: email
       });
-      const newAccount = await Accounts.create(account);
+      await Accounts.create(account);
       const loadAccount = await Accounts.getByIdFaceboook(idFacebook);
-      console.log(loadAccount);
-
       const token = jwt.sign(
         {
           idAccount: loadAccount.idAccount,
@@ -125,7 +138,9 @@ exports.loginByFacebook = async (req, res, next) => {
 
       res.status(200).json({
         token: token,
-        name: account.name
+        name: account.name,
+        role: account.role,
+        avartar: account.avartar
       });
     }
   } catch (error) {
@@ -165,8 +180,9 @@ exports.loginByGoogle = async (req, res, next) => {
       );
       res.status(200).json({
         token: token,
-        idAccount: loadAccount.idAccount,
-        name: loadAccount.name
+        name: account.name,
+        role: account.role,
+        avartar: account.avartar
       });
     } else {
       const token = jwt.sign(
