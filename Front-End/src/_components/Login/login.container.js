@@ -17,13 +17,13 @@ class LoginContainer extends Component {
       this.state = {
          email: "",
          password: "",
-         redirect: false
+         redirect: false,
+         role: ""
       };
    }
 
    componentWillMount() {
       const name = sessionStorage.getItem("name");
-      console.log(name);
       if (name !== "" && name !== undefined && name !== null) {
          this.setState({
             redirect: true
@@ -38,15 +38,21 @@ class LoginContainer extends Component {
          nextProps.auth.role !== null
       ) {
          this.setState({
-            redirect: true
+            redirect: true,
+            role: nextProps.auth.role
          });
       }
    }
 
    haveRedirect() {
-      if (this.state.redirect === true) {
+      const { redirect, role } = this.state;
+      if (redirect === true) {
          this.setState({ redirect: false });
-         return <Redirect to="/" {...this.props} />;
+         return role === "user" ? (
+            <Redirect to="/" />
+         ) : (
+            <Redirect to="/admin" />
+         );
       }
    }
 

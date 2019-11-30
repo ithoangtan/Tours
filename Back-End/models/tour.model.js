@@ -11,6 +11,7 @@ const Tour = function(tour) {
   this.describe = tour.describe;
   this.address = tour.address;
   this.vocationTime = tour.vocationTime;
+  this.idAccount = tour.idAccount;
 };
 Tour.getAllTour = function(result) {
   mysql.query("SELECT * FROM kinhdoanhtourdulich.tours ;", function(err, res) {
@@ -30,8 +31,9 @@ Tour.createTour = function(newTour, result) {
   this.describe = newTour.describe;
   this.address = newTour.address;
   this.vocationTime = newTour.vocationTime;
+  this.idAccount = newTour.idAccount;
   mysql.query(
-    "INSERT INTO kinhdoanhtourdulich.tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`) VALUES ('" +
+    "INSERT INTO kinhdoanhtourdulich.tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`, `idAccount`) VALUES ('" +
       this.titleTour +
       "', '" +
       this.price +
@@ -45,6 +47,8 @@ Tour.createTour = function(newTour, result) {
       this.address +
       "', '" +
       this.vocationTime +
+      "', '" +
+      this.idAccount +
       "') ",
     function(err, res) {
       if (err) {

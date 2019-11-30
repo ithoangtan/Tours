@@ -6,6 +6,8 @@ import { Link, Redirect } from "react-router-dom";
 
 import { Menu, Dropdown, Icon, Button, Avatar, Badge, Tooltip } from "antd";
 
+import { getSignCookie } from "../../_commons/auth.service";
+
 const menu = (
    <Menu>
       <Menu.Item key="0">
@@ -30,39 +32,43 @@ export default class Navigation extends Component {
    }
 
    menuAvartar() {
+      const role = getSignCookie("role").role.role;
       return (
          <Menu>
             <Menu.Item>
-               <Link
-                  className="mr-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  to="#"
-               >
+               <Link className="mr-2" rel="noopener noreferrer" to="#">
                   <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-600" />
                   Profile
                </Link>
             </Menu.Item>
             <Menu.Item>
-               <Link
-                  className="mr-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  to="#"
-               >
+               <Link className="mr-2" rel="noopener noreferrer" to="#">
                   <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-600" />
                   Settings
                </Link>
             </Menu.Item>
             <Menu.Item>
-               <Link
-                  className="mr-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  to="#"
-               >
+               <Link className="mr-2" rel="noopener noreferrer" to="#">
                   <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-600" />
                   Activity Log
+               </Link>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item
+               disabled={
+                  role === "admin" || role === "administrator" ? false : true
+               }
+            >
+               <Link
+                  className="mr-2"
+                  rel="noopener noreferrer"
+                  to="/admin"
+                  disabled={
+                     role === "admin" || role === "administrator" ? false : true
+                  }
+               >
+                  <i className="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-600" />
+                  Tour Manage (Admin)
                </Link>
             </Menu.Item>
             <Menu.Divider />

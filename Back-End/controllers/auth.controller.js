@@ -39,14 +39,15 @@ exports.register = (req, res, next) => {
 exports.login = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  const role = req.body.role;
   let loadAccount;
 
-  Accounts.getByEmail(email)
+  Accounts.getByEmailAndRole(email, role)
     .then(account => {
       if (!account) {
         const error = new Error();
         error.statusCode = 200;
-        error.message = "User with this email could not found!!!";
+        error.message = "User of this email could not found!!!";
         res.status(200).json(error);
         throw error;
       }

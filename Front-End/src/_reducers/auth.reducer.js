@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 
+import { setSignCookie, getSignCookie } from "../_commons/auth.service";
 import * as authConstants from "../_constants/auth.module";
 import { toastError } from "../_helper/toastify.helper";
 import {
@@ -20,9 +21,6 @@ const reducer = (state = initialState, action) => {
       case authConstants.FETCH_AUTH_SUCCESS: {
          const { data } = action.payload;
          //data chứa token và một số thứ khác: idAccount, role
-         // toastLoginSuccess(data);
-         console.log(data);
-
          if (data.name === null || data.name === undefined || data.name === "")
             messageErrorLogin(`Opps!!, ${data.message}`, 2);
          else
@@ -33,7 +31,11 @@ const reducer = (state = initialState, action) => {
                3
             );
          //Lưu cookie token
-         Cookies.set("token", data.token);
+         Cookies.set("token", data.token, { expires: 7 });
+         setSignCookie("role", getSignCookie("role"), {
+            expires: 7
+         });
+
          //Save info user:
          sessionStorage.setItem("avatar", data.avatar);
          sessionStorage.setItem("name", data.name);

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
+import { Tooltip } from "antd";
+
 export default class SideBarContainer extends Component {
    render() {
       return (
@@ -10,23 +12,30 @@ export default class SideBarContainer extends Component {
             id="accordionSidebar"
          >
             {/* Sidebar - Brand */}
-            <Link
-               to="/admin/"
-               className="sidebar-brand d-flex align-items-center justify-content-center"
-            >
-               <div className="sidebar-brand-icon rotate-n-15">
-                  <i className="fas fa-laugh-wink" />
-               </div>
-               <div className="sidebar-brand-text mx-3">SB Admin</div>
-            </Link>
+            <Tooltip placement="right" title={"Go to user MODE"}>
+               <Link
+                  to="/"
+                  className="sidebar-brand d-flex align-items-center justify-content-center"
+               >
+                  <div className="sidebar-brand-icon rotate-n-15">
+                     <i className="fas fa-laugh-wink" />
+                  </div>
+                  <div className="sidebar-brand-text mx-3">SB Admin</div>
+               </Link>
+            </Tooltip>
+
             {/* Divider */}
             <hr className="sidebar-divider my-0" />
             {/* Nav Item - Dashboard */}
+
             <li className="nav-item active">
-               <Link to="/admin/" className="nav-link">
-                  <i className="fas fa-fw fa-tachometer-alt" />
-                  <span>Dashboard</span>
-               </Link>
+               {" "}
+               <Tooltip placement="right" title={"Go to Report and analytics"}>
+                  <Link to="/admin/" className="nav-link">
+                     <i className="fas fa-fw fa-tachometer-alt" />
+                     <span>Dashboard</span>
+                  </Link>
+               </Tooltip>
             </li>
             {/* Divider */}
             <hr className="sidebar-divider" />

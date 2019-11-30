@@ -1,6 +1,6 @@
 import axiosService from "../_commons/axios.service";
 import { API_ENDPOINT } from "../_constants/index.constants";
-
+import Cookies from "js-cookie";
 const url = "tour";
 const urls = "tours";
 
@@ -42,8 +42,14 @@ export const uploadImageTour = (file, idTour) => {
       { body: file },
       {
          headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            Authentication: getCookie("token")
          }
       }
    );
 };
+
+function getCookie(name) {
+   const token = Cookies.get(name);
+   return token;
+}

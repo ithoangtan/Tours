@@ -1,5 +1,4 @@
 import * as imageApis from "../_apis/image.api";
-import * as tourApis from "../_apis/tour.api";
 import * as imageConstants from "../_constants/image.module";
 import * as tourConstants from "../_constants/tour.module";
 
@@ -67,7 +66,7 @@ export const fetchDeleteTourImageError = error => {
 
 export const fetchDeleteTourImageRequest = file => {
    return dispatch => {
-      tourApis
+      imageApis
          .deleteImageTour(file.idImage, file.name)
          .then(resp => {
             const { data } = resp;
