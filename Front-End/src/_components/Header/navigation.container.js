@@ -32,7 +32,9 @@ export default class Navigation extends Component {
    }
 
    menuAvartar() {
-      const role = getSignCookie("role").role.role;
+      const role = getSignCookie("role");
+      console.log(role);
+
       return (
          <Menu>
             <Menu.Item>
@@ -56,7 +58,9 @@ export default class Navigation extends Component {
             <Menu.Divider />
             <Menu.Item
                disabled={
-                  role === "admin" || role === "administrator" ? false : true
+                  role.role === "admin" || role.role === "administrator"
+                     ? false
+                     : true
                }
             >
                <Link
@@ -64,7 +68,9 @@ export default class Navigation extends Component {
                   rel="noopener noreferrer"
                   to="/admin"
                   disabled={
-                     role === "admin" || role === "administrator" ? false : true
+                     role.role === "admin" || role.role === "administrator"
+                        ? false
+                        : true
                   }
                >
                   <i className="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-600" />
@@ -74,6 +80,7 @@ export default class Navigation extends Component {
             <Menu.Divider />
             <Menu.Item>
                <Link
+                  to="#"
                   className="mr-2"
                   rel="noopener noreferrer"
                   onClick={this.logout}
@@ -125,6 +132,7 @@ export default class Navigation extends Component {
       //Xóa session, xóa cookie, redirect về trang login
       sessionStorage.clear();
       Cookies.remove("token");
+      Cookies.remove("role");
       this.setState({ logout: true });
    };
 

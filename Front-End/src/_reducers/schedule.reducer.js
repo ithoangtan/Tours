@@ -1,11 +1,9 @@
 import * as scheduleConstants from "../_constants/schedule.module";
 import {
    toastError,
-   toastScheduleSuccess,
    toastPatchScheduleSuccess,
    toastDeleteScheduleSuccess,
    toastCreateScheduleSuccess,
-   toastScheduleGetByIdTourSuccess
 } from "../_helper/toastify.helper";
 const initialState = {
    listSchedule: [],
@@ -24,7 +22,7 @@ const reducer = (state = initialState, action) => {
          };
       case scheduleConstants.FETCH_SCHEDULE_SUCCESS: {
          const { data } = action.payload;
-         toastScheduleSuccess(data);
+         // toastScheduleSuccess(data);
          return {
             ...state,
             listSchedule: data
@@ -42,7 +40,7 @@ const reducer = (state = initialState, action) => {
       //Schedule Get By Id Tour
       case scheduleConstants.FETCH_SCHEDULE_GET_BYID_TOUR_SUCCESS: {
          const { data } = action.payload;
-         toastScheduleGetByIdTourSuccess(data);
+         // toastScheduleGetByIdTourSuccess(data);
          return {
             ...state,
             scheduleByIdTour: data

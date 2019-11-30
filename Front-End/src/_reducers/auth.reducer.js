@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-import { setSignCookie, getSignCookie } from "../_commons/auth.service";
+import { setSignCookie, getParamTokenWithName } from "../_commons/auth.service";
 import * as authConstants from "../_constants/auth.module";
 import { toastError } from "../_helper/toastify.helper";
 import {
@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
             );
          //Lưu cookie token
          Cookies.set("token", data.token, { expires: 7 });
-         setSignCookie("role", getSignCookie("role"), {
+         setSignCookie("role", getParamTokenWithName("role"), {
             expires: 7
          });
 

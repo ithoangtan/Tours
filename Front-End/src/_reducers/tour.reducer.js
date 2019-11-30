@@ -1,11 +1,10 @@
 import * as tourConstants from "../_constants/tour.module";
 import {
    toastError,
-   toastSuccess,
+   // toastSuccess,
    toastPatchSuccess,
    toastDeleteSuccess,
-   toastCreateSuccess,
-   toastGetByIdSuccess
+   toastCreateSuccess
 } from "../_helper/toastify.helper";
 const initialState = {
    listTour: [],
@@ -25,7 +24,7 @@ const reducer = (state = initialState, action) => {
          };
       case tourConstants.FETCH_TOUR_SUCCESS: {
          const { data } = action.payload;
-         toastSuccess(data);
+         // toastSuccess(data);
          return {
             ...state,
             listTour: data
@@ -43,7 +42,7 @@ const reducer = (state = initialState, action) => {
       //Get Schedule By  Id Tour
       case tourConstants.FETCH_TOUR_GET_BYID_SUCCESS: {
          const { data } = action.payload;
-         toastGetByIdSuccess(data);
+         // toastGetByIdSuccess(data);
          return {
             ...state,
             tourById: data
@@ -123,7 +122,7 @@ const reducer = (state = initialState, action) => {
          };
       case tourConstants.FETCH_TOUR_IMAGE_SUCCESS: {
          const { data } = action.payload;
-         toastSuccess(data);
+         // toastSuccess(data);
          return {
             ...state,
             listImageTour: data

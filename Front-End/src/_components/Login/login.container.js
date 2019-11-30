@@ -60,8 +60,6 @@ class LoginContainer extends Component {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
          if (!err) {
-            console.log("Received values of form: ", values);
-
             const { authAllActions } = this.props;
             const { fetchLoginRequest } = authAllActions;
             fetchLoginRequest(values);

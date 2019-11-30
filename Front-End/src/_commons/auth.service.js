@@ -11,13 +11,17 @@ import * as authContants from "../_constants/auth.module";
 export const getParamTokenWithName = nameParam => {
    const token = Cookies.get("token");
    let decodedToken = {};
-   try {
-      decodedToken = jwt.verify(token, authContants.ENCRYPTCODE);
-   } catch (err) {
-      throw err;
-   }
-   if (!decodedToken) {
-      return null;
+   if (token) {
+      try {
+         decodedToken = jwt.verify(token, authContants.ENCRYPTCODE);
+      } catch (err) {
+         throw err;
+      }
+      if (!decodedToken) {
+         return null;
+      }
+   } else {
+      return "";
    }
    if (nameParam === "role") return decodedToken.role;
    if (nameParam === "idAccount") return decodedToken.idAccount;
@@ -34,13 +38,20 @@ export const setSignCookie = (nameCookie, value, config) => {
    //sign
    let cookieSign = "";
    try {
-      cookieSign = jwt.sign({ [nameCookie]: value }, authContants.ENCRYPTCODE);
+      cookieSign = jwt.sign(
+         {
+            [nameCookie]: value
+         },
+         authContants.ENCRYPTCODE
+      );
    } catch (err) {
       throw err;
    }
 
+   //Xóa trước khi lưu không thì toy
+   Cookies.remove(nameCookie);
    //set cookies
-   Cookies.set([nameCookie], cookieSign, config);
+   Cookies.set(nameCookie, cookieSign, config);
 };
 
 /**

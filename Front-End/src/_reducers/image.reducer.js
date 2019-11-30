@@ -2,7 +2,6 @@ import * as imageConstants from "../_constants/image.module";
 import * as tourConstants from "../_constants/tour.module";
 import {
    toastError,
-   toastListImageGetByIdTourSuccess,
    toastDeleteImageSuccess
 } from "../_helper/toastify.helper";
 const initialState = {
@@ -16,7 +15,7 @@ const reducer = (state = initialState, action) => {
       //Load List Image ById Tour
       case imageConstants.FETCH_IMAGE_GET_BYID_TOUR_SUCCESS: {
          const { data } = action.payload;
-         toastListImageGetByIdTourSuccess(data);
+         // toastListImageGetByIdTourSuccess(data);
          return {
             ...state,
             listImageByIdTour: data
