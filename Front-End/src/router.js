@@ -30,8 +30,6 @@ import BackToTop from "./App/backTop";
 //Admin
 import AdminIndexPage from "./AdminIndex/Index.Page";
 import AdminForgotPasswordPage from "./AdminForgotPassword/ForgotPassword.Page";
-import AdminLoginPage from "./AdminLogin/Login.Page";
-import AdminRegisterPage from "./AdminRegister/RegisterPage.Page";
 import AdminTourPage from "./AdminTour/Tour.Page";
 import AdminScheduleDetailPage from "./AdminSchedule/ScheduleDetail.Page";
 //end Admin
@@ -41,10 +39,10 @@ const router = [
    {
       path: "/",
       exact: true,
-      component: () => (
+      component: props => (
          <div>
-            <NavigationContainer />
-            <IndexPage />
+            <NavigationContainer {...props} />
+            <IndexPage {...props} />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
@@ -223,21 +221,10 @@ const router = [
       )
    },
    {
-      path: "/admin/forgot-password",
+      path: "/forgot-password",
       exact: true,
       component: ({ match }) => <AdminForgotPasswordPage match={match} />
    },
-   {
-      path: "/admin/login",
-      exact: true,
-      component: ({ match }) => <AdminLoginPage match={match} />
-   },
-   {
-      path: "/admin/register",
-      exact: true,
-      component: ({ match }) => <AdminRegisterPage match={match} />
-   },
-
    //for  commons
    {
       path: "/notAuthorized",

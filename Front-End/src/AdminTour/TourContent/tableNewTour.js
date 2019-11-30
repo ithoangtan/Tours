@@ -11,6 +11,8 @@ import {
    Select
 } from "antd";
 
+import { getParamTokenWithName } from "../../_commons/auth.service";
+const idAccount = getParamTokenWithName("idAccount");
 const { TextArea } = Input;
 
 class TableNewRow extends Component {
@@ -26,7 +28,8 @@ class TableNewRow extends Component {
          .toJSON()
          .slice(0, 10)
          .replace(/-/g, "-"),
-      describe: ""
+      describe: "",
+      idAccount: idAccount
    };
    // To generate mock Form.Item
    getFields() {
@@ -244,7 +247,9 @@ class TableNewRow extends Component {
       var target = event.target;
       var name = target.name;
       var value = target.value;
-      this.setState({ [name]: value });
+      this.setState({
+         [name]: value
+      });
    };
 
    onChangeDate = (value, dateString) => {
@@ -298,6 +303,7 @@ class TableNewRow extends Component {
          //    "time-picker": fieldsValue["time-picker"].format("HH:mm:ss")
          // };
       });
+
       const { titleTour, describe, address } = this.state;
       if (titleTour !== "" && describe !== "" && address !== "") {
          const { handleAdd, onCancle } = this.props;

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+
+// import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 
-import * as tourActions from "../_actions/tour.actions";
+// import * as tourActions from "../_actions/tour.actions";
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
@@ -26,9 +27,9 @@ class IndexPage extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
 
-      const { tourAllActions } = this.props;
-      const { fetchListTourRequest } = tourAllActions;
-      fetchListTourRequest();
+      // const { tourAllActions } = this.props;
+      // const { fetchListTourRequest } = tourAllActions;
+      // fetchListTourRequest();
    }
 
    renderBoard() {
@@ -57,22 +58,22 @@ class IndexPage extends Component {
 }
 
 IndexPage.propTypes = {
-   classes: PropTypes.object,
-   tourAllActions: PropTypes.shape({
-      fetchListTourRequest: PropTypes.func
-   }),
-   listTour: PropTypes.array
+   // classes: PropTypes.object,
+   // tourAllActions: PropTypes.shape({
+   // fetchListTourRequest: PropTypes.func
+   // }),
+   // listTour: PropTypes.array
 };
 
 const mapStateToProps = state => {
-   return {
-      listTour: state.tour.listTour
-   };
+   // return {
+   // listTour: state.tour.listTour
+   // };
 };
 const mapDispatchToProps = dispatch => {
-   return {
-      tourAllActions: bindActionCreators(tourActions, dispatch)
-      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
-   };
+   // return {
+   // tourAllActions: bindActionCreators(tourActions, dispatch)
+   //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   // };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);

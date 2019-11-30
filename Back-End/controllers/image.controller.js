@@ -8,7 +8,7 @@ let dateNow = Date.now();
 
 let Storage = multer.diskStorage({
   destination: function(req, file, callback) {
-    callback(null, "../front-end/public/img");
+    callback(null, "../Front-End/public/img");
   },
   filename: function(req, file, callback) {
     nameFile = dateNow + "_" + file.originalname;
@@ -88,6 +88,6 @@ exports.delete = function(req, res) {
   //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Image.remove(req.query.idImage, req.query.name, function(err, idImage) {
     if (err) res.send(err);
-    res.send(idImage);
+    res.json(idImage);
   });
 };

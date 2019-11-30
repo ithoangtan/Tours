@@ -13,6 +13,8 @@
     "antd": "^3.25.0",
     "axios": "^0.19.0",
     "html-react-parser": "^0.10.0",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",

@@ -38,14 +38,9 @@ class EditorContainer extends Component {
       // console.log(this.state.content);
    };
 
-   onChangeDate(value, dateString) {
-      console.log("Selected Time: ", value);
-      console.log("Formatted Selected Time: ", dateString);
-   }
+   onChangeDate(value, dateString) {}
 
-   onOk(value) {
-      console.log("onOk: ", value);
-   }
+   onOk(value) {}
 
    componentWillReceiveProps() {
       const { tour, scheduleByIdTour } = this.props;
@@ -67,7 +62,7 @@ class EditorContainer extends Component {
       fetchPatchScheduleRequest(schedule);
    };
 
-   loadData = scheduleByIdTour => {
+   loadData = async scheduleByIdTour => {
       return scheduleByIdTour.data;
    };
 

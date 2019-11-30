@@ -24,6 +24,12 @@ import {
 
 import TableGallery from "./tableGallery";
 import TableNewRow from "./tableNewTour";
+import Cookies from "js-cookie";
+
+function getCookie(name) {
+   const token = Cookies.get(name);
+   return token;
+}
 
 const EditableContext = React.createContext();
 
@@ -100,7 +106,7 @@ const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Tạm thời không biết nên ghi gì";
 //Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 1930, y: 450 };
+const scroll = { x: 2000, y: 450 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -184,7 +190,7 @@ class EditableTable extends React.Component {
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = newTour => {
+   handleAdd = async newTour => {
       const { count, data } = this.state;
       const newData = {
          idTour:
@@ -201,12 +207,13 @@ class EditableTable extends React.Component {
          departureDay: newTour.departureDay,
          describe: newTour.describe,
          address: newTour.address,
-         vocationTime: newTour.vocationTime
+         vocationTime: newTour.vocationTime,
+         idAccount: newTour.idAccount
       };
       //Gọi API create dưới CSDL
       const { tourAllActions } = this.props;
       const { fetchPostTourRequest } = tourAllActions;
-      fetchPostTourRequest(newData);
+      await fetchPostTourRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
@@ -249,16 +256,16 @@ class EditableTable extends React.Component {
       });
    };
 
-   fetch = (params = {}) => {
+   fetch = async (params = {}) => {
       this.setState({ loading: true });
       const { tourAllActions } = this.props;
       const { fetchListTourRequest } = tourAllActions;
-      fetchListTourRequest();
-      reqwest({
+      await fetchListTourRequest();
+      await reqwest({
          url: "http://localhost:8000/tours",
-         method: "get",
+         method: "GET",
+         headers: { Authentication: getCookie("token") },
          data: {
-            tours: 1000,
             ...params
          },
          type: "json"
@@ -441,7 +448,7 @@ class EditableTable extends React.Component {
    expandedRowRender = record => {
       const { listImageTour } = this.props;
       return (
-         <TableGallery 
+         <TableGallery
             record={record}
             listImage={listImageTour}
             {...this.props}
@@ -567,7 +574,7 @@ class EditableTable extends React.Component {
             editable: true
          },
          {
-            title: "describe",
+            title: "Describe",
             dataIndex: "describe",
             key: "describe",
             width: 400,
@@ -576,6 +583,16 @@ class EditableTable extends React.Component {
             sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
             ellipsis: true,
             editable: true
+         },
+         {
+            title: "IDAcc",
+            dataIndex: "idAccount",
+            key: "idAccount",
+            width: 80,
+            // fixed: "left",
+            ellipsis: true,
+            editable: true
+            // render: text => text
          },
          {
             title: "Edit",

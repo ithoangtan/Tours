@@ -59,12 +59,13 @@ Account.getById = function(idAccount) {
   });
 };
 
-Account.getByEmail = function(email) {
+Account.getByEmailAndRole = function(email, role) {
   return new Promise(function(resolve, reject) {
     database
-      .query("SELECT * FROM kinhdoanhtourdulich.accounts  WHERE email= ? ;", [
-        email
-      ])
+      .query(
+        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE email= ? AND role= ?;",
+        [email, role]
+      )
       .then(rows => resolve(rows[0]))
       .catch(err => reject(err));
   });
