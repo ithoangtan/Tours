@@ -21,6 +21,7 @@ import TourBestPage from "./TourPage/tourBest.page";
 import TourPage from "./TourPage/tour.page";
 import LoginPage from "./LoginAndRegisterPage/login.page";
 import RegisterPage from "./LoginAndRegisterPage/register.page";
+import BookTourPage from "./BookTourPage/bookTour.page";
 //common Customer
 import SubcribeContainer from "./_components/Footer/subcribe.container";
 import FooterContainer from "./_components/Footer/footer.container";
@@ -86,6 +87,21 @@ const router = [
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourPage match={match} {...props} />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
+         </div>
+      )
+   },
+   {
+      path: "/book-tour/:idTour",
+      exact: true,
+      component: (match, props) => (
+         <div>
+            <NavigationContainer match={match} {...props} />
+            <HeaderBreadcrumbContainer match={match} {...props} />
+            <BookTourPage match={match} {...props} />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />

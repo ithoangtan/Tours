@@ -78,9 +78,14 @@ class TableGallery extends Component {
       this.setState({
          fileList: newListImage
       });
-
+      const key = "updatable";
       return (
-         message.loading(`${file.name} is uploading.....`, 0.6), actionUpload
+         message.loading({
+            content: `${file.name} is uploading.....`,
+            key,
+            duration: 1
+         }),
+         actionUpload
       );
    };
 
