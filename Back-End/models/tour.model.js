@@ -23,6 +23,20 @@ Tour.getAllTour = function(result) {
   });
 };
 
+Tour.getAllTourForUser = function(idAccount, result) {
+  mysql.query(
+    "SELECT * FROM kinhdoanhtourdulich.tours where idAccount = ?; ",
+    [idAccount],
+    function(err, res) {
+      if (err) {
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 Tour.createTour = function(newTour, result) {
   this.titleTour = newTour.titleTour;
   this.price = newTour.price;
@@ -64,6 +78,20 @@ Tour.getTourById = function(idTour, result) {
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? ;",
     [idTour],
+    function(err, res) {
+      if (err) {
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+Tour.getTourByIdWithIdAccount = function(idTour, idAccount, result) {
+  mysql.query(
+    "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? AND idAccount = ? ;",
+    [idTour, idAccount],
     function(err, res) {
       if (err) {
         result(err, null);

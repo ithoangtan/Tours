@@ -40,14 +40,21 @@ exports.listAll = function(req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
-
-  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
-  Tour.getAllTour(function(err, tour) {
-    if (err) res.send(err);
-    res.json(tour);
-  });
+  const idAccount = req.query.idAccount;
+  if (idAccount !== null && idAccount !== undefined && idAccount !== "") {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
+    Tour.getAllTourForUser(req.query.idAccount, function(err, tour) {
+      if (err) res.send(err);
+      res.json(tour);
+    });
+  } else {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
+    Tour.getAllTour(function(err, tour) {
+      if (err) res.send(err);
+      res.json(tour);
+    });
+  }
 };
-
 exports.create = function(req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
@@ -66,12 +73,26 @@ exports.read = function(req, res) {
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
-  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
-  Tour.getTourById(req.query.idTour, function(err, tour) {
-    if (err) res.send(err);
-    res.json(tour[0]); //Đã là API thì trả về phải chuẩn
-    //Chỉ có một phần tử thì không lý do gì phải res về một mảng
-  });
+  const idAccount = req.query.idAccount;
+  if (idAccount !== null && idAccount !== undefined && idAccount !== "") {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
+    Tour.getTourByIdWithIdAccount(
+      req.query.idTour,
+      req.query.idAccount,
+      function(err, tour) {
+        if (err) res.send(err);
+        res.json(tour[0]); //Đã là API thì trả về phải chuẩn
+        //Chỉ có một phần tử thì không lý do gì phải res về một mảng
+      }
+    );
+  } else {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
+    Tour.getTourById(req.query.idTour, function(err, tour) {
+      if (err) res.send(err);
+      res.json(tour[0]); //Đã là API thì trả về phải chuẩn
+      //Chỉ có một phần tử thì không lý do gì phải res về một mảng
+    });
+  }
 };
 
 exports.update = function(req, res) {

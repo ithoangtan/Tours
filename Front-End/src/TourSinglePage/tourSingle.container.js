@@ -205,7 +205,7 @@ export default class TourSingleContainer extends Component {
                      <Title level={3} className="ftco-animate">
                         POPULAR TOURS
                      </Title>
-                     <MoreTourSingle className="ftco-animate" />
+                     <MoreTourSingle idImage={2} className="ftco-animate" />
                      <MoreTourSingle idImage={1} className="ftco-animate" />
                   </div>
                </div>
