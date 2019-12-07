@@ -47,6 +47,11 @@
    font-size: 1.3rem;
 }
 
+.text-price-tour-detail-book {
+   font-weight: 600;
+   font-size: 2.2rem;
+}
+
 .right-tour-detail-page {
    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.1);
    padding: 5px;
@@ -323,13 +328,13 @@
 }
 
 .steps-content {
-   margin-top: 16px;
+   margin-top: 6px;
    border: 1px dashed #e9e9e9;
    border-radius: 6px;
    background-color: #fafafa;
    min-height: 200px;
    text-align: center;
-   padding-top: 80px;
+   padding-top: 10px;
 }
 
 .steps-action {
@@ -341,5 +346,16 @@
 
 .book-tour-container {
    margin: 0 auto;
-   padding: 0px 100px;
+   padding: 0px 120px;
+}
+
+.ht-book-product-list {
+   background-color: #ffffff;
+   margin: 0px 20px;
+}
+
+.ht-book-form-information {
+}
+
+.ht-book-finish {
 }
