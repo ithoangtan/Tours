@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import { Button, Steps, message } from "antd";
 
-import { Carousel, Rate, Tag, Button, Steps, message, Typography } from "antd";
+import BookTourStep1 from "./bookTourStep1";
+import BookTourStep2 from "./bookTourStep2";
+import BookTourStep3 from "./bookTourStep3";
 
-import TourDetailImages from "../TourPage/tourDetailImages";
-
-import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
-
-const { Text, Title, Paragraph } = Typography;
+import * as INDEX_CONSTANTS from "../_constants/index.constants";
 
 const { Step } = Steps;
 
@@ -21,138 +19,57 @@ export default class BookTourContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         current: 0
+         current: 0,
+         step2OK: false
       };
    }
+   //steps container
    next() {
+      if (!this.state.step2OK && this.state.current === 1) {
+         message.error(
+            "Vui lòng nhập đầy đủ thông tin và xác nhận trước khi đến bước tiếp theo!"
+         );
+         return;
+      }
       const current = this.state.current + 1;
       this.setState({ current });
+      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
    prev() {
       const current = this.state.current - 1;
       this.setState({ current });
-   }
-   onChange = current => {
-      this.setState({ current });
-   };
-
-   componentDidUpdate() {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
-
-   renderImage() {
-      const { listImageByIdTour } = this.props;
-      let result = null;
-      if (listImageByIdTour !== undefined) {
-         result = listImageByIdTour.map((imageTour, index) => {
-            return (
-               <TourDetailImages
-                  {...this.props}
-                  srcImage={imageTour.url}
-                  key={index}
-               />
-            );
-         });
+   onChange = current => {
+      if (!this.state.step2OK && this.state.current === 1) {
+         message.error(
+            "Vui lòng nhập đầy đủ thông tin và xác nhận trước khi đến bước tiếp theo!"
+         );
+         return;
       }
-      return result;
-   }
-   orderList = () => {
-      const { tourById } = this.props;
+      this.setState({ current });
+      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+   };
 
+   //end step container
+
+   orderList = () => {
+      const { tourById, listImageByIdTour } = this.props;
       return (
-         <div className="ht-book-product-list">
-            <div className="right-tour-detail-page mb-4">
-               <div
-                  className="tour-content"
-                  style={{ margin: "10px 10px 0px 10px" }}
-               >
-                  <div className="row justify-conten-center">
-                     <div className="col-md-12 col-lg-4 ftco-animate ht-boder-radius-1">
-                        {/* Render Image of Tour */}
-                        <Link
-                           to={{
-                              pathname: `/tour-single/${tourById.idTour}`,
-                              state: {
-                                 tour: tourById
-                              }
-                           }}
-                        >
-                           <Carousel autoplay>{this.renderImage()}</Carousel>
-                        </Link>
-                        {/* end Render Image of Tour */}
-                     </div>
-                     <div className="col-md-12 col-lg-5 ftco-animate">
-                        <Link
-                           to={{
-                              pathname: `/tour-single/${tourById.idTour}`,
-                              state: {
-                                 tour: tourById
-                              }
-                           }}
-                        >
-                           <Title level={4}>{tourById.titleTour}</Title>
-                        </Link>
-                        <Rate disabled defaultValue={4} />
-                        <br />
-                        <Paragraph className="mt-2" ellipsis>
-                           {tourById.describe}
-                        </Paragraph>
-                        <div className="">
-                           <Tag color="#f50">
-                              Khuyễn mãi miễn phí {tourById.sale}% luôn á nè
-                           </Tag>
-                           <Button type="dashed">More</Button>
-                        </div>
-                        <div className="mt-2">
-                           <Paragraph className="mt-2" ellipsis>
-                              Time: {tourById.vocationTime}
-                           </Paragraph>
-                           <Paragraph className="mt-2" ellipsis>
-                              Deparure: {tourById.departureDay}
-                           </Paragraph>
-                        </div>
-                     </div>
-                     <div className="col-md-12 col-lg-3 ftco-animate right-detail-tour">
-                        <div className="mt-2">
-                           <Tag color="#87d068">Nhiều người đi nhất</Tag>
-                        </div>
-                        <div className="mt-1">
-                           <Text>(233) Reviews</Text>
-                        </div>
-                        <div className="mt-1 text-price-tour-detail-book">
-                           ${tourById.price}
-                        </div>
-                        <div className="mt-1">
-                           <Text delete>
-                              $
-                              {tourById.price -
-                                 tourById.price * tourById.sale * 0.01}
-                           </Text>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+         <BookTourStep1
+            tourById={tourById}
+            listImageByIdTour={listImageByIdTour}
+         />
       );
    };
 
+   //Step 2: Your information
    orderInfo = () => {
-      return (
-         <div className="ht-book-form-information">
-            <p>"Nhập hông tin cần thiết và thanh toán cần thiết"</p>
-         </div>
-      );
+      return <BookTourStep2 next={() => this.next()} />;
    };
 
    orderFinish = () => {
-      return (
-         <div className="ht-book-finish">
-            <p>
-               "Thông báo thành công và gủi mail đến 2 loại người dùng website"
-            </p>
-         </div>
-      );
+      return <BookTourStep3 />;
    };
 
    statusOrder = current => {
@@ -167,22 +84,22 @@ export default class BookTourContainer extends Component {
 
       const steps = [
          {
-            title: "Check your order",
+            title: "Check Your Order",
             status: this.statusOrder(current),
-            description: "00:00:10",
+            description: "Estimaed: 00:00:10",
             content: this.orderList()
          },
          {
-            title: "Your information",
+            title: "Your Information",
             status: this.statusOrder(current),
-            description: "00:01:00",
+            description: "Estimaed: 00:02:00",
             content: this.orderInfo()
          },
          {
-            title: "Waiting confirmation",
+            title: "Payments Method",
             // subTitle: "00:05:00",
             status: this.statusOrder(current),
-            description: "00:05:00",
+            description: "Estimaed: 00:02:00",
             content: this.orderFinish()
          }
       ];
