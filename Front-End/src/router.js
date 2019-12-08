@@ -241,9 +241,11 @@ const router = [
       component: () => <ResultSubmissionFailed />
    },
    {
-      path: "/successfulResult",
+      path: "/successfulResult/:idOrder",
       exact: true,
-      component: () => <ResultSuccessful />
+      component: ({ match }, props) => (
+         <ResultSuccessful match={match} {...props} />
+      )
    },
    {
       path: "/warningResult",

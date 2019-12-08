@@ -37,10 +37,19 @@ class BookTourStep2 extends Component {
       this.props.form.validateFieldsAndScroll((err, values) => {
          if (!err) {
             message.success("OK! Bây giờ bạn có thể đến bước tiếp theo rồi");
+            this.props.step2OK();
             //    const { authAllActions } = this.props;
             //    const { fetchLoginRequest } = authAllActions;
             //    fetchLoginRequest(values);
             //Lưu thông tin vào storage
+            localStorage.setItem("name", values.name);
+            localStorage.setItem("email", values.email);
+            localStorage.setItem("phone", values.phone);
+            localStorage.setItem("numberChildren", values.numberChildren);
+            localStorage.setItem("numberPeople", values.numberPeople);
+            localStorage.setItem("province", values.residence[0]);
+            localStorage.setItem("district", values.residence[1]);
+            localStorage.setItem("ward", values.residence[2]);
             //Đến khi người dùng ấn done mới tiến hành lưu xuống CSDL
             console.log("Received values of form: ", values);
          }
@@ -54,8 +63,24 @@ class BookTourStep2 extends Component {
       });
    };
 
+   initValue(name) {
+      if (name === "name") return localStorage.getItem("name");
+      if (name === "email") return localStorage.getItem("email");
+      if (name === "phone") return localStorage.getItem("phone");
+      if (name === "numberPeople") return localStorage.getItem("numberPeople");
+      if (name === "numberChildren")
+         return localStorage.getItem("numberChildren");
+      if (name === "address")
+         return [
+            localStorage.getItem("province"),
+            localStorage.getItem("district"),
+            localStorage.getItem("ward")
+         ];
+   }
+
    render() {
       const { getFieldDecorator } = this.props.form;
+
       const formItemLayout = {
          labelCol: {
             xs: { span: 24 },
@@ -80,6 +105,7 @@ class BookTourStep2 extends Component {
                }
             >
                {getFieldDecorator("name", {
+                  initialValue: this.initValue("name"),
                   rules: [
                      {
                         required: true,
@@ -90,6 +116,7 @@ class BookTourStep2 extends Component {
             </Form.Item>
             <Form.Item label="E-mail">
                {getFieldDecorator("email", {
+                  initialValue: this.initValue("email"),
                   rules: [
                      {
                         type: "email",
@@ -113,7 +140,7 @@ class BookTourStep2 extends Component {
                }
             >
                {getFieldDecorator("residence", {
-                  initialValue: ["Hồ Chí Minh", "Thủ Đức", "Bình Thọ"],
+                  initialValue: this.initValue("address"),
                   rules: [
                      {
                         type: "array",
@@ -139,6 +166,7 @@ class BookTourStep2 extends Component {
                }
             >
                {getFieldDecorator("phone", {
+                  initialValue: this.initValue("phone"),
                   rules: [
                      {
                         required: true,
@@ -164,7 +192,7 @@ class BookTourStep2 extends Component {
                }
             >
                {getFieldDecorator("numberPeople", {
-                  initialValue: 1,
+                  initialValue: this.initValue("numberPeople"),
                   rules: [
                      {
                         required: true,
@@ -188,7 +216,7 @@ class BookTourStep2 extends Component {
                }
             >
                {getFieldDecorator("numberChildren", {
-                  initialValue: 0
+                  initialValue: this.initValue("numberChildren")
                })(<InputNumber style={{ width: "100%" }} min={0} max={10} />)}
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
@@ -200,7 +228,6 @@ class BookTourStep2 extends Component {
                      type="primary"
                      htmlType="submit"
                      style={{ width: "100%" }}
-                     onClick={this.props.next}
                   >
                      Xác nhận thông tin của bạn là chính xác!
                   </Button>

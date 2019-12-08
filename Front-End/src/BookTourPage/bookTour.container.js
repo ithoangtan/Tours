@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Redirect } from "react-router-dom";
+
 import { Button, Steps, message } from "antd";
 
 import BookTourStep1 from "./bookTourStep1";
@@ -20,21 +22,29 @@ export default class BookTourContainer extends Component {
       super(props);
       this.state = {
          current: 0,
-         step2OK: false
+         step2OK: false,
+         redirectResult: false
       };
    }
    //steps container
    next() {
       if (!this.state.step2OK && this.state.current === 1) {
          message.error(
-            "Vui lòng nhập đầy đủ thông tin và xác nhận trước khi đến bước tiếp theo!"
+            "Vui lòng nhập đầy đủ thông tin và xác nhận trước khi đến bước tiếp theo! next"
          );
          return;
+      } else {
+         const current = this.state.current + 1;
+         this.setState({ current });
+         // this.setState({ current, step2OK: false });
+         funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
       }
-      const current = this.state.current + 1;
-      this.setState({ current });
-      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
+
+   step2OK() {
+      this.setState({ step2OK: true });
+   }
+
    prev() {
       const current = this.state.current - 1;
       this.setState({ current });
@@ -47,6 +57,7 @@ export default class BookTourContainer extends Component {
          );
          return;
       }
+      console.log(this.state.current, this.state.step2OK);
       this.setState({ current });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    };
@@ -65,7 +76,7 @@ export default class BookTourContainer extends Component {
 
    //Step 2: Your information
    orderInfo = () => {
-      return <BookTourStep2 next={() => this.next()} />;
+      return <BookTourStep2 step2OK={() => this.step2OK()} />;
    };
 
    orderFinish = () => {
@@ -79,6 +90,27 @@ export default class BookTourContainer extends Component {
       return status;
    };
 
+   //Done
+   onDone = () => {
+      message.success("Processing complete!");
+      this.setState({ redirectResult: true });
+   };
+   onRedirect() {
+      const PIN = Date.now();
+      localStorage.setItem("PIN", PIN);
+      if (this.state.redirectResult) {
+         this.setState({ redirectResult: false });
+         return (
+            <Redirect
+               to={{
+                  pathname: `/successfulResult/${PIN}`,
+                  // search: `?idOrder=${PIN}`,
+                  state: { done: true }
+               }}
+            />
+         );
+      }
+   }
    render() {
       const { current } = this.state;
 
@@ -103,8 +135,10 @@ export default class BookTourContainer extends Component {
             content: this.orderFinish()
          }
       ];
+
       return (
          <div className="book-tour-container">
+            {this.onRedirect()}
             <Steps
                current={current}
                type="navigation"
@@ -138,10 +172,7 @@ export default class BookTourContainer extends Component {
                   </Button>
                )}
                {current === steps.length - 1 && (
-                  <Button
-                     type="primary"
-                     onClick={() => message.success("Processing complete!")}
-                  >
+                  <Button type="primary" onClick={this.onDone}>
                      Done
                   </Button>
                )}

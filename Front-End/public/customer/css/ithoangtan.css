@@ -358,4 +358,11 @@
 }
 
 .ht-book-finish {
+   background-color: #ffffff;
+}
+
+.ht-cach2-finish-checkout {
+   max-width: 80%;
+   margin: 0 auto;
+   padding-bottom: 10px;
 }
