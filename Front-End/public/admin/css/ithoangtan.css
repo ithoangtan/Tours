@@ -100,10 +100,7 @@
 }
 
 .ht-img-tour {
-   width: auto;
    max-height: 100%;
-   background-attachment: fixed !important;
-   background-size: cover !important;
    border-radius: 5px !important;
 }
 

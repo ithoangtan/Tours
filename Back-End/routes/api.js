@@ -14,22 +14,22 @@ const auth = require("../controllers/auth.controller");
 const authenticated = require("../middleware/auth.middleware");
 
 //for tour
-router.get("/tour", authenticated, tour.read);
-router.get("/tours", authenticated, tour.listAll);
+router.get("/tour", tour.read);
+router.get("/tours", tour.listAll);
 router.post("/tour", authenticated, tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
 router.patch("/tour", authenticated, tour.update);
 router.delete("/tour", authenticated, tour.delete);
 
 //for schedule
-router.get("/schedule", authenticated, schedule.read);
-router.get("/schedules", authenticated, schedule.listAll);
+router.get("/schedule", schedule.read);
+router.get("/schedules", schedule.listAll);
 router.post("/schedule", authenticated, schedule.create);
 router.patch("/schedule", authenticated, schedule.update);
 router.delete("/schedule", authenticated, schedule.delete);
 
 //for img
-router.get("/images", authenticated, image.listAllImageTour);
-router.get("/image", authenticated, image.listAllImageTourById);
+router.get("/images", image.listAllImageTour);
+router.get("/image", image.listAllImageTourById);
 router.delete("/image", authenticated, image.delete);
 router.post("/image", image.create);
 router.post("/upload", authenticated, image.upload);
@@ -44,6 +44,5 @@ router.delete("/account", authenticated, account.delete);
 //for authencation
 router.post("/login", auth.login);
 router.post("/register", auth.register);
-// router.post("/logout", auth.logout);
 
 module.exports = router;

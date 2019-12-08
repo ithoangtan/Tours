@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 
-import { Steps, Button, message } from "antd";
+import { Redirect } from "react-router-dom";
+
+import { Button, Steps, message } from "antd";
+
+import BookTourStep1 from "./bookTourStep1";
+import BookTourStep2 from "./bookTourStep2";
+import BookTourStep3 from "./bookTourStep3";
+
+import funcLoadJs from "../_constants/loadJs.constants";
+import * as INDEX_CONSTANTS from "../_constants/index.constants";
 
 const { Step } = Steps;
 
@@ -8,63 +17,128 @@ const stepStyle = {
    marginBottom: 60,
    boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
-
-const steps = [
-   {
-      title: "Step 1",
-      subTitle: "00:00:05",
-      status: "finish",
-      description: "This is a description.",
-      content: "Kiểm tra lại đơn hàng"
-   },
-   {
-      title: "Step 2",
-      subTitle: "00:01:00",
-      status: "process",
-      description: "This is a description.",
-      content: "Nhập hông tin cần thiết và thanh toán cần thiết"
-   },
-   {
-      title: "Step 3",
-      subTitle: "waiting for long time",
-      status: "wait",
-      description: "This is a description.",
-      content: (
-         <div>
-            <p>
-               "Thông báo thành công và gủi mail đến 2 loại người dùng website"
-            </p>
-         </div>
-      )
-   }
-];
-
 export default class BookTourContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         current: 0
+         current: 0,
+         step2OK: false,
+         redirectResult: false
       };
    }
-
+   //steps container
    next() {
-      const current = this.state.current + 1;
-      this.setState({ current });
+      if (!this.state.step2OK && this.state.current === 1) {
+         message.error(
+            "Vui lòng nhập đầy đủ thông tin và xác nhận trước khi đến bước tiếp theo! next"
+         );
+         return;
+      } else {
+         const current = this.state.current + 1;
+         this.setState({ current });
+         // this.setState({ current, step2OK: false });
+         funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+      }
+   }
+
+   step2OK() {
+      this.setState({ step2OK: true });
    }
 
    prev() {
       const current = this.state.current - 1;
       this.setState({ current });
+      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
-
    onChange = current => {
-      console.log("onChange:", current);
+      if (!this.state.step2OK && this.state.current === 1) {
+         message.error(
+            "Vui lòng nhập đầy đủ thông tin và xác nhận trước khi đến bước tiếp theo!"
+         );
+         return;
+      }
+      console.log(this.state.current, this.state.step2OK);
       this.setState({ current });
+      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    };
+
+   //end step container
+
+   orderList = () => {
+      const { tourById, listImageByIdTour } = this.props;
+      return (
+         <BookTourStep1
+            tourById={tourById}
+            listImageByIdTour={listImageByIdTour}
+         />
+      );
+   };
+
+   //Step 2: Your information
+   orderInfo = () => {
+      return <BookTourStep2 step2OK={() => this.step2OK()} />;
+   };
+
+   orderFinish = () => {
+      return <BookTourStep3 />;
+   };
+
+   statusOrder = current => {
+      let status = "";
+      if (current === 1) status = "";
+      if (current === 2) status = "";
+      return status;
+   };
+
+   //Done
+   onDone = () => {
+      message.success("Processing complete!");
+      this.setState({ redirectResult: true });
+   };
+   onRedirect() {
+      const PIN = Date.now();
+      localStorage.setItem("PIN", PIN);
+      if (this.state.redirectResult) {
+         this.setState({ redirectResult: false });
+         return (
+            <Redirect
+               to={{
+                  pathname: `/successfulResult/${PIN}`,
+                  // search: `?idOrder=${PIN}`,
+                  state: { done: true }
+               }}
+            />
+         );
+      }
+   }
    render() {
       const { current } = this.state;
+
+      const steps = [
+         {
+            title: "Check Your Order",
+            status: this.statusOrder(current),
+            description: "Estimaed: 00:00:10",
+            content: this.orderList()
+         },
+         {
+            title: "Your Information",
+            status: this.statusOrder(current),
+            description: "Estimaed: 00:02:00",
+            content: this.orderInfo()
+         },
+         {
+            title: "Payments Method",
+            // subTitle: "00:05:00",
+            status: this.statusOrder(current),
+            description: "Estimaed: 00:02:00",
+            content: this.orderFinish()
+         }
+      ];
+
       return (
          <div className="book-tour-container">
+            {this.onRedirect()}
             <Steps
                current={current}
                type="navigation"
@@ -98,52 +172,11 @@ export default class BookTourContainer extends Component {
                   </Button>
                )}
                {current === steps.length - 1 && (
-                  <Button
-                     type="primary"
-                     onClick={() => message.success("Processing complete!")}
-                  >
+                  <Button type="primary" onClick={this.onDone}>
                      Done
                   </Button>
                )}
             </div>
-            {/* <Steps
-               type="navigation"
-               size="small"
-               current={current}
-               onChange={this.onChange}
-               style={stepStyle}
-            >
-               <Step
-                  title="Step 1"
-                  subTitle="00:00:05"
-                  status="finish"
-                  description="This is a description."
-               />
-               <Step
-                  title="Step 2"
-                  subTitle="00:01:02"
-                  status="process"
-                  description="This is a description."
-               />
-               <Step
-                  title="Step 3"
-                  subTitle="waiting for longlong time"
-                  status="wait"
-                  description="This is a description."
-               />
-            </Steps> */}
-            {/* <Steps
-               type="navigation"
-               size="small"
-               current={current}
-               onChange={this.onChange}
-               style={stepStyle}
-            >
-               <Step status="finish" title="finish 1" />
-               <Step status="finish" title="finish 2" />
-               <Step status="process" title="current process" />
-               <Step status="wait" title="wait" disabled />
-            </Steps> */}
          </div>
       );
    }

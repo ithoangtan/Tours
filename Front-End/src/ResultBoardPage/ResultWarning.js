@@ -4,13 +4,14 @@ import { Result, Button } from "antd";
 
 export default class ResultWarning extends Component {
    render() {
+      const { status, title } = this.props;
       return (
          <Result
-            status="warning"
-            title="There are some problems with your operation."
+            status={status}
+            title={title}
             extra={
-               <Button type="primary" key="console">
-                  Go Console
+               <Button type="default" key="console">
+                  Continue!
                </Button>
             }
          />

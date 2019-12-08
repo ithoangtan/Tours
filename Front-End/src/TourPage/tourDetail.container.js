@@ -61,18 +61,23 @@ export default class TourDetailContainer extends Component {
                      >
                         <Title level={4}>{tour.titleTour}</Title>
                      </Link>
-                     <Rate disabled defaultValue={2} />
+                     <Rate disabled defaultValue={4} />
                      <br />
                      <Paragraph className="mt-1" ellipsis>
                         {tour.describe}
                      </Paragraph>
-                     <div className="mt-2">
+                     <div className="">
                         <Tag color="#f50">
                            Khuyễn mãi miễn phí {tour.sale}% luôn á nè
                         </Tag>
-                     </div>
-                     <div className="mt-2">
                         <Button type="dashed">More</Button>
+                     </div>
+                     <div className="mt-1">
+                        <Paragraph className="mt-1" ellipsis>
+                           Time: {tour.vocationTime}
+                           {"  "}
+                           Deparure: {tour.departureDay}
+                        </Paragraph>
                      </div>
                   </div>
                   <div className="col-md-12 col-lg-3 ftco-animate right-detail-tour">
@@ -91,7 +96,16 @@ export default class TourDetailContainer extends Component {
                         </Text>
                      </div>
                      <div>
-                        <Button type="primary">BOOK NOW</Button>
+                        <Link
+                           to={{
+                              pathname: `/book-tour/${tour.idTour}`,
+                              state: {
+                                 tour: tour
+                              }
+                           }}
+                        >
+                           <Button type="primary">BOOK NOW</Button>
+                        </Link>
                      </div>
                   </div>
                </div>

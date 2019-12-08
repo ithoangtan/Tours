@@ -22,18 +22,13 @@ import TourPage from "./TourPage/tour.page";
 import LoginPage from "./LoginAndRegisterPage/login.page";
 import RegisterPage from "./LoginAndRegisterPage/register.page";
 import BookTourPage from "./BookTourPage/bookTour.page";
+import ForgotPasswordPage from "./AdminForgotPassword/ForgotPassword.Page";
+
 //common Customer
 import SubcribeContainer from "./_components/Footer/subcribe.container";
 import FooterContainer from "./_components/Footer/footer.container";
 import Loaded from "./App/loaded";
 import BackToTop from "./App/backTop";
-
-//Admin
-import AdminIndexPage from "./AdminIndex/Index.Page";
-import AdminForgotPasswordPage from "./AdminForgotPassword/ForgotPassword.Page";
-import AdminTourPage from "./AdminTour/Tour.Page";
-import AdminScheduleDetailPage from "./AdminSchedule/ScheduleDetail.Page";
-//end Admin
 
 const router = [
    //for customer
@@ -213,33 +208,10 @@ const router = [
       )
    },
    //end for customer
-
-   //for admin
-   {
-      path: "/admin/",
-      exact: true,
-      component: ({ match }, props) => (
-         <AdminIndexPage match={match} {...props} />
-      )
-   },
-   {
-      path: "/admin/tour",
-      exact: true,
-      component: ({ match }, props) => (
-         <AdminTourPage match={match} {...props} />
-      )
-   },
-   {
-      path: "/admin/schedule-detail/:idTour",
-      exact: true,
-      component: ({ match }, props) => (
-         <AdminScheduleDetailPage match={match} {...props} />
-      )
-   },
    {
       path: "/forgot-password",
       exact: true,
-      component: ({ match }) => <AdminForgotPasswordPage match={match} />
+      component: ({ match }) => <ForgotPasswordPage match={match} />
    },
    //for  commons
    {
@@ -269,9 +241,11 @@ const router = [
       component: () => <ResultSubmissionFailed />
    },
    {
-      path: "/successfulResult",
+      path: "/successfulResult/:idOrder",
       exact: true,
-      component: () => <ResultSuccessful />
+      component: ({ match }, props) => (
+         <ResultSuccessful match={match} {...props} />
+      )
    },
    {
       path: "/warningResult",
