@@ -13,31 +13,31 @@ const Tour = function(tour) {
   this.vocationTime = tour.vocationTime;
   this.idAccount = tour.idAccount;
 };
-Tour.getAllTour = function(result) {
+Tour.getAllTour = function(funcResult) {
   mysql.query("SELECT * FROM kinhdoanhtourdulich.tours ;", function(err, res) {
     if (err) {
-      result(err, null);
+      funcResult(err, null);
     } else {
-      result(null, res);
+      funcResult(null, res);
     }
   });
 };
 
-Tour.getAllTourForUser = function(idAccount, result) {
+Tour.getAllTourForUser = function(idAccount, funcResult) {
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.tours where idAccount = ?; ",
     [idAccount],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Tour.createTour = function(newTour, result) {
+Tour.createTour = function(newTour, funcResult) {
   this.titleTour = newTour.titleTour;
   this.price = newTour.price;
   this.sale = newTour.sale;
@@ -66,78 +66,78 @@ Tour.createTour = function(newTour, result) {
       "') ",
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, result);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Tour.getTourById = function(idTour, result) {
+Tour.getTourById = function(idTour, funcResult) {
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? ;",
     [idTour],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Tour.getTourByIdWithIdAccount = function(idTour, idAccount, result) {
+Tour.getTourByIdWithIdAccount = function(idTour, idAccount, funcResult) {
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? AND idAccount = ? ;",
     [idTour, idAccount],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
-Tour.updateById = function(updateTour, result) {
+Tour.updateById = function(updateTour, funcResult) {
   mysql.query(
     "UPDATE kinhdoanhtourdulich.tours SET ? WHERE (idTour = ?);",
     [updateTour, updateTour.idTour],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
-Tour.remove = function(idTour, result) {
+Tour.remove = function(idTour, funcResult) {
   mysql.query(
     "DELETE FROM kinhdoanhtourdulich.tours WHERE idTour = ?",
     [idTour],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Tour.createImageTour = function(idTour, name, result) {
+Tour.createImageTour = function(idTour, name, funcResult) {
   var link = `/img/${name}`;
   var status = "done";
   mysql.query(
     `INSERT INTO kinhdoanhtourdulich.images (link, status, name, idTour) VALUES ('${link}', '${status}', ' ${name}' , '${idTour}')`,
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );

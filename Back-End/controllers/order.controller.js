@@ -26,9 +26,9 @@ exports.create = function(req, res) {
 
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   let newOrder = new Order(req.body);
-  Order.createOrder(newOrder, function(err, order) {
+  Order.createOrder(newOrder, function(err, newOrder) {
     if (err) res.send(err);
-    res.json(order);
+    res.json(newOrder);
   });
 };
 
@@ -67,9 +67,9 @@ exports.update = function(req, res) {
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   // Phải truyền vào như v kh thì dăn lỗi ...
   updateOrder = new Order(req.body);
-  Order.updateById(updateOrder, function(err, order) {
+  Order.updateById(updateOrder, function(err, updateOrder) {
     if (err) res.send(err);
-    res.send(order);
+    res.send(updateOrder);
   });
 };
 

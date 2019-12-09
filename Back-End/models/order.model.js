@@ -14,31 +14,31 @@ const Order = function(order) {
   this.notes = order.notes;
   this.idAccount = order.idAccount;
 };
-Order.getAllOrder = function(result) {
+Order.getAllOrder = function(funcResult) {
   mysql.query("SELECT * FROM kinhdoanhtourdulich.orders ;", function(err, res) {
     if (err) {
-      result(err, null);
+      funcResult(err, null);
     } else {
-      result(null, res);
+      funcResult(null, res);
     }
   });
 };
 
-Order.getAllOrderForUser = function(idAccount, result) {
+Order.getAllOrderForUser = function(idAccount, funcResult) {
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.orders where idAccount = ?; ",
     [idAccount],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Order.createOrder = function(newOrder, result) {
+Order.createOrder = function(newOrder, funcResult) {
   this.PIN = newOrder.PIN;
   this.status = newOrder.status;
   this.totalPrice = newOrder.totalPrice;
@@ -74,65 +74,65 @@ Order.createOrder = function(newOrder, result) {
       "') ",
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, result);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Order.getOrderById = function(idOrder, result) {
+Order.getOrderById = function(idOrder, funcResult) {
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? ;",
     [idOrder],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Order.getOrderByIdWithIdAccount = function(idOrder, idAccount, result) {
+Order.getOrderByIdWithIdAccount = function(idOrder, idAccount, funcResult) {
   mysql.query(
     "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? AND idAccount = ? ;",
     [idOrder, idAccount],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Order.updateById = function(updateOrder, result) {
+Order.updateById = function(updateOrder, funcResult) {
   mysql.query(
     "UPDATE kinhdoanhtourdulich.orders SET ? WHERE (idOrder = ?);",
     [updateOrder, updateOrder.idOrder],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
 };
 
-Order.remove = function(idOrder, result) {
+Order.remove = function(idOrder, funcResult) {
   mysql.query(
     "DELETE FROM kinhdoanhtourdulich.orders WHERE idOrder = ?",
     [idOrder],
     function(err, res) {
       if (err) {
-        result(err, null);
+        funcResult(err, null);
       } else {
-        result(null, res);
+        funcResult(null, res);
       }
     }
   );
