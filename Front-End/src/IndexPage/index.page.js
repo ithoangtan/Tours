@@ -47,11 +47,11 @@ class IndexPage extends Component {
             <HeaderContainer />
             <SearchEngineContainer />
             <BestTourContainer />
+            <RecentStoriesContainer />
             <ServiceSection />
             <AboutTravelandContainer />
             <ThingsToKnowContainer />
             <HappyTravelerSaysContainer />
-            <RecentStoriesContainer />
          </div>
       );
    }
