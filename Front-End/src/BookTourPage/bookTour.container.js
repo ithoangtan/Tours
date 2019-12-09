@@ -2,6 +2,12 @@ import React, { Component } from "react";
 
 import { Redirect } from "react-router-dom";
 
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as orderActions from "../_actions/order.actions";
+
 import { Button, Steps, message } from "antd";
 
 import BookTourStep1 from "./bookTourStep1";
@@ -17,6 +23,8 @@ const stepStyle = {
    marginBottom: 60,
    boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
+
+const PIN = Date.now();
 class BookTourContainer extends Component {
    constructor(props) {
       super(props);
@@ -95,9 +103,22 @@ class BookTourContainer extends Component {
       message.success("Processing complete!");
       this.setState({ redirectResult: true });
       //Lưu xuống data base nữa nha
+      const { tourById } = this.props;
+      let newOrder = JSON.parse(localStorage.getItem("orders"));
+      newOrder.address = JSON.stringify(newOrder.address);
+      let order = {
+         ...newOrder,
+         status: "verify",
+         PIN: PIN,
+         notes: " ",
+         totalPrice: tourById.price,
+         idAccount: 8 //test account
+      };
+      const { orderAllActions } = this.props;
+      const { fetchPostOrderRequest } = orderAllActions;
+      fetchPostOrderRequest(order);
    };
    onRedirect() {
-      const PIN = Date.now();
       localStorage.setItem("PIN", PIN);
       if (this.state.redirectResult) {
          this.setState({ redirectResult: false });
@@ -183,4 +204,22 @@ class BookTourContainer extends Component {
    }
 }
 
-export default BookTourContainer;
+BookTourContainer.propTypes = {
+   classes: PropTypes.object,
+   orderAllActions: PropTypes.shape({
+      fetchPostOrderRequest: PropTypes.func
+   }),
+   listOrder: PropTypes.array
+};
+
+const mapStateToProps = state => {
+   return {
+      listTour: state.order.listOrder
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      orderAllActions: bindActionCreators(orderActions, dispatch)
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BookTourContainer);

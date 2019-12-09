@@ -46,7 +46,7 @@ export const fetchListOrderRequest = () => {
 //Get Order By  ID Tour
 export const fetchOrderByIdTourSuccess = data => {
    return {
-      type: orderConstants.FETCH_ORDER_GET_BYID_TOUR_SUCCESS,
+      type: orderConstants.FETCH_ORDER_GET_BYID_ACCOUNT_SUCCESS,
       payload: {
          data
       }
@@ -55,7 +55,7 @@ export const fetchOrderByIdTourSuccess = data => {
 
 export const fetchOrderByIdTourError = error => {
    return {
-      type: orderConstants.FETCH_ORDER_GET_BYID_TOUR_FAILED,
+      type: orderConstants.FETCH_ORDER_GET_BYID_ACCOUNT_FAILED,
       payload: {
          error
       }

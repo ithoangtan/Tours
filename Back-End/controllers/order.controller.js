@@ -26,9 +26,9 @@ exports.create = function(req, res) {
 
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   let newOrder = new Order(req.body);
-  Order.createOrder(newOrder, function(err, newOrder) {
+  Order.createOrder(newOrder, function(err, order) {
     if (err) res.send(err);
-    res.json(newOrder);
+    res.json(order);
   });
 };
 

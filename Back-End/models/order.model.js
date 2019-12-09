@@ -2,17 +2,17 @@ const mysql = require("../dbconnection.js");
 
 //Task object constructor
 const Order = function(order) {
-  this.idOrder = order.idOrder | 0;
-  this.PIN = order.PIN;
-  this.status = order.status;
-  this.totalPrice = order.totalPrice;
-  this.numberPeople = order.numberPeople;
-  this.numberChildren = order.numberChildren;
-  this.address = order.address;
-  this.phone = order.phone;
-  this.email = order.email;
-  this.notes = order.notes;
-  this.idAccount = order.idAccount;
+  this.idOrder = order.idOrder || 0;
+  this.PIN = order.PIN || 0;
+  this.status = order.status || "verify";
+  this.totalPrice = order.totalPrice || 0;
+  this.numberPeople = order.numberPeople || 1;
+  this.numberChildren = order.numberChildren || 0;
+  this.address = order.address || " ";
+  this.phone = order.phone || " ";
+  this.email = order.email || " ";
+  this.notes = order.notes || " ";
+  this.idAccount = order.idAccount || 8;
 };
 Order.getAllOrder = function(funcResult) {
   mysql.query("SELECT * FROM kinhdoanhtourdulich.orders ;", function(err, res) {
@@ -49,6 +49,7 @@ Order.createOrder = function(newOrder, funcResult) {
   this.email = newOrder.email;
   this.notes = newOrder.notes;
   this.idAccount = newOrder.idAccount;
+
   mysql.query(
     "INSERT INTO kinhdoanhtourdulich.orders (`PIN`, `status`, `totalPrice`, `numberPeople`," +
       " `numberChildren`, `address`, `phone`,`email`,`notes`, `idAccount`) VALUES ('" +

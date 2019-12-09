@@ -45,8 +45,8 @@ router.delete("/account", authenticated, account.delete);
 //for order`
 router.get("/order", order.read);
 router.get("/orders", order.listAll);
-router.post("/order", authenticated, order.create);
-router.patch("/order", authenticated, order.update);
+router.post("/order", order.create);
+router.patch("/order", order.update);
 router.delete("/order", authenticated, order.delete);
 
 //for authencation

@@ -40,13 +40,13 @@ export default class BookTourStep3 extends Component {
                   />
                </TabPane>
                <TabPane tab="CÁCH 2: Chuyển khoản đến Tài khoản:" key="2">
-                  <ul class="list-group ht-cach2-finish-checkout">
-                     <li class="list-group-item">
-                        <i class="fa fa-university" aria-hidden="true"></i> Ngân
-                        hàng Nông nghiệp và Phát triển nông thôn Việt Nam -
+                  <ul className="list-group ht-cach2-finish-checkout">
+                     <li className="list-group-item">
+                        <i className="fa fa-university" aria-hidden="true"></i>{" "}
+                        Ngân hàng Nông nghiệp và Phát triển nông thôn Việt Nam -
                         Agribank
                      </li>
-                     <li class="list-group-item">
+                     <li className="list-group-item">
                         <Title level={4}>
                            {" "}
                            <Tooltip
@@ -54,7 +54,7 @@ export default class BookTourStep3 extends Component {
                               title={"Đây là số thẻ của administrator"}
                            >
                               <i
-                                 class="fa fa-credit-card"
+                                 className="fa fa-credit-card"
                                  aria-hidden="true"
                               ></i>{" "}
                               Số Thẻ{" "}
@@ -67,14 +67,15 @@ export default class BookTourStep3 extends Component {
                            </Tooltip>
                         </Title>
                      </li>
-                     <li class="list-group-item">
+                     <li className="list-group-item">
                         <Title level={4}>
                            {" "}
                            <Tooltip
                               placement="left"
                               title={"Đây là số tài khoản của administrator"}
                            >
-                              <i class="fas fa-address-card"></i> Số Tài Khoản{" "}
+                              <i className="fas fa-address-card"></i> Số Tài
+                              Khoản{" "}
                               <Paragraph
                                  copyable={{ text: "5604205193727" }}
                                  style={{ display: "inline" }}
@@ -84,15 +85,15 @@ export default class BookTourStep3 extends Component {
                            </Tooltip>
                         </Title>
                      </li>
-                     <li class="list-group-item">
+                     <li className="list-group-item">
                         <Title level={4}>
                            {" "}
                            <Tooltip
                               placement="left"
                               title={"Nội dung là số điện thoại của bạn"}
                            >
-                              <i class="far fa-sticky-note"></i> Nội Dung Chuyển
-                              Khoản{" "}
+                              <i className="far fa-sticky-note"></i> Nội Dung
+                              Chuyển Khoản{" "}
                               <Paragraph
                                  copyable={{ text: `${phone} ${name}` }}
                                  style={{ display: "inline" }}
@@ -103,10 +104,10 @@ export default class BookTourStep3 extends Component {
                            </Tooltip>{" "}
                         </Title>
                      </li>
-                     <li class="list-group-item">
+                     <li className="list-group-item">
                         <Title level={4}>
                            <i
-                              class="fa fa-angle-double-right"
+                              className="fa fa-angle-double-right"
                               aria-hidden="true"
                            ></i>{" "}
                            Chủ tài khoản: Hoàng Trọng Tấn

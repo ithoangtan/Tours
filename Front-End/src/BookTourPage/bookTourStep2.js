@@ -78,9 +78,9 @@ class BookTourStep2 extends Component {
             return JSON.parse(localStorage.getItem("orders")).numberChildren;
          if (name === "address")
             return [
-               JSON.parse(localStorage.getItem("orders")).residence[0],
-               JSON.parse(localStorage.getItem("orders")).residence[1],
-               JSON.parse(localStorage.getItem("orders")).residence[2]
+               JSON.parse(localStorage.getItem("orders")).address[0],
+               JSON.parse(localStorage.getItem("orders")).address[1],
+               JSON.parse(localStorage.getItem("orders")).address[2]
             ];
       }
    }
@@ -146,7 +146,7 @@ class BookTourStep2 extends Component {
                   </span>
                }
             >
-               {getFieldDecorator("residence", {
+               {getFieldDecorator("address", {
                   initialValue: this.initValue("address"),
                   rules: [
                      {

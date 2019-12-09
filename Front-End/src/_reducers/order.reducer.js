@@ -1,10 +1,10 @@
 import * as orderConstants from "../_constants/order.module";
 import {
-   toastError,
-   toastPatchOrderSuccess,
-   toastDeleteOrderSuccess,
-   toastCreateOrderSuccess
-} from "../_helper/toastify.helper";
+   messageError,
+   messageSuccess,
+   // messageLoading,
+   messageWarning
+} from "../_helper/message.helper";
 const initialState = {
    listOrder: [],
    orderByIdAccount: {},
@@ -15,40 +15,38 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
    switch (action.type) {
-      case orderConstants.FETCH_SCHEDULE:
+      case orderConstants.FETCH_ORDER:
          return {
             ...state,
             listOrder: []
          };
-      case orderConstants.FETCH_SCHEDULE_SUCCESS: {
+      case orderConstants.FETCH_ORDER_SUCCESS: {
          const { data } = action.payload;
-         // toastOrderSuccess(data);
          return {
             ...state,
             listOrder: data
          };
       }
-      case orderConstants.FETCH_SCHEDULE_FAILED: {
+      case orderConstants.FETCH_ORDER_FAILED: {
          const { error } = action.payload;
-         toastError(error);
+         messageError(`${error}`, 1);
          return {
             ...state,
             listOrder: error
          };
       }
 
-      //Order Get By Id Tour
-      case orderConstants.FETCH_SCHEDULE_GET_BYID_ORDER_SUCCESS: {
+      //Order Get By Id Account
+      case orderConstants.FETCH_ORDER_GET_BYID_ACCOUNT_SUCCESS: {
          const { data } = action.payload;
-         // toastOrderGetByIdAccountSuccess(data);
          return {
             ...state,
             orderByIdAccount: data
          };
       }
-      case orderConstants.FETCH_SCHEDULE_GET_BYID_ORDER_FAILED: {
+      case orderConstants.FETCH_ORDER_GET_BYID_ACCOUNT_FAILED: {
          const { error } = action.payload;
-         toastError(error);
+         messageError(`${error}`, 1);
          return {
             ...state,
             orderByIdAccount: error
@@ -56,18 +54,18 @@ const reducer = (state = initialState, action) => {
       }
 
       //Post - Create
-      case orderConstants.FETCH_SCHEDULE_CREATE_SUCCESS: {
+      case orderConstants.FETCH_ORDER_CREATE_SUCCESS: {
          const { data } = action.payload;
-         const { newOrder } = action.newOrder;
-         toastCreateOrderSuccess(newOrder);
+         const { order } = action.order;
+         messageSuccess(`Đơn hàng ${order.PIN} tạo thành công!`, 3);
          return {
             ...state,
             create: data
          };
       }
-      case orderConstants.FETCH_SCHEDULE_CREATE_FAILED: {
+      case orderConstants.FETCH_ORDER_CREATE_FAILED: {
          const { error } = action.payload;
-         toastError(error);
+         messageError(`${error}`, 1);
          return {
             ...state,
             create: error
@@ -75,18 +73,18 @@ const reducer = (state = initialState, action) => {
       }
 
       //Delete
-      case orderConstants.FETCH_SCHEDULE_DELETE_SUCCESS: {
+      case orderConstants.FETCH_ORDER_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
-         toastDeleteOrderSuccess(record);
+         messageWarning(`Đơn hàng ${record.PIN} xóa thành công!`, 3);
          return {
             ...state,
             delete: data
          };
       }
-      case orderConstants.FETCH_SCHEDULE_DELETE_FAILED: {
+      case orderConstants.FETCH_ORDER_DELETE_FAILED: {
          const { error } = action.payload;
-         toastError(error);
+         messageError(`${error}`, 1);
          return {
             ...state,
             delete: error
@@ -94,18 +92,18 @@ const reducer = (state = initialState, action) => {
       }
 
       //Patch - update
-      case orderConstants.FETCH_SCHEDULE_PATCH_SUCCESS: {
+      case orderConstants.FETCH_ORDER_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { order } = action.order;
-         toastPatchOrderSuccess(order);
+         messageSuccess(`Đơn hàng ${order.PIN} sửa thành công!`, 3);
          return {
             ...state,
             patch: data
          };
       }
-      case orderConstants.FETCH_SCHEDULE_PATCH_FAILED: {
+      case orderConstants.FETCH_ORDER_PATCH_FAILED: {
          const { error } = action.payload;
-         toastError(error);
+         messageError(`${error}`, 1);
          return {
             ...state,
             patch: error

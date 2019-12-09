@@ -3,10 +3,7 @@ import Cookies from "js-cookie";
 import { setSignCookie, getParamTokenWithName } from "../_commons/auth.service";
 import * as authConstants from "../_constants/auth.module";
 import { toastError } from "../_helper/toastify.helper";
-import {
-   messageLoadingLogin,
-   messageErrorLogin
-} from "../_helper/message.helper";
+import { messageLoading, messageError } from "../_helper/message.helper";
 const initialState = {
    auth: []
 };
@@ -22,9 +19,9 @@ const reducer = (state = initialState, action) => {
          const { data } = action.payload;
          //data chứa token và một số thứ khác: idAccount, role
          if (data.name === null || data.name === undefined || data.name === "")
-            messageErrorLogin(`Opps!!, ${data.message}`, 2);
+            messageError(`Opps!!, ${data.message}`, 2);
          else
-            messageLoadingLogin(
+            messageLoading(
                `${data.name} is login.....`,
                `Thanks you come back with us, ${data.name}`,
                1,
