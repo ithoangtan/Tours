@@ -1,0 +1,19 @@
+CREATE DEFINER =`root`@`localhost` PROCEDURE `spsearchEngineTour`
+(p_search NVARCHAR(100),p_dayStart DATETIME,p_dayEnd DATETIME)
+BEGIN
+	DECLARE v_likeSearch NVARCHAR
+	(100) DEFAULT Concat
+	('%',p_search,'%');
+	SELECT *
+	FROM tours INNER JOIN schedules
+		on tours.idTour = schedules.idTour
+	WHERE (tours.titleTour LIKE v_likeSearch
+		OR tours.describe LIKE v_likeSearch
+		OR tours.price	 LIKE v_likeSearch
+		OR tours.address LIKE v_likeSearch
+		OR tours.vocationTime LIKE v_likeSearch
+		OR schedules.data LIKE v_likeSearch)
+		AND tours.departureDay <= p_dayEnd
+		AND tours.departureDay >= p_dayStart
+	ORDER BY tours.titleTour ASC;
+END
