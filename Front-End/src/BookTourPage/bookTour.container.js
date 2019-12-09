@@ -17,7 +17,7 @@ const stepStyle = {
    marginBottom: 60,
    boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
-export default class BookTourContainer extends Component {
+class BookTourContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -94,6 +94,7 @@ export default class BookTourContainer extends Component {
    onDone = () => {
       message.success("Processing complete!");
       this.setState({ redirectResult: true });
+      //Lưu xuống data base nữa nha
    };
    onRedirect() {
       const PIN = Date.now();
@@ -181,3 +182,5 @@ export default class BookTourContainer extends Component {
       );
    }
 }
+
+export default BookTourContainer;

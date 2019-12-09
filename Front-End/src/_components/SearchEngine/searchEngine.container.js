@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { Input, DatePicker, Select, Button, Icon, AutoComplete } from "antd";
 import moment from "moment";
-const { Search } = Input;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const { OptGroup } = AutoComplete;
@@ -98,12 +97,12 @@ export default class SearchEngineContainer extends Component {
          .map(group => (
             <OptGroup key={group.title} label={this.renderTitle(group.title)}>
                {group.children.map(opt => (
-                  <Option key={opt.title} value={opt.title}>
+                  <OptionComplete key={opt.title} value={opt.title}>
                      {opt.title}
                      <span className="certain-search-item-count">
                         {opt.count} people
                      </span>
-                  </Option>
+                  </OptionComplete>
                ))}
             </OptGroup>
          ))

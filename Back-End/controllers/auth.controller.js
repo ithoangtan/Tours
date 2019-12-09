@@ -17,7 +17,11 @@ exports.register = (req, res, next) => {
   }
 
   let account = new Accounts(req.body);
-
+  //Quét xem email đã tồn tại không
+  //Nếu có thì thông báo email này đã được đăng ký
+  //Nếu không có thì tiến hành đăng ký
+  // Tiếp theo là quét xem đơn hàng có phone or email nào trùng không,
+  //nếu có thì cập nhật idAccount này cho Order đó
   bcrypt
     .hash(account.password, saltRounds)
     .then(passwordHash => {
@@ -25,7 +29,10 @@ exports.register = (req, res, next) => {
       return Accounts.create(account);
     })
     .then(result => {
-      res.status(201).json({ statusCode: 200, userId: result.idAccount });
+      res.status(201).json({
+        statusCode: 200,
+        userId: result.idAccount
+      });
     })
     .catch(err => {
       if (!err.statusCode) {
