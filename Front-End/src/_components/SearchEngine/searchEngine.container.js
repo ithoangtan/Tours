@@ -1,11 +1,55 @@
 import React, { Component } from "react";
 
-import { Input, DatePicker, Select, Button } from "antd";
+import { Input, DatePicker, Select, Button, Icon, AutoComplete } from "antd";
 import moment from "moment";
-const { Search } = Input;
 const { RangePicker } = DatePicker;
 const { Option } = Select;
+const { OptGroup } = AutoComplete;
+const OptionComplete = AutoComplete.Option;
 const dateFormat = "DD/MM/YYYY";
+
+const dataSource = [
+   {
+      title: "Tên Tour",
+      children: [
+         {
+            title: "Cặp đôi",
+            count: 100
+         },
+         {
+            title: "Gia đình",
+            count: 1060
+         }
+      ]
+   },
+   {
+      title: "Địa danh",
+      children: [
+         {
+            title: "Thung lũng tình yêu",
+            count: 601
+         },
+         {
+            title: "Hạ Long Bay",
+            count: 300
+         }
+      ]
+   },
+   {
+      title: "Tỉnh Thành phố",
+      children: [
+         {
+            title: "Đà Lạt",
+            count: 10
+         },
+         {
+            title: "Sa Pa",
+            count: 2
+         }
+      ]
+   }
+];
+
 export default class SearchEngineContainer extends Component {
    getCurrentDay = () => {
       var today = new Date();
@@ -32,6 +76,50 @@ export default class SearchEngineContainer extends Component {
       console.log("search:", val);
    };
 
+   renderTitle(title) {
+      return (
+         <span>
+            {title}
+            <a
+               style={{ float: "right" }}
+               href="https://www.google.com/search?q=antd"
+               target="_blank"
+               rel="noopener noreferrer"
+            >
+               more
+            </a>
+         </span>
+      );
+   }
+
+   options() {
+      let options = dataSource
+         .map(group => (
+            <OptGroup key={group.title} label={this.renderTitle(group.title)}>
+               {group.children.map(opt => (
+                  <OptionComplete key={opt.title} value={opt.title}>
+                     {opt.title}
+                     <span className="certain-search-item-count">
+                        {opt.count} people
+                     </span>
+                  </OptionComplete>
+               ))}
+            </OptGroup>
+         ))
+         .concat([
+            <Option disabled key="all" className="show-all">
+               <a
+                  href="https://www.google.com/search?q=antd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+               >
+                  View all results
+               </a>
+            </Option>
+         ]);
+      return options;
+   }
+
    render() {
       return (
          <section className="ftco-section ftco-no-pb ftco-no-pt">
@@ -43,8 +131,35 @@ export default class SearchEngineContainer extends Component {
                            <div className="row">
                               <div className="col-lg ">
                                  <div className="form-group">
-                                    <label htmlFor="#">Destination</label>
-                                    <div className="form-field">
+                                    <label htmlFor="#">
+                                       Điểm đến của bạn là:
+                                    </label>
+                                    <div
+                                       className="certain-category-search-wrapper"
+                                       style={{ width: 250 }}
+                                    >
+                                       <AutoComplete
+                                          className="certain-category-search"
+                                          dropdownClassName="certain-category-search-dropdown"
+                                          dropdownMatchSelectWidth={false}
+                                          dropdownStyle={{ width: 300 }}
+                                          size="large"
+                                          style={{ width: "100%" }}
+                                          dataSource={this.options()}
+                                          placeholder="Nhấp zô! Gợi ý cho bạn nè:"
+                                          optionLabelProp="value"
+                                       >
+                                          <Input
+                                             suffix={
+                                                <Icon
+                                                   type="search"
+                                                   className="certain-category-icon"
+                                                />
+                                             }
+                                          />
+                                       </AutoComplete>
+                                    </div>
+                                    {/* <div className="form-field">
                                        <div className="icon">
                                           <span className="ion-ios-search" />
                                        </div>
@@ -53,13 +168,13 @@ export default class SearchEngineContainer extends Component {
                                           onSearch={value => console.log(value)}
                                           size={"large"}
                                           // style={{ width: 200 }}
-                                       />
-                                       {/* <input
+                                       /> */}
+                                    {/* <input
                                           type="text"
                                           className="form-control"
                                           placeholder="Search place"
                                        /> */}
-                                    </div>
+                                    {/* </div> */}
                                  </div>
                               </div>
                               {/* <div className="col-lg align-items-end">
@@ -79,7 +194,9 @@ export default class SearchEngineContainer extends Component {
                               </div> */}
                               <div className="col-lg ">
                                  <div className="form-group">
-                                    <label htmlFor="#">Check-out date</label>
+                                    <label htmlFor="#">
+                                       Bạn định đi khi nào?
+                                    </label>
                                     <div className="form-field">
                                        <RangePicker
                                           size={"large"}
@@ -105,7 +222,9 @@ export default class SearchEngineContainer extends Component {
                               </div>
                               <div className="col-lg">
                                  <div className="form-group">
-                                    <label htmlFor="#">Price Limit</label>
+                                    <label htmlFor="#">
+                                       Bạn có khoản bao nhiêu?
+                                    </label>
                                     <div className="form-field">
                                        <div className="select-wrap">
                                           <div className="icon">
@@ -114,7 +233,7 @@ export default class SearchEngineContainer extends Component {
                                           <Select
                                              showSearch
                                              size={"large"}
-                                             placeholder="Select a Price Limit"
+                                             placeholder="Giá cả của tour"
                                              optionFilterProp="children"
                                              onChange={this.onChange}
                                              onFocus={this.onFocus}
@@ -128,47 +247,23 @@ export default class SearchEngineContainer extends Component {
                                                    ) >= 0
                                              }
                                           >
-                                             <Option value={5000}>
-                                                $5,000
-                                             </Option>
-                                             <Option value={10000}>
-                                                $10,000
-                                             </Option>
-                                             <Option value={50000}>
-                                                $50,000
-                                             </Option>
-                                             <Option value={100000}>
-                                                $100,000
-                                             </Option>
-                                             <Option value={200000}>
-                                                $200,000
-                                             </Option>
-                                             <Option value={300000}>
-                                                $300,000
-                                             </Option>
-                                             <Option value={400000}>
-                                                $400,000
-                                             </Option>
-                                             <Option value={500000}>
-                                                $500,000
-                                             </Option>
-                                             <Option value={600000}>
-                                                $600,000
-                                             </Option>
-                                             <Option value={700000}>
-                                                $700,000
-                                             </Option>
-                                             <Option value={800000}>
-                                                $800,000
-                                             </Option>
-                                             <Option value={900000}>
-                                                $900,000
-                                             </Option>
-                                             <Option value={1000000}>
-                                                $1,000,000
-                                             </Option>
                                              <Option value={2000000}>
-                                                $2,000,000
+                                                2,000,000 VNĐ
+                                             </Option>
+                                             <Option value={5000000}>
+                                                5,000,000 VNĐ
+                                             </Option>
+                                             <Option value={8000000}>
+                                                8,000,000 VNĐ
+                                             </Option>
+                                             <Option value={10000000}>
+                                                10,000,000 VNĐ
+                                             </Option>
+                                             <Option value={20000000}>
+                                                20,000,000 VNĐ
+                                             </Option>
+                                             <Option value={0}>
+                                                Không thành vấn đề (^_^)
                                              </Option>
                                           </Select>
                                           <select
@@ -182,7 +277,9 @@ export default class SearchEngineContainer extends Component {
                               </div>
                               <div className="col-lg align-items-center">
                                  <div className="form-group">
-                                    <label htmlFor="#">Are you ready?</label>
+                                    <label htmlFor="#">
+                                       Bạn đã sẵn sàng chưa?
+                                    </label>
                                     <div className="form-field">
                                        <Button
                                           type="primary"
@@ -190,7 +287,7 @@ export default class SearchEngineContainer extends Component {
                                           size={"large"}
                                           block
                                        >
-                                          Search Your Tours
+                                          Tìm kiếm Tour nào
                                        </Button>
                                        {/* <input
                                           type="submit"

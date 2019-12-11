@@ -42,14 +42,15 @@ class BookTourStep2 extends Component {
             //    const { fetchLoginRequest } = authAllActions;
             //    fetchLoginRequest(values);
             //Lưu thông tin vào storage
-            localStorage.setItem("name", values.name);
-            localStorage.setItem("email", values.email);
-            localStorage.setItem("phone", values.phone);
-            localStorage.setItem("numberChildren", values.numberChildren);
-            localStorage.setItem("numberPeople", values.numberPeople);
-            localStorage.setItem("province", values.residence[0]);
-            localStorage.setItem("district", values.residence[1]);
-            localStorage.setItem("ward", values.residence[2]);
+            localStorage.setItem("orders", JSON.stringify(values));
+            // localStorage.setItem("name", values.name);
+            // localStorage.setItem("email", values.email);
+            // localStorage.setItem("phone", values.phone);
+            // localStorage.setItem("numberChildren", values.numberChildren);
+            // localStorage.setItem("numberPeople", values.numberPeople);
+            // localStorage.setItem("province", values.residence[0]);
+            // localStorage.setItem("district", values.residence[1]);
+            // localStorage.setItem("ward", values.residence[2]);
             //Đến khi người dùng ấn done mới tiến hành lưu xuống CSDL
             console.log("Received values of form: ", values);
          }
@@ -64,18 +65,24 @@ class BookTourStep2 extends Component {
    };
 
    initValue(name) {
-      if (name === "name") return localStorage.getItem("name");
-      if (name === "email") return localStorage.getItem("email");
-      if (name === "phone") return localStorage.getItem("phone");
-      if (name === "numberPeople") return localStorage.getItem("numberPeople");
-      if (name === "numberChildren")
-         return localStorage.getItem("numberChildren");
-      if (name === "address")
-         return [
-            localStorage.getItem("province"),
-            localStorage.getItem("district"),
-            localStorage.getItem("ward")
-         ];
+      if (localStorage.getItem("orders")) {
+         if (name === "name")
+            return JSON.parse(localStorage.getItem("orders")).name;
+         if (name === "email")
+            return JSON.parse(localStorage.getItem("orders")).email;
+         if (name === "phone")
+            return JSON.parse(localStorage.getItem("orders")).phone;
+         if (name === "numberPeople")
+            return JSON.parse(localStorage.getItem("orders")).numberPeople;
+         if (name === "numberChildren")
+            return JSON.parse(localStorage.getItem("orders")).numberChildren;
+         if (name === "address")
+            return [
+               JSON.parse(localStorage.getItem("orders")).address[0],
+               JSON.parse(localStorage.getItem("orders")).address[1],
+               JSON.parse(localStorage.getItem("orders")).address[2]
+            ];
+      }
    }
 
    render() {
@@ -139,7 +146,7 @@ class BookTourStep2 extends Component {
                   </span>
                }
             >
-               {getFieldDecorator("residence", {
+               {getFieldDecorator("address", {
                   initialValue: this.initValue("address"),
                   rules: [
                      {

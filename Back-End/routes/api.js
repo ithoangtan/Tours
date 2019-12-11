@@ -7,6 +7,7 @@ const router = express.Router();
 const tour = require("../controllers/tour.controller");
 const schedule = require("../controllers/schedule.controller");
 const image = require("../controllers/image.controller");
+const order = require("../controllers/order.controller");
 const account = require("../controllers/account.controller");
 const auth = require("../controllers/auth.controller");
 
@@ -40,6 +41,13 @@ router.get("/accounts", authenticated, account.listAll);
 router.post("/account", authenticated, account.create);
 router.patch("/account", authenticated, account.update);
 router.delete("/account", authenticated, account.delete);
+
+//for order`
+router.get("/order", order.read);
+router.get("/orders", order.listAll);
+router.post("/order", order.create);
+router.patch("/order", order.update);
+router.delete("/order", authenticated, order.delete);
 
 //for authencation
 router.post("/login", auth.login);

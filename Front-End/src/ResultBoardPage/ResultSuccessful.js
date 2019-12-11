@@ -12,18 +12,21 @@ export default class ResultSuccessful extends Component {
       return (
          <Result
             status={`success`}
-            title={`Tour của bạn đã được xác nhận!`}
+            title={
+               <div>
+                  {" "}
+                  Số hóa đơn (mã PIN của bạn) là:{" "}
+                  <Paragraph
+                     copyable={{ text: "9704050730989220" }}
+                     style={{ display: "inline" }}
+                  >
+                     {params.idOrder}
+                  </Paragraph>{" "}
+               </div>
+            }
             subTitle={
                <div>
-                  <p>
-                     Số hóa đơn (mã PIN của bạn) là:{" "}
-                     <Paragraph
-                        copyable={{ text: "9704050730989220" }}
-                        style={{ display: "inline" }}
-                     >
-                        {params.idOrder}
-                     </Paragraph>{" "}
-                  </p>
+                  {`Tour của bạn đã được xác nhận!`}
                   <p>
                      Chúng tôi sẽ gửi mail cho bạn để xác nhận lần nữa, Xin hãy
                      kiểm tra và lưu lại!`
@@ -32,6 +35,7 @@ export default class ResultSuccessful extends Component {
             }
             extra={[
                <Link
+                  key="extra"
                   to={{
                      pathname: "/"
                   }}
