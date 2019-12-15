@@ -416,3 +416,15 @@
    max-width: 100%;
    min-width: 100%;
 }
+
+.ht-hero-menu {
+   display: flex;
+   justify-content: center;
+   align-content: flex-start;
+   align-items: flex-start;
+   align-self: flex-start;
+}
+
+.ht-hero-menu-item {
+   max-height: 25px;
+}
