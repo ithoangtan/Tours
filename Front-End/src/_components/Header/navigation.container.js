@@ -8,19 +8,175 @@ import { Menu, Dropdown, Icon, Button, Avatar, Badge, Tooltip } from "antd";
 
 import { getSignCookie } from "../../_commons/auth.service";
 
-const menu = (
-   <Menu>
-      <Menu.Item key="0">
-         <Link to="/tour">Tours</Link>
-      </Menu.Item>
-      <Menu.Item key="1">
-         <Link to="/tour">Tours2</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="3" disabled>
-         3rd menu item（disabled）
-      </Menu.Item>
-   </Menu>
+const menuVN = (
+   <div className="ht-hero-menu">
+      <Menu>
+         <Menu.ItemGroup title="Bắc">
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+            <Menu.Item key="3" className="ht-hero-menu-item">
+               3rd menu item
+            </Menu.Item>
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+         </Menu.ItemGroup>
+         <Menu.Item key="1">
+            <Link to="/tour">Tours2</Link>
+         </Menu.Item>
+         <Menu.Item key="3">3rd menu </Menu.Item>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Trung">
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+            <Menu.Item key="3" className="ht-hero-menu-item">
+               3rd menu item
+            </Menu.Item>
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+         </Menu.ItemGroup>
+         <Menu.Item key="1">
+            <Link to="/tour">Tours2</Link>
+         </Menu.Item>
+         <Menu.Item key="3">3rd menu </Menu.Item>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Nam">
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+            <Menu.Item key="3" className="ht-hero-menu-item">
+               3rd menu item
+            </Menu.Item>
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+         </Menu.ItemGroup>
+         <Menu.Item key="1">
+            <Link to="/tour">Tours2</Link>
+         </Menu.Item>
+         <Menu.Item key="3">3rd menu item ）</Menu.Item>
+      </Menu>
+   </div>
+);
+
+const menuWorld = (
+   <div className="ht-hero-menu">
+      <Menu>
+         <Menu.ItemGroup title="Đông Á">
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+            <Menu.Item key="3" className="ht-hero-menu-item">
+               3rd menu item
+            </Menu.Item>
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+         </Menu.ItemGroup>
+         <Menu.Item key="1">
+            <Link to="/tour">Tours2</Link>
+         </Menu.Item>
+         <Menu.Item key="3">3rd menu item ）</Menu.Item>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Tây Á">
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+            <Menu.Item key="3" className="ht-hero-menu-item">
+               3rd menu item
+            </Menu.Item>
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+         </Menu.ItemGroup>
+         <Menu.Item key="1">
+            <Link to="/tour">Tours2</Link>
+         </Menu.Item>
+         <Menu.Item key="3">3rd menu item ）</Menu.Item>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Châu Âu">
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+            <Menu.Item key="3" className="ht-hero-menu-item">
+               3rd menu item
+            </Menu.Item>
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+         </Menu.ItemGroup>
+         <Menu.Item key="1">
+            <Link to="/tour">Tours2</Link>
+         </Menu.Item>
+         <Menu.Item key="3">3rd menu </Menu.Item>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Châu Mỹ">
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+            <Menu.Item key="3" className="ht-hero-menu-item">
+               3rd menu item
+            </Menu.Item>
+            <Menu.Item key="0" className="ht-hero-menu-item">
+               <Link to="/tour">Tours</Link>
+            </Menu.Item>
+            <Menu.Item key="1" className="ht-hero-menu-item">
+               <Link to="/tour">Tours2</Link>
+            </Menu.Item>
+         </Menu.ItemGroup>
+         <Menu.Item key="1">
+            <Link to="/tour">Tours2</Link>
+         </Menu.Item>
+         <Menu.Item key="3">3rd menu </Menu.Item>
+      </Menu>
+   </div>
 );
 
 export default class Navigation extends Component {
@@ -154,7 +310,6 @@ export default class Navigation extends Component {
                <Link to="/" className="navbar-brand">
                   <span>Tours</span>
                </Link>
-
                <button
                   className="navbar-toggler"
                   type="button"
@@ -170,23 +325,25 @@ export default class Navigation extends Component {
                   <ul className="navbar-nav ml-auto">
                      <li className="nav-item active">
                         <Link to="/" className="nav-link">
-                           Home
+                           HOME
                         </Link>
                      </li>
-                     <li className="nav-item">
-                        <Link to="/about" className="nav-link">
-                           About
-                        </Link>
-                     </li>
-                     <li className="nav-item">
+                     {/* <li className="nav-item">
                         <Link to="/destination" className="nav-link">
                            Destination
                         </Link>
+                     </li> */}
+                     <li className="nav-item">
+                        <Dropdown overlay={menuWorld} className="nav-link">
+                           <Link to="/">
+                              Quốc Tế <Icon type="down" />
+                           </Link>
+                        </Dropdown>
                      </li>
                      <li className="nav-item">
-                        <Dropdown overlay={menu} className="nav-link">
+                        <Dropdown overlay={menuVN} className="nav-link">
                            <Link to="/">
-                              Tours <Icon type="down" />
+                              Việt Nam <Icon type="down" />
                            </Link>
                         </Dropdown>
                      </li>
@@ -196,10 +353,16 @@ export default class Navigation extends Component {
                         </Link>
                      </li>
                      <li className="nav-item">
+                        <Link to="/about" className="nav-link">
+                           About
+                        </Link>
+                     </li>
+                     <li className="nav-item">
                         <Link to="/contact" className="nav-link">
                            Contact
                         </Link>
                      </li>
+
                      <li className="nav-item" style={{ alignSelf: "center" }}>
                         <Button
                            type="secondary"

@@ -17,8 +17,7 @@ export default class BookTourStep3 extends Component {
 
    render() {
       const { size } = this.state;
-      const phone = localStorage.getItem("phone");
-      const name = localStorage.getItem("name");
+      const orders = JSON.parse(localStorage.getItem("orders"));
       return (
          <div className="ht-book-finish">
             <Tabs defaultActiveKey="1" size={size}>
@@ -95,10 +94,12 @@ export default class BookTourStep3 extends Component {
                               <i className="far fa-sticky-note"></i> Nội Dung
                               Chuyển Khoản{" "}
                               <Paragraph
-                                 copyable={{ text: `${phone} ${name}` }}
+                                 copyable={{
+                                    text: `${orders.phone} ${orders.name}`
+                                 }}
                                  style={{ display: "inline" }}
                               >
-                                 {`${phone} `}
+                                 {`${orders.phone} `}
                                  {/* Dự kiến là số điện thoại + Tên khách hàng */}
                               </Paragraph>
                            </Tooltip>{" "}

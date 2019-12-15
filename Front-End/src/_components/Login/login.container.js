@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Form, Icon, Input, Button, Checkbox, Radio } from "antd";
+import { Form, Icon, Input, Button, Checkbox } from "antd";
 
 class LoginContainer extends Component {
    constructor(props) {
@@ -62,7 +62,8 @@ class LoginContainer extends Component {
          if (!err) {
             const { authAllActions } = this.props;
             const { fetchLoginRequest } = authAllActions;
-            fetchLoginRequest(values);
+            let data = { ...values, role: "user" };
+            fetchLoginRequest(data);
          } else {
             throw err;
          }
@@ -112,7 +113,7 @@ class LoginContainer extends Component {
                   />
                )}
             </Form.Item>
-            <Form.Item>
+            {/* <Form.Item>
                {getFieldDecorator("role", {
                   valuePropName: "radio",
                   initialValue: true
@@ -132,7 +133,7 @@ class LoginContainer extends Component {
                      </Radio.Button>
                   </Radio.Group>
                )}
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item>
                {getFieldDecorator("remember", {
                   valuePropName: "checked",
