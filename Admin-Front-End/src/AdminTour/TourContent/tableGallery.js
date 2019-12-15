@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as tourImageActions from "../../_actions/image.actions";
-import { API_ENDPOINT } from "../../_constants/index.constants";
+import { API_ENDPOINT, APIImage } from "../../_constants/index.constants";
 
 import { Upload, Icon, Modal, message } from "antd";
 
@@ -37,6 +37,9 @@ class TableGallery extends Component {
          .filter(image => image.idTour === record.idTour)
          .map(image => ({
             ...image,
+            //APIImage is http://localhost:8000
+            //image.url is /img/<name file image>.xxx
+            url: APIImage + image.url,
             uid: image.idImage
          }));
       this.setState({ fileList: listImageFilterIdTour });

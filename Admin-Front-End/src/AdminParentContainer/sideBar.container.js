@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { Tooltip } from "antd";
 
+import { LinkUserPage } from "../_constants/index.constants";
+
 export default class SideBarContainer extends Component {
    render() {
       return (
@@ -13,15 +15,17 @@ export default class SideBarContainer extends Component {
          >
             {/* Sidebar - Brand */}
             <Tooltip placement="right" title={"Go to user MODE"}>
-               <Link
-                  to="/"
+               <a
+                  href={LinkUserPage}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="sidebar-brand d-flex align-items-center justify-content-center"
                >
                   <div className="sidebar-brand-icon rotate-n-15">
                      <i className="fas fa-laugh-wink" />
                   </div>
                   <div className="sidebar-brand-text mx-3">SB Admin</div>
-               </Link>
+               </a>
             </Tooltip>
 
             {/* Divider */}
