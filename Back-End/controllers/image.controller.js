@@ -8,7 +8,7 @@ let dateNow = Date.now();
 
 let Storage = multer.diskStorage({
   destination: function(req, file, callback) {
-    callback(null, "../Front-End/public/img");
+    callback(null, "./public/img");
   },
   filename: function(req, file, callback) {
     nameFile = dateNow + "_" + file.originalname;
