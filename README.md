@@ -20,7 +20,7 @@ Install the dependencies and devDependencies and start the server.
 For back-end...
 
 ```sh
-$ cd back-end
+$ cd Back-End
 $ npm install -d
 $ nodemon
 ...port 8000
@@ -29,10 +29,19 @@ $ nodemon
 For front-end...
 
 ```sh
-$ cd front-end
+$ cd Front-End
 $ yarn
 $ yarn start
 ...port 9999
+```
+
+For admin-front-end...
+
+```sh
+$ cd Admin-Front-End
+$ yarn
+$ yarn start
+...port 9000
 ```
 
 ### Todos
