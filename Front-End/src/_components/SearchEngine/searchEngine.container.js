@@ -134,22 +134,19 @@ export default class SearchEngineContainer extends Component {
                                     <label htmlFor="#">
                                        Điểm đến của bạn là:
                                     </label>
-                                    <div
-                                       className="certain-category-search-wrapper"
-                                       style={{ width: 250 }}
-                                    >
+                                    <div className="certain-category-search-wrapperht-width100">
                                        <AutoComplete
-                                          className="certain-category-search"
+                                          className="certain-category-search ht-width100"
                                           dropdownClassName="certain-category-search-dropdown"
                                           dropdownMatchSelectWidth={false}
                                           dropdownStyle={{ width: 300 }}
                                           size="large"
-                                          style={{ width: "100%" }}
                                           dataSource={this.options()}
                                           placeholder="Nhấp zô! Gợi ý cho bạn nè:"
                                           optionLabelProp="value"
                                        >
                                           <Input
+                                             className="ht-width100"
                                              suffix={
                                                 <Icon
                                                    type="search"
@@ -200,6 +197,7 @@ export default class SearchEngineContainer extends Component {
                                     <div className="form-field">
                                        <RangePicker
                                           size={"large"}
+                                          className="ht-width100"
                                           defaultValue={[
                                              moment(
                                                 this.getCurrentDay(),

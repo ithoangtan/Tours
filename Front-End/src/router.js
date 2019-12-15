@@ -22,7 +22,6 @@ import TourPage from "./TourPage/tour.page";
 import LoginPage from "./LoginAndRegisterPage/login.page";
 import RegisterPage from "./LoginAndRegisterPage/register.page";
 import BookTourPage from "./BookTourPage/bookTour.page";
-import ForgotPasswordPage from "./AdminForgotPassword/ForgotPassword.Page";
 
 //common Customer
 import SubcribeContainer from "./_components/Footer/subcribe.container";
@@ -208,11 +207,7 @@ const router = [
       )
    },
    //end for customer
-   {
-      path: "/forgot-password",
-      exact: true,
-      component: ({ match }) => <ForgotPasswordPage match={match} />
-   },
+
    //for  commons
    {
       path: "/notAuthorized",
