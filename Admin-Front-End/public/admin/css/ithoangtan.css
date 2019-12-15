@@ -107,3 +107,7 @@
 .ht-boder-radius-1 {
    border-radius: 8px;
 }
+
+.ht-width100 {
+   width: 100%;
+}

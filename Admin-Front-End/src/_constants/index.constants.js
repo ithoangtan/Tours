@@ -31,3 +31,7 @@ export const AdminArrayExternalScript = [
    "/admin/js/demo/chart-area-demo.js",
    "/admin/js/demo/chart-pie-demo.js"
 ];
+
+export const APIImage = "http://localhost:8000";
+
+export const LinkUserPage = "http://localhost:9999";

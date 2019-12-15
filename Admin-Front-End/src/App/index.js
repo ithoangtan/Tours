@@ -80,7 +80,7 @@ function PrivateRoute({ ...rest }) {
                return (
                   <Redirect
                      to={{
-                        pathname: "/login",
+                        pathname: "/",
                         state: { from: location }
                      }}
                   />

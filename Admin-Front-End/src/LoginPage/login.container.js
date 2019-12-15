@@ -7,9 +7,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as authActions from "../../_actions/auth.actions";
+import * as authActions from "../_actions/auth.actions";
 
-import { Form, Icon, Input, Button, Checkbox, Radio } from "antd";
+import { Form, Icon, Input, Button, Checkbox } from "antd";
 
 class LoginContainer extends Component {
    constructor(props) {
@@ -62,7 +62,8 @@ class LoginContainer extends Component {
          if (!err) {
             const { authAllActions } = this.props;
             const { fetchLoginRequest } = authAllActions;
-            fetchLoginRequest(values);
+            let data = { ...values, role: "Administrator" };
+            fetchLoginRequest(data);
          } else {
             throw err;
          }
@@ -72,7 +73,7 @@ class LoginContainer extends Component {
    render() {
       const { getFieldDecorator } = this.props.form;
       return (
-         <Form onSubmit={this.handleSubmit} className="login-form">
+         <Form onSubmit={this.handleSubmit} className="login-form ">
             {this.haveRedirect()}
             <Form.Item>
                {getFieldDecorator("email", {
@@ -88,6 +89,7 @@ class LoginContainer extends Component {
                            style={{ color: "rgba(0,0,0,.25)" }}
                         />
                      }
+                     size="large"
                      placeholder="Email"
                   />
                )}
@@ -100,6 +102,7 @@ class LoginContainer extends Component {
                })(
                   <Input
                      name="password"
+                     size="large"
                      prefix={
                         <Icon
                            type="lock"
@@ -113,43 +116,29 @@ class LoginContainer extends Component {
                )}
             </Form.Item>
             <Form.Item>
-               {getFieldDecorator("role", {
-                  valuePropName: "radio",
-                  initialValue: true
-               })(
-                  <Radio.Group
-                     defaultValue="user"
-                     buttonStyle="solid"
-                     className="role"
-                  >
-                     <Radio.Button value="role" disabled>
-                        Roles:{" "}
-                     </Radio.Button>
-                     <Radio.Button value="user">User</Radio.Button>
-                     <Radio.Button value="admin">Admin</Radio.Button>
-                     <Radio.Button value="administrator">
-                        Administrator
-                     </Radio.Button>
-                  </Radio.Group>
-               )}
-            </Form.Item>
-            <Form.Item>
                {getFieldDecorator("remember", {
                   valuePropName: "checked",
                   initialValue: true
-               })(<Checkbox>Remember me</Checkbox>)}
-               <Link className="login-form-forgot" to="/forgot-password">
-                  Forgot password
-               </Link>
+               })(<Checkbox size="large">Remember me</Checkbox>)}
                <Button
+                  size="large"
                   type="primary"
                   htmlType="submit"
-                  className="login-form-button"
+                  className="login-form-button ht-width100 mt-3"
                >
                   Log in
                </Button>
-               Or <Link to="/register">register now!</Link>
             </Form.Item>
+
+            <Link to="index.html" className="btn btn-google btn-user btn-block">
+               <i className="fab fa-google fa-fw" /> Login with Google
+            </Link>
+            <Link
+               to="index.html"
+               className="btn btn-facebook btn-user btn-block"
+            >
+               <i className="fab fa-facebook-f fa-fw" /> Login with Facebook
+            </Link>
          </Form>
       );
    }
