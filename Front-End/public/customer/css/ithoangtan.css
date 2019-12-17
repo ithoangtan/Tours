@@ -437,25 +437,6 @@
    width: 100%;
 }
 
-.carouselTitle {
-   font-size: 64px;
-   font-weight: 100;
-   color: white;
-   text-shadow: 0 1px 2px #000;
-   position: absolute;
-   bottom: 60px;
-   left: 80px;
-}
-
-.carousel-item .col,
-.carousel-item .col-sm,
-.carousel-item .col-md {
-   margin: 8px;
-   height: 300px;
-   background-size: cover;
-   background-position: center center;
-}
-
 .area-hidden-right {
    background: linear-gradient(
       90deg,
@@ -470,4 +451,215 @@
       rgb(73, 73, 73) 0%,
       rgba(255, 255, 255, 0) 70%
    );
+}
+
+/* slide best tour */
+
+/*
+    code by Iatek LLC 2018 - CC 2.0 License - Attribution required
+    code customized by Azmind.com
+*/
+@media (min-width: 768px) and (max-width: 991px) {
+   /* Show 4th slide on md if col-md-4*/
+   #myCarousel
+      .carousel-inner
+      .active.col-md-4.carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: absolute;
+      top: 0;
+      right: -33.3333%; /*change this with javascript in the future*/
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+   /* Show 3rd slide on sm if col-sm-6*/
+   #myCarousel
+      .carousel-inner
+      .active.col-sm-6.carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: absolute;
+      top: 0;
+      right: -50%; /*change this with javascript in the future*/
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+}
+@media (min-width: 576px) {
+   .carousel-item {
+      margin-right: 0;
+   }
+   /* show 2 items */
+   #myCarousel .carousel-inner .active + .carousel-item {
+      display: block;
+   }
+   #myCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+   #myCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+      + .carousel-item {
+      transition: none;
+   }
+   #myCarousel .carousel-inner .carousel-item-next {
+      position: relative;
+      transform: translate3d(0, 0, 0);
+   }
+   /* left or forward direction */
+   #myCarousel
+      .active.carousel-item-left
+      + .carousel-item-next.carousel-item-left,
+   #myCarousel .carousel-item-next.carousel-item-left + .carousel-item,
+   #myCarousel
+      .carousel-item-next.carousel-item-left
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+   }
+   /* farthest right hidden item must be also positioned for animations */
+   #myCarousel .carousel-inner .carousel-item-prev.carousel-item-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+   /* right or prev direction */
+   #myCarousel
+      .active.carousel-item-right
+      + .carousel-item-prev.carousel-item-right,
+   #myCarousel .carousel-item-prev.carousel-item-right + .carousel-item,
+   #myCarousel
+      .carousel-item-prev.carousel-item-right
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+      display: block;
+      visibility: visible;
+   }
+}
+/* MD */
+@media (min-width: 768px) {
+   /* show 3rd of 3 item slide */
+   #myCarousel .carousel-inner .active + .carousel-item + .carousel-item {
+      display: block;
+   }
+   #myCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+      + .carousel-item
+      + .carousel-item {
+      transition: none;
+   }
+   #myCarousel .carousel-inner .carousel-item-next {
+      position: relative;
+      transform: translate3d(0, 0, 0);
+   }
+   /* left or forward direction */
+   #myCarousel
+      .carousel-item-next.carousel-item-left
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+   }
+   /* right or prev direction */
+   #myCarousel
+      .carousel-item-prev.carousel-item-right
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+      display: block;
+      visibility: visible;
+   }
+}
+/* LG */
+@media (min-width: 991px) {
+   /* show 4th item */
+   #myCarousel
+      .carousel-inner
+      .active
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      display: block;
+   }
+   #myCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      transition: none;
+   }
+   /* Show 5th slide on lg if col-lg-3 */
+   #myCarousel
+      .carousel-inner
+      .active.col-lg-3.carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: absolute;
+      top: 0;
+      right: -25%; /*change this with javascript in the future*/
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+   /* left or forward direction */
+   #myCarousel
+      .carousel-item-next.carousel-item-left
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+   }
+   /* right or prev direction //t - previous slide direction last item animation fix */
+   #myCarousel
+      .carousel-item-prev.carousel-item-right
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+      display: block;
+      visibility: visible;
+   }
+}
+
+.ht-w-40 {
+   width: 70px !important;
+}
+
+.ht-w-50 {
+   width: 70px !important;
+}
+
+.ht-w-60 {
+   width: 70px !important;
+}
+.ht-w-70 {
+   width: 70px !important;
 }

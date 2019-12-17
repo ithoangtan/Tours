@@ -363,7 +363,7 @@ export default class Navigation extends Component {
                         </Link>
                      </li>
 
-                     <li className="nav-item" style={{ alignSelf: "center" }}>
+                     {/* <li className="nav-item" style={{ alignSelf: "center" }}>
                         <Button
                            type="secondary"
                            icon="shopping-cart"
@@ -371,7 +371,7 @@ export default class Navigation extends Component {
                         >
                            Book Now
                         </Button>
-                     </li>
+                     </li> */}
                      {this.renderAvartar()}
                   </ul>
                </div>
