@@ -12,6 +12,8 @@ import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
 import { Resizable } from "react-resizable";
 
+import { API_ENDPOINT } from "../../_constants/index.constants";
+
 import {
    Table,
    Input,
@@ -262,7 +264,7 @@ class EditableTable extends React.Component {
       const { fetchListTourRequest } = tourAllActions;
       await fetchListTourRequest();
       await reqwest({
-         url: "http://localhost:8000/tours",
+         url: `${API_ENDPOINT}/tours`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {

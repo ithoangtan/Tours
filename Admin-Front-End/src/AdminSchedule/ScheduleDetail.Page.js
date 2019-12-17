@@ -30,18 +30,7 @@ class ScheduleDetail extends Component {
       // fetchListTourRequest();
       // const { record } = this.props.location.state;
       if (this.props.match !== null) {
-         const { idTour } = this.props.match.params;
-
-         //Load data tour by Id tour
-         const { tourAllActions } = this.props;
-         const { fetchTourByIdRequest } = tourAllActions;
-         fetchTourByIdRequest(idTour);
-
-         //Load data schedule by id tour
-         const { scheduleAllActions } = this.props;
-         const { fetchScheduleByIdTourRequest } = scheduleAllActions;
-         fetchScheduleByIdTourRequest(idTour);
-
+         this.fetch();
          //Save on state
          const { scheduleByIdTour, tour } = this.props;
          this.setState({
@@ -50,6 +39,19 @@ class ScheduleDetail extends Component {
          });
       } //end if
    }
+   fetch = async () => {
+      const { idTour } = this.props.match.params;
+
+      //Load data tour by Id tour
+      const { tourAllActions } = this.props;
+      const { fetchTourByIdRequest } = tourAllActions;
+      await fetchTourByIdRequest(idTour);
+
+      //Load data schedule by id tour
+      const { scheduleAllActions } = this.props;
+      const { fetchScheduleByIdTourRequest } = scheduleAllActions;
+      await fetchScheduleByIdTourRequest(idTour);
+   };
 
    render() {
       const { tour, scheduleByIdTour } = this.props;
