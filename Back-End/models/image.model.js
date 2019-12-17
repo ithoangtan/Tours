@@ -10,18 +10,23 @@ const Image = function(image) {
   this.idTour = image.idTour;
 };
 Image.getAllImageTour = function(fncResult) {
-  mysql.query("SELECT * FROM kinhdoanhtourdulich.images;", function(err, res) {
-    if (err) {
-      fncResult(err, null);
-    } else {
-      fncResult(null, res);
+  mysql.query(
+    "SELECT * FROM kinhdoanhtourdulich.images WHERE statusAction <> 'deleted';",
+    function(err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
     }
-  });
+  );
 };
 
 Image.getAllImageTourById = function(idTour, fncResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.images WHERE idTour = " + idTour + " ;",
+    "SELECT * FROM kinhdoanhtourdulich.images WHERE idTour = " +
+      idTour +
+      " AND statusAction <> 'deleted';",
     function(err, res) {
       if (err) {
         fncResult(err, null);
@@ -34,7 +39,7 @@ Image.getAllImageTourById = function(idTour, fncResult) {
 
 Image.remove = function(idImage, name, fncResult) {
   mysql.query(
-    "DELETE FROM kinhdoanhtourdulich.images WHERE idImage = ?",
+    "UPDATE kinhdoanhtourdulich.images SET `statusAction` = 'deleted' WHERE idImage = ?",
     [idImage],
     function(err, res) {
       if (err) {

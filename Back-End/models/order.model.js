@@ -15,18 +15,21 @@ const Order = function(order) {
   this.idAccount = order.idAccount || 8;
 };
 Order.getAllOrder = function(funcResult) {
-  mysql.query("SELECT * FROM kinhdoanhtourdulich.orders ;", function(err, res) {
-    if (err) {
-      funcResult(err, null);
-    } else {
-      funcResult(null, res);
+  mysql.query(
+    "SELECT * FROM kinhdoanhtourdulich.orders WHERE statusAction <> 'deleted';",
+    function(err, res) {
+      if (err) {
+        funcResult(err, null);
+      } else {
+        funcResult(null, res);
+      }
     }
-  });
+  );
 };
 
 Order.getAllOrderForUser = function(idAccount, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.orders where idAccount = ?; ",
+    "SELECT * FROM kinhdoanhtourdulich.orders where idAccount = ? AND WHERE statusAction <> 'deleted'; ",
     [idAccount],
     function(err, res) {
       if (err) {
@@ -85,7 +88,7 @@ Order.createOrder = function(newOrder, funcResult) {
 
 Order.getOrderById = function(idOrder, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? ;",
+    "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? AND WHERE statusAction <> 'deleted';",
     [idOrder],
     function(err, res) {
       if (err) {
@@ -99,7 +102,7 @@ Order.getOrderById = function(idOrder, funcResult) {
 
 Order.getOrderByIdWithIdAccount = function(idOrder, idAccount, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? AND idAccount = ? ;",
+    "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? AND idAccount = ? AND WHERE statusAction <> 'deleted';",
     [idOrder, idAccount],
     function(err, res) {
       if (err) {
@@ -112,6 +115,7 @@ Order.getOrderByIdWithIdAccount = function(idOrder, idAccount, funcResult) {
 };
 
 Order.updateById = function(updateOrder, funcResult) {
+  updateOrder = { ...updateOrder, statusAction: "edited" };
   mysql.query(
     "UPDATE kinhdoanhtourdulich.orders SET ? WHERE (idOrder = ?);",
     [updateOrder, updateOrder.idOrder],
@@ -127,7 +131,7 @@ Order.updateById = function(updateOrder, funcResult) {
 
 Order.remove = function(idOrder, funcResult) {
   mysql.query(
-    "DELETE FROM kinhdoanhtourdulich.orders WHERE idOrder = ?",
+    "UPDATE kinhdoanhtourdulich.orders SET `statusAction` = 'deleted' WHERE idOrder = ?",
     [idOrder],
     function(err, res) {
       if (err) {
