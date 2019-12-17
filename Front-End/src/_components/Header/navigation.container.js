@@ -4,80 +4,145 @@ import Cookies from "js-cookie";
 
 import { Link, Redirect } from "react-router-dom";
 
-import { Menu, Dropdown, Icon, Button, Avatar, Badge, Tooltip } from "antd";
+import { Menu, Dropdown, Icon, Avatar, Badge, Tooltip } from "antd";
 
 import { getSignCookie } from "../../_commons/auth.service";
+
+const North = [
+   { name: "Hà Nội", key: "ha-noi" },
+   { name: "Hạ Long", key: "ha-long-bay" },
+   { name: "Sa Pa", key: "sa-pa" },
+   { name: "Ninh Bình", key: "ninh-binh" },
+   { name: "Ninh Hòa", key: "ninh-hoa" },
+   { name: "Hòa Bình", key: "hoa-binh" },
+   { name: "Thanh Hóa", key: "thanh-hoa" }
+];
+const Central = [
+   { name: "Phan Thiết", key: "phan-thiet" },
+   { name: "Nha Trang", key: "nha-trang" },
+   { name: "Đà Lạt", key: "da-lat" },
+   { name: "Tây Nguyên", key: "tay-nguyen" },
+   {
+      name: "Tuy Hòa - Quy Nhơn - Quảng Ngãi",
+      key: "tuy-hoa-quy-nhon-quang-ngai"
+   },
+   { name: "Hội An - Đà Nẵng", key: "hoi-an-da-nang" },
+   { name: "Huế - Quảng Bình", key: "hue-quang-binh" }
+];
+const South = [
+   { name: "Phú Quốc", key: "phu-quoc}" },
+   { name: "Miền Tây", key: "mien-tay" },
+   { name: "Côn Đảo", key: "con-dao" },
+   { name: "Hồ Tràm", key: "ho-tram" }
+];
+const bestTour = [
+   { name: "Ưu đãi Tour Tết Nguyên Đán", key: "uu-dai-tet-nguyen-dan" },
+   { name: "Tour năm mới 2020", key: "tour-nam-moi-2020" },
+   { name: "Các mùa trong nước", key: "cac-mua-trong-nuoc" },
+   { name: "Tour tự do", key: "tour-tu-do" },
+   { name: "Tour liên tuyến", key: "tour-lien-tuyen" },
+   { name: "Tour mạo hiểm", key: "tour-mao-hiem" },
+   { name: "Tour hành hương", key: "tour-hanh-huong" }
+];
+
+const Asia1 = [
+   { name: "Campuchia", key: "campuchia" },
+   { name: "Đài Loan", key: "dai-loan" },
+   { name: "Hàn Quốc", key: "han-quoc" },
+   { name: "HongKong", key: "hongkong" },
+   { name: "Malaysia", key: "malaysia" },
+   { name: "Myanmar", key: "myanmar" },
+   { name: "Nhật Bản", key: "nhat-ban" },
+   { name: "Singapore", key: "singapore" }
+];
+
+const Asia2 = [
+   { name: "Thái Lan", key: "thai-lan" },
+   { name: "Trung Quốc", key: "trung-quoc" },
+   { name: "Ả Rập", key: "a-rap" },
+   { name: "Nga", key: "nga" },
+   { name: "Brunei", key: "brunei" },
+   { name: "Lào", key: "lao" },
+   { name: "Indonesia", key: "indonesia" },
+   { name: "Triều Tiên", key: "trieu-tien" },
+   { name: "Philippines", key: "philippines" },
+   { name: "Ấn Độ", key: "an-do" },
+   { name: "Qatar", key: "qatar" }
+];
+const Euro = [
+   { name: "Anh", key: "anh" },
+   { name: "Đức", key: "duc" },
+   { name: "Scotland", key: "scotland" },
+   { name: "Thổ Nhĩ Kỳ", key: "tho-nhi-ky" },
+   { name: "Ý", key: "y" },
+   { name: "Pháp", key: "phap" }
+];
+
+const otherContinents = [
+   { name: "châu Úc", key: "chau-uc" },
+   { name: "châu Mỹ", key: "chau-my" },
+   { name: "New Zealand", key: "new-zealand" },
+   { name: "Cuba", key: "cuba" },
+   { name: "Ma-rốc", key: "ma-roc" },
+   { name: "Nam Mỹ", key: "nam-my" },
+   { name: "Canada", key: "canada" }
+];
+const vipTour = [
+   { name: "Du thuyền cao cấp", key: "du-thuyen-cao-cap" },
+   { name: "Mùa hòa anh đào", key: "mua-hoa-anh-dao" },
+   { name: "Lặng biển", key: "lang-bien" },
+   { name: "Dubai", key: "dubai" }
+];
 
 const menuVN = (
    <div className="ht-hero-menu">
       <Menu>
-         <Menu.ItemGroup title="Bắc">
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
-            <Menu.Item key="3" className="ht-hero-menu-item">
-               3rd menu item
-            </Menu.Item>
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
+         <Menu.ItemGroup title="Miền Bắc" className="ht-hero-menu-title">
+            {North.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
          </Menu.ItemGroup>
-         <Menu.Item key="1">
-            <Link to="/tour">Tours2</Link>
-         </Menu.Item>
-         <Menu.Item key="3">3rd menu </Menu.Item>
+         <Menu.Item></Menu.Item>
       </Menu>
       <Menu>
-         <Menu.ItemGroup title="Trung">
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
-            <Menu.Item key="3" className="ht-hero-menu-item">
-               3rd menu item
-            </Menu.Item>
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
+         <Menu.ItemGroup title="Miền Trung" className="ht-hero-menu-title">
+            {Central.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
          </Menu.ItemGroup>
-         <Menu.Item key="1">
-            <Link to="/tour">Tours2</Link>
-         </Menu.Item>
-         <Menu.Item key="3">3rd menu </Menu.Item>
+         <Menu.Item></Menu.Item>
       </Menu>
       <Menu>
-         <Menu.ItemGroup title="Nam">
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
-            <Menu.Item key="3" className="ht-hero-menu-item">
-               3rd menu item
-            </Menu.Item>
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
+         <Menu.ItemGroup title="Miền Nam" className="ht-hero-menu-title">
+            {South.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
          </Menu.ItemGroup>
-         <Menu.Item key="1">
-            <Link to="/tour">Tours2</Link>
-         </Menu.Item>
-         <Menu.Item key="3">3rd menu item ）</Menu.Item>
+         <Menu.Item></Menu.Item>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Best Tours" className="ht-hero-menu-title">
+            {bestTour.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
+         </Menu.ItemGroup>
+         <Menu.Item></Menu.Item>
       </Menu>
    </div>
 );
@@ -85,96 +150,64 @@ const menuVN = (
 const menuWorld = (
    <div className="ht-hero-menu">
       <Menu>
-         <Menu.ItemGroup title="Đông Á">
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
-            <Menu.Item key="3" className="ht-hero-menu-item">
-               3rd menu item
-            </Menu.Item>
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
+         <Menu.ItemGroup title="Châu Á" className="ht-hero-menu-title">
+            {Asia1.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
          </Menu.ItemGroup>
-         <Menu.Item key="1">
-            <Link to="/tour">Tours2</Link>
-         </Menu.Item>
-         <Menu.Item key="3">3rd menu item ）</Menu.Item>
+         <Menu.Item></Menu.Item>
       </Menu>
       <Menu>
-         <Menu.ItemGroup title="Tây Á">
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
-            <Menu.Item key="3" className="ht-hero-menu-item">
-               3rd menu item
-            </Menu.Item>
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
+         <Menu.ItemGroup title="Châu Á" className="ht-hero-menu-title">
+            {Asia2.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
          </Menu.ItemGroup>
-         <Menu.Item key="1">
-            <Link to="/tour">Tours2</Link>
-         </Menu.Item>
-         <Menu.Item key="3">3rd menu item ）</Menu.Item>
+         <Menu.Item></Menu.Item>
       </Menu>
       <Menu>
-         <Menu.ItemGroup title="Châu Âu">
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
-            <Menu.Item key="3" className="ht-hero-menu-item">
-               3rd menu item
-            </Menu.Item>
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
+         <Menu.ItemGroup title="Châu Âu" className="ht-hero-menu-title">
+            {Euro.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
          </Menu.ItemGroup>
-         <Menu.Item key="1">
-            <Link to="/tour">Tours2</Link>
-         </Menu.Item>
-         <Menu.Item key="3">3rd menu </Menu.Item>
+         <Menu.Item></Menu.Item>
       </Menu>
       <Menu>
-         <Menu.ItemGroup title="Châu Mỹ">
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
-            <Menu.Item key="3" className="ht-hero-menu-item">
-               3rd menu item
-            </Menu.Item>
-            <Menu.Item key="0" className="ht-hero-menu-item">
-               <Link to="/tour">Tours</Link>
-            </Menu.Item>
-            <Menu.Item key="1" className="ht-hero-menu-item">
-               <Link to="/tour">Tours2</Link>
-            </Menu.Item>
+         <Menu.ItemGroup title="Châu lục khác" className="ht-hero-menu-title">
+            {otherContinents.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
          </Menu.ItemGroup>
-         <Menu.Item key="1">
-            <Link to="/tour">Tours2</Link>
-         </Menu.Item>
-         <Menu.Item key="3">3rd menu </Menu.Item>
+         <Menu.Item></Menu.Item>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Châu Mỹ" className="ht-hero-menu-title">
+            {vipTour.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                  </Menu.Item>
+               );
+            })}
+         </Menu.ItemGroup>
+         <Menu.Item></Menu.Item>
       </Menu>
    </div>
 );
@@ -325,7 +358,7 @@ export default class Navigation extends Component {
                   <ul className="navbar-nav ml-auto">
                      <li className="nav-item active">
                         <Link to="/" className="nav-link">
-                           HOME
+                           Home
                         </Link>
                      </li>
                      {/* <li className="nav-item">
@@ -363,7 +396,7 @@ export default class Navigation extends Component {
                         </Link>
                      </li>
 
-                     <li className="nav-item" style={{ alignSelf: "center" }}>
+                     {/* <li className="nav-item" style={{ alignSelf: "center" }}>
                         <Button
                            type="secondary"
                            icon="shopping-cart"
@@ -371,7 +404,7 @@ export default class Navigation extends Component {
                         >
                            Book Now
                         </Button>
-                     </li>
+                     </li> */}
                      {this.renderAvartar()}
                   </ul>
                </div>

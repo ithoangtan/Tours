@@ -220,7 +220,6 @@ AOS.init({
       var i = 0;
       $(".ftco-animate").waypoint(
          function(direction) {
-            console.log(1231231212);
             if (
                direction === "down" &&
                !$(this.element).hasClass("ftco-animated")

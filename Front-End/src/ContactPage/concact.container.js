@@ -18,9 +18,7 @@ export default class ConcactContainer extends Component {
                               <span className="icon-map-signs" />
                            </div>
                            <h3 className="mb-4">Address</h3>
-                           <p>
-                              198 West 21th Street, Suite 721 New York NY 10016
-                           </p>
+                           <p>15 Công Lý, Bình Thọ, Thủ Đức</p>
                         </div>
                      </div>
                      <div className="col-md-3 d-flex">
@@ -30,7 +28,7 @@ export default class ConcactContainer extends Component {
                            </div>
                            <h3 className="mb-4">Contact Number</h3>
                            <p>
-                              <a href="tel://1234567920">+ 1235 2355 98</a>
+                              <a href="tel://1234567920">+84 983 982 933</a>
                            </p>
                         </div>
                      </div>
@@ -41,8 +39,8 @@ export default class ConcactContainer extends Component {
                            </div>
                            <h3 className="mb-4">Email Address</h3>
                            <p>
-                              <a href="mailto:info@yoursite.com">
-                                 info@yoursite.com
+                              <a href="mailto:ithoangtan@gmail.com">
+                                 ithoangtan@gmail.com
                               </a>
                            </p>
                         </div>
@@ -54,7 +52,9 @@ export default class ConcactContainer extends Component {
                            </div>
                            <h3 className="mb-4">Website</h3>
                            <p>
-                              <a href="s">yoursite.com</a>
+                              <a href=" https://www.facebook.com/ithoangtan">
+                                 facebook.com/ithoangtan
+                              </a>
                            </p>
                         </div>
                      </div>

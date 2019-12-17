@@ -18,8 +18,9 @@ export const CustomerArrayExternalScript = [
    // "/customer/js/google-map.js",
    "/customer/js/main.js",
    "/customer/js/ithoangtan.js",
-   "http://cdn.iframe.ly/embed.js"
+   "http://cdn.iframe.ly/embed.js",
    // "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",,
+   "/customer/js/ithoangtan.js"
 ];
 
 export const AdminArrayExternalScript = [

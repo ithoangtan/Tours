@@ -120,6 +120,11 @@ export default class SearchEngineContainer extends Component {
       return options;
    }
 
+   disabledDate(current) {
+      // Can not select days before today and today
+      return current && current < moment().endOf("day");
+   }
+
    render() {
       return (
          <section className="ftco-section ftco-no-pb ftco-no-pt">
@@ -129,7 +134,7 @@ export default class SearchEngineContainer extends Component {
                      <div className="search-wrap-1 ftco-animate p-4">
                         <form action="#" className="search-property-1">
                            <div className="row">
-                              <div className="col-lg ">
+                              <div className="col-lg-4">
                                  <div className="form-group">
                                     <label htmlFor="#">
                                        Điểm đến của bạn là:
@@ -139,10 +144,12 @@ export default class SearchEngineContainer extends Component {
                                           className="certain-category-search ht-width100"
                                           dropdownClassName="certain-category-search-dropdown"
                                           dropdownMatchSelectWidth={false}
-                                          dropdownStyle={{ width: 300 }}
+                                          dropdownStyle={{
+                                             width: 300
+                                          }}
                                           size="large"
                                           dataSource={this.options()}
-                                          placeholder="Nhấp zô! Gợi ý cho bạn nè:"
+                                          placeholder="Nhấp zô??? Có gợi ý cho bạn nè!"
                                           optionLabelProp="value"
                                        >
                                           <Input
@@ -189,7 +196,7 @@ export default class SearchEngineContainer extends Component {
                                     </div>
                                  </div>
                               </div> */}
-                              <div className="col-lg ">
+                              <div className="col-lg-3 ">
                                  <div className="form-group">
                                     <label htmlFor="#">
                                        Bạn định đi khi nào?
@@ -198,6 +205,7 @@ export default class SearchEngineContainer extends Component {
                                        <RangePicker
                                           size={"large"}
                                           className="ht-width100"
+                                          disabledDate={this.disabledDate}
                                           defaultValue={[
                                              moment(
                                                 this.getCurrentDay(),
@@ -218,11 +226,9 @@ export default class SearchEngineContainer extends Component {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col-lg">
+                              <div className="col-lg-2">
                                  <div className="form-group">
-                                    <label htmlFor="#">
-                                       Bạn có khoản bao nhiêu?
-                                    </label>
+                                    <label htmlFor="#">Search theo:</label>
                                     <div className="form-field">
                                        <div className="select-wrap">
                                           <div className="icon">
@@ -231,7 +237,7 @@ export default class SearchEngineContainer extends Component {
                                           <Select
                                              showSearch
                                              size={"large"}
-                                             placeholder="Giá cả của tour"
+                                             placeholder="Tìm kiếm theo..."
                                              optionFilterProp="children"
                                              onChange={this.onChange}
                                              onFocus={this.onFocus}
@@ -245,23 +251,20 @@ export default class SearchEngineContainer extends Component {
                                                    ) >= 0
                                              }
                                           >
-                                             <Option value={2000000}>
-                                                2,000,000 VNĐ
+                                             <Option value={"all"}>
+                                                Tất cả
                                              </Option>
-                                             <Option value={5000000}>
-                                                5,000,000 VNĐ
+                                             <Option value={"name"}>
+                                                Tên của Tour
                                              </Option>
-                                             <Option value={8000000}>
-                                                8,000,000 VNĐ
+                                             <Option value={"landmark"}>
+                                                Địa danh
                                              </Option>
-                                             <Option value={10000000}>
-                                                10,000,000 VNĐ
+                                             <Option value={"address"}>
+                                                Địa chỉ
                                              </Option>
-                                             <Option value={20000000}>
-                                                20,000,000 VNĐ
-                                             </Option>
-                                             <Option value={0}>
-                                                Không thành vấn đề (^_^)
+                                             <Option value={"type"}>
+                                                Loại tour
                                              </Option>
                                           </Select>
                                           <select
@@ -273,7 +276,7 @@ export default class SearchEngineContainer extends Component {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col-lg align-items-center">
+                              <div className="col-lg-3 align-items-center">
                                  <div className="form-group">
                                     <label htmlFor="#">
                                        Bạn đã sẵn sàng chưa?
