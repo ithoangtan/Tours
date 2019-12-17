@@ -5,9 +5,18 @@ const Schedule = function(schedule) {
   this.data = schedule.data;
   this.idTour = schedule.idTour;
 };
+
+const databaseLocal = "azmszdk4w6h5j1o6";
+const databaseProduction =
+  process.env.NODE_ENV === "production"
+    ? process.env.JAWSDB_DATABASE
+    : databaseLocal;
+
 Schedule.getAllSchedule = function(funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.schedules WHERE statusAction <> 'deleted';",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".schedules WHERE statusAction <> 'deleted';",
     function(err, res) {
       if (err) {
         funcResult(err, null);
@@ -25,7 +34,9 @@ Schedule.createSchedule = function(newSchedule, funcResult) {
   this.data = newSchedule.data;
   this.idTour = newSchedule.idTour;
   mysql.query(
-    "INSERT INTO kinhdoanhtourdulich.schedules (`data`, `idTour`) VALUES ('" +
+    "INSERT INTO " +
+      databaseProduction +
+      ".schedules (`data`, `idTour`) VALUES ('" +
       this.data +
       "', '" +
       this.idTour +
@@ -42,7 +53,9 @@ Schedule.createSchedule = function(newSchedule, funcResult) {
 
 Schedule.getScheduleById = function(idSchedule, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.schedules  WHERE idSchedule = ? AND statusAction <> 'deleted';",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".schedules  WHERE idSchedule = ? AND statusAction <> 'deleted';",
     [idSchedule],
     function(err, res) {
       if (err) {
@@ -56,7 +69,9 @@ Schedule.getScheduleById = function(idSchedule, funcResult) {
 
 Schedule.getScheduleByIdTour = function(idTour, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.schedules  WHERE idTour = ? AND statusAction <> 'deleted';",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".schedules  WHERE idTour = ? AND statusAction <> 'deleted';",
     [idTour],
     function(err, res) {
       if (err) {
@@ -71,7 +86,7 @@ Schedule.getScheduleByIdTour = function(idTour, funcResult) {
 Schedule.updateById = function(updateTour, funcResult) {
   updateTour = { ...updateTour, statusAction: "edited" };
   mysql.query(
-    "UPDATE kinhdoanhtourdulich.schedules SET ? WHERE (idTour = ?);",
+    "UPDATE " + databaseProduction + ".schedules SET ? WHERE (idTour = ?);",
     [updateTour, updateSchedule.idTour],
     function(err, res) {
       if (err) {
@@ -87,7 +102,9 @@ Schedule.updateById = function(updateTour, funcResult) {
  */
 Schedule.remove = function(idSchedule, funcResult) {
   mysql.query(
-    "UPDATE kinhdoanhtourdulich.schedules SET `statusAction` = 'deleted'  WHERE idSchedule = ?",
+    "UPDATE " +
+      databaseProduction +
+      ".schedules SET `statusAction` = 'deleted'  WHERE idSchedule = ?",
     [idSchedule],
     function(err, res) {
       if (err) {

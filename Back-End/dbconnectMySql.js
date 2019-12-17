@@ -34,6 +34,25 @@ const config = {
   database: "kinhdoanhtourdulich"
 };
 
-const database = new Database(config);
+const configHerokuTest = {
+  host: "l3855uft9zao23e2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  user: "vke6ut5wnkjh7y47",
+  port: "3306",
+  password: "x18ifcnupo42ey8j",
+  database: "azmszdk4w6h5j1o6"
+};
+
+const configProduction = {
+  host: process.env.JAWSDB_HOST,
+  user: process.env.JAWSDB_USERNAME,
+  port: process.env.JAWSDB_PORT,
+  password: process.env.JAWSDB_PASSWORD,
+  database: process.env.JAWSDB_DATABASE
+};
+
+const database =
+  process.env.NODE_ENV === "production"
+    ? new Database(configProduction)
+    : new Database(configHerokuTest);
 
 module.exports = database;
