@@ -63,19 +63,22 @@ class TourContainer extends Component {
       });
    };
 
-   componentDidMount() {
+   fetch = async () => {
       const { tourAllActions } = this.props;
       const {
          fetchListTourRequest,
          fetchListTourImageRequest
       } = tourAllActions;
 
-      fetchListTourRequest();
-      fetchListTourImageRequest();
+      await fetchListTourRequest();
+      await fetchListTourImageRequest();
 
-      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+      await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+   };
 
+   componentDidMount() {
       const { listTour } = this.props;
+      this.fetch();
       this.setState({ listTour, haveData: true });
    }
 

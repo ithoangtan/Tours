@@ -11,7 +11,7 @@ export default class Loaded extends Component {
                   cy={24}
                   r={22}
                   fill="none"
-                  strokeWidth={4}
+                  strokeWidth={6}
                   stroke="#eeeeee"
                />
                <circle
@@ -20,8 +20,8 @@ export default class Loaded extends Component {
                   cy={24}
                   r={22}
                   fill="none"
-                  strokeWidth={4}
-                  strokeMiterlimit={10}
+                  strokeWidth={6}
+                  strokeMiterlimit={30}
                   stroke="#F96D00"
                />
             </svg>

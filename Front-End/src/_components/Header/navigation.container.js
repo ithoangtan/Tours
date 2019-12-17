@@ -368,14 +368,14 @@ export default class Navigation extends Component {
                      </li> */}
                      <li className="nav-item">
                         <Dropdown overlay={menuWorld} className="nav-link">
-                           <Link to="/">
+                           <Link to="/tour">
                               Quốc Tế <Icon type="down" />
                            </Link>
                         </Dropdown>
                      </li>
                      <li className="nav-item">
                         <Dropdown overlay={menuVN} className="nav-link">
-                           <Link to="/">
+                           <Link to="/tour">
                               Việt Nam <Icon type="down" />
                            </Link>
                         </Dropdown>

@@ -24,8 +24,8 @@ class TourSinglePage extends Component {
       };
    }
 
-   componentDidMount() {
-      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+   fetch = async () => {
+      await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
 
       const { idTour } = this.props.match.params;
 
@@ -37,15 +37,18 @@ class TourSinglePage extends Component {
 
       //load Tour byId
       const { fetchTourByIdRequest } = tourAllActions;
-      fetchTourByIdRequest(idTour);
+      await fetchTourByIdRequest(idTour);
 
       //Load images with idTour
       const { fetchListImageByIdTourRequest } = imageAllActions;
-      fetchListImageByIdTourRequest(idTour);
+      await fetchListImageByIdTourRequest(idTour);
 
       //Load schedule with idTour
       const { fetchScheduleByIdTourRequest } = scheduleAllActions;
-      fetchScheduleByIdTourRequest(idTour);
+      await fetchScheduleByIdTourRequest(idTour);
+   };
+   componentDidMount() {
+      this.fetch();
 
       const { tourById, listImageByIdTour, scheduleByIdTour } = this.props;
       this.setState({
