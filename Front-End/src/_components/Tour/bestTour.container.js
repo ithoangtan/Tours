@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 
-import * as INDEX_CONSTANTS from "../../_constants/index.constants";
-import funcLoadJs from "../../_constants/loadJs.constants";
-
 export default class BestTourContainer extends Component {
-   componentDidMount() {
-      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
-   }
    render() {
       return (
          <section className="ftco-section">
@@ -20,14 +14,15 @@ export default class BestTourContainer extends Component {
                      </p>
                   </div>
                </div>
+
                <div
                   id="myCarousel"
-                  className="carousel slide  ftco-animate"
+                  className="carousel slide ftco-animate"
                   data-ride="carousel"
                   data-interval={4000}
                >
                   <div
-                     className="carousel-inner row w-100 mx-auto"
+                     className="carousel-inner row w-100 mx-auto ftco-animate"
                      role="listbox"
                   >
                      <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
@@ -70,7 +65,7 @@ export default class BestTourContainer extends Component {
                            </a>
                         </div>
                      </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ">
+                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="project">
                            <div className="img">
                               <img
@@ -110,7 +105,7 @@ export default class BestTourContainer extends Component {
                            </a>
                         </div>
                      </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ">
+                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="project">
                            <div className="img">
                               <img
@@ -150,7 +145,7 @@ export default class BestTourContainer extends Component {
                            </a>
                         </div>
                      </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ">
+                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="project">
                            <div className="img">
                               <img
@@ -190,7 +185,7 @@ export default class BestTourContainer extends Component {
                            </a>
                         </div>
                      </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ">
+                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="project">
                            <div className="img">
                               <img
@@ -230,7 +225,7 @@ export default class BestTourContainer extends Component {
                            </a>
                         </div>
                      </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ">
+                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="project">
                            <div className="img">
                               <img
