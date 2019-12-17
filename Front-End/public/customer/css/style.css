@@ -8302,10 +8302,12 @@ h1, h2, h3, h4, h5,
   border-radius: 5px; }
   @media (min-width: 768px) {
     .search-wrap-1 {
-      margin-top: -220px; } }
+      margin-top: -220px;
+    z-index: 999; } }
   @media (max-width: 767.98px) {
     .search-wrap-1 {
-      margin-top: 3em; } }
+      margin-top: -140px;
+    z-index: 999; } }
 
 .search-property-1 .form-group {
   position: relative;
