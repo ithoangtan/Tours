@@ -18,7 +18,9 @@ const Account = function(account) {
 Account.getAll = function() {
   return new Promise(function(resolve, reject) {
     database
-      .query("SELECT * FROM kinhdoanhtourdulich.accounts;")
+      .query(
+        "SELECT * FROM kinhdoanhtourdulich.accounts WHERE statusAction <> 'deleted';"
+      )
       .then(rows => resolve(rows))
       .catch(err => reject(err));
   });
@@ -51,7 +53,7 @@ Account.getById = function(idAccount) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idAccount= ? ;",
+        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idAccount= ? AND statusAction <> 'deleted';",
         [idAccount]
       )
       .then(rows => resolve(rows[0]))
@@ -63,7 +65,7 @@ Account.getByEmailAndRole = function(email, role) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE email= ? AND role= ?;",
+        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE email= ? AND role= ? AND statusAction <> 'deleted';",
         [email, role]
       )
       .then(rows => resolve(rows[0]))
@@ -75,7 +77,7 @@ Account.getByIdFaceboook = function(idGoogle) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idGoogle= ? ;",
+        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idGoogle= ? AND statusAction <> 'deleted' ;",
         [idGoogle]
       )
       .then(rows => resolve(rows))
@@ -87,7 +89,7 @@ Account.getByIdGoogle = function(idFacebook) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idFacebook= ? ;",
+        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idFacebook= ?  AND statusAction <> 'deleted';",
         [idFacebook]
       )
       .then(rows => resolve(rows[0]))
@@ -96,6 +98,7 @@ Account.getByIdGoogle = function(idFacebook) {
 };
 
 Account.updateById = function(updateAccount) {
+  updateAccount = { ...updateAccount, statusAction: "edited" };
   return new Promise(function(resolve, reject) {
     database
       .query(
@@ -107,12 +110,16 @@ Account.updateById = function(updateAccount) {
   });
 };
 
+/**
+ * remove status mà thôi!!!
+ */
 Account.remove = function(idAccount) {
   return new Promise(function(resolve, reject) {
     database
-      .query("DELETE FROM kinhdoanhtourdulich.accounts WHERE idAccount= ?", [
-        idAccount
-      ])
+      .query(
+        "UPDATE kinhdoanhtourdulich.accounts SET `statusAction` = 'deleted' WHERE (idAccount= ?);",
+        [idAccount]
+      )
       .then(rows => resolve(rows))
       .catch(err => reject(err));
   });

@@ -6,16 +6,16 @@ const Schedule = function(schedule) {
   this.idTour = schedule.idTour;
 };
 Schedule.getAllSchedule = function(funcResult) {
-  mysql.query("SELECT * FROM kinhdoanhtourdulich.schedules ;", function(
-    err,
-    res
-  ) {
-    if (err) {
-      funcResult(err, null);
-    } else {
-      funcResult(null, res);
+  mysql.query(
+    "SELECT * FROM kinhdoanhtourdulich.schedules WHERE statusAction <> 'deleted';",
+    function(err, res) {
+      if (err) {
+        funcResult(err, null);
+      } else {
+        funcResult(null, res);
+      }
     }
-  });
+  );
 };
 
 /**
@@ -42,7 +42,7 @@ Schedule.createSchedule = function(newSchedule, funcResult) {
 
 Schedule.getScheduleById = function(idSchedule, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.schedules  WHERE idSchedule = ? ;",
+    "SELECT * FROM kinhdoanhtourdulich.schedules  WHERE idSchedule = ? AND statusAction <> 'deleted';",
     [idSchedule],
     function(err, res) {
       if (err) {
@@ -56,7 +56,7 @@ Schedule.getScheduleById = function(idSchedule, funcResult) {
 
 Schedule.getScheduleByIdTour = function(idTour, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.schedules  WHERE idTour = ? ;",
+    "SELECT * FROM kinhdoanhtourdulich.schedules  WHERE idTour = ? AND statusAction <> 'deleted';",
     [idTour],
     function(err, res) {
       if (err) {
@@ -69,6 +69,7 @@ Schedule.getScheduleByIdTour = function(idTour, funcResult) {
 };
 
 Schedule.updateById = function(updateTour, funcResult) {
+  updateTour = { ...updateTour, statusAction: "edited" };
   mysql.query(
     "UPDATE kinhdoanhtourdulich.schedules SET ? WHERE (idTour = ?);",
     [updateTour, updateSchedule.idTour],
@@ -86,7 +87,7 @@ Schedule.updateById = function(updateTour, funcResult) {
  */
 Schedule.remove = function(idSchedule, funcResult) {
   mysql.query(
-    "DELETE FROM kinhdoanhtourdulich.schedules WHERE idSchedule = ?",
+    "UPDATE kinhdoanhtourdulich.schedules SET `statusAction` = 'deleted'  WHERE idSchedule = ?",
     [idSchedule],
     function(err, res) {
       if (err) {

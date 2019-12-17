@@ -14,18 +14,21 @@ const Tour = function(tour) {
   this.idAccount = tour.idAccount;
 };
 Tour.getAllTour = function(funcResult) {
-  mysql.query("SELECT * FROM kinhdoanhtourdulich.tours ;", function(err, res) {
-    if (err) {
-      funcResult(err, null);
-    } else {
-      funcResult(null, res);
+  mysql.query(
+    "SELECT * FROM kinhdoanhtourdulich.tours WHERE statusAction <> 'deleted' ;",
+    function(err, res) {
+      if (err) {
+        funcResult(err, null);
+      } else {
+        funcResult(null, res);
+      }
     }
-  });
+  );
 };
 
 Tour.getAllTourForUser = function(idAccount, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.tours where idAccount = ?; ",
+    "SELECT * FROM kinhdoanhtourdulich.tours where idAccount = ? AND statusAction <> 'deleted'; ",
     [idAccount],
     function(err, res) {
       if (err) {
@@ -76,7 +79,7 @@ Tour.createTour = function(newTour, funcResult) {
 
 Tour.getTourById = function(idTour, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? ;",
+    "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? AND statusAction <> 'deleted';",
     [idTour],
     function(err, res) {
       if (err) {
@@ -90,7 +93,7 @@ Tour.getTourById = function(idTour, funcResult) {
 
 Tour.getTourByIdWithIdAccount = function(idTour, idAccount, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? AND idAccount = ? ;",
+    "SELECT * FROM kinhdoanhtourdulich.tours  WHERE idTour = ? AND idAccount = ? AND statusAction <> 'deleted' ;",
     [idTour, idAccount],
     function(err, res) {
       if (err) {
@@ -102,6 +105,7 @@ Tour.getTourByIdWithIdAccount = function(idTour, idAccount, funcResult) {
   );
 };
 Tour.updateById = function(updateTour, funcResult) {
+  updateTour = { ...updateTour, statusAction: "edited" };
   mysql.query(
     "UPDATE kinhdoanhtourdulich.tours SET ? WHERE (idTour = ?);",
     [updateTour, updateTour.idTour],
@@ -116,7 +120,7 @@ Tour.updateById = function(updateTour, funcResult) {
 };
 Tour.remove = function(idTour, funcResult) {
   mysql.query(
-    "DELETE FROM kinhdoanhtourdulich.tours WHERE idTour = ?",
+    "UPDATE kinhdoanhtourdulich.tours SET `statusAction` = 'deleted' WHERE idTour = ?",
     [idTour],
     function(err, res) {
       if (err) {
