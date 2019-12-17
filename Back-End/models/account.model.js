@@ -9,6 +9,11 @@ const Account = function(account) {
   this.role = account.role || "user"; //user(customer), admin(customer), administrator(full permission)
   this.password = account.password;
 };
+const databaseLocal = "azmszdk4w6h5j1o6";
+const databaseProduction =
+  process.env.NODE_ENV === "production"
+    ? process.env.JAWSDB_DATABASE
+    : databaseLocal;
 
 /**
  * Hàm này trả về một Promise;
@@ -19,7 +24,9 @@ Account.getAll = function() {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts WHERE statusAction <> 'deleted';"
+        "SELECT * FROM " +
+          databaseProduction +
+          ".accounts WHERE statusAction <> 'deleted';"
       )
       .then(rows => resolve(rows))
       .catch(err => reject(err));
@@ -30,7 +37,9 @@ Account.create = function(newAccount) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "INSERT INTO kinhdoanhtourdulich.accounts (`name`, `username`, `email`, `phone`, `role`, `password`) VALUES ('" +
+        "INSERT INTO " +
+          databaseProduction +
+          ".accounts (`name`, `username`, `email`, `phone`, `role`, `password`) VALUES ('" +
           newAccount.name +
           "', '" +
           newAccount.username +
@@ -53,7 +62,9 @@ Account.getById = function(idAccount) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idAccount= ? AND statusAction <> 'deleted';",
+        "SELECT * FROM " +
+          databaseProduction +
+          ".accounts  WHERE idAccount= ? AND statusAction <> 'deleted';",
         [idAccount]
       )
       .then(rows => resolve(rows[0]))
@@ -65,7 +76,9 @@ Account.getByEmailAndRole = function(email, role) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE email= ? AND role= ? AND statusAction <> 'deleted';",
+        "SELECT * FROM " +
+          databaseProduction +
+          ".accounts  WHERE email= ? AND role= ? AND statusAction <> 'deleted';",
         [email, role]
       )
       .then(rows => resolve(rows[0]))
@@ -77,7 +90,9 @@ Account.getByIdFaceboook = function(idGoogle) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idGoogle= ? AND statusAction <> 'deleted' ;",
+        "SELECT * FROM " +
+          databaseProduction +
+          ".accounts  WHERE idGoogle= ? AND statusAction <> 'deleted' ;",
         [idGoogle]
       )
       .then(rows => resolve(rows))
@@ -89,7 +104,9 @@ Account.getByIdGoogle = function(idFacebook) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "SELECT * FROM kinhdoanhtourdulich.accounts  WHERE idFacebook= ?  AND statusAction <> 'deleted';",
+        "SELECT * FROM " +
+          databaseProduction +
+          ".accounts  WHERE idFacebook= ?  AND statusAction <> 'deleted';",
         [idFacebook]
       )
       .then(rows => resolve(rows[0]))
@@ -102,7 +119,9 @@ Account.updateById = function(updateAccount) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "UPDATE kinhdoanhtourdulich.accounts SET  ?  WHERE (idAccount= ?);",
+        "UPDATE " +
+          databaseProduction +
+          ".accounts SET  ?  WHERE (idAccount= ?);",
         [updateAccount, updateAccount.idAccount]
       )
       .then(rows => resolve(rows))
@@ -117,7 +136,9 @@ Account.remove = function(idAccount) {
   return new Promise(function(resolve, reject) {
     database
       .query(
-        "UPDATE kinhdoanhtourdulich.accounts SET `statusAction` = 'deleted' WHERE (idAccount= ?);",
+        "UPDATE " +
+          databaseProduction +
+          ".accounts SET `statusAction` = 'deleted' WHERE (idAccount= ?);",
         [idAccount]
       )
       .then(rows => resolve(rows))

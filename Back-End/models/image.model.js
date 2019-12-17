@@ -9,9 +9,18 @@ const Image = function(image) {
   this.name = image.name;
   this.idTour = image.idTour;
 };
+
+const databaseLocal = "azmszdk4w6h5j1o6";
+const databaseProduction =
+  process.env.NODE_ENV === "production"
+    ? process.env.JAWSDB_DATABASE
+    : databaseLocal;
+
 Image.getAllImageTour = function(fncResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.images WHERE statusAction <> 'deleted';",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".images WHERE statusAction <> 'deleted';",
     function(err, res) {
       if (err) {
         fncResult(err, null);
@@ -24,7 +33,9 @@ Image.getAllImageTour = function(fncResult) {
 
 Image.getAllImageTourById = function(idTour, fncResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.images WHERE idTour = " +
+    "SELECT * FROM " +
+      databaseProduction +
+      ".images WHERE idTour = " +
       idTour +
       " AND statusAction <> 'deleted';",
     function(err, res) {
@@ -39,7 +50,9 @@ Image.getAllImageTourById = function(idTour, fncResult) {
 
 Image.remove = function(idImage, name, fncResult) {
   mysql.query(
-    "UPDATE kinhdoanhtourdulich.images SET `statusAction` = 'deleted' WHERE idImage = ?",
+    "UPDATE " +
+      databaseProduction +
+      ".images SET `statusAction` = 'deleted' WHERE idImage = ?",
     [idImage],
     function(err, res) {
       if (err) {
@@ -62,7 +75,7 @@ Image.createImageTour = function(idTour, name, fncResult) {
   var url = `/img/${name}`;
   var status = "done";
   mysql.query(
-    `INSERT INTO kinhdoanhtourdulich.images (url, status, name, idTour) VALUES ('${url}', '${status}', ' ${name}' , '${idTour}')`,
+    `INSERT INTO ${databaseProduction}.images (url, status, name, idTour) VALUES ('${url}', '${status}', ' ${name}' , '${idTour}')`,
     function(err, res) {
       if (err) {
         fncResult(err, null);

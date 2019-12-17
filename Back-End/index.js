@@ -10,6 +10,7 @@ app.set("port", process.env.PORT || 8000);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// app.use(cookieParser(process.env.SECRET));
 app.use(cookieParser("ithoangtansecurity"));
 
 app.use((req, res, next) => {
@@ -46,7 +47,16 @@ const corsOptions = {
 
 if (process.env.NODE_ENV === "production") {
   app.use(
-    cors({ origin: "http://frontend-dev22.us-west-2.elasticbeanstalk.com" })
+    cors({
+      origin: [
+        process.env.FRONT_END,
+        process.env.ADMIN_FRONT_END,
+        "http://localhost:9000",
+        "http://localhost:9999"
+      ],
+      methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS",
+      credentials: true // required to pass
+    })
   );
 } else {
   app.use(cors(corsOptions));

@@ -14,9 +14,18 @@ const Order = function(order) {
   this.notes = order.notes || " ";
   this.idAccount = order.idAccount || 8;
 };
+
+const databaseLocal = "azmszdk4w6h5j1o6";
+const databaseProduction =
+  process.env.NODE_ENV === "production"
+    ? process.env.JAWSDB_DATABASE
+    : databaseLocal;
+
 Order.getAllOrder = function(funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.orders WHERE statusAction <> 'deleted';",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".orders WHERE statusAction <> 'deleted';",
     function(err, res) {
       if (err) {
         funcResult(err, null);
@@ -29,7 +38,9 @@ Order.getAllOrder = function(funcResult) {
 
 Order.getAllOrderForUser = function(idAccount, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.orders where idAccount = ? AND WHERE statusAction <> 'deleted'; ",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".orders where idAccount = ? AND WHERE statusAction <> 'deleted'; ",
     [idAccount],
     function(err, res) {
       if (err) {
@@ -54,7 +65,9 @@ Order.createOrder = function(newOrder, funcResult) {
   this.idAccount = newOrder.idAccount;
 
   mysql.query(
-    "INSERT INTO kinhdoanhtourdulich.orders (`PIN`, `status`, `totalPrice`, `numberPeople`," +
+    "INSERT INTO " +
+      databaseProduction +
+      ".orders (`PIN`, `status`, `totalPrice`, `numberPeople`," +
       " `numberChildren`, `address`, `phone`,`email`,`notes`, `idAccount`) VALUES ('" +
       this.PIN +
       "', '" +
@@ -88,7 +101,9 @@ Order.createOrder = function(newOrder, funcResult) {
 
 Order.getOrderById = function(idOrder, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? AND WHERE statusAction <> 'deleted';",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".orders  WHERE idOrder = ? AND WHERE statusAction <> 'deleted';",
     [idOrder],
     function(err, res) {
       if (err) {
@@ -102,7 +117,9 @@ Order.getOrderById = function(idOrder, funcResult) {
 
 Order.getOrderByIdWithIdAccount = function(idOrder, idAccount, funcResult) {
   mysql.query(
-    "SELECT * FROM kinhdoanhtourdulich.orders  WHERE idOrder = ? AND idAccount = ? AND WHERE statusAction <> 'deleted';",
+    "SELECT * FROM " +
+      databaseProduction +
+      ".orders  WHERE idOrder = ? AND idAccount = ? AND WHERE statusAction <> 'deleted';",
     [idOrder, idAccount],
     function(err, res) {
       if (err) {
@@ -117,7 +134,7 @@ Order.getOrderByIdWithIdAccount = function(idOrder, idAccount, funcResult) {
 Order.updateById = function(updateOrder, funcResult) {
   updateOrder = { ...updateOrder, statusAction: "edited" };
   mysql.query(
-    "UPDATE kinhdoanhtourdulich.orders SET ? WHERE (idOrder = ?);",
+    "UPDATE " + databaseProduction + ".orders SET ? WHERE (idOrder = ?);",
     [updateOrder, updateOrder.idOrder],
     function(err, res) {
       if (err) {
@@ -131,7 +148,9 @@ Order.updateById = function(updateOrder, funcResult) {
 
 Order.remove = function(idOrder, funcResult) {
   mysql.query(
-    "UPDATE kinhdoanhtourdulich.orders SET `statusAction` = 'deleted' WHERE idOrder = ?",
+    "UPDATE " +
+      databaseProduction +
+      ".orders SET `statusAction` = 'deleted' WHERE idOrder = ?",
     [idOrder],
     function(err, res) {
       if (err) {
