@@ -1,25 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="apple-touch-icon" href="logo192.png" />
-  <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- ADMIN -->
@@ -30,7 +19,7 @@
   <link href="%PUBLIC_URL%/admin/css/sb-admin-2.min.css" rel="stylesheet">
   <link href="%PUBLIC_URL%/admin/css/ithoangtan.css" rel="stylesheet">
   <!-- ADMIN -->
-
+  <script src="https://kit.fontawesome.com/adcfcf1edd.js"></script>
   </script>
 
   <title>React App</title>
@@ -50,7 +39,7 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   <!-- ADMIN -->
-  <script src="%PUBLIC_URL%/admin/vendor/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="%PUBLIC_URL%/admin/vendor/jquery/jquery.min.js"></script>
   <script src="%PUBLIC_URL%/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- <script src="%PUBLIC_URL%/admin/vendor/jquery-easing/jquery.easing.min.js"></script> -->
   <!-- <script src="%PUBLIC_URL%/admin/js/sb-admin-2.min.js"></script> -->
@@ -58,6 +47,29 @@
   <!-- <script src="%PUBLIC_URL%/admin/js/demo/chart-area-demo.js"></script> -->
   <!-- <script src="%PUBLIC_URL%/admin/js/demo/chart-pie-demo.js"></script> -->
   <!-- ADMIN -->
+  <!-- Load Facebook SDK for JavaScript -->
+
+
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: 'v5.0'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Your customer chat code -->
+  <div class="fb-customerchat" attribution=setup_tool page_id="101814614661874" theme_color="#13cf13">
+  </div>
 </body>
 
 </html>

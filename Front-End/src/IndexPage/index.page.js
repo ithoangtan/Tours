@@ -23,13 +23,14 @@ class IndexPage extends Component {
       super(props);
       this.state = {};
    }
-
+   fetch = async () => {
+      await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+   };
    componentDidMount() {
-      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
-
       // const { tourAllActions } = this.props;
       // const { fetchListTourRequest } = tourAllActions;
       // fetchListTourRequest();
+      this.fetch();
    }
 
    renderBoard() {

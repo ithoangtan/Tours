@@ -6,7 +6,14 @@ import { Tooltip } from "antd";
 
 import { LinkUserPage } from "../_constants/index.constants";
 
+import * as INDEX_CONSTANTS from "../_constants/index.constants";
+import funcLoadJs from "../_constants/loadJs.constants";
+
 export default class SideBarContainer extends Component {
+   componentDidMount() {
+      funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
+   }
+
    render() {
       return (
          <ul

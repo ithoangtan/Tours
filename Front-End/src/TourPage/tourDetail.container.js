@@ -11,8 +11,12 @@ import funcLoadJs from "../_constants/loadJs.constants";
 const { Text, Title, Paragraph } = Typography;
 
 export default class TourDetailContainer extends Component {
+   fetch = async () => {
+      await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+   };
+
    componentDidMount() {
-      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+      this.fetch();
    }
 
    renderImage() {

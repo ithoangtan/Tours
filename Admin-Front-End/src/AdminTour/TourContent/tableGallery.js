@@ -60,9 +60,8 @@ class TableGallery extends Component {
       if (!file.url && !file.preview) {
          file.preview = await getBase64(file.originFileObj);
       }
-
       this.setState({
-         previewImage: file.url || file.preview,
+         previewImage: API_ENDPOINT + file.url || file.preview,
          previewVisible: true
       });
    };
@@ -92,10 +91,10 @@ class TableGallery extends Component {
       );
    };
 
-   onRemove = file => {
+   onRemove = async file => {
       const { tourImageAllActions } = this.props;
       const { fetchDeleteTourImageRequest } = tourImageAllActions;
-      fetchDeleteTourImageRequest(file);
+      await fetchDeleteTourImageRequest(file);
       message.warn(`${file.idImage}, ${file.name} deleted!`);
    };
 
