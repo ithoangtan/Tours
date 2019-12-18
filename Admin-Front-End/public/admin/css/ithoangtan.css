@@ -116,3 +116,9 @@
    top: 100px;
    margin-bottom: 100px;
 }
+
+.ht-loaded {
+   position: fixed;
+   bottom: 120px;
+   right: 30px;
+}

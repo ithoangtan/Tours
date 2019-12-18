@@ -668,7 +668,8 @@
    width: 70px !important;
 }
 
-.ht-icon-message {
-   top: 100px;
-   margin-bottom: 100px;
+.ht-loaded {
+   position: fixed !important;
+   bottom: 120px !important;
+   right: 30px !important;
 }
