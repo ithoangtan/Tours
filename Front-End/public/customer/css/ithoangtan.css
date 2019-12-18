@@ -667,3 +667,8 @@
 .ht-w-70 {
    width: 70px !important;
 }
+
+.ht-icon-message {
+   top: 100px;
+   margin-bottom: 100px;
+}
