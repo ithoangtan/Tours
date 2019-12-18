@@ -45,9 +45,9 @@ $ yarn start
 ```
 
 ### DEMO:
-https://admin-kinhdoanhtourdulich.herokuapp.com/
-https://kinhdoanhtourdulich.herokuapp.com/
-https://api-kinhdoanhtourdulich.herokuapp.com/
+- ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
+- USER: https://kinhdoanhtourdulich.herokuapp.com/
+- API: https://api-kinhdoanhtourdulich.herokuapp.com/
 
 ### Todos
 
