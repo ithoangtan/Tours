@@ -44,6 +44,11 @@ $ yarn start
 ...port 9000
 ```
 
+### DEMO:
+https://admin-kinhdoanhtourdulich.herokuapp.com/
+https://kinhdoanhtourdulich.herokuapp.com/
+https://api-kinhdoanhtourdulich.herokuapp.com/
+
 ### Todos
 
 
