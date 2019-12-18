@@ -10,14 +10,27 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
 export default class SideBarContainer extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         toggled: false
+      };
+   }
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
    }
 
+   toggled = () => {
+      this.setState({ toggled: !this.state.toggled });
+   };
+
    render() {
       return (
          <ul
-            className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
+            className={`navbar-nav bg-gradient-primary sidebar  sidebar-menu sidebar-dark accordion  ${
+               this.state.toggled ? "toggled" : ""
+            }`}
+            data-widget="tree"
             id="accordionSidebar"
          >
             {/* Sidebar - Brand */}
@@ -40,7 +53,6 @@ export default class SideBarContainer extends Component {
             {/* Nav Item - Dashboard */}
 
             <li className="nav-item active">
-               {" "}
                <Tooltip placement="right" title={"Go to Report and analytics"}>
                   <Link to="/admin/" className="nav-link">
                      <i className="fas fa-fw fa-tachometer-alt" />
@@ -57,7 +69,6 @@ export default class SideBarContainer extends Component {
                <Link
                   to="#"
                   className="nav-link collapsed"
-                  // href=""
                   data-toggle="collapse"
                   data-target="#collapseTwo"
                   aria-expanded="true"
@@ -179,7 +190,11 @@ export default class SideBarContainer extends Component {
             <hr className="sidebar-divider d-none d-md-block" />
             {/* Sidebar Toggler (Sidebar) */}
             <div className="text-center d-none d-md-inline">
-               <button className="rounded-circle border-0" id="sidebarToggle" />
+               <button
+                  className="rounded-circle border-0"
+                  id="sidebarToggle"
+                  onClick={this.toggled}
+               />
             </div>
          </ul>
       );
