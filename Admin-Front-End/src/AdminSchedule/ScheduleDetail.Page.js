@@ -63,6 +63,10 @@ class ScheduleDetail extends Component {
                scheduleByIdTour={scheduleByIdTour}
             />
             {/* End of Content Wrapper */}
+            {/* Scroll to Top Button*/}
+            <a className="scroll-to-top rounded ht-loaded" href="#page-top">
+               <i className="fas fa-angle-up" />
+            </a>
          </div>
       );
    }
