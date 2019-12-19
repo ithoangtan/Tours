@@ -11,7 +11,7 @@ import funcLoadJs from "../_constants/loadJs.constants";
 
 import TourDetailContainer from "./tourDetail.container";
 
-import { Typography, Rate, Checkbox } from "antd";
+import { Typography, Rate, Checkbox, Spin } from "antd";
 
 const { Title } = Typography;
 
@@ -38,7 +38,8 @@ class TourContainer extends Component {
          indeterminate: true,
          checkAll: false,
          haveData: false,
-         listTour: {}
+         listTour: {},
+         loading: true
       };
    }
 
@@ -81,8 +82,14 @@ class TourContainer extends Component {
       this.fetch();
       this.setState({ listTour, haveData: true });
    }
-
-   renderTours() {
+   loaded = () => {
+      this.setState(props => {
+         return {
+            loading: false
+         };
+      });
+   };
+   renderTours = () => {
       let result = null;
       const { listTour, listImageTour } = this.props;
 
@@ -96,6 +103,7 @@ class TourContainer extends Component {
                   listImageTour={listImageTour.filter(
                      imageTour => imageTour.idTour === tour.idTour
                   )}
+                  loaded={this.loaded}
                />
             );
          });
@@ -106,8 +114,7 @@ class TourContainer extends Component {
       //Ở đây truyền fulloption dữ liệu vào
       //Gọi api, fetch,...... ở container này hết
       return result;
-   }
-
+   };
    render() {
       const { value } = this.state;
       return (
@@ -165,7 +172,9 @@ class TourContainer extends Component {
                   </div>
                   <div className="col-md-12 col-lg-9 ftco-animate right-tour-page">
                      {/* Rendder TOURS */}
-                     {this.renderTours()}
+                     <Spin tip="loading... data" spinning={this.state.loading}>
+                        {this.renderTours()}
+                     </Spin>
                      {/* end Render Tours */}
                   </div>
                </div>
