@@ -23,10 +23,6 @@ export default class WrapperTableParentContainer extends Component {
             {/* Content Wrapper */}
             <TourWrapperContainer {...this.props} />
             {/* End of Content Wrapper */}
-            {/* Scroll to Top Button*/}
-            <a className="scroll-to-top rounded ht-loaded" href="#page-top">
-               <i className="fas fa-angle-up" />
-            </a>
          </div>
       );
    }

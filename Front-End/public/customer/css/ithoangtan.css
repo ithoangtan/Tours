@@ -709,12 +709,6 @@
    width: 70px !important;
 }
 
-<<<<<<< HEAD
-.ht-loaded {
-   position: fixed !important;
-   bottom: 120px !important;
-   right: 30px !important;
-=======
 /* slide Recent Stories */
 /*
     code by Iatek LLC 2018 - CC 2.0 License - Attribution required
@@ -932,5 +926,4 @@
    display: flex;
    flex-wrap: wrap;
    justify-content: start;
->>>>>>> 5788e36aec4c3e570f67758e1d0079071bf94e34
 }

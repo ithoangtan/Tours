@@ -35,7 +35,7 @@ class IndexPage extends Component {
 
    render() {
       return (
-         <div>
+         <div id="page-top">
             {/* Page Wrapper */}
             <div id="wrapper">
                {/* Sidebar */}
@@ -47,7 +47,7 @@ class IndexPage extends Component {
             </div>
             {/* End of Page Wrapper */}
             {/* Scroll to Top Button*/}
-            <a className="scroll-to-top rounded ht-loaded" href="#page-top">
+            <a className="scroll-to-top rounded" href="#page-top">
                <i className="fas fa-angle-up" />
             </a>
          </div>
