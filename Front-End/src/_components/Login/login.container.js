@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 
 class LoginContainer extends Component {
    constructor(props) {
@@ -63,6 +63,7 @@ class LoginContainer extends Component {
             const { authAllActions } = this.props;
             const { fetchLoginRequest } = authAllActions;
             let data = { ...values, role: "user" };
+            message.loading("Login...", 1);
             fetchLoginRequest(data);
          } else {
             throw err;

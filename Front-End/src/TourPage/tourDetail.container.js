@@ -50,7 +50,9 @@ export default class TourDetailContainer extends Component {
                            }
                         }}
                      >
-                        <Carousel autoplay>{this.renderImage()}</Carousel>
+                        <Carousel autoplay dotPosition={`top`}>
+                           {this.renderImage()}
+                        </Carousel>
                      </Link>
                      {/* end Render Image of Tour */}
                   </div>

@@ -10,15 +10,19 @@ const dateFormat = "DD/MM/YYYY";
 
 const dataSource = [
    {
-      title: "Tên Tour",
+      title: "Trùm Tour",
       children: [
          {
-            title: "Cặp đôi",
+            title: "Tết Nguyên Đán",
             count: 100
          },
          {
-            title: "Gia đình",
+            title: "Năm mới 2020",
             count: 1060
+         },
+         {
+            title: "Mùa hoa anh đào nở",
+            count: 2
          }
       ]
    },
@@ -30,21 +34,22 @@ const dataSource = [
             count: 601
          },
          {
-            title: "Hạ Long Bay",
+            title: "Hạ Long bay",
             count: 300
          }
       ]
    },
    {
-      title: "Tỉnh Thành phố",
+      title: "Địa chỉ",
       children: [
          {
-            title: "Đà Lạt",
-            count: 10
+            title: "Thành phố Đà Lạt",
+            count: 150
          },
+
          {
-            title: "Sa Pa",
-            count: 2
+            title: "Tokyo",
+            count: 254
          }
       ]
    }
@@ -163,39 +168,9 @@ export default class SearchEngineContainer extends Component {
                                           />
                                        </AutoComplete>
                                     </div>
-                                    {/* <div className="form-field">
-                                       <div className="icon">
-                                          <span className="ion-ios-search" />
-                                       </div>
-                                       <Search
-                                          placeholder="input search text"
-                                          onSearch={value => console.log(value)}
-                                          size={"large"}
-                                          // style={{ width: 200 }}
-                                       /> */}
-                                    {/* <input
-                                          type="text"
-                                          className="form-control"
-                                          placeholder="Search place"
-                                       /> */}
-                                    {/* </div> */}
                                  </div>
                               </div>
-                              {/* <div className="col-lg align-items-end">
-                                 <div className="form-group">
-                                    <label htmlFor="#">Check-in date</label>
-                                    <div className="form-field">
-                                       <div className="icon">
-                                          <span className="ion-ios-calendar" />
-                                       </div>
-                                       <input
-                                          type="text"
-                                          className="form-control checkin_date"
-                                          placeholder="Check In Date"
-                                       />
-                                    </div>
-                                 </div>
-                              </div> */}
+
                               <div className="col-lg-3 ">
                                  <div className="form-group">
                                     <label htmlFor="#">
@@ -218,11 +193,6 @@ export default class SearchEngineContainer extends Component {
                                           ]}
                                           format={dateFormat}
                                        />
-                                       {/* <input
-                                          type="text"
-                                          className="form-control checkout_date"
-                                          placeholder="Check Out Date"
-                                       /> */}
                                     </div>
                                  </div>
                               </div>
@@ -237,7 +207,7 @@ export default class SearchEngineContainer extends Component {
                                           <Select
                                              showSearch
                                              size={"large"}
-                                             placeholder="Tìm kiếm theo..."
+                                             defaultValue="all"
                                              optionFilterProp="children"
                                              onChange={this.onChange}
                                              onFocus={this.onFocus}

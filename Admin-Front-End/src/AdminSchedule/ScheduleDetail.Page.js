@@ -24,7 +24,6 @@ class ScheduleDetail extends Component {
    }
 
    componentDidMount() {
-      funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
       // const { tourAllActions } = this.props;
       // const { fetchListTourRequest } = tourAllActions;
       // fetchListTourRequest();
@@ -40,6 +39,7 @@ class ScheduleDetail extends Component {
       } //end if
    }
    fetch = async () => {
+      funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
       const { idTour } = this.props.match.params;
 
       //Load data tour by Id tour
