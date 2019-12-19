@@ -13,6 +13,9 @@ import ScheduleDetailWrapperContainer from "./ScheduleDetail/scheduleDetailWrapp
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
+import moment from "moment";
+const dateFormat = "YYYY-DD-MM HH:mm:ss";
+
 class ScheduleDetail extends Component {
    constructor(props) {
       super(props);
@@ -24,22 +27,12 @@ class ScheduleDetail extends Component {
    }
 
    componentDidMount() {
-      // const { tourAllActions } = this.props;
-      // const { fetchListTourRequest } = tourAllActions;
-      // fetchListTourRequest();
-      // const { record } = this.props.location.state;
       if (this.props.match !== null) {
          this.fetch();
-         //Save on state
-         const { scheduleByIdTour, tour } = this.props;
-         this.setState({
-            scheduleByIdTour,
-            tour
-         });
       } //end if
    }
    fetch = async () => {
-      funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
+      await funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
       const { idTour } = this.props.match.params;
 
       //Load data tour by Id tour
@@ -55,6 +48,9 @@ class ScheduleDetail extends Component {
 
    render() {
       const { tour, scheduleByIdTour } = this.props;
+      tour.departureDay = moment(tour.departureDay)
+         .utc()
+         .format(dateFormat);
       return (
          <div id="wrapper">
             {/* Sidebar */}

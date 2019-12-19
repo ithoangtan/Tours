@@ -17,6 +17,7 @@ export default class TourDetailContainer extends Component {
 
    componentDidMount() {
       this.fetch();
+      this.props.loaded();
    }
 
    renderImage() {
