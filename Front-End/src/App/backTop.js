@@ -4,6 +4,6 @@ import { BackTop } from "antd";
 
 export default class BackToTop extends Component {
    render() {
-      return <BackTop></BackTop>;
+      return <BackTop className="ht-loaded"></BackTop>;
    }
 }

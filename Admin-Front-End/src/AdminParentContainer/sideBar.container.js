@@ -36,6 +36,7 @@ export default class SideBarContainer extends Component {
             {/* Sidebar - Brand */}
             <Tooltip placement="right" title={"Go to user MODE"}>
                <a
+                  id="page-top"
                   href={LinkUserPage}
                   target="_blank"
                   rel="noopener noreferrer"

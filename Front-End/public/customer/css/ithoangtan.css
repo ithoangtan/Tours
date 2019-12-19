@@ -927,3 +927,9 @@
    flex-wrap: wrap;
    justify-content: start;
 }
+
+.ht-loaded {
+   position: fixed !important;
+   bottom: 120px !important;
+   right: 30px !important;
+}
