@@ -34,6 +34,7 @@
    flex-direction: column;
    justify-content: flex-start;
    align-items: center;
+   flex-wrap: wrap;
 }
 @media (max-width: 992px) {
    .right-detail-tour {
@@ -63,6 +64,28 @@
 .login-form {
    max-width: auto;
 }
+
+/* 
+   xs: "480px",
+   sm: "576px",
+   md: "768px",
+   lg: "992px",
+   xl: "1200px",
+   xxl: "1600px"
+*/
+@media (max-width: 480px) {
+   .login-form {
+      max-width: auto;
+      width: 90%;
+   }
+}
+@media (max-width: 576px) {
+   .login-form {
+      max-width: auto;
+      width: 90%;
+   }
+}
+
 .login-form-forgot {
    float: right;
 }
@@ -348,7 +371,10 @@
 
 .book-tour-container {
    margin: 0 auto;
-   padding: 0px 120px;
+   width: 90%;
+}
+.book-tour-step2 {
+   width: 90%;
 }
 
 .ht-book-product-list {
@@ -394,7 +420,7 @@
 }
 
 .certain-category-search-dropdown .ant-select-dropdown-menu {
-   max-height: 350px;
+   max-height: 400px;
 }
 
 .certain-search-item-count {
@@ -431,6 +457,18 @@
    max-height: 28px;
 }
 
+.ht-hero-menu-item:hover {
+   border-left: 3px solid #1da57a;
+}
+.ht-hero-menu-title:hover {
+   background-image: linear-gradient(
+      to top,
+      #d5dee7 0%,
+      #ffafbd 0%,
+      #c9ffbf 100%
+   );
+}
+
 .ht-hero-menu-title {
    color: black !important;
 }
@@ -439,6 +477,10 @@
 #carousel-example-generic {
    height: auto;
    width: 100%;
+}
+
+.ht-header-slideshow {
+   max-width: 100px !important;
 }
 
 .area-hidden-right {
@@ -458,14 +500,13 @@
 }
 
 /* slide best tour */
-
 /*
     code by Iatek LLC 2018 - CC 2.0 License - Attribution required
     code customized by Azmind.com
 */
 @media (min-width: 768px) and (max-width: 991px) {
    /* Show 4th slide on md if col-md-4*/
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .active.col-md-4.carousel-item
       + .carousel-item
@@ -481,7 +522,7 @@
 }
 @media (min-width: 576px) and (max-width: 768px) {
    /* Show 3rd slide on sm if col-sm-6*/
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .active.col-sm-6.carousel-item
       + .carousel-item
@@ -499,28 +540,28 @@
       margin-right: 0;
    }
    /* show 2 items */
-   #myCarousel .carousel-inner .active + .carousel-item {
+   #bestTourCarousel .carousel-inner .active + .carousel-item {
       display: block;
    }
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
       + .carousel-item {
       transition: none;
    }
-   #myCarousel .carousel-inner .carousel-item-next {
+   #bestTourCarousel .carousel-inner .carousel-item-next {
       position: relative;
       transform: translate3d(0, 0, 0);
    }
    /* left or forward direction */
-   #myCarousel
+   #bestTourCarousel
       .active.carousel-item-left
       + .carousel-item-next.carousel-item-left,
-   #myCarousel .carousel-item-next.carousel-item-left + .carousel-item,
-   #myCarousel
+   #bestTourCarousel .carousel-item-next.carousel-item-left + .carousel-item,
+   #bestTourCarousel
       .carousel-item-next.carousel-item-left
       + .carousel-item
       + .carousel-item {
@@ -529,7 +570,7 @@
       visibility: visible;
    }
    /* farthest right hidden item must be also positioned for animations */
-   #myCarousel .carousel-inner .carousel-item-prev.carousel-item-right {
+   #bestTourCarousel .carousel-inner .carousel-item-prev.carousel-item-right {
       position: absolute;
       top: 0;
       left: 0;
@@ -538,11 +579,11 @@
       visibility: visible;
    }
    /* right or prev direction */
-   #myCarousel
+   #bestTourCarousel
       .active.carousel-item-right
       + .carousel-item-prev.carousel-item-right,
-   #myCarousel .carousel-item-prev.carousel-item-right + .carousel-item,
-   #myCarousel
+   #bestTourCarousel .carousel-item-prev.carousel-item-right + .carousel-item,
+   #bestTourCarousel
       .carousel-item-prev.carousel-item-right
       + .carousel-item
       + .carousel-item {
@@ -556,22 +597,22 @@
 /* MD */
 @media (min-width: 768px) {
    /* show 3rd of 3 item slide */
-   #myCarousel .carousel-inner .active + .carousel-item + .carousel-item {
+   #bestTourCarousel .carousel-inner .active + .carousel-item + .carousel-item {
       display: block;
    }
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
       + .carousel-item
       + .carousel-item {
       transition: none;
    }
-   #myCarousel .carousel-inner .carousel-item-next {
+   #bestTourCarousel .carousel-inner .carousel-item-next {
       position: relative;
       transform: translate3d(0, 0, 0);
    }
    /* left or forward direction */
-   #myCarousel
+   #bestTourCarousel
       .carousel-item-next.carousel-item-left
       + .carousel-item
       + .carousel-item
@@ -581,7 +622,7 @@
       visibility: visible;
    }
    /* right or prev direction */
-   #myCarousel
+   #bestTourCarousel
       .carousel-item-prev.carousel-item-right
       + .carousel-item
       + .carousel-item
@@ -596,7 +637,7 @@
 /* LG */
 @media (min-width: 991px) {
    /* show 4th item */
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .active
       + .carousel-item
@@ -604,7 +645,7 @@
       + .carousel-item {
       display: block;
    }
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
       + .carousel-item
@@ -613,7 +654,7 @@
       transition: none;
    }
    /* Show 5th slide on lg if col-lg-3 */
-   #myCarousel
+   #bestTourCarousel
       .carousel-inner
       .active.col-lg-3.carousel-item
       + .carousel-item
@@ -628,7 +669,7 @@
       visibility: visible;
    }
    /* left or forward direction */
-   #myCarousel
+   #bestTourCarousel
       .carousel-item-next.carousel-item-left
       + .carousel-item
       + .carousel-item
@@ -639,7 +680,7 @@
       visibility: visible;
    }
    /* right or prev direction //t - previous slide direction last item animation fix */
-   #myCarousel
+   #bestTourCarousel
       .carousel-item-prev.carousel-item-right
       + .carousel-item
       + .carousel-item
@@ -666,4 +707,223 @@
 }
 .ht-w-70 {
    width: 70px !important;
+}
+
+/* slide Recent Stories */
+/*
+    code by Iatek LLC 2018 - CC 2.0 License - Attribution required
+    code customized by Azmind.com
+*/
+@media (min-width: 768px) and (max-width: 991px) {
+   /* Show 4th slide on md if col-md-4*/
+   #recentStoriesCarousel
+      .carousel-inner
+      .active.col-md-4.carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: absolute;
+      top: 0;
+      right: -33.3333%; /*change this with javascript in the future*/
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+   /* Show 3rd slide on sm if col-sm-6*/
+   #recentStoriesCarousel
+      .carousel-inner
+      .active.col-sm-6.carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: absolute;
+      top: 0;
+      right: -50%; /*change this with javascript in the future*/
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+}
+@media (min-width: 576px) {
+   .carousel-item {
+      margin-right: 0;
+   }
+   /* show 2 items */
+   #recentStoriesCarousel .carousel-inner .active + .carousel-item {
+      display: block;
+   }
+   #recentStoriesCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+   #recentStoriesCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+      + .carousel-item {
+      transition: none;
+   }
+   #recentStoriesCarousel .carousel-inner .carousel-item-next {
+      position: relative;
+      transform: translate3d(0, 0, 0);
+   }
+   /* left or forward direction */
+   #recentStoriesCarousel
+      .active.carousel-item-left
+      + .carousel-item-next.carousel-item-left,
+   #recentStoriesCarousel
+      .carousel-item-next.carousel-item-left
+      + .carousel-item,
+   #recentStoriesCarousel
+      .carousel-item-next.carousel-item-left
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+   }
+   /* farthest right hidden item must be also positioned for animations */
+   #recentStoriesCarousel
+      .carousel-inner
+      .carousel-item-prev.carousel-item-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+   /* right or prev direction */
+   #recentStoriesCarousel
+      .active.carousel-item-right
+      + .carousel-item-prev.carousel-item-right,
+   #recentStoriesCarousel
+      .carousel-item-prev.carousel-item-right
+      + .carousel-item,
+   #recentStoriesCarousel
+      .carousel-item-prev.carousel-item-right
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+      display: block;
+      visibility: visible;
+   }
+}
+/* MD */
+@media (min-width: 768px) {
+   /* show 3rd of 3 item slide */
+   #recentStoriesCarousel
+      .carousel-inner
+      .active
+      + .carousel-item
+      + .carousel-item {
+      display: block;
+   }
+   #recentStoriesCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+      + .carousel-item
+      + .carousel-item {
+      transition: none;
+   }
+   #recentStoriesCarousel .carousel-inner .carousel-item-next {
+      position: relative;
+      transform: translate3d(0, 0, 0);
+   }
+   /* left or forward direction */
+   #recentStoriesCarousel
+      .carousel-item-next.carousel-item-left
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+   }
+   /* right or prev direction */
+   #recentStoriesCarousel
+      .carousel-item-prev.carousel-item-right
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+      display: block;
+      visibility: visible;
+   }
+}
+/* LG */
+@media (min-width: 991px) {
+   /* show 4th item */
+   #recentStoriesCarousel
+      .carousel-inner
+      .active
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      display: block;
+   }
+   #recentStoriesCarousel
+      .carousel-inner
+      .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      transition: none;
+   }
+   /* Show 5th slide on lg if col-lg-3 */
+   #recentStoriesCarousel
+      .carousel-inner
+      .active.col-lg-3.carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: absolute;
+      top: 0;
+      right: -25%; /*change this with javascript in the future*/
+      z-index: -1;
+      display: block;
+      visibility: visible;
+   }
+   /* left or forward direction */
+   #recentStoriesCarousel
+      .carousel-item-next.carousel-item-left
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+   }
+   /* right or prev direction //t - previous slide direction last item animation fix */
+   #recentStoriesCarousel
+      .carousel-item-prev.carousel-item-right
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item
+      + .carousel-item {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      visibility: visible;
+      display: block;
+      visibility: visible;
+   }
+}
+
+.ht-control-preview-icon {
+   width: 60px !important;
+   height: 60px !important;
+}
+
+.anticon {
+   vertical-align: 0em !important;
+}
+.ht-hero-menu {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: start;
 }

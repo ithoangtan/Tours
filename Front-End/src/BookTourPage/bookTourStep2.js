@@ -16,12 +16,22 @@ import { mapAddressToOptionAntd } from "./addressVN";
 const tailFormItemLayout = {
    wrapperCol: {
       xs: {
-         span: 12,
-         offset: 8
+         offset: 0
       },
       sm: {
-         span: 12,
-         offset: 8
+         offset: 2
+      },
+      md: {
+         offset: 2
+      },
+      lg: {
+         offset: 2
+      },
+      xl: {
+         offset: 2
+      },
+      xxl: {
+         offset: 2
       }
    }
 };
@@ -100,7 +110,11 @@ class BookTourStep2 extends Component {
       };
 
       return (
-         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+         <Form
+            {...formItemLayout}
+            onSubmit={this.handleSubmit}
+            className="book-tour-step2"
+         >
             <Form.Item
                label={
                   <span>

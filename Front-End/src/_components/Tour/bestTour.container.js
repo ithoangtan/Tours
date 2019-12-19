@@ -14,9 +14,8 @@ export default class BestTourContainer extends Component {
                      </p>
                   </div>
                </div>
-
                <div
-                  id="myCarousel"
+                  id="bestTourCarousel"
                   className="carousel slide ftco-animate"
                   data-ride="carousel"
                   data-interval={4000}
@@ -268,24 +267,24 @@ export default class BestTourContainer extends Component {
                   </div>
                   <a
                      className="carousel-control-prev ht-w-70"
-                     href="#myCarousel"
+                     href="#bestTourCarousel"
                      role="button"
                      data-slide="prev"
                   >
                      <span
-                        className="carousel-control-prev-icon "
+                        className="carousel-control-prev-icon ht-control-preview-icon"
                         aria-hidden="true"
                      />
                      {/* <span className="sr-only">Previous</span> */}
                   </a>
                   <a
                      className="carousel-control-next text-faded ht-w-70"
-                     href="#myCarousel"
+                     href="#bestTourCarousel"
                      role="button"
                      data-slide="next"
                   >
                      <span
-                        className="carousel-control-next-icon "
+                        className="carousel-control-next-icon ht-control-preview-icon"
                         aria-hidden="true"
                      />
                      {/* <span className="sr-only">Next</span> */}

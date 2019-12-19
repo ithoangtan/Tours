@@ -475,6 +475,8 @@ class EditableTable extends React.Component {
       sortedInfo = sortedInfo || {};
       // filteredInfo = filteredInfo || {};
 
+      const widthClient = window.outerWidth;
+
       this.columns = [
          {
             title: "ID",
@@ -601,7 +603,7 @@ class EditableTable extends React.Component {
             dataIndex: "edit",
             width: 180,
             key: "edit",
-            fixed: "right",
+            fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
                const { editingidTour } = this.state;
                const editable = this.isEditing(record);
@@ -641,7 +643,7 @@ class EditableTable extends React.Component {
             dataIndex: "delete",
             width: 110,
             key: "delete",
-            fixed: "right",
+            fixed: widthClient > 768 ? "right" : "",
             render: (text, record) =>
                this.state.data.length >= 1 ? (
                   <Popconfirm
@@ -680,6 +682,7 @@ class EditableTable extends React.Component {
 
       //Show ADD
       const { showAdd } = this.state;
+
       return (
          <div className="container-fluid card shadow">
             {showAdd ? (
