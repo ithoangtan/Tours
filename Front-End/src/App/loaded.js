@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Loaded extends Component {
    render() {
       return (
-         <div id="ftco-loader" className="show fullscreen">
+         <div id="ftco-loader" className="show fullscreen ht-loaded">
             <svg className="circular" width="48px" height="48px">
                <circle
                   className="path-bg"
