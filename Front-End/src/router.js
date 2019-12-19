@@ -29,6 +29,9 @@ import FooterContainer from "./_components/Footer/footer.container";
 import Loaded from "./App/loaded";
 import BackToTop from "./App/backTop";
 
+//test
+import All from "./App/all";
+
 const router = [
    //for customer
    {
@@ -246,6 +249,11 @@ const router = [
       path: "/warningResult",
       exact: true,
       component: () => <ResultWarning />
+   },
+   {
+      path: "/all",
+      exact: true,
+      component: () => <All />
    },
    {
       path: "/",

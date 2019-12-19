@@ -61,7 +61,7 @@ class TableGallery extends Component {
          file.preview = await getBase64(file.originFileObj);
       }
       this.setState({
-         previewImage: API_ENDPOINT + file.url || file.preview,
+         previewImage: file.url || file.preview,
          previewVisible: true
       });
    };
