@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import moment from "moment";
-
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -14,12 +12,10 @@ import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { Button } from "antd";
-const dateFormat = "YYYY-DD-MM HH:mm:ss";
 
 class EditorContainer extends Component {
    constructor(props) {
       super(props);
-
       this.state = {
          id: props.id,
          content: props.content,
@@ -43,12 +39,7 @@ class EditorContainer extends Component {
    onOk(value) {}
 
    componentWillReceiveProps() {
-      const { tour, scheduleByIdTour } = this.props;
-
-      tour.departureDay = moment(tour.departureDay)
-         .utc()
-         .format(dateFormat);
-      this.setState({ tour, scheduleByIdTour });
+      this.props.loaded();
    }
 
    onSave = () => {
@@ -70,7 +61,7 @@ class EditorContainer extends Component {
       return (
          <CKEditor
             editor={this.state.editor}
-            data={this.state.scheduleByIdTour.data}
+            data={scheduleByIdTour.data}
             config={{
                // ckfinder: {
                //    // eslint-disable-next-line max-len
@@ -90,6 +81,7 @@ class EditorContainer extends Component {
             onInit={editor => {
                // You can store the "editor" and use when it is needed.
                this.setState({ scheduleByIdTour });
+
                console.log("Editor is ready to use!", editor);
             }}
             onChange={(event, editor) => this.onChange(event, editor)}
@@ -105,13 +97,12 @@ class EditorContainer extends Component {
 
    render() {
       const { tour, scheduleByIdTour } = this.props;
-
       return (
          <div className="container-fluid card shadow ht-style-card">
             <div className="ht-card-title-schedule">
                <h6>Schedule for Tour: {tour.titleTour}</h6>
                <div>
-                  <h6>Departure Time: {this.state.tour.departureDay}</h6>
+                  <h6>Departure Time: {tour.departureDay}</h6>
                </div>
                <Button type="primary" onClick={this.onSave}>
                   Save Schedule
@@ -138,12 +129,10 @@ class EditorContainer extends Component {
 EditorContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
-      // fetchTourByIdRequest: PropTypes.func,
-      // fetchScheduleByIdTourRequest: PropTypes.func
       fetchPatchScheduleRequest: PropTypes.func
-   })
-   // scheduleByIdTour: PropTypes.object,
-   // tour: PropTypes.object
+   }),
+   scheduleByIdTour: PropTypes.object,
+   tour: PropTypes.object
 };
 
 const mapStateToProps = state => {
@@ -156,7 +145,6 @@ const mapDispatchToProps = dispatch => {
    return {
       tourAllActions: bindActionCreators(tourActions, dispatch),
       scheduleAllActions: bindActionCreators(scheduleActions, dispatch)
-      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EditorContainer);
