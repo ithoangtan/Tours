@@ -26,7 +26,7 @@ export default class RecentStoriesContainer extends Component {
                      <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
                         <div className="blog-entry justify-content-end">
                            <Link
-                              to="#"
+                              to="blog-single"
                               className="block-20"
                               style={{
                                  backgroundImage: 'url("images/image_1.jpg")'
@@ -43,7 +43,7 @@ export default class RecentStoriesContainer extends Component {
                                  </div>
                               </div>
                               <h3 className="heading">
-                                 <Link to="#">
+                                 <Link to="blog-single">
                                     Why Lead Generation is Key for Business
                                     Growth
                                  </Link>
@@ -54,7 +54,7 @@ export default class RecentStoriesContainer extends Component {
                      <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="blog-entry justify-content-end">
                            <Link
-                              to="#"
+                              to="blog-single"
                               className="block-20"
                               style={{
                                  backgroundImage: 'url("images/image_2.jpg")'
@@ -71,7 +71,7 @@ export default class RecentStoriesContainer extends Component {
                                  </div>
                               </div>
                               <h3 className="heading">
-                                 <Link to="#">
+                                 <Link to="blog-single">
                                     Why Lead Generation is Key for Business
                                     Growth
                                  </Link>
@@ -82,7 +82,7 @@ export default class RecentStoriesContainer extends Component {
                      <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="blog-entry">
                            <Link
-                              to="#"
+                              to="blog-single"
                               className="block-20"
                               style={{
                                  backgroundImage: 'url("images/image_3.jpg")'
@@ -99,7 +99,7 @@ export default class RecentStoriesContainer extends Component {
                                  </div>
                               </div>
                               <h3 className="heading">
-                                 <Link to="#">
+                                 <Link to="blog-single">
                                     Why Lead Generation is Key for Business
                                     Growth
                                  </Link>
@@ -110,7 +110,7 @@ export default class RecentStoriesContainer extends Component {
                      <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="blog-entry justify-content-end">
                            <Link
-                              to="#"
+                              to="blog-single"
                               className="block-20"
                               style={{
                                  backgroundImage: 'url("images/image_1.jpg")'
@@ -127,7 +127,7 @@ export default class RecentStoriesContainer extends Component {
                                  </div>
                               </div>
                               <h3 className="heading">
-                                 <Link to="#">
+                                 <Link to="blog-single">
                                     Why Lead Generation is Key for Business
                                     Growth
                                  </Link>
@@ -138,7 +138,7 @@ export default class RecentStoriesContainer extends Component {
                      <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="blog-entry justify-content-end">
                            <Link
-                              to="#"
+                              to="blog-single"
                               className="block-20"
                               style={{
                                  backgroundImage: 'url("images/image_2.jpg")'
@@ -155,7 +155,7 @@ export default class RecentStoriesContainer extends Component {
                                  </div>
                               </div>
                               <h3 className="heading">
-                                 <Link to="#">
+                                 <Link to="blog-single">
                                     Why Lead Generation is Key for Business
                                     Growth
                                  </Link>
@@ -166,7 +166,7 @@ export default class RecentStoriesContainer extends Component {
                      <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="blog-entry">
                            <Link
-                              to="#"
+                              to="blog-single"
                               className="block-20"
                               style={{
                                  backgroundImage: 'url("images/image_3.jpg")'
@@ -183,7 +183,7 @@ export default class RecentStoriesContainer extends Component {
                                  </div>
                               </div>
                               <h3 className="heading">
-                                 <Link to="#">
+                                 <Link to="blog-single">
                                     Why Lead Generation is Key for Business
                                     Growth
                                  </Link>
