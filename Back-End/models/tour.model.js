@@ -51,6 +51,58 @@ Tour.getAllTourForUser = function(idAccount, funcResult) {
   );
 };
 
+Tour.getAllTourSearch = function(searchs, funcResult) {
+  if (searchs.conditional === "name") {
+    mysql.query(
+      "call " +
+        databaseProduction +
+        `.spsearchEngineTourByName( '${searchs.keySearch}', '${
+          searchs.dayStart
+        }', '${searchs.dayEnd}', ${10000000000} ); `,
+      function(err, res) {
+        if (err) {
+          funcResult(err, null);
+        } else {
+          funcResult(null, res[0]);
+        }
+      }
+    );
+  } else if (
+    searchs.conditional === "landmark" ||
+    searchs.conditional === "address"
+  ) {
+    mysql.query(
+      "call " +
+        databaseProduction +
+        `.spsearchEngineTourByAddress( '${searchs.keySearch}', '${
+          searchs.dayStart
+        }', '${searchs.dayEnd}', ${10000000000} ); `,
+      function(err, res) {
+        if (err) {
+          funcResult(err, null);
+        } else {
+          funcResult(null, res[0]);
+        }
+      }
+    );
+  } else {
+    mysql.query(
+      "call " +
+        databaseProduction +
+        `.spsearchEngineTour( '${searchs.keySearch}', '${searchs.dayStart}', '${
+          searchs.dayEnd
+        }', ${10000000000} ); `,
+      function(err, res) {
+        if (err) {
+          funcResult(err, null);
+        } else {
+          funcResult(null, res[0]);
+        }
+      }
+    );
+  }
+};
+
 Tour.createTour = function(newTour, funcResult) {
   this.titleTour = newTour.titleTour;
   this.price = newTour.price;
