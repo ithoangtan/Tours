@@ -103,7 +103,13 @@ const menuVN = (
             {North.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -116,7 +122,13 @@ const menuVN = (
             {South.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -129,7 +141,13 @@ const menuVN = (
             {Central.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -142,7 +160,13 @@ const menuVN = (
             {bestTour.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -160,7 +184,13 @@ const menuWorld = (
             {Asia1.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -173,7 +203,13 @@ const menuWorld = (
             {Asia2.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -186,7 +222,13 @@ const menuWorld = (
             {Euro.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -199,7 +241,13 @@ const menuWorld = (
             {otherContinents.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
@@ -212,7 +260,13 @@ const menuWorld = (
             {vipTour.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}

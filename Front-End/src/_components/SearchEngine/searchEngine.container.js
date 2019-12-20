@@ -1,14 +1,42 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-import { Input, DatePicker, Select, Button, Icon, AutoComplete } from "antd";
+import {
+   Input,
+   DatePicker,
+   Select,
+   Button,
+   Icon,
+   AutoComplete,
+   message
+} from "antd";
 import moment from "moment";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const { OptGroup } = AutoComplete;
 const OptionComplete = AutoComplete.Option;
 const dateFormat = "DD/MM/YYYY";
+
+// const dataSourceUser = [
+//    {
+//       title: "Bạn đã từng tìm kiếm: ",
+//       children: [
+//          {
+//             title: "Tết Nguyên Đán",
+//             count: 1
+//          },
+//          {
+//             title: "Năm mới 2020",
+//             count: 2
+//          },
+//          {
+//             title: "Mùa hoa anh đào nở",
+//             count: 2
+//          }
+//       ]
+//    }
+// ];
 
 const dataSourceAll = [
    {
@@ -61,12 +89,13 @@ export default class SearchEngineContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         keySearch: "",
-         dayStart: "",
-         dayEnd: "",
+         keySearch: " ",
+         dayStart: "2019-1-1",
+         dayEnd: "2030-12-12",
          conditional: "all",
          dataSource: [],
-         dataSourceAll: dataSourceAll
+         dataSourceAll: dataSourceAll,
+         onSearch: false
       };
    }
 
@@ -79,7 +108,7 @@ export default class SearchEngineContainer extends Component {
    };
 
    onSelect(value) {
-      console.log("onSelect", value);
+      // console.log("onSelect", value);
    }
 
    getRandomInt(max, min = 0) {
@@ -102,15 +131,7 @@ export default class SearchEngineContainer extends Component {
          <Option key={item.category} text={item.category}>
             <div className="global-search-item">
                <span className="global-search-item-desc">
-                  Found {item.query} on{" "}
-                  <a
-                     href={`https://s.taobao.com/search?q=${item.query}`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                  >
-                     {" "}
-                     {item.category}
-                  </a>
+                  Your mind: {item.query}
                </span>
                <span className="global-search-item-count">
                   {" "}
@@ -131,8 +152,7 @@ export default class SearchEngineContainer extends Component {
    };
 
    onChangeConditional = value => {
-      console.log(value);
-
+      // console.log(value);
       this.setState({ conditional: value });
    };
    onChangeKeySearch = value => {
@@ -140,27 +160,41 @@ export default class SearchEngineContainer extends Component {
    };
    onChangeDay = moment => {
       if (moment[0] !== undefined) {
-         const dayStart = moment[0].format("YYYY-MM-DD");
-         const dayEnd = moment[1].format("YYYY-MM-DD");
-
+         const dayStartTemp = moment[0].format("YYYY-MM-DD");
+         const dayEndTemp = moment[1].format("YYYY-MM-DD");
          //day start
-         this.setState({ dayStart });
+         this.setState({ dayStart: dayStartTemp });
          //day end
-         this.setState({ dayEnd });
+         this.setState({ dayEnd: dayEndTemp });
       }
    };
 
    onBlur = () => {
-      console.log("blur");
+      // console.log("blur");
    };
 
    onFocus = () => {
-      console.log("focus");
+      // console.log("focus");
    };
 
    onSearch = event => {
       event.preventDefault();
+      //Chuyển hướng đến bên trang tour
+      this.setState({ onSearch: true });
    };
+
+   haveRedirect() {
+      const { onSearch, keySearch, dayEnd, dayStart, conditional } = this.state;
+      if (onSearch === true) {
+         message.loading(`"${keySearch}" searching...`, 1);
+         this.setState({ onSearch: false });
+         return (
+            <Redirect
+               to={`/tour/search/${keySearch}/${dayStart}/${dayEnd}/${conditional}`}
+            />
+         );
+      }
+   }
 
    renderTitle(title) {
       return (
@@ -204,6 +238,7 @@ export default class SearchEngineContainer extends Component {
       const { dataSource } = this.state;
       return (
          <section className="ftco-section ftco-no-pb ftco-no-pt">
+            {this.haveRedirect()}
             <div className="container">
                <div className="row">
                   <div className="col-md-12">
@@ -220,7 +255,9 @@ export default class SearchEngineContainer extends Component {
                                           className="certain-category-search ht-width100"
                                           dropdownClassName="certain-category-search-dropdown"
                                           size="large"
-                                          style={{ width: "100%" }}
+                                          style={{
+                                             width: "100%"
+                                          }}
                                           dataSource={
                                              this.state.keySearch === "" &&
                                              this.state.conditional === "all"
@@ -266,10 +303,7 @@ export default class SearchEngineContainer extends Component {
                                                 this.getCurrentDay(),
                                                 dateFormat
                                              ),
-                                             moment(
-                                                this.getCurrentDay(),
-                                                dateFormat
-                                             )
+                                             moment("12/12/2030", dateFormat)
                                           ]}
                                           onChange={this.onChangeDay}
                                           format={dateFormat}

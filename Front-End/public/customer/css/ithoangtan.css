@@ -103,7 +103,7 @@
 }
 
 .ht-filter-tour {
-   margin-top: 30px;
+   margin-bottom: 10px;
 }
 
 /*
@@ -980,4 +980,28 @@
    max-height: auto;
    object-fit: cover !important;
    overflow: hidden;
+}
+
+.ht-khong-tim-thay-du-lieu {
+   display: flex;
+   justify-content: center;
+   align-items: flex-end;
+   height: 150px;
+   max-width: 100%;
+   min-width: 100%;
+}
+
+.ftco-section {
+   margin-top: 0px !important;
+   margin-bottom: 0px !important;
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+}
+
+.ht-filter-tour-2 {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: flex-start;
+   flex-wrap: wrap;
 }

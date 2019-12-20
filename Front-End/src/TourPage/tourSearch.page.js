@@ -28,11 +28,11 @@ const plainOptions = [
 ];
 const defaultCheckedList = ["Ưu đãi nhất"];
 
-class TourContainer extends Component {
+class TourSearchContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         valueStar: 1,
+         value: 1,
          value2: 1,
          checkedListFilter: defaultCheckedList,
          indeterminate: true,
@@ -40,13 +40,12 @@ class TourContainer extends Component {
          checkAll: false,
          checkAll2: false,
          haveData: false,
-         listTour: [],
+         listTourSearch: [],
          loading: true
       };
    }
-
    handleChange = value => {
-      this.setState({ valueStar: value });
+      this.setState({ value });
    };
 
    onChange = checkedListFilter => {
@@ -74,13 +73,13 @@ class TourContainer extends Component {
    };
 
    fetch = async () => {
+      const data = this.props.match.params;
       const { tourAllActions } = this.props;
       const {
-         fetchListTourRequest,
+         fetchListTourSearchRequest,
          fetchListTourImageRequest
       } = tourAllActions;
-
-      await fetchListTourRequest();
+      await fetchListTourSearchRequest(data);
       await fetchListTourImageRequest();
 
       await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
@@ -92,10 +91,11 @@ class TourContainer extends Component {
          left: 0,
          behavior: "smooth"
       });
-      const { listTour } = this.props;
+      const { listTourSearch } = this.props;
       this.fetch();
-      this.setState({ listTour, haveData: true });
+      this.setState({ listTourSearch, haveData: true });
    }
+
    loaded = () => {
       this.setState(props => {
          return {
@@ -128,27 +128,21 @@ class TourContainer extends Component {
 
    renderTours = () => {
       let result = null;
-      const { listTour, listImageTour } = this.props;
+      const { listTourSearch, listImageTour } = this.props;
 
       if (this.state.value2 === 1)
-         listTour.sort(this.compareValues("titleTour", "asc"));
+         listTourSearch.sort(this.compareValues("titleTour", "asc"));
       if (this.state.value2 === 2)
-         listTour.sort(this.compareValues("titleTour", "desc"));
+         listTourSearch.sort(this.compareValues("titleTour", "desc"));
       if (this.state.value2 === 3)
-         listTour.sort(this.compareValues("dateAdded", "asc"));
+         listTourSearch.sort(this.compareValues("dateAdded", "asc"));
       if (this.state.value2 === 4)
-         listTour.sort(this.compareValues("price", "asc"));
+         listTourSearch.sort(this.compareValues("price", "asc"));
       if (this.state.value2 === 5)
-         listTour.sort(this.compareValues("departureDay", "asc"));
+         listTourSearch.sort(this.compareValues("departureDay", "asc"));
 
-      // if (this.state.valueStar === 1) listTour.filter();
-      // if (this.state.valueStar === 2) listTour.filter();
-      // if (this.state.valueStar === 3) listTour.filter();
-      // if (this.state.valueStar === 4) listTour.filter();
-      // if (this.state.valueStar === 5) listTour.filter();
-
-      if (this.state.haveData === true) {
-         result = listTour.map((tour, index) => {
+      if (this.state.haveData && listTourSearch.length > 0) {
+         result = listTourSearch.map((tour, index) => {
             return (
                <TourDetailContainer
                   {...this.props}
@@ -171,10 +165,12 @@ class TourContainer extends Component {
 
       //Ở đây truyền fulloption dữ liệu vào
       //Gọi api, fetch,...... ở container này hết
+
       return result;
    };
+
    render() {
-      const { valueStar } = this.state;
+      const { value } = this.state;
       const radioStyle = {
          display: "block",
          height: "30px",
@@ -183,9 +179,9 @@ class TourContainer extends Component {
       return (
          <section className="ftco-section">
             <div className="container">
-               <div className="row justify-content-center pb-1">
+               <div className="row justify-content-center">
                   <div className="col-md-12 heading-section text-center ftco-animate">
-                     <h2 className="mb-4">Tours du lịch HOT</h2>
+                     <h2 className="mb-4">Kết quả tìm kiếm:</h2>
                   </div>
                </div>
                <div className="row">
@@ -237,7 +233,7 @@ class TourContainer extends Component {
                                     onChange={this.onCheckAllChange}
                                     checked={this.state.checkAll}
                                  >
-                                    Check all
+                                    Lọc theo:
                                  </Checkbox>
                               </div>
                               <CheckboxGroup
@@ -249,16 +245,16 @@ class TourContainer extends Component {
                            </div>
                         </div>
                         <div>
-                           <Title level={4}>Tour Class</Title>
+                           <Title level={4}>Mức độ đánh giá</Title>
                            <span>
                               <Rate
                                  tooltips={desc}
                                  onChange={this.handleChange}
-                                 value={valueStar}
+                                 value={value}
                               />
-                              {valueStar ? (
+                              {value ? (
                                  <span className="ant-rate-text">
-                                    {desc[valueStar - 1]}
+                                    {desc[value - 1]}
                                  </span>
                               ) : (
                                  ""
@@ -280,24 +276,18 @@ class TourContainer extends Component {
       );
    }
 }
-TourContainer.propTypes = {
+TourSearchContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
-      fetchListTourRequest: PropTypes.func,
       fetchListTourSearchRequest: PropTypes.func,
-      fetchPostTourRequest: PropTypes.func,
-      fetchDeleteTourRequest: PropTypes.func,
-      fetchPatchTourRequest: PropTypes.func,
       fetchListTourImageRequest: PropTypes.func
    }),
-   listTour: PropTypes.array,
    listTourSearch: PropTypes.array,
    listImageTour: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listTour: state.tour.listTour,
       listTourSearch: state.tour.listTourSearch,
       listImageTour: state.tour.listImageTour
    };
@@ -308,4 +298,7 @@ const mapDispatchToProps = dispatch => {
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TourContainer);
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(TourSearchContainer);

@@ -39,9 +39,10 @@ export default class TourDetailContainer extends Component {
    //Dữ liệu từ ngoài truyền vô ở đây chỉ có việc load lên thôi
    render() {
       const { tour } = this.props;
-      tour.departureDay = moment(tour.departureDay)
-         .utc()
-         .format("lll");
+      if (tour.departureDay.length > 22)
+         tour.departureDay = moment(tour.departureDay)
+            .utc()
+            .format("lll");
       return (
          <div className="right-tour-detail-page mb-4">
             <div className="tour-content">
