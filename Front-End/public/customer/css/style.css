@@ -8425,6 +8425,26 @@ h1, h2, h3, h4, h5,
   overflow: hidden;
   z-index: 0;
   margin-bottom: 50px; }
+  .project .img p.sale {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding: .1em .3em;
+      background: #f50;
+      font-weight: 400;
+      font-size: 16px;
+      -moz-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      -webkit-transition: all 0.3s ease;
+      -ms-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      -ms-border-radius: 2px;
+      border-radius: 2px;
+      -webkit-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+      -moz-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+      box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11); }
   .project .img {
     position: relative;
     overflow: hidden;
@@ -8432,6 +8452,7 @@ h1, h2, h3, h4, h5,
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     border-radius: 4px; }
+    
   .project img {
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
@@ -8452,11 +8473,15 @@ h1, h2, h3, h4, h5,
     -webkit-transition: all 0.6s ease;
     -ms-transition: all 0.6s ease;
     transition: all 0.6s ease; }
-    .project .text h4.price {
+    .project .text h3.name-tour{
+      padding-bottom: 0px !important;
+      margin-bottom: 0px !important;
+    }
+    .project .text h5.price {
       position: absolute;
       top: -25px;
       right: 10px;
-      padding: .4em .7em;
+      padding: .2em .3em;
       background: #fff;
       font-weight: 600;
       font-size: 20px;

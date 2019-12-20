@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
+import { Rate, Button } from "antd";
+
 export default class BestTourContainer extends Component {
+   state = {};
+
    render() {
       return (
          <section className="ftco-section">
@@ -32,232 +38,34 @@ export default class BestTourContainer extends Component {
                                  className="img-fluid"
                                  alt="Colorlib Template"
                               />
+                              <p className="sale">10% sale</p>
                            </div>
                            <div className="text">
-                              <h4 className="price">$400</h4>
-                              <span>15 Days Tour</span>
-                              <h3>
-                                 <a href="project.html">
-                                    Gurtnellen, Swetzerland
-                                 </a>
+                              <h5 className="price">Giá từ 5.000.000đ</h5>
+                              <Link to="/tour">Có bao nhiêu tour ở Đà Lạt</Link>
+                              <h3 className="name-tour">
+                                 <Link to="/tour">Tên tour ở đây là gì</Link>
                               </h3>
                               <div className="star d-flex clearfix">
-                                 <div className="mr-auto float-left">
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                 </div>
-                                 <div className="float-right">
+                                 <Rate disabled defaultValue={4} size="small" />
+                                 <div className="float-right ht-align-end">
                                     <span className="rate">
-                                       <a href="s">(120)</a>
+                                       <Link to="/tour"> (120)</Link>
                                     </span>
                                  </div>
                               </div>
+                           </div>
+                           <div className="ht-best-tour-bottom">
+                              <div className="ht-flex-center-col">
+                                 <p className="ht-mr-0">3 Days 2 Nights</p>
+                                 <p className="ht-mr-0">8h - 12/9/2019</p>
+                              </div>
+                              <Button type="primary" className="float-right">
+                                 Book Now
+                              </Button>
                            </div>
                            <a
                               href="images/destination-1.jpg"
-                              className="icon image-popup d-flex justify-content-center align-items-center"
-                           >
-                              <span className="icon-expand" />
-                           </a>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="project">
-                           <div className="img">
-                              <img
-                                 src="images/destination-2.jpg"
-                                 className="img-fluid"
-                                 alt="Colorlib Template"
-                              />
-                           </div>
-                           <div className="text">
-                              <h4 className="price">$400</h4>
-                              <span>15 Days Tour</span>
-                              <h3>
-                                 <a href="project.html">
-                                    Gurtnellen, Swetzerland
-                                 </a>
-                              </h3>
-                              <div className="star d-flex clearfix">
-                                 <div className="mr-auto float-left">
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                 </div>
-                                 <div className="float-right">
-                                    <span className="rate">
-                                       <a href="s">(120)</a>
-                                    </span>
-                                 </div>
-                              </div>
-                           </div>
-                           <a
-                              href="images/destination-2.jpg"
-                              className="icon image-popup d-flex justify-content-center align-items-center"
-                           >
-                              <span className="icon-expand" />
-                           </a>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="project">
-                           <div className="img">
-                              <img
-                                 src="images/destination-3.jpg"
-                                 className="img-fluid"
-                                 alt="Colorlib Template"
-                              />
-                           </div>
-                           <div className="text">
-                              <h4 className="price">$400</h4>
-                              <span>15 Days Tour</span>
-                              <h3>
-                                 <a href="project.html">
-                                    Gurtnellen, Swetzerland
-                                 </a>
-                              </h3>
-                              <div className="star d-flex clearfix">
-                                 <div className="mr-auto float-left">
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                 </div>
-                                 <div className="float-right">
-                                    <span className="rate">
-                                       <a href="s">(120)</a>
-                                    </span>
-                                 </div>
-                              </div>
-                           </div>
-                           <a
-                              href="images/destination-3.jpg"
-                              className="icon image-popup d-flex justify-content-center align-items-center"
-                           >
-                              <span className="icon-expand" />
-                           </a>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="project">
-                           <div className="img">
-                              <img
-                                 src="images/destination-4.jpg"
-                                 className="img-fluid"
-                                 alt="Colorlib Template"
-                              />
-                           </div>
-                           <div className="text">
-                              <h4 className="price">$400</h4>
-                              <span>15 Days Tour</span>
-                              <h3>
-                                 <a href="project.html">
-                                    Gurtnellen, Swetzerland
-                                 </a>
-                              </h3>
-                              <div className="star d-flex clearfix">
-                                 <div className="mr-auto float-left">
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                 </div>
-                                 <div className="float-right">
-                                    <span className="rate">
-                                       <a href="s">(120)</a>
-                                    </span>
-                                 </div>
-                              </div>
-                           </div>
-                           <a
-                              href="images/destination-4.jpg"
-                              className="icon image-popup d-flex justify-content-center align-items-center"
-                           >
-                              <span className="icon-expand" />
-                           </a>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="project">
-                           <div className="img">
-                              <img
-                                 src="images/destination-4.jpg"
-                                 className="img-fluid"
-                                 alt="Colorlib Template"
-                              />
-                           </div>
-                           <div className="text">
-                              <h4 className="price">$400</h4>
-                              <span>15 Days Tour</span>
-                              <h3>
-                                 <a href="project.html">
-                                    Gurtnellen, Swetzerland
-                                 </a>
-                              </h3>
-                              <div className="star d-flex clearfix">
-                                 <div className="mr-auto float-left">
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                 </div>
-                                 <div className="float-right">
-                                    <span className="rate">
-                                       <a href="s">(120)</a>
-                                    </span>
-                                 </div>
-                              </div>
-                           </div>
-                           <a
-                              href="images/destination-4.jpg"
-                              className="icon image-popup d-flex justify-content-center align-items-center"
-                           >
-                              <span className="icon-expand" />
-                           </a>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="project">
-                           <div className="img">
-                              <img
-                                 src="images/destination-4.jpg"
-                                 className="img-fluid"
-                                 alt="Colorlib Template"
-                              />
-                           </div>
-                           <div className="text">
-                              <h4 className="price">$400</h4>
-                              <span>15 Days Tour</span>
-                              <h3>
-                                 <a href="project.html">
-                                    Gurtnellen, Swetzerland
-                                 </a>
-                              </h3>
-                              <div className="star d-flex clearfix">
-                                 <div className="mr-auto float-left">
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                    <span className="ion-ios-star" />
-                                 </div>
-                                 <div className="float-right">
-                                    <span className="rate">
-                                       <a href="s">(120)</a>
-                                    </span>
-                                 </div>
-                              </div>
-                           </div>
-                           <a
-                              href="images/destination-4.jpg"
                               className="icon image-popup d-flex justify-content-center align-items-center"
                            >
                               <span className="icon-expand" />

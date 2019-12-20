@@ -709,6 +709,12 @@
    width: 70px !important;
 }
 
+@media (max-width: 768px) {
+   .ht-w-70 {
+      width: 40px !important;
+   }
+}
+
 /* slide Recent Stories */
 /*
     code by Iatek LLC 2018 - CC 2.0 License - Attribution required
@@ -932,4 +938,31 @@
    position: fixed !important;
    bottom: 120px !important;
    right: 30px !important;
+}
+
+.ht-align-end {
+   display: flex;
+   align-items: flex-end;
+   justify-content: center;
+}
+
+.ht-best-tour-bottom {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+.ht-text-middle {
+   vertical-align: middle;
+}
+
+.ht-flex-center-col {
+   display: flex;
+   flex-direction: column;
+}
+
+.ht-mr-0 {
+   margin: 0;
+   padding: 0;
 }
