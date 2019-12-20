@@ -6,11 +6,11 @@ export default class TourDetailImages extends Component {
    render() {
       const { srcImage } = this.props;
       return (
-         <div>
+         <div className="ht-contain-img">
             <img
                alt="notFound"
                src={`${API_ENDPOINT + srcImage}`}
-               className="img-tour ht-img-tour"
+               className="ht-img-tour"
             />
          </div>
       );

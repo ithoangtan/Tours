@@ -8,6 +8,7 @@ import {
 } from "../_helper/toastify.helper";
 const initialState = {
    listTour: [],
+   listTourSearch: [],
    listImageTour: [],
    tourById: {},
    delete: [],
@@ -20,11 +21,11 @@ const reducer = (state = initialState, action) => {
       case tourConstants.FETCH_TOUR:
          return {
             ...state,
-            listTour: []
+            listTour: [],
+            listTourSearch: []
          };
       case tourConstants.FETCH_TOUR_SUCCESS: {
          const { data } = action.payload;
-         // toastSuccess(data);
          return {
             ...state,
             listTour: data
@@ -36,6 +37,23 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             listTour: error
+         };
+      }
+      // List tour search
+      case tourConstants.FETCH_TOUR_SEARCH_SUCCESS: {
+         const { data } = action.payload;
+
+         return {
+            ...state,
+            listTourSearch: data
+         };
+      }
+      case tourConstants.FETCH_TOUR_SEARCH_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            listTourSearch: error
          };
       }
 

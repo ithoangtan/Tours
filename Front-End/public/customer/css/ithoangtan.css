@@ -24,9 +24,18 @@
    align-items: flex-start !important;
 }
 
-.img-tour {
+.ht-contain-img {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.ht-img-tour {
    max-width: 100% !important;
-   height: auto !important;
+   overflow: hidden !important;
+   height: auto;
+   max-height: 350px;
+   object-fit: scale-down !important;
 }
 
 .right-detail-tour {
@@ -94,7 +103,7 @@
 }
 
 .ht-filter-tour {
-   margin-top: 30px;
+   margin-bottom: 10px;
 }
 
 /*
@@ -709,6 +718,12 @@
    width: 70px !important;
 }
 
+@media (max-width: 768px) {
+   .ht-w-70 {
+      width: 40px !important;
+   }
+}
+
 /* slide Recent Stories */
 /*
     code by Iatek LLC 2018 - CC 2.0 License - Attribution required
@@ -932,4 +947,61 @@
    position: fixed !important;
    bottom: 120px !important;
    right: 30px !important;
+}
+
+.ht-align-end {
+   display: flex;
+   align-items: flex-end;
+   justify-content: center;
+}
+
+.ht-best-tour-bottom {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+.ht-text-middle {
+   vertical-align: middle;
+}
+
+.ht-flex-center-col {
+   display: flex;
+   flex-direction: column;
+}
+
+.ht-mr-0 {
+   margin: 0;
+   padding: 0;
+}
+
+.ht-carousel-all-tour {
+   max-height: auto;
+   object-fit: cover !important;
+   overflow: hidden;
+}
+
+.ht-khong-tim-thay-du-lieu {
+   display: flex;
+   justify-content: center;
+   align-items: flex-end;
+   height: 150px;
+   max-width: 100%;
+   min-width: 100%;
+}
+
+.ftco-section {
+   margin-top: 0px !important;
+   margin-bottom: 0px !important;
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+}
+
+.ht-filter-tour-2 {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: flex-start;
+   flex-wrap: wrap;
 }
