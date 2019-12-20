@@ -78,6 +78,11 @@ class TourContainer extends Component {
    };
 
    componentDidMount() {
+      window.scrollTo({
+         top: 0,
+         left: 0,
+         behavior: "smooth"
+      });
       const { listTour } = this.props;
       this.fetch();
       this.setState({ listTour, haveData: true });

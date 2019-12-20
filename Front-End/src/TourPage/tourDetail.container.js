@@ -8,6 +8,8 @@ import TourDetailImages from "./tourDetailImages";
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
+import moment from "moment";
+
 const { Text, Title, Paragraph } = Typography;
 
 export default class TourDetailContainer extends Component {
@@ -37,6 +39,9 @@ export default class TourDetailContainer extends Component {
    //Dữ liệu từ ngoài truyền vô ở đây chỉ có việc load lên thôi
    render() {
       const { tour } = this.props;
+      tour.departureDay = moment(tour.departureDay)
+         .utc()
+         .format("lll");
       return (
          <div className="right-tour-detail-page mb-4">
             <div className="tour-content">
@@ -51,7 +56,11 @@ export default class TourDetailContainer extends Component {
                            }
                         }}
                      >
-                        <Carousel autoplay dotPosition={`top`}>
+                        <Carousel
+                           autoplay
+                           dotPosition={`top`}
+                           className="ht-carousel-all-tour"
+                        >
                            {this.renderImage()}
                         </Carousel>
                      </Link>
@@ -68,7 +77,7 @@ export default class TourDetailContainer extends Component {
                      >
                         <Title level={4}>{tour.titleTour}</Title>
                      </Link>
-                     <Rate disabled defaultValue={4} />
+                     <Rate disabled defaultValue={4} /> ({tour.idTour})
                      <br />
                      <Paragraph className="mt-1" ellipsis>
                         {tour.describe}
@@ -77,12 +86,22 @@ export default class TourDetailContainer extends Component {
                         <Tag color="#f50">
                            Khuyễn mãi miễn phí {tour.sale}% luôn á nè
                         </Tag>
-                        <Button type="dashed">More</Button>
+                        <Link
+                           to={{
+                              pathname: `/tour-single/${tour.idTour}`,
+                              state: {
+                                 tour: tour
+                              }
+                           }}
+                        >
+                           <Button type="dashed">More</Button>
+                        </Link>
                      </div>
                      <div className="mt-1">
                         <Paragraph className="mt-1" ellipsis>
                            Time: {tour.vocationTime}
                            {"  "}
+                           <br></br>
                            Deparure: {tour.departureDay}
                         </Paragraph>
                      </div>

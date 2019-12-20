@@ -27,6 +27,11 @@ class IndexPage extends Component {
       await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    };
    componentDidMount() {
+      window.scrollTo({
+         top: 0,
+         left: 0,
+         behavior: "smooth"
+      });
       // const { tourAllActions } = this.props;
       // const { fetchListTourRequest } = tourAllActions;
       // fetchListTourRequest();

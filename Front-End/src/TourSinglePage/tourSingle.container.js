@@ -176,13 +176,23 @@ export default class TourSingleContainer extends Component {
                                     MORE TOURS
                                  </Link>
                               </Button>
-                              <Button
-                                 type="primary"
-                                 icon="shopping"
-                                 size={"large"}
+                              <Link
+                                 to={{
+                                    pathname: `/book-tour/${tourById.idTour}`,
+                                    state: {
+                                       tour: tourById
+                                    }
+                                 }}
                               >
-                                 BOOK NOW
-                              </Button>
+                                 <Button
+                                    type="primary"
+                                    icon="shopping"
+                                    size={"large"}
+                                 >
+                                    BOOK NOW
+                                 </Button>
+                              </Link>
+
                               <Checkbox onChange={this.onChange}>
                                  Favorites
                               </Checkbox>

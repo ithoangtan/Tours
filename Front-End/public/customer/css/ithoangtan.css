@@ -24,9 +24,18 @@
    align-items: flex-start !important;
 }
 
-.img-tour {
+.ht-contain-img {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.ht-img-tour {
    max-width: 100% !important;
-   height: auto !important;
+   overflow: hidden !important;
+   height: auto;
+   max-height: 350px;
+   object-fit: scale-down !important;
 }
 
 .right-detail-tour {
@@ -965,4 +974,10 @@
 .ht-mr-0 {
    margin: 0;
    padding: 0;
+}
+
+.ht-carousel-all-tour {
+   max-height: auto;
+   object-fit: cover !important;
+   overflow: hidden;
 }

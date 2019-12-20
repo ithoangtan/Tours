@@ -7,6 +7,11 @@ import funcLoadJs from "../_constants/loadJs.constants";
 
 export default class BlogContainer extends Component {
    componentDidMount() {
+      window.scrollTo({
+         top: 0,
+         left: 0,
+         behavior: "smooth"
+      });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
 
