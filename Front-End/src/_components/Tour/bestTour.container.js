@@ -75,6 +75,16 @@ class BestTourContainer extends Component {
                            <Link to="/tour">
                               Ở Đà Lạt còn 4 tour nữa. Xem ngay!
                            </Link>
+                           <Link
+                              to={{
+                                 pathname: `/tour`,
+                                 state: {
+                                    tour: tour
+                                 }
+                              }}
+                           >
+                              Khởi hành từ Hồ Chí Minh
+                           </Link>
                            <h3 className="name-tour">
                               <Link
                                  to={{
