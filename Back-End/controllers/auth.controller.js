@@ -55,13 +55,13 @@ exports.register = (req, res, next) => {
           )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
                         <br/><br/>
                         Have a pleasant day.`;
-          // //micro service mailgun(sever mail support)
-          // await mailer.sendEmail(
-          //   "app156076672@heroku.com",
-          //   newAccount.email,
-          //   "Vui lòng xác thực email của bạn!",
-          //   html
-          // );
+          //micro service mailgun(sever mail support)
+          await mailer.sendEmail(
+            "app156076672@heroku.com",
+            newAccount.email,
+            "Vui lòng xác thực email của bạn!",
+            html
+          );
           //micro service gmail
           await mailerGmail.sendEmail(
             process.env.MY_GMAIL,
