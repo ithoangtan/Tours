@@ -40,13 +40,15 @@ exports.register = (req, res, next) => {
                         <br/><br/>
                         Please verify your email by typing the following token:
                         On the following page:
-                        <a href="http://localhost:8000/verify?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
-                          verifyToken,
-                          "ithoangtansecurity"
-                        )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(
+                        <a href="${
+                          process.env.FRONT_END
+                        }/verify?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
+            verifyToken,
+            "ithoangtansecurity"
+          )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(
             newAccount.email,
             "ithoangtansecurity"
-          )}">http://localhost:8000/verify?${jwt.sign(
+          )}">${process.env.FRONT_END}/verify?${jwt.sign(
             "verifyToken",
             "ithoangtansecurity"
           )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
@@ -105,7 +107,7 @@ exports.verify = async (req, res, next) => {
     "ithoangtansecurity"
   );
   Accounts.getByEmailAndRole(emailVerify, "user")
-    .then(account => {
+    .then(async account => {
       if (!account) {
         const error = new Error();
         error.statusCode = 200;
@@ -114,6 +116,11 @@ exports.verify = async (req, res, next) => {
         throw error;
       }
       if (account.verifyToken === verifyToken) {
+        //update account
+        account.verify = true;
+        account.verifyToken = "verified";
+        await Accounts.updateById(account);
+
         res.status(200).json({
           statusCode: 200,
           userId: account.idAccount,
