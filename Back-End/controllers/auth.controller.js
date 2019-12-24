@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const randomstring = require("randomstring");
 const Accounts = require("../models/account.model");
 const mailer = require("../mics/mailer.mics");
-
+const mailerGmail = require("../mics/mailer.gmail");
 exports.register = (req, res, next) => {
   // const err = validationResult(req);
   const verifyToken = randomstring.generate();
@@ -54,9 +54,16 @@ exports.register = (req, res, next) => {
           )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
                         <br/><br/>
                         Have a pleasant day.`;
-          //micro service
-          await mailer.sendEmail(
-            "app156076672@heroku.com",
+          // //micro service mailgun(sever mail support)
+          // await mailer.sendEmail(
+          //   "app156076672@heroku.com",
+          //   newAccount.email,
+          //   "Vui lòng xác thực email của bạn!",
+          //   html
+          // );
+          //micro service gmail
+          await mailerGmail.sendEmail(
+            "itk160454@gmail.com",
             newAccount.email,
             "Vui lòng xác thực email của bạn!",
             html
