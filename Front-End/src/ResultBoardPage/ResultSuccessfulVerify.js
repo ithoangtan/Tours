@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
-import { Result, Button, message, Spin } from "antd";
+import { Result, Button } from "antd";
 
 import PropTypes from "prop-types";
 
@@ -20,7 +20,6 @@ class ResultSuccessfulVerify extends Component {
       const params = window.location.search;
       const { authAllActions } = this.props;
       const { fetchVerifyEmailRequest } = authAllActions;
-      message.loading("Verify...", 1);
       await fetchVerifyEmailRequest(params);
    };
 
