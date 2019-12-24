@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 
-import { Input, DatePicker, Select, Button, Icon, AutoComplete } from "antd";
+import { Link, Redirect } from "react-router-dom";
+
+import {
+   Input,
+   DatePicker,
+   Select,
+   Button,
+   Icon,
+   AutoComplete,
+   message
+} from "antd";
 import moment from "moment";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -8,17 +18,41 @@ const { OptGroup } = AutoComplete;
 const OptionComplete = AutoComplete.Option;
 const dateFormat = "DD/MM/YYYY";
 
-const dataSource = [
+// const dataSourceUser = [
+//    {
+//       title: "Bạn đã từng tìm kiếm: ",
+//       children: [
+//          {
+//             title: "Tết Nguyên Đán",
+//             count: 1
+//          },
+//          {
+//             title: "Năm mới 2020",
+//             count: 2
+//          },
+//          {
+//             title: "Mùa hoa anh đào nở",
+//             count: 2
+//          }
+//       ]
+//    }
+// ];
+
+const dataSourceAll = [
    {
-      title: "Tên Tour",
+      title: "Trùm Tour",
       children: [
          {
-            title: "Cặp đôi",
+            title: "Tết Nguyên Đán",
             count: 100
          },
          {
-            title: "Gia đình",
+            title: "Năm mới 2020",
             count: 1060
+         },
+         {
+            title: "Mùa hoa anh đào nở",
+            count: 2
          }
       ]
    },
@@ -30,27 +64,84 @@ const dataSource = [
             count: 601
          },
          {
-            title: "Hạ Long Bay",
+            title: "Hạ Long bay",
             count: 300
          }
       ]
    },
    {
-      title: "Tỉnh Thành phố",
+      title: "Địa chỉ",
       children: [
          {
-            title: "Đà Lạt",
-            count: 10
+            title: "Thành phố Đà Lạt",
+            count: 150
          },
+
          {
-            title: "Sa Pa",
-            count: 2
+            title: "Tokyo",
+            count: 254
          }
       ]
    }
 ];
 
 export default class SearchEngineContainer extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         keySearch: " ",
+         dayStart: "2019-1-1",
+         dayEnd: "2030-12-12",
+         conditional: "all",
+         dataSource: [],
+         dataSourceAll: dataSourceAll,
+         onSearch: false
+      };
+   }
+
+   //Auto complete search key
+
+   handleSearch = value => {
+      this.setState({
+         dataSource: value ? this.searchResult(value) : []
+      });
+   };
+
+   onSelect(value) {
+      // console.log("onSelect", value);
+   }
+
+   getRandomInt(max, min = 0) {
+      return Math.floor(Math.random() * (max - min + 1)) + min; // eslint-disable-line no-mixed-operators
+   }
+
+   searchResult(query) {
+      return new Array(this.getRandomInt(5))
+         .join(".")
+         .split(".")
+         .map((item, idx) => ({
+            query,
+            category: `${query}${idx}`,
+            count: this.getRandomInt(200, 100)
+         }));
+   }
+
+   renderOption(item) {
+      return (
+         <Option key={item.category} text={item.category}>
+            <div className="global-search-item">
+               <span className="global-search-item-desc">
+                  Your mind: {item.query}
+               </span>
+               <span className="global-search-item-count">
+                  {" "}
+                  {item.count} results
+               </span>
+            </div>
+         </Option>
+      );
+   }
+
    getCurrentDay = () => {
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, "0");
@@ -60,40 +151,64 @@ export default class SearchEngineContainer extends Component {
       return today;
    };
 
-   onChange = value => {
-      console.log(`selected ${value}`);
+   onChangeConditional = value => {
+      // console.log(value);
+      this.setState({ conditional: value });
+   };
+   onChangeKeySearch = value => {
+      this.setState({ keySearch: value });
+   };
+   onChangeDay = moment => {
+      if (moment[0] !== undefined) {
+         const dayStartTemp = moment[0].format("YYYY-MM-DD");
+         const dayEndTemp = moment[1].format("YYYY-MM-DD");
+         //day start
+         this.setState({ dayStart: dayStartTemp });
+         //day end
+         this.setState({ dayEnd: dayEndTemp });
+      }
    };
 
    onBlur = () => {
-      console.log("blur");
+      // console.log("blur");
    };
 
    onFocus = () => {
-      console.log("focus");
+      // console.log("focus");
    };
 
-   onSearch = val => {
-      console.log("search:", val);
+   onSearch = event => {
+      event.preventDefault();
+      //Chuyển hướng đến bên trang tour
+      this.setState({ onSearch: true });
    };
+
+   haveRedirect() {
+      const { onSearch, keySearch, dayEnd, dayStart, conditional } = this.state;
+      if (onSearch === true) {
+         message.loading(`"${keySearch}" searching...`, 1);
+         this.setState({ onSearch: false });
+         return (
+            <Redirect
+               to={`/tour/search/${keySearch}/${dayStart}/${dayEnd}/${conditional}`}
+            />
+         );
+      }
+   }
 
    renderTitle(title) {
       return (
          <span>
             {title}
-            <a
-               style={{ float: "right" }}
-               href="https://www.google.com/search?q=antd"
-               target="_blank"
-               rel="noopener noreferrer"
-            >
+            <Link style={{ float: "right" }} to="/tour">
                more
-            </a>
+            </Link>
          </span>
       );
    }
 
    options() {
-      let options = dataSource
+      let options = this.state.dataSourceAll
          .map(group => (
             <OptGroup key={group.title} label={this.renderTitle(group.title)}>
                {group.children.map(opt => (
@@ -108,13 +223,7 @@ export default class SearchEngineContainer extends Component {
          ))
          .concat([
             <Option disabled key="all" className="show-all">
-               <a
-                  href="https://www.google.com/search?q=antd"
-                  target="_blank"
-                  rel="noopener noreferrer"
-               >
-                  View all results
-               </a>
+               <Link to="/tour">View all results</Link>
             </Option>
          ]);
       return options;
@@ -126,8 +235,10 @@ export default class SearchEngineContainer extends Component {
    }
 
    render() {
+      const { dataSource } = this.state;
       return (
          <section className="ftco-section ftco-no-pb ftco-no-pt">
+            {this.haveRedirect()}
             <div className="container">
                <div className="row">
                   <div className="col-md-12">
@@ -143,59 +254,40 @@ export default class SearchEngineContainer extends Component {
                                        <AutoComplete
                                           className="certain-category-search ht-width100"
                                           dropdownClassName="certain-category-search-dropdown"
-                                          dropdownMatchSelectWidth={false}
-                                          dropdownStyle={{
-                                             width: 300
-                                          }}
                                           size="large"
-                                          dataSource={this.options()}
+                                          style={{
+                                             width: "100%"
+                                          }}
+                                          dataSource={
+                                             this.state.keySearch === "" &&
+                                             this.state.conditional === "all"
+                                                ? this.options()
+                                                : dataSource.map(
+                                                     this.renderOption
+                                                  )
+                                          }
+                                          onSelect={this.onSelect}
+                                          onSearch={this.handleSearch}
+                                          dropdownMatchSelectWidth={false}
                                           placeholder="Nhấp zô??? Có gợi ý cho bạn nè!"
                                           optionLabelProp="value"
+                                          onChange={this.onChangeKeySearch}
                                        >
                                           <Input
                                              className="ht-width100"
                                              suffix={
                                                 <Icon
-                                                   type="search"
+                                                   type="question-circle"
+                                                   theme="filled"
                                                    className="certain-category-icon"
                                                 />
                                              }
                                           />
                                        </AutoComplete>
                                     </div>
-                                    {/* <div className="form-field">
-                                       <div className="icon">
-                                          <span className="ion-ios-search" />
-                                       </div>
-                                       <Search
-                                          placeholder="input search text"
-                                          onSearch={value => console.log(value)}
-                                          size={"large"}
-                                          // style={{ width: 200 }}
-                                       /> */}
-                                    {/* <input
-                                          type="text"
-                                          className="form-control"
-                                          placeholder="Search place"
-                                       /> */}
-                                    {/* </div> */}
                                  </div>
                               </div>
-                              {/* <div className="col-lg align-items-end">
-                                 <div className="form-group">
-                                    <label htmlFor="#">Check-in date</label>
-                                    <div className="form-field">
-                                       <div className="icon">
-                                          <span className="ion-ios-calendar" />
-                                       </div>
-                                       <input
-                                          type="text"
-                                          className="form-control checkin_date"
-                                          placeholder="Check In Date"
-                                       />
-                                    </div>
-                                 </div>
-                              </div> */}
+
                               <div className="col-lg-3 ">
                                  <div className="form-group">
                                     <label htmlFor="#">
@@ -211,18 +303,11 @@ export default class SearchEngineContainer extends Component {
                                                 this.getCurrentDay(),
                                                 dateFormat
                                              ),
-                                             moment(
-                                                this.getCurrentDay(),
-                                                dateFormat
-                                             )
+                                             moment("12/12/2030", dateFormat)
                                           ]}
+                                          onChange={this.onChangeDay}
                                           format={dateFormat}
                                        />
-                                       {/* <input
-                                          type="text"
-                                          className="form-control checkout_date"
-                                          placeholder="Check Out Date"
-                                       /> */}
                                     </div>
                                  </div>
                               </div>
@@ -237,12 +322,11 @@ export default class SearchEngineContainer extends Component {
                                           <Select
                                              showSearch
                                              size={"large"}
-                                             placeholder="Tìm kiếm theo..."
+                                             defaultValue="all"
                                              optionFilterProp="children"
-                                             onChange={this.onChange}
+                                             onChange={this.onChangeConditional}
                                              onFocus={this.onFocus}
                                              onBlur={this.onBlur}
-                                             onSearch={this.onSearch}
                                              filterOption={(input, option) =>
                                                 option.props.children
                                                    .toLowerCase()
@@ -287,14 +371,10 @@ export default class SearchEngineContainer extends Component {
                                           icon="search"
                                           size={"large"}
                                           block
+                                          onClick={this.onSearch}
                                        >
                                           Tìm kiếm Tour nào
                                        </Button>
-                                       {/* <input
-                                          type="submit"
-                                          defaultValue="Search"
-                                          className="form-control btn btn-primary"
-                                       /> */}
                                     </div>
                                  </div>
                               </div>

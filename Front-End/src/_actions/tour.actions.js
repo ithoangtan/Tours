@@ -35,7 +35,6 @@ export const fetchListTourError = error => {
  *
  */
 export const fetchListTourRequest = () => {
-   console.log("fetchListTourRequest");
    return dispatch => {
       dispatch(fetchListTour()); //reset state tours-->[]
       tourApis
@@ -46,6 +45,39 @@ export const fetchListTourRequest = () => {
          })
          .catch(error => {
             dispatch(fetchListTourError(error));
+         });
+   };
+};
+
+/**
+ * List Tour Search
+ */
+export const fetchListTourSearchSuccess = data => {
+   return {
+      type: tourConstants.FETCH_TOUR_SEARCH_SUCCESS,
+      payload: {
+         data
+      }
+   };
+};
+export const fetchListTourSearchError = error => {
+   return {
+      type: tourConstants.FETCH_TOUR_SEARCH_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+export const fetchListTourSearchRequest = data => {
+   return dispatch => {
+      tourApis
+         .getListTourSearch(data)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchListTourSearchSuccess(data));
+         })
+         .catch(error => {
+            dispatch(fetchListTourSearchError(error));
          });
    };
 };
@@ -220,7 +252,6 @@ export const fetchListTourImageError = error => {
 };
 
 export const fetchListTourImageRequest = () => {
-   console.log("fetchListTourImageRequest");
    return dispatch => {
       dispatch(fetchListTourImage()); //reset state Images-->[]
       tourApis

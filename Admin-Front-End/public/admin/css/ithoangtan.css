@@ -111,3 +111,9 @@
 .ht-width100 {
    width: 100%;
 }
+
+.ht-loaded {
+   position: fixed;
+   bottom: 120px;
+   right: 30px;
+}

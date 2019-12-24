@@ -19,6 +19,7 @@ import DestinationPage from "./DestinationPage/destination.container";
 import TourSinglePage from "./TourSinglePage/tourSingle.page";
 import TourBestPage from "./TourPage/tourBest.page";
 import TourPage from "./TourPage/tour.page";
+import TourSearchPage from "./TourPage/tourSearch.page";
 import LoginPage from "./LoginAndRegisterPage/login.page";
 import RegisterPage from "./LoginAndRegisterPage/register.page";
 import BookTourPage from "./BookTourPage/bookTour.page";
@@ -28,6 +29,9 @@ import SubcribeContainer from "./_components/Footer/subcribe.container";
 import FooterContainer from "./_components/Footer/footer.container";
 import Loaded from "./App/loaded";
 import BackToTop from "./App/backTop";
+
+//test
+import All from "./App/all";
 
 const router = [
    //for customer
@@ -81,6 +85,21 @@ const router = [
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourPage match={match} {...props} />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
+         </div>
+      )
+   },
+   {
+      path: "/tour/search/:keySearch/:dayStart/:dayEnd/:conditional",
+      exact: true,
+      component: ({ match }, props) => (
+         <div>
+            <NavigationContainer {...props} />
+            <HeaderBreadcrumbContainer {...props} />
+            <TourSearchPage match={match} {...props} />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
@@ -246,6 +265,11 @@ const router = [
       path: "/warningResult",
       exact: true,
       component: () => <ResultWarning />
+   },
+   {
+      path: "/all",
+      exact: true,
+      component: () => <All />
    },
    {
       path: "/",

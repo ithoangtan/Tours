@@ -17,6 +17,7 @@ const authenticated = require("../middleware/auth.middleware");
 //for tour
 router.get("/tour", tour.read);
 router.get("/tours", tour.listAll);
+router.post("/tours/search", tour.listTourSearch);
 router.post("/tour", authenticated, tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
 router.patch("/tour", authenticated, tour.update);
 router.delete("/tour", authenticated, tour.delete);

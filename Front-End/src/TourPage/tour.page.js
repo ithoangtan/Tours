@@ -11,53 +11,63 @@ import funcLoadJs from "../_constants/loadJs.constants";
 
 import TourDetailContainer from "./tourDetail.container";
 
-import { Typography, Rate, Checkbox } from "antd";
+import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 const CheckboxGroup = Checkbox.Group;
 
 const plainOptions = [
-   "Apple",
-   "Pear",
-   "Orange",
-   "something1",
-   "something2",
-   "something3"
+   "Ưu đãi nhất",
+   "Tiết kiệm nhất",
+   "Cao cấp",
+   "Event đặc biệt",
+   "Mùa hè"
 ];
-const defaultCheckedList = ["Apple"];
+const defaultCheckedList = ["Ưu đãi nhất"];
 
 class TourContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         value: 1,
-         checkedList: defaultCheckedList,
+         valueStar: 1,
+         value2: 1,
+         checkedListFilter: defaultCheckedList,
          indeterminate: true,
+         indeterminate2: true,
          checkAll: false,
+         checkAll2: false,
          haveData: false,
-         listTour: {}
+         listTour: [],
+         loading: true
       };
    }
 
    handleChange = value => {
-      this.setState({ value });
+      this.setState({ valueStar: value });
    };
 
-   onChange = checkedList => {
+   onChange = checkedListFilter => {
       this.setState({
-         checkedList,
+         checkedListFilter,
          indeterminate:
-            !!checkedList.length && checkedList.length < plainOptions.length,
-         checkAll: checkedList.length === plainOptions.length
+            !!checkedListFilter.length &&
+            checkedListFilter.length < plainOptions.length,
+         checkAll: checkedListFilter.length === plainOptions.length
+      });
+   };
+
+   onChange2 = e => {
+      this.setState({
+         value2: e.target.value
       });
    };
 
    onCheckAllChange = e => {
       this.setState({
-         checkedList: e.target.checked ? plainOptions : [],
+         checkedListFilter: e.target.checked ? plainOptions : [],
          indeterminate: false,
          checkAll: e.target.checked
       });
@@ -77,14 +87,65 @@ class TourContainer extends Component {
    };
 
    componentDidMount() {
+      window.scrollTo({
+         top: 0,
+         left: 0,
+         behavior: "smooth"
+      });
       const { listTour } = this.props;
       this.fetch();
       this.setState({ listTour, haveData: true });
    }
+   loaded = () => {
+      this.setState(props => {
+         return {
+            loading: false
+         };
+      });
+   };
 
-   renderTours() {
+   compareValues(key, order = "asc") {
+      return function(a, b) {
+         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            // không tồn tại tính chất trên cả hai object
+            return 0;
+         }
+
+         const varA =
+            typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+         const varB =
+            typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+
+         let comparison = 0;
+         if (varA > varB) {
+            comparison = 1;
+         } else if (varA < varB) {
+            comparison = -1;
+         }
+         return order === "desc" ? comparison * -1 : comparison;
+      };
+   }
+
+   renderTours = () => {
       let result = null;
       const { listTour, listImageTour } = this.props;
+
+      if (this.state.value2 === 1)
+         listTour.sort(this.compareValues("titleTour", "asc"));
+      if (this.state.value2 === 2)
+         listTour.sort(this.compareValues("titleTour", "desc"));
+      if (this.state.value2 === 3)
+         listTour.sort(this.compareValues("dateAdded", "asc"));
+      if (this.state.value2 === 4)
+         listTour.sort(this.compareValues("price", "asc"));
+      if (this.state.value2 === 5)
+         listTour.sort(this.compareValues("departureDay", "asc"));
+
+      // if (this.state.valueStar === 1) listTour.filter();
+      // if (this.state.valueStar === 2) listTour.filter();
+      // if (this.state.valueStar === 3) listTour.filter();
+      // if (this.state.valueStar === 4) listTour.filter();
+      // if (this.state.valueStar === 5) listTour.filter();
 
       if (this.state.haveData === true) {
          result = listTour.map((tour, index) => {
@@ -96,76 +157,121 @@ class TourContainer extends Component {
                   listImageTour={listImageTour.filter(
                      imageTour => imageTour.idTour === tour.idTour
                   )}
+                  loaded={this.loaded}
                />
             );
          });
       } else {
-         result = <div>Không có dữ liệu</div>;
+         result = (
+            <div className="ht-khong-tim-thay-du-lieu">
+               <Title level={3}> Chưa có dữ liệu phù hợp</Title>
+            </div>
+         );
       }
 
       //Ở đây truyền fulloption dữ liệu vào
       //Gọi api, fetch,...... ở container này hết
       return result;
-   }
-
+   };
    render() {
-      const { value } = this.state;
+      const { valueStar } = this.state;
+      const radioStyle = {
+         display: "block",
+         height: "30px",
+         lineHeight: "30px"
+      };
       return (
          <section className="ftco-section">
             <div className="container">
                <div className="row justify-content-center pb-1">
                   <div className="col-md-12 heading-section text-center ftco-animate">
-                     <h2 className="mb-4">All tours</h2>
+                     <h2 className="mb-4">Tours du lịch HOT</h2>
                   </div>
                </div>
                <div className="row">
                   <div className="col-md-12 col-lg-3 ftco-animate left-tour-page">
-                     <div className="">
-                        <Title level={4}>Tour Class</Title>
-                        <span>
-                           <Rate
-                              tooltips={desc}
-                              onChange={this.handleChange}
-                              value={value}
-                           />
-                           {value ? (
-                              <span className="ant-rate-text">
-                                 {desc[value - 1]}
-                              </span>
-                           ) : (
-                              ""
-                           )}
-                        </span>
-                     </div>
                      <div className="ht-filter-tour">
-                        <Title level={4}>Price per day</Title>
-                        <div>
-                           <div
-                              style={{
-                                 borderBottom: "1px solid #E9E9E9"
-                              }}
-                              className="mb-1 pb-1"
-                           >
-                              <Checkbox
-                                 indeterminate={this.state.indeterminate}
-                                 onChange={this.onCheckAllChange}
-                                 checked={this.state.checkAll}
+                        <Title level={4}>Bộ Lọc</Title>
+                        <div className="ht-filter-tour-2">
+                           <div className="mb-3">
+                              <Text
+                                 style={{
+                                    paddingBottom: "5px",
+                                    borderBottom: "1px solid #E9E9E9"
+                                 }}
                               >
-                                 Check all
-                              </Checkbox>
+                                 Sắp xếp theo thứ tự:
+                              </Text>{" "}
+                              <br></br>
+                              <Radio.Group
+                                 onChange={this.onChange2}
+                                 value={this.state.value2}
+                              >
+                                 <Radio style={radioStyle} value={1}>
+                                    Tên Tour
+                                 </Radio>
+                                 <Radio style={radioStyle} value={2}>
+                                    Tên Tour (Z-A)
+                                 </Radio>
+                                 <Radio style={radioStyle} value={3}>
+                                    Gần đây nhất
+                                 </Radio>
+                                 <Radio style={radioStyle} value={4}>
+                                    Giá tăng dần
+                                 </Radio>
+                                 <Radio style={radioStyle} value={5}>
+                                    Ngày khởi hành
+                                 </Radio>
+                              </Radio.Group>
                            </div>
-                           <CheckboxGroup
-                              className="check-group-tour-left"
-                              options={plainOptions}
-                              value={this.state.checkedList}
-                              onChange={this.onChange}
-                           />
+
+                           <div className="mb-3">
+                              <div
+                                 style={{
+                                    borderBottom: "1px solid #E9E9E9"
+                                 }}
+                                 className="mb-1 pb-1"
+                              >
+                                 <Checkbox
+                                    indeterminate={this.state.indeterminate}
+                                    onChange={this.onCheckAllChange}
+                                    checked={this.state.checkAll}
+                                 >
+                                    Check all
+                                 </Checkbox>
+                              </div>
+                              <CheckboxGroup
+                                 className="check-group-tour-left"
+                                 options={plainOptions}
+                                 value={this.state.checkedListFilter}
+                                 onChange={this.onChange}
+                              />
+                           </div>
+                        </div>
+                        <div>
+                           <Title level={4}>Tour Class</Title>
+                           <span>
+                              <Rate
+                                 tooltips={desc}
+                                 onChange={this.handleChange}
+                                 value={valueStar}
+                              />
+                              {valueStar ? (
+                                 <span className="ant-rate-text">
+                                    {desc[valueStar - 1]}
+                                 </span>
+                              ) : (
+                                 ""
+                              )}
+                           </span>
                         </div>
                      </div>
                   </div>
                   <div className="col-md-12 col-lg-9 ftco-animate right-tour-page">
                      {/* Rendder TOURS */}
-                     {this.renderTours()}
+                     <Spin tip="loading... data" spinning={this.state.loading}>
+                        {this.renderTours()}
+                     </Spin>
                      {/* end Render Tours */}
                   </div>
                </div>
@@ -178,18 +284,21 @@ TourContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
       fetchListTourRequest: PropTypes.func,
+      fetchListTourSearchRequest: PropTypes.func,
       fetchPostTourRequest: PropTypes.func,
       fetchDeleteTourRequest: PropTypes.func,
       fetchPatchTourRequest: PropTypes.func,
       fetchListTourImageRequest: PropTypes.func
    }),
    listTour: PropTypes.array,
+   listTourSearch: PropTypes.array,
    listImageTour: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
       listTour: state.tour.listTour,
+      listTourSearch: state.tour.listTourSearch,
       listImageTour: state.tour.listImageTour
    };
 };

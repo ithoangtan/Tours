@@ -128,7 +128,7 @@ export default class HeaderContainer extends Component {
                </div>
             </div>
             <a
-               className="carousel-control-prev area-hidden-left"
+               className="carousel-control-prev area-hidden-left ht-header-slideshow"
                href="#carousel-example-generic"
                role="button"
                data-slide="prev"
@@ -140,7 +140,7 @@ export default class HeaderContainer extends Component {
                <span className="sr-only">Previous</span>
             </a>
             <a
-               className="carousel-control-next area-hidden-right"
+               className="carousel-control-next area-hidden-right ht-header-slideshow"
                href="#carousel-example-generic"
                role="button"
                data-slide="next"

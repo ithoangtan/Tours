@@ -8,6 +8,8 @@ import { Menu, Dropdown, Icon, Avatar, Badge, Tooltip } from "antd";
 
 import { getSignCookie } from "../../_commons/auth.service";
 
+import { API_ENDPOINT } from "../../_constants/index.constants";
+
 const North = [
    { name: "Hà Nội", key: "ha-noi" },
    { name: "Hạ Long", key: "ha-long-bay" },
@@ -46,28 +48,27 @@ const bestTour = [
 ];
 
 const Asia1 = [
-   { name: "Campuchia", key: "campuchia" },
-   { name: "Đài Loan", key: "dai-loan" },
+   { name: "Nhật Bản", key: "nhat-ban" },
    { name: "Hàn Quốc", key: "han-quoc" },
-   { name: "HongKong", key: "hongkong" },
+   { name: "Đài Loan", key: "dai-loan" },
+   { name: "Lào", key: "lao" },
+   { name: "Thái Lan", key: "thai-lan" },
+   { name: "Campuchia", key: "campuchia" },
    { name: "Malaysia", key: "malaysia" },
    { name: "Myanmar", key: "myanmar" },
-   { name: "Nhật Bản", key: "nhat-ban" },
-   { name: "Singapore", key: "singapore" }
+   { name: "Indonesia", key: "indonesia" }
 ];
 
 const Asia2 = [
-   { name: "Thái Lan", key: "thai-lan" },
    { name: "Trung Quốc", key: "trung-quoc" },
-   { name: "Ả Rập", key: "a-rap" },
+   { name: "Singapore", key: "singapore" },
+   { name: "HongKong", key: "hongkong" },
+   { name: "Qatar", key: "qatar" },
    { name: "Nga", key: "nga" },
-   { name: "Brunei", key: "brunei" },
-   { name: "Lào", key: "lao" },
-   { name: "Indonesia", key: "indonesia" },
-   { name: "Triều Tiên", key: "trieu-tien" },
-   { name: "Philippines", key: "philippines" },
    { name: "Ấn Độ", key: "an-do" },
-   { name: "Qatar", key: "qatar" }
+   { name: "Philippines", key: "philippines" },
+   { name: "Ả Rập", key: "a-rap" },
+   { name: "Brunei", key: "brunei" }
 ];
 const Euro = [
    { name: "Anh", key: "anh" },
@@ -98,51 +99,79 @@ const menuVN = (
    <div className="ht-hero-menu">
       <Menu>
          <Menu.ItemGroup title="Miền Bắc" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {North.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
-      </Menu>
-      <Menu>
-         <Menu.ItemGroup title="Miền Trung" className="ht-hero-menu-title">
-            {Central.map(provincial => {
-               return (
-                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
-                  </Menu.Item>
-               );
-            })}
-         </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
       </Menu>
       <Menu>
          <Menu.ItemGroup title="Miền Nam" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {South.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
+      </Menu>
+      <Menu>
+         <Menu.ItemGroup title="Miền Trung" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
+            {Central.map(provincial => {
+               return (
+                  <Menu.Item key={provincial.key} className="ht-hero-menu-item">
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
+                  </Menu.Item>
+               );
+            })}
+         </Menu.ItemGroup>
+         <Menu.Divider></Menu.Divider>
       </Menu>
       <Menu>
          <Menu.ItemGroup title="Best Tours" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {bestTour.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
       </Menu>
    </div>
 );
@@ -151,63 +180,98 @@ const menuWorld = (
    <div className="ht-hero-menu">
       <Menu>
          <Menu.ItemGroup title="Châu Á" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {Asia1.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
       </Menu>
       <Menu>
          <Menu.ItemGroup title="Châu Á" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {Asia2.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
       </Menu>
       <Menu>
          <Menu.ItemGroup title="Châu Âu" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {Euro.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
       </Menu>
       <Menu>
          <Menu.ItemGroup title="Châu lục khác" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {otherContinents.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
       </Menu>
       <Menu>
          <Menu.ItemGroup title="Châu Mỹ" className="ht-hero-menu-title">
+            <Menu.Divider></Menu.Divider>
             {vipTour.map(provincial => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
-                     <Link to={`${provincial.key}`}>{provincial.name}</Link>
+                     <Link
+                        to={{
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                        }}
+                     >
+                        {provincial.name}
+                     </Link>
                   </Menu.Item>
                );
             })}
          </Menu.ItemGroup>
-         <Menu.Item></Menu.Item>
+         <Menu.Divider></Menu.Divider>
       </Menu>
    </div>
 );
@@ -222,8 +286,6 @@ export default class Navigation extends Component {
 
    menuAvartar() {
       const role = getSignCookie("role");
-      console.log(role);
-
       return (
          <Menu>
             <Menu.Item>
@@ -299,7 +361,11 @@ export default class Navigation extends Component {
                            className="ht-avatar"
                            icon="user"
                            size="large"
-                           src={token ? avatar : `/img/avatarDefault.jpg`}
+                           src={
+                              token
+                                 ? API_ENDPOINT + avatar
+                                 : `${API_ENDPOINT}/img/avatarDefault.jpg`
+                           }
                         />
                      </Badge>
                   </Dropdown>
@@ -310,8 +376,7 @@ export default class Navigation extends Component {
          return (
             <li className="nav-item ml-1 mr-1" style={{ alignSelf: "center" }}>
                <Link className="ml-2" rel="noopener noreferrer" to="/login">
-                  <i className="fas fa-sign-in-alt fa-fw mr-2"></i>
-                  Sign In
+                  <i className="fas fa-sign-in-alt"></i> Sign In
                </Link>
             </li>
          );
@@ -358,7 +423,7 @@ export default class Navigation extends Component {
                   <ul className="navbar-nav ml-auto">
                      <li className="nav-item active">
                         <Link to="/" className="nav-link">
-                           Home
+                           <i className="fas fa-umbrella-beach"></i> Home
                         </Link>
                      </li>
                      {/* <li className="nav-item">
@@ -369,25 +434,27 @@ export default class Navigation extends Component {
                      <li className="nav-item">
                         <Dropdown overlay={menuWorld} className="nav-link">
                            <Link to="/tour">
-                              Quốc Tế <Icon type="down" />
+                              <i className="fas fa-globe"></i> Quốc Tế{" "}
+                              <Icon type="down" />
                            </Link>
                         </Dropdown>
                      </li>
                      <li className="nav-item">
                         <Dropdown overlay={menuVN} className="nav-link">
                            <Link to="/tour">
-                              Việt Nam <Icon type="down" />
+                              <i className="fas fa-map-marker-alt"></i> Việt Nam{" "}
+                              <Icon type="down" />
                            </Link>
                         </Dropdown>
                      </li>
                      <li className="nav-item">
                         <Link to="/blog" className="nav-link">
-                           Blog
+                           <i className="fas fa-blog"></i> Blog
                         </Link>
                      </li>
                      <li className="nav-item">
                         <Link to="/about" className="nav-link">
-                           About
+                           <i className="fas fa-users-cog"></i> About
                         </Link>
                      </li>
                      <li className="nav-item">

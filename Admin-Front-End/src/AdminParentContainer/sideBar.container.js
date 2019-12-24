@@ -36,6 +36,7 @@ export default class SideBarContainer extends Component {
             {/* Sidebar - Brand */}
             <Tooltip placement="right" title={"Go to user MODE"}>
                <a
+                  id="page-top"
                   href={LinkUserPage}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -44,7 +45,7 @@ export default class SideBarContainer extends Component {
                   <div className="sidebar-brand-icon rotate-n-15">
                      <i className="fas fa-laugh-wink" />
                   </div>
-                  <div className="sidebar-brand-text mx-3">SB Admin</div>
+                  <div className="sidebar-brand-text mx-3">User MODE</div>
                </a>
             </Tooltip>
 

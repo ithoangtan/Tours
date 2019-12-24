@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 // import PropTypes from "prop-types";
 
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 
 // import * as tourActions from "../_actions/tour.actions";
@@ -27,6 +27,11 @@ class IndexPage extends Component {
       await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    };
    componentDidMount() {
+      window.scrollTo({
+         top: 0,
+         left: 0,
+         behavior: "smooth"
+      });
       // const { tourAllActions } = this.props;
       // const { fetchListTourRequest } = tourAllActions;
       // fetchListTourRequest();
@@ -49,10 +54,10 @@ class IndexPage extends Component {
             <SearchEngineContainer />
             <BestTourContainer />
             <RecentStoriesContainer />
-            <ServiceSection />
-            <AboutTravelandContainer />
-            <ThingsToKnowContainer />
             <HappyTravelerSaysContainer />
+            <ThingsToKnowContainer />
+            <AboutTravelandContainer />
+            <ServiceSection />
          </div>
       );
    }
@@ -65,16 +70,4 @@ IndexPage.propTypes = {
    // }),
    // listTour: PropTypes.array
 };
-
-const mapStateToProps = state => {
-   // return {
-   // listTour: state.tour.listTour
-   // };
-};
-const mapDispatchToProps = dispatch => {
-   // return {
-   // tourAllActions: bindActionCreators(tourActions, dispatch)
-   //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
-   // };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);
+export default IndexPage;

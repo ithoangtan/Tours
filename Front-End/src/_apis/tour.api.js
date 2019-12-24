@@ -7,7 +7,9 @@ const urls = "tours";
 export const getListTour = () => {
    return axiosService.get(`${API_ENDPOINT}/${urls}`);
 };
-
+export const getListTourSearch = data => {
+   return axiosService.post(`${API_ENDPOINT}/${urls}/search`, data);
+};
 export const getTourById = idTour => {
    return axiosService.get(`${API_ENDPOINT}/${url}?idTour=${idTour}`);
 };

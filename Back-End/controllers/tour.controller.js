@@ -35,6 +35,22 @@ const Tour = require("../models/tour.model");
 //     }
 //   });
 // };
+exports.listTourSearch = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+  const searchs = {
+    keySearch: req.body.keySearch,
+    dayStart: req.body.dayStart,
+    dayEnd: req.body.dayEnd,
+    conditional: req.body.conditional
+  };
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
+  Tour.getAllTourSearch(searchs, function(err, tour) {
+    if (err) res.send(err);
+    res.json(tour);
+  });
+};
 
 exports.listAll = function(req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
