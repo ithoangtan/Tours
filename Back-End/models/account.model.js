@@ -8,6 +8,7 @@ const Account = function(account) {
   this.phone = account.phone;
   this.role = account.role || "user"; //user(customer), admin(customer), administrator(full permission)
   this.password = account.password;
+  this.verifyToken = account.verifyToken;
 };
 const databaseLocal = "azmszdk4w6h5j1o6";
 const databaseProduction =
@@ -39,7 +40,7 @@ Account.create = function(newAccount) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".accounts (`name`, `username`, `email`, `phone`, `role`, `password`) VALUES ('" +
+          ".accounts (`name`, `username`, `email`, `phone`, `role`, `password`, `verify` , `verifyToken` ) VALUES ('" +
           newAccount.name +
           "', '" +
           newAccount.username +
@@ -51,6 +52,10 @@ Account.create = function(newAccount) {
           newAccount.role +
           "', '" +
           newAccount.password +
+          "', '" +
+          newAccount.verify +
+          "', '" +
+          newAccount.verifyToken +
           "') "
       )
       .then(rows => resolve(rows))

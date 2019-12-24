@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { check } = require("express-validator");
+// const { check } = require("express-validator");
 
 const router = express.Router();
 
@@ -53,5 +53,6 @@ router.delete("/order", authenticated, order.delete);
 //for authencation
 router.post("/login", auth.login);
 router.post("/register", auth.register);
+router.get("/verify", auth.verify);
 
 module.exports = router;
