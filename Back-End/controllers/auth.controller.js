@@ -159,6 +159,13 @@ exports.login = (req, res, next) => {
         res.status(200).json(error);
         throw error;
       }
+      if (!account.verify) {
+        const error = new Error();
+        error.statusCode = 200;
+        error.message = "Your account was not verified!!!";
+        res.status(200).json(error);
+        throw error;
+      }
       loadAccount = account;
       return bcrypt.compare(password, account.password);
     })
