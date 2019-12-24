@@ -59,8 +59,8 @@ const reducer = (state = initialState, action) => {
             messageLoading(
                `${data.name} is register.....`,
                `Now!, you can login, ${data.name}`,
-               0.5,
-               3
+               1,
+               5
             );
 
          //Save info user:
