@@ -3,13 +3,14 @@ const xoauth2 = require("xoauth2");
 
 var transporter = nodemailer.createTransport({
   service: "gmail",
+  secure: true,
   auth: {
-    xoauth2: xoauth2.createXOAuth2Generator({
-      user: process.env.MY_GMAIL,
-      clientId: process.env.CLIENT_ID_GMAIL,
-      clientSecret: process.env.CLIENT_SECRET_GMAIL,
-      refreshToken: process.env.REFRESH_TOKEN_GMAIL
-    })
+    type: "OAuth2",
+    user: process.env.MY_GMAIL,
+    clientId: process.env.CLIENT_ID_GMAIL,
+    clientSecret: process.env.CLIENT_SECRET_GMAIL,
+    refreshToken: process.env.REFRESH_TOKEN_GMAIL,
+    accessToken: process.env.ACCESS_TOKEN_GMAIL
   }
 });
 

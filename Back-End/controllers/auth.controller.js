@@ -209,8 +209,7 @@ exports.forgotPasswordStep1 = (req, res, next) => {
       );
       res.status(200).json({
         statusCode: 200,
-        email: accountTemp.email,
-        result: result
+        email: accountTemp.email
       });
     })
 
