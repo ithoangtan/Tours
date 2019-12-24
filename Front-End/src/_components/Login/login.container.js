@@ -73,11 +73,16 @@ class LoginContainer extends Component {
 
    render() {
       const { getFieldDecorator } = this.props.form;
+      const email = sessionStorage.getItem("email");
       return (
          <Form onSubmit={this.handleSubmit} className="login-form">
             {this.haveRedirect()}
             <Form.Item>
                {getFieldDecorator("email", {
+                  initialValue:
+                     email !== null && email !== undefined && email !== ""
+                        ? email
+                        : "",
                   rules: [
                      { required: true, message: "Please input your email!" }
                   ]

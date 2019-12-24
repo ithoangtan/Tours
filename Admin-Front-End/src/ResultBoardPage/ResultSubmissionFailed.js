@@ -14,10 +14,9 @@ export default class ResultSubmissionFailed extends Component {
             title="Submission Failed"
             subTitle="Please check and modify the following information before resubmitting."
             extra={[
-               <Button type="primary" key="console">
-                  Go Console
-               </Button>,
-               <Button key="buy">Buy Again</Button>
+               <Link to={{ pathname: `/tour` }}>
+                  <Button type="primary">Back Home</Button>
+               </Link>
             ]}
          >
             <div className="desc">
