@@ -14,14 +14,7 @@ export default class ResultSubmissionFailed extends Component {
             title="Submission Failed"
             subTitle="Please check and modify the following information before resubmitting."
             extra={[
-               <Link
-                  to={{
-                     pathname: `/tour`,
-                     state: {
-                        tour: tour
-                     }
-                  }}
-               >
+               <Link to={{ pathname: `/tour` }}>
                   <Button type="primary">Back Home</Button>
                </Link>
             ]}

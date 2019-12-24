@@ -34,12 +34,7 @@ export default class ResultSuccessful extends Component {
                </div>
             }
             extra={[
-               <Link
-                  key="extra"
-                  to={{
-                     pathname: "/"
-                  }}
-               >
+               <Link key="extra" to={{ pathname: "/" }}>
                   <Button type="dashed" key="console">
                      Đi đến trang chủ
                   </Button>

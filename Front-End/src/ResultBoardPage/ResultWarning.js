@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import { Result, Button } from "antd";
 
 export default class ResultWarning extends Component {
@@ -10,14 +10,7 @@ export default class ResultWarning extends Component {
             status={status}
             title={title}
             extra={
-               <Link
-                  to={{
-                     pathname: `/tour`,
-                     state: {
-                        tour: tour
-                     }
-                  }}
-               >
+               <Link to={{ pathname: `/tour` }}>
                   <Button type="default">Back Home</Button>
                </Link>
             }
