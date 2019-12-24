@@ -53,14 +53,6 @@ class BookTourStep2 extends Component {
             //    fetchLoginRequest(values);
             //Lưu thông tin vào storage
             localStorage.setItem("orders", JSON.stringify(values));
-            // localStorage.setItem("name", values.name);
-            // localStorage.setItem("email", values.email);
-            // localStorage.setItem("phone", values.phone);
-            // localStorage.setItem("numberChildren", values.numberChildren);
-            // localStorage.setItem("numberPeople", values.numberPeople);
-            // localStorage.setItem("province", values.residence[0]);
-            // localStorage.setItem("district", values.residence[1]);
-            // localStorage.setItem("ward", values.residence[2]);
             //Đến khi người dùng ấn done mới tiến hành lưu xuống CSDL
             console.log("Received values of form: ", values);
          }
@@ -75,23 +67,15 @@ class BookTourStep2 extends Component {
    };
 
    initValue(name) {
+      const orders = JSON.parse(localStorage.getItem("orders"));
       if (localStorage.getItem("orders")) {
-         if (name === "name")
-            return JSON.parse(localStorage.getItem("orders")).name;
-         if (name === "email")
-            return JSON.parse(localStorage.getItem("orders")).email;
-         if (name === "phone")
-            return JSON.parse(localStorage.getItem("orders")).phone;
-         if (name === "numberPeople")
-            return JSON.parse(localStorage.getItem("orders")).numberPeople;
-         if (name === "numberChildren")
-            return JSON.parse(localStorage.getItem("orders")).numberChildren;
+         if (name === "name") return orders.name;
+         if (name === "email") return orders.email;
+         if (name === "phone") return orders.phone;
+         if (name === "numberPeople") return orders.numberPeople;
+         if (name === "numberChildren") return orders.numberChildren;
          if (name === "address")
-            return [
-               JSON.parse(localStorage.getItem("orders")).address[0],
-               JSON.parse(localStorage.getItem("orders")).address[1],
-               JSON.parse(localStorage.getItem("orders")).address[2]
-            ];
+            return [orders.address[0], orders.address[1], orders.address[2]];
       }
    }
 

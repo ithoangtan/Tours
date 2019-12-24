@@ -4,22 +4,25 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const randomstring = require("randomstring");
 const Accounts = require("../models/account.model");
-// const mailer = require("../mics/mailer.mics");
+const mailer = require("../mics/mailer.mics");
 const mailerGmail = require("../mics/mailer.gmail");
 
 exports.register = (req, res, next) => {
   // const err = validationResult(req);
   const verifyToken = randomstring.generate();
   let newAccount = new Accounts(req.body);
-  Accounts.getByEmailAndRole(newAccount.email, "user")
-    .then(account => {
-      if (account && account.email === newAccount.email) {
-        const error = new Error();
-        error.statusCode = 200;
-        error.message = "The email already exists";
-        res.status(200).json(error);
-        throw error;
-      }
+  Accounts.getAll()
+    .then(accounts => {
+      accounts.forEach(account => {
+        if (account && account.email === newAccount.email) {
+          const error = new Error();
+          error.statusCode = 200;
+          error.message = "The email already exists";
+          console.log(account, newAccount);
+          res.status(200).json(error);
+          throw error;
+        }
+      });
 
       newAccount = { ...newAccount, verifyToken: verifyToken };
       //Quét xem email đã tồn tại không
@@ -55,13 +58,13 @@ exports.register = (req, res, next) => {
           )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
                         <br/><br/>
                         Have a pleasant day.`;
-          //micro service mailgun(sever mail support)
-          await mailer.sendEmail(
-            "app156076672@heroku.com",
-            newAccount.email,
-            "Vui lòng xác thực email của bạn!",
-            html
-          );
+          // //micro service mailgun(sever mail support)
+          // await mailer.sendEmail(
+          //   "app156076672@heroku.com",
+          //   newAccount.email,
+          //   "Vui lòng xác thực email của bạn!",
+          //   html
+          // );
           //micro service gmail
           await mailerGmail.sendEmail(
             process.env.MY_GMAIL,

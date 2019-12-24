@@ -7,7 +7,7 @@ export const fetchLogin = () => {
    };
 };
 
-//List Tour
+//Login
 export const fetchLoginSuccess = (data, status) => {
    return {
       type: tourConstants.FETCH_AUTH_SUCCESS,
@@ -28,13 +28,7 @@ export const fetchLoginError = error => {
       }
    };
 };
-/**
- * B1: fetch isTourRequest()
- * B2: ResetL state tours --> []
- * B3: Khi API thành công thì vào then:
- * fetchLoginSucces (data response)
- *
- */
+
 export const fetchLoginRequest = data => {
    return dispatch => {
       dispatch(fetchLogin()); //reset state tours-->[]
@@ -46,6 +40,42 @@ export const fetchLoginRequest = data => {
          })
          .catch(error => {
             dispatch(fetchLoginError(error));
+         });
+   };
+};
+
+//Register
+export const fetchRegisterSuccess = (data, status) => {
+   return {
+      type: tourConstants.FETCH_REGISTER_SUCCESS,
+      payload: {
+         // Thường đi làm thì người ta hay gọi là FETCH
+         //data gửi kèm trong actions là payload ở vị trí này
+         data,
+         status
+      }
+   };
+};
+
+export const fetchRegisterError = error => {
+   return {
+      type: tourConstants.FETCH_REGISTER_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchRegisterRequest = data => {
+   return dispatch => {
+      authApis
+         .register(data)
+         .then(resp => {
+            const { data, status } = resp;
+            dispatch(fetchRegisterSuccess(data, status));
+         })
+         .catch(error => {
+            dispatch(fetchRegisterError(error));
          });
    };
 };

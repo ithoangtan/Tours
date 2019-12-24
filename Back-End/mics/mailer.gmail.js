@@ -11,6 +11,13 @@ var transporter = nodemailer.createTransport({
     clientSecret: process.env.CLIENT_SECRET_GMAIL,
     refreshToken: process.env.REFRESH_TOKEN_GMAIL,
     accessToken: process.env.ACCESS_TOKEN_GMAIL
+    // user: "itk160454@gmail.com",
+    // clientId:
+    //   "187952647481-48snbaum74q2kongn41akvqje12ah3ki.apps.googleusercontent.com",
+    // clientSecret: "nyLQCsqSm6tZ_4AMTxX4_8JX",
+    // refreshToken:
+    //   "1//04jyBbxxKQXDjCgYIARAAGAQSNwF-L9Ir5P6jgsnn6PLg5FPYRUEGs7_24ceiSpOpS8fBTscd8IW90-VZGXg3WDIHssGGbPn5cVc",
+    // accessToken: process.env.ACCESS_TOKEN_GMAIL
   }
 });
 

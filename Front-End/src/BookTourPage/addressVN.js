@@ -60,6 +60,34 @@ export function mapAddressToOptionAntd() {
    return arrayAddress;
 }
 
+export function mapAddressNotWardToOptionAntd() {
+   let addressMapped = _.map(data, divided);
+   addressMapped.forEach(element => {
+      element["quan-huyen"] = _.map(element["quan-huyen"], divided);
+      element["quan-huyen"].forEach(element => {
+         element["xa-phuong"] = _.map(element["xa-phuong"], divided);
+      });
+   });
+   let arrayAddress = [];
+   addressMapped.forEach(element => {
+      let addressProvince = {
+         value: element["name"],
+         label: element["name_with_type"],
+         children: []
+      };
+      element["quan-huyen"].forEach(element => {
+         let addressDistrict = {
+            value: element["name"],
+            label: element["name_with_type"],
+            children: []
+         };
+         addressProvince.children.push(addressDistrict);
+      });
+      arrayAddress.push(addressProvince);
+   });
+   return arrayAddress;
+}
+
 /**
  * @param {*} data
  */

@@ -9,58 +9,49 @@ import {
    Select,
    Checkbox,
    Button,
-   AutoComplete
+   AutoComplete,
+   message
 } from "antd";
+
+import { mapAddressNotWardToOptionAntd } from "../../BookTourPage/addressVN";
+
+import { Link } from "react-router-dom";
+
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import * as authActions from "../../_actions/auth.actions";
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
-const residences = [
-   {
-      value: "zhejiang",
-      label: "Zhejiang",
-      children: [
-         {
-            value: "hangzhou",
-            label: "Hangzhou",
-            children: [
-               {
-                  value: "xihu",
-                  label: "West Lake"
-               }
-            ]
-         }
-      ]
-   },
-   {
-      value: "jiangsu",
-      label: "Jiangsu",
-      children: [
-         {
-            value: "nanjing",
-            label: "Nanjing",
-            children: [
-               {
-                  value: "zhonghuamen",
-                  label: "Zhong Hua Men"
-               }
-            ]
-         }
-      ]
-   }
-];
-
 class RegistrationContainer extends React.Component {
-   state = {
-      confirmDirty: false,
-      autoCompleteResult: []
-   };
+   constructor(props) {
+      super(props);
+      this.state = {
+         email: "",
+         password: "",
+         redirect: false,
+         role: "",
+         confirmDirty: false,
+         autoCompleteResult: []
+      };
+   }
 
    handleSubmit = e => {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
          if (!err) {
-            console.log("Received values of form: ", values);
+            //Gọi API
+            const { authAllActions } = this.props;
+            const { fetchRegisterRequest } = authAllActions;
+            let data = { ...values, role: "user" };
+            message.loading("Register...", 0.5);
+            fetchRegisterRequest(data);
+         } else {
+            throw err;
          }
       });
    };
@@ -92,7 +83,7 @@ class RegistrationContainer extends React.Component {
       if (!value) {
          autoCompleteResult = [];
       } else {
-         autoCompleteResult = [".com", ".org", ".net"].map(
+         autoCompleteResult = [".com", ".vn", ".org", ".net"].map(
             domain => `${value}${domain}`
          );
       }
@@ -126,11 +117,10 @@ class RegistrationContainer extends React.Component {
          }
       };
       const prefixSelector = getFieldDecorator("prefix", {
-         initialValue: "86"
+         initialValue: "84"
       })(
          <Select style={{ width: 70 }}>
-            <Option value="86">+86</Option>
-            <Option value="87">+87</Option>
+            <Option value="84">+84</Option>
          </Select>
       );
 
@@ -190,19 +180,19 @@ class RegistrationContainer extends React.Component {
                   </span>
                }
             >
-               {getFieldDecorator("nickname", {
+               {getFieldDecorator("username", {
                   rules: [
                      {
                         required: true,
-                        message: "Please input your nickname!",
+                        message: "Please input your username!",
                         whitespace: true
                      }
                   ]
                })(<Input />)}
             </Form.Item>
             <Form.Item label="Habitual Residence">
-               {getFieldDecorator("residence", {
-                  initialValue: ["zhejiang", "hangzhou", "xihu"],
+               {getFieldDecorator("address", {
+                  initialValue: ["Hồ Chí Minh", "Thủ Đức"],
                   rules: [
                      {
                         type: "array",
@@ -210,7 +200,7 @@ class RegistrationContainer extends React.Component {
                         message: "Please select your habitual residence!"
                      }
                   ]
-               })(<Cascader options={residences} />)}
+               })(<Cascader options={mapAddressNotWardToOptionAntd()} />)}
             </Form.Item>
             <Form.Item label="Phone Number">
                {getFieldDecorator("phone", {
@@ -228,9 +218,7 @@ class RegistrationContainer extends React.Component {
                )}
             </Form.Item>
             <Form.Item label="Website">
-               {getFieldDecorator("website", {
-                  rules: [{ required: true, message: "Please input website!" }]
-               })(
+               {getFieldDecorator("website")(
                   <AutoComplete
                      dataSource={websiteOptions}
                      onChange={this.handleWebsiteChange}
@@ -266,7 +254,11 @@ class RegistrationContainer extends React.Component {
                })(
                   <Checkbox>
                      I have read the{" "}
-                     <a href="s" rel="noopener noreferrer">
+                     <a
+                        href="https://github.com/ithoangtan"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                     >
                         agreement
                      </a>
                   </Checkbox>
@@ -276,6 +268,8 @@ class RegistrationContainer extends React.Component {
                <Button type="primary" htmlType="submit">
                   Register
                </Button>
+               <br></br>
+               Bạn đã có tài khoản? <Link to="/login">Login</Link>
             </Form.Item>
          </Form>
       );
@@ -286,4 +280,26 @@ const WrappedRegistrationContainer = Form.create({ name: "register" })(
    RegistrationContainer
 );
 
-export default WrappedRegistrationContainer;
+WrappedRegistrationContainer.propTypes = {
+   classes: PropTypes.object,
+   authAllActions: PropTypes.shape({
+      fetchRegisterRequest: PropTypes.func
+   }),
+   auth: PropTypes.object
+};
+
+const mapStateToProps = state => {
+   return {
+      auth: state.auth.auth
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      authAllActions: bindActionCreators(authActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+   };
+};
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(WrappedRegistrationContainer);

@@ -34,6 +34,7 @@ const reducer = (state = initialState, action) => {
          });
 
          //Save info user:
+         sessionStorage.setItem("email", data.email);
          sessionStorage.setItem("avatar", data.avatar);
          sessionStorage.setItem("name", data.name);
 
@@ -43,6 +44,34 @@ const reducer = (state = initialState, action) => {
          };
       }
       case authConstants.FETCH_AUTH_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            auth: error
+         };
+      }
+      case authConstants.FETCH_REGISTER_SUCCESS: {
+         const { data } = action.payload;
+         if (data.name === null || data.name === undefined || data.name === "")
+            messageError(`Opps!!, ${data.message}`, 3);
+         else
+            messageLoading(
+               `${data.name} is register.....`,
+               `Now!, you can login, ${data.name}`,
+               0.5,
+               3
+            );
+
+         //Save info user:
+         sessionStorage.setItem("email", data.email);
+
+         return {
+            ...state,
+            auth: data
+         };
+      }
+      case authConstants.FETCH_REGISTER_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
