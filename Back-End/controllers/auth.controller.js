@@ -45,13 +45,13 @@ exports.register = (req, res, next) => {
                         On the following page:
                         <a href="${
                           process.env.FRONT_END
-                        }/verify?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
+                        }verify?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
             verifyToken,
             "ithoangtansecurity"
           )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(
             newAccount.email,
             "ithoangtansecurity"
-          )}">${process.env.FRONT_END}/verify?${jwt.sign(
+          )}">${process.env.FRONT_END}verify?${jwt.sign(
             "verifyToken",
             "ithoangtansecurity"
           )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
@@ -117,12 +117,8 @@ exports.verify = async (req, res, next) => {
       req.query.QZmWYU22y2zb2qZg8clJ,
       "ithoangtansecurity"
     );
-    console.log(verifyToken, emailVerify);
-
     Accounts.getByEmailAndRole(emailVerify, "user")
       .then(async account => {
-        console.log(account);
-
         if (!account) {
           const error = new Error();
           error.statusCode = 200;
@@ -179,7 +175,6 @@ exports.verify = async (req, res, next) => {
 exports.forgotPasswordStep1 = (req, res, next) => {
   const verifyToken = randomstring.generate();
   const email = req.body.email;
-  let accountTemp = {};
   Accounts.getByEmailAndRole(email, "user")
     .then(async account => {
       if (!account) {
@@ -190,7 +185,8 @@ exports.forgotPasswordStep1 = (req, res, next) => {
         throw error;
       }
       account.verifyToken = verifyToken;
-
+      //update Token để step2 xác nhận lại
+      Accounts.updateById(account);
       const html = `Hi there,
                         <br/>
                         Thank you for using us service!
@@ -200,7 +196,7 @@ exports.forgotPasswordStep1 = (req, res, next) => {
                         On the following page in order to get new password:
                         <a href="${
                           process.env.FRONT_END
-                        }/forgotPassword?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
+                        }forgotPassword?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
         verifyToken,
         "ithoangtansecurity"
       )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(
@@ -208,7 +204,7 @@ exports.forgotPasswordStep1 = (req, res, next) => {
         "ithoangtansecurity"
       )}&wXvkihdDAD9D8FI9Nwpf=${jwt.sign(Date.now(), "ithoangtansecurity")}">${
         process.env.FRONT_END
-      }/forgotPassword?${jwt.sign(
+      }forgotPassword?${jwt.sign(
         "verifyToken",
         "ithoangtansecurity"
       )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
@@ -223,7 +219,7 @@ exports.forgotPasswordStep1 = (req, res, next) => {
       );
       res.status(200).json({
         statusCode: 200,
-        email: accountTemp.email
+        email: account.email
       });
     })
 
@@ -252,43 +248,46 @@ exports.forgotPasswordStep2 = (req, res, next) => {
       req.query.wXvkihdDAD9D8FI9Nwpf,
       "ithoangtansecurity"
     );
-    const account = {
-      idAccount: req.body.idAccount,
-      password: req.body.password,
-      email: req.body.email
-    };
+    const email = jwt.verify(
+      req.query.QZmWYU22y2zb2qZg8clJ,
+      "ithoangtansecurity"
+    );
     if (Date.now() - date >= 500000) {
       const error = new Error();
       error.statusCode = 200;
-      error.message = "Phiên quá hạn, vui lòng thực hiện lại!";
+      error.message =
+        "Phiên quá hạn, vui lòng thực hiện lại trình tự khôi phục mật khẩu!";
       res.status(200).json(error);
       throw error;
     }
-    Accounts.getByEmailAndRole(account.email, "user")
-      .then(async account => {
+    Accounts.getByEmailAndRole(email, "user")
+      .then(account => {
         if (!account) {
           const error = new Error();
           error.statusCode = 200;
           error.message = "This email is not resgitered!";
           res.status(200).json(error);
           throw error;
-        }
-        if (account.verifyToken === verifyToken)
-          Accounts.updateById(account)
-            .then(result => {
+        } else if (account.verifyToken === verifyToken) {
+          //Lấy password từ body
+          bcrypt.hash(req.body.password, saltRounds).then(passwordHash => {
+            account.password = passwordHash;
+            Accounts.updateById(account).then(result => {
               res.status(200).json({
                 statusCode: 200,
                 idAccount: account.idAccount,
+                email: account.email,
                 result: result
               });
-            })
-            .catch(err => {
-              if (!err.statusCode) {
-                err.statusCode = 500;
-              }
-              res.status(500).json(err);
-              next(err);
             });
+          });
+        } else {
+          const error = new Error();
+          error.statusCode = 200;
+          error.message = "Có gì đó sai sai á nè!";
+          res.status(200).json(error);
+          throw error;
+        }
       })
       .catch(err => {
         if (!err.statusCode) {
@@ -305,6 +304,7 @@ exports.forgotPasswordStep2 = (req, res, next) => {
     next(error);
   }
 };
+
 exports.login = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;

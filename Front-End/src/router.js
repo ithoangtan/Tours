@@ -23,6 +23,8 @@ import TourPage from "./TourPage/tour.page";
 import TourSearchPage from "./TourPage/tourSearch.page";
 import LoginPage from "./LoginAndRegisterPage/login.page";
 import RegisterPage from "./LoginAndRegisterPage/register.page";
+import ForgotPasswordPage from "./LoginAndRegisterPage/forgotPassword.page";
+import ForgotPasswordPageStep2 from "./LoginAndRegisterPage/forgotPasswordStep2.page";
 import BookTourPage from "./BookTourPage/bookTour.page";
 
 //common Customer
@@ -71,6 +73,34 @@ const router = [
          <div>
             <NavigationContainer />
             <RegisterPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
+         </div>
+      )
+   },
+   {
+      path: "/forgot-password",
+      exact: true,
+      component: () => (
+         <div>
+            <NavigationContainer />
+            <ForgotPasswordPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
+         </div>
+      )
+   },
+   {
+      path: "/forgotPassword",
+      exact: true,
+      component: () => (
+         <div>
+            <NavigationContainer />
+            <ForgotPasswordPageStep2 />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />

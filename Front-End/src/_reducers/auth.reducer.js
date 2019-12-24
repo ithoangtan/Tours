@@ -3,7 +3,11 @@ import Cookies from "js-cookie";
 import { setSignCookie, getParamTokenWithName } from "../_commons/auth.service";
 import * as authConstants from "../_constants/auth.module";
 import { toastError } from "../_helper/toastify.helper";
-import { messageLoading, messageError } from "../_helper/message.helper";
+import {
+   messageLoading,
+   messageError,
+   messageSuccess
+} from "../_helper/message.helper";
 const initialState = {
    auth: []
 };
@@ -82,7 +86,6 @@ const reducer = (state = initialState, action) => {
          };
       }
       //Verify Email
-      //Register
       case authConstants.FETCH_VERIFY_EMAIL_SUCCESS: {
          const { data } = action.payload;
          if (data.name === null || data.name === undefined || data.name === "")
@@ -100,6 +103,56 @@ const reducer = (state = initialState, action) => {
          };
       }
       case authConstants.FETCH_VERIFY_EMAIL_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            auth: error
+         };
+      }
+      //Forgot Password Step1
+      case authConstants.FETCH_FORGOT_PASSWORD_STEP1_SUCCESS: {
+         const { data } = action.payload;
+         if (
+            data.email === null ||
+            data.email === undefined ||
+            data.email === ""
+         )
+            messageError(`Opps!!, ${data.message}`, 3);
+         else
+            messageSuccess(
+               `You need check your email: ${data.email} in order to continue!`,
+               5
+            );
+         return {
+            ...state,
+            auth: data
+         };
+      }
+      case authConstants.FETCH_FORGOT_PASSWORD_STEP1_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            auth: error
+         };
+      }
+      //Forgot Password Step1
+      case authConstants.FETCH_FORGOT_PASSWORD_STEP2_SUCCESS: {
+         const { data } = action.payload;
+         if (
+            data.email === null ||
+            data.email === undefined ||
+            data.email === ""
+         )
+            messageError(`Opps!!, ${data.message}`, 3);
+         else messageSuccess(`Now!, ${data.email} can login!`, 5);
+         return {
+            ...state,
+            auth: data
+         };
+      }
+      case authConstants.FETCH_FORGOT_PASSWORD_STEP2_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
