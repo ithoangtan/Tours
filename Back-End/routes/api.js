@@ -54,5 +54,7 @@ router.delete("/order", authenticated, order.delete);
 router.post("/login", auth.login);
 router.post("/register", auth.register);
 router.get("/verify", auth.verify);
+router.post("/forgotPasswordStep1", auth.forgotPasswordStep1);
+router.post("/forgotPasswordStep2", auth.forgotPasswordStep2);
 
 module.exports = router;

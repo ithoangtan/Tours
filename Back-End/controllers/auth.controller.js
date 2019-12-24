@@ -4,7 +4,8 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const randomstring = require("randomstring");
 const Accounts = require("../models/account.model");
-const mailer = require("../mics/mailer.mics");
+// const mailer = require("../mics/mailer.mics");
+const mailerGmail = require("../mics/mailer.gmail");
 
 exports.register = (req, res, next) => {
   // const err = validationResult(req);
@@ -54,9 +55,16 @@ exports.register = (req, res, next) => {
           )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
                         <br/><br/>
                         Have a pleasant day.`;
-          //micro service
+          //micro service mailgun(sever mail support)
           await mailer.sendEmail(
             "app156076672@heroku.com",
+            newAccount.email,
+            "Vui lòng xác thực email của bạn!",
+            html
+          );
+          //micro service gmail
+          await mailerGmail.sendEmail(
+            process.env.MY_GMAIL,
             newAccount.email,
             "Vui lòng xác thực email của bạn!",
             html
@@ -98,43 +106,113 @@ exports.register = (req, res, next) => {
  */
 exports.verify = async (req, res, next) => {
   //Ta tiến hành xác minh email và redirect tới trang xác thực thành công ở client
-  const verifyToken = await jwt.verify(
-    req.query.ddSWuQzP8x2cHckmKxiK,
-    "ithoangtansecurity"
-  );
-  const emailVerify = await jwt.verify(
-    req.query.QZmWYU22y2zb2qZg8clJ,
-    "ithoangtansecurity"
-  );
-  Accounts.getByEmailAndRole(emailVerify, "user")
+  try {
+    const verifyToken = await jwt.verify(
+      req.query.ddSWuQzP8x2cHckmKxiK,
+      "ithoangtansecurity"
+    );
+    const emailVerify = await jwt.verify(
+      req.query.QZmWYU22y2zb2qZg8clJ,
+      "ithoangtansecurity"
+    );
+    Accounts.getByEmailAndRole(emailVerify, "user")
+      .then(async account => {
+        if (!account) {
+          const error = new Error();
+          error.statusCode = 200;
+          error.message = "Some thing Wrong!!!";
+          res.status(200).json(error);
+          throw error;
+        }
+        if (account.verifyToken === verifyToken) {
+          //update account
+          account.verify = true;
+          account.verifyToken = "verified";
+          await Accounts.updateById(account);
+
+          res.status(200).json({
+            statusCode: 200,
+            userId: account.idAccount,
+            name: account.name,
+            email: account.email
+          });
+        } else {
+          const error = new Error();
+          error.statusCode = 200;
+          error.message = "Something Wrong!";
+          res.status(200).json(error);
+          throw error;
+        }
+      })
+      .catch(err => {
+        if (!err.statusCode) {
+          err.statusCode = 500;
+        }
+        res.status(500).json(err);
+        next(err);
+      });
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    res.status(500).json(error);
+    next(error);
+  }
+};
+
+//Forgot password
+// wXvkihdDAD9D8FI9Nwpf date
+exports.forgotPasswordStep1 = (req, res, next) => {
+  const verifyToken = randomstring.generate();
+  const email = req.body.email;
+  let accountTemp = {};
+  Accounts.getByEmailAndRole(email, "user")
     .then(async account => {
       if (!account) {
         const error = new Error();
         error.statusCode = 200;
-        error.message = "Some thing Wrong!!!";
+        error.message = "This email is not resgitered!";
         res.status(200).json(error);
         throw error;
       }
-      if (account.verifyToken === verifyToken) {
-        //update account
-        account.verify = true;
-        account.verifyToken = "verified";
-        await Accounts.updateById(account);
+      account.verifyToken = verifyToken;
 
-        res.status(200).json({
-          statusCode: 200,
-          userId: account.idAccount,
-          name: account.name,
-          email: account.email
-        });
-      } else {
-        const error = new Error();
-        error.statusCode = 200;
-        error.message = "Something Wrong!";
-        res.status(200).json(error);
-        throw error;
-      }
+      const html = `Hi there,
+                        <br/>
+                        Thank you for using us service!
+                        <br/><br/>
+                        We are Trùm Tour:
+                        <br/><br/>
+                        On the following page in order to get new password:
+                        <a href="${
+                          process.env.FRONT_END
+                        }/forgotPassword?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
+        verifyToken,
+        "ithoangtansecurity"
+      )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(
+        account.email,
+        "ithoangtansecurity"
+      )}&wXvkihdDAD9D8FI9Nwpf=${jwt.sign(Date.now(), "ithoangtansecurity")}">${
+        process.env.FRONT_END
+      }/forgotPassword?${jwt.sign(
+        "verifyToken",
+        "ithoangtansecurity"
+      )}=${jwt.sign(verifyToken, "ithoangtansecurity")}</a>
+                        <br/><br/>
+                        Have a pleasant day.`;
+      //micro service gmail
+      await mailerGmail.sendEmail(
+        "itk160454@gmail.com",
+        account.email,
+        "Vui lòng nhấp vào link dưới để khôi phục mật khẩu!",
+        html
+      );
+      res.status(200).json({
+        statusCode: 200,
+        email: accountTemp.email
+      });
     })
+
     .catch(err => {
       if (!err.statusCode) {
         err.statusCode = 500;
@@ -144,6 +222,75 @@ exports.verify = async (req, res, next) => {
     });
 };
 
+/**
+ * Khi người dùng nhất vào link gửi qua mail
+ * chuyển tới client và show 2 input password
+ * gọi API save password
+ */
+exports.forgotPasswordStep2 = (req, res, next) => {
+  //change password
+  try {
+    const verifyToken = jwt.verify(
+      req.query.ddSWuQzP8x2cHckmKxiK,
+      "ithoangtansecurity"
+    );
+    const date = jwt.verify(
+      req.query.wXvkihdDAD9D8FI9Nwpf,
+      "ithoangtansecurity"
+    );
+    const account = {
+      idAccount: req.body.idAccount,
+      password: req.body.password,
+      email: req.body.email
+    };
+    if (Date.now() - date >= 500000) {
+      const error = new Error();
+      error.statusCode = 200;
+      error.message = "Phiên quá hạn, vui lòng thực hiện lại!";
+      res.status(200).json(error);
+      throw error;
+    }
+    Accounts.getByEmailAndRole(account.email, "user")
+      .then(async account => {
+        if (!account) {
+          const error = new Error();
+          error.statusCode = 200;
+          error.message = "This email is not resgitered!";
+          res.status(200).json(error);
+          throw error;
+        }
+        if (account.verifyToken === verifyToken)
+          Accounts.updateById(account)
+            .then(result => {
+              res.status(200).json({
+                statusCode: 200,
+                idAccount: account.idAccount,
+                result: result
+              });
+            })
+            .catch(err => {
+              if (!err.statusCode) {
+                err.statusCode = 500;
+              }
+              res.status(500).json(err);
+              next(err);
+            });
+      })
+      .catch(err => {
+        if (!err.statusCode) {
+          err.statusCode = 500;
+        }
+        res.status(500).json(err);
+        next(err);
+      });
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    res.status(500).json(error);
+    next(error);
+  }
+};
 exports.login = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -159,6 +306,13 @@ exports.login = (req, res, next) => {
         res.status(200).json(error);
         throw error;
       }
+      // if (!account.verify) {
+      //   const error = new Error();
+      //   error.statusCode = 200;
+      //   error.message = "Your account was not verified!!!";
+      //   res.status(200).json(error);
+      //   throw error;
+      // }
       loadAccount = account;
       return bcrypt.compare(password, account.password);
     })
