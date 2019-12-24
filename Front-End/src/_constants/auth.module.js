@@ -5,6 +5,9 @@ export const FETCH_AUTH_FAILED = "FETCH_AUTH_FAILED";
 export const FETCH_REGISTER_SUCCESS = "FETCH_REGISTER_SUCCESS";
 export const FETCH_REGISTER_FAILED = "FETCH_REGISTER_FAILED";
 
+export const FETCH_VERIFY_EMAIL_SUCCESS = "FETCH_VERIFY_EMAIL_SUCCESS";
+export const FETCH_VERIFY_EMAIL_FAILED = "FETCH_VERIFY_EMAIL_FAILED";
+
 export const ENCRYPTCODE = "ithoangtansecurity";
 //SAU NÀY NHỚ SỬA THÀNH process.env.ENCRYPTCODE
 //tốt nhất là chứa trong config

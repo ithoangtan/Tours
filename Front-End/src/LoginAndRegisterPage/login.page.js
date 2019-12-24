@@ -18,7 +18,7 @@ class LoginPage extends Component {
       return (
          <section className="ftco-section">
             <div className="container">
-               <div className="row justify-content-center pb-1">
+               <div className="row justify-content-center pb-1 mt-4">
                   <LoginContainer />
                </div>
             </div>

@@ -6,6 +6,7 @@ import ResultDone from "./ResultBoardPage/ResultDone";
 import ResultProcessing from "./ResultBoardPage/ResultProcessing";
 import ResultSubmissionFailed from "./ResultBoardPage/ResultSubmissionFailed";
 import ResultSuccessful from "./ResultBoardPage/ResultSuccessful";
+import ResultSuccessfulVerify from "./ResultBoardPage/ResultSuccessfulVerify";
 import ResultWarning from "./ResultBoardPage/ResultWarning";
 import NavigationContainer from "./_components/Header/navigation.container";
 import HeaderBreadcrumbContainer from "./_components/Header/headerBreadcrumb.container";
@@ -70,6 +71,20 @@ const router = [
          <div>
             <NavigationContainer />
             <RegisterPage />
+            <SubcribeContainer />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
+         </div>
+      )
+   },
+   {
+      path: "/verify",
+      exact: true,
+      component: ({ match }, props) => (
+         <div>
+            <NavigationContainer />
+            <ResultSuccessfulVerify match={match} {...props} />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />

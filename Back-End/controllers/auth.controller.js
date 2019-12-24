@@ -18,7 +18,6 @@ exports.register = (req, res, next) => {
           const error = new Error();
           error.statusCode = 200;
           error.message = "The email already exists";
-          console.log(account, newAccount);
           res.status(200).json(error);
           throw error;
         }
@@ -118,8 +117,12 @@ exports.verify = async (req, res, next) => {
       req.query.QZmWYU22y2zb2qZg8clJ,
       "ithoangtansecurity"
     );
+    console.log(verifyToken, emailVerify);
+
     Accounts.getByEmailAndRole(emailVerify, "user")
       .then(async account => {
+        console.log(account);
+
         if (!account) {
           const error = new Error();
           error.statusCode = 200;
@@ -140,6 +143,14 @@ exports.verify = async (req, res, next) => {
             email: account.email
           });
         } else {
+          if (account.verifyToken === "verified") {
+            res.status(200).json({
+              statusCode: 200,
+              userId: account.idAccount,
+              name: account.name,
+              email: account.email
+            });
+          }
           const error = new Error();
           error.statusCode = 200;
           error.message = "Something Wrong!";
@@ -433,8 +444,6 @@ exports.loginByGoogle = async (req, res, next) => {
       });
       await Accounts.create(account);
       const loadAccount = await Accounts.getByIdGoogle(idGoogle);
-      console.log(loadAccount);
-
       const token = jwt.sign(
         {
           idAccount: loadAccount.idAccount,

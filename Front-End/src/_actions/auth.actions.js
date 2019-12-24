@@ -79,3 +79,39 @@ export const fetchRegisterRequest = data => {
          });
    };
 };
+
+//Verify
+export const fetchVerifyEmailSuccess = (data, status) => {
+   return {
+      type: tourConstants.FETCH_VERIFY_EMAIL_SUCCESS,
+      payload: {
+         // Thường đi làm thì người ta hay gọi là FETCH
+         //data gửi kèm trong actions là payload ở vị trí này
+         data,
+         status
+      }
+   };
+};
+
+export const fetchVerifyEmailError = error => {
+   return {
+      type: tourConstants.FETCH_VERIFY_EMAIL_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchVerifyEmailRequest = path => {
+   return dispatch => {
+      authApis
+         .verifyEmail(path)
+         .then(resp => {
+            const { data, status } = resp;
+            dispatch(fetchVerifyEmailSuccess(data, status));
+         })
+         .catch(error => {
+            dispatch(fetchVerifyEmailError(error));
+         });
+   };
+};

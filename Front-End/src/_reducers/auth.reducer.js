@@ -51,6 +51,8 @@ const reducer = (state = initialState, action) => {
             auth: error
          };
       }
+
+      //Register
       case authConstants.FETCH_REGISTER_SUCCESS: {
          const { data } = action.payload;
          if (data.name === null || data.name === undefined || data.name === "")
@@ -59,7 +61,7 @@ const reducer = (state = initialState, action) => {
             messageLoading(
                `${data.name} is register.....`,
                `Now!, you can login, ${data.name}`,
-               1,
+               0.2,
                5
             );
 
@@ -72,6 +74,32 @@ const reducer = (state = initialState, action) => {
          };
       }
       case authConstants.FETCH_REGISTER_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            auth: error
+         };
+      }
+      //Verify Email
+      //Register
+      case authConstants.FETCH_VERIFY_EMAIL_SUCCESS: {
+         const { data } = action.payload;
+         if (data.name === null || data.name === undefined || data.name === "")
+            messageError(`Opps!!, ${data.message}`, 3);
+         else
+            messageLoading(
+               `${data.name} is verify.....`,
+               `You can continue, ${data.name}`,
+               0.1,
+               1
+            );
+         return {
+            ...state,
+            auth: data
+         };
+      }
+      case authConstants.FETCH_VERIFY_EMAIL_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
