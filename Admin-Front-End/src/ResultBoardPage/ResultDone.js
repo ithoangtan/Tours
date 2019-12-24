@@ -8,7 +8,18 @@ export default class ResultDone extends Component {
          <Result
             icon={<Icon type="smile" theme="twoTone" />}
             title="Great, we have done all the operations!"
-            extra={<Button type="primary">Next</Button>}
+            extra={
+               <Link
+                  to={{
+                     pathname: `/tour`,
+                     state: {
+                        tour: tour
+                     }
+                  }}
+               >
+                  <Button type="primary">Next</Button>
+               </Link>
+            }
          />
       );
    }

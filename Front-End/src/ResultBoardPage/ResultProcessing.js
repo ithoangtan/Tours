@@ -8,9 +8,16 @@ export default class ResultProcessing extends Component {
          <Result
             title="Your operation has been executed"
             extra={
-               <Button type="primary" key="console">
-                  Go Console
-               </Button>
+               <Link
+                  to={{
+                     pathname: `/tour`,
+                     state: {
+                        tour: tour
+                     }
+                  }}
+               >
+                  <Button type="primary">Back Home</Button>
+               </Link>
             }
          />
       );

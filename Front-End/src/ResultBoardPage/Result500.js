@@ -9,7 +9,18 @@ export default class Result500 extends Component {
             status="500"
             title="500"
             subTitle="Sorry, the server is wrong."
-            extra={<Button type="primary">Back Home</Button>}
+            extra={
+               <Link
+                  to={{
+                     pathname: `/tour`,
+                     state: {
+                        tour: tour
+                     }
+                  }}
+               >
+                  <Button type="primary">Back Home</Button>
+               </Link>
+            }
          />
       );
    }

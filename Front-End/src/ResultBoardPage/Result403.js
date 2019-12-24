@@ -9,7 +9,18 @@ export default class Result403 extends Component {
             status="403"
             title="403"
             subTitle="Sorry, you are not authorized to access this page."
-            extra={<Button type="primary">Back Home</Button>}
+            extra={
+               <Link
+                  to={{
+                     pathname: `/tour`,
+                     state: {
+                        tour: tour
+                     }
+                  }}
+               >
+                  <Button type="primary">Back Home</Button>
+               </Link>
+            }
          />
       );
    }

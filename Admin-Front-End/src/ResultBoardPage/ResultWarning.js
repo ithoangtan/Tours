@@ -10,9 +10,16 @@ export default class ResultWarning extends Component {
             status={status}
             title={title}
             extra={
-               <Button type="default" key="console">
-                  Continue!
-               </Button>
+               <Link
+                  to={{
+                     pathname: `/tour`,
+                     state: {
+                        tour: tour
+                     }
+                  }}
+               >
+                  <Button type="default">Back Home</Button>
+               </Link>
             }
          />
       );
