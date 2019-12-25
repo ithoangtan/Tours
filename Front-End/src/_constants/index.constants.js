@@ -1,4 +1,5 @@
 export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+// export const API_ENDPOINT = "http://localhost:8000";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",

@@ -1,0 +1,59 @@
+https://www.nganluong.vn/checkout.php?merchant_site_code=61849&return_url=https://kinhdoanhtourdulich.herokuapp.com&receiver=ithoangtan@gmail.com&transaction_info=ithoangtan&order_code=15745445123&price=20000&currency=vnd&quantity=1&tax=0&discount=0&fee_cal=0&fee_shipping=0&order_description=ithoangtantest&buyer_info=NguyenHoangLam*|*itk160454@gmail.com*|*0983982933*|*HoangTan&affiliate_code=&lang=vi&secure_code=712cfe1214c3329fc92b718454a08647&cancel_url=http://kinhdoanhtourdulich.herokuapp.com/tour
+61849 https://kinhdoanhtourdulich.herokuapp.com ithoangtan@gmail.com ithoangtan 15745445123 20000 vnd 1 0 0 0 0 ithoangtantest NguyenHoangLam*|*itk160454@gmail.com*|*0983982933*|*HoangTan  c42ee0cefa2b4e8c82508cde88f3e40c
+712cfe1214c3329fc92b718454a08647
+
+https://sandbox.nganluong.vn:8088/nl35/checkout.php?merchant_site_code=48481&return_url=https://kinhdoanhtourdulich.herokuapp.com&receiver=ithoangtan@gmail.com&transaction_info=ithoangtan&order_code=15745445123&price=20000&currency=vnd&quantity=1&tax=0&discount=0&fee_cal=0&fee_shipping=0&order_description=ithoangtantest&buyer_info=NguyenHoangLam*|*itk160454@gmail.com*|*0983982933*|*HoangTan&affiliate_code=&lang=vi&secure_code=a4d27496b64ff1ab59da33ddd2c0d301&cancel_url=http://kinhdoanhtourdulich.herokuapp.com/tour
+48481 
+https://kinhdoanhtourdulich.herokuapp.com 
+ithoangtan@gmail.com 
+ithoangtan 
+15745445123 
+20000 
+vnd 1 0 0 0 0 
+ithoangtantest 
+NguyenHoangLam*|*itk160454@gmail.com*|*0983982933*|*AddressHoangTan
+  93da9b0edf0355fa54ec956bac650483
+
+https://sandbox.nganluong.vn:8088/nl35/checkout.php?
+
+env!merchant_site_code=48481
+
+&return_url=https://kinhdoanhtourdulich.herokuapp.com
+
+env!&receiver=ithoangtan@gmail.com
+
+&transaction_info=ithoangtan
+&order_code=15745445123
+
+cal!&price=20000
+
+&currency=vnd
+&quantity=1
+&tax=0
+&discount=0
+&fee_cal=0
+&fee_shipping=0
+&order_description=ithoangtantest
+&buyer_info=NguyenHoangLam*|*itk160454@gmail.com*|*0983982933*|*HoangTan
+&affiliate_code=
+&lang=vi
+
+cal!&secure_code=a4d27496b64ff1ab59da33ddd2c0d301
+
+&cancel_url=http://kinhdoanhtourdulich.herokuapp.com/tour`;
+
+
+Thanh toán bằng ATM Online: chọn ngân hàng Eximbank với thông tin thẻ:
+● Số thẻ: 9874563254178962
+● Họ tên chủ thẻ: Nguyen Hue
+● Ngày phát hành: 10/2016
+● Mã OTP: 123456
+
+Thanh toán bằng thẻ visa, với thông tin thẻ:
+● Số thẻ: 4111111111111111
+● Họ tên chủ thẻ: Nguyen Hue
+● Ngày hết hạn: 10/2023
+● Mã CVV: 123
+● Mã OTP: 123456
+
+https://sandbox.nganluong.vn:8088/nl35/checkout.php?merchant_site_code=48481&return_url=https://kinhdoanhtourdulich.herokuapp.com/return_payment&receiver=ithoangtan@gmail.com&transaction_info=ithoangtantransaction&order_code=1577295645884&price=160000&currency=vnd&quantity=1&tax=0&discount=0&fee_cal=0&fee_shipping=0&order_description=Tour:MùahèvớiHoaAnhĐàonhéPeople-2Children-0&buyer_info=HoàngTrọngTấn*|*it10069001@gmail.com*|*0983982933*|*["HưngYên","YênMỹ","ĐồngThan"]&affiliate_code=&lang=vi&secure_code=042a6c50ea98e53b3d517bf8958c724a&cancel_url=https://kinhdoanhtourdulich.herokuapp.com/book-tour/:idTour=66?cancelPayment="Giao dịch đã bị hủy"

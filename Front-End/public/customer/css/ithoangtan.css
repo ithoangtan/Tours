@@ -1005,3 +1005,9 @@
    align-items: flex-start;
    flex-wrap: wrap;
 }
+
+.ht-image-fix-size {
+   object-fit: cover;
+   max-width: 100%;
+   height: auto;
+}

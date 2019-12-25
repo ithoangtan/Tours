@@ -6,6 +6,7 @@ import ResultDone from "./ResultBoardPage/ResultDone";
 import ResultProcessing from "./ResultBoardPage/ResultProcessing";
 import ResultSubmissionFailed from "./ResultBoardPage/ResultSubmissionFailed";
 import ResultSuccessful from "./ResultBoardPage/ResultSuccessful";
+import ResultSuccessfulPayment from "./ResultBoardPage/ResultSuccessfulPayment";
 import ResultSuccessfulVerify from "./ResultBoardPage/ResultSuccessfulVerify";
 import ResultWarning from "./ResultBoardPage/ResultWarning";
 import NavigationContainer from "./_components/Header/navigation.container";
@@ -307,9 +308,18 @@ const router = [
       )
    },
    {
+      path: "/successfulResult",
+      exact: true,
+      component: ({ match }, props) => (
+         <ResultSuccessfulPayment match={match} {...props} />
+      )
+   },
+   {
       path: "/warningResult",
       exact: true,
-      component: () => <ResultWarning />
+      component: () => (
+         <ResultWarning status="warning" title="Warning something!" />
+      )
    },
    {
       path: "/all",

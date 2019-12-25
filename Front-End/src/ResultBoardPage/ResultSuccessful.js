@@ -28,8 +28,8 @@ export default class ResultSuccessful extends Component {
                <div>
                   {`Tour của bạn đã được xác nhận!`}
                   <p>
-                     Chúng tôi sẽ gửi mail cho bạn để xác nhận lần nữa, Xin hãy
-                     kiểm tra và lưu lại!`
+                     Chúng tôi sẽ gửi mail cho bạn để xác nhận đã thanh toán,
+                     Xin hãy kiểm tra và lưu lại!
                   </p>
                </div>
             }

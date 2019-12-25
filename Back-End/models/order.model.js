@@ -13,6 +13,7 @@ const Order = function(order) {
   this.email = order.email || " ";
   this.notes = order.notes || " ";
   this.idAccount = order.idAccount || 8;
+  this.buyer = order.buyer || " ";
 };
 
 const databaseLocal = "azmszdk4w6h5j1o6";
@@ -63,12 +64,13 @@ Order.createOrder = function(newOrder, funcResult) {
   this.email = newOrder.email;
   this.notes = newOrder.notes;
   this.idAccount = newOrder.idAccount;
+  this.buyer = newOrder.buyer;
 
   mysql.query(
     "INSERT INTO " +
       databaseProduction +
       ".orders (`PIN`, `status`, `totalPrice`, `numberPeople`," +
-      " `numberChildren`, `address`, `phone`,`email`,`notes`, `idAccount`) VALUES ('" +
+      " `numberChildren`, `address`, `phone`,`email`,`notes`, `idAccount`, `buyer`) VALUES ('" +
       this.PIN +
       "', '" +
       this.status +
@@ -88,6 +90,8 @@ Order.createOrder = function(newOrder, funcResult) {
       this.notes +
       "', '" +
       this.idAccount +
+      "', '" +
+      this.buyer +
       "') ",
     function(err, res) {
       if (err) {
@@ -136,6 +140,21 @@ Order.updateById = function(updateOrder, funcResult) {
   mysql.query(
     "UPDATE " + databaseProduction + ".orders SET ? WHERE (idOrder = ?);",
     [updateOrder, updateOrder.idOrder],
+    function(err, res) {
+      if (err) {
+        funcResult(err, null);
+      } else {
+        funcResult(null, res);
+      }
+    }
+  );
+};
+
+Order.updateByPIN = function(updateOrder, funcResult) {
+  updateOrder = { ...updateOrder, statusAction: "edited" };
+  mysql.query(
+    "UPDATE " + databaseProduction + ".orders SET ? WHERE (PIN = ?);",
+    [updateOrder, updateOrder.PIN],
     function(err, res) {
       if (err) {
         funcResult(err, null);

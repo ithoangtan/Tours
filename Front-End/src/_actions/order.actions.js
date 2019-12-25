@@ -217,3 +217,39 @@ export const fetchPatchOrderRequest = order => {
          });
    };
 };
+
+//Get Link Payment
+export const fetchGetLinkPaymentSuccess = (infoPayment, data) => {
+   return {
+      type: orderConstants.FETCH_GET_LINK_PAYMENT_SUCCESS,
+      payload: {
+         // Thường đi làm thì người ta hay gọi là FETCH
+         //data gửi kèm trong actions là payload ở vị trí này
+         data
+      },
+      infoPayment: { infoPayment }
+   };
+};
+
+export const fetchGetLinkPaymentError = error => {
+   return {
+      type: orderConstants.FETCH_GET_LINK_PAYMENT_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchGetLinkPaymentRequest = infoPayment => {
+   return dispatch => {
+      orderApis
+         .getLinkPayment(infoPayment)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchGetLinkPaymentSuccess(infoPayment, data));
+         })
+         .catch(error => {
+            dispatch(fetchGetLinkPaymentError(error));
+         });
+   };
+};
