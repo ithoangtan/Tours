@@ -11,6 +11,7 @@ TLCN - CNPM - demo TLCN CNPM Khóa 2016-2020
 - [node.js] - evented I/O for the backend
 - [Express] - fast node.js network app framework
 - [heroku] - hosting free
+- [nganluong(sandbox), onepay, vnpay, sohapay] - payment gateway VietNam
 
 ### Installation and run
 
