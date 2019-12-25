@@ -47,7 +47,6 @@ class BookTourStep2 extends Component {
       this.props.form.validateFieldsAndScroll((err, values) => {
          if (!err) {
             message.success("OK! Bây giờ bạn có thể đến bước tiếp theo rồi");
-            this.props.step2OK();
             //    const { authAllActions } = this.props;
             //    const { fetchLoginRequest } = authAllActions;
             //    fetchLoginRequest(values);
@@ -55,6 +54,7 @@ class BookTourStep2 extends Component {
             localStorage.setItem("orders", JSON.stringify(values));
             //Đến khi người dùng ấn done mới tiến hành lưu xuống CSDL
             console.log("Received values of form: ", values);
+            this.props.step2OK();
          }
       });
    };

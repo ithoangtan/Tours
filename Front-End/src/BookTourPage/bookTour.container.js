@@ -137,14 +137,12 @@ class BookTourContainer extends Component {
 
    componentDidMount() {
       const mess = window.location.search;
-      console.log(window.location.search);
-
       if (mess) {
          message.warning(
             "Bạn đã hủy thanh toán trước đó, Hãy thử lại bằng cách khác nhé!",
-            5
+            8
          );
-         this.setState({ current: 2, redirectResult: true });
+         this.setState({ current: 1 });
       }
    }
 

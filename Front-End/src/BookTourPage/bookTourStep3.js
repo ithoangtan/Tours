@@ -23,8 +23,6 @@ export default class BookTourStep3 extends Component {
    render() {
       const { size } = this.state;
       const { data } = this.props;
-      console.log(data);
-
       const orders = JSON.parse(localStorage.getItem("orders"));
       return (
          <div className="ht-book-finish">
