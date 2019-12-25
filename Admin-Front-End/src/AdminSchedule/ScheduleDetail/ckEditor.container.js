@@ -13,6 +13,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { Button } from "antd";
 
+require("dotenv").config();
 class EditorContainer extends Component {
    constructor(props) {
       super(props);
@@ -69,8 +70,10 @@ class EditorContainer extends Component {
                //       "https://cksource.com/weuy2g4ryt278ywiue/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json"
                // },
                cloudServices: {
+                  // tokenUrl: process.env.TOKEN_URL_CKEDITOR,
+                  // uploadUrl: process.env.UPLOAD_URL_CKEDITOR
                   tokenUrl:
-                     "https://43967.cke-cs.com/token/dev/PLTDrOf3tlrbQxO14HqGZdCdWnqVWTV991y772AEWgYmoonLkUTIHZbiiEa2",
+                     "https://43967.cke-cs.com/token/dev/l7cxsIIm0SUdMOgNLARTMvdnWOZonc1bVbB741He69AfWvRSQd1o9NKKwwCo",
                   uploadUrl: "https://43967.cke-cs.com/easyimage/upload/"
                },
                mediaEmbed: {

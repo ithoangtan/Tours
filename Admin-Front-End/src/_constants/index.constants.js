@@ -1,4 +1,6 @@
+require("dotenv").config();
 export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+// export const API_ENDPOINT = process.env.API_ENDPOINT;
 
 export const AdminArrayExternalScript = [
    "/admin/vendor/jquery/jquery.min.js",
@@ -11,5 +13,7 @@ export const AdminArrayExternalScript = [
 ];
 
 export const APIImage = "https://api-kinhdoanhtourdulich.herokuapp.com";
+// export const APIImage = process.env.APIImage;
 
 export const LinkUserPage = "https://kinhdoanhtourdulich.herokuapp.com";
+// export const LinkUserPage = process.env.LinkUserPage;

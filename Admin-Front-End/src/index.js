@@ -11,6 +11,8 @@ import configStore from "./_redux/configStore.redux";
 
 const store = configStore();
 
+require("dotenv").config();
+
 ReactDOM.render(
    <Provider store={store}>
       <App />
