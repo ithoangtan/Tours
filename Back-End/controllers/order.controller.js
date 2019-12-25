@@ -154,7 +154,7 @@ exports.getLinkPayment = function(req, res) {
         ""
       )}&affiliate_code=&lang=vi&secure_code=${secureCode}&cancel_url=${
       process.env.CANCEL_URL
-    }/${tour.idTour}?cancelPayment="Giao dịch đã bị hủy"`;
+    }/${tour.idTour}`;
 
     // Trả về: tour, order(gồm mã PIN và tổng tiền, người mua tour), link(theo format đã cho trước),
     //  message đã sẵn sàng thanh toán!!!!
