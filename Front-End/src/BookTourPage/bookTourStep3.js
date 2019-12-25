@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 import { Tabs, Tooltip } from "antd";
 
 import { Typography } from "antd";
 
-import ResultWarning from "../ResultBoardPage/ResultWarning";
-
 const { Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
 export default class BookTourStep3 extends Component {
-   state = { size: "large" };
+   constructor(props) {
+      super(props);
+      this.state = {
+         size: "large"
+      };
+   }
 
    onChange = e => {
       this.setState({ size: e.target.value });
@@ -17,26 +22,122 @@ export default class BookTourStep3 extends Component {
 
    render() {
       const { size } = this.state;
+      const { data } = this.props;
+      console.log(data);
+
       const orders = JSON.parse(localStorage.getItem("orders"));
       return (
          <div className="ht-book-finish">
             <Tabs defaultActiveKey="1" size={size}>
-               <TabPane
-                  tab="CÁCH 1: Bạn sử dụng ATM/VISA để thanh toán?"
-                  key="1"
-               >
-                  <ResultWarning
-                     status={"warning"}
-                     title={
-                        <div>
-                           <p>
-                              Chân thành xin lỗi quý khách vì chức năng này đang
-                              được bảo trì!
-                           </p>
-                           <p> Vui lòng chọn hình thức thanh toán khác</p>
+               <TabPane tab="CÁCH 1: Thanh toán online:" key="1">
+                  <div className="row">
+                     <div className="col-sx-12 col-sm-6 col-md-3">
+                        <div className="thumbnail">
+                           <img
+                              src="/payment/nganluong.png"
+                              alt="nganluong.vn"
+                              className="ht-image-fix-size"
+                           />
+                           <div className="caption">
+                              <p>
+                                 Cổng thanh toán đa dạng kênh uy tín, Ưu việt
+                                 hàng đầu Việt Nam. Liên kết h ơn 20 ngân hàng
+                                 trong nước và Quốc tế
+                              </p>
+                              <p>
+                                 <a
+                                    href={data.link}
+                                    className="btn btn-primary"
+                                    role="button"
+                                 >
+                                    Thanh toán ngay
+                                 </a>{" "}
+                              </p>
+                           </div>
                         </div>
-                     }
-                  />
+                     </div>
+                     <div className="col-sx-12 col-sm-6 col-md-3">
+                        <div className="thumbnail">
+                           <img
+                              src="/payment/onepay.png"
+                              alt="onepay.vn"
+                              className="ht-image-fix-size"
+                           />
+                           <div className="caption">
+                              <p>
+                                 OnePAY is a Leading Payment Processing Company
+                                 in Vietnam since 2006, providing payment
+                                 gateway and merchant services.
+                              </p>
+                              <p>
+                                 <Link
+                                    style={{ border: "1px solid black" }}
+                                    disabled
+                                    to="#"
+                                    className="btn btn-default"
+                                    role="button"
+                                 >
+                                    Developing...
+                                 </Link>{" "}
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     <div className="col-sx-12 col-sm-6 col-md-3">
+                        <div className="thumbnail">
+                           <img
+                              src="/payment/sohapay.png"
+                              alt="sohapay.vn"
+                              className="ht-image-fix-size"
+                           />
+                           <div className="caption">
+                              <p>
+                                 Cung cấp dịch vụ khách hàng tốt nhất, tạo môi
+                                 trường thanh toán trực tuyến an toàn và tiện
+                                 lợi nhất
+                              </p>
+                              <p>
+                                 <Link
+                                    style={{ border: "1px solid black" }}
+                                    disabled
+                                    to="#"
+                                    className="btn btn-default"
+                                    role="button"
+                                 >
+                                    Developing...
+                                 </Link>{" "}
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     <div className="col-sx-12 col-sm-6 col-md-3">
+                        <div className="thumbnail">
+                           <img
+                              src="/payment/vnpay.png"
+                              alt="vnpay.vn"
+                              className="ht-image-fix-size"
+                           />
+                           <div className="caption">
+                              <p>
+                                 Thuộc top 100 sản phẩm, dịch vụ Việt Nam được
+                                 tin dùng, là nhãn hiệu nổi tiếng trong phạm vi
+                                 toàn quốc
+                              </p>
+                              <p>
+                                 <Link
+                                    style={{ border: "1px solid black" }}
+                                    disabled
+                                    to="#"
+                                    className="btn btn-default"
+                                    role="button"
+                                 >
+                                    Developing...
+                                 </Link>{" "}
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
                </TabPane>
                <TabPane tab="CÁCH 2: Chuyển khoản đến Tài khoản:" key="2">
                   <ul className="list-group ht-cach2-finish-checkout">

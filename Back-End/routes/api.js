@@ -43,6 +43,10 @@ router.post("/account", authenticated, account.create);
 router.patch("/account", authenticated, account.update);
 router.delete("/account", authenticated, account.delete);
 
+//for payment
+router.post("/getLinkPayment", order.getLinkPayment);
+router.post("/resultPayment", order.resultPayment);
+router.post("/cancelPayment", order.cancelPayment);
 //for order`
 router.get("/order", order.read);
 router.get("/orders", order.listAll);

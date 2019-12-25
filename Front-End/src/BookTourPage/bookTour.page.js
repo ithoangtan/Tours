@@ -26,7 +26,6 @@ class BookTourPage extends Component {
          behavior: "smooth"
       });
       // funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
-
       const { idTour } = this.props.match.match.params;
 
       const { tourAllActions, imageAllActions } = this.props;

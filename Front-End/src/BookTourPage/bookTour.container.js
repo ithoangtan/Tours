@@ -51,6 +51,23 @@ class BookTourContainer extends Component {
 
    step2OK() {
       this.setState({ step2OK: true });
+      //Lưu xuống data base nữa nha
+      const { tourById } = this.props;
+      let newOrder = JSON.parse(localStorage.getItem("orders"));
+      newOrder.address = JSON.stringify(newOrder.address);
+      let order = {
+         ...newOrder,
+         status: "verify",
+         PIN: PIN,
+         notes: " ",
+         totalPrice: tourById.price,
+         idAccount: 8, //test account,
+         buyer: newOrder.name
+      };
+      const { orderAllActions } = this.props;
+      const { fetchGetLinkPaymentRequest } = orderAllActions;
+      const data = { order: { ...order }, tour: { ...tourById } };
+      fetchGetLinkPaymentRequest(data);
    }
 
    prev() {
@@ -65,7 +82,6 @@ class BookTourContainer extends Component {
          );
          return;
       }
-      console.log(this.state.current, this.state.step2OK);
       this.setState({ current });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    };
@@ -88,7 +104,7 @@ class BookTourContainer extends Component {
    };
 
    orderFinish = () => {
-      return <BookTourStep3 />;
+      return <BookTourStep3 data={this.props.data} payment={true} />;
    };
 
    statusOrder = current => {
@@ -102,21 +118,6 @@ class BookTourContainer extends Component {
    onDone = () => {
       message.success("Processing complete!");
       this.setState({ redirectResult: true });
-      //Lưu xuống data base nữa nha
-      const { tourById } = this.props;
-      let newOrder = JSON.parse(localStorage.getItem("orders"));
-      newOrder.address = JSON.stringify(newOrder.address);
-      let order = {
-         ...newOrder,
-         status: "verify",
-         PIN: PIN,
-         notes: " ",
-         totalPrice: tourById.price,
-         idAccount: 8 //test account
-      };
-      const { orderAllActions } = this.props;
-      const { fetchPostOrderRequest } = orderAllActions;
-      fetchPostOrderRequest(order);
    };
    onRedirect() {
       localStorage.setItem("PIN", PIN);
@@ -133,6 +134,20 @@ class BookTourContainer extends Component {
          );
       }
    }
+
+   componentDidMount() {
+      const mess = window.location.search;
+      console.log(window.location.search);
+
+      if (mess) {
+         message.warning(
+            "Bạn đã hủy thanh toán trước đó, Hãy thử lại bằng cách khác nhé!",
+            5
+         );
+         this.setState({ current: 2, redirectResult: true });
+      }
+   }
+
    render() {
       const { current } = this.state;
 
@@ -207,14 +222,16 @@ class BookTourContainer extends Component {
 BookTourContainer.propTypes = {
    classes: PropTypes.object,
    orderAllActions: PropTypes.shape({
-      fetchPostOrderRequest: PropTypes.func
+      fetchGetLinkPaymentRequest: PropTypes.func
    }),
    listOrder: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listTour: state.order.listOrder
+      listTour: state.order.listOrder,
+      data: state.order.data
+      //data: .link, .message, .order, .tour
    };
 };
 const mapDispatchToProps = dispatch => {

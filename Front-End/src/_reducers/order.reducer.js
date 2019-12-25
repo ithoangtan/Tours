@@ -10,7 +10,8 @@ const initialState = {
    orderByIdAccount: {},
    delete: [],
    patch: [],
-   create: []
+   create: [],
+   data: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -110,6 +111,23 @@ const reducer = (state = initialState, action) => {
          };
       }
 
+      //Get Link Payment
+      case orderConstants.FETCH_GET_LINK_PAYMENT_SUCCESS: {
+         const { data } = action.payload;
+         messageSuccess(`${data.message}!`, 3);
+         return {
+            ...state,
+            data: data
+         };
+      }
+      case orderConstants.FETCH_GET_LINK_PAYMENT_FAILED: {
+         const { error } = action.payload;
+         messageError(`${error}`, 1);
+         return {
+            ...state,
+            data: error
+         };
+      }
       default:
          return state;
    }

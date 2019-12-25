@@ -309,7 +309,9 @@ const router = [
    {
       path: "/warningResult",
       exact: true,
-      component: () => <ResultWarning />
+      component: () => (
+         <ResultWarning status="warning" title="Warning something!" />
+      )
    },
    {
       path: "/all",
