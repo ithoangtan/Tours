@@ -65,6 +65,7 @@ class LoginContainer extends Component {
             let data = { ...values, role: "user" };
             message.loading("Login...", 1);
             fetchLoginRequest(data);
+            sessionStorage.setItem("email", data.email);
          } else {
             throw err;
          }

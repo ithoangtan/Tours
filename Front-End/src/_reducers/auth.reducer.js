@@ -38,7 +38,6 @@ const reducer = (state = initialState, action) => {
          });
 
          //Save info user:
-         sessionStorage.setItem("email", data.email);
          sessionStorage.setItem("avatar", data.avatar);
          sessionStorage.setItem("name", data.name);
 

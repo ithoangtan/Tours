@@ -1,11 +1,11 @@
 const { check, validationResult } = require("express-validator");
 
-const Account = require("../models/account.model");
+const Farovite = require("../models/favorite.model");
 
 exports.listAll = async (req, res, next) => {
   try {
-    listAccount = await Account.getAll();
-    res.status(200).json(listAccount);
+    listFarovite = await Farovite.getAll();
+    res.status(200).json(listFarovite);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -16,8 +16,8 @@ exports.listAll = async (req, res, next) => {
 
 exports.read = async (req, res, next) => {
   try {
-    account = await Account.getById();
-    res.status(200).json(account);
+    favorite = await Farovite.getById();
+    res.status(200).json(favorite);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -28,8 +28,8 @@ exports.read = async (req, res, next) => {
 
 exports.readByEmail = async (req, res, next) => {
   try {
-    account = await Account.getByEmailAndRole(req.query.email, "user");
-    res.status(200).json(account);
+    favorite = await Farovite.getByEmail(req.query.email);
+    res.status(200).json(favorite);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -40,8 +40,8 @@ exports.readByEmail = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
   try {
-    const newAccount = new Account(req.body);
-    resultCreate = await Account.create(newAccount);
+    const newFarovite = new Farovite(req.body);
+    resultCreate = await Farovite.create(newFarovite);
     res.status(200).json(resultCreate);
   } catch (err) {
     if (!err.statusCode) {
@@ -53,8 +53,8 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   try {
-    const updateAccount = new Account(req.body);
-    updateResult = await Account.updateById(updateAccount);
+    const updateFarovite = new Farovite(req.body);
+    updateResult = await Farovite.updateById(updateFarovite);
     res.status(200).json(updateResult);
   } catch (err) {
     if (!err.statusCode) {
@@ -66,7 +66,7 @@ exports.update = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
   try {
-    deleteResult = await Account.remove(req.query.idAccount);
+    deleteResult = await Farovite.remove(req.query.idFarovite);
     res.status(200).json(deleteResult);
   } catch (err) {
     if (!err.statusCode) {

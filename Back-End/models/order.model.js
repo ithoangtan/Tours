@@ -118,6 +118,23 @@ Order.getOrderById = function(idOrder, funcResult) {
     }
   );
 };
+Order.getOrderByEmail = function(email, funcResult) {
+  mysql.query(
+    "SELECT * FROM " +
+      databaseProduction +
+      ".orders  WHERE email = ? AND statusAction <> 'deleted' order by " +
+      databaseProduction +
+      ".orders.dateAdded desc limit 0,5;",
+    [email],
+    function(err, res) {
+      if (err) {
+        funcResult(err, null);
+      } else {
+        funcResult(null, res);
+      }
+    }
+  );
+};
 
 Order.getOrderByIdWithIdAccount = function(idOrder, idAccount, funcResult) {
   mysql.query(
