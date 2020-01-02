@@ -53,7 +53,6 @@ class BookTourStep2 extends Component {
             //Lưu thông tin vào storage
             localStorage.setItem("orders", JSON.stringify(values));
             //Đến khi người dùng ấn done mới tiến hành lưu xuống CSDL
-            console.log("Received values of form: ", values);
             this.props.step2OK();
          }
       });

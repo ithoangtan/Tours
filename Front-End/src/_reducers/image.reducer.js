@@ -7,7 +7,8 @@ import {
 const initialState = {
    listImageTour: [],
    delete: [],
-   uploadImage: []
+   uploadImage: [],
+   listImageByIdTour: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,7 +19,7 @@ const reducer = (state = initialState, action) => {
          // toastListImageGetByIdTourSuccess(data);
          return {
             ...state,
-            listImageByIdTour: data
+            listImageTour: data
          };
       }
       case imageConstants.FETCH_IMAGE_GET_BYID_TOUR_FAILED: {
@@ -26,7 +27,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            delete: error
+            listImageTour: error
          };
       }
       //Delete

@@ -9,6 +9,9 @@ const Account = function(account) {
   this.role = account.role || "user"; //user(customer), admin(customer), administrator(full permission)
   this.password = account.password;
   this.verifyToken = account.verifyToken;
+  this.address = account.address || " ";
+  this.website = account.website || "abc.xyz";
+  this.birthdate = account.birthdate || " ";
 };
 const databaseLocal = "azmszdk4w6h5j1o6";
 const databaseProduction =

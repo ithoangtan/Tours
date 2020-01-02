@@ -28,6 +28,7 @@ exports.create = function(req, res) {
 
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   let newOrder = new Order(req.body);
+
   //60% giá vé đối với trẻ em
   newOrder.totalPrice =
     newOrder.numberPeople * newOrder.totalPrice +
@@ -68,7 +69,6 @@ exports.readByEmail = function(req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
-
   Order.getOrderByEmail(req.query.email, function(err, order) {
     if (err) res.send(err);
     res.json(order); //Đã là API thì trả về phải chuẩn
@@ -115,6 +115,7 @@ exports.getLinkPayment = function(req, res) {
   newOrder.totalPrice =
     newOrder.numberPeople * newOrder.totalPrice +
     newOrder.numberChildren * newOrder.totalPrice * 0.6;
+  console.log(newOrder);
 
   Order.createOrder(newOrder, function(err, order) {
     if (err) res.send(err);

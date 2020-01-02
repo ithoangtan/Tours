@@ -115,3 +115,39 @@ export const fetchFavoritesWithEmailRequest = email => {
          });
    };
 };
+
+//Upload of Account
+export const fetchUpdateAccountSuccess = (data, status) => {
+   return {
+      type: accountConstants.FETCH_UPDATE_ACCOUNT_SUCCESS,
+      payload: {
+         // Thường đi làm thì người ta hay gọi là FETCH
+         //data gửi kèm trong actions là payload ở vị trí này
+         data,
+         status
+      }
+   };
+};
+
+export const fetchUpdateAccountError = error => {
+   return {
+      type: accountConstants.FETCH_UPDATE_ACCOUNT_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchUpdateAccountRequest = account => {
+   return dispatch => {
+      accountApis
+         .patchUpdateAccount(account)
+         .then(resp => {
+            const { data, status } = resp;
+            dispatch(fetchUpdateAccountSuccess(data, status));
+         })
+         .catch(error => {
+            dispatch(fetchUpdateAccountError(error));
+         });
+   };
+};

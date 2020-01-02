@@ -1,12 +1,15 @@
 import * as accountConstants from "../_constants/account.module";
 import { toastError } from "../_helper/toastify.helper";
-import {
-   messageLoading,
-   messageError,
-   messageSuccess
-} from "../_helper/message.helper";
+// import {
+//    messageLoading,
+//    messageError,
+//    messageSuccess
+// } from "../_helper/message.helper";
 const initialState = {
-   account: []
+   account: [],
+   update: [],
+   favorite: [],
+   order: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,7 +41,7 @@ const reducer = (state = initialState, action) => {
          const { data } = action.payload;
          return {
             ...state,
-            account: data
+            order: data
          };
       }
       case accountConstants.FETCH_ORDER_OF_ACCOUNT_FAILED: {
@@ -46,7 +49,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            account: error
+            order: error
          };
       }
       //Favorites
@@ -54,7 +57,7 @@ const reducer = (state = initialState, action) => {
          const { data } = action.payload;
          return {
             ...state,
-            account: data
+            favorite: data
          };
       }
       case accountConstants.FETCH_FAVORITES_OF_ACCOUNT_FAILED: {
@@ -62,7 +65,24 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            account: error
+            favorite: error
+         };
+      } //Update - patch
+      case accountConstants.FETCH_UPDATE_ACCOUNT_SUCCESS: {
+         const { data } = action.payload;
+         console.log(data);
+
+         return {
+            ...state,
+            update: data
+         };
+      }
+      case accountConstants.FETCH_UPDATE_ACCOUNT_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            update: error
          };
       }
       default:

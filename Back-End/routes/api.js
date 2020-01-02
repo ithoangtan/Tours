@@ -34,6 +34,7 @@ router.get("/images", image.listAllImageTour);
 router.get("/image", image.listAllImageTourById);
 router.delete("/image", authenticated, image.delete);
 router.post("/image", image.create);
+router.post("/avatar", image.avatar);
 router.post("/upload", image.upload);
 
 //for account

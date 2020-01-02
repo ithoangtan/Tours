@@ -42,6 +42,23 @@ exports.create = function(req, res) {
     }
   });
 };
+exports.avatar = function(req, res) {
+  dateNow = Date.now();
+  upload(req, res, function(err) {
+    if (err) {
+      return res.send(err);
+    } else {
+      Image.updateAvatar(req.query.idAccount, nameFile, function(err, resp) {
+        if (err) res.send(err);
+        else
+          res.send({
+            idAccount: req.query.idAccount,
+            nameFile: nameFile
+          });
+      });
+    }
+  });
+};
 
 exports.upload = function(req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
