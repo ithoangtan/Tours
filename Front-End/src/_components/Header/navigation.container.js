@@ -9,6 +9,7 @@ import { Menu, Dropdown, Icon, Avatar, Badge, Tooltip } from "antd";
 import { getSignCookie } from "../../_commons/auth.service";
 
 import { API_ENDPOINT } from "../../_constants/index.constants";
+import ProfileComponent from "../Profile/profile.component";
 
 const North = [
    { name: "Hà Nội", key: "ha-noi" },
@@ -280,16 +281,33 @@ export default class Navigation extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         logout: false
+         logout: false,
+         visibleProfile: false
       };
    }
+
+   showDrawer = () => {
+      this.setState({
+         visibleProfile: true
+      });
+   };
+   onClose = () => {
+      this.setState({
+         visibleProfile: false
+      });
+   };
 
    menuAvartar() {
       const role = getSignCookie("role");
       return (
          <Menu>
             <Menu.Item>
-               <Link className="mr-2" rel="noopener noreferrer" to="#">
+               <Link
+                  className="mr-2"
+                  rel="noopener noreferrer"
+                  to="#"
+                  onClick={this.showDrawer}
+               >
                   <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-600" />
                   Profile
                </Link>
@@ -351,6 +369,10 @@ export default class Navigation extends Component {
       if (name !== undefined && name !== null && name !== "") {
          return (
             <li className="nav-item ml-3 mr-2" style={{ alignSelf: "center" }}>
+               <ProfileComponent
+                  visible={this.state.visibleProfile}
+                  onClose={this.onClose}
+               />
                <Tooltip placement="right" title={`Hi!, ${name}`}>
                   <Dropdown
                      overlay={this.menuAvartar()}
