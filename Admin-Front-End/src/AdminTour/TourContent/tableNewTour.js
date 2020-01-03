@@ -166,6 +166,7 @@ class TableNewRow extends Component {
                      style={{ width: 195 }}
                      onChange={this.handleChange}
                   >
+                     <Select.Option value="1-0">1 days 0 nights</Select.Option>
                      <Select.Option value="2-1">2 days 1 nights</Select.Option>
                      <Select.Option value="3-2">3 days 2 nights</Select.Option>
                      <Select.Option value="4-3">4 days 3 nights</Select.Option>
