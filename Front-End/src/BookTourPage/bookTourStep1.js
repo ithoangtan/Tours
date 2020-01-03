@@ -95,13 +95,13 @@ export default class bookTourStep1 extends Component {
                            <Text>(233) Reviews</Text>
                         </div>
                         <div className="mt-1 text-price-tour-detail-book">
-                           ${tourById.price}
+                           {tourById.price} VNĐ
                         </div>
                         <div className="mt-1">
                            <Text delete>
-                              $
                               {tourById.price -
-                                 tourById.price * tourById.sale * 0.01}
+                                 tourById.price * tourById.sale * 0.01}{" "}
+                              VNĐ
                            </Text>
                         </div>
                      </div>

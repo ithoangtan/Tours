@@ -123,11 +123,13 @@ export default class TourSingleContainer extends Component {
                               </div>
                               <div className="col-md-12 col-lg-3 text-right">
                                  <Title level={1}>
-                                    $
                                     {tourById.price -
-                                       tourById.price * tourById.sale * 0.01}
+                                       tourById.price *
+                                          tourById.sale *
+                                          0.01}{" "}
+                                    VNĐ
                                  </Title>
-                                 <Text delete>${tourById.price}</Text>
+                                 <Text delete>{tourById.price} VNĐ</Text>
                               </div>
                            </div>
                            <br />
