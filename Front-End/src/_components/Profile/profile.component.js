@@ -124,18 +124,9 @@ class ProfileContainer extends Component {
       }
    };
 
-   imageIdTour(idTour) {
-      const { listImageTour } = this.props;
-      let image = "";
-      listImageTour.forEach(value => {
-         if (idTour === value.idTour) image = value.url;
-      });
-      console.log(image);
-
-      return image;
-   }
    renderOrder = () => {
-      const { order, listImageTour } = this.props;
+      const { order, account } = this.props;
+      sessionStorage.setItem("avatar", account.avatar);
       return (
          <List
             itemLayout="horizontal"
