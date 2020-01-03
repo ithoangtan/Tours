@@ -26,6 +26,18 @@ exports.read = async (req, res, next) => {
   }
 };
 
+exports.readByEmail = async (req, res, next) => {
+  try {
+    account = await Account.getByEmailAndRole(req.query.email, "user");
+    res.status(200).json(account);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.create = async (req, res, next) => {
   try {
     const newAccount = new Account(req.body);

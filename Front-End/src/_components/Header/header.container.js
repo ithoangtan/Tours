@@ -1,6 +1,18 @@
 import React, { Component } from "react";
 
 export default class HeaderContainer extends Component {
+   showDrawer = () => {
+      this.setState({
+         visible: true
+      });
+   };
+
+   onClose = () => {
+      this.setState({
+         visible: false
+      });
+   };
+
    render() {
       return (
          <div
@@ -21,7 +33,9 @@ export default class HeaderContainer extends Component {
                <div className="carousel-item active">
                   <div
                      className="hero-wrap js-fullheight"
-                     style={{ backgroundImage: 'url("images/bg_1.jpg")' }}
+                     style={{
+                        backgroundImage: 'url("images/bg_1.jpg")'
+                     }}
                      data-stellar-background-ratio="0.5"
                   >
                      <div className="overlay" />
@@ -57,7 +71,9 @@ export default class HeaderContainer extends Component {
                <div className="carousel-item">
                   <div
                      className="hero-wrap js-fullheight"
-                     style={{ backgroundImage: 'url("images/bg_1.jpg")' }}
+                     style={{
+                        backgroundImage: 'url("images/bg_1.jpg")'
+                     }}
                      data-stellar-background-ratio="0.5"
                   >
                      <div className="overlay" />
@@ -93,7 +109,9 @@ export default class HeaderContainer extends Component {
                <div className="carousel-item">
                   <div
                      className="hero-wrap js-fullheight"
-                     style={{ backgroundImage: 'url("images/bg_1.jpg")' }}
+                     style={{
+                        backgroundImage: 'url("images/bg_1.jpg")'
+                     }}
                      data-stellar-background-ratio="0.5"
                   >
                      <div className="overlay" />

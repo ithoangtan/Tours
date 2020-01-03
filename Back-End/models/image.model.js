@@ -85,5 +85,18 @@ Image.createImageTour = function(idTour, name, fncResult) {
     }
   );
 };
-
+Image.updateAvatar = function(idAccount, name, fncResult) {
+  var url = `/img/${name}`;
+  mysql.query(
+    "UPDATE " + databaseProduction + ".accounts SET ? WHERE (idAccount = ?);",
+    [{ avatar: url }, idAccount],
+    function(err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
 module.exports = Image;

@@ -14,6 +14,7 @@ const Order = function(order) {
   this.notes = order.notes || " ";
   this.idAccount = order.idAccount || 8;
   this.buyer = order.buyer || " ";
+  this.idTour = order.idTour || " ";
 };
 
 const databaseLocal = "azmszdk4w6h5j1o6";
@@ -65,12 +66,13 @@ Order.createOrder = function(newOrder, funcResult) {
   this.notes = newOrder.notes;
   this.idAccount = newOrder.idAccount;
   this.buyer = newOrder.buyer;
+  this.idTour = newOrder.idTour;
 
   mysql.query(
     "INSERT INTO " +
       databaseProduction +
       ".orders (`PIN`, `status`, `totalPrice`, `numberPeople`," +
-      " `numberChildren`, `address`, `phone`,`email`,`notes`, `idAccount`, `buyer`) VALUES ('" +
+      " `numberChildren`, `address`, `phone`,`email`,`notes`, `idAccount`, `buyer`, `idTour` ) VALUES ('" +
       this.PIN +
       "', '" +
       this.status +
@@ -92,6 +94,8 @@ Order.createOrder = function(newOrder, funcResult) {
       this.idAccount +
       "', '" +
       this.buyer +
+      "', '" +
+      this.idTour +
       "') ",
     function(err, res) {
       if (err) {
@@ -109,6 +113,23 @@ Order.getOrderById = function(idOrder, funcResult) {
       databaseProduction +
       ".orders  WHERE idOrder = ? AND WHERE statusAction <> 'deleted';",
     [idOrder],
+    function(err, res) {
+      if (err) {
+        funcResult(err, null);
+      } else {
+        funcResult(null, res);
+      }
+    }
+  );
+};
+Order.getOrderByEmail = function(email, funcResult) {
+  mysql.query(
+    "SELECT * FROM " +
+      databaseProduction +
+      ".orders inner join tours on tours.idTour = orders.idTour WHERE email = ? AND orders.statusAction <> 'deleted' order by " +
+      databaseProduction +
+      ".orders.dateAdded desc limit 0,5;",
+    [email],
     function(err, res) {
       if (err) {
         funcResult(err, null);

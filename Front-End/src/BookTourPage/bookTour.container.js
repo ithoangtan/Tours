@@ -24,7 +24,7 @@ const stepStyle = {
    boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
 
-const PIN = Date.now();
+let PIN = Date.now();
 class BookTourContainer extends Component {
    constructor(props) {
       super(props);
@@ -34,6 +34,7 @@ class BookTourContainer extends Component {
          redirectResult: false
       };
    }
+
    //steps container
    next() {
       if (!this.state.step2OK && this.state.current === 1) {
@@ -55,6 +56,7 @@ class BookTourContainer extends Component {
       const { tourById } = this.props;
       let newOrder = JSON.parse(localStorage.getItem("orders"));
       newOrder.address = JSON.stringify(newOrder.address);
+      PIN = Date.now();
       let order = {
          ...newOrder,
          status: "verify",
@@ -62,7 +64,8 @@ class BookTourContainer extends Component {
          notes: " ",
          totalPrice: tourById.price,
          idAccount: 8, //test account,
-         buyer: newOrder.name
+         buyer: newOrder.name,
+         idTour: tourById.idTour
       };
       const { orderAllActions } = this.props;
       const { fetchGetLinkPaymentRequest } = orderAllActions;
@@ -118,6 +121,7 @@ class BookTourContainer extends Component {
    onDone = () => {
       message.success("Processing complete!");
       this.setState({ redirectResult: true });
+      //save xuống data
    };
    onRedirect() {
       localStorage.setItem("PIN", PIN);

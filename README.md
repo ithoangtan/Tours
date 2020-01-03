@@ -49,9 +49,13 @@ $ yarn start
 ### DEMO:
 
 - ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
+- account test: ithoangtan@gmail.com; password: 123456a@
 - USER: https://kinhdoanhtourdulich.herokuapp.com/
 - API: https://api-kinhdoanhtourdulich.herokuapp.com/
 
 ### Todos
+
+### Issue
+- heroku upload file: https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted 
 
 ## License

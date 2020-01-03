@@ -10,7 +10,7 @@ const image = require("../controllers/image.controller");
 const order = require("../controllers/order.controller");
 const account = require("../controllers/account.controller");
 const auth = require("../controllers/auth.controller");
-
+const favorite = require("../controllers/favorite.controller");
 //authencation
 const authenticated = require("../middleware/auth.middleware");
 
@@ -34,10 +34,13 @@ router.get("/images", image.listAllImageTour);
 router.get("/image", image.listAllImageTourById);
 router.delete("/image", authenticated, image.delete);
 router.post("/image", image.create);
+router.post("/avatar", image.avatar);
 router.post("/upload", image.upload);
 
 //for account
 router.get("/account", authenticated, account.read);
+router.get("/accountWithEmail", authenticated, account.readByEmail);
+
 router.get("/accounts", authenticated, account.listAll);
 router.post("/account", authenticated, account.create);
 router.patch("/account", authenticated, account.update);
@@ -49,10 +52,14 @@ router.post("/resultPayment", order.resultPayment);
 router.post("/cancelPayment", order.cancelPayment);
 //for order`
 router.get("/order", order.read);
+router.get("/orderWithEmail", order.readByEmail);
 router.get("/orders", order.listAll);
 router.post("/order", order.create);
 router.patch("/order", order.update);
 router.delete("/order", authenticated, order.delete);
+
+//favorites
+router.get("/favoritesWithEmail", favorite.readByEmail);
 
 //for authencation
 router.post("/login", auth.login);
