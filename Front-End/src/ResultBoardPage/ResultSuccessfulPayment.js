@@ -3,8 +3,22 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import { Result, Button } from "antd";
+import PropTypes from "prop-types";
 
-export default class ResultSuccessful extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as orderActions from "../_actions/order.actions";
+class ResultSuccessful extends Component {
+   componentDidMount() {
+      const { orderAllActions } = this.props;
+      const { fetchSetStatusPaidRequest } = orderAllActions;
+      // console.log(this.props.location.query.order_code);
+      const search = window.location.search;
+      const params = new URLSearchParams(search);
+      const PIN = params.get("order_code");
+      const data = { PIN: PIN, status: "paid" };
+      fetchSetStatusPaidRequest(data);
+   }
    render() {
       // const { params } = this.props.match;
       return (
@@ -31,3 +45,21 @@ export default class ResultSuccessful extends Component {
       );
    }
 }
+ResultSuccessful.propTypes = {
+   classes: PropTypes.object,
+   orderAllActions: PropTypes.shape({
+      fetchSetStatusPaidRequest: PropTypes.func
+   })
+};
+
+const mapStateToProps = state => {
+   return {
+      patch: state.order.patch
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      orderAllActions: bindActionCreators(orderActions, dispatch)
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ResultSuccessful);

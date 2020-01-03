@@ -6,7 +6,7 @@ import { Result, Button, Typography } from "antd";
 
 const { Paragraph } = Typography;
 
-export default class ResultSuccessful extends Component {
+class ResultSuccessful extends Component {
    render() {
       const { params } = this.props.match;
       return (
@@ -17,7 +17,7 @@ export default class ResultSuccessful extends Component {
                   {" "}
                   Số hóa đơn (mã PIN của bạn) là:{" "}
                   <Paragraph
-                     copyable={{ text: "9704050730989220" }}
+                     copyable={params.idOrder}
                      style={{ display: "inline" }}
                   >
                      {params.idOrder}
@@ -44,3 +44,5 @@ export default class ResultSuccessful extends Component {
       );
    }
 }
+
+export default ResultSuccessful;

@@ -217,6 +217,20 @@ export const fetchPatchOrderRequest = order => {
          });
    };
 };
+//patch status with PIN
+export const fetchSetStatusPaidRequest = order => {
+   return dispatch => {
+      orderApis
+         .patchSetStatusPaid(order)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchPatchOrderSuccess(order, data));
+         })
+         .catch(error => {
+            dispatch(fetchPatchOrderError(error));
+         });
+   };
+};
 
 //Get Link Payment
 export const fetchGetLinkPaymentSuccess = (infoPayment, data) => {
