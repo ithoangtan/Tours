@@ -18,8 +18,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.less"; //customize theme
 
+require("dotenv").config();
 //import components:
-
 class App extends Component {
    render() {
       return (
@@ -33,7 +33,6 @@ class App extends Component {
    showContent = (routes, routesPrivate) => {
       var resultPage = null;
       var resultPagePrivate = null;
-
       if (routes.length > 0) {
          resultPage = routes.map((route, index) => {
             return (

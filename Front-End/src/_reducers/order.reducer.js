@@ -96,7 +96,7 @@ const reducer = (state = initialState, action) => {
       case orderConstants.FETCH_ORDER_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { order } = action.order;
-         messageSuccess(`Đơn hàng ${order.PIN} sửa thành công!`, 3);
+         messageSuccess(`Đơn hàng ${order.PIN} mua thành công!`, 3);
          return {
             ...state,
             patch: data

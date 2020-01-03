@@ -55,7 +55,10 @@ $ yarn start
 
 ### Todos
 
+- Lib Chart.js with React: https://www.createwithdata.com/react-chartjs-dashboard/
+
 ### Issue
-- heroku upload file: https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted 
+
+- heroku upload file: https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted
 
 ## License

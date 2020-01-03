@@ -10,7 +10,7 @@ export default class ReportViewChartContainer extends Component {
                   {/* Card Header - Dropdown */}
                   <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                      <h6 className="m-0 font-weight-bold text-primary">
-                        Earnings Overview
+                        Doanh thu
                      </h6>
                      <div className="dropdown no-arrow">
                         <a
@@ -58,7 +58,7 @@ export default class ReportViewChartContainer extends Component {
                   {/* Card Header - Dropdown */}
                   <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                      <h6 className="m-0 font-weight-bold text-primary">
-                        Tour was bought
+                        Điểm đến chủ yếu
                      </h6>
                      <div className="dropdown no-arrow">
                         <a
@@ -99,14 +99,16 @@ export default class ReportViewChartContainer extends Component {
                      </div>
                      <div className="mt-4 text-center small">
                         <span className="mr-2">
-                           <i className="fas fa-circle text-primary" /> Domestic
+                           <i className="fas fa-circle text-primary" /> Trong
+                           nước
                         </span>
                         <span className="mr-2">
                            <i className="fas fa-circle text-success" />
-                           International
+                           Quốc tế
                         </span>
                         <span className="mr-2">
-                           <i className="fas fa-circle text-info" /> Referral
+                           <i className="fas fa-circle text-info" /> Dịch vụ cao
+                           cấp
                         </span>
                      </div>
                   </div>

@@ -185,6 +185,7 @@ exports.resultPayment = function(req, res) {
   //Thanh toán thành công thì phải cho status thanh toán từ verify thành paid
   //updateByPIN
   updateOrder = { PIN: req.body.PIN, status: "paid" };
+
   Order.updateByPIN(updateOrder, function(err, updateOrder) {
     if (err) res.send(err);
     res.send(updateOrder);

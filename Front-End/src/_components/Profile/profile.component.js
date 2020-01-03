@@ -7,7 +7,6 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as accountActions from "../../_actions/account.actions";
-import * as tourActions from "../../_actions/tour.actions";
 import { API_ENDPOINT } from "../../_constants/index.constants";
 
 import { Link } from "react-router-dom";
