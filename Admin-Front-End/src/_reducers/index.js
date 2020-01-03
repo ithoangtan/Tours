@@ -4,13 +4,14 @@ import scheduleReducer from "./schedule.reducer";
 import imageReducer from "./image.reducer";
 import authReducer from "./auth.reducer";
 import orderReducer from "./order.reducer";
-
+import reportReducer from "./report.reducer";
 const rootReducer = combineReducers({
    tour: tourReducer,
    image: imageReducer,
    schedule: scheduleReducer,
    auth: authReducer,
-   order: orderReducer
+   order: orderReducer,
+   report: reportReducer
 });
 
 export default rootReducer;

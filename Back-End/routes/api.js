@@ -13,7 +13,8 @@ const auth = require("../controllers/auth.controller");
 const favorite = require("../controllers/favorite.controller");
 //authencation
 const authenticated = require("../middleware/auth.middleware");
-
+//report
+const report = require("../controllers/report.controller");
 //for tour
 router.get("/tour", tour.read);
 router.get("/tours", tour.listAll);
@@ -67,5 +68,8 @@ router.post("/register", auth.register);
 router.get("/verify", auth.verify);
 router.post("/forgotPasswordStep1", auth.forgotPasswordStep1);
 router.post("/forgotPasswordStep2", auth.forgotPasswordStep2);
+
+//report
+router.get("/report", authenticated, report.getReport);
 
 module.exports = router;
