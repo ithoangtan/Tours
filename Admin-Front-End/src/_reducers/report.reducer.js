@@ -13,6 +13,7 @@ const reducer = (state = initialState, action) => {
          };
       case reportConstants.FETCH_REPORT_SUCCESS: {
          const { data } = action.payload;
+         console.log(data);
          return {
             ...state,
             report: data

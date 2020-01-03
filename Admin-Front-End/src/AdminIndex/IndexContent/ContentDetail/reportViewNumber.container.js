@@ -16,7 +16,23 @@ class ReportViewNumberContainer extends Component {
       const { fetchReportRequest } = reportAllActions;
       fetchReportRequest();
    }
+   analyticReport() {
+      const { report } = this.props;
+      let report2 = [];
+      if (report !== undefined || report !== [] || report !== null) {
+         for (let index = 0; index < report.length - 1; index++) {
+            report[index].forEach(element => {
+               report2.push(element);
+            });
+         }
+      }
+      return report2;
+   }
    render() {
+      let report = this.analyticReport();
+      let report2 = [{ tourNumber: 0 }, { total: 0 }, { verifyAccount: 0 }];
+      if (report.length !== 0) report2 = [...report];
+
       return (
          <div className="row">
             {/* Earnings (Monthly) Card Example */}
@@ -26,10 +42,10 @@ class ReportViewNumberContainer extends Component {
                      <div className="row no-gutters align-items-center">
                         <div className="col mr-2">
                            <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                              Tổng thu tháng này
+                              Tổng thu trong năm
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              $40,000
+                              {report2[1].total} VNĐ
                            </div>
                         </div>
                         <div className="col-auto">
@@ -46,10 +62,10 @@ class ReportViewNumberContainer extends Component {
                      <div className="row no-gutters align-items-center">
                         <div className="col mr-2">
                            <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                              Số report (chưa đến lịch)
+                              Số Tours (chưa đến lịch)
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              $215,000
+                              {report2[0].tourNumber} Tours
                            </div>
                         </div>
                         <div className="col-auto">
@@ -69,7 +85,7 @@ class ReportViewNumberContainer extends Component {
                               Tổng số người dùng đăng ký
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              $215,000
+                              {report2[2].verifyAccount} Người
                            </div>
                         </div>
                         <div className="col-auto">
@@ -89,7 +105,7 @@ class ReportViewNumberContainer extends Component {
                               Yêu cầu đang chờ xử lý
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              08
+                              08 Request
                            </div>
                         </div>
                         <div className="col-auto">
