@@ -83,6 +83,7 @@ class BestTourContainer extends Component {
                                  }
                               }}
                            >
+                              {" "}
                               Khởi hành từ Hồ Chí Minh
                            </Link>
                            <h3 className="name-tour">

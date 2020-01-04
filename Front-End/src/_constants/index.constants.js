@@ -9,7 +9,7 @@ export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.easing.1.3.js",
    // "/customer/js/jquery.waypoints.min.js",
    // "/customer/js/jquery.stellar.min.js",
-   // "/customer/js/owl.carousel.min.js",
+   "/customer/js/owl.carousel.min.js",
    // "/customer/js/jquery.magnific-popup.min.js",
    "/customer/js/aos.js",
    // "/customer/js/jquery.animateNumber.min.js",
