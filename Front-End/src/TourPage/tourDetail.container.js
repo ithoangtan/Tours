@@ -115,11 +115,11 @@ export default class TourDetailContainer extends Component {
                         <Text>(233) Reviews</Text>
                      </div>
                      <div className="mt-1 text-price-tour-detail">
-                        {tour.price} VNĐ
+                        {tour.price}Đ
                      </div>
                      <div className="mt-1">
                         <Text delete>
-                           {tour.price - tour.price * tour.sale * 0.01} VNĐ
+                           {tour.price - tour.price * tour.sale * 0.01}Đ
                         </Text>
                      </div>
                      <div>

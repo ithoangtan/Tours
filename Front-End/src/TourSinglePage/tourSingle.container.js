@@ -53,17 +53,10 @@ export default class TourSingleContainer extends Component {
 
    renderImage() {
       const { listImageByIdTour } = this.props;
-
       let result = null;
       if (listImageByIdTour !== null && listImageByIdTour !== undefined)
          result = listImageByIdTour.map((imageTour, index) => {
-            return (
-               <TourDetailImg
-                  {...this.props}
-                  srcImage={imageTour.url}
-                  key={index}
-               />
-            );
+            return <TourDetailImg srcImage={imageTour.url} key={index} />;
          });
       return result;
    }
@@ -122,14 +115,12 @@ export default class TourSingleContainer extends Component {
                                  </div>
                               </div>
                               <div className="col-md-12 col-lg-3 text-right">
-                                 <Title level={1}>
+                                 <Title level={3}>
                                     {tourById.price -
-                                       tourById.price *
-                                          tourById.sale *
-                                          0.01}{" "}
-                                    VNĐ
+                                       tourById.price * tourById.sale * 0.01}
+                                    Đ
                                  </Title>
-                                 <Text delete>{tourById.price} VNĐ</Text>
+                                 <Text delete>{tourById.price}Đ</Text>
                               </div>
                            </div>
                            <br />

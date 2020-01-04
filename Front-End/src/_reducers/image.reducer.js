@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
          // toastListImageGetByIdTourSuccess(data);
          return {
             ...state,
-            listImageTour: data
+            listImageByIdTour: data
          };
       }
       case imageConstants.FETCH_IMAGE_GET_BYID_TOUR_FAILED: {
@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listImageTour: error
+            listImageByIdTour: error
          };
       }
       //Delete
