@@ -3,7 +3,7 @@ import {
    toastError,
    toastPatchScheduleSuccess,
    toastDeleteScheduleSuccess,
-   toastCreateScheduleSuccess,
+   toastCreateScheduleSuccess
 } from "../_helper/toastify.helper";
 const initialState = {
    listSchedule: [],
