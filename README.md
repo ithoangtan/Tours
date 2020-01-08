@@ -60,5 +60,6 @@ $ yarn start
 ### Issue
 
 - heroku upload file: https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted
+- trong nhan xet cua thay
 
 ## License
