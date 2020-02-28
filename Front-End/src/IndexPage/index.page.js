@@ -10,7 +10,7 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
 import HeaderContainer from "../_components/Header/header.container";
-import SearchEngineContainer from "../_components/SearchEngine/searchEngine.container";
+// import SearchEngineContainer from "../_components/SearchEngine/searchEngine.container";
 import BestTourContainer from "../_components/Tour/bestTour.container";
 import ServiceSection from "../_components/ServiceSection/serviceSection.container";
 import AboutTravelandContainer from "../_components/AboutTraveland/aboutTraveland.container";
@@ -49,16 +49,16 @@ class IndexPage extends Component {
 
    render() {
       return (
-         <div>
+         <>
             <HeaderContainer />
-            <SearchEngineContainer />
+            {/* <SearchEngineContainer /> */}
             <BestTourContainer />
             <RecentStoriesContainer />
             <HappyTravelerSaysContainer />
             <ThingsToKnowContainer />
             <AboutTravelandContainer />
             <ServiceSection />
-         </div>
+         </>
       );
    }
 }

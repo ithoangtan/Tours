@@ -368,7 +368,10 @@ export default class Navigation extends Component {
       const avatar = sessionStorage.getItem("avatar");
       if (name !== undefined && name !== null && name !== "") {
          return (
-            <li className="nav-item ml-3 mr-2" style={{ alignSelf: "center" }}>
+            <li
+               className="nav-item ht-nav-item ml-3 mr-2"
+               style={{ alignSelf: "center" }}
+            >
                <ProfileComponent
                   visible={this.state.visibleProfile}
                   onClose={this.onClose}
@@ -396,8 +399,12 @@ export default class Navigation extends Component {
          );
       } else
          return (
-            <li className="nav-item ml-1 mr-1" style={{ alignSelf: "center" }}>
-               <Link className="ml-2" rel="noopener noreferrer" to="/login">
+            <li className="nav-item ht-nav-item">
+               <Link
+                  className="ml-2 nav-link ht-nav-link"
+                  rel="noopener noreferrer"
+                  to="/login"
+               >
                   <i className="fas fa-sign-in-alt"></i> Sign In
                </Link>
             </li>
@@ -422,70 +429,81 @@ export default class Navigation extends Component {
    render() {
       return (
          <nav
-            className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+            className="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light container ht-nav-container"
+            // className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light container ht-nav-container"
             id="ftco-navbar"
          >
             {this.haveRedirect()}
-            <div className="container">
-               <Link to="/" className="navbar-brand">
-                  <span>Tours</span>
-               </Link>
-               <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#ftco-nav"
-                  aria-controls="ftco-nav"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-               >
-                  <span className="oi oi-menu" /> Menu
-               </button>
-               <div className="collapse navbar-collapse" id="ftco-nav">
-                  <ul className="navbar-nav ml-auto">
-                     <li className="nav-item active">
-                        <Link to="/" className="nav-link">
-                           <i className="fas fa-umbrella-beach"></i> Home
-                        </Link>
-                     </li>
-                     {/* <li className="nav-item">
-                        <Link to="/destination" className="nav-link">
+            {/* <div className="container ht-nav-container"> */}
+            <Link to="/">
+               <img
+                  src="./logo192.png"
+                  alt="Tours"
+                  className="ht-logo-nav"
+               ></img>
+            </Link>
+            <button
+               className="navbar-toggler"
+               type="button"
+               data-toggle="collapse"
+               data-target="#ftco-nav"
+               aria-controls="ftco-nav"
+               aria-expanded="false"
+               aria-label="Toggle navigation"
+            >
+               <span className="oi oi-menu" /> Menu
+            </button>
+            <div className="collapse navbar-collapse" id="ftco-nav">
+               <ul className="navbar-nav ml-auto ht-navbar-nav">
+                  {/* <li className="nav-item ht-nav-item active">
+                     <Link to="/" className="nav-link ht-nav-link">
+                        <i className="fas fa-umbrella-beach"></i> Home
+                     </Link>
+                  </li> */}
+                  {/* <li className="nav-item ht-nav-item">
+                        <Link to="/destination" className="nav-link ht-nav-link">
                            Destination
                         </Link>
                      </li> */}
-                     <li className="nav-item">
-                        <Dropdown overlay={menuWorld} className="nav-link">
-                           <Link to="/tour">
-                              <i className="fas fa-globe"></i> Quốc Tế{" "}
-                              <Icon type="down" />
-                           </Link>
-                        </Dropdown>
-                     </li>
-                     <li className="nav-item">
-                        <Dropdown overlay={menuVN} className="nav-link">
-                           <Link to="/tour">
-                              <i className="fas fa-map-marker-alt"></i> Việt Nam{" "}
-                              <Icon type="down" />
-                           </Link>
-                        </Dropdown>
-                     </li>
-                     <li className="nav-item">
-                        <Link to="/blog" className="nav-link">
-                           <i className="fas fa-blog"></i> Blog
+                  <li className="nav-item ht-nav-item">
+                     <Dropdown
+                        overlay={menuWorld}
+                        className="nav-link ht-nav-link"
+                     >
+                        <Link to="/tour">
+                           <i className="fas fa-globe"></i> Quốc Tế{" "}
+                           <Icon type="down" />
                         </Link>
-                     </li>
-                     <li className="nav-item">
-                        <Link to="/about" className="nav-link">
-                           <i className="fas fa-users-cog"></i> About
+                     </Dropdown>
+                  </li>
+                  <li className="nav-item ht-nav-item">
+                     <Dropdown
+                        overlay={menuVN}
+                        className="nav-link ht-nav-link"
+                     >
+                        <Link to="/tour">
+                           <i className="fas fa-map-marker-alt"></i> Việt Nam{" "}
+                           <Icon type="down" />
                         </Link>
-                     </li>
-                     <li className="nav-item">
-                        <Link to="/contact" className="nav-link">
-                           Contact
-                        </Link>
-                     </li>
+                     </Dropdown>
+                  </li>
+                  <li className="nav-item ht-nav-item">
+                     <Link to="/blog" className="nav-link ht-nav-link">
+                        <i className="fas fa-blog"></i> Blog
+                     </Link>
+                  </li>
+                  <li className="nav-item ht-nav-item">
+                     <Link to="/about" className="nav-link ht-nav-link">
+                        <i className="fas fa-users-cog"></i> About
+                     </Link>
+                  </li>
+                  <li className="nav-item ht-nav-item">
+                     <Link to="/contact" className="nav-link ht-nav-link">
+                        Contact
+                     </Link>
+                  </li>
 
-                     {/* <li className="nav-item" style={{ alignSelf: "center" }}>
+                  {/* <li className="nav-item" style={{ alignSelf: "center" }}>
                         <Button
                            type="secondary"
                            icon="shopping-cart"
@@ -494,10 +512,10 @@ export default class Navigation extends Component {
                            Book Now
                         </Button>
                      </li> */}
-                     {this.renderAvartar()}
-                  </ul>
-               </div>
+                  {this.renderAvartar()}
+               </ul>
             </div>
+            {/* </div> */}
          </nav>
       );
    }

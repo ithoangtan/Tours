@@ -43,9 +43,7 @@ class BestTourContainer extends Component {
             let listImageTourDetail = listImageTour.filter(
                imageTour => imageTour.idTour === tour.idTour
             );
-            tour.departureDay = moment(tour.departureDay)
-               .utc()
-               .format(dateFormat);
+            tour.departureDay = moment(tour.departureDay).format(dateFormat);
             if (index < 8)
                return (
                   <div

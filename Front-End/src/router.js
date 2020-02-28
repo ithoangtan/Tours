@@ -43,91 +43,91 @@ const router = [
       path: "/",
       exact: true,
       component: props => (
-         <div>
+         <>
             <NavigationContainer {...props} />
             <IndexPage {...props} />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/login",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <LoginPage />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/register",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <RegisterPage />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/forgot-password",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <ForgotPasswordPage />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/forgotPassword",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <ForgotPasswordPageStep2 />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/verify",
       exact: true,
       component: ({ match }, props) => (
-         <div>
+         <>
             <NavigationContainer />
             <ResultSuccessfulVerify match={match} {...props} />
             <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/tour",
       exact: true,
       component: ({ match }, props) => (
-         <div>
+         <>
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourPage match={match} {...props} />
@@ -135,14 +135,14 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/tour/search/:keySearch/:dayStart/:dayEnd/:conditional",
       exact: true,
       component: ({ match }, props) => (
-         <div>
+         <>
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourSearchPage match={match} {...props} />
@@ -150,14 +150,14 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/book-tour/:idTour",
       exact: true,
       component: (match, props) => (
-         <div>
+         <>
             <NavigationContainer match={match} {...props} />
             <HeaderBreadcrumbContainer match={match} {...props} />
             <BookTourPage match={match} {...props} />
@@ -165,14 +165,14 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/tour-best",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <TourBestPage />
@@ -180,28 +180,28 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/tour-single/:idTour",
       exact: true,
       component: ({ match }, props) => (
-         <div>
+         <>
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourSinglePage match={match} {...props} />
             <SubcribeContainer />
             <FooterContainer />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/about",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <AboutPage />
@@ -209,14 +209,14 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/contact",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <ContactPage />
@@ -224,14 +224,14 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/destination",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <DestinationPage />
@@ -239,14 +239,14 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/blog",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <BlogPage />
@@ -254,21 +254,21 @@ const router = [
             <FooterContainer />
             <Loaded />
             <BackToTop />
-         </div>
+         </>
       )
    },
    {
       path: "/blog-single",
       exact: true,
       component: () => (
-         <div>
+         <>
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <BlogSinglePage />
             <SubcribeContainer />
             <FooterContainer />
             <BackToTop />
-         </div>
+         </>
       )
    },
    //end for customer
