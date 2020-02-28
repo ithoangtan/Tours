@@ -49,7 +49,7 @@ class IndexPage extends Component {
 
    render() {
       return (
-         <div>
+         <>
             <HeaderContainer />
             <SearchEngineContainer />
             <BestTourContainer />
@@ -58,7 +58,7 @@ class IndexPage extends Component {
             <ThingsToKnowContainer />
             <AboutTravelandContainer />
             <ServiceSection />
-         </div>
+         </>
       );
    }
 }

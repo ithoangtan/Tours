@@ -17,7 +17,7 @@ export default class HeaderContainer extends Component {
       return (
          <div
             id="carousel-example-generic"
-            className="carousel slide"
+            className="carousel slide ht-header-position"
             data-ride="carousel"
          >
             <ol className="carousel-indicators">
