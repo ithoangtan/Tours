@@ -73,7 +73,7 @@ body {
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
    font-size: 1rem;
    font-weight: 400;
-   line-height: 1.5;
+   line-height: 1.3;
    color: #212529;
    text-align: left;
    background-color: #fff;
@@ -10681,7 +10681,7 @@ h5,
    .ftco-navbar-light.scrolled .nav-item > .nav-link {
       padding-left: 0 !important;
       padding-right: 0 !important;
-      padding-bottom: 0 !important;
+      padding-bottom: 0 ;
    }
 }
 .ftco-navbar-light.scrolled .nav-item.active > a {
@@ -10728,8 +10728,8 @@ h5,
    letter-spacing: 0.1em;
 }
 .ftco-navbar-light.scrolled .nav-link {
-   padding-top: 1rem !important;
-   padding-bottom: 1rem !important;
+   padding-top: 0.5rem !important;
+   padding-bottom: 0.5rem !important;
    color: #000000 !important;
 }
 .ftco-navbar-light.scrolled .nav-link.active {
@@ -10871,9 +10871,9 @@ h5,
 .search-wrap-1 {
    position: relative;
    background: #232931;
-   -webkit-box-shadow: 0px 75px 94px -66px rgba(0, 0, 0, 0.66);
-   -moz-box-shadow: 0px 75px 94px -66px rgba(0, 0, 0, 0.66);
-   box-shadow: 0px 75px 94px -66px rgba(0, 0, 0, 0.66);
+   -webkit-box-shadow: 0px 25px 30px -15px rgba(0, 0, 0, 0.66);
+   -moz-box-shadow: 0px 25px 30px -15px rgba(0, 0, 0, 0.66);
+   box-shadow: 0px 25px 30px -15px rgba(0, 0, 0, 0.66);
    -webkit-border-radius: 5px;
    -moz-border-radius: 5px;
    -ms-border-radius: 5px;
@@ -10881,25 +10881,34 @@ h5,
 }
 @media (min-width: 768px) {
    .search-wrap-1 {
-      margin-top: -220px;
+      /* margin-top: -220px; */
       z-index: 1;
+      bottom: 35%;
    }
 }
 @media (max-width: 767.98px) {
    .search-wrap-1 {
-      margin-top: -140px;
+      /* margin-top: -140px; */
       z-index: 1;
+      bottom: 20%;
    }
 }
 
 .search-property-1 .form-group {
    position: relative;
-   margin-bottom: 0;
+   margin-bottom: 02px;
 }
 .search-property-1 .form-group label {
    font-weight: 400;
-   font-size: 18px;
-   color: rgba(255, 255, 255, 0.8);
+   font-size: 1.2rem;
+   color: rgba(255, 255, 255, 1);
+}
+@media (max-width: 767.89px) {
+   .search-property-1 .form-group label {
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 1);
+   }
 }
 .search-property-1 .form-group .form-field {
    position: relative;
