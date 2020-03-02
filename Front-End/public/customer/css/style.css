@@ -10561,13 +10561,13 @@ h5,
    padding-bottom: 1.5rem;
    padding-left: 20px;
    padding-right: 20px;
-   color: #1da57a;
+   color: #00a777;
    font-weight: 500;
    opacity: 1 !important;
 }
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover,
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:focus {
-   color: rgb(255, 255, 255);
+   color: rgb(8, 8, 8);
    /* background: #C8E6C9; */
    /* border-bottom: 1px solid #1DA57A; */
    background: linear-gradient(
@@ -10681,7 +10681,7 @@ h5,
    .ftco-navbar-light.scrolled .nav-item > .nav-link {
       padding-left: 0 !important;
       padding-right: 0 !important;
-      padding-bottom: 0 ;
+      padding-bottom: 0;
    }
 }
 .ftco-navbar-light.scrolled .nav-item.active > a {
