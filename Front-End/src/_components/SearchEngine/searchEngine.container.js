@@ -243,7 +243,7 @@ export default class SearchEngineContainer extends Component {
    }
 
    onFocusSearch = () => {
-      window.scrollTo(0, 360);
+      window.scrollTo(0, 340);
    };
 
    render() {

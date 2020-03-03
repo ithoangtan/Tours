@@ -10561,13 +10561,13 @@ h5,
    padding-bottom: 1.5rem;
    padding-left: 20px;
    padding-right: 20px;
-   color: #1da57a;
+   color: #00a777;
    font-weight: 500;
    opacity: 1 !important;
 }
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover,
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:focus {
-   color: rgb(255, 255, 255);
+   color: rgb(8, 8, 8);
    /* background: #C8E6C9; */
    /* border-bottom: 1px solid #1DA57A; */
    background: linear-gradient(
@@ -10681,7 +10681,7 @@ h5,
    .ftco-navbar-light.scrolled .nav-item > .nav-link {
       padding-left: 0 !important;
       padding-right: 0 !important;
-      padding-bottom: 0 ;
+      padding-bottom: 0;
    }
 }
 .ftco-navbar-light.scrolled .nav-item.active > a {
@@ -10783,7 +10783,7 @@ h5,
    right: 0;
    bottom: 0;
    content: "";
-   opacity: 0.3;
+   opacity: 0.1;
    background: #000000;
    background: #6b75ff;
    background: -moz-linear-gradient(
@@ -10816,14 +10816,14 @@ h5,
 }
 
 .slider-text h1 {
-   font-size: 64px;
+   font-size: 40px;
    color: #fff;
    line-height: 1.2;
    font-weight: 700;
 }
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
    .slider-text h1 {
-      font-size: 40px;
+      font-size: 32px;
    }
 }
 
@@ -10831,7 +10831,19 @@ h5,
    font-size: 20px;
    line-height: 1.5;
    font-weight: 300;
-   color: rgba(255, 255, 255, 0.8);
+   color: rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 767.98px) {
+   .slider-text h1 {
+      font-size: 32px;
+   }
+   .slider-text p {
+      font-size: 1.1rem;
+      line-height: 1.2;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 1);
+   }
 }
 .slider-text p strong {
    font-weight: 700;
@@ -10870,7 +10882,7 @@ h5,
 
 .search-wrap-1 {
    position: relative;
-   background: #232931;
+   background: #243636;
    -webkit-box-shadow: 0px 25px 30px -15px rgba(0, 0, 0, 0.66);
    -moz-box-shadow: 0px 25px 30px -15px rgba(0, 0, 0, 0.66);
    box-shadow: 0px 25px 30px -15px rgba(0, 0, 0, 0.66);
@@ -11094,9 +11106,10 @@ h5,
    -ms-transition: all 0.6s ease;
    transition: all 0.6s ease;
 }
-.project .text h3.name-tour {
+.project .text h4.name-tour {
    padding-bottom: 0px !important;
    margin-bottom: 0px !important;
+   font-size: 1.1rem;
 }
 .project .text h5.price {
    position: absolute;
@@ -11183,6 +11196,10 @@ h5,
    -o-transform: scale(1);
    -ms-transform: scale(1);
    transform: scale(1);
+}
+
+.project:hover .name-tour {
+   text-decoration: underline;
 }
 
 .ftco-about .one-half {
