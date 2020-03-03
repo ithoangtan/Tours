@@ -91,7 +91,7 @@ export default class HeaderContainer extends Component {
                                     </p>
                                     <div className="ht-header-sale ht-display-flex-center-center">
                                        <p className="ht-p-500">
-                                          <i class="fas fa-piggy-bank"></i>{" "}
+                                          <i className="fas fa-piggy-bank"></i>{" "}
                                           {size === "large" ? "Giảm ngay " : ""}
                                           1.000.000.đ
                                        </p>
@@ -110,8 +110,8 @@ export default class HeaderContainer extends Component {
                                        placement="bottom"
                                        title={
                                           <p>
-                                             <i class="fas fa-couch"></i> còn 5
-                                             chỗ
+                                             <i className="fas fa-couch"></i>{" "}
+                                             còn 5 chỗ
                                           </p>
                                        }
                                     >
@@ -180,7 +180,7 @@ export default class HeaderContainer extends Component {
                                     </p>
                                     <div className="ht-header-sale ht-display-flex-center-center">
                                        <p className="ht-p-500">
-                                          <i class="fas fa-piggy-bank"></i>{" "}
+                                          <i className="fas fa-piggy-bank"></i>{" "}
                                           {size === "large" ? "Giảm ngay " : ""}
                                           1.000.000.đ
                                        </p>
@@ -199,8 +199,8 @@ export default class HeaderContainer extends Component {
                                        placement="bottom"
                                        title={
                                           <p>
-                                             <i class="fas fa-couch"></i> còn 5
-                                             chỗ
+                                             <i className="fas fa-couch"></i>{" "}
+                                             còn 5 chỗ
                                           </p>
                                        }
                                     >

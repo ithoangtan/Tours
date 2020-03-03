@@ -139,7 +139,7 @@ class BestTourContainer extends Component {
                      </div>
                   </div>
                );
-            else return <div></div>;
+            else return <></>;
          });
       } else {
          result = <div>Không có dữ liệu</div>;
@@ -152,7 +152,7 @@ class BestTourContainer extends Component {
          <section className="ftco-section">
             <div className="container">
                <div className="row justify-content-center pb-1">
-                  <div className="col-md-12 heading-section text-center ftco-animate">
+                  <div className="col-md-12 heading-section text-center">
                      <h2 className="mb-4">Best Place to Travel</h2>
                      <p>
                         Far far away, behind the word mountains, far from the
@@ -167,7 +167,7 @@ class BestTourContainer extends Component {
                   data-interval={4000}
                >
                   <div
-                     className="carousel-inner row w-100 mx-auto ftco-animate"
+                     className="carousel-inner row w-100 mx-auto"
                      role="listbox"
                   >
                      {this.renderBestTours()}
