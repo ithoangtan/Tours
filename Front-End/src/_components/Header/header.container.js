@@ -198,7 +198,7 @@ export default class HeaderContainer extends Component {
                                     <Tooltip
                                        placement="bottom"
                                        title={
-                                          <p>
+                                          <p className="ht-no-p-m">
                                              <i className="fas fa-couch"></i>{" "}
                                              còn 5 chỗ
                                           </p>

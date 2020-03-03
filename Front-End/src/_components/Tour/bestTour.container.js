@@ -8,15 +8,18 @@ import * as tourActions from "../../_actions/tour.actions";
 
 import { Link } from "react-router-dom";
 
-import { Rate, Button } from "antd";
+import { Rate, Button, Statistic, Tooltip } from "antd";
 
 import { API_ENDPOINT } from "../../_constants/index.constants";
 
 import moment from "moment";
+
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 const dateFormat = "lll";
+const { Countdown } = Statistic;
 
 class BestTourContainer extends Component {
-   state = { haveData: false };
+   state = { haveData: false, size: "default" };
 
    fetch = async () => {
       const { tourAllActions } = this.props;
@@ -32,7 +35,11 @@ class BestTourContainer extends Component {
    componentDidMount() {
       const { listTour } = this.props;
       this.fetch();
-      this.setState({ listTour, haveData: true });
+      this.setState({
+         listTour,
+         haveData: true,
+         size: window.innerWidth > 757.98 ? "default" : "small"
+      });
    }
 
    renderBestTours() {
@@ -62,10 +69,23 @@ class BestTourContainer extends Component {
                                     : ``
                               }
                               className="img-fluid"
-                              alt="Colorlib Template"
+                              alt="best tour"
                            />
                            <p className="sale">
-                              {tour.sale !== 0 ? `${tour.sale}% sale` : null}
+                              <Countdown
+                                 value={
+                                    Date.now() +
+                                    1000 * 60 * 60 * 24 * 2 +
+                                    1000 * 3
+                                 }
+                                 valueStyle={
+                                    this.state.size === "default"
+                                       ? { fontSize: "1.1rem" }
+                                       : { fontSize: "0.9rem" }
+                                 }
+                                 format="Dd Hh m:s"
+                              />
+                              {/* {tour.sale !== 0 ? `${tour.sale}% sale` : null} */}
                            </p>
                         </div>
                         <div className="text">
@@ -84,7 +104,7 @@ class BestTourContainer extends Component {
                               {" "}
                               Khởi hành từ Hồ Chí Minh
                            </Link>
-                           <h3 className="name-tour">
+                           <h4 className="name-tour">
                               <Link
                                  to={{
                                     pathname: `/tour-single/${tour.idTour}`,
@@ -95,13 +115,19 @@ class BestTourContainer extends Component {
                               >
                                  {tour.titleTour}
                               </Link>
-                           </h3>
+                           </h4>
                            <div className="star d-flex clearfix">
-                              <Rate disabled defaultValue={4} size="small" />
-                              <div className="float-right ht-align-end">
-                                 <span className="rate">
-                                    <Link to="/tour"> (199)</Link>
-                                 </span>
+                              <Rate
+                                 tooltips={desc}
+                                 disabled
+                                 defaultValue={4.5}
+                                 size="small"
+                                 allowHalf
+                              />
+                              <div className="float-right ht-display-flex-start-center">
+                                 <div className="rate">
+                                    <Link to="/tour"> (199 views)</Link>
+                                 </div>
                               </div>
                            </div>
                         </div>
@@ -118,9 +144,19 @@ class BestTourContainer extends Component {
                                  }
                               }}
                            >
-                              <Button type="primary" className="float-right">
-                                 BOOK NOW
-                              </Button>
+                              <Tooltip
+                                 placement="bottom"
+                                 title={
+                                    <p className="ht-no-p-m">
+                                       <i className="fas fa-couch"></i> còn 5
+                                       chỗ
+                                    </p>
+                                 }
+                              >
+                                 <Button type="primary" className="float-right">
+                                    ĐẶT NGAY
+                                 </Button>
+                              </Tooltip>
                            </Link>
                         </div>
                         <a
@@ -153,11 +189,8 @@ class BestTourContainer extends Component {
             <div className="container">
                <div className="row justify-content-center pb-1">
                   <div className="col-md-12 heading-section text-center">
-                     <h2 className="mb-4">Best Place to Travel</h2>
-                     <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia
-                     </p>
+                     <h2 className="mb-4">Những TOUR hàng đầu</h2>
+                     <p>Something! Câu nói hay về du lịch</p>
                   </div>
                </div>
                <div

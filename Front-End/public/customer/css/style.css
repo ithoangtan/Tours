@@ -10839,11 +10839,11 @@ h5,
       font-size: 32px;
    }
    .slider-text p {
-   font-size: 1.1rem;
-   line-height: 1.2;
-   font-weight: 300;
-   color: rgba(255, 255, 255, 1);
-}
+      font-size: 1.1rem;
+      line-height: 1.2;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 1);
+   }
 }
 .slider-text p strong {
    font-weight: 700;
@@ -11106,9 +11106,10 @@ h5,
    -ms-transition: all 0.6s ease;
    transition: all 0.6s ease;
 }
-.project .text h3.name-tour {
+.project .text h4.name-tour {
    padding-bottom: 0px !important;
    margin-bottom: 0px !important;
+   font-size: 1.1rem;
 }
 .project .text h5.price {
    position: absolute;
@@ -11195,6 +11196,10 @@ h5,
    -o-transform: scale(1);
    -ms-transform: scale(1);
    transform: scale(1);
+}
+
+.project:hover .name-tour {
+   text-decoration: underline;
 }
 
 .ftco-about .one-half {
