@@ -10783,7 +10783,7 @@ h5,
    right: 0;
    bottom: 0;
    content: "";
-   opacity: 0.3;
+   opacity: 0.1;
    background: #000000;
    background: #6b75ff;
    background: -moz-linear-gradient(
@@ -10816,14 +10816,14 @@ h5,
 }
 
 .slider-text h1 {
-   font-size: 64px;
+   font-size: 40px;
    color: #fff;
    line-height: 1.2;
    font-weight: 700;
 }
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
    .slider-text h1 {
-      font-size: 40px;
+      font-size: 32px;
    }
 }
 
@@ -10831,7 +10831,19 @@ h5,
    font-size: 20px;
    line-height: 1.5;
    font-weight: 300;
-   color: rgba(255, 255, 255, 0.8);
+   color: rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 767.98px) {
+   .slider-text h1 {
+      font-size: 32px;
+   }
+   .slider-text p {
+   font-size: 1.1rem;
+   line-height: 1.2;
+   font-weight: 300;
+   color: rgba(255, 255, 255, 1);
+}
 }
 .slider-text p strong {
    font-weight: 700;
