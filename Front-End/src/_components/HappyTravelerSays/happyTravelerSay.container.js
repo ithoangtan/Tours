@@ -9,15 +9,15 @@ export default class HappyTravelerSayContainer extends Component {
          >
             <div className="overlay" />
             <div className="container">
-               <div className="row justify-content-center mb-1 pb-1">
-                  <div className="col-md-7 text-center heading-section heading-section-white ftco-animate">
-                     <h2 className="mb-4">Happy Traveler Says</h2>
+               <div className="row justify-content-center pt-3">
+                  <div className="col-md-12 text-center heading-section heading-section-white ftco-animate">
+                     <h2 className="mb-3">Happy Traveler Says</h2>
                   </div>
                </div>
-               <div className="row ftco-animate">
-                  <div className="col-md-12 testimonial">
-                     <div className="carousel-testimony owl-carousel ftco-owl">
-                        <div className="item">
+               <div className="row ftco-animate ">
+                  <div className="col-md-12 testimonial ht-traveler-say">
+                     <div className="carousel-testimony owl-carousel ftco-owl ht-traveler-say">
+                        <div className="item ht-traveler-say">
                            <div
                               className="testimony-wrap img"
                               style={{
@@ -38,7 +38,7 @@ export default class HappyTravelerSayContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="item">
+                        <div className="item ht-traveler-say">
                            <div
                               className="testimony-wrap"
                               style={{
@@ -59,7 +59,7 @@ export default class HappyTravelerSayContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="item">
+                        <div className="item ht-traveler-say">
                            <div
                               className="testimony-wrap"
                               style={{
@@ -78,7 +78,7 @@ export default class HappyTravelerSayContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="item">
+                        <div className="item ht-traveler-say">
                            <div
                               className="testimony-wrap"
                               style={{
@@ -97,7 +97,7 @@ export default class HappyTravelerSayContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="item">
+                        <div className="item ht-traveler-say">
                            <div
                               className="testimony-wrap"
                               style={{

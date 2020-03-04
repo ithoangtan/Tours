@@ -430,11 +430,9 @@ export default class Navigation extends Component {
       return (
          <nav
             className="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light container ht-nav-container"
-            // className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light container ht-nav-container"
             id="ftco-navbar"
          >
             {this.haveRedirect()}
-            {/* <div className="container ht-nav-container"> */}
             <Link to="/">
                <img
                   src="./logo192.png"
@@ -455,41 +453,31 @@ export default class Navigation extends Component {
             </button>
             <div className="collapse navbar-collapse" id="ftco-nav">
                <ul className="navbar-nav ml-auto ht-navbar-nav">
-                  {/* <li className="nav-item ht-nav-item active">
-                     <Link to="/" className="nav-link ht-nav-link">
-                        <i className="fas fa-umbrella-beach"></i> Home
-                     </Link>
-                  </li> */}
-                  {/* <li className="nav-item ht-nav-item">
-                        <Link to="/destination" className="nav-link ht-nav-link">
-                           Destination
-                        </Link>
-                     </li> */}
                   <li className="nav-item ht-nav-item">
                      <Dropdown
-                        overlay={menuWorld}
+                        overlay={menuVN}
                         className="nav-link ht-nav-link"
                      >
-                        <Link to="/tour">
-                           <i className="fas fa-globe"></i> Quốc Tế{" "}
+                        <Link to="#">
+                           <i className="fas fa-globe"></i> Việt Nam
                            <Icon type="down" />
                         </Link>
                      </Dropdown>
                   </li>
                   <li className="nav-item ht-nav-item">
                      <Dropdown
-                        overlay={menuVN}
+                        overlay={menuWorld}
                         className="nav-link ht-nav-link"
                      >
-                        <Link to="/tour">
-                           <i className="fas fa-map-marker-alt"></i> Việt Nam{" "}
+                        <Link to="#">
+                           <i className="fas fa-map-marker-alt"></i> Quốc tế
                            <Icon type="down" />
                         </Link>
                      </Dropdown>
                   </li>
                   <li className="nav-item ht-nav-item">
                      <Link to="/blog" className="nav-link ht-nav-link">
-                        <i className="fas fa-blog"></i> Blog
+                        <i className="fas fa-blog"></i> Cẩm nang du lịch
                      </Link>
                   </li>
                   <li className="nav-item ht-nav-item">
@@ -502,20 +490,9 @@ export default class Navigation extends Component {
                         Contact
                      </Link>
                   </li>
-
-                  {/* <li className="nav-item" style={{ alignSelf: "center" }}>
-                        <Button
-                           type="secondary"
-                           icon="shopping-cart"
-                           size={"large"}
-                        >
-                           Book Now
-                        </Button>
-                     </li> */}
                   {this.renderAvartar()}
                </ul>
             </div>
-            {/* </div> */}
          </nav>
       );
    }

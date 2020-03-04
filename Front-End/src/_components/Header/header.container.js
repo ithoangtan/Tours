@@ -234,10 +234,10 @@ export default class HeaderContainer extends Component {
                   data-slide="prev"
                >
                   <span
-                     className="carousel-control-prev-icon"
+                     className="carousel-control-prev-icon ht-carousel-control"
                      aria-hidden="true"
                   ></span>
-                  <span className="sr-only">Previous</span>
+                  <span className="sr-only ht-carousel-control">Previous</span>
                </a>
                <a
                   className="carousel-control-next area-hidden-right ht-header-slideshow"
@@ -246,10 +246,10 @@ export default class HeaderContainer extends Component {
                   data-slide="next"
                >
                   <span
-                     className="carousel-control-next-icon"
+                     className="carousel-control-next-icon ht-carousel-control"
                      aria-hidden="true"
                   ></span>
-                  <span className="sr-only">Next</span>
+                  <span className="sr-only ht-carousel-control">Next</span>
                </a>
             </div>
             <SearchEngineContainer />

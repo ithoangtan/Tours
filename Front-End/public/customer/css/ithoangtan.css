@@ -964,6 +964,14 @@
    display: flex;
    flex-direction: column;
 }
+.ht-d-flex-col {
+   display: flex;
+   flex-direction: column;
+}
+
+.ht-map-maker {
+   color: #0071c2;
+}
 
 .ht-mr-0 {
    margin: 0;
@@ -1068,6 +1076,7 @@
 .ht-search-engine {
    position: absolute;
    bottom: 5%;
+   width: 95%;
 }
 
 @media (max-width: 767.98px) {
@@ -1085,6 +1094,18 @@
 }
 
 /* Header */
+.ht-carousel-control {
+   width: 50px !important;
+   height: 50px !important;
+}
+
+@media (max-width: 757.98px) {
+   .ht-carousel-control {
+      width: 20px !important;
+      height: 20px !important;
+   }
+}
+
 .ht-header-descript {
    color: white !important;
    opacity: 1 !important;
@@ -1314,4 +1335,86 @@ html {
 }
 .ht-mr-l-3 {
    margin-left: 18px;
+}
+
+/* Cam nang du lich */
+.blog-entry p.ht-post-tag-container {
+   position: absolute;
+   top: 3px;
+   right: 0px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-end;
+   flex-direction: column;
+   -moz-transition: all 0.3s ease;
+   -o-transition: all 0.3s ease;
+   -webkit-transition: all 0.3s ease;
+   -ms-transition: all 0.3s ease;
+   transition: all 0.3s ease;
+   -webkit-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+   -moz-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+   box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+}
+
+.blog-entry .ht-blog-image {
+   border-radius: 6px;
+}
+
+.blog-entry .ht-post-comment-container {
+   position: absolute;
+   bottom: 27%;
+   right: 8%;
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-end;
+   flex-direction: column;
+   -moz-transition: all 0.3s ease;
+   -o-transition: all 0.3s ease;
+   -webkit-transition: all 0.3s ease;
+   -ms-transition: all 0.3s ease;
+   transition: all 0.3s ease;
+   -webkit-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+   -moz-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+   box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+   color: white;
+}
+
+.ht-more-container {
+   position: relative;
+}
+.ht-more {
+   position: absolute;
+   top: 50%;
+   right: 30px;
+   font-size: 1.1rem;
+   text-decoration: underline;
+   z-index: 1;
+}
+
+.ht-over-image {
+   position: absolute;
+   bottom: 0px;
+   width: 100%;
+   height: 50px;
+   background: rgb(255, 255, 255);
+   background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.6052560672706583) 38%,
+      rgba(0, 0, 0, 0.8881692325367647) 68%,
+      rgba(0, 0, 0, 1) 100%
+   );
+}
+
+/* Happy Traveler Say */
+.ht-traveler-say {
+   height: 500px !important ;
+}
+
+/* overwrite */
+.ant-tag {
+   margin: 0px !important;
+   padding-left: 2px !important;
+   padding-right: 3px !important;
+   margin-bottom: 3px !important;
 }
