@@ -14,6 +14,26 @@ exports.listAll = async (req, res, next) => {
   }
 };
 
+exports.listNotificationSearch = async function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+  const searchs = {
+    keySearch: req.body.keySearch,
+    dayTime: req.body.dayTime,
+    conditional: req.body.conditional,
+  };
+  try {
+    listNotification = await Notification.getAllNotificationSearch(searchs);
+    res.status(200).json(listNotification);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.read = async (req, res, next) => {
   try {
     const { idNotification } = req.query;

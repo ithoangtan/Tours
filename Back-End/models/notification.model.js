@@ -33,8 +33,7 @@ Notification.getAllNotification = function() {
   });
 };
 
-// Cần viết thêm Proceduce search cho bảng notifications
-Notification.getAllNotificationSearch = function(searchs, funcResult) {
+Notification.getAllNotificationSearch = function(searchs) {
   if (searchs.conditional === "title") {
     return new Promise(function(resolve, reject) {
       database

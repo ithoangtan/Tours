@@ -29,8 +29,7 @@ Post.getAllPost = function(funcResult) {
   });
 };
 
-// Cần viết thêm Proceduce search cho bảng posts
-Post.getAllPostSearch = function(searchs, funcResult) {
+Post.getAllPostSearch = function(searchs) {
   if (searchs.conditional === "content") {
     return new Promise(function(resolve, reject) {
       database
