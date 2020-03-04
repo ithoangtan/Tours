@@ -501,6 +501,11 @@ export default class Navigation extends Component {
             </button>
             <div className="collapse navbar-collapse" id="ftco-nav">
                <ul className="navbar-nav ml-auto ht-navbar-nav">
+                  <li className="nav-item ht-nav-item">
+                     <Link to="/tour" className="nav-link ht-nav-link">
+                        <i class="fas fa-piggy-bank"></i> % Ưu đãi
+                     </Link>
+                  </li>
                   {size === "small" ? (
                      <>
                         <li class="nav-item dropdown ht-nav-item">

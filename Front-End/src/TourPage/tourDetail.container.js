@@ -44,10 +44,10 @@ export default class TourDetailContainer extends Component {
             .utc()
             .format("lll");
       return (
-         <div className="right-tour-detail-page mb-4">
+         <div className="right-tour-detail-page mb-4 ftco-animate">
             <div className="tour-content">
                <div className="row justify-conten-center">
-                  <div className="col-md-12 col-lg-4 ftco-animate ht-boder-radius-1">
+                  <div className="col-md-12 col-lg-4 ht-boder-radius-1">
                      {/* Render Image of Tour */}
                      <Link
                         to={{
@@ -67,7 +67,7 @@ export default class TourDetailContainer extends Component {
                      </Link>
                      {/* end Render Image of Tour */}
                   </div>
-                  <div className="col-md-12 col-lg-5 ftco-animate">
+                  <div className="col-md-12 col-lg-5">
                      <Link
                         to={{
                            pathname: `/tour-single/${tour.idTour}`,
@@ -107,7 +107,7 @@ export default class TourDetailContainer extends Component {
                         </Paragraph>
                      </div>
                   </div>
-                  <div className="col-md-12 col-lg-3 ftco-animate right-detail-tour">
+                  <div className="col-md-12 col-lg-3 right-detail-tour">
                      <div className="mt-2">
                         <Tag color="#87d068">Nhiều người đi nhất</Tag>
                      </div>

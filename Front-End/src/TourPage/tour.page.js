@@ -141,12 +141,6 @@ class TourContainer extends Component {
       if (this.state.value2 === 5)
          listTour.sort(this.compareValues("departureDay", "asc"));
 
-      // if (this.state.valueStar === 1) listTour.filter();
-      // if (this.state.valueStar === 2) listTour.filter();
-      // if (this.state.valueStar === 3) listTour.filter();
-      // if (this.state.valueStar === 4) listTour.filter();
-      // if (this.state.valueStar === 5) listTour.filter();
-
       if (this.state.haveData === true) {
          result = listTour.map((tour, index) => {
             return (
@@ -183,13 +177,8 @@ class TourContainer extends Component {
       return (
          <section className="ftco-section">
             <div className="container">
-               <div className="row justify-content-center pb-1">
-                  <div className="col-md-12 heading-section text-center ftco-animate">
-                     <h2 className="mb-4">Tours du lịch HOT</h2>
-                  </div>
-               </div>
-               <div className="row">
-                  <div className="col-md-12 col-lg-3 ftco-animate left-tour-page">
+               <div className="row ftco-animate">
+                  <div className="col-md-12 col-lg-3 left-tour-page">
                      <div className="ht-filter-tour">
                         <Title level={4}>Bộ Lọc</Title>
                         <div className="ht-filter-tour-2">
@@ -269,6 +258,11 @@ class TourContainer extends Component {
                   </div>
                   <div className="col-md-12 col-lg-9 ftco-animate right-tour-page">
                      {/* Rendder TOURS */}
+                     <div className="row justify-content-center pb-1">
+                        <div className="col-md-12 heading-section text-center ftco-animate">
+                           <h3 className="mb-2">Danh mục các tour du lịch</h3>
+                        </div>
+                     </div>
                      <Spin tip="loading... data" spinning={this.state.loading}>
                         {this.renderTours()}
                      </Spin>

@@ -1126,6 +1126,15 @@
 }
 
 /* Header */
+
+.ht-breadcrumb-container {
+   border-bottom: 1px solid rgba(0, 120, 120, 0.3);
+   padding-bottom: 2px;
+   margin-bottom: 2px;
+   border-bottom-left-radius: 50px;
+   border-top-left-radius: 50px;
+}
+
 .ht-carousel-control {
    width: 50px !important;
    height: 50px !important;
