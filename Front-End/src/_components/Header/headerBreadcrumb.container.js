@@ -23,7 +23,7 @@ export default class HeaderBreadcrumbContainer extends Component {
                <div className="col-md-12 col-lg-6 text-right">
                   <Text>
                      <Paragraph copyable={{ text: "+84983982933" }}>
-                        Call me: +84 983 982 933
+                        Call us: {`+84 983 982 933`}
                      </Paragraph>
                   </Text>
                </div>

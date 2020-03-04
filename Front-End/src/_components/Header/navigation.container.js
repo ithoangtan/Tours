@@ -551,7 +551,7 @@ export default class Navigation extends Component {
                               overlay={menuVN}
                               className="nav-link ht-nav-link"
                            >
-                              <Link to="#">
+                              <Link to="tour/search/vn">
                                  <i className="fas fa-map-marker-alt"></i> Việt
                                  Nam
                                  <Icon type="down" />
@@ -563,7 +563,7 @@ export default class Navigation extends Component {
                               overlay={menuWorld}
                               className="nav-link ht-nav-link"
                            >
-                              <Link to="#">
+                              <Link to="tour/search/world">
                                  <i className="fas fa-globe"></i> Quốc tế
                                  <Icon type="down" />
                               </Link>
@@ -580,11 +580,6 @@ export default class Navigation extends Component {
                   <li className="nav-item ht-nav-item">
                      <Link to="/about" className="nav-link ht-nav-link">
                         <i className="fas fa-users-cog"></i> About
-                     </Link>
-                  </li>
-                  <li className="nav-item ht-nav-item">
-                     <Link to="/contact" className="nav-link ht-nav-link">
-                        Contact
                      </Link>
                   </li>
                   {this.renderAvartar()}

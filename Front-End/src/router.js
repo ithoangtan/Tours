@@ -16,8 +16,6 @@ import IndexPage from "./IndexPage/index.page";
 import AboutPage from "./AboutPage/about.container";
 import BlogPage from "./BlogPage/blog.container";
 import BlogSinglePage from "./BlogSinglePage/blogSingle.container";
-import ContactPage from "./ContactPage/concact.container";
-import DestinationPage from "./DestinationPage/destination.container";
 import TourSinglePage from "./TourSinglePage/tourSingle.page";
 import TourBestPage from "./TourPage/tourBest.page";
 import TourPage from "./TourPage/tour.page";
@@ -199,34 +197,7 @@ const router = [
          </>
       )
    },
-   {
-      path: "/contact",
-      exact: true,
-      component: () => (
-         <>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <ContactPage />
-            <FooterContainer />
-            <Loaded />
-            <BackToTop />
-         </>
-      )
-   },
-   {
-      path: "/destination",
-      exact: true,
-      component: () => (
-         <>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <DestinationPage />
-            <FooterContainer />
-            <Loaded />
-            <BackToTop />
-         </>
-      )
-   },
+
    {
       path: "/blog",
       exact: true,

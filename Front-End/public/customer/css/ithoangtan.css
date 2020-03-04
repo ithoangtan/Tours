@@ -1193,6 +1193,11 @@
    justify-content: center;
    align-items: center;
 }
+.ht-d-flex-center-center {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
 .ht-display-flex-start-center {
    display: flex;
    justify-content: start;
