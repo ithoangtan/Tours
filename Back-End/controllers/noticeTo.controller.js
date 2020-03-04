@@ -1,6 +1,6 @@
 const { check, validationResult } = require("express-validator");
 
-const NoticeTo = require("../models/NoticeTo.model");
+const NoticeTo = require("../models/noticeTo.model");
 
 exports.create = async (req, res, next) => {
   try {
