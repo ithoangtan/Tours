@@ -188,7 +188,7 @@ class BestTourContainer extends Component {
          <section className="ftco-section">
             <div className="container">
                <div className="row justify-content-center pb-1 ht-more-container">
-                  <Link className="ht-more" to="tours">
+                  <Link className="ht-more" to="tour">
                      <Button type="dashed">Xem thêm...</Button>
                   </Link>
                   <div className="col-md-12 heading-section text-center ">

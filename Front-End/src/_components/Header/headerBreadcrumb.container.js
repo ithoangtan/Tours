@@ -15,10 +15,9 @@ export default class HeaderBreadcrumbContainer extends Component {
                         <Icon type="home" />
                      </Breadcrumb.Item>
                      <Breadcrumb.Item href="">
-                        <Icon type="user" />
-                        <span>Application List</span>
+                        <span>Tours</span>
                      </Breadcrumb.Item>
-                     <Breadcrumb.Item>Application</Breadcrumb.Item>
+                     <Breadcrumb.Item>Danh mục</Breadcrumb.Item>
                   </Breadcrumb>
                </div>
                <div className="col-md-12 col-lg-6 text-right">

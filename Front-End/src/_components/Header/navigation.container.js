@@ -11,6 +11,19 @@ import { getSignCookie } from "../../_commons/auth.service";
 import { API_ENDPOINT } from "../../_constants/index.constants";
 import ProfileComponent from "../Profile/profile.component";
 
+const arrayVietNamMobile = [
+   { name: "Miền Bắc", key: "mien-bac" },
+   { name: "Miền Trung", key: "mien-trung" },
+   { name: "Miền Nam", key: "mien-nam" },
+   { name: "Tour Tốt nhất", key: "best-tour" }
+];
+const arrayWorldMobile = [
+   { name: "Đông Nam Á", key: "dong-nam-a" },
+   { name: "Châu Á", key: "chau-a" },
+   { name: "Châu Âu", key: "chau-au" },
+   { name: "Châu lục khác", key: "chau-luc-khac" }
+];
+
 const North = [
    { name: "Hà Nội", key: "ha-noi" },
    { name: "Hạ Long", key: "ha-long-bay" },
@@ -51,7 +64,7 @@ const bestTour = [
 const Asia1 = [
    { name: "Nhật Bản", key: "nhat-ban" },
    { name: "Hàn Quốc", key: "han-quoc" },
-   { name: "Đài Loan", key: "dai-loan" },
+   { name: "Singapore", key: "singapore" },
    { name: "Lào", key: "lao" },
    { name: "Thái Lan", key: "thai-lan" },
    { name: "Campuchia", key: "campuchia" },
@@ -62,7 +75,7 @@ const Asia1 = [
 
 const Asia2 = [
    { name: "Trung Quốc", key: "trung-quoc" },
-   { name: "Singapore", key: "singapore" },
+   { name: "Đài Loan", key: "dai-loan" },
    { name: "HongKong", key: "hongkong" },
    { name: "Qatar", key: "qatar" },
    { name: "Nga", key: "nga" },
@@ -282,7 +295,8 @@ export default class Navigation extends Component {
       super(props);
       this.state = {
          logout: false,
-         visibleProfile: false
+         visibleProfile: false,
+         size: "default"
       };
    }
 
@@ -426,7 +440,41 @@ export default class Navigation extends Component {
       }
    }
 
+   componentDidMount() {
+      this.setState({ size: window.innerWidth > 557.98 ? "large" : "small" });
+   }
+
+   renderMenuWorld() {
+      const result = arrayWorldMobile.map((item, index) => {
+         return (
+            <Link
+               className="dropdown-item ht-nav-link"
+               to={`tour/search/${item.key}`}
+               key={index}
+            >
+               {item.name}
+            </Link>
+         );
+      });
+      return result;
+   }
+   renderMenuVietNam() {
+      const result = arrayVietNamMobile.map((item, index) => {
+         return (
+            <Link
+               className="dropdown-item ht-nav-link"
+               to={`tour/search/${item.key}`}
+               key={index}
+            >
+               {item.name}
+            </Link>
+         );
+      });
+      return result;
+   }
+
    render() {
+      const { size } = this.state;
       return (
          <nav
             className="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light container ht-nav-container"
@@ -453,28 +501,77 @@ export default class Navigation extends Component {
             </button>
             <div className="collapse navbar-collapse" id="ftco-nav">
                <ul className="navbar-nav ml-auto ht-navbar-nav">
-                  <li className="nav-item ht-nav-item">
-                     <Dropdown
-                        overlay={menuVN}
-                        className="nav-link ht-nav-link"
-                     >
-                        <Link to="#">
-                           <i className="fas fa-globe"></i> Việt Nam
-                           <Icon type="down" />
-                        </Link>
-                     </Dropdown>
-                  </li>
-                  <li className="nav-item ht-nav-item">
-                     <Dropdown
-                        overlay={menuWorld}
-                        className="nav-link ht-nav-link"
-                     >
-                        <Link to="#">
-                           <i className="fas fa-map-marker-alt"></i> Quốc tế
-                           <Icon type="down" />
-                        </Link>
-                     </Dropdown>
-                  </li>
+                  {size === "small" ? (
+                     <>
+                        <li class="nav-item dropdown ht-nav-item">
+                           {/* Mobile MENU */}
+                           <Link
+                              className="nav-link dropdown-toggle ht-nav-link"
+                              to="tour/search/vn"
+                              id="navbarDropdown"
+                              role="button"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                           >
+                              Việt Nam
+                           </Link>
+                           <div
+                              className="dropdown-menu"
+                              aria-labelledby="navbarDropdown"
+                           >
+                              {this.renderMenuVietNam()}
+                           </div>
+                        </li>
+                        <li class="nav-item dropdown ht-nav-item">
+                           <Link
+                              className="nav-link dropdown-toggle ht-nav-link"
+                              to="tour/search/vn"
+                              id="navbarDropdown"
+                              role="button"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                           >
+                              Thế Giới
+                           </Link>
+                           <div
+                              className="dropdown-menu"
+                              aria-labelledby="navbarDropdown"
+                           >
+                              {this.renderMenuWorld()}
+                           </div>
+                        </li>
+                     </>
+                  ) : (
+                     <>
+                        {/* Desktop MENU*/}
+                        <li className="nav-item ht-nav-item">
+                           <Dropdown
+                              overlay={menuVN}
+                              className="nav-link ht-nav-link"
+                           >
+                              <Link to="#">
+                                 <i className="fas fa-map-marker-alt"></i> Việt
+                                 Nam
+                                 <Icon type="down" />
+                              </Link>
+                           </Dropdown>
+                        </li>
+                        <li className="nav-item ht-nav-item">
+                           <Dropdown
+                              overlay={menuWorld}
+                              className="nav-link ht-nav-link"
+                           >
+                              <Link to="#">
+                                 <i className="fas fa-globe"></i> Quốc tế
+                                 <Icon type="down" />
+                              </Link>
+                           </Dropdown>
+                        </li>
+                     </>
+                  )}
+
                   <li className="nav-item ht-nav-item">
                      <Link to="/blog" className="nav-link ht-nav-link">
                         <i className="fas fa-blog"></i> Cẩm nang du lịch
