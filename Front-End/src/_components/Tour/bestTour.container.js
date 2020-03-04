@@ -83,26 +83,26 @@ class BestTourContainer extends Component {
                                        ? { fontSize: "1.1rem" }
                                        : { fontSize: "0.9rem" }
                                  }
-                                 format="Dd Hh m:s"
+                                 format="Còn Dd Hh m:s"
                               />
                               {/* {tour.sale !== 0 ? `${tour.sale}% sale` : null} */}
                            </p>
                         </div>
-                        <div className="text">
+                        <div className="text ht-d-flex-col">
                            <h5 className="price">Giá từ {`${tour.price}đ`}</h5>
                            <Link to="/tour">
                               Ở Đà Lạt còn 4 tour nữa. Xem ngay!
                            </Link>
                            <Link
+                              className="ht-map-maker"
                               to={{
-                                 pathname: `/tour`,
+                                 pathname: `/tour/search/hcm`,
                                  state: {
                                     tour: tour
                                  }
                               }}
                            >
-                              {" "}
-                              Khởi hành từ Hồ Chí Minh
+                              <i class="fas fa-map-marker-alt"> </i> Hồ Chí Minh
                            </Link>
                            <h4 className="name-tour">
                               <Link
@@ -187,9 +187,12 @@ class BestTourContainer extends Component {
       return (
          <section className="ftco-section">
             <div className="container">
-               <div className="row justify-content-center pb-1">
-                  <div className="col-md-12 heading-section text-center">
-                     <h2 className="mb-4">Những TOUR hàng đầu</h2>
+               <div className="row justify-content-center pb-1 ht-more-container">
+                  <Link className="ht-more" to="tour">
+                     <Button type="dashed">Xem thêm...</Button>
+                  </Link>
+                  <div className="col-md-12 heading-section text-center ">
+                     <h2 className="mb-1">Những TOUR hàng đầu</h2>
                      <p>Something! Câu nói hay về du lịch</p>
                   </div>
                </div>

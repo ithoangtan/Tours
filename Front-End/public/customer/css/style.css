@@ -11189,6 +11189,7 @@ h5,
    top: 30px;
    opacity: 1;
 }
+
 .project img:hover,
 .project:focus img {
    -webkit-transform: scale(1);
@@ -11371,7 +11372,7 @@ textarea.form-control {
    width: 100%;
    display: block;
    z-index: 1;
-   padding-top: 20em;
+   padding: 2em 0em;
 }
 .ftco-subscribe .text-wrap {
    -webkit-border-radius: 2px;
@@ -11380,7 +11381,7 @@ textarea.form-control {
    border-radius: 2px;
    z-index: 1;
    background: #fff;
-   padding: 2.5em;
+   padding: 1.5em;
 }
 
 .subscribe-form .form-group {
@@ -12036,6 +12037,7 @@ textarea.form-control {
 
 .blog-entry {
    overflow: hidden;
+   position: relative;
 }
 @media (min-width: 768px) {
    .blog-entry {
@@ -12080,7 +12082,7 @@ textarea.form-control {
 }
 .blog-entry .topp {
    position: absolute;
-   top: -5em;
+   top: -5.5em;
    left: 1em;
 }
 .blog-entry .one {
@@ -12098,9 +12100,9 @@ textarea.form-control {
 .blog-entry span.yr,
 .blog-entry span.mos {
    display: block;
-   font-size: 13px;
+   font-size: 0.9rem;
    line-height: 1.4;
-   color: rgba(255, 255, 255, 0.8);
+   color: rgb(255, 255, 255);
 }
 
 .block-23 ul {

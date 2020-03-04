@@ -120,27 +120,6 @@ class LoginContainer extends Component {
                   />
                )}
             </Form.Item>
-            {/* <Form.Item>
-               {getFieldDecorator("role", {
-                  valuePropName: "radio",
-                  initialValue: true
-               })(
-                  <Radio.Group
-                     defaultValue="user"
-                     buttonStyle="solid"
-                     className="role"
-                  >
-                     <Radio.Button value="role" disabled>
-                        Roles:{" "}
-                     </Radio.Button>
-                     <Radio.Button value="user">User</Radio.Button>
-                     <Radio.Button value="admin">Admin</Radio.Button>
-                     <Radio.Button value="administrator">
-                        Administrator
-                     </Radio.Button>
-                  </Radio.Group>
-               )}
-            </Form.Item> */}
             <Form.Item>
                {getFieldDecorator("remember", {
                   valuePropName: "checked",
@@ -156,6 +135,14 @@ class LoginContainer extends Component {
                >
                   Log in
                </Button>
+               <div className="d-flex">
+                  <Button className="ht-login-fb">
+                     <i class="fab fa-facebook"></i> Facebook
+                  </Button>
+                  <Button className="ht-login-gg">
+                     <i class="fab fa-google"></i> Google
+                  </Button>
+               </div>
                Or <Link to="/register">register now!</Link>
             </Form.Item>
          </Form>

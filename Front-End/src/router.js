@@ -16,8 +16,6 @@ import IndexPage from "./IndexPage/index.page";
 import AboutPage from "./AboutPage/about.container";
 import BlogPage from "./BlogPage/blog.container";
 import BlogSinglePage from "./BlogSinglePage/blogSingle.container";
-import ContactPage from "./ContactPage/concact.container";
-import DestinationPage from "./DestinationPage/destination.container";
 import TourSinglePage from "./TourSinglePage/tourSingle.page";
 import TourBestPage from "./TourPage/tourBest.page";
 import TourPage from "./TourPage/tour.page";
@@ -29,7 +27,6 @@ import ForgotPasswordPageStep2 from "./LoginAndRegisterPage/forgotPasswordStep2.
 import BookTourPage from "./BookTourPage/bookTour.page";
 
 //common Customer
-import SubcribeContainer from "./_components/Footer/subcribe.container";
 import FooterContainer from "./_components/Footer/footer.container";
 import Loaded from "./App/loaded";
 import BackToTop from "./App/backTop";
@@ -46,7 +43,6 @@ const router = [
          <>
             <NavigationContainer {...props} />
             <IndexPage {...props} />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -60,7 +56,6 @@ const router = [
          <>
             <NavigationContainer />
             <LoginPage />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -74,7 +69,6 @@ const router = [
          <>
             <NavigationContainer />
             <RegisterPage />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -88,7 +82,6 @@ const router = [
          <>
             <NavigationContainer />
             <ForgotPasswordPage />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -102,7 +95,6 @@ const router = [
          <>
             <NavigationContainer />
             <ForgotPasswordPageStep2 />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -116,7 +108,6 @@ const router = [
          <>
             <NavigationContainer />
             <ResultSuccessfulVerify match={match} {...props} />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -131,7 +122,6 @@ const router = [
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourPage match={match} {...props} />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -146,7 +136,6 @@ const router = [
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourSearchPage match={match} {...props} />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -161,7 +150,6 @@ const router = [
             <NavigationContainer match={match} {...props} />
             <HeaderBreadcrumbContainer match={match} {...props} />
             <BookTourPage match={match} {...props} />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -176,7 +164,6 @@ const router = [
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <TourBestPage />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -191,7 +178,6 @@ const router = [
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
             <TourSinglePage match={match} {...props} />
-            <SubcribeContainer />
             <FooterContainer />
             <BackToTop />
          </>
@@ -205,43 +191,13 @@ const router = [
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <AboutPage />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
          </>
       )
    },
-   {
-      path: "/contact",
-      exact: true,
-      component: () => (
-         <>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <ContactPage />
-            <SubcribeContainer />
-            <FooterContainer />
-            <Loaded />
-            <BackToTop />
-         </>
-      )
-   },
-   {
-      path: "/destination",
-      exact: true,
-      component: () => (
-         <>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <DestinationPage />
-            <SubcribeContainer />
-            <FooterContainer />
-            <Loaded />
-            <BackToTop />
-         </>
-      )
-   },
+
    {
       path: "/blog",
       exact: true,
@@ -250,7 +206,6 @@ const router = [
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <BlogPage />
-            <SubcribeContainer />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -265,7 +220,6 @@ const router = [
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <BlogSinglePage />
-            <SubcribeContainer />
             <FooterContainer />
             <BackToTop />
          </>
