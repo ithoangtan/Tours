@@ -13,7 +13,7 @@ export default class ConcactContainer extends Component {
    }
    render() {
       return (
-         <div>
+         <>
             <section className="ftco-section ftco-no-pb contact-section">
                <div className="container">
                   <div className="row d-flex contact-info">
@@ -113,12 +113,14 @@ export default class ConcactContainer extends Component {
                         </form>
                      </div>
                      <div className="col-md-6 d-flex">
-                        <div id="map" className="bg-white" />
+                        <div className="bg-white ht-d-flex-center-center">
+                           <h4>Vì sao nên chọn chúng tôi?</h4>
+                        </div>
                      </div>
                   </div>
                </div>
             </section>
-         </div>
+         </>
       );
    }
 }

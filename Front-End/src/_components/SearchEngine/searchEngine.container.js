@@ -95,7 +95,9 @@ export default class SearchEngineContainer extends Component {
          conditional: "all",
          dataSource: [],
          dataSourceAll: dataSourceAll,
-         onSearch: false
+         onSearch: false,
+         // Responsize antd component
+         sizeWindow: ""
       };
    }
 
@@ -234,15 +236,25 @@ export default class SearchEngineContainer extends Component {
       return current && current < moment().endOf("day");
    }
 
+   componentDidMount() {
+      this.setState({
+         sizeWindow: window.innerWidth > 767.98 ? "large" : "small"
+      });
+   }
+
+   onFocusSearch = () => {
+      window.scrollTo(0, 340);
+   };
+
    render() {
-      const { dataSource } = this.state;
+      const { dataSource, sizeWindow } = this.state;
       return (
-         <section className="ftco-section ftco-no-pb ftco-no-pt">
+         <section className="ftco-section ftco-no-pb ftco-no-pt ht-search-engine">
             {this.haveRedirect()}
             <div className="container">
                <div className="row">
                   <div className="col-md-12">
-                     <div className="search-wrap-1 ftco-animate p-4">
+                     <div className="search-wrap-1 ftco-animate p-3">
                         <form action="#" className="search-property-1">
                            <div className="row">
                               <div className="col-lg-4">
@@ -254,7 +266,7 @@ export default class SearchEngineContainer extends Component {
                                        <AutoComplete
                                           className="certain-category-search ht-width100"
                                           dropdownClassName="certain-category-search-dropdown"
-                                          size="large"
+                                          size={sizeWindow}
                                           style={{
                                              width: "100%"
                                           }}
@@ -282,6 +294,8 @@ export default class SearchEngineContainer extends Component {
                                                    className="certain-category-icon"
                                                 />
                                              }
+                                             onFocus={this.onFocusSearch}
+                                             onClick={this.onFocusSearch}
                                           />
                                        </AutoComplete>
                                     </div>
@@ -295,7 +309,7 @@ export default class SearchEngineContainer extends Component {
                                     </label>
                                     <div className="form-field">
                                        <RangePicker
-                                          size={"large"}
+                                          size={sizeWindow}
                                           className="ht-width100"
                                           disabledDate={this.disabledDate}
                                           defaultValue={[
@@ -321,7 +335,7 @@ export default class SearchEngineContainer extends Component {
                                           </div>
                                           <Select
                                              showSearch
-                                             size={"large"}
+                                             size={sizeWindow}
                                              defaultValue="all"
                                              optionFilterProp="children"
                                              onChange={this.onChangeConditional}
@@ -351,11 +365,11 @@ export default class SearchEngineContainer extends Component {
                                                 Loại tour
                                              </Option>
                                           </Select>
-                                          <select
+                                          {/* <select
                                              name="limitPrice"
                                              id="limitPrice"
                                              className="form-control"
-                                          ></select>
+                                          ></select> */}
                                        </div>
                                     </div>
                                  </div>
@@ -369,7 +383,7 @@ export default class SearchEngineContainer extends Component {
                                        <Button
                                           type="primary"
                                           icon="search"
-                                          size={"large"}
+                                          size={sizeWindow}
                                           block
                                           onClick={this.onSearch}
                                        >
