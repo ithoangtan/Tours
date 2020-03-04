@@ -32,53 +32,27 @@ Post.getAllPost = function(funcResult) {
 // Cần viết thêm Proceduce search cho bảng posts
 Post.getAllPostSearch = function(searchs, funcResult) {
   if (searchs.conditional === "content") {
-    mysql.query(
-      "call " +
-        databaseProduction +
-        `.spsearchEnginePostByContent( '${searchs.keySearch}', '${
-          searchs.dayStart
-        }', '${searchs.dayEnd}', ${10000000000} ); `,
-      function(err, res) {
-        if (err) {
-          funcResult(err, null);
-        } else {
-          funcResult(null, res[0]);
-        }
-      }
-    );
-  } else if (
-    searchs.conditional === "landmark" ||
-    searchs.conditional === "address"
-  ) {
-    mysql.query(
-      "call " +
-        databaseProduction +
-        `.spsearchEngineTourByAddress( '${searchs.keySearch}', '${
-          searchs.dayStart
-        }', '${searchs.dayEnd}', ${10000000000} ); `,
-      function(err, res) {
-        if (err) {
-          funcResult(err, null);
-        } else {
-          funcResult(null, res[0]);
-        }
-      }
-    );
+    return new Promise(function(resolve, reject) {
+      database
+        .query(
+          "call " +
+            databaseProduction +
+            `.spsearchEnginePostByContent( '${searchs.keySearch}' ); `
+        )
+        .then(rows => resolve(rows))
+        .catch(err => reject(err));
+    });
   } else {
-    mysql.query(
-      "call " +
-        databaseProduction +
-        `.spsearchEngineTour( '${searchs.keySearch}', '${searchs.dayStart}', '${
-          searchs.dayEnd
-        }', ${10000000000} ); `,
-      function(err, res) {
-        if (err) {
-          funcResult(err, null);
-        } else {
-          funcResult(null, res[0]);
-        }
-      }
-    );
+    return new Promise(function(resolve, reject) {
+      database
+        .query(
+          "call " +
+            databaseProduction +
+            `.spsearchEnginePost( '${searchs.keySearch}', ${searchs.vote} ); `
+        )
+        .then(rows => resolve(rows))
+        .catch(err => reject(err));
+    });
   }
 };
 

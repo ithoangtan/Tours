@@ -12,21 +12,10 @@ exports.getReport = async (req, res, next) => {
   }
 };
 
-exports.getRevenue = async (req, res, next) => {
-  try {
-    let listReport = await Report.getRevenue();
-    res.status(200).json(listReport);
-  } catch (err) {
-    if (!err.statusCode) {
-      err.statusCode = 500;
-    }
-    res.status(500).json(err);
-  }
-};
-
 exports.getDestinationByTime = async (req, res, next) => {
   try {
-    let listReport = await Report.getDestinationByTime();
+    const { month } = req.query;
+    let listReport = await Report.getDestinationByTime(month);
     res.status(200).json(listReport);
   } catch (err) {
     if (!err.statusCode) {

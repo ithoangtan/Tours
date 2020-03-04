@@ -36,53 +36,38 @@ Notification.getAllNotification = function() {
 // Cần viết thêm Proceduce search cho bảng notifications
 Notification.getAllNotificationSearch = function(searchs, funcResult) {
   if (searchs.conditional === "title") {
-    database.query(
-      "call " +
-        databaseProduction +
-        `.spsearchEngineNotificationByTitle( '${searchs.keySearch}', '${
-          searchs.dayStart
-        }', '${searchs.dayEnd}', ${10000000000} ); `,
-      function(err, res) {
-        if (err) {
-          funcResult(err, null);
-        } else {
-          funcResult(null, res[0]);
-        }
-      }
-    );
-  } else if (
-    searchs.conditional === "landmark" ||
-    searchs.conditional === "address"
-  ) {
-    database.query(
-      "call " +
-        databaseProduction +
-        `.spsearchEngineTourByAddress( '${searchs.keySearch}', '${
-          searchs.dayStart
-        }', '${searchs.dayEnd}', ${10000000000} ); `,
-      function(err, res) {
-        if (err) {
-          funcResult(err, null);
-        } else {
-          funcResult(null, res[0]);
-        }
-      }
-    );
+    return new Promise(function(resolve, reject) {
+      database
+        .query(
+          "call " +
+            databaseProduction +
+            `.spsearchEngineNotificationByTitle( '${searchs.keySearch}' ); `
+        )
+        .then(rows => resolve(rows))
+        .catch(err => reject(err));
+    });
+  } else if (searchs.conditional === "content") {
+    return new Promise(function(resolve, reject) {
+      database
+        .query(
+          "call " +
+            databaseProduction +
+            `.spsearchEngineNotificationByContent( '${searchs.keySearch}'); `
+        )
+        .then(rows => resolve(rows))
+        .catch(err => reject(err));
+    });
   } else {
-    database.query(
-      "call " +
-        databaseProduction +
-        `.spsearchEngineTour( '${searchs.keySearch}', '${searchs.dayStart}', '${
-          searchs.dayEnd
-        }', ${10000000000} ); `,
-      function(err, res) {
-        if (err) {
-          funcResult(err, null);
-        } else {
-          funcResult(null, res[0]);
-        }
-      }
-    );
+    return new Promise(function(resolve, reject) {
+      database
+        .query(
+          "call " +
+            databaseProduction +
+            `.spsearchEngineNotification( '${searchs.keySearch}', '${searchs.dayTime}' ); `
+        )
+        .then(rows => resolve(rows))
+        .catch(err => reject(err));
+    });
   }
 };
 

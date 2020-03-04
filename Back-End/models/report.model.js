@@ -22,24 +22,16 @@ Report.getReport = function() {
 };
 
 /**
- * Hàm này trả về tổng doanh thu
- */
-Report.getRevenue = function() {
-  return new Promise(function(resolve, reject) {
-    database
-      .query("call " + databaseProduction + `.spGetReportRevenue(); `)
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
-  });
-};
-
-/**
  * Hàm này trả về các điểm đến theo thời gian
  */
-Report.getDestinationByTime = function() {
+Report.getDestinationByTime = function(month) {
   return new Promise(function(resolve, reject) {
     database
-      .query("call " + databaseProduction + `.spGetReportDestinationByTime(); `)
+      .query(
+        "call " +
+          databaseProduction +
+          `.spGetReportDestinationByTime('${month}'); `
+      )
       .then(rows => resolve(rows))
       .catch(err => reject(err));
   });
