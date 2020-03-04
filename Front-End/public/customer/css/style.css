@@ -11372,7 +11372,7 @@ textarea.form-control {
    width: 100%;
    display: block;
    z-index: 1;
-   padding-top: 20em;
+   padding: 2em 0em;
 }
 .ftco-subscribe .text-wrap {
    -webkit-border-radius: 2px;
@@ -11381,7 +11381,7 @@ textarea.form-control {
    border-radius: 2px;
    z-index: 1;
    background: #fff;
-   padding: 2.5em;
+   padding: 1.5em;
 }
 
 .subscribe-form .form-group {
