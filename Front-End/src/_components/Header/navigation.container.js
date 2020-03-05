@@ -503,12 +503,12 @@ export default class Navigation extends Component {
                <ul className="navbar-nav ml-auto ht-navbar-nav">
                   <li className="nav-item ht-nav-item">
                      <Link to="/tour" className="nav-link ht-nav-link">
-                        <i class="fas fa-piggy-bank"></i> % Ưu đãi
+                        <i className="fas fa-piggy-bank"></i> % Ưu đãi
                      </Link>
                   </li>
                   {size === "small" ? (
                      <>
-                        <li class="nav-item dropdown ht-nav-item">
+                        <li className="nav-item dropdown ht-nav-item">
                            {/* Mobile MENU */}
                            <Link
                               className="nav-link dropdown-toggle ht-nav-link"
@@ -528,7 +528,7 @@ export default class Navigation extends Component {
                               {this.renderMenuVietNam()}
                            </div>
                         </li>
-                        <li class="nav-item dropdown ht-nav-item">
+                        <li className="nav-item dropdown ht-nav-item">
                            <Link
                               className="nav-link dropdown-toggle ht-nav-link"
                               to="tour/search/vn"

@@ -10,7 +10,6 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
 import TourDetailContainer from "./tourDetail.container";
-
 import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
 
 const { Title, Text } = Typography;
@@ -74,13 +73,18 @@ class TourContainer extends Component {
    };
 
    fetch = async () => {
+      const data = this.props.match.params;
       const { tourAllActions } = this.props;
       const {
          fetchListTourRequest,
+         fetchListTourSearchRequest,
          fetchListTourImageRequest
       } = tourAllActions;
-
-      await fetchListTourRequest();
+      if (data.keySearch !== null && data.keySearch !== undefined) {
+         await fetchListTourSearchRequest(data);
+      } else {
+         await fetchListTourRequest();
+      }
       await fetchListTourImageRequest();
 
       await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
@@ -128,21 +132,29 @@ class TourContainer extends Component {
 
    renderTours = () => {
       let result = null;
-      const { listTour, listImageTour } = this.props;
+      const data = this.props.match.params;
+      const { listTourSearch, listImageTour } = this.props;
+      const { listTour } = this.props;
+      let listTours = [];
+      if (data.keySearch !== null && data.keySearch !== undefined) {
+         listTours = [...listTourSearch];
+      } else {
+         listTours = [...listTour];
+      }
 
       if (this.state.value2 === 1)
-         listTour.sort(this.compareValues("titleTour", "asc"));
+         listTours.sort(this.compareValues("titleTour", "asc"));
       if (this.state.value2 === 2)
-         listTour.sort(this.compareValues("titleTour", "desc"));
+         listTours.sort(this.compareValues("titleTour", "desc"));
       if (this.state.value2 === 3)
-         listTour.sort(this.compareValues("dateAdded", "asc"));
+         listTours.sort(this.compareValues("dateAdded", "asc"));
       if (this.state.value2 === 4)
-         listTour.sort(this.compareValues("price", "asc"));
+         listTours.sort(this.compareValues("price", "asc"));
       if (this.state.value2 === 5)
-         listTour.sort(this.compareValues("departureDay", "asc"));
+         listTours.sort(this.compareValues("departureDay", "asc"));
 
-      if (this.state.haveData === true) {
-         result = listTour.map((tour, index) => {
+      if (this.state.haveData && listTours.length > 0) {
+         result = listTours.map((tour, index) => {
             return (
                <TourDetailContainer
                   {...this.props}
@@ -165,8 +177,10 @@ class TourContainer extends Component {
 
       //Ở đây truyền fulloption dữ liệu vào
       //Gọi api, fetch,...... ở container này hết
+
       return result;
    };
+
    render() {
       const { valueStar } = this.state;
       const radioStyle = {
