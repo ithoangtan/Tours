@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as tourActions from "../_actions/tour.actions";
 
+import * as tourActions from "../_actions/tour.actions";
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
+
 import funcLoadJs from "../_constants/loadJs.constants";
 
 import TourDetailContainer from "./tourDetail.container";
-import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
+import SearchEngineTourPage from "../_components/SearchEngine/searchEngineTourPage.container";
 
+import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
 const { Title, Text } = Typography;
 
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
@@ -193,6 +195,7 @@ class TourContainer extends Component {
             <div className="container">
                <div className="row ftco-animate">
                   <div className="col-md-12 col-lg-3 left-tour-page">
+                     <SearchEngineTourPage />
                      <div className="ht-filter-tour">
                         <Title level={4}>Bộ Lọc</Title>
                         <div className="ht-filter-tour-2">

@@ -1464,3 +1464,30 @@ html {
    padding-right: 3px !important;
    margin-bottom: 3px !important;
 }
+
+/* Tour Page */
+.ht-no-p-l {
+   padding-left: 0px !important;
+}
+.ht-no-p-r {
+   padding-right: 0px !important;
+}
+.ht-no-p-b {
+   padding-bottom: 0px !important;
+}
+.ht-no-p-t {
+   padding-top: 0px !important;
+}
+
+.ht-search-tour-page {
+   border-top-left-radius: 12px;
+   border-top-right-radius: 12px;
+   background: rgb(54, 207, 192);
+   background: #c9ccd3;
+   background-image: linear-gradient(
+      to top,
+      #f3e7e9 0%,
+      #e3eeff 99%,
+      #e3eeff 100%
+   );
+}

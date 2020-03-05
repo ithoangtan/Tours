@@ -18,26 +18,6 @@ const { OptGroup } = AutoComplete;
 const OptionComplete = AutoComplete.Option;
 const dateFormat = "DD/MM/YYYY";
 
-// const dataSourceUser = [
-//    {
-//       title: "Bạn đã từng tìm kiếm: ",
-//       children: [
-//          {
-//             title: "Tết Nguyên Đán",
-//             count: 1
-//          },
-//          {
-//             title: "Năm mới 2020",
-//             count: 2
-//          },
-//          {
-//             title: "Mùa hoa anh đào nở",
-//             count: 2
-//          }
-//       ]
-//    }
-// ];
-
 const dataSourceAll = [
    {
       title: "Trùm Tour",
@@ -154,7 +134,6 @@ export default class SearchEngineContainer extends Component {
    };
 
    onChangeConditional = value => {
-      // console.log(value);
       this.setState({ conditional: value });
    };
    onChangeKeySearch = value => {
@@ -181,7 +160,6 @@ export default class SearchEngineContainer extends Component {
 
    onSearch = event => {
       event.preventDefault();
-      //Chuyển hướng đến bên trang tour
       this.setState({ onSearch: true });
    };
 
@@ -238,167 +216,120 @@ export default class SearchEngineContainer extends Component {
 
    componentDidMount() {
       this.setState({
-         sizeWindow: window.innerWidth > 767.98 ? "large" : "small"
+         sizeWindow: window.innerWidth > 767.98 ? "default" : "small"
       });
    }
-
-   onFocusSearch = () => {
-      window.scrollTo(0, 340);
-   };
 
    render() {
       const { dataSource, sizeWindow } = this.state;
       return (
-         <section className="ftco-section ftco-no-pb ftco-no-pt ht-search-engine">
-            {this.haveRedirect()}
-            <div className="container">
-               <div className="row">
-                  <div className="col-md-12">
-                     <div className="search-wrap-1 ftco-animate p-3">
-                        <form action="#" className="search-property-1">
-                           <div className="row">
-                              <div className="col-lg-4">
-                                 <div className="form-group">
-                                    <label htmlFor="#">
-                                       Điểm đến của bạn là:
-                                    </label>
-                                    <div className="certain-category-search-wrapperht-width100">
-                                       <AutoComplete
-                                          className="certain-category-search ht-width100"
-                                          dropdownClassName="certain-category-search-dropdown"
-                                          size={sizeWindow}
-                                          style={{
-                                             width: "100%"
-                                          }}
-                                          dataSource={
-                                             this.state.keySearch === "" &&
-                                             this.state.conditional === "all"
-                                                ? this.options()
-                                                : dataSource.map(
-                                                     this.renderOption
-                                                  )
-                                          }
-                                          onSelect={this.onSelect}
-                                          onSearch={this.handleSearch}
-                                          dropdownMatchSelectWidth={false}
-                                          placeholder="Nhấp zô??? Có gợi ý cho bạn nè!"
-                                          optionLabelProp="value"
-                                          onChange={this.onChangeKeySearch}
-                                       >
-                                          <Input
-                                             className="ht-width100"
-                                             suffix={
-                                                <Icon
-                                                   type="question-circle"
-                                                   theme="filled"
-                                                   className="certain-category-icon"
-                                                />
-                                             }
-                                             onFocus={this.onFocusSearch}
-                                             onClick={this.onFocusSearch}
-                                          />
-                                       </AutoComplete>
-                                    </div>
-                                 </div>
-                              </div>
-
-                              <div className="col-lg-3 ">
-                                 <div className="form-group">
-                                    <label htmlFor="#">
-                                       Bạn định đi khi nào?
-                                    </label>
-                                    <div className="form-field">
-                                       <RangePicker
-                                          size={sizeWindow}
-                                          className="ht-width100"
-                                          disabledDate={this.disabledDate}
-                                          defaultValue={[
-                                             moment(
-                                                this.getCurrentDay(),
-                                                dateFormat
-                                             ),
-                                             moment("12/12/2030", dateFormat)
-                                          ]}
-                                          onChange={this.onChangeDay}
-                                          format={dateFormat}
-                                       />
-                                    </div>
-                                 </div>
-                              </div>
-                              <div className="col-lg-2">
-                                 <div className="form-group">
-                                    <label htmlFor="#">Search theo:</label>
-                                    <div className="form-field">
-                                       <div className="select-wrap">
-                                          <div className="icon">
-                                             <span className="ion-ios-arrow-down" />
-                                          </div>
-                                          <Select
-                                             showSearch
-                                             size={sizeWindow}
-                                             defaultValue="all"
-                                             optionFilterProp="children"
-                                             onChange={this.onChangeConditional}
-                                             onFocus={this.onFocus}
-                                             onBlur={this.onBlur}
-                                             filterOption={(input, option) =>
-                                                option.props.children
-                                                   .toLowerCase()
-                                                   .indexOf(
-                                                      input.toLowerCase()
-                                                   ) >= 0
-                                             }
-                                          >
-                                             <Option value={"all"}>
-                                                Tất cả
-                                             </Option>
-                                             <Option value={"name"}>
-                                                Tên của Tour
-                                             </Option>
-                                             <Option value={"landmark"}>
-                                                Địa danh
-                                             </Option>
-                                             <Option value={"address"}>
-                                                Địa chỉ
-                                             </Option>
-                                             <Option value={"type"}>
-                                                Loại tour
-                                             </Option>
-                                          </Select>
-                                          {/* <select
-                                             name="limitPrice"
-                                             id="limitPrice"
-                                             className="form-control"
-                                          ></select> */}
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div className="col-lg-3 align-items-center">
-                                 <div className="form-group">
-                                    <label htmlFor="#">
-                                       Bạn đã sẵn sàng chưa?
-                                    </label>
-                                    <div className="form-field">
-                                       <Button
-                                          type="primary"
-                                          icon="search"
-                                          size={sizeWindow}
-                                          block
-                                          onClick={this.onSearch}
-                                       >
-                                          Tìm kiếm Tour nào
-                                       </Button>
-                                    </div>
-                                 </div>
-                              </div>
+         <div className="container">
+            <div className="row">
+               <div className="col-md-12 ht-no-p-l">
+                  <div className="col-md ht-no-p-l mt-2">
+                     <div className="ht-d-flex-center-center ht-search-tour-page p-2">
+                        <h6 className="ht-no-p-m">Tìm Kiếm</h6>
+                     </div>
+                     <div className="form-group">
+                        <div className="certain-category-search-wrapperht-width100">
+                           <AutoComplete
+                              className="certain-category-search ht-width100"
+                              dropdownClassName="certain-category-search-dropdown"
+                              size={sizeWindow}
+                              style={{
+                                 width: "100%"
+                              }}
+                              dataSource={
+                                 this.state.keySearch === "" &&
+                                 this.state.conditional === "all"
+                                    ? this.options()
+                                    : dataSource.map(this.renderOption)
+                              }
+                              onSelect={this.onSelect}
+                              onSearch={this.handleSearch}
+                              dropdownMatchSelectWidth={false}
+                              placeholder="Nhấp zô??? Có gợi ý cho bạn nè!"
+                              optionLabelProp="value"
+                              onChange={this.onChangeKeySearch}
+                           >
+                              <Input
+                                 className="ht-width100"
+                                 suffix={
+                                    <Icon
+                                       type="question-circle"
+                                       theme="filled"
+                                       className="certain-category-icon"
+                                    />
+                                 }
+                              />
+                           </AutoComplete>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="col-md ht-no-p-l ">
+                     <div className="form-group">
+                        <div className="form-field">
+                           <RangePicker
+                              size={sizeWindow}
+                              className="ht-width100"
+                              disabledDate={this.disabledDate}
+                              defaultValue={[
+                                 moment(this.getCurrentDay(), dateFormat),
+                                 moment("12/12/2030", dateFormat)
+                              ]}
+                              onChange={this.onChangeDay}
+                              format={dateFormat}
+                           />
+                        </div>
+                     </div>
+                  </div>
+                  <div className="col-md ht-no-p-l">
+                     <div className="form-group">
+                        <div className="form-field">
+                           <div className="select-wrap">
+                              <Select
+                                 showSearch
+                                 size={sizeWindow}
+                                 defaultValue="all"
+                                 optionFilterProp="children"
+                                 onChange={this.onChangeConditional}
+                                 onFocus={this.onFocus}
+                                 onBlur={this.onBlur}
+                                 filterOption={(input, option) =>
+                                    option.props.children
+                                       .toLowerCase()
+                                       .indexOf(input.toLowerCase()) >= 0
+                                 }
+                                 style={{ width: "100%" }}
+                              >
+                                 <Option value={"all"}>Tất cả</Option>
+                                 <Option value={"name"}>Tên của Tour</Option>
+                                 <Option value={"landmark"}>Địa danh</Option>
+                                 <Option value={"address"}>Địa chỉ</Option>
+                                 <Option value={"type"}>Loại tour</Option>
+                              </Select>
                            </div>
-                        </form>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="col-md ht-no-p-l align-items-center">
+                     <div className="form-group">
+                        <div className="form-field">
+                           <Button
+                              type="primary"
+                              icon="search"
+                              size={sizeWindow}
+                              block
+                              onClick={this.onSearch}
+                           >
+                              Tìm kiếm Tour
+                           </Button>
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
-         </section>
+         </div>
       );
    }
 }
