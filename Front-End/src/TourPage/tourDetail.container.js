@@ -44,7 +44,12 @@ export default class TourDetailContainer extends Component {
             .utc()
             .format("lll");
       return (
-         <div className="right-tour-detail-page mb-4 ftco-animate">
+         <div className="right-tour-detail-page mb-4 ftco-animate ht-z-id-0 ht-tour-detail-container">
+            <div className="ht-day-scroll-auto">
+               {/* Chỗ này tách ngày ra bằng moment.js để thêm vào 2 nội dung ở dưới */}
+               <div className="ht-f-day">{`7`}</div>
+               <div className="ht-f-date">{`3/20`}</div>
+            </div>
             <div className="tour-content">
                <div className="row justify-conten-center">
                   <div className="col-md-12 col-lg-4 ht-boder-radius-1">

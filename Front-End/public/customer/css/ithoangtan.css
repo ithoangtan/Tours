@@ -1060,7 +1060,7 @@
       margin-bottom: 8px;
    }
    .ht-logo-nav {
-      width: 70px;
+      width: 50px;
       padding-left: 2px;
       border-radius: 50%;
    }
@@ -1206,6 +1206,20 @@
    display: flex;
    justify-content: center;
    align-items: center;
+}
+.ht-d-flex-start-center {
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   overflow-wrap: break-word;
+   flex-wrap: wrap;
+}
+.ht-d-flex-start-end {
+   display: flex;
+   justify-content: start;
+   align-items: flex-end;
+   overflow-wrap: break-word;
+   flex-wrap: wrap;
 }
 .ht-display-flex-start-center {
    display: flex;
@@ -1490,4 +1504,149 @@ html {
       #e3eeff 99%,
       #e3eeff 100%
    );
+}
+
+.ht-z-id-0 {
+   z-index: -999 !important;
+}
+.ht-z-id-1 {
+   z-index: 1 !important;
+}
+.ht-z-id-2 {
+   z-index: 2 !important;
+}
+.ht-z-id-3 {
+   z-index: 3 !important;
+}
+.ht-z-id-4 {
+   z-index: 4 !important;
+}
+.ht-z-id-5 {
+   z-index: 5 !important;
+}
+.ht-z-id-6 {
+   z-index: 6 !important;
+}
+.ht-z-id-7 {
+   z-index: 7 !important;
+}
+.ht-z-id-8 {
+   z-index: 8 !important;
+}
+.ht-z-id-9 {
+   z-index: 9 !important;
+}
+.ht-z-id-10 {
+   z-index: 10 !important;
+}
+
+.ht-tool-tour-page {
+   border-bottom: dotted 1px rgba(46, 163, 199, 0.5);
+}
+.ht-info-title-tour-page {
+   padding: 6px;
+   margin: 6px;
+   background-image: linear-gradient(
+      to top,
+      #f3e7e9 0%,
+      #e3eeff 99%,
+      #e3eeff 100%
+   );
+   border-radius: 3px;
+   border: 1px dotted rgba(19, 166, 185, 0.5);
+}
+
+.height-40 {
+   height: 40px !important;
+}
+
+@media (max-width: 757.98px) {
+   .ht-info-container-tour-page {
+      flex-direction: column;
+   }
+}
+
+.ht-describe-info-tour-page {
+   text-align: justify;
+}
+
+.ht-tour-detail-container {
+   position: relative;
+}
+.ht-day-scroll-auto {
+   height: auto;
+   position: absolute;
+   padding: 3px;
+   border: 1px solid rgba(35, 151, 103, 0.5);
+   border-radius: 6px;
+   font-size: 1.5em;
+   font-weight: 500;
+}
+
+@media (max-width: 757.98px) {
+   .ht-day-scroll-auto {
+      width: 36px;
+      top: 0;
+      right: 0;
+      font-size: 1.3em;
+      font-weight: 400;
+   }
+}
+
+@media (min-width: 758px) {
+   .ht-day-scroll-auto {
+      width: 48px;
+      top: 0;
+      left: -53px;
+   }
+}
+/* day */
+.ht-f-day {
+   text-align: center;
+   border-radius: 3px;
+   background-image: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
+}
+/* month and year */
+.ht-f-date {
+   text-align: center;
+   font-size: 0.6em;
+}
+
+.ht-accordion {
+   background: white;
+   border: none;
+   border-bottom: 1px dotted rgba(9, 135, 151, 0.473);
+   cursor: pointer;
+   padding: 6px;
+   width: 100%;
+   text-align: left;
+   outline: none;
+   font-size: 1rem;
+   transition: 0.4s;
+   font-weight: 500;
+}
+
+.active,
+.ht-accordion:hover {
+   background-image: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%);
+}
+
+.ht-accordion:after {
+   content: "\002B";
+   font-weight: bold;
+   float: right;
+   margin-left: 6px;
+}
+
+.active:after {
+   content: "\2212";
+}
+
+.ht-panel {
+   padding: 0 18px;
+   background-color: white;
+   max-height: 0;
+   overflow: hidden;
+   transition: max-height 0.2s ease-out;
+   border-left: 1px solid rgba(0, 219, 219, 0.726);
 }
