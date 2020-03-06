@@ -38,6 +38,7 @@ const costOption = [
 
 const tourTypeOption = [
    //Loại tour
+   "Còn chỗ",
    "Trọn gói",
    "Không vé máy bay",
    "Khởi hành mỗi ngày",
@@ -69,7 +70,7 @@ class TourContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         valueStar: 1,
+         valueStar: 0,
          value2: 1,
          checkedListFilterCostOption: defaultCheckedListCostOption,
          checkedListFilterTourTypeOption: defaultCheckedListTourTypeOption,
@@ -298,7 +299,7 @@ class TourContainer extends Component {
    }
 
    render() {
-      const { valueStar, rows, size } = this.state;
+      const { valueStar, rows } = this.state;
       const radioStyle = {
          display: "block",
          height: "30px",
@@ -561,12 +562,15 @@ class TourContainer extends Component {
                         </Paragraph>
                      </div>
                      <div className="row justify-start-end pb-1 mb-4 ml-1 ht-tool-tour-page">
-                        <button className="btn btn-sm " type="button">
+                        <button
+                           className="btn btn-sm ht-tool-tour-page-item ht-tool-tour-page-item-focused"
+                           type="button"
+                        >
                            Phổ biến nhất
                         </button>
                         <div className="dropdown">
                            <button
-                              className="btn btn-sm dropdown-toggle"
+                              className="btn btn-sm dropdown-toggle ht-tool-tour-page-item"
                               type="button"
                               id="dropdownMenu1"
                               data-toggle="dropdown"
@@ -580,13 +584,13 @@ class TourContainer extends Component {
                               aria-labelledby="dropdownMenu1"
                            >
                               <button
-                                 className="dropdown-item btn-sm"
+                                 className="dropdown-item btn-sm ht-tool-tour-page-item"
                                  type="button"
                               >
                                  Tăng dần
                               </button>
                               <button
-                                 className="dropdown-item btn-sm"
+                                 className="dropdown-item btn-sm ht-tool-tour-page-item"
                                  type="button"
                               >
                                  Giảm dần
@@ -595,7 +599,7 @@ class TourContainer extends Component {
                         </div>
                         <div className="dropdown">
                            <button
-                              className="btn btn-sm dropdown-toggle"
+                              className="btn btn-sm dropdown-toggle ht-tool-tour-page-item"
                               type="button"
                               id="dropdownMenu3"
                               data-toggle="dropdown"
@@ -609,26 +613,35 @@ class TourContainer extends Component {
                               aria-labelledby="dropdownMenu3"
                            >
                               <button
-                                 className="dropdown-item btn-sm"
+                                 className="dropdown-item btn-sm ht-tool-tour-page-item"
                                  type="button"
                               >
                                  Tăng dần
                               </button>
                               <button
-                                 className="dropdown-item btn-sm"
+                                 className="dropdown-item btn-sm ht-tool-tour-page-item"
                                  type="button"
                               >
                                  Giảm dần
                               </button>
                            </div>
                         </div>
-                        <button className="btn btn-sm " type="button">
+                        <button
+                           className="btn btn-sm ht-tool-tour-page-item"
+                           type="button"
+                        >
                            Sắp khởi hành
                         </button>
-                        <button className="btn btn-sm " type="button">
+                        <button
+                           className="btn btn-sm ht-tool-tour-page-item"
+                           type="button"
+                        >
                            Đánh giá cao
                         </button>
-                        <button className="btn btn-sm " type="button">
+                        <button
+                           className="btn btn-sm ht-tool-tour-page-item"
+                           type="button"
+                        >
                            Khuyến mãi
                         </button>
                      </div>
