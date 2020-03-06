@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Input, AutoComplete, Button } from "antd";
+import { Input, AutoComplete, Button, notification } from "antd";
 
 const InputGroup = Input.Group;
 
@@ -24,6 +24,18 @@ export default class SubcribeContainer extends Component {
          size: window.innerWidth > 576.98 ? "default" : "small"
       });
    }
+
+   openNotification = () => {
+      notification.open({
+         message: "Notification Title",
+         description: "This is the content of the notification. ",
+         onClick: () => {
+            console.log("Notification Clicked!");
+         },
+         placement: "bottomLeft"
+      });
+   };
+
    render() {
       const { size } = this.state;
       return (
@@ -45,6 +57,7 @@ export default class SubcribeContainer extends Component {
                            type="primary"
                            size={size}
                            className="col-md-12 mt-1"
+                           onClick={this.openNotification}
                         >
                            Subscribe us!
                         </Button>

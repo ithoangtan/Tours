@@ -21,7 +21,7 @@ export const CustomerArrayExternalScript = [
    "/customer/js/ithoangtan.js",
    // "http://cdn.iframe.ly/embed.js",
    // "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",,
-   "/customer/js/ithoangtan.js"
+   "/customer/js/ithoangtan2.js"
 ];
 
 export const AdminArrayExternalScript = [

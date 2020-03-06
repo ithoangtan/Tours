@@ -19,7 +19,6 @@ import BlogSinglePage from "./BlogSinglePage/blogSingle.container";
 import TourSinglePage from "./TourSinglePage/tourSingle.page";
 import TourBestPage from "./TourPage/tourBest.page";
 import TourPage from "./TourPage/tour.page";
-import TourSearchPage from "./TourPage/tourSearch.page";
 import LoginPage from "./LoginAndRegisterPage/login.page";
 import RegisterPage from "./LoginAndRegisterPage/register.page";
 import ForgotPasswordPage from "./LoginAndRegisterPage/forgotPassword.page";
@@ -135,7 +134,7 @@ const router = [
          <>
             <NavigationContainer {...props} />
             <HeaderBreadcrumbContainer {...props} />
-            <TourSearchPage match={match} {...props} />
+            <TourPage match={match} {...props} />
             <FooterContainer />
             <Loaded />
             <BackToTop />
