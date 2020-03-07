@@ -8,7 +8,7 @@ import * as tourActions from "../../_actions/tour.actions";
 
 import { Link } from "react-router-dom";
 
-import { Rate, Button, Statistic, Tooltip } from "antd";
+import { Rate, Button, Statistic, Tooltip, Icon } from "antd";
 
 import { API_ENDPOINT } from "../../_constants/index.constants";
 
@@ -123,6 +123,7 @@ class BestTourContainer extends Component {
                                  defaultValue={4.5}
                                  size="small"
                                  allowHalf
+                                 character={<Icon type="star" />}
                               />
                               <div className="float-right ht-display-flex-start-center">
                                  <div className="rate">

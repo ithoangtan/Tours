@@ -13,7 +13,7 @@ import funcLoadJs from "../_constants/loadJs.constants";
 import TourDetailContainer from "./tourDetail.container";
 import SearchEngineTourPage from "../_components/SearchEngine/searchEngineTourPage.container";
 
-import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
+import { Typography, Rate, Checkbox, Spin, Radio, Icon } from "antd";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -460,6 +460,7 @@ class TourContainer extends Component {
                                     tooltips={desc}
                                     onChange={this.handleChange}
                                     value={valueStar}
+                                    character={<Icon type="star" />}
                                  />
                                  {valueStar ? (
                                     <span className="ant-rate-text">
@@ -532,6 +533,7 @@ class TourContainer extends Component {
                                  defaultValue={this.numberStarCal(
                                     totalNumberStar
                                  )}
+                                 character={<Icon type="star" />}
                                  //Phải làm tròn số với đơn vị 0.5
                                  size="small"
                                  className="mr-1 height-40"
