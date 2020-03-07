@@ -169,74 +169,76 @@ export default class TourDetailContainer extends Component {
                         title={`${tour.describe}`}
                         className="ht-describe-info-tour-detail"
                      >
-                        <i class="fas fa-info-circle"></i> {tour.describe}
+                        <i className="fas fa-info-circle"></i> {tour.describe}
                      </Paragraph>
                   </div>
                   <div className="col-xs-12 col-md-12 col-lg-3 pb-1 ht-info-tour-detail-container-3">
                      <div className="ht-info-tour-detail-special">
                         <div className="m-1 ht-tour-detail-info-departure">
-                           <i class="fas fa-map-marked-alt"></i> Từ: Hồ Chí Minh
+                           <i className="fas fa-map-marked-alt"></i> Từ: Hồ Chí
+                           Minh
                         </div>
                         <div className="m-1">
                            <div className="">
                               <Tooltip title="Đưa đón tận nơi">
-                                 <i class="fas fa-taxi"> </i> {` `}
+                                 <i className="fas fa-taxi"> </i> {` `}
                               </Tooltip>
                               {/* Mấy cái khác tự làm như trên */}
                               <Tooltip title="Cho thuê xe máy">
-                                 <i class="fas fa-motorcycle"> </i> {` `}
+                                 <i className="fas fa-motorcycle"> </i> {` `}
                               </Tooltip>
                               <Tooltip title="Free Wifi">
-                                 <i class="fas fa-wifi"> </i> {` `}
+                                 <i className="fas fa-wifi"> </i> {` `}
                               </Tooltip>
                               <Tooltip title="Hỗ trợ người khuyết tật">
-                                 <i class="fas fa-wheelchair"></i> {` `}
+                                 <i className="fas fa-wheelchair"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Sẵn vé máy bay">
-                                 <i class="fas fa-plane-departure"></i> {` `}
+                                 <i className="fas fa-plane-departure"></i>{" "}
+                                 {` `}
                               </Tooltip>
                               <Tooltip title="Phương tiện công cộng">
-                                 <i class="fas fa-bus-alt"></i> {` `}
+                                 <i className="fas fa-bus-alt"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Bãi biển đẹp">
-                                 <i class="fas fa-umbrella-beach"></i> {` `}
+                                 <i className="fas fa-umbrella-beach"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Phòng ngủ tập thể">
-                                 <i class="fas fa-bed"></i> {` `}
+                                 <i className="fas fa-bed"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Passport">
-                                 <i class="fas fa-id-badge"></i> {` `}
+                                 <i className="fas fa-id-badge"></i> {` `}
                               </Tooltip>
                            </div>
                            <div className="">
                               <Tooltip title="Tiệc sinh nhật đúng ngày">
-                                 <i class="fas fa-birthday-cake"></i> {` `}
+                                 <i className="fas fa-birthday-cake"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Hưỡng dẫn viên">
-                                 <i class="fas fa-user-check"></i> {` `}
+                                 <i className="fas fa-user-check"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Bảo hiểm">
-                                 <i class="fas fa-user-shield"></i> {` `}
+                                 <i className="fas fa-user-shield"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Cho thuê xe đạp">
-                                 <i class="fas fa-bicycle"></i> {` `}
+                                 <i className="fas fa-bicycle"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Tự do trong 1 ngày">
-                                 <i class="fas fa-shoe-prints"></i> {` `}
+                                 <i className="fas fa-shoe-prints"></i> {` `}
                                  {/* Tự do 2 hoặc mấy ngày đấy */}
                               </Tooltip>
 
                               <Tooltip title="Phòng tập gym">
-                                 <i class="fas fa-dumbbell"></i> {` `}
+                                 <i className="fas fa-dumbbell"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Dịch vụ spa">
-                                 <i class="fas fa-spa"></i> {` `}
+                                 <i className="fas fa-spa"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Có bể bơi">
-                                 <i class="fas fa-swimmer"></i> {` `}
+                                 <i className="fas fa-swimmer"></i> {` `}
                               </Tooltip>
                               <Tooltip title="Trượt tuyết">
-                                 <i class="fas fa-skiing"></i> {` `}
+                                 <i className="fas fa-skiing"></i> {` `}
                               </Tooltip>
                            </div>
                         </div>
@@ -270,7 +272,7 @@ export default class TourDetailContainer extends Component {
                               }
                               placement="left"
                            >
-                              <i class="fas fa-donate"></i> {` `}
+                              <i className="fas fa-donate"></i> {` `}
                               <NumberFormat
                                  value={
                                     tour.price - tour.price * tour.sale * 0.01
@@ -292,7 +294,7 @@ export default class TourDetailContainer extends Component {
                            <Tooltip
                               title={
                                  <p className="ht-no-p-m">
-                                    <i class="fas fa-couch"></i>
+                                    <i className="fas fa-couch"></i>
                                     {` Còn ${5} chỗ `}
                                  </p>
                               }
@@ -300,7 +302,7 @@ export default class TourDetailContainer extends Component {
                            >
                               {size === "small" ? (
                                  <Button type="primary">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <i className="fas fa-shopping-cart"></i>
                                  </Button>
                               ) : (
                                  <Button type="primary">ĐẶT NGAY</Button>
