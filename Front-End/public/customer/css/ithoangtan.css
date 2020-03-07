@@ -1545,11 +1545,11 @@ html {
    border: none;
    border-bottom: 1px dotted rgba(9, 135, 151, 0.473);
    cursor: pointer;
-   padding: 6px;
+   padding: 5px;
    width: 100%;
    text-align: left;
    outline: none;
-   font-size: 1rem;
+   font-size: 0.9rem;
    transition: 0.4s;
    font-weight: 500;
 }

@@ -76,8 +76,49 @@ export default class TourSingleContainer extends Component {
       return (
          <section className="ftco-section">
             <div className="container">
+               {/* Tour infomation detail container */}
+               <div className="row">
+                  {/* Title main */}
+                  <div className="col-md-12 ht-detail-tour-title-container">
+                     <div className="ht-title"></div>
+                     <div className="ht-code"></div>
+                     <div className="ht-social-container"></div>
+                  </div>
+                  {/* Images - LEFT */}
+                  <div className="col-sm-12 col-md-6 col-lg-8 ht-detail-tour-img-container">
+                     <div className="ht-tag"></div>
+                  </div>
+                  {/* info - RIGHT */}
+                  <div className="col-sm-12 col-md-6 col-lg-4 ht-detail-tour-info-container">
+                     <div className="ht-info-container-1">
+                        <div className="ht-rates"></div>
+                        <div className="ht-views"></div>
+                     </div>
+                     <div className="ht-info-container-2">
+                        <div className="ht-departure-day">
+                           <div className="ht-choose-departure-day"></div>
+                        </div>
+                        <div className="ht-time-location"></div>
+                     </div>
+                     <div className="ht-service-container"></div>
+                     <div className="ht-info-container-4-buy-1"></div>
+                     <div className="ht-info-container-4-buy-2"></div>
+                     <div className="ht-info-container-5">
+                        {/* maybe describe or link trong trang xem chương trình tour... */}
+                     </div>
+                  </div>
+               </div>
+               {/* Tour schedule container */}
+               <div className="row">
+                  {/* Content main */}
+                  <div className="col-sm-10 col-md-9 col-lg-9"></div>
+                  {/* MENU info schedule, detail, note, date, concat, map, more tour,... */}
+                  <div className="col-sm-2 col-md-3 col-lg-3"></div>
+               </div>
+            </div>
+            <div className="container">
                <div className="row justify-content-center pb-1">
-                  <div className="col-md-12 heading-section ftco-animate">
+                  <div className="col-md-12 heading-section">
                      <div className="row">
                         <div className="col-md-12 col-lg-6 ftco-animate">
                            <Carousel autoplay>{this.renderImage()}</Carousel>
@@ -196,7 +237,7 @@ export default class TourSingleContainer extends Component {
                </div>
                <br />
                <div className="row justify-content-center pb-1 pt-2 mt-3">
-                  <div className="col-md-12 col-lg-8 heading-section ftco-animate">
+                  <div className="col-md-12 col-lg-8 heading-section">
                      <div className="row justify-content-center ftco-animate">
                         <Title level={3}>SCHEDULE DETAILS</Title>
                      </div>

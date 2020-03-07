@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
-import { Typography, Rate, Tag, Button, Carousel, Tooltip } from "antd";
+import { Typography, Rate, Tag, Button, Carousel, Tooltip, Icon } from "antd";
 import TourDetailImages from "./tourDetailImages";
 
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
@@ -68,7 +68,7 @@ export default class TourDetailContainer extends Component {
       const month = dmy.substr(0, 2);
       const year = dmy.substr(dmy.length - 2, 2);
 
-      const totalNumberStar = 4.48555555555555555555555555555555555555555555;
+      const totalNumberStar = 3.98987987987987987987987987987;
       return (
          <div className="right-tour-detail-page mb-4 ftco-animate ht-tour-detail-container">
             <div className="ht-day-scroll-auto">
@@ -113,11 +113,12 @@ export default class TourDetailContainer extends Component {
                      </Link>
                      <div className="ht-d-flex-start-center">
                         <Rate
+                           allowHalf
                            disabled
-                           defaultValue={4}
+                           defaultValue={this.numberStarCal(totalNumberStar)}
                            size="small"
                            className="ht-no-p-m"
-                           allowHalf
+                           character={<Icon type="star" />}
                         ></Rate>
                         <p className="ht-rate-detail-tour pt-1">
                            {size === "small" ? (
@@ -257,13 +258,28 @@ export default class TourDetailContainer extends Component {
                         )}
 
                         <div className="ht-text-price-tour-detail m-1">
-                           <i class="fas fa-donate"></i> {` `}
-                           <NumberFormat
-                              value={tour.price - tour.price * tour.sale * 0.01}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              suffix={" VNĐ"}
-                           />
+                           <Tooltip
+                              title={
+                                 <NumberFormat
+                                    value={tour.price * tour.sale * 0.01}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"Tiết kiệm "}
+                                    suffix={" VNĐ"}
+                                 />
+                              }
+                              placement="left"
+                           >
+                              <i class="fas fa-donate"></i> {` `}
+                              <NumberFormat
+                                 value={
+                                    tour.price - tour.price * tour.sale * 0.01
+                                 }
+                                 displayType={"text"}
+                                 thousandSeparator={true}
+                                 suffix={" VNĐ"}
+                              />
+                           </Tooltip>
                         </div>
                         <Link
                            to={{
