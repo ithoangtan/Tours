@@ -483,7 +483,7 @@ export default class Navigation extends Component {
             {this.haveRedirect()}
             <Link to="/">
                <img
-                  src="./logo192.png"
+                  src="/logo192.png"
                   alt="Tours"
                   className="ht-logo-nav"
                ></img>
