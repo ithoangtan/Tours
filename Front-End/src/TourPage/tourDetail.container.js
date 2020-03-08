@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
-import { Typography, Rate, Tag, Button, Carousel, Tooltip, Icon } from "antd";
+import { Typography, Rate, Tag, Button, Carousel, Tooltip } from "antd";
+import { Icon } from "@ant-design/compatible";
 import TourDetailImages from "./tourDetailImages";
 
 import * as INDEX_CONSTANTS from "../_constants/index.constants";

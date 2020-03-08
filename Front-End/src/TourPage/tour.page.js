@@ -13,7 +13,8 @@ import funcLoadJs from "../_constants/loadJs.constants";
 import TourDetailContainer from "./tourDetail.container";
 import SearchEngineTourPage from "../_components/SearchEngine/searchEngineTourPage.container";
 
-import { Typography, Rate, Checkbox, Spin, Radio, Icon } from "antd";
+import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
+import { Icon } from "@ant-design/compatible";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -533,7 +534,7 @@ class TourContainer extends Component {
                                  defaultValue={this.numberStarCal(
                                     totalNumberStar
                                  )}
-                                 character={<Icon type="star" />}
+                                 character={<Icon type="star"></Icon>}
                                  //Phải làm tròn số với đơn vị 0.5
                                  size="small"
                                  className="mr-1 height-40"

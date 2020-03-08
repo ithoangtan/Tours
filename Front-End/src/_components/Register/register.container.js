@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-   Form,
    Input,
    Tooltip,
    Icon,
@@ -13,6 +12,7 @@ import {
    message,
    Spin
 } from "antd";
+import { Form } from "@ant-design/compatible";
 
 import { mapAddressNotWardToOptionAntd } from "../../BookTourPage/addressVN";
 

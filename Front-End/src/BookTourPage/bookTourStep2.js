@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import {
-   Form,
    Input,
    Tooltip,
    Icon,
@@ -10,6 +9,8 @@ import {
    Button,
    message
 } from "antd";
+
+import { Form } from "@ant-design/compatible";
 
 import { mapAddressToOptionAntd } from "./addressVN";
 

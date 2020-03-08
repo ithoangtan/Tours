@@ -4,7 +4,17 @@ import { Link } from "react-router-dom";
 
 import parseHtml from "html-react-parser";
 
-import { Carousel, Rate, Icon, Tag, Button, Tooltip } from "antd";
+import {
+   Carousel,
+   Rate,
+   Tag,
+   Button,
+   Tooltip,
+   Timeline,
+   Typography,
+   Tabs
+} from "antd";
+import { Icon } from "@ant-design/compatible";
 
 import MoreTourSingle from "./moreTourSingle.container";
 import TourDetailImg from "../TourPage/tourDetailImages";
@@ -13,9 +23,9 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 import moment from "moment";
 import NumberFormat from "react-number-format";
-
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
-
+const { Paragraph } = Typography;
+const { TabPane } = Tabs;
 export default class TourSingleContainer extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
@@ -66,8 +76,15 @@ export default class TourSingleContainer extends Component {
          : numStar;
    }
 
+   onChangeRows = rows => {
+      this.setState({ rows });
+   };
+
+   onPanelChange(value, mode) {
+      console.log(value, mode);
+   }
    render() {
-      const { size } = this.state;
+      const { size, rows } = this.state;
       const { tourById } = this.props;
       const totalNumberStar = 4.48555555555555555555555555555555555555555555;
       const departureDay = moment(tourById.departureDay).format("l");
@@ -86,9 +103,16 @@ export default class TourSingleContainer extends Component {
                         Mã TOUR: {tourById.idTour}
                      </div> */}
                      <div className="ht-social-container ftco-animate">
-                        <p className="pr-2 mb-0">
-                           <i className="fas fa-share"></i> Chia sẻ ngay:
-                        </p>
+                        {size === "default" ? (
+                           <p className="pr-2 mb-0">
+                              <i className="fas fa-share"></i>
+                           </p>
+                        ) : (
+                           <p className="pr-2 mb-0">
+                              <i className="fas fa-share"></i> Chia sẻ ngay:
+                           </p>
+                        )}
+
                         <p className="pr-2 mb-0 share">
                            <i className="fab fa-facebook-square"></i> Facebook
                         </p>
@@ -256,7 +280,7 @@ export default class TourSingleContainer extends Component {
                            <Tooltip title="Sẵn vé máy bay">
                               <i className="fas fa-plane-departure"></i> {` `}
                            </Tooltip>
-                           <Tooltip title="Phương tiện công cộng">
+                           <Tooltip title="Xe giường nằm">
                               <i className="fas fa-bus-alt"></i> {` `}
                            </Tooltip>
                            <Tooltip title="Bãi biển đẹp">
@@ -271,8 +295,8 @@ export default class TourSingleContainer extends Component {
                            <Tooltip title="Tiệc sinh nhật đúng ngày">
                               <i className="fas fa-birthday-cake"></i> {` `}
                            </Tooltip>
-                           <Tooltip title="Hưỡng dẫn viên">
-                              <i className="fas fa-user-check"></i> {` `}
+                           <Tooltip title="Hướng dẫn viên">
+                              <i className="fas fa-flag"></i> {` `}
                            </Tooltip>
                            <Tooltip title="Bảo hiểm">
                               <i className="fas fa-user-shield"></i> {` `}
@@ -295,6 +319,15 @@ export default class TourSingleContainer extends Component {
                            </Tooltip>
                            <Tooltip title="Trượt tuyết">
                               <i className="fas fa-skiing"></i> {` `}
+                           </Tooltip>{" "}
+                           <Tooltip title="Bao bữa sáng">
+                              <i className="fas fa-utensils"></i> {` `}
+                           </Tooltip>
+                           <Tooltip title="Hỗ trợ visa">
+                              <i className="fab fa-cc-visa"></i> {` `}
+                           </Tooltip>
+                           <Tooltip title="Vé tham quan">
+                              <i className="fas fa-money-bill"></i> {` `}
                            </Tooltip>
                         </div>
                      </div>
@@ -450,41 +483,310 @@ export default class TourSingleContainer extends Component {
                            Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
                            Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
                            Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
-                           Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
                         </div>
                         {/* maybe describe or link trong trang xem chương trình tour... */}
                      </div>
                   </div>
                </div>
                {/* Tour schedule container */}
-               <div className="row">
+               <div className="row ht-info-schedule-container ">
                   {/* Content main */}
                   <div className="col-sm-10 col-md-9 col-lg-9">
-                     <div className="ht-schedule ftco-animate">
-                        <div className="ht-time-line ftco-animate">
-                           https://ant.design/components/timeline/#header
+                     <div
+                        data-spy="scroll"
+                        data-target="#ht-list-info-container"
+                        data-offset="0"
+                        className="ht-schedule-container ftco-animate"
+                     >
+                        <div
+                           className="ht-time-line ftco-animate"
+                           id="ht-list-info-1"
+                        >
+                           <div className="ht-schedule-title">
+                              CHƯƠNG TRÌNH TOUR
+                           </div>
+                           <Timeline mode={"left"} className="width-100">
+                              <Timeline.Item
+                                 label={
+                                    <p className="ht-label">
+                                       {" "}
+                                       01/01/2019{" "}
+                                       <i className="far fa-calendar-alt"></i>
+                                    </p>
+                                 }
+                                 dot={<i className="fas fa-map-pin ht-dot"></i>}
+                                 color=""
+                              >
+                                 <div className="ht-time-line-content">
+                                    <div className="ht-location">
+                                       <i className="fas fa-location-arrow"></i>{" "}
+                                       TP. HỒ CHÍ MINH – SYDNEY
+                                    </div>
+                                    <div className="ht-describe">
+                                       <Paragraph
+                                          ellipsis={{
+                                             rows,
+                                             expandable: true,
+                                             suffix: "--ithoangtan"
+                                          }}
+                                          title={`Hướng dẫn viên Vietravel
+                                          đón Quý khách tại điểm hẹn sân bay 
+                                          Tân Sơn Nhất đón chuyến bay thẳng đi
+                                          Sydney. Nghỉ đêm trên máy bay.Hướng 
+                                          dẫn viên Vietravel đón Quý khách tại 
+                                          điểm hẹn sân bay Tân Sơn Nhất đón 
+                                          chuyến bay thẳng đi Sydney. Nghỉ đêm 
+                                          trên máy bay.`}
+                                       >
+                                          Hướng dẫn viên Vietravel đón Quý khách
+                                          tại điểm hẹn sân bay Tân Sơn Nhất đón
+                                          chuyến bay thẳng đi Sydney. Nghỉ đêm
+                                          trên máy bay.Hướng dẫn viên Vietravel
+                                          đón Quý khách tại điểm hẹn sân bay Tân
+                                          Sơn Nhất đón chuyến bay thẳng đi
+                                          Sydney. Nghỉ đêm trên máy bay.
+                                       </Paragraph>
+                                    </div>
+                                 </div>
+                              </Timeline.Item>
+                              <Timeline.Item
+                                 label={
+                                    <p className="ht-label">
+                                       {" "}
+                                       01/01/2019{" "}
+                                       <i className="far fa-calendar-alt"></i>
+                                    </p>
+                                 }
+                                 dot={<i className="fas fa-map-pin ht-dot"></i>}
+                                 color=""
+                              >
+                                 <div className="ht-time-line-content">
+                                    <div className="ht-location">
+                                       <i className="fas fa-location-arrow"></i>{" "}
+                                       TP. HỒ CHÍ MINH – SYDNEY
+                                    </div>
+                                    <div className="ht-describe">
+                                       <Paragraph
+                                          ellipsis={{
+                                             rows,
+                                             expandable: true,
+                                             suffix: "--ithoangtan"
+                                          }}
+                                          title={`Hướng dẫn viên Vietravel
+                                          đón Quý khách tại điểm hẹn sân bay 
+                                          Tân Sơn Nhất đón chuyến bay thẳng đi
+                                          Sydney. Nghỉ đêm trên máy bay.Hướng 
+                                          dẫn viên Vietravel đón Quý khách tại 
+                                          điểm hẹn sân bay Tân Sơn Nhất đón 
+                                          chuyến bay thẳng đi Sydney. Nghỉ đêm 
+                                          trên máy bay.`}
+                                       >
+                                          Hướng dẫn viên Vietravel đón Quý khách
+                                          tại điểm hẹn sân bay Tân Sơn Nhất đón
+                                          chuyến bay thẳng đi Sydney. Nghỉ đêm
+                                          trên máy bay.Hướng dẫn viên Vietravel
+                                          đón Quý khách tại điểm hẹn sân bay Tân
+                                          Sơn Nhất đón chuyến bay thẳng đi
+                                          Sydney. Nghỉ đêm trên máy bay.
+                                       </Paragraph>
+                                    </div>
+                                 </div>
+                              </Timeline.Item>
+                              <Timeline.Item
+                                 label={
+                                    <p className="ht-label">
+                                       {" "}
+                                       01/01/2019{" "}
+                                       <i className="far fa-calendar-alt"></i>
+                                    </p>
+                                 }
+                                 dot={<i className="fas fa-map-pin ht-dot"></i>}
+                                 color=""
+                              >
+                                 <div className="ht-time-line-content">
+                                    <div className="ht-location">
+                                       <i className="fas fa-location-arrow"></i>{" "}
+                                       TP. HỒ CHÍ MINH – SYDNEY
+                                    </div>
+                                    <div className="ht-describe">
+                                       <Paragraph
+                                          ellipsis={{
+                                             rows,
+                                             expandable: true,
+                                             suffix: "--ithoangtan"
+                                          }}
+                                          title={`Hướng dẫn viên Vietravel
+                                          đón Quý khách tại điểm hẹn sân bay 
+                                          Tân Sơn Nhất đón chuyến bay thẳng đi
+                                          Sydney. Nghỉ đêm trên máy bay.Hướng 
+                                          dẫn viên Vietravel đón Quý khách tại 
+                                          điểm hẹn sân bay Tân Sơn Nhất đón 
+                                          chuyến bay thẳng đi Sydney. Nghỉ đêm 
+                                          trên máy bay.`}
+                                       >
+                                          Hướng dẫn viên Vietravel đón Quý khách
+                                          tại điểm hẹn sân bay Tân Sơn Nhất đón
+                                          chuyến bay thẳng đi Sydney. Nghỉ đêm
+                                          trên máy bay.Hướng dẫn viên Vietravel
+                                          đón Quý khách tại điểm hẹn sân bay Tân
+                                          Sơn Nhất đón chuyến bay thẳng đi
+                                          Sydney. Nghỉ đêm trên máy bay.
+                                       </Paragraph>
+                                    </div>
+                                 </div>
+                              </Timeline.Item>
+                           </Timeline>
                         </div>
-                        <div className="ht-content-schedule ftco-animate">
+                        <div
+                           className="ht-content-schedule ftco-animate"
+                           id="ht-list-info-2"
+                        >
+                           <div className="ht-schedule-title">
+                              LỊCH TRÌNH CHI TIẾT TOUR
+                           </div>
                            <div className="ck-content">
                               {this.parseHTMLSchedule()}
                            </div>
                         </div>
-                        <div className="ht-info-more ftco-animate">
-                           https://ant.design/components/tabs/
-                           <div className="ht-choose-different-day ftco-animate">
-                              https://ant.design/components/calendar/
+                        <div
+                           className="ht-content-policy ftco-animate"
+                           id="ht-list-info-3"
+                        >
+                           <div className="ht-schedule-title">
+                              CHÍNH SÁCH VÀ ĐIỀU KHOẢN
+                           </div>
+                           <Tabs tabPosition={"right"}>
+                              <TabPane tab="Chi tiết giá tour" key="1">
+                                 Bao gồm Phí visa Úc (Lưu ý: visa Úc sẽ không
+                                 dán vào hộ chiếu) Vé máy bay khứ hồi, vé chặng
+                                 nội địa Úc (Hàng không Jetstar hành lý 30 kg/01
+                                 kiện, có phục vụ ăn trên máy bay chặng quốc tế,
+                                 lưu ý quý khách nhớ đem theo áo ấm trên máy bay
+                                 vì hàng không không phuc vụ phát mền). Thuế phi
+                                 trường hai nước, phụ phí xăng dầu và bảo hiểm
+                                 hàng không. Khách sạn tiêu chuẩn quốc tế 3 sao,
+                                 phòng đôi Nhà hàng, chi phí tham quan trong
+                                 chương trình. Xe máy lạnh đưa đón đoàn theo
+                                 chương trình. Hướng dẫn viên Vietravel suốt
+                                 tuyến. Đặc biệt, Vietravel tặng thêm cho tất cả
+                                 du khách (đến 80 tuổi) phí Bảo hiểm du lịch
+                                 toàn cầu với mức bồi thường tối đa là
+                                 1.400.000.000 VND. Không bao gồm: Phí phòng đơn
+                                 (dành cho khách yêu cầu ở phòng đơn): Nước uống
+                                 (bia rượu trong bữa ăn), điện thoại, giặt ủi,
+                                 hành lý quá cước theo quy định của hàng không.
+                                 Thuốc men, bệnh viện… và chi phí cá nhân của
+                                 khách ngoài chương trình. Chi phí dời ngày, đổi
+                                 chặng, nâng hạng vé máy bay. Trường hợp Quý
+                                 khách không sử dụng chặng đi của vé đoàn theo
+                                 tour, các chặng nội địa và quốc tế còn lại sẽ
+                                 bị hủy hoặc không sử dụng chặng về cũng không
+                                 được hoàn do điều kiện của hãng Hàng Không Tiền
+                                 bồi dưỡng cho hướng dẫn viên và tài xế địa
+                                 phương (150.000/khách/ngày). Quà tặng: Quà tặng
+                                 Vietravel. Thẻ thành viên với nhiều ưu đãi Giá
+                                 tour dành cho trẻ em: + Trẻ em dưới 2 tuổi: 30%
+                                 giá tour người lớn. + Trẻ em từ 2 tuổi đến dưới
+                                 12 tuổi: 100% giá tour người lớn (có chế độ
+                                 giường riêng). + Khi nộp hồ sơ quý khách đặt
+                                 cọc 20 triệu/ khách. Quy trình đăng ký & thanh
+                                 toán: - Đợt 1: Đặt cọc 20.000.000 VND/khách. -
+                                 Đợt 2: Thanh toán số tiền tour còn lại sau khi
+                                 được chấp thuận visa. Điều khoản hủy tour: +
+                                 Sau khi đặt cọc tour và trước khi Vietravel nộp
+                                 phí visa: không mất chi phí. + Trường hợp Quý
+                                 khách bị từ chối visa, chi phí không hoàn lại
+                                 là 5.000.000 VND - Nếu hủy hoặc chuyển sang các
+                                 chuyến du lịch khác khi đã nộp visa mất phí cọc
+                                 tour 30.000.000 vnd/khách - Nếu hủy hoặc chuyển
+                                 sang các chuyến du lịch khác khi đã có visa chi
+                                 phí hủy tour là 100% tiền tour. Lưu ý: Tour
+                                 khuyến mãi không hoàn tiền tour vì bất kỳ lí do
+                                 nào Trường hợp bất khả kháng: - Nếu chương
+                                 trình du lịch bị hủy bỏ hoặc thay đổi bởi một
+                                 trong hai bên vì lý do bất khả kháng (hỏa hoạn,
+                              </TabPane>
+                              <TabPane tab="Lưu ý" key="2">
+                                 TRỤ SỞ CHÍNH Địa chỉ: 190 Pasteur, Phường 6,
+                                 Quận 3, Tp. Hồ Chí Minh Điện thoại: (84-28)
+                                 3822 8898 Fax: (84-28) 3829 9142 Email:
+                                 info@vietravel.com
+                              </TabPane>
+                              <TabPane tab="Ý kiến khách hàng" key="4">
+                                 ý kiến khách hàng
+                              </TabPane>
+                              <TabPane tab="Liên hệ" key="3">
+                                 Liên hệ
+                              </TabPane>
+                           </Tabs>
+                        </div>
+                        <div
+                           className="ht-info-more ftco-animate"
+                           id="ht-list-info-4"
+                        >
+                           <div className="ht-schedule-title">
+                              ĐÁNH GIÁ VÀ NHẬN XÉT
+                           </div>
+                           Đánhg giá, nhận xét của khách hàng
+                        </div>
+                        <div
+                           className="ht-tour-more-container ftco-animate"
+                           id="ht-list-info-5"
+                        >
+                           <div className="ht-schedule-title">
+                              NHỮNG TOUR LIÊN QUAN
+                           </div>
+                           <div className="ht-tour-more">
+                              <MoreTourSingle
+                                 idImage={2}
+                                 className="ftco-animate"
+                              />
+                              <MoreTourSingle
+                                 idImage={1}
+                                 className="ftco-animate"
+                              />
                            </div>
                         </div>
                      </div>
                   </div>
                   {/* MENU info schedule, detail, note, date, concat, map, more tour,... */}
-                  <div className="col-sm-2 col-md-3 col-lg-3">
-                     <div className="ht-list-info ftco-animate">
-                        https://getbootstrap.com/docs/4.3/components/scrollspy/#list-item-1
+                  <div className="col-sm-2 col-md-3 col-lg-3 ">
+                     <div
+                        id="ht-list-info-container"
+                        className="list-group ftco-animate ht-list-info"
+                     >
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-1"
+                        >
+                           Mốc thời gian lịch trình
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-2"
+                        >
+                           Lịch trình chi tiết
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-3"
+                        >
+                           Điều khoản và chính sách
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-4"
+                        >
+                           Thông tin khác
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-5"
+                        >
+                           Xem những tour khác
+                        </a>
                      </div>
                   </div>
-                  <MoreTourSingle idImage={2} className="ftco-animate" />
-                  <MoreTourSingle idImage={1} className="ftco-animate" />
                </div>
             </div>
          </section>
