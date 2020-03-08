@@ -9,7 +9,8 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Form, Icon, Input, Button, Checkbox, message } from "antd";
+import { Icon, Input, Button, Checkbox, message } from "antd";
+import { Form } from "@ant-design/compatible";
 
 class LoginContainer extends Component {
    constructor(props) {

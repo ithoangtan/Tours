@@ -9,7 +9,8 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Form, Icon, Input, Button, message } from "antd";
+import { Icon, Input, Button, message } from "antd";
+import { Form } from "@ant-design/compatible";
 import ResultDynamic from "../../ResultBoardPage/Result";
 
 class ForgotPasswordContainer extends Component {

@@ -1986,12 +1986,12 @@ html {
 
 .ht-detail-tour-img-container .ht-tag {
    position: absolute;
-   top: 6px;
-   right: 3px;
+   top: 100px;
+   left: 0px;
    display: flex;
    flex-direction: column;
    justify-content: flex-start;
-   align-items: flex-end;
+   align-items: flex-start;
    z-index: 2;
 }
 .ht-detail-tour-img-container .ht-tag-over {
@@ -2081,7 +2081,7 @@ html {
 }
 .ht-detail-tour-info-container:hover .ht-info-container-3-buy-1,
 .ht-detail-tour-info-container:hover .ht-info-container-3-buy-2 {
-   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12), 1px 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .ht-detail-tour-info-container .ht-info-container-1 {
@@ -2179,6 +2179,7 @@ html {
 @media (max-width: 320px) {
 }
 .ht-detail-tour-info-container .ht-divide {
+   margin-top: 6px;
    border-top: 1px solid rgba(4, 112, 103, 0.212);
 }
 .ht-info-container-3-buy-1,
@@ -2257,6 +2258,33 @@ html {
    background: rgba(141, 141, 141, 0.199);
 }
 
+/* Desktop */
+@media (min-width: 1024.01px) {
+}
+
+/*Ipad ngang(1024 x 768)*/
+@media (max-width: 1024px) {
+}
+
+/*Ipad dọc(768 x 1024)*/
+@media (max-width: 768px) {
+}
+/*Tablet nhỏ(480 x 640)*/
+@media (max-width: 480px) {
+}
+/*Iphone(480 x 640)*/
+@media (max-width: 320px) {
+}
+
+.ht-info-schedule-container {
+   margin-top: 16px;
+}
+
+.ht-schedule-container {
+}
+
+.ht-schedule-container .ht-time-line {
+}
 /* Desktop */
 @media (min-width: 1024.01px) {
 }

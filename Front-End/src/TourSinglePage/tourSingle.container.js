@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 import parseHtml from "html-react-parser";
 
-import { Carousel, Rate, Icon, Tag, Button, Tooltip } from "antd";
+import { Carousel, Rate, Tag, Button, Tooltip, Timeline } from "antd";
+import { Icon } from "@ant-design/compatible";
 
 import MoreTourSingle from "./moreTourSingle.container";
 import TourDetailImg from "../TourPage/tourDetailImages";
@@ -13,7 +14,6 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 import moment from "moment";
 import NumberFormat from "react-number-format";
-
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 export default class TourSingleContainer extends Component {
@@ -86,9 +86,16 @@ export default class TourSingleContainer extends Component {
                         Mã TOUR: {tourById.idTour}
                      </div> */}
                      <div className="ht-social-container ftco-animate">
-                        <p className="pr-2 mb-0">
-                           <i className="fas fa-share"></i> Chia sẻ ngay:
-                        </p>
+                        {size === "default" ? (
+                           <p className="pr-2 mb-0">
+                              <i className="fas fa-share"></i>
+                           </p>
+                        ) : (
+                           <p className="pr-2 mb-0">
+                              <i className="fas fa-share"></i> Chia sẻ ngay:
+                           </p>
+                        )}
+
                         <p className="pr-2 mb-0 share">
                            <i className="fab fa-facebook-square"></i> Facebook
                         </p>
@@ -256,7 +263,7 @@ export default class TourSingleContainer extends Component {
                            <Tooltip title="Sẵn vé máy bay">
                               <i className="fas fa-plane-departure"></i> {` `}
                            </Tooltip>
-                           <Tooltip title="Phương tiện công cộng">
+                           <Tooltip title="Xe giường nằm">
                               <i className="fas fa-bus-alt"></i> {` `}
                            </Tooltip>
                            <Tooltip title="Bãi biển đẹp">
@@ -271,8 +278,8 @@ export default class TourSingleContainer extends Component {
                            <Tooltip title="Tiệc sinh nhật đúng ngày">
                               <i className="fas fa-birthday-cake"></i> {` `}
                            </Tooltip>
-                           <Tooltip title="Hưỡng dẫn viên">
-                              <i className="fas fa-user-check"></i> {` `}
+                           <Tooltip title="Hướng dẫn viên">
+                              <i className="fas fa-flag"></i> {` `}
                            </Tooltip>
                            <Tooltip title="Bảo hiểm">
                               <i className="fas fa-user-shield"></i> {` `}
@@ -295,6 +302,15 @@ export default class TourSingleContainer extends Component {
                            </Tooltip>
                            <Tooltip title="Trượt tuyết">
                               <i className="fas fa-skiing"></i> {` `}
+                           </Tooltip>{" "}
+                           <Tooltip title="Bao bữa sáng">
+                              <i className="fas fa-utensils"></i> {` `}
+                           </Tooltip>
+                           <Tooltip title="Hỗ trợ visa">
+                              <i className="fab fa-cc-visa"></i> {` `}
+                           </Tooltip>
+                           <Tooltip title="Vé tham quan">
+                              <i className="fas fa-money-bill"></i> {` `}
                            </Tooltip>
                         </div>
                      </div>
@@ -457,30 +473,100 @@ export default class TourSingleContainer extends Component {
                   </div>
                </div>
                {/* Tour schedule container */}
-               <div className="row">
+               <div className="row ht-info-schedule-container">
                   {/* Content main */}
+
                   <div className="col-sm-10 col-md-9 col-lg-9">
-                     <div className="ht-schedule ftco-animate">
-                        <div className="ht-time-line ftco-animate">
-                           https://ant.design/components/timeline/#header
+                     <div
+                        className="ht-schedule-container ftco-animate"
+                        data-spy="scroll"
+                        data-target="#list-example"
+                        data-offset="0"
+                     >
+                        <div
+                           className="ht-time-line ftco-animate"
+                           id="ht-list-info-1"
+                        >
+                           <Timeline mode={"left"}>
+                              <Timeline.Item label="2015-09-01">
+                                 Create a services
+                              </Timeline.Item>
+                              <Timeline.Item label="2015-09-01 09:12:11">
+                                 Solve initial network problems
+                              </Timeline.Item>
+                              <Timeline.Item>Technical testing</Timeline.Item>
+                              <Timeline.Item label="2015-09-01 09:12:11">
+                                 Network problems being solved
+                              </Timeline.Item>
+                           </Timeline>
                         </div>
-                        <div className="ht-content-schedule ftco-animate">
+                        <div
+                           className="ht-content-schedule ftco-animate"
+                           id="ht-list-info-2"
+                        >
                            <div className="ck-content">
                               {this.parseHTMLSchedule()}
                            </div>
                         </div>
-                        <div className="ht-info-more ftco-animate">
+                        <div
+                           className="ht-content-policy ftco-animate"
+                           id="ht-list-info-3"
+                        >
                            https://ant.design/components/tabs/
                            <div className="ht-choose-different-day ftco-animate">
                               https://ant.design/components/calendar/
                            </div>
                         </div>
+                        <div
+                           className="ht-info-more ftco-animate"
+                           id="ht-list-info-4"
+                        >
+                           Đánhg giá, nhận xét của khách hàng
+                        </div>
+                        <div
+                           className="ht-tour-more ftco-animate"
+                           id="ht-list-info-5"
+                        >
+                           Đánhg giá, nhận xét của khách hàng
+                        </div>
                      </div>
                   </div>
                   {/* MENU info schedule, detail, note, date, concat, map, more tour,... */}
                   <div className="col-sm-2 col-md-3 col-lg-3">
-                     <div className="ht-list-info ftco-animate">
-                        https://getbootstrap.com/docs/4.3/components/scrollspy/#list-item-1
+                     <div
+                        className="list-group ht-list-info ftco-animate"
+                        id="ht-list-info-container"
+                     >
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-1"
+                        >
+                           Mốc thời gian lịch trình
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-2"
+                        >
+                           Lịch trình chi tiết
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-3"
+                        >
+                           Điều khoản và chính sách
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-4"
+                        >
+                           Thông tin khác
+                        </a>
+                        <a
+                           className="list-group-item list-group-item-action"
+                           href="#ht-list-info-4"
+                        >
+                           Xem những tour khác
+                        </a>
                      </div>
                   </div>
                   <MoreTourSingle idImage={2} className="ftco-animate" />
