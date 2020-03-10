@@ -6,9 +6,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as tourActions from "../_actions/tour.actions";
-import * as INDEX_CONSTANTS from "../_constants/index.constants";
-
-import funcLoadJs from "../_constants/loadJs.constants";
 
 import TourDetailContainer from "./tourDetail.container";
 import SearchEngineTourPage from "../_components/SearchEngine/searchEngineTourPage.container";
@@ -193,8 +190,6 @@ class TourContainer extends Component {
          await fetchListTourRequest();
       }
       await fetchListTourImageRequest();
-
-      await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    };
 
    componentDidMount() {
