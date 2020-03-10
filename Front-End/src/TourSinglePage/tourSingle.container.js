@@ -495,7 +495,7 @@ export default class TourSingleContainer extends Component {
                      <div
                         data-spy="scroll"
                         data-target="#ht-list-info-container"
-                        data-offset="0"
+                        data-offset="10"
                         className="ht-schedule-container ftco-animate"
                      >
                         <div

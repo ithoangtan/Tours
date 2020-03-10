@@ -16,9 +16,6 @@ import { ToastContainer } from "react-toastify";
 
 //style
 import "react-toastify/dist/ReactToastify.min.css";
-import "antd/dist/antd.less"; //customize theme
-
-//import components:
 
 class App extends Component {
    render() {

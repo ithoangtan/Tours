@@ -9,8 +9,7 @@ export default class BlogContainer extends Component {
    componentDidMount() {
       window.scrollTo({
          top: 0,
-         left: 0,
-         behavior: "smooth"
+         left: 0
       });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }

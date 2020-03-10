@@ -8,9 +8,6 @@ import * as tourActions from "../_actions/tour.actions";
 import * as imageActions from "../_actions/image.actions";
 import * as scheduleActions from "../_actions/schedule.actions";
 
-import * as INDEX_CONSTANTS from "../_constants/index.constants";
-import funcLoadJs from "../_constants/loadJs.constants";
-
 import TourSingleContainer from "./tourSingle.container";
 
 class TourSinglePage extends Component {
@@ -25,8 +22,6 @@ class TourSinglePage extends Component {
    }
 
    fetch = async () => {
-      await funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
-
       const { idTour } = this.props.match.params;
 
       const {
