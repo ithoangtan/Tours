@@ -286,6 +286,7 @@ export default class SearchEngineContainer extends Component {
                                           onChange={this.onChangeKeySearch}
                                        >
                                           <Input
+                                             size={sizeWindow}
                                              className="ht-width100"
                                              suffix={
                                                 <Icon

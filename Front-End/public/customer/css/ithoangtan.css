@@ -2292,12 +2292,32 @@ html {
    justify-content: center;
    align-items: center;
    font-size: 1.3rem;
-   margin-bottom: 6px;
    font-weight: 500;
    color: black;
+   background-image: linear-gradient(180deg, #66a6ff9f 0%, #89f6fe50 100%);
+   padding: 4px;
+   border-top-left-radius: 12px;
+   border-top-right-radius: 12px;
+}
+
+.ht-schedule-container .ht-time-line .ht-schedule-timeline,
+.ht-schedule-container .ht-content-policy .ht-tabs-schedule,
+.ht-schedule-container .ht-info-more .ht-rating,
+.ht-schedule-container .ht-tour-more-container .ht-tour-more,
+.ht-schedule-container .ht-content-schedule .ht-content {
+   padding-top: 12px;
+   margin-bottom: 18px;
+   border-bottom: 1px dashed rgba(0, 255, 221, 0.4);
+   border-left: 1px solid rgba(0, 255, 221, 0.25);
+   border-right: 1px solid rgba(0, 255, 221, 0.25);
 }
 
 .ht-schedule-container .ht-content-policy {
+}
+
+.ht-schedule-container .ht-content-policy .ht-tabs-schedule {
+}
+.ht-schedule-container .ht-info-more {
 }
 .ht-schedule-container .ht-content-policy .ht-choose-different-day {
    width: 300px;
@@ -2324,6 +2344,7 @@ html {
 }
 
 .ht-schedule-container .ht-time-line .ht-time-line-content .ht-describe {
+   text-align: justify;
 }
 
 .ht-info-schedule-container .ht-list-info {
@@ -2360,7 +2381,107 @@ html {
 .ant-typography-expand {
    color: #1da57a !important;
 }
+.ht-schedule-container .ht-info-more .ht-rating {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+.ht-schedule-container .ht-info-more .ht-rating .ht-header-rating {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 6px;
+   padding: 0 6px 6px 6px;
+}
 
+.ht-schedule-container
+   .ht-info-more
+   .ht-rating
+   .ht-header-rating
+   .ht-sort-rating {
+}
+
+.ht-schedule-container .ht-info-more .ht-rating .ht-tabs-rating {
+}
+
+.ht-rating .ht-tabs-rating .ht-rate-detail {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: flex-start;
+   border-top: 1px solid rgba(24, 190, 127, 0.773);
+   padding-bottom: 6px;
+}
+.ht-rating .ht-tabs-rating .ht-rate-detail .ht-rate-avatar {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.ht-rating .ht-tabs-rating .ht-rate-detail .ht-rate-content {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+.ht-rate-content .ht-rate-detail-name-and-date {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.ht-rate-detail-name-and-date .ht-name {
+   font-size: 1rem;
+   font-weight: 500;
+}
+
+.ht-rate-detail-name-and-date .ht-date {
+   font-weight: 100;
+   color: rgba(73, 73, 73, 0.8);
+}
+
+.ht-rate-content .ht-slider-container-mini {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   font-size: 1rem;
+}
+
+.ht-rate-content .ht-rate-description {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+.ht-rate-box {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-right: 6px;
+}
+
+.ht-rate-box .ht-name {
+   font-weight: 450;
+   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+   border-top-left-radius: 6px;
+   border-bottom-left-radius: 6px;
+   padding: 0px 6px;
+}
+.ht-rate-box .ht-rate {
+   font-weight: 450;
+   background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+   border-top-right-radius: 6px;
+   border-bottom-right-radius: 6px;
+   padding: 0px 12px;
+}
+
+.ht-text-justify {
+   text-align: justify;
+}
 /* Desktop */
 @media (min-width: 1024.01px) {
 }
