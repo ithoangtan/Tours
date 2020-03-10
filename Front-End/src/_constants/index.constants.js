@@ -2,6 +2,7 @@ export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
 // export const API_ENDPOINT = "http://localhost:8000";
 
 export const CustomerArrayExternalScript = [
+   // "/customer/js/bootstrap.min.js",
    // "/customer/js/jquery.min.js",
    // "/customer/js/jquery-migrate-3.0.1.min.js",
    // "/customer/js/popper.min.js",
@@ -17,11 +18,10 @@ export const CustomerArrayExternalScript = [
    // "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false",
    // "/customer/js/google-map.js",
    "/customer/js/main.js",
-   "/customer/js/ithoangtan.js",
    // "http://cdn.iframe.ly/embed.js",
    // "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",,
-   // "/customer/js/bootstrap.min.js",
-   "/customer/js/ithoangtan2.js"
+   "/customer/js/ithoangtan2.js",
+   "/customer/js/ithoangtan.js"
 ];
 
 export const AdminArrayExternalScript = [
