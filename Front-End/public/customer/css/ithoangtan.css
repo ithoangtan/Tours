@@ -945,6 +945,13 @@
    align-self: center;
    align-items: center;
 }
+.d-flex-col-end-end {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   align-self: flex-end;
+   align-items: flex-end;
+}
 
 .ht-map-maker {
    color: #0071c2;
@@ -2496,4 +2503,43 @@ html {
 }
 /*Iphone(480 x 640)*/
 @media (max-width: 320px) {
+}
+.ht-d-flex-col-start-start {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+.ht-d-flex-col-start-start .ht-book-tour-info-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+
+/* Desktop */
+@media (min-width: 1024.01px) {
+}
+
+/*Ipad ngang(1024 x 768)*/
+@media (max-width: 1024px) {
+}
+
+/*Ipad dọc(768 x 1024)*/
+@media (max-width: 768px) {
+   .ht-d-flex-col-start-start .ht-book-tour-info-container {
+      flex-direction: column;
+   }
+}
+/*Tablet nhỏ(480 x 640)*/
+@media (max-width: 480px) {
+   .ht-d-flex-col-start-start .ht-book-tour-info-container {
+      flex-direction: column;
+   }
+}
+/*Iphone(480 x 640)*/
+@media (max-width: 320px) {
+   .ht-d-flex-col-start-start .ht-book-tour-info-container {
+      flex-direction: column;
+   }
 }

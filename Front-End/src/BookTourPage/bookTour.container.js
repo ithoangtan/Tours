@@ -95,7 +95,6 @@ class BookTourContainer extends Component {
       const { tourById, listImageByIdTour } = this.props;
       return (
          <BookTourStep1
-            style={{ fontSize: "1.1rem" }}
             tourById={tourById}
             listImageByIdTour={listImageByIdTour}
          />
