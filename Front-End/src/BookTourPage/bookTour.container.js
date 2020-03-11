@@ -20,7 +20,7 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 const { Step } = Steps;
 
 const stepStyle = {
-   marginBottom: 60,
+   marginBottom: 18,
    boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
 
@@ -95,6 +95,7 @@ class BookTourContainer extends Component {
       const { tourById, listImageByIdTour } = this.props;
       return (
          <BookTourStep1
+            style={{ fontSize: "1.1rem" }}
             tourById={tourById}
             listImageByIdTour={listImageByIdTour}
          />
@@ -176,7 +177,7 @@ class BookTourContainer extends Component {
       ];
 
       return (
-         <div className="book-tour-container">
+         <div className="book-tour-container container">
             {this.onRedirect()}
             <Steps
                current={current}
