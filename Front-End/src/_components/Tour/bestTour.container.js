@@ -71,7 +71,7 @@ class BestTourContainer extends Component {
                               className="img-fluid"
                               alt="best tour"
                            />
-                           <p className="sale">
+                           <div className="sale">
                               <Countdown
                                  value={
                                     Date.now() +
@@ -86,7 +86,7 @@ class BestTourContainer extends Component {
                                  format="Còn Dd Hh m:s"
                               />
                               {/* {tour.sale !== 0 ? `${tour.sale}% sale` : null} */}
-                           </p>
+                           </div>
                         </div>
                         <div className="text ht-d-flex-col">
                            <h5 className="price">Giá từ {`${tour.price}đ`}</h5>
@@ -102,7 +102,8 @@ class BestTourContainer extends Component {
                                  }
                               }}
                            >
-                              <i class="fas fa-map-marker-alt"> </i> Hồ Chí Minh
+                              <i className="fas fa-map-marker-alt"> </i> Hồ Chí
+                              Minh
                            </Link>
                            <h4 className="name-tour">
                               <Link

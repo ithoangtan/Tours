@@ -77,9 +77,9 @@ class LoginContainer extends Component {
       const { getFieldDecorator } = this.props.form;
       const email = sessionStorage.getItem("email");
       return (
-         <Form onSubmit={this.handleSubmit} className="login-form">
+         <Form onSubmit={this.handleSubmit} className="login-form mt-1 mb-4">
             {this.haveRedirect()}
-            <Form.Item>
+            <Form.Item className="pb-2">
                {getFieldDecorator("email", {
                   initialValue:
                      email !== null && email !== undefined && email !== ""
@@ -101,13 +101,13 @@ class LoginContainer extends Component {
                   />
                )}
             </Form.Item>
-            <Form.Item>
+            <Form.Item className="pb-2">
                {getFieldDecorator("password", {
                   rules: [
                      { required: true, message: "Please input your password!" }
                   ]
                })(
-                  <Input
+                  <Input.Password
                      name="password"
                      prefix={
                         <Icon
@@ -138,10 +138,10 @@ class LoginContainer extends Component {
                </Button>
                <div className="d-flex">
                   <Button className="ht-login-fb">
-                     <i class="fab fa-facebook"></i> Facebook
+                     <i className="fab fa-facebook"></i> Facebook
                   </Button>
                   <Button className="ht-login-gg">
-                     <i class="fab fa-google"></i> Google
+                     <i className="fab fa-google"></i> Google
                   </Button>
                </div>
                Or <Link to="/register">register now!</Link>

@@ -52,7 +52,7 @@ export default class RecentStoriesContainer extends Component {
                            </p>
                            <Tooltip title={`Xem nhận xét`} placement="top">
                               <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i class="fas fa-comment"> 100 </i>
+                                 <i className="fas fa-comment"> 100 </i>
                               </Link>
                            </Tooltip>
                            <div className="text mt-3 float-right d-block">
@@ -100,7 +100,7 @@ export default class RecentStoriesContainer extends Component {
                            </p>
                            <Tooltip title={`Xem nhận xét`} placement="top">
                               <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i class="fas fa-comment"> 100 </i>
+                                 <i className="fas fa-comment"> 100 </i>
                               </Link>
                            </Tooltip>
                            <div className="text mt-3 float-right d-block">
@@ -148,7 +148,7 @@ export default class RecentStoriesContainer extends Component {
                            </p>
                            <Tooltip title={`Xem nhận xét`} placement="top">
                               <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i class="fas fa-comment"> 100 </i>
+                                 <i className="fas fa-comment"> 100 </i>
                               </Link>
                            </Tooltip>
                            <div className="text mt-3 float-right d-block">
@@ -196,7 +196,7 @@ export default class RecentStoriesContainer extends Component {
                            </p>
                            <Tooltip title={`Xem nhận xét`} placement="top">
                               <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i class="fas fa-comment"> 100 </i>
+                                 <i className="fas fa-comment"> 100 </i>
                               </Link>
                            </Tooltip>
                            <div className="text mt-3 float-right d-block">
@@ -244,7 +244,7 @@ export default class RecentStoriesContainer extends Component {
                            </p>
                            <Tooltip title={`Xem nhận xét`} placement="top">
                               <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i class="fas fa-comment"> 100 </i>
+                                 <i className="fas fa-comment"> 100 </i>
                               </Link>
                            </Tooltip>
                            <div className="text mt-3 float-right d-block">
@@ -292,7 +292,7 @@ export default class RecentStoriesContainer extends Component {
                            </p>
                            <Tooltip title={`Xem nhận xét`} placement="top">
                               <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i class="fas fa-comment"> 100 </i>
+                                 <i className="fas fa-comment"> 100 </i>
                               </Link>
                            </Tooltip>
                            <div className="text mt-3 float-right d-block">

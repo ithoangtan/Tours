@@ -3,16 +3,15 @@ import React from "react";
 import {
    Input,
    Tooltip,
-   Icon,
    Cascader,
    Select,
    Checkbox,
    Button,
    AutoComplete,
-   message,
-   Spin
+   message
+   // Spin
 } from "antd";
-import { Form } from "@ant-design/compatible";
+import { Form, Icon } from "@ant-design/compatible";
 
 import { mapAddressNotWardToOptionAntd } from "../../BookTourPage/addressVN";
 
@@ -159,112 +158,123 @@ class RegistrationContainer extends React.Component {
       ));
 
       return (
-         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-            <Spin
+         <Form
+            {...formItemLayout}
+            onSubmit={this.handleSubmit}
+            className="mt-3 mb-3"
+         >
+            {/* <Spin
                tip="Đang xác thực thông tin..."
                spinning={this.state.loading}
                size="large"
+            > */}
+            {this.haveRedirect()}
+            <Form.Item className="mb-2" label="E-mail *">
+               {getFieldDecorator("email", {
+                  rules: [
+                     {
+                        type: "email",
+                        message: "The input is not valid E-mail!"
+                     },
+                     {
+                        required: true,
+                        message: "Please input your E-mail!"
+                     }
+                  ]
+               })(<Input />)}
+            </Form.Item>
+            <Form.Item className="mb-2" label="Password *" hasFeedback>
+               {getFieldDecorator("password", {
+                  rules: [
+                     {
+                        required: true,
+                        message: "Please input your password!"
+                     },
+                     {
+                        validator: this.validateToNextPassword
+                     }
+                  ]
+               })(<Input.Password />)}
+            </Form.Item>
+            <Form.Item className="mb-2" label="Confirm Password *" hasFeedback>
+               {getFieldDecorator("confirm", {
+                  rules: [
+                     {
+                        required: true,
+                        message: "Please confirm your password!"
+                     },
+                     {
+                        validator: this.compareToFirstPassword
+                     }
+                  ]
+               })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+            </Form.Item>
+            <Form.Item
+               className="mb-2"
+               label={
+                  <span>
+                     Nickname&nbsp;
+                     <Tooltip title="What do you want others to call you?">
+                        <Icon type="question-circle-o" />*
+                     </Tooltip>
+                  </span>
+               }
             >
-               {this.haveRedirect()}
-               <Form.Item label="E-mail">
-                  {getFieldDecorator("email", {
-                     rules: [
-                        {
-                           type: "email",
-                           message: "The input is not valid E-mail!"
-                        },
-                        {
-                           required: true,
-                           message: "Please input your E-mail!"
-                        }
-                     ]
-                  })(<Input />)}
-               </Form.Item>
-               <Form.Item label="Password" hasFeedback>
-                  {getFieldDecorator("password", {
-                     rules: [
-                        {
-                           required: true,
-                           message: "Please input your password!"
-                        },
-                        {
-                           validator: this.validateToNextPassword
-                        }
-                     ]
-                  })(<Input.Password />)}
-               </Form.Item>
-               <Form.Item label="Confirm Password" hasFeedback>
-                  {getFieldDecorator("confirm", {
-                     rules: [
-                        {
-                           required: true,
-                           message: "Please confirm your password!"
-                        },
-                        {
-                           validator: this.compareToFirstPassword
-                        }
-                     ]
-                  })(<Input.Password onBlur={this.handleConfirmBlur} />)}
-               </Form.Item>
-               <Form.Item
-                  label={
-                     <span>
-                        Nickname&nbsp;
-                        <Tooltip title="What do you want others to call you?">
-                           <Icon type="question-circle-o" />
-                        </Tooltip>
-                     </span>
-                  }
-               >
-                  {getFieldDecorator("username", {
-                     rules: [
-                        {
-                           required: true,
-                           message: "Please input your username!",
-                           whitespace: true
-                        }
-                     ]
-                  })(<Input />)}
-               </Form.Item>
-               <Form.Item label="Habitual Residence">
-                  {getFieldDecorator("address", {
-                     initialValue: ["Hồ Chí Minh", "Thủ Đức"],
-                     rules: [
-                        {
-                           type: "array",
-                           required: true,
-                           message: "Please select your habitual residence!"
-                        }
-                     ]
-                  })(<Cascader options={mapAddressNotWardToOptionAntd()} />)}
-               </Form.Item>
-               <Form.Item label="Phone Number">
-                  {getFieldDecorator("phone", {
-                     rules: [
-                        {
-                           required: true,
-                           message: "Please input your phone number!"
-                        }
-                     ]
-                  })(
-                     <Input
-                        addonBefore={prefixSelector}
-                        style={{ width: "100%" }}
-                     />
-                  )}
-               </Form.Item>
-               <Form.Item label="Website">
-                  {getFieldDecorator("website")(
-                     <AutoComplete
-                        dataSource={websiteOptions}
-                        onChange={this.handleWebsiteChange}
-                        placeholder="website"
-                     >
-                        <Input />
-                     </AutoComplete>
-                  )}
-               </Form.Item>
-               {/* <Form.Item
+               {getFieldDecorator("username", {
+                  rules: [
+                     {
+                        required: true,
+                        message: "Please input your username!",
+                        whitespace: true
+                     }
+                  ]
+               })(<Input />)}
+            </Form.Item>
+            <Form.Item className="mb-2" label="Habitual Residence">
+               {getFieldDecorator("address", {
+                  initialValue: ["Hồ Chí Minh", "Thủ Đức"],
+                  rules: [
+                     {
+                        type: "array",
+                        required: true,
+                        message: "Please select your habitual residence!"
+                     }
+                  ]
+               })(
+                  <Cascader
+                     options={mapAddressNotWardToOptionAntd()}
+                     className="ht-width-100"
+                  />
+               )}
+            </Form.Item>
+            <Form.Item className="mb-2" label="Phone Number *">
+               {getFieldDecorator("phone", {
+                  rules: [
+                     {
+                        required: true,
+                        message: "Please input your phone number!"
+                     }
+                  ]
+               })(
+                  <Input
+                     addonBefore={prefixSelector}
+                     style={{ width: "100%" }}
+                  />
+               )}
+            </Form.Item>
+            <Form.Item className="mb-2" label="Website">
+               {getFieldDecorator("website")(
+                  <AutoComplete
+                     dataSource={websiteOptions}
+                     onChange={this.handleWebsiteChange}
+                     placeholder="website"
+                     className="ht-width-100"
+                  >
+                     <Input />
+                  </AutoComplete>
+               )}
+            </Form.Item>
+            {/* <Form.Item className="mb-2"
                label="Captcha"
                extra="We must make sure that your are a human."
             >
@@ -284,34 +294,34 @@ class RegistrationContainer extends React.Component {
                   </Col>
                </Row>
             </Form.Item> */}
-               <Form.Item {...tailFormItemLayout}>
-                  {getFieldDecorator("agreement", {
-                     valuePropName: "checked"
-                  })(
-                     <Checkbox>
-                        I have read the{" "}
-                        <a
-                           href="https://github.com/ithoangtan"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                        >
-                           agreement
-                        </a>
-                     </Checkbox>
-                  )}
-               </Form.Item>
-               <Form.Item {...tailFormItemLayout}>
-                  <Button
-                     type="primary"
-                     htmlType="submit"
-                     onClick={this.waitLoading}
-                  >
-                     Register
-                  </Button>
-                  <br></br>
-                  Bạn đã có tài khoản? <Link to="/login">Login</Link>
-               </Form.Item>
-            </Spin>
+            <Form.Item className="mb-2" {...tailFormItemLayout}>
+               {getFieldDecorator("agreement", {
+                  valuePropName: "checked"
+               })(
+                  <Checkbox>
+                     I have read the{" "}
+                     <a
+                        href="https://github.com/ithoangtan"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                     >
+                        agreement
+                     </a>
+                  </Checkbox>
+               )}
+            </Form.Item>
+            <Form.Item className="mb-2" {...tailFormItemLayout}>
+               <Button
+                  type="primary"
+                  htmlType="submit"
+                  onClick={this.waitLoading}
+               >
+                  Register
+               </Button>
+               <br></br>
+               Bạn đã có tài khoản? <Link to="/login">Login</Link>
+            </Form.Item>
+            {/* </Spin> */}
          </Form>
       );
    }
