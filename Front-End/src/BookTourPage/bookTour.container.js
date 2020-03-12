@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as orderActions from "../_actions/order.actions";
 
-import { Button, Steps, message } from "antd";
+import { Button, Steps, message, Checkbox } from "antd";
 
 import BookTourStep1 from "./bookTourStep1";
 import BookTourStep2 from "./bookTourStep2";
@@ -197,6 +197,19 @@ class BookTourContainer extends Component {
             </Steps>
             <div className="steps-content">{steps[current].content}</div>
             <div className="steps-action">
+               <div className="ht-policy-check">
+                  <Checkbox checked>
+                     Đồng ý với{" "}
+                     <Link to="#" className="ht-text-underline">
+                        điều khoản và chính sách
+                     </Link>{" "}
+                     của chúng tôi và
+                     <Link to="#" className="ht-text-underline">
+                        {" "}
+                        điều khoản bắt buộc khi thanh toán online
+                     </Link>
+                  </Checkbox>
+               </div>
                {current > 0 && (
                   <Button
                      style={{ marginRight: 8 }}

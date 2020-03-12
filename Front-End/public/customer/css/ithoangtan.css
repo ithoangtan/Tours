@@ -988,8 +988,81 @@
 
 .ht-image-fix-size {
    object-fit: cover;
-   max-width: 100%;
-   height: auto;
+}
+.ht-payment-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+/* Desktop */
+@media (min-width: 1024.01px) {
+   .ht-image-fix-size {
+      object-fit: cover;
+      max-width: 100%;
+      height: auto;
+   }
+   .ht-thumbnail-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+   }
+}
+
+/*Ipad ngang(1024 x 768)*/
+@media (max-width: 1024px) {
+   .ht-image-fix-size {
+      object-fit: cover;
+      max-width: 100%;
+      height: auto;
+   }
+   .ht-thumbnail-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+   }
+}
+
+/*Ipad dọc(768 x 1024)*/
+@media (max-width: 768px) {
+   .ht-image-fix-size {
+      max-width: 25%;
+      height: auto;
+   }
+   .ht-thumbnail-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+   }
+}
+/*Tablet nhỏ(480 x 640)*/
+@media (max-width: 480px) {
+   .ht-image-fix-size {
+      max-width: 25%;
+      height: auto;
+   }
+   .ht-thumbnail-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+   }
+}
+/*Iphone(480 x 640)*/
+@media (max-width: 320px) {
+   .ht-image-fix-size {
+      max-width: 20%;
+      height: auto;
+   }
+   .ht-thumbnail-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+   }
 }
 
 /* Navigation */
@@ -2542,4 +2615,21 @@ html {
    .ht-d-flex-col-start-start .ht-book-tour-info-container {
       flex-direction: column;
    }
+}
+
+.ht-price-total-and-comfirm {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   align-items: center;
+}
+.ht-price-total-and-comfirm .ht-price-total {
+   font-weight: 500;
+   font-size: 1.05rem;
+   padding-right: 6px;
+}
+
+.ht-text-underline {
+   text-decoration: underline;
 }

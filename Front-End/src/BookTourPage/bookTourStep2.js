@@ -5,6 +5,7 @@ import { Input, Tooltip, Cascader, InputNumber, Button, message } from "antd";
 import { Form, Icon } from "@ant-design/compatible";
 
 import { mapAddressToOptionAntd } from "./addressVN";
+import NumberFormat from "react-number-format";
 
 class BookTourStep2 extends Component {
    state = {
@@ -50,7 +51,7 @@ class BookTourStep2 extends Component {
          if (name === "address")
             return [orders.address[0], orders.address[1], orders.address[2]];
       } else {
-         if (name === "numberPeople") return 2;
+         if (name === "numberPeople") return 1;
          if (name === "numberChildren") return 0;
       }
    }
@@ -79,6 +80,7 @@ class BookTourStep2 extends Component {
          }
       };
       const { sizeWindow } = this.state;
+      const priceTour = 5000000;
       return (
          <Form
             {...formItemLayout}
@@ -199,20 +201,54 @@ class BookTourStep2 extends Component {
                         style={{ paddingBottom: 12 }}
                      >
                         {getFieldDecorator("numberPeople", {
-                           initialValue: this.initValue("numberPeople"),
-                           rules: [
-                              {
-                                 required: true,
-                                 message:
-                                    "Xin hãy cho chúng tôi biết số lượng người!"
-                              }
-                           ]
+                           initialValue: this.initValue("numberPeople")
                         })(
-                           <InputNumber
-                              style={{ width: "100%" }}
-                              min={0}
-                              max={100}
-                           />
+                           <>
+                              <Tooltip
+                                 trigger="focus"
+                                 title={
+                                    <NumberFormat
+                                       value={priceTour}
+                                       displayType={"text"}
+                                       thousandSeparator={true}
+                                       suffix={" VNĐ / khách"}
+                                    />
+                                 }
+                              >
+                                 <i
+                                    class="fas fa-user-tie pr-1"
+                                    style={{ width: "10%", textAlign: "right" }}
+                                 ></i>
+                                 <InputNumber
+                                    placeholder="Người lớn"
+                                    style={{ width: "40%" }}
+                                    min={0}
+                                    max={100}
+                                 />
+                              </Tooltip>
+                              <Tooltip
+                                 trigger="focus"
+                                 title={
+                                    <NumberFormat
+                                       value={priceTour * 0.9}
+                                       displayType={"text"}
+                                       thousandSeparator={true}
+                                       suffix={" VNĐ / khách"}
+                                    />
+                                 }
+                              >
+                                 <i
+                                    class="fas fa-male pl-2 pr-1"
+                                    style={{ width: "10%", textAlign: "right" }}
+                                 ></i>
+                                 <InputNumber
+                                    placeholder="Trẻ em"
+                                    style={{ width: "40%" }}
+                                    min={0}
+                                    max={100}
+                                 />
+                              </Tooltip>
+                           </>
                         )}
                      </Form.Item>
                      <Form.Item
@@ -233,35 +269,84 @@ class BookTourStep2 extends Component {
                         {getFieldDecorator("numberChildren", {
                            initialValue: this.initValue("numberChildren")
                         })(
-                           <InputNumber
-                              style={{ width: "100%" }}
-                              min={0}
-                              max={100}
-                           />
+                           <>
+                              <Tooltip
+                                 trigger="focus"
+                                 placement="bottom"
+                                 title={
+                                    <NumberFormat
+                                       value={priceTour * 0.6}
+                                       displayType={"text"}
+                                       thousandSeparator={true}
+                                       suffix={" VNĐ / khách"}
+                                    />
+                                 }
+                              >
+                                 <i
+                                    class="fas fa-child pr-1 pl-1"
+                                    style={{ width: "10%", textAlign: "right" }}
+                                 ></i>
+                                 <InputNumber
+                                    placeholder="Trẻ nhỏ"
+                                    style={{ width: "40%" }}
+                                    min={0}
+                                    max={100}
+                                 />
+                              </Tooltip>
+                              <Tooltip
+                                 trigger="focus"
+                                 placement="bottom"
+                                 title={
+                                    <NumberFormat
+                                       value={priceTour * 0.1}
+                                       displayType={"text"}
+                                       thousandSeparator={true}
+                                       suffix={" VNĐ / khách"}
+                                    />
+                                 }
+                              >
+                                 <i
+                                    class="fas fa-baby pr-1 pl-1"
+                                    style={{ width: "10%", textAlign: "right" }}
+                                 ></i>
+                                 <InputNumber
+                                    placeholder="Em bé"
+                                    style={{ width: "40%" }}
+                                    min={0}
+                                    max={100}
+                                 />
+                              </Tooltip>
+                           </>
                         )}
                      </Form.Item>
                   </div>
                </div>
-               <Form.Item
-                  style={{
-                     paddingBottom: 12,
-                     width: "100%",
-                     display: "flex",
-                     flexDirection: "column",
-                     justifyContent: "flex-end",
-                     alignItems: "flex-end",
-                     paddingRight: "30px"
-                  }}
-               >
-                  <Tooltip
-                     placement="bottom"
-                     title={"Thông tin của bạn sẽ được bảo mật!"}
+               <div className="ht-price-total-and-comfirm">
+                  <p className="ht-price-total">
+                     Tổng giá:{" "}
+                     <NumberFormat
+                        value={priceTour * 5}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        suffix={" VNĐ"}
+                     />
+                  </p>
+                  <Form.Item
+                     style={{
+                        paddingBottom: 12,
+                        paddingRight: "30px"
+                     }}
                   >
-                     <Button type="primary" htmlType="submit">
-                        Xác nhận thông tin của bạn là chính xác!
-                     </Button>
-                  </Tooltip>
-               </Form.Item>
+                     <Tooltip
+                        placement="bottom"
+                        title={"Thông tin của bạn sẽ được bảo mật!"}
+                     >
+                        <Button type="primary" htmlType="submit">
+                           Xác nhận thông tin của bạn là chính xác!
+                        </Button>
+                     </Tooltip>
+                  </Form.Item>
+               </div>
             </div>
          </Form>
       );
