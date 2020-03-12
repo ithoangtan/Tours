@@ -262,6 +262,7 @@ class TourContainer extends Component {
                   {...this.props}
                   tour={tour}
                   key={index}
+                  bookTour={false}
                   listImageTour={listImageTour.filter(
                      imageTour => imageTour.idTour === tour.idTour
                   )}

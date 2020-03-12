@@ -16,12 +16,12 @@ const { Text, Paragraph } = Typography;
 
 export default class TourDetailContainer extends Component {
    state = {
-      rows: 2,
+      rowsDescribe: 2,
       size: "default"
    };
 
-   onChange = rows => {
-      this.setState({ rows });
+   onChange = rowsDescribe => {
+      this.setState({ rowsDescribe });
    };
 
    fetch = async () => {
@@ -33,7 +33,7 @@ export default class TourDetailContainer extends Component {
    }
    componentDidMount() {
       this.fetch();
-      this.props.loaded();
+      if (!this.props.bookTour) this.props.loaded();
    }
 
    renderImage() {
@@ -61,7 +61,7 @@ export default class TourDetailContainer extends Component {
    //Dữ liệu từ ngoài truyền vô ở đây chỉ có việc load lên thôi
    render() {
       const { size } = this.state;
-      const { tour } = this.props;
+      const { tour, bookTour } = this.props;
       const timeDeparture = moment(tour.departureDay).format("LT");
       const dmy = moment(tour.departureDay).format("L");
 
@@ -77,7 +77,10 @@ export default class TourDetailContainer extends Component {
                <div className="ht-f-day">{`${day}`}</div>
                <div className="ht-f-date">{`${month}/${year}`}</div>
             </div>
-            <div className="tour-content">
+            <div
+               className="tour-content"
+               style={bookTour ? { fontSize: "1.1rem" } : {}}
+            >
                <div className="row justify-conten-center">
                   <div className="col-xs-12 col-md-6 col-lg-4 ht-info-tour-detail-container-1">
                      {/* Render Image of Tour */}
@@ -108,9 +111,15 @@ export default class TourDetailContainer extends Component {
                            }
                         }}
                      >
-                        <h4 className="ht-detail-tour-title">
-                           {tour.titleTour}
-                        </h4>
+                        {bookTour ? (
+                           <h3 className="ht-detail-tour-title">
+                              {tour.titleTour}
+                           </h3>
+                        ) : (
+                           <h4 className="ht-detail-tour-title">
+                              {tour.titleTour}
+                           </h4>
+                        )}
                      </Link>
                      <div className="ht-d-flex-start-center">
                         <Rate
@@ -163,7 +172,7 @@ export default class TourDetailContainer extends Component {
                      </div>
                      <Paragraph
                         ellipsis={{
-                           rows: this.state.rows,
+                           rows: this.state.rowsDescribe,
                            expandable: true,
                            suffix: ""
                         }}
@@ -284,6 +293,7 @@ export default class TourDetailContainer extends Component {
                               />
                            </Tooltip>
                         </div>
+
                         <Link
                            to={{
                               pathname: `/book-tour/${tour.idTour}`,
@@ -292,23 +302,27 @@ export default class TourDetailContainer extends Component {
                               }
                            }}
                         >
-                           <Tooltip
-                              title={
-                                 <p className="ht-no-p-m">
-                                    <i className="fas fa-couch"></i>
-                                    {` Còn ${5} chỗ `}
-                                 </p>
-                              }
-                              placement="right"
-                           >
-                              {size === "small" ? (
-                                 <Button type="primary">
-                                    <i className="fas fa-shopping-cart"></i>
-                                 </Button>
-                              ) : (
-                                 <Button type="primary">ĐẶT NGAY</Button>
-                              )}
-                           </Tooltip>
+                           {bookTour ? (
+                              <></>
+                           ) : (
+                              <Tooltip
+                                 title={
+                                    <p className="ht-no-p-m">
+                                       <i className="fas fa-couch"></i>
+                                       {` Còn ${5} chỗ `}
+                                    </p>
+                                 }
+                                 placement="right"
+                              >
+                                 {size === "small" ? (
+                                    <Button type="primary">
+                                       <i className="fas fa-shopping-cart"></i>
+                                    </Button>
+                                 ) : (
+                                    <Button type="primary">ĐẶT NGAY</Button>
+                                 )}
+                              </Tooltip>
+                           )}
                         </Link>
                      </div>
                   </div>

@@ -20,7 +20,7 @@ import {
 } from "antd";
 import { Icon } from "@ant-design/compatible";
 
-import MoreTourSingle from "./moreTourSingle.container";
+// import MoreTourSingle from "./moreTourSingle.container";
 import TourDetailImg from "../TourPage/tourDetailImages";
 
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
@@ -849,7 +849,9 @@ export default class TourSingleContainer extends Component {
                                              <div className="ht-rate-content">
                                                 <div className="ht-rate-detail-name-and-date col-md-12">
                                                    <div className="ht-name">
-                                                      <i class={item.icon}></i>{" "}
+                                                      <i
+                                                         className={item.icon}
+                                                      ></i>{" "}
                                                       {`${item.title}`}
                                                    </div>
                                                    <div className="ht-date">
@@ -865,33 +867,33 @@ export default class TourSingleContainer extends Component {
                                                       <Tooltip
                                                          title={`Chỗ ở nghỉ ngơi`}
                                                       >
-                                                         <i class="fas fa-hotel"></i>
+                                                         <i className="fas fa-hotel"></i>
                                                          (9)
                                                          {`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Ẩm thực`}
                                                       >
-                                                         <i class="fas fa-utensils"></i>
+                                                         <i className="fas fa-utensils"></i>
                                                          (9){`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Phương tiện và đi lại`}
                                                       >
-                                                         <i class="fas fa-shuttle-van"></i>
+                                                         <i className="fas fa-shuttle-van"></i>
                                                          (9){`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Hướng dẫn viên`}
                                                       >
-                                                         <i class="fas fa-flag"></i>
+                                                         <i className="fas fa-flag"></i>
                                                          (9)
                                                          {`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Lịch trình tour`}
                                                       >
-                                                         <i class="fas fa-calendar-check"></i>
+                                                         <i className="fas fa-calendar-check"></i>
                                                          (9) {`  `}
                                                       </Tooltip>
                                                    </div>
@@ -1015,7 +1017,8 @@ export default class TourSingleContainer extends Component {
                               NHỮNG TOUR LIÊN QUAN
                            </div>
                            <div className="ht-tour-more col-md-12">
-                              <MoreTourSingle
+                              Nothing!
+                              {/* <MoreTourSingle
                                  idImage={2}
                                  className="ftco-animate col-md-3"
                               />
@@ -1030,7 +1033,7 @@ export default class TourSingleContainer extends Component {
                               <MoreTourSingle
                                  idImage={1}
                                  className="ftco-animate col-md-3"
-                              />
+                              /> */}
                            </div>
                         </div>
                      </div>

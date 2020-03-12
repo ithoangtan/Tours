@@ -28,9 +28,77 @@ export default class BookTourStep3 extends Component {
          <div className="ht-book-finish">
             <Tabs defaultActiveKey="1" size={size}>
                <TabPane tab="CÁCH 1: Thanh toán online:" key="1">
-                  <div className="row">
+                  <div className="row ht-payment-container">
                      <div className="col-sx-12 col-sm-6 col-md-3">
-                        <div className="thumbnail">
+                        <div className="thumbnail ht-thumbnail-container">
+                           <img
+                              src="/payment/logo-momo.jfif"
+                              alt="momo"
+                              className="ht-image-fix-size"
+                           />
+                           <div className="caption">
+                              <p>
+                                 Cung cấp dịch vụ khách hàng tốt nhất, tạo môi
+                                 trường thanh toán trực tuyến an toàn và tiện
+                                 lợi nhất{" "}
+                                 <Link
+                                    to="https://momo.vn/huong-dan"
+                                    className="ht-text-underline"
+                                 >
+                                    {" "}
+                                    Xem hướng dẫn{" "}
+                                 </Link>
+                              </p>
+                              <p>
+                                 <Link
+                                    style={{ border: "1px solid black" }}
+                                    disabled
+                                    to="#"
+                                    className="btn btn-default"
+                                    role="button"
+                                 >
+                                    Developing...
+                                 </Link>{" "}
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     <div className="col-sx-12 col-sm-6 col-md-3">
+                        <div className="thumbnail ht-thumbnail-container">
+                           <img
+                              src="/payment/new-paypal-logo.jpg"
+                              alt="paypal-logo"
+                              className="ht-image-fix-size"
+                           />
+                           <div className="caption">
+                              <p>
+                                 Thuộc top 100 sản phẩm, dịch vụ Việt Nam được
+                                 tin dùng, là nhãn hiệu nổi tiếng trong phạm vi
+                                 toàn quốc{" "}
+                                 <Link
+                                    to="https://www.paypal.com/vn/home?locale.x=vi_VN"
+                                    className="ht-text-underline"
+                                 >
+                                    {" "}
+                                    Xem hướng dẫn{" "}
+                                 </Link>
+                              </p>
+                              <p>
+                                 <Link
+                                    style={{ border: "1px solid black" }}
+                                    disabled
+                                    to="#"
+                                    className="btn btn-default"
+                                    role="button"
+                                 >
+                                    Developing...
+                                 </Link>{" "}
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     <div className="col-sx-12 col-sm-6 col-md-3">
+                        <div className="thumbnail ht-thumbnail-container">
                            <img
                               src="/payment/nganluong.png"
                               alt="nganluong.vn"
@@ -40,7 +108,11 @@ export default class BookTourStep3 extends Component {
                               <p>
                                  Cổng thanh toán đa dạng kênh uy tín, Ưu việt
                                  hàng đầu Việt Nam. Liên kết h ơn 20 ngân hàng
-                                 trong nước và Quốc tế
+                                 trong nước và Quốc tế{" "}
+                                 <Link to="#" className="ht-text-underline">
+                                    {" "}
+                                    Xem hướng dẫn{" "}
+                                 </Link>
                               </p>
                               <p>
                                  <a
@@ -50,87 +122,6 @@ export default class BookTourStep3 extends Component {
                                  >
                                     Thanh toán ngay
                                  </a>{" "}
-                              </p>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="col-sx-12 col-sm-6 col-md-3">
-                        <div className="thumbnail">
-                           <img
-                              src="/payment/onepay.png"
-                              alt="onepay.vn"
-                              className="ht-image-fix-size"
-                           />
-                           <div className="caption">
-                              <p>
-                                 OnePAY is a Leading Payment Processing Company
-                                 in Vietnam since 2006, providing payment
-                                 gateway and merchant services.
-                              </p>
-                              <p>
-                                 <Link
-                                    style={{ border: "1px solid black" }}
-                                    disabled
-                                    to="#"
-                                    className="btn btn-default"
-                                    role="button"
-                                 >
-                                    Developing...
-                                 </Link>{" "}
-                              </p>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="col-sx-12 col-sm-6 col-md-3">
-                        <div className="thumbnail">
-                           <img
-                              src="/payment/sohapay.png"
-                              alt="sohapay.vn"
-                              className="ht-image-fix-size"
-                           />
-                           <div className="caption">
-                              <p>
-                                 Cung cấp dịch vụ khách hàng tốt nhất, tạo môi
-                                 trường thanh toán trực tuyến an toàn và tiện
-                                 lợi nhất
-                              </p>
-                              <p>
-                                 <Link
-                                    style={{ border: "1px solid black" }}
-                                    disabled
-                                    to="#"
-                                    className="btn btn-default"
-                                    role="button"
-                                 >
-                                    Developing...
-                                 </Link>{" "}
-                              </p>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="col-sx-12 col-sm-6 col-md-3">
-                        <div className="thumbnail">
-                           <img
-                              src="/payment/vnpay.png"
-                              alt="vnpay.vn"
-                              className="ht-image-fix-size"
-                           />
-                           <div className="caption">
-                              <p>
-                                 Thuộc top 100 sản phẩm, dịch vụ Việt Nam được
-                                 tin dùng, là nhãn hiệu nổi tiếng trong phạm vi
-                                 toàn quốc
-                              </p>
-                              <p>
-                                 <Link
-                                    style={{ border: "1px solid black" }}
-                                    disabled
-                                    to="#"
-                                    className="btn btn-default"
-                                    role="button"
-                                 >
-                                    Developing...
-                                 </Link>{" "}
                               </p>
                            </div>
                         </div>
