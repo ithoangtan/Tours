@@ -11053,7 +11053,7 @@ h5,
    z-index: 0;
    margin-bottom: 50px;
 }
-.project .img p.sale {
+.project .img div.sale {
    position: absolute;
    top: 0px;
    left: 0px;
