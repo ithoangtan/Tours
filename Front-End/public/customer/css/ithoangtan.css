@@ -2760,6 +2760,138 @@ html {
 .ht-mb-special {
    margin-bottom: 20px;
 }
+
+.ht-blog-title {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.ht-blog-title .ht-title {
+   font-weight: 500;
+   font-size: 1.5rem;
+}
+
+.ht-blog-title .ht-describe {
+   font-size: 1rem;
+}
+
+/* Desktop */
+@media (min-width: 1024.01px) {
+}
+
+/*Ipad ngang(1024 x 768)*/
+@media (max-width: 1024px) {
+}
+
+/*Ipad dọc(768 x 1024)*/
+@media (max-width: 768px) {
+}
+/*Tablet nhỏ(480 x 640)*/
+@media (max-width: 480px) {
+}
+/*Iphone(480 x 640)*/
+@media (max-width: 320px) {
+}
+.ht-divide-special {
+   width: 100%;
+   height: 12px;
+   background-image: linear-gradient(120deg, #66a6ff 0%, #89f7fe 100%);
+   margin: 0px;
+   border-radius: 15px;
+   margin-top: 12px;
+}
+
+.ht-divide-special-1 {
+   width: 100%;
+   background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+   height: 12px;
+   margin: 0px;
+   border-radius: 15px;
+   margin-top: 12px;
+}
+.ht-divide-special-2 {
+   width: 100%;
+   height: 12px;
+   background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+   margin: 0px;
+   border-radius: 15px;
+   margin-top: 12px;
+}
+.ht-divide-special-3 {
+   width: 100%;
+   background-image: linear-gradient(to right, #5f72bd 0%, #9b23ea 100%);
+   height: 12px;
+   margin: 0px;
+   border-radius: 15px;
+   margin-top: 12px;
+}
+
+.ht-title-mini {
+   font-weight: 500;
+   font-size: 1rem;
+}
+
+.ht-blog-container-2 {
+}
+
+.ht-blog-container-2 .ht-blog-right {
+}
+
+.ht-blog-right .ht-reads,
+.ht-blog-right .ht-new {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+
+.ht-item-post-mini {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: flex-start;
+   border-bottom: 1px solid rgba(0, 255, 221, 0.226);
+   padding-bottom: 4px;
+   margin-bottom: 12px;
+}
+
+.ht-item-post-mini img {
+   max-width: 100%;
+   width: 100px;
+   object-fit: fill;
+   border-radius: 6px;
+   margin-right: 3px;
+}
+
+.ht-item-post-mini .ht-item-post-mini-info {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+
+.ht-item-post-mini-info .ht-title {
+   font-weight: 500;
+   text-align: justify;
+}
+
+.ht-item-post-mini-info .ht-date-view-vote {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: flex-start;
+   width: 100%;
+}
+
+.ht-date-view-vote .ht-date {
+}
+
+.ht-date-view-vote .ht-view-vote {
+   color: black;
+}
+
 /* Desktop */
 @media (min-width: 1024.01px) {
 }
