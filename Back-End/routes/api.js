@@ -11,6 +11,7 @@ const order = require("../controllers/order.controller");
 const account = require("../controllers/account.controller");
 const notification = require("../controllers/notification.controller");
 const noticeTo = require("../controllers/noticeTo.controller");
+const evaluate = require("../controllers/evaluate.controller");
 const post = require("../controllers/post.controller");
 const auth = require("../controllers/auth.controller");
 const favorite = require("../controllers/favorite.controller");
@@ -88,6 +89,13 @@ router.delete("/notification", authenticated, notification.delete);
 router.post("/noticeTo", authenticated, noticeTo.create);
 router.put("/noticeTo", authenticated, noticeTo.update);
 router.delete("/noticeTo", authenticated, noticeTo.delete);
+
+//for evaluate
+router.get("/evaluate", authenticated, evaluate.read);
+router.get("/evaluate/bytour", evaluate.readByIdTour);
+router.post("/evaluate", authenticated, evaluate.create);
+router.put("/evaluate", authenticated, evaluate.update);
+router.delete("/evaluate", authenticated, evaluate.delete);
 
 //for post
 router.get("/post", post.read);
