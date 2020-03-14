@@ -16,7 +16,11 @@ import {
    DatePicker,
    Radio,
    Avatar,
-   List
+   List,
+   Modal,
+   Input,
+   Select,
+   Slider
 } from "antd";
 import { Icon } from "@ant-design/compatible";
 
@@ -30,6 +34,8 @@ import NumberFormat from "react-number-format";
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 const { Paragraph } = Typography;
 const { TabPane } = Tabs;
+const { TextArea } = Input;
+const { Option } = Select;
 
 const dataRating = [
    {
@@ -54,6 +60,49 @@ const dataRating = [
    }
 ];
 
+const marksEvaluate = {
+   0: {
+      style: {
+         color: "#bfbfbf"
+      },
+      label: (
+         <strong style={{ width: "70px", position: "absolute", left: "-25px" }}>
+            "Rất tệ"
+         </strong>
+      )
+   },
+   2.5: {
+      style: {
+         color: "#fa8c16"
+      },
+      label: "Tạm ổn"
+   },
+   5: {
+      style: {
+         color: "#52c41a"
+      },
+      label: <strong>"Bình thường"</strong>
+   },
+   7.5: {
+      style: {
+         color: "#eb2f96"
+      },
+      label: "Rất tổt"
+   },
+   10: {
+      style: {
+         color: "#f5222d"
+      },
+      label: (
+         <strong
+            style={{ width: "80px", position: "absolute", right: "-25px" }}
+         >
+            "Tuyệt vời"{" "}
+         </strong>
+      )
+   }
+};
+
 export default class TourSingleContainer extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
@@ -73,8 +122,47 @@ export default class TourSingleContainer extends Component {
       value: 3,
       size: "small",
       rows: 2,
-      valueRatingSort: 1
+      valueRatingSort: 1,
+      visible: false
    };
+
+   showModal = () => {
+      this.setState({
+         visible: true
+      });
+   };
+
+   // Select
+   onChangeTypeTour(value) {
+      console.log(`selected ${value}`);
+   }
+
+   onBlurTypeTour() {
+      console.log("blur");
+   }
+
+   onFocusTypeTour() {
+      console.log("focus");
+   }
+
+   onSearchTypeTour(val) {
+      console.log("search:", val);
+   }
+
+   handleOk = e => {
+      console.log(e);
+      this.setState({
+         visible: false
+      });
+   };
+
+   handleCancel = e => {
+      console.log(e);
+      this.setState({
+         visible: false
+      });
+   };
+
    onChangeRatingSortRadio = e => {
       console.log("radio checked", e.target.value);
       this.setState({
@@ -814,15 +902,167 @@ export default class TourSingleContainer extends Component {
                                        </Radio>
                                     </Radio.Group>
                                  </div>
-                                 <Button>
+                                 <Button onClick={this.showModal}>
                                     <i className="fas fa-pen-square mr-2"></i>{" "}
                                     Viết Đánh Giá
                                  </Button>
+                                 <Modal
+                                    title="Đánh giá"
+                                    visible={this.state.visible}
+                                    onOk={this.handleOk}
+                                    onCancel={this.handleCancel}
+                                    okText="Đánh giá"
+                                    cancelText="Hủy"
+                                    style={{ top: 50 }}
+                                 >
+                                    <div className="ht-evaluate-container">
+                                       <div className="ht-evaluate-detail">
+                                          <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
+                                             <Tooltip
+                                                className="col-md-3 pr-0 pl-0 mr-0 ml-0"
+                                                title={`Chỗ ở nghỉ ngơi`}
+                                             >
+                                                <i className="fas fa-hotel"></i>{" "}
+                                                Chỗ nghỉ:
+                                                {`  `}
+                                             </Tooltip>
+                                             <Slider
+                                                className="col-md-9"
+                                                defaultValue={10}
+                                                marks={marksEvaluate}
+                                                step={0.5}
+                                                min={0}
+                                                max={10}
+                                             />
+                                          </div>
+                                          <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
+                                             <Tooltip
+                                                className="col-md-3 pr-0 pl-0 mr-0 ml-0"
+                                                title={`Ẩm thực`}
+                                             >
+                                                <i className="fas fa-utensils"></i>
+                                                {`  `}Ẩm thực:
+                                             </Tooltip>
+                                             <Slider
+                                                className="col-md-9"
+                                                defaultValue={10}
+                                                // marks={marksEvaluate}
+                                                step={0.5}
+                                                min={0}
+                                                max={10}
+                                             />
+                                          </div>{" "}
+                                          <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
+                                             <Tooltip
+                                                className="col-md-3 pr-0 pl-0 mr-0 ml-0"
+                                                title={`Phương tiện và đi lại`}
+                                             >
+                                                <i className="fas fa-shuttle-van"></i>
+                                                {`  `}Đi lại
+                                             </Tooltip>
+                                             <Slider
+                                                className="col-md-9"
+                                                defaultValue={10}
+                                                step={0.5}
+                                                // marks={marksEvaluate}
+                                                min={0}
+                                                max={10}
+                                             />
+                                          </div>{" "}
+                                          <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
+                                             <Tooltip
+                                                className="col-md-3 pr-0 pl-0 mr-0 ml-0"
+                                                title={`Hướng dẫn viên`}
+                                             >
+                                                <i className="fas fa-flag"></i>
+                                                {`  `}H.dẫn viên:
+                                             </Tooltip>
+                                             <Slider
+                                                className="col-md-9"
+                                                defaultValue={10}
+                                                step={0.5}
+                                                // marks={marksEvaluate}
+                                                min={0}
+                                                max={10}
+                                             />
+                                          </div>{" "}
+                                          <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
+                                             <Tooltip
+                                                className="col-md-3 pr-0 pl-0 mr-0 ml-0"
+                                                title={`Lịch trình tour`}
+                                             >
+                                                <i className="fas fa-calendar-check"></i>{" "}
+                                                Lịch trình tour
+                                             </Tooltip>
+                                             <Slider
+                                                className="col-md-9"
+                                                defaultValue={10}
+                                                step={0.5}
+                                                marks={marksEvaluate}
+                                                min={0}
+                                                max={10}
+                                             />
+                                          </div>
+                                       </div>
+                                       <div className="ht-evaluate-form mt-3">
+                                          <Input
+                                             className="mb-2"
+                                             placeholder="Họ và tên hoặc email"
+                                          />
+                                          <Input
+                                             className="mb-2"
+                                             placeholder="Tiêu đề"
+                                          />
+                                          <Select
+                                             className="mb-2"
+                                             showSearch
+                                             style={{
+                                                width: "100%"
+                                             }}
+                                             placeholder="Kiểu du lịch"
+                                             optionFilterProp="children"
+                                             onChange={this.onChangeTypeTour}
+                                             onFocus={this.onFocusTypeTour}
+                                             onBlur={this.onBlurTypeTour}
+                                             onSearch={this.onSearchTypeTour}
+                                             filterOption={(input, option) =>
+                                                option.children
+                                                   .toLowerCase()
+                                                   .indexOf(
+                                                      input.toLowerCase()
+                                                   ) >= 0
+                                             }
+                                          >
+                                             <Option value="personal">
+                                                Cá nhân
+                                             </Option>
+                                             <Option value="heart">
+                                                Cặp đôi
+                                             </Option>
+                                             <Option value="family">
+                                                Gia đình
+                                             </Option>
+                                             <Option value="friend">
+                                                Bạn bè
+                                             </Option>
+                                             <Option value="business">
+                                                Doanh nghiệp
+                                             </Option>
+                                          </Select>
+                                          <TextArea
+                                             rows={4}
+                                             placeholder="Nội dung chi tiết"
+                                          />
+                                       </div>
+                                    </div>
+                                 </Modal>
                               </div>
                               <Tabs
                                  tabPosition={"left"}
                                  tabBarExtraContent={
-                                    <Button>Viết Đánh Giá</Button>
+                                    <Button onClick={this.showModal}>
+                                       Viết Đánh Giá
+                                    </Button>
                                  }
                                  className="ht-tabs-rating col-md-12"
                               >
@@ -874,26 +1114,28 @@ export default class TourSingleContainer extends Component {
                                                       <Tooltip
                                                          title={`Ẩm thực`}
                                                       >
-                                                         <i className="fas fa-utensils"></i>
-                                                         (9){`  `}
+                                                         <i className="fas fa-utensils ml-2"></i>
+                                                         (9)
+                                                         {`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Phương tiện và đi lại`}
                                                       >
-                                                         <i className="fas fa-shuttle-van"></i>
-                                                         (9){`  `}
+                                                         <i className="fas fa-shuttle-van ml-2"></i>
+                                                         (9)
+                                                         {`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Hướng dẫn viên`}
                                                       >
-                                                         <i className="fas fa-flag"></i>
+                                                         <i className="fas fa-flag ml-2"></i>
                                                          (9)
                                                          {`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Lịch trình tour`}
                                                       >
-                                                         <i className="fas fa-calendar-check"></i>
+                                                         <i className="fas fa-calendar-check ml-2"></i>
                                                          (9) {`  `}
                                                       </Tooltip>
                                                    </div>
