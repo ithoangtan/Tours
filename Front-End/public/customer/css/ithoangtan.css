@@ -2909,3 +2909,96 @@ html {
 /*Iphone(480 x 640)*/
 @media (max-width: 320px) {
 }
+
+/* Blog single */
+
+.ht-sidebar-box {
+   margin: 12px 0px 12px 0px;
+}
+
+.ht-title-post-container {
+   border-bottom: 1px solid rgba(18, 180, 126, 0.753);
+   margin-bottom: 12px;
+}
+
+.ht-title-post-container .ht-title {
+   font-size: 1.5rem;
+   font-weight: 500;
+}
+.ht-title-post-container .ht-date-view-vote {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: baseline;
+}
+
+.ht-date-view-vote .ht-date-view {
+   font-size: 1rem;
+   font-weight: 300;
+}
+.ht-date-view-vote .ht-vote {
+   font-size: 1.5rem;
+   font-weight: 500;
+   text-shadow: 1px 1px 1px rgba(59, 59, 59, 0.473);
+   border-radius: 6px;
+   border: 1px solid rgba(11, 199, 158, 0.329);
+   /* box-shadow: 2px 2px 5px rgba(73, 73, 73, 0.527); */
+   padding: 0px 12px;
+   margin-bottom: 6px;
+   margin-right: 6px;
+   user-select: none;
+}
+.ht-date-view-vote .ht-vote:hover {
+   cursor: pointer;
+   box-shadow: 2px 2px 2px rgba(73, 73, 73, 0.24);
+}
+.ht-date-view-vote .ht-vote-up {
+   font-size: 1.5rem;
+   font-weight: 500;
+   color: black;
+   text-shadow: 1px 1px 1px rgba(59, 59, 59, 0.473);
+   border: 1px solid rgba(11, 199, 158, 0.699);
+   border-radius: 6px;
+   padding: 0px 12px;
+   margin-bottom: 6px;
+   margin-right: 6px;
+   background-image: linear-gradient(
+      -225deg,
+      #dfffcd 0%,
+      #90f9c4 48%,
+      #39f3bb 100%
+   );
+   user-select: none;
+}
+.ht-date-view-vote .ht-vote-up:hover {
+   cursor: pointer;
+   box-shadow: 2px 2px 2px rgba(73, 73, 73, 0.24);
+}
+/* Desktop */
+@media (min-width: 1024.01px) {
+}
+
+/*Ipad ngang(1024 x 768)*/
+@media (max-width: 1024px) {
+}
+
+/*Ipad dọc(768 x 1024)*/
+@media (max-width: 768px) {
+}
+/*Tablet nhỏ(480 x 640)*/
+@media (max-width: 480px) {
+}
+/*Iphone(480 x 640)*/
+@media (max-width: 320px) {
+}
+
+/* tile uploaded pictures */
+.comment-action {
+   padding-left: 8px;
+   cursor: "auto";
+}
+
+[class*="-col-rtl"] .comment-action {
+   padding-right: 8px;
+   padding-left: 0;
+}
