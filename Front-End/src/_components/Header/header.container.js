@@ -57,7 +57,7 @@ export default class HeaderContainer extends Component {
                         data-stellar-background-ratio="0.5"
                      >
                         <div className="overlay" />
-                        <div className="container">
+                        <div className="container  ht-text-shadow">
                            <div
                               className="row no-gutters slider-text js-fullheight align-items-top justify-content-end"
                               data-scrollax-parent="true"
@@ -146,7 +146,7 @@ export default class HeaderContainer extends Component {
                         data-stellar-background-ratio="0.5"
                      >
                         <div className="overlay" />
-                        <div className="container">
+                        <div className="container  ht-text-shadow">
                            <div
                               className="row no-gutters slider-text js-fullheight align-items-top justify-content-end"
                               data-scrollax-parent="true"
