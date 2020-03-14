@@ -349,6 +349,7 @@ export default class SearchEngineContainer extends Component {
                                                       input.toLowerCase()
                                                    ) >= 0
                                              }
+                                             style={{ width: "100%" }}
                                           >
                                              <Option value={"all"}>
                                                 Tất cả

@@ -7,7 +7,10 @@ import funcLoadJs from "../_constants/loadJs.constants";
 
 import BlogRightContainer from "../BlogPage/blogRight.container";
 import BlogNavigationContainer from "../BlogPage/blogNavigation.container";
-import BlogCommentContainer from "./blogComment.container";
+
+import { Rate } from "antd";
+
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 export default class BlogSingleContainer extends Component {
    componentDidMount() {
@@ -26,9 +29,14 @@ export default class BlogSingleContainer extends Component {
       super(props);
       this.state = {
          vote: false,
-         numVote: 131
+         numVote: 131,
+         valueRate: 3
       };
    }
+
+   handleChange = value => {
+      this.setState({ valueRate: value });
+   };
    onChangeVote = () => {
       this.setState({
          vote: !this.state.vote,
@@ -38,7 +46,7 @@ export default class BlogSingleContainer extends Component {
       });
    };
    render() {
-      const { vote, numVote } = this.state;
+      const { vote, numVote, valueRate } = this.state;
       return (
          <section className="ftco-section">
             <div className="container">
@@ -153,6 +161,9 @@ export default class BlogSingleContainer extends Component {
                      </p>
                      <div className="tag-widget post-tag-container mb-2 mt-2">
                         <div className="tagcloud">
+                           <div className="ht-tag-container-beautiful">
+                              <i className="far fa-folder-open"></i> Category
+                           </div>
                            <Link to="#" className="tag-cloud-link">
                               Life
                            </Link>
@@ -165,8 +176,71 @@ export default class BlogSingleContainer extends Component {
                            <Link to="#" className="tag-cloud-link">
                               Travel
                            </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                        </div>
+
+                        <div className="tagcloud">
+                           <div className="ht-tag-container-beautiful">
+                              <i className="fas fa-tags"></i> Tags
+                           </div>
+                           <Link to="#" className="tag-cloud-link">
+                              Life
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Sport
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Tech
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
                         </div>
                      </div>
+                     <div className="pt-2 mt-2 mb-4 ht-rating-post">
+                        ĐÁNH GIÁ BÀI VIẾT NÀY
+                        <div className="ht-rating">
+                           <span>
+                              <Rate
+                                 allowClear={false}
+                                 tooltips={desc}
+                                 onChange={this.handleChange}
+                                 value={valueRate}
+                              />
+                              {valueRate ? (
+                                 <span className="ant-rate-text">
+                                    {desc[valueRate - 1]}
+                                 </span>
+                              ) : (
+                                 ""
+                              )}
+                           </span>
+                        </div>
+                     </div>
+
                      <div className="about-author d-flex p-4 bg-light">
                         <div className="bio mr-5">
                            <img
@@ -176,21 +250,14 @@ export default class BlogSingleContainer extends Component {
                            />
                         </div>
                         <div className="desc">
-                           <h3>George Washington</h3>
+                           <h3>ithoangtan</h3>
                            <p>
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipisicing elit. Ducimus itaque, autem
-                              necessitatibus voluptate quod mollitia delectus
-                              aut, sunt placeat nam vero culpa sapiente
-                              consectetur similique, inventore eos fugit
-                              cupiditate numquam!
+                              Create a beautiful blog that fits your style.
+                              Choose from a selection of easy-to-use templates –
+                              all with flexible layouts and hundreds of
+                              background images – or design something new.
                            </p>
                         </div>
-                     </div>
-                     <div className="pt-2 mt-2">
-                        <h3 className="mb-2">6 Comments</h3>
-                        {/* END comment-list */}
-                        <BlogCommentContainer />
                      </div>
                   </div>
                   {/* .col-md-8 */}

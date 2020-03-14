@@ -209,15 +209,15 @@ export default class BlogRightContainer extends Component {
                </TabPane>
             </Tabs>
             <div className="ht-themes f-flex">
-               <div className="ht-title-mini ht-width-100">
+               <div className="ht-title-mini ht-width-100 mt-3 mb-1">
                   Bạn quan tâm đến chủ đề gì?
                </div>
                <Tag
                   color="#fff2e8"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
-                     padding: "3px",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
+                     padding: "3px 6px",
                      borderRadius: "3px"
                   }}
                >
@@ -227,7 +227,7 @@ export default class BlogRightContainer extends Component {
                   color="#fff7e6"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -238,7 +238,7 @@ export default class BlogRightContainer extends Component {
                   color="#ffccc7"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -249,7 +249,7 @@ export default class BlogRightContainer extends Component {
                   color="#ffd8bf"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -260,7 +260,7 @@ export default class BlogRightContainer extends Component {
                   color="#ffe7ba"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -271,7 +271,7 @@ export default class BlogRightContainer extends Component {
                   color="#fffbe6"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -282,7 +282,7 @@ export default class BlogRightContainer extends Component {
                   color="#feffe6"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -293,7 +293,7 @@ export default class BlogRightContainer extends Component {
                   color="#fcffe6"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -304,7 +304,7 @@ export default class BlogRightContainer extends Component {
                   color="#fff1b8"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -315,7 +315,7 @@ export default class BlogRightContainer extends Component {
                   color="#ffffb8"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -326,7 +326,7 @@ export default class BlogRightContainer extends Component {
                   color="#f4ffb8"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -337,7 +337,7 @@ export default class BlogRightContainer extends Component {
                   color="#f6ffed"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -348,7 +348,7 @@ export default class BlogRightContainer extends Component {
                   color="#e6fffb"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}
@@ -359,7 +359,7 @@ export default class BlogRightContainer extends Component {
                   color="#e6f7ff"
                   style={{
                      color: "black",
-                     border: "0.5px dotted rgba(0, 255, 187, 0.5)",
+                     border: "1px solid rgba(0, 0, 0, 0.6)",
                      padding: "3px",
                      borderRadius: "3px"
                   }}

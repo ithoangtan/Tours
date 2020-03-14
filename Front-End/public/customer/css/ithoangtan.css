@@ -1146,6 +1146,10 @@
 
 /* Header */
 
+.ht-text-shadow{
+   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.575);
+}
+
 .ht-breadcrumb-container {
    border-bottom: 1px solid rgba(0, 120, 120, 0.3);
    padding-bottom: 2px;
@@ -2830,7 +2834,8 @@ html {
 
 .ht-title-mini {
    font-weight: 500;
-   font-size: 1rem;
+   font-size: 1.2rem;
+   color: rgb(36, 36, 36);
 }
 
 .ht-blog-container-2 {
@@ -2924,6 +2929,8 @@ html {
 .ht-title-post-container .ht-title {
    font-size: 1.5rem;
    font-weight: 500;
+   color: black;
+   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 .ht-title-post-container .ht-date-view-vote {
    display: flex;
@@ -3001,4 +3008,22 @@ html {
 [class*="-col-rtl"] .comment-action {
    padding-right: 8px;
    padding-left: 0;
+}
+
+.ht-rating-post {
+   box-shadow: 1px 2px 3px rgba(100, 100, 100, 0.685);
+   background-image: linear-gradient(
+      -225deg,
+      #5d9effa2 0%,
+      #b8dcff9f 48%,
+      #6bbaff98 100%
+   );
+   border-radius: 6px;
+   padding: 6px 12px;
+   font-weight: 500;
+}
+
+.ht-tag-container-beautiful {
+   border-radius: 6px;
+   padding: 6px;
 }
