@@ -14,6 +14,26 @@ exports.listAll = async (req, res, next) => {
   }
 };
 
+exports.listPostSearch = async function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+  const searchs = {
+    keySearch: req.body.keySearch,
+    vote: req.body.vote,
+    conditional: req.body.conditional,
+  };
+  try {
+    listPost = await Post.getAllPostSearch(searchs);
+    res.status(200).json(listPost);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.read = async (req, res, next) => {
   try {
     const { idPost } = req.query;

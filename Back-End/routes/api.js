@@ -11,6 +11,7 @@ const order = require("../controllers/order.controller");
 const account = require("../controllers/account.controller");
 const notification = require("../controllers/notification.controller");
 const noticeTo = require("../controllers/noticeTo.controller");
+const evaluate = require("../controllers/evaluate.controller");
 const post = require("../controllers/post.controller");
 const auth = require("../controllers/auth.controller");
 const favorite = require("../controllers/favorite.controller");
@@ -75,6 +76,11 @@ router.post("/forgotPasswordStep2", auth.forgotPasswordStep2);
 //for notification
 router.get("/notification", authenticated, notification.read);
 router.get("/notifications", authenticated, notification.listAll);
+router.post(
+  "/notifications/search",
+  authenticated,
+  notification.listNotificationSearch
+);
 router.post("/notification", authenticated, notification.create);
 router.put("/notification", authenticated, notification.update);
 router.delete("/notification", authenticated, notification.delete);
@@ -84,9 +90,17 @@ router.post("/noticeTo", authenticated, noticeTo.create);
 router.put("/noticeTo", authenticated, noticeTo.update);
 router.delete("/noticeTo", authenticated, noticeTo.delete);
 
+//for evaluate
+router.get("/evaluate", authenticated, evaluate.read);
+router.get("/evaluate/bytour", evaluate.readByIdTour);
+router.post("/evaluate", authenticated, evaluate.create);
+router.put("/evaluate", authenticated, evaluate.update);
+router.delete("/evaluate", authenticated, evaluate.delete);
+
 //for post
 router.get("/post", post.read);
 router.get("/posts", post.listAll);
+router.post("/posts/search", post.listPostSearch);
 router.post("/post", authenticated, post.create);
 router.put("/post", authenticated, post.update);
 router.delete("/post", authenticated, post.delete);
