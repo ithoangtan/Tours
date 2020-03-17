@@ -28,12 +28,12 @@ export default class BlogHeaderContainer extends Component {
                >
                   <ul className="navbar-nav mr-auto">
                      <li className="nav-item active">
-                        <Link className="nav-link" href="#">
+                        <Link className="nav-link" to="/blog-category">
                            Trang chủ <span className="sr-only">(current)</span>
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link className="nav-link" href="#">
+                        <Link className="nav-link" to="/blog-category">
                            Khuyến mãi
                         </Link>
                      </li>
@@ -53,13 +53,13 @@ export default class BlogHeaderContainer extends Component {
                            className="dropdown-menu"
                            aria-labelledby="navbarDropdown"
                         >
-                           <Link className="dropdown-item" href="#">
+                           <Link className="dropdown-item" to="blog-category">
                               Cảnh đẹp
                            </Link>
-                           <Link className="dropdown-item" href="#">
+                           <Link className="dropdown-item" to="blog-category">
                               Khám phá
                            </Link>
-                           <Link className="dropdown-item" href="#">
+                           <Link className="dropdown-item" to="blog-category">
                               Du lịch biển
                            </Link>
                         </div>
@@ -80,31 +80,31 @@ export default class BlogHeaderContainer extends Component {
                            className="dropdown-menu"
                            aria-labelledby="navbarDropdown"
                         >
-                           <Link className="dropdown-item" href="#">
+                           <Link className="dropdown-item" to="blog-category">
                               Di sản văn hóa
                            </Link>
-                           <Link className="dropdown-item" href="#">
+                           <Link className="dropdown-item" to="blog-category">
                               Lễ hội - Sự kiện
                            </Link>
                         </div>
                      </li>
                      <li className="nav-item">
-                        <Link className="nav-link" href="#">
+                        <Link className="nav-link" to="blog-category">
                            Điểm đến
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link className="nav-link" href="#">
+                        <Link className="nav-link" to="blog-category">
                            Ẩm thực
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link className="nav-link" href="#">
+                        <Link className="nav-link" to="blog-category">
                            Mẹo du lịch
                         </Link>
                      </li>
                      <li className="nav-item">
-                        <Link className="nav-link" href="#">
+                        <Link className="nav-link" to="blog-category">
                            Đặt tour
                         </Link>
                      </li>

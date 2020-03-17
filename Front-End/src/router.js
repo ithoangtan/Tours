@@ -15,6 +15,7 @@ import HeaderBreadcrumbContainer from "./_components/Header/headerBreadcrumb.con
 import IndexPage from "./IndexPage/index.page";
 import AboutPage from "./AboutPage/about.container";
 import BlogPage from "./BlogPage/blog.container";
+import BlogCategoryPage from "./BlogPage/blogCategory.container";
 import BlogSinglePage from "./BlogSinglePage/blogSingle.container";
 import TourSinglePage from "./TourSinglePage/tourSingle.page";
 import TourBestPage from "./TourPage/tourBest.page";
@@ -205,6 +206,21 @@ const router = [
             <NavigationContainer />
             <HeaderBreadcrumbContainer />
             <BlogPage />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
+         </>
+      )
+   },
+
+   {
+      path: "/blog-category",
+      exact: true,
+      component: () => (
+         <>
+            <NavigationContainer />
+            <HeaderBreadcrumbContainer />
+            <BlogCategoryPage />
             <FooterContainer />
             <Loaded />
             <BackToTop />
