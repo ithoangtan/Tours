@@ -252,7 +252,7 @@ export default class TourSingleContainer extends Component {
                   <div className="col-sm-12 col-md-6 col-lg-8 ht-detail-tour-img-container ftco-animate">
                      <div className="ht-tag-over"></div>
                      <div className="ht-qr-info">
-                        [QR] code
+                        Giá tốt
                         {/* Hình QR sinh ra bằng thư viện
                         https://www.npmjs.com/package/qrcode.react  */}
                      </div>
@@ -302,7 +302,7 @@ export default class TourSingleContainer extends Component {
                               {`  `}
                               <strong>
                                  {" "}
-                                 {Math.round(totalNumberStar * 100) / 100}{" "}
+                                 {Math.round(totalNumberStar * 10) / 10}{" "}
                               </strong>
                               với <strong>{`xx00`} </strong>đánh giá
                            </p>
@@ -311,7 +311,7 @@ export default class TourSingleContainer extends Component {
                            <p>
                               <Tooltip title={`${335} luợt xem`}>
                                  <i
-                                    className="fas fa-eye"
+                                    className="fas fa-star"
                                     style={{ color: "#595959" }}
                                  ></i>{" "}
                                  {335}
@@ -860,9 +860,6 @@ export default class TourSingleContainer extends Component {
                                  3822 8898 Fax: (84-28) 3829 9142 Email:
                                  info@vietravel.com
                               </TabPane>
-                              <TabPane tab="Ý kiến khách hàng" key="4">
-                                 ý kiến khách hàng
-                              </TabPane>
                               <TabPane tab="Liên hệ" key="3">
                                  Liên hệ
                               </TabPane>
@@ -1251,7 +1248,7 @@ export default class TourSingleContainer extends Component {
                               </Tabs>
                            </div>
                         </div>
-                        <div
+                        {/* <div
                            className="ht-tour-more-container ftco-animate"
                            id="ht-list-info-5"
                         >
@@ -1260,24 +1257,9 @@ export default class TourSingleContainer extends Component {
                            </div>
                            <div className="ht-tour-more col-md-12">
                               Nothing!
-                              {/* <MoreTourSingle
-                                 idImage={2}
-                                 className="ftco-animate col-md-3"
-                              />
-                              <MoreTourSingle
-                                 idImage={2}
-                                 className="ftco-animate col-md-3"
-                              />
-                              <MoreTourSingle
-                                 idImage={1}
-                                 className="ftco-animate col-md-3"
-                              />
-                              <MoreTourSingle
-                                 idImage={1}
-                                 className="ftco-animate col-md-3"
-                              /> */}
+                        
                            </div>
-                        </div>
+                        </div> */}
                      </div>
                   </div>
                   {/* MENU info schedule, detail, note, date, concat, map, more tour,... */}
@@ -1310,12 +1292,12 @@ export default class TourSingleContainer extends Component {
                         >
                            Đánh giá và nhận xét
                         </a>
-                        <a
+                        {/* <a
                            className="list-group-item list-group-item-action"
                            href="#ht-list-info-5"
                         >
                            Xem những tour liên quan
-                        </a>
+                        </a> */}
                      </div>
                   </div>
                </div>

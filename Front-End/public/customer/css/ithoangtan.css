@@ -476,6 +476,11 @@
     code by Iatek LLC 2018 - CC 2.0 License - Attribution required
     code customized by Azmind.com
 */
+
+.ht-name-tour {
+   font-size: 1.1rem;
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
    /* Show 4th slide on md if col-md-4*/
    #bestTourCarousel
@@ -1146,7 +1151,7 @@
 
 /* Header */
 
-.ht-text-shadow{
+.ht-text-shadow {
    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.575);
 }
 
@@ -2108,6 +2113,10 @@ html {
    display: flex;
    justify-content: center;
    align-items: center;
+   font-weight: 500;
+   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+   font-size: 1rem;
+   color: #f5222d;
 }
 .ht-detail-tour-img-container .ht-sale-info {
    position: absolute;

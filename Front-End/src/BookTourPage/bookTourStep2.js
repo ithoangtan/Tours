@@ -207,12 +207,16 @@ class BookTourStep2 extends Component {
                               <Tooltip
                                  trigger="focus"
                                  title={
-                                    <NumberFormat
-                                       value={priceTour}
-                                       displayType={"text"}
-                                       thousandSeparator={true}
-                                       suffix={" VNĐ / khách"}
-                                    />
+                                    <>
+                                       trên 1,2m là
+                                       <NumberFormat
+                                          value={priceTour}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          prefix=" "
+                                          suffix={" VNĐ / khách"}
+                                       />
+                                    </>
                                  }
                               >
                                  <i
@@ -229,12 +233,16 @@ class BookTourStep2 extends Component {
                               <Tooltip
                                  trigger="focus"
                                  title={
-                                    <NumberFormat
-                                       value={priceTour * 0.9}
-                                       displayType={"text"}
-                                       thousandSeparator={true}
-                                       suffix={" VNĐ / khách"}
-                                    />
+                                    <>
+                                       dưới 1,2m là
+                                       <NumberFormat
+                                          value={priceTour * 0.9}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          prefix=" "
+                                          suffix={" VNĐ / khách"}
+                                       />
+                                    </>
                                  }
                               >
                                  <i
@@ -274,12 +282,16 @@ class BookTourStep2 extends Component {
                                  trigger="focus"
                                  placement="bottom"
                                  title={
-                                    <NumberFormat
-                                       value={priceTour * 0.6}
-                                       displayType={"text"}
-                                       thousandSeparator={true}
-                                       suffix={" VNĐ / khách"}
-                                    />
+                                    <>
+                                       từ 2 - 6 tuổi là
+                                       <NumberFormat
+                                          value={priceTour * 0.6}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          prefix=" "
+                                          suffix={" VNĐ / khách"}
+                                       />
+                                    </>
                                  }
                               >
                                  <i
@@ -297,12 +309,17 @@ class BookTourStep2 extends Component {
                                  trigger="focus"
                                  placement="bottom"
                                  title={
-                                    <NumberFormat
-                                       value={priceTour * 0.1}
-                                       displayType={"text"}
-                                       thousandSeparator={true}
-                                       suffix={" VNĐ / khách"}
-                                    />
+                                    <>
+                                       {" "}
+                                       dưới 2 tuổi là
+                                       <NumberFormat
+                                          value={priceTour * 0.1}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          prefix=" "
+                                          suffix={" VNĐ / khách"}
+                                       />
+                                    </>
                                  }
                               >
                                  <i

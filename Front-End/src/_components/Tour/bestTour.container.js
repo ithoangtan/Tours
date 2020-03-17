@@ -8,7 +8,9 @@ import * as tourActions from "../../_actions/tour.actions";
 
 import { Link } from "react-router-dom";
 
-import { Rate, Button, Statistic, Tooltip, Icon } from "antd";
+import { Rate, Button, Statistic, Tooltip } from "antd";
+
+import { Icon } from "@ant-design/compatible";
 
 import { API_ENDPOINT } from "../../_constants/index.constants";
 
@@ -88,7 +90,7 @@ class BestTourContainer extends Component {
                               {/* {tour.sale !== 0 ? `${tour.sale}% sale` : null} */}
                            </div>
                         </div>
-                        <div className="text ht-d-flex-col">
+                        <div className=" ht-d-flex-col">
                            <h5 className="price">Giá từ {`${tour.price}đ`}</h5>
                            <Link to="/tour">
                               Ở Đà Lạt còn 4 tour nữa. Xem ngay!
@@ -105,7 +107,7 @@ class BestTourContainer extends Component {
                               <i className="fas fa-map-marker-alt"> </i> Hồ Chí
                               Minh
                            </Link>
-                           <h4 className="name-tour">
+                           <h4 className="ht-name-tour">
                               <Link
                                  to={{
                                     pathname: `/tour-single/${tour.idTour}`,
@@ -117,15 +119,17 @@ class BestTourContainer extends Component {
                                  {tour.titleTour}
                               </Link>
                            </h4>
-                           <div className="star d-flex clearfix">
+                           <div className="d-flex">
                               <Rate
+                                 allowHalf
                                  tooltips={desc}
                                  disabled
                                  defaultValue={4.5}
-                                 size="small"
-                                 allowHalf
                                  character={<Icon type="star" />}
-                              />
+                                 //Phải làm tròn số với đơn vị 0.5
+                                 size="small"
+                                 className="mr-1 height-40"
+                              ></Rate>{" "}
                               <div className="float-right ht-display-flex-start-center">
                                  <div className="rate">
                                     <Link to="/tour"> (199 views)</Link>
