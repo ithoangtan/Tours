@@ -21,4 +21,20 @@ Report.getReport = function() {
   });
 };
 
+/**
+ * Hàm này trả về các điểm đến theo thời gian
+ */
+Report.getDestinationByTime = function(month) {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spGetReportDestinationByTime('${month}'); `
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 module.exports = Report;

@@ -1,5 +1,5 @@
-// export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
-export const API_ENDPOINT = "http://localhost:8000";
+export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+//export const API_ENDPOINT = "http://localhost:8000";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",
@@ -9,6 +9,7 @@ export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.easing.1.3.js",
    // "/customer/js/jquery.waypoints.min.js",
    // "/customer/js/jquery.stellar.min.js",
+   "/customer/js/main.js",
    "/customer/js/owl.carousel.min.js",
    // "/customer/js/jquery.magnific-popup.min.js",
    "/customer/js/aos.js",
@@ -17,11 +18,10 @@ export const CustomerArrayExternalScript = [
    "/customer/js/scrollax.min.js",
    // "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false",
    // "/customer/js/google-map.js",
-   "/customer/js/main.js",
-   "/customer/js/ithoangtan.js",
+   "/customer/js/ithoangtan2.js",
+   "/customer/js/ithoangtan.js"
    // "http://cdn.iframe.ly/embed.js",
    // "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",,
-   "/customer/js/ithoangtan.js"
 ];
 
 export const AdminArrayExternalScript = [

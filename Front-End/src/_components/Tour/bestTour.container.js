@@ -8,15 +8,20 @@ import * as tourActions from "../../_actions/tour.actions";
 
 import { Link } from "react-router-dom";
 
-import { Rate, Button } from "antd";
+import { Rate, Button, Statistic, Tooltip } from "antd";
+
+import { Icon } from "@ant-design/compatible";
 
 import { API_ENDPOINT } from "../../_constants/index.constants";
 
 import moment from "moment";
+
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 const dateFormat = "lll";
+const { Countdown } = Statistic;
 
 class BestTourContainer extends Component {
-   state = { haveData: false };
+   state = { haveData: false, size: "default" };
 
    fetch = async () => {
       const { tourAllActions } = this.props;
@@ -32,7 +37,11 @@ class BestTourContainer extends Component {
    componentDidMount() {
       const { listTour } = this.props;
       this.fetch();
-      this.setState({ listTour, haveData: true });
+      this.setState({
+         listTour,
+         haveData: true,
+         size: window.innerWidth > 757.98 ? "default" : "small"
+      });
    }
 
    renderBestTours() {
@@ -43,9 +52,7 @@ class BestTourContainer extends Component {
             let listImageTourDetail = listImageTour.filter(
                imageTour => imageTour.idTour === tour.idTour
             );
-            tour.departureDay = moment(tour.departureDay)
-               .utc()
-               .format(dateFormat);
+            tour.departureDay = moment(tour.departureDay).format(dateFormat);
             if (index < 8)
                return (
                   <div
@@ -64,29 +71,43 @@ class BestTourContainer extends Component {
                                     : ``
                               }
                               className="img-fluid"
-                              alt="Colorlib Template"
+                              alt="best tour"
                            />
-                           <p className="sale">
-                              {tour.sale !== 0 ? `${tour.sale}% sale` : null}
-                           </p>
+                           <div className="sale">
+                              <Countdown
+                                 value={
+                                    Date.now() +
+                                    1000 * 60 * 60 * 24 * 2 +
+                                    1000 * 3
+                                 }
+                                 valueStyle={
+                                    this.state.size === "default"
+                                       ? { fontSize: "1.1rem" }
+                                       : { fontSize: "0.9rem" }
+                                 }
+                                 format="Còn Dd Hh m:s"
+                              />
+                              {/* {tour.sale !== 0 ? `${tour.sale}% sale` : null} */}
+                           </div>
                         </div>
-                        <div className="text">
+                        <div className=" ht-d-flex-col">
                            <h5 className="price">Giá từ {`${tour.price}đ`}</h5>
                            <Link to="/tour">
                               Ở Đà Lạt còn 4 tour nữa. Xem ngay!
                            </Link>
                            <Link
+                              className="ht-map-maker"
                               to={{
-                                 pathname: `/tour`,
+                                 pathname: `/tour/search/hcm`,
                                  state: {
                                     tour: tour
                                  }
                               }}
                            >
-                              {" "}
-                              Khởi hành từ Hồ Chí Minh
+                              <i className="fas fa-map-marker-alt"> </i> Hồ Chí
+                              Minh
                            </Link>
-                           <h3 className="name-tour">
+                           <h4 className="ht-name-tour">
                               <Link
                                  to={{
                                     pathname: `/tour-single/${tour.idTour}`,
@@ -97,13 +118,22 @@ class BestTourContainer extends Component {
                               >
                                  {tour.titleTour}
                               </Link>
-                           </h3>
-                           <div className="star d-flex clearfix">
-                              <Rate disabled defaultValue={4} size="small" />
-                              <div className="float-right ht-align-end">
-                                 <span className="rate">
-                                    <Link to="/tour"> (199)</Link>
-                                 </span>
+                           </h4>
+                           <div className="d-flex">
+                              <Rate
+                                 allowHalf
+                                 tooltips={desc}
+                                 disabled
+                                 defaultValue={4.5}
+                                 character={<Icon type="star" />}
+                                 //Phải làm tròn số với đơn vị 0.5
+                                 size="small"
+                                 className="mr-1 height-40"
+                              ></Rate>{" "}
+                              <div className="float-right ht-display-flex-start-center">
+                                 <div className="rate">
+                                    <Link to="/tour"> (199 views)</Link>
+                                 </div>
                               </div>
                            </div>
                         </div>
@@ -120,9 +150,19 @@ class BestTourContainer extends Component {
                                  }
                               }}
                            >
-                              <Button type="primary" className="float-right">
-                                 BOOK NOW
-                              </Button>
+                              <Tooltip
+                                 placement="bottom"
+                                 title={
+                                    <p className="ht-no-p-m">
+                                       <i className="fas fa-couch"></i> còn 5
+                                       chỗ
+                                    </p>
+                                 }
+                              >
+                                 <Button type="primary" className="float-right">
+                                    ĐẶT NGAY
+                                 </Button>
+                              </Tooltip>
                            </Link>
                         </div>
                         <a
@@ -141,7 +181,7 @@ class BestTourContainer extends Component {
                      </div>
                   </div>
                );
-            else return <div></div>;
+            else return <></>;
          });
       } else {
          result = <div>Không có dữ liệu</div>;
@@ -153,13 +193,13 @@ class BestTourContainer extends Component {
       return (
          <section className="ftco-section">
             <div className="container">
-               <div className="row justify-content-center pb-1">
-                  <div className="col-md-12 heading-section text-center ftco-animate">
-                     <h2 className="mb-4">Best Place to Travel</h2>
-                     <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia
-                     </p>
+               <div className="row justify-content-center pb-1 ht-more-container">
+                  <Link className="ht-more" to="tour">
+                     <Button type="dashed">Xem thêm...</Button>
+                  </Link>
+                  <div className="col-md-12 heading-section text-center ">
+                     <h2 className="mb-1">Những TOUR hàng đầu</h2>
+                     <p>Something! Câu nói hay về du lịch</p>
                   </div>
                </div>
                <div
@@ -169,7 +209,7 @@ class BestTourContainer extends Component {
                   data-interval={4000}
                >
                   <div
-                     className="carousel-inner row w-100 mx-auto ftco-animate"
+                     className="carousel-inner row w-100 mx-auto"
                      role="listbox"
                   >
                      {this.renderBestTours()}

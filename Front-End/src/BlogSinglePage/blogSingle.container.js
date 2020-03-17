@@ -5,24 +5,76 @@ import { Link } from "react-router-dom";
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
+import BlogRightContainer from "../BlogPage/blogRight.container";
+import BlogNavigationContainer from "../BlogPage/blogNavigation.container";
+
+import { Rate } from "antd";
+
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+
 export default class BlogSingleContainer extends Component {
    componentDidMount() {
       window.scrollTo({
          top: 0,
-         left: 0,
-         behavior: "smooth"
+         left: 0
       });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
+
+   renderContentPost() {
+      return <></>;
+   }
+
+   constructor(props) {
+      super(props);
+      this.state = {
+         vote: false,
+         numVote: 131,
+         valueRate: 3
+      };
+   }
+
+   handleChange = value => {
+      this.setState({ valueRate: value });
+   };
+   onChangeVote = () => {
+      this.setState({
+         vote: !this.state.vote,
+         numVote: this.state.vote
+            ? this.state.numVote - 1
+            : this.state.numVote + 1
+      });
+   };
    render() {
+      const { vote, numVote, valueRate } = this.state;
       return (
          <section className="ftco-section">
             <div className="container">
+               <BlogNavigationContainer />
+
                <div className="row">
-                  <div className="col-lg-8 order-md-last ftco-animate">
-                     <h2 className="mb-3">
-                        It is a long established fact a reader be distracted
-                     </h2>
+                  <div className="col-lg-8 ftco-animate">
+                     <div className="ht-title-post-container">
+                        <div className="ht-title">
+                           Thử Làm "Rich Kid" Một Lần Xem Chúng Bạn Có Trầm Trồ
+                           Tại 3 Resort Sang Chảnh Bậc Nhất Đà Lạt
+                        </div>
+                        <div className="ht-date-view-vote">
+                           <div className="ht-date-view">
+                              <i className="far fa-calendar-alt"></i> 03/03/2020
+                              <i className="far fa-eye ml-3"></i> 1244
+                              <i className="far fa-comment ml-3"></i> 115
+                           </div>
+                           <div
+                              className={vote ? "ht-vote-up" : "ht-vote"}
+                              onClick={this.onChangeVote}
+                           >
+                              {" "}
+                              <i className="far fa-thumbs-up"></i> {numVote}
+                           </div>
+                        </div>
+                     </div>
+                     {this.renderContentPost()}
                      <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Reiciendis, eius mollitia suscipit, quisquam
@@ -107,8 +159,11 @@ export default class BlogSingleContainer extends Component {
                         voluptates mollitia illo minus praesentium, rerum ipsa
                         debitis, inventore?
                      </p>
-                     <div className="tag-widget post-tag-container mb-5 mt-5">
+                     <div className="tag-widget post-tag-container mb-2 mt-2">
                         <div className="tagcloud">
+                           <div className="ht-tag-container-beautiful">
+                              <i className="far fa-folder-open"></i> Category
+                           </div>
                            <Link to="#" className="tag-cloud-link">
                               Life
                            </Link>
@@ -121,8 +176,71 @@ export default class BlogSingleContainer extends Component {
                            <Link to="#" className="tag-cloud-link">
                               Travel
                            </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                        </div>
+
+                        <div className="tagcloud">
+                           <div className="ht-tag-container-beautiful">
+                              <i className="fas fa-tags"></i> Tags
+                           </div>
+                           <Link to="#" className="tag-cloud-link">
+                              Life
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Sport
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Tech
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel kakakakakak
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
+                           <Link to="#" className="tag-cloud-link">
+                              Travel
+                           </Link>
                         </div>
                      </div>
+                     <div className="pt-2 mt-2 mb-4 ht-rating-post">
+                        ĐÁNH GIÁ BÀI VIẾT NÀY
+                        <div className="ht-rating">
+                           <span>
+                              <Rate
+                                 allowClear={false}
+                                 tooltips={desc}
+                                 onChange={this.handleChange}
+                                 value={valueRate}
+                              />
+                              {valueRate ? (
+                                 <span className="ant-rate-text">
+                                    {desc[valueRate - 1]}
+                                 </span>
+                              ) : (
+                                 ""
+                              )}
+                           </span>
+                        </div>
+                     </div>
+
                      <div className="about-author d-flex p-4 bg-light">
                         <div className="bio mr-5">
                            <img
@@ -132,433 +250,19 @@ export default class BlogSingleContainer extends Component {
                            />
                         </div>
                         <div className="desc">
-                           <h3>George Washington</h3>
+                           <h3>ithoangtan</h3>
                            <p>
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipisicing elit. Ducimus itaque, autem
-                              necessitatibus voluptate quod mollitia delectus
-                              aut, sunt placeat nam vero culpa sapiente
-                              consectetur similique, inventore eos fugit
-                              cupiditate numquam!
+                              Create a beautiful blog that fits your style.
+                              Choose from a selection of easy-to-use templates –
+                              all with flexible layouts and hundreds of
+                              background images – or design something new.
                            </p>
                         </div>
                      </div>
-                     <div className="pt-5 mt-5">
-                        <h3 className="mb-5">6 Comments</h3>
-                        <ul className="comment-list">
-                           <li className="comment">
-                              <div className="vcard bio">
-                                 <img src="images/person_1.jpg" alt="#" />
-                              </div>
-                              <div className="comment-body">
-                                 <h3>John Doe</h3>
-                                 <div className="meta">
-                                    October 03, 2018 at 2:21pm
-                                 </div>
-                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Pariatur quidem laborum
-                                    necessitatibus, ipsam impedit vitae autem,
-                                    eum officia, fugiat saepe enim sapiente iste
-                                    iure! Quam voluptas earum impedit
-                                    necessitatibus, nihil?
-                                 </p>
-                                 <p>
-                                    <Link to="#" className="reply">
-                                       Reply
-                                    </Link>
-                                 </p>
-                              </div>
-                           </li>
-                           <li className="comment">
-                              <div className="vcard bio">
-                                 <img src="images/person_1.jpg" alt="#" />
-                              </div>
-                              <div className="comment-body">
-                                 <h3>John Doe</h3>
-                                 <div className="meta">
-                                    October 03, 2018 at 2:21pm
-                                 </div>
-                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Pariatur quidem laborum
-                                    necessitatibus, ipsam impedit vitae autem,
-                                    eum officia, fugiat saepe enim sapiente iste
-                                    iure! Quam voluptas earum impedit
-                                    necessitatibus, nihil?
-                                 </p>
-                                 <p>
-                                    <Link to="#" className="reply">
-                                       Reply
-                                    </Link>
-                                 </p>
-                              </div>
-                              <ul className="children">
-                                 <li className="comment">
-                                    <div className="vcard bio">
-                                       <img src="images/person_1.jpg" alt="#" />
-                                    </div>
-                                    <div className="comment-body">
-                                       <h3>John Doe</h3>
-                                       <div className="meta">
-                                          October 03, 2018 at 2:21pm
-                                       </div>
-                                       <p>
-                                          Lorem ipsum dolor sit amet,
-                                          consectetur adipisicing elit. Pariatur
-                                          quidem laborum necessitatibus, ipsam
-                                          impedit vitae autem, eum officia,
-                                          fugiat saepe enim sapiente iste iure!
-                                          Quam voluptas earum impedit
-                                          necessitatibus, nihil?
-                                       </p>
-                                       <p>
-                                          <Link to="#" className="reply">
-                                             Reply
-                                          </Link>
-                                       </p>
-                                    </div>
-                                    <ul className="children">
-                                       <li className="comment">
-                                          <div className="vcard bio">
-                                             <img
-                                                src="images/person_1.jpg"
-                                                alt="#"
-                                             />
-                                          </div>
-                                          <div className="comment-body">
-                                             <h3>John Doe</h3>
-                                             <div className="meta">
-                                                October 03, 2018 at 2:21pm
-                                             </div>
-                                             <p>
-                                                Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit.
-                                                Pariatur quidem laborum
-                                                necessitatibus, ipsam impedit
-                                                vitae autem, eum officia, fugiat
-                                                saepe enim sapiente iste iure!
-                                                Quam voluptas earum impedit
-                                                necessitatibus, nihil?
-                                             </p>
-                                             <p>
-                                                <Link to="#" className="reply">
-                                                   Reply
-                                                </Link>
-                                             </p>
-                                          </div>
-                                          <ul className="children">
-                                             <li className="comment">
-                                                <div className="vcard bio">
-                                                   <img
-                                                      src="images/person_1.jpg"
-                                                      alt="#"
-                                                   />
-                                                </div>
-                                                <div className="comment-body">
-                                                   <h3>John Doe</h3>
-                                                   <div className="meta">
-                                                      October 03, 2018 at 2:21pm
-                                                   </div>
-                                                   <p>
-                                                      Lorem ipsum dolor sit
-                                                      amet, consectetur
-                                                      adipisicing elit. Pariatur
-                                                      quidem laborum
-                                                      necessitatibus, ipsam
-                                                      impedit vitae autem, eum
-                                                      officia, fugiat saepe enim
-                                                      sapiente iste iure! Quam
-                                                      voluptas earum impedit
-                                                      necessitatibus, nihil?
-                                                   </p>
-                                                   <p>
-                                                      <Link
-                                                         to="#"
-                                                         className="reply"
-                                                      >
-                                                         Reply
-                                                      </Link>
-                                                   </p>
-                                                </div>
-                                             </li>
-                                          </ul>
-                                       </li>
-                                    </ul>
-                                 </li>
-                              </ul>
-                           </li>
-                           <li className="comment">
-                              <div className="vcard bio">
-                                 <img src="images/person_1.jpg" alt="#" />
-                              </div>
-                              <div className="comment-body">
-                                 <h3>John Doe</h3>
-                                 <div className="meta">
-                                    October 03, 2018 at 2:21pm
-                                 </div>
-                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Pariatur quidem laborum
-                                    necessitatibus, ipsam impedit vitae autem,
-                                    eum officia, fugiat saepe enim sapiente iste
-                                    iure! Quam voluptas earum impedit
-                                    necessitatibus, nihil?
-                                 </p>
-                                 <p>
-                                    <Link to="#" className="reply">
-                                       Reply
-                                    </Link>
-                                 </p>
-                              </div>
-                           </li>
-                        </ul>
-                        {/* END comment-list */}
-                        <div className="comment-form-wrap pt-5">
-                           <h3 className="mb-5">Leave a comment</h3>
-                           <form action="#" className="p-5 bg-light">
-                              <div className="form-group">
-                                 <label htmlFor="name">Name *</label>
-                                 <input
-                                    type="text"
-                                    className="form-control"
-                                    id="name"
-                                 />
-                              </div>
-                              <div className="form-group">
-                                 <label htmlFor="email">Email *</label>
-                                 <input
-                                    type="email"
-                                    className="form-control"
-                                    id="email"
-                                 />
-                              </div>
-                              <div className="form-group">
-                                 <label htmlFor="website">Website</label>
-                                 <input
-                                    type="url"
-                                    className="form-control"
-                                    id="website"
-                                 />
-                              </div>
-                              <div className="form-group">
-                                 <label htmlFor="message">Message</label>
-                                 <textarea
-                                    name="message"
-                                    id="message"
-                                    cols={30}
-                                    rows={10}
-                                    className="form-control"
-                                    defaultValue={""}
-                                 />
-                              </div>
-                              <div className="form-group">
-                                 <input
-                                    type="submit"
-                                    defaultValue="Post Comment"
-                                    className="btn py-3 px-4 btn-primary"
-                                 />
-                              </div>
-                           </form>
-                        </div>
-                     </div>
-                  </div>{" "}
+                  </div>
                   {/* .col-md-8 */}
-                  <div className="col-lg-4 sidebar ftco-animate">
-                     <div className="sidebar-box">
-                        <form action="#" className="search-form">
-                           <div className="form-group">
-                              <span className="icon icon-search" />
-                              <input
-                                 type="text"
-                                 className="form-control"
-                                 placeholder="Type a keyword and hit enter"
-                              />
-                           </div>
-                        </form>
-                     </div>
-                     <div className="sidebar-box ftco-animate">
-                        <div className="categories">
-                           <h3>Categories</h3>
-                           <li>
-                              <Link to="#">
-                                 Travel <span>(12)</span>
-                              </Link>
-                           </li>
-                           <li>
-                              <Link to="#">
-                                 Tour <span>(22)</span>
-                              </Link>
-                           </li>
-                           <li>
-                              <Link to="#">
-                                 Destination <span>(37)</span>
-                              </Link>
-                           </li>
-                           <li>
-                              <Link to="#">
-                                 Drinks <span>(42)</span>
-                              </Link>
-                           </li>
-                           <li>
-                              <Link to="#">
-                                 Foods <span>(14)</span>
-                              </Link>
-                           </li>
-                           <li>
-                              <Link to="#">
-                                 Travel <span>(140)</span>
-                              </Link>
-                           </li>
-                        </div>
-                     </div>
-                     <div className="sidebar-box ftco-animate">
-                        <h3>Recent Blog</h3>
-                        <div className="block-21 mb-4 d-flex">
-                           <Link
-                              to="#"
-                              className="blog-img mr-4"
-                              style={{
-                                 backgroundImage: "url(images/image_1.jpg)"
-                              }}
-                           />
-                           <div className="text">
-                              <h3 className="heading">
-                                 <Link to="#">
-                                    Even the all-powerful Pointing has no
-                                    control about the blind texts
-                                 </Link>
-                              </h3>
-                              <div className="meta">
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-calendar" />{" "}
-                                       February 12, 2019
-                                    </Link>
-                                 </div>
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-person" /> Admin
-                                    </Link>
-                                 </div>
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-chat" /> 19
-                                    </Link>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div className="block-21 mb-4 d-flex">
-                           <Link
-                              to="#"
-                              className="blog-img mr-4"
-                              style={{
-                                 backgroundImage: "url(images/image_2.jpg)"
-                              }}
-                           />
-                           <div className="text">
-                              <h3 className="heading">
-                                 <Link to="#">
-                                    Even the all-powerful Pointing has no
-                                    control about the blind texts
-                                 </Link>
-                              </h3>
-                              <div className="meta">
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-calendar" />{" "}
-                                       February 12, 2019
-                                    </Link>
-                                 </div>
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-person" /> Admin
-                                    </Link>
-                                 </div>
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-chat" /> 19
-                                    </Link>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div className="block-21 mb-4 d-flex">
-                           <Link
-                              to="#"
-                              className="blog-img mr-4"
-                              style={{
-                                 backgroundImage: "url(images/image_3.jpg)"
-                              }}
-                           />
-                           <div className="text">
-                              <h3 className="heading">
-                                 <Link to="#">
-                                    Even the all-powerful Pointing has no
-                                    control about the blind texts
-                                 </Link>
-                              </h3>
-                              <div className="meta">
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-calendar" />{" "}
-                                       February 12, 2019
-                                    </Link>
-                                 </div>
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-person" /> Admin
-                                    </Link>
-                                 </div>
-                                 <div>
-                                    <Link to="#">
-                                       <span className="icon-chat" /> 19
-                                    </Link>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="sidebar-box ftco-animate">
-                        <h3>Tag Cloud</h3>
-                        <div className="tagcloud">
-                           <Link to="#" className="tag-cloud-link">
-                              dish
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              menu
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              food
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              sweet
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              tasty
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              delicious
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              desserts
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              drinks
-                           </Link>
-                        </div>
-                     </div>
-                     <div className="sidebar-box ftco-animate">
-                        <h3>Paragraph</h3>
-                        <p>
-                           Lorem ipsum dolor sit amet, consectetur adipisicing
-                           elit. Ducimus itaque, autem necessitatibus voluptate
-                           quod mollitia delectus aut, sunt placeat nam vero
-                           culpa sapiente consectetur similique, inventore eos
-                           fugit cupiditate numquam!
-                        </p>
-                     </div>
+                  <div className="col-lg-4 sidebar ftco-animate col-md-4 ht-blog-right">
+                     <BlogRightContainer />
                   </div>
                </div>
             </div>

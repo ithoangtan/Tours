@@ -9,7 +9,8 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Form, Icon, Input, Button, Checkbox, message } from "antd";
+import { Icon, Input, Button, Checkbox, message } from "antd";
+import { Form } from "@ant-design/compatible";
 
 class LoginContainer extends Component {
    constructor(props) {
@@ -76,9 +77,9 @@ class LoginContainer extends Component {
       const { getFieldDecorator } = this.props.form;
       const email = sessionStorage.getItem("email");
       return (
-         <Form onSubmit={this.handleSubmit} className="login-form">
+         <Form onSubmit={this.handleSubmit} className="login-form mt-1 mb-4">
             {this.haveRedirect()}
-            <Form.Item>
+            <Form.Item className="pb-2">
                {getFieldDecorator("email", {
                   initialValue:
                      email !== null && email !== undefined && email !== ""
@@ -100,13 +101,13 @@ class LoginContainer extends Component {
                   />
                )}
             </Form.Item>
-            <Form.Item>
+            <Form.Item className="pb-2">
                {getFieldDecorator("password", {
                   rules: [
                      { required: true, message: "Please input your password!" }
                   ]
                })(
-                  <Input
+                  <Input.Password
                      name="password"
                      prefix={
                         <Icon
@@ -120,27 +121,6 @@ class LoginContainer extends Component {
                   />
                )}
             </Form.Item>
-            {/* <Form.Item>
-               {getFieldDecorator("role", {
-                  valuePropName: "radio",
-                  initialValue: true
-               })(
-                  <Radio.Group
-                     defaultValue="user"
-                     buttonStyle="solid"
-                     className="role"
-                  >
-                     <Radio.Button value="role" disabled>
-                        Roles:{" "}
-                     </Radio.Button>
-                     <Radio.Button value="user">User</Radio.Button>
-                     <Radio.Button value="admin">Admin</Radio.Button>
-                     <Radio.Button value="administrator">
-                        Administrator
-                     </Radio.Button>
-                  </Radio.Group>
-               )}
-            </Form.Item> */}
             <Form.Item>
                {getFieldDecorator("remember", {
                   valuePropName: "checked",
@@ -156,6 +136,14 @@ class LoginContainer extends Component {
                >
                   Log in
                </Button>
+               <div className="d-flex">
+                  <Button className="ht-login-fb">
+                     <i className="fab fa-facebook"></i> Facebook
+                  </Button>
+                  <Button className="ht-login-gg">
+                     <i className="fab fa-google"></i> Google
+                  </Button>
+               </div>
                Or <Link to="/register">register now!</Link>
             </Form.Item>
          </Form>

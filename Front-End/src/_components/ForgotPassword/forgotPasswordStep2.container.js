@@ -7,7 +7,8 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Form, Input, Button, message } from "antd";
+import { Input, Button, message } from "antd";
+import { Form } from "@ant-design/compatible";
 import ResultDynamic from "../../ResultBoardPage/Result";
 import Text from "antd/lib/typography/Text";
 import { Link } from "react-router-dom";

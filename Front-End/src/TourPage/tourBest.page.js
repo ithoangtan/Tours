@@ -12,10 +12,10 @@ export default class TourBestPage extends Component {
    }
    render() {
       return (
-         <div>
+         <>
             <TourVideoGalleryContainer />
             <BestTourContainer />
-         </div>
+         </>
       );
    }
 }

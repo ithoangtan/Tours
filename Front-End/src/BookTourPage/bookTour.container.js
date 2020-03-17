@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as orderActions from "../_actions/order.actions";
 
-import { Button, Steps, message } from "antd";
+import { Button, Steps, message, Checkbox } from "antd";
 
 import BookTourStep1 from "./bookTourStep1";
 import BookTourStep2 from "./bookTourStep2";
@@ -20,7 +20,7 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 const { Step } = Steps;
 
 const stepStyle = {
-   marginBottom: 60,
+   marginBottom: 18,
    boxShadow: "0px -1px 0 0 #e8e8e8 inset"
 };
 
@@ -176,7 +176,7 @@ class BookTourContainer extends Component {
       ];
 
       return (
-         <div className="book-tour-container">
+         <div className="book-tour-container container">
             {this.onRedirect()}
             <Steps
                current={current}
@@ -197,6 +197,19 @@ class BookTourContainer extends Component {
             </Steps>
             <div className="steps-content">{steps[current].content}</div>
             <div className="steps-action">
+               <div className="ht-policy-check">
+                  <Checkbox checked>
+                     Đồng ý với{" "}
+                     <Link to="#" className="ht-text-underline">
+                        điều khoản và chính sách
+                     </Link>{" "}
+                     của chúng tôi và
+                     <Link to="#" className="ht-text-underline">
+                        {" "}
+                        điều khoản bắt buộc khi thanh toán online
+                     </Link>
+                  </Checkbox>
+               </div>
                {current > 0 && (
                   <Button
                      style={{ marginRight: 8 }}

@@ -6,5 +6,6 @@ module.exports = {
       lg: "992px",
       xl: "1200px",
       xxl: "1600px"
-   }
+   },
+   color: "#1DA57A"
 };

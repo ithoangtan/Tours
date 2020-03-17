@@ -47,7 +47,7 @@ $ yarn start
 ```
 
 ### DEMO:
-
+- Link video: https://www.youtube.com/watch?v=uulm3fSYRwU
 - ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
 - account test: ithoangtan@gmail.com; password: 123456a@
 - USER: https://kinhdoanhtourdulich.herokuapp.com/
@@ -60,5 +60,6 @@ $ yarn start
 ### Issue
 
 - heroku upload file: https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted
+- trong nhan xet cua thay
 
 ## License

@@ -8,13 +8,13 @@
          var it = itemsPerSlide - (totalItems - idx);
          for (var i = 0; i < it; i++) {
             // append slides to end
-            if (e.direction == "left") {
+            if (e.direction === "right") {
                $("#bestTourCarousel .carousel-item")
-                  .eq(i)
+                  .eq(0)
                   .appendTo("#bestTourCarousel .carousel-inner");
             } else {
                $("#bestTourCarousel .carousel-item")
-                  .eq(0)
+                  .eq(i)
                   .appendTo("#bestTourCarousel .carousel-inner");
             }
          }
@@ -29,7 +29,7 @@
          var it = itemsPerSlide - (totalItems - idx);
          for (var i = 0; i < it; i++) {
             // append slides to end
-            if (e.direction == "left") {
+            if (e.direction === "left") {
                $("#recentStoriesCarousel .carousel-item")
                   .eq(i)
                   .appendTo("#recentStoriesCarousel .carousel-inner");
