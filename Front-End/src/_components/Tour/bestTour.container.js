@@ -15,6 +15,7 @@ import { Icon } from "@ant-design/compatible";
 import { API_ENDPOINT } from "../../_constants/index.constants";
 
 import moment from "moment";
+import NumberFormat from "react-number-format";
 
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 const dateFormat = "lll";
@@ -90,8 +91,16 @@ class BestTourContainer extends Component {
                               {/* {tour.sale !== 0 ? `${tour.sale}% sale` : null} */}
                            </div>
                         </div>
-                        <div className=" ht-d-flex-col">
-                           <h5 className="price">Giá từ {`${tour.price}đ`}</h5>
+                        <div className="text ht-d-flex-col">
+                           <h5 className="price">
+                              <NumberFormat
+                                 value={tour.price}
+                                 displayType={"text"}
+                                 thousandSeparator={true}
+                                 prefix={"Giá từ "}
+                                 suffix={"Đ"}
+                              />
+                           </h5>
                            <Link to="/tour">
                               Ở Đà Lạt còn 4 tour nữa. Xem ngay!
                            </Link>

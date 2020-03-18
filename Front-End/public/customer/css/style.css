@@ -11052,6 +11052,9 @@ h5,
    overflow: hidden;
    z-index: 0;
    margin-bottom: 50px;
+   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+   padding: 8px;
+   border-radius: 6px;
 }
 .project .img div.sale {
    position: absolute;
@@ -11098,7 +11101,6 @@ h5,
    transition: all 0.6s ease;
 }
 .project .text {
-   padding: 1.5em 0 0 0;
    position: relative;
    -moz-transition: all 0.6s ease;
    -o-transition: all 0.6s ease;
@@ -11113,8 +11115,8 @@ h5,
 }
 .project .text h5.price {
    position: absolute;
-   top: -25px;
-   right: 10px;
+   top: -45px;
+   right: 6px;
    padding: 0.2em 0.3em;
    background: #fff;
    font-weight: 600;
@@ -11128,18 +11130,18 @@ h5,
    -moz-border-radius: 2px;
    -ms-border-radius: 2px;
    border-radius: 2px;
-   -webkit-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
-   -moz-box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
-   box-shadow: 0px 20px 43px -8px rgba(0, 0, 0, 0.11);
+   -webkit-box-shadow: 0px 5px 16px -8px rgba(0, 0, 0, 0.11);
+   -moz-box-shadow: 0px 5px 16px -8px rgba(0, 0, 0, 0.11);
+   box-shadow: 0px 5px 16px -8px rgba(0, 0, 0, 0.11);
 }
-.project .text span {
+/* .project .text span {
    font-weight: 500;
    font-size: 14px;
    text-transform: uppercase;
    letter-spacing: 2px;
    color: rgba(0, 0, 0, 0.2);
-}
-.project .text h3 {
+} */
+/* .project .text h3 {
    font-size: 20px;
    font-weight: 600;
    color: #000000;
@@ -11152,7 +11154,7 @@ h5,
 }
 .project .text .star .rate a {
    color: rgba(0, 0, 0, 0.3);
-}
+} */
 .project .icon {
    position: absolute;
    top: -50px;
