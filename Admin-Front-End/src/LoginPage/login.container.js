@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
@@ -131,7 +131,7 @@ class LoginContainer extends Component {
                </Button>
             </Form.Item>
 
-            <Link to="index.html" className="btn btn-google btn-user btn-block">
+            {/* <Link to="index.html" className="btn btn-google btn-user btn-block">
                <i className="fab fa-google fa-fw" /> Login with Google
             </Link>
             <Link
@@ -139,7 +139,7 @@ class LoginContainer extends Component {
                className="btn btn-facebook btn-user btn-block"
             >
                <i className="fab fa-facebook-f fa-fw" /> Login with Facebook
-            </Link>
+            </Link> */}
          </Form>
       );
    }
