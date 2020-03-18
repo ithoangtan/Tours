@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import ReportViewNumberContainer from "./ContentDetail/reportViewNumber.container";
 import ReportViewChartContainer from "./ContentDetail/reportViewChart.container";
-import ReportProjectSliderAndIllustrationsContainer from "./ContentDetail/reportProjectSliderAndIllustrations.container";
+// import ReportProjectSliderAndIllustrationsContainer from "./ContentDetail/reportProjectSliderAndIllustrations.container";
 
 export default class ContentMainContainer extends Component {
    render() {
@@ -21,10 +21,11 @@ export default class ContentMainContainer extends Component {
             </div>
             {/* report Number */}
             <ReportViewNumberContainer />
+
             {/* report Chart */}
             <ReportViewChartContainer />
             {/* Project slider and Illsutrations */}
-            <ReportProjectSliderAndIllustrationsContainer />
+            {/* <ReportProjectSliderAndIllustrationsContainer /> */}
          </div>
       );
    }

@@ -46,7 +46,7 @@ class EditorContainer extends Component {
    onSave = () => {
       const schedule = {
          data: this.state.content,
-         idTour: this.state.tour.idTour
+         idTour: this.props.tour.idTour
       };
       //Save data schedule by id tour
       const { scheduleAllActions } = this.props;

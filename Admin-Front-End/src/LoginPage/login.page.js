@@ -30,6 +30,7 @@ export default class LoginPage extends Component {
                                        <Link
                                           className="small"
                                           to="/forgot-password"
+                                          style={{ fontSize: "1rem" }}
                                        >
                                           Forgot Password?
                                        </Link>

@@ -7,6 +7,8 @@ import * as reportActions from "../../../_actions/report.actions";
 import * as INDEX_CONSTANTS from "../../../_constants/index.constants";
 import funcLoadJs from "../../../_constants/loadJs.constants";
 
+import NumberFormat from "react-number-format";
+
 class ReportViewNumberContainer extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
@@ -45,11 +47,17 @@ class ReportViewNumberContainer extends Component {
                               Tổng thu trong năm
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              {report2[1].total} VNĐ
+                              <NumberFormat
+                                 value={report2[1].total}
+                                 displayType={"text"}
+                                 thousandSeparator={true}
+                                 prefix={""}
+                                 suffix={" VNĐ"}
+                              />
                            </div>
                         </div>
                         <div className="col-auto">
-                           <i className="fas fa-calendar fa-2x text-gray-300" />
+                           <i className="fas fa-dollar-sign fa-2x text-primary" />
                         </div>
                      </div>
                   </div>
@@ -69,7 +77,7 @@ class ReportViewNumberContainer extends Component {
                            </div>
                         </div>
                         <div className="col-auto">
-                           <i className="fas fa-dollar-sign fa-2x text-gray-300" />
+                           <i className="fas fa-umbrella-beach fa-2x text-success" />
                         </div>
                      </div>
                   </div>
@@ -89,7 +97,7 @@ class ReportViewNumberContainer extends Component {
                            </div>
                         </div>
                         <div className="col-auto">
-                           <i className="fas fa-dollar-sign fa-2x text-gray-300" />
+                           <i className="fas fa-user-check fa-2x text-success" />
                         </div>
                      </div>
                   </div>
@@ -98,18 +106,18 @@ class ReportViewNumberContainer extends Component {
             {/* Pending Requests Card Example */}
             <div className="col-xl-3 col-md-6 mb-4">
                <div className="card border-left-warning shadow h-100 py-2">
-                  <div className="card-body">
+                  <div className="card-body ">
                      <div className="row no-gutters align-items-center">
                         <div className="col mr-2">
                            <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
                               Yêu cầu đang chờ xử lý
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              08 Request
+                              8 Request
                            </div>
                         </div>
                         <div className="col-auto">
-                           <i className="fas fa-comments fa-2x text-gray-300" />
+                           <i className="fas fa-clipboard-list fa-2x text-warning" />
                         </div>
                      </div>
                   </div>
