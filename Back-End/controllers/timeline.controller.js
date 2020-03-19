@@ -2,6 +2,22 @@ const { check, validationResult } = require("express-validator");
 
 const Timeline = require("../models/timeline.model");
 
+exports.listTimelineSearch = async function(req, res) {
+  const searchs = {
+    keySearch: req.body.keySearch,
+    date: req.body.date,
+  };
+  try {
+    listTimeline = await Timeline.getAllTimelineSearch(searchs);
+    res.status(200).json(listTimeline);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.read = async (req, res, next) => {
   try {
     const { idTimelines } = req.query;

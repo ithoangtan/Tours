@@ -26,6 +26,19 @@ Tag.getTagById = function(idTag) {
   });
 };
 
+Tag.getAllTagSearch = function(searchs) {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spSearchEngineTag( '${searchs.keySearch}' ); `
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 Tag.createTag = function(newTag) {
   return new Promise(function(resolve, reject) {
     database

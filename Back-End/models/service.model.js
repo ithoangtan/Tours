@@ -26,6 +26,19 @@ Service.getServiceById = function(idServices) {
   });
 };
 
+Service.getAllServiceSearch = function(searchs) {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spSearchEngineService( '${searchs.keySearch}' ); `
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 Service.createService = function(newService) {
   return new Promise(function(resolve, reject) {
     database

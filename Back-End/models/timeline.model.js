@@ -29,6 +29,19 @@ Timeline.getTimelineById = function(idTimelines) {
   });
 };
 
+Timeline.getAllTimelineSearch = function(searchs) {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spSearchEngineTimeline( '${searchs.keySearch}', '${searchs.date}' ); `
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 Timeline.createTimeline = function(newTimeline) {
   return new Promise(function(resolve, reject) {
     database
