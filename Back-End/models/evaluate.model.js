@@ -3,7 +3,11 @@ const database = require("../dbconnectMySql");
 //Task object constructor
 const Evaluate = function(evaluate) {
   this.idEvaluate = evaluate.idEvaluate | 0;
-  this.numberStar = evaluate.numberStar;
+  this.numberStarHotel = evaluate.numberStarHotel;
+  this.numberStarFood = evaluate.numberStarFood;
+  this.numberStarVehicle = evaluate.numberStarVehicle;
+  this.numberStarTourGuide = evaluate.numberStarTourGuide;
+  this.numberStarSchedule = evaluate.numberStarSchedule;
   this.title = evaluate.title;
   this.contentEvaluate = evaluate.contentEvaluate;
   this.idAccount = evaluate.idAccount;
@@ -44,8 +48,16 @@ Evaluate.createEvaluate = function(newEvaluate) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".evaluates (`numberStar`, `title`, `contentEvaluate`, `idAccount`, `idTour`) VALUES ('" +
-          newEvaluate.numberStar +
+          ".evaluates (`numberStarHotel`, `numberStarFood`, `numberStarVehicle`, `numberStarTourGuide`, `numberStarSchedule`, `title`, `contentEvaluate`, `idAccount`, `idTour`) VALUES ('" +
+          newEvaluate.numberStarHotel +
+          "', '" +
+          newEvaluate.numberStarFood +
+          "', '" +
+          newEvaluate.numberStarVehicle +
+          "', '" +
+          newEvaluate.numberStarTourGuide +
+          "', '" +
+          newEvaluate.numberStarSchedule +
           "', '" +
           newEvaluate.title +
           "', '" +

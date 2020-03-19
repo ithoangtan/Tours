@@ -4,6 +4,10 @@ const mysql = require("../dbconnection.js");
 const Schedule = function(schedule) {
   this.data = schedule.data;
   this.idTour = schedule.idTour;
+  this.policy = schedule.policy;
+  this.detailPrice = schedule.detailPrice;
+  this.notes = schedule.notes;
+  this.contacts = schedule.contacts;
 };
 
 const databaseLocal = "azmszdk4w6h5j1o6";
@@ -36,10 +40,18 @@ Schedule.createSchedule = function(newSchedule, funcResult) {
   mysql.query(
     "INSERT INTO " +
       databaseProduction +
-      ".schedules (`data`, `idTour`) VALUES ('" +
+      ".schedules (`data`, `idTour`, `policy`, `detailPrice`, `notes`, `contacts`) VALUES ('" +
       this.data +
       "', '" +
       this.idTour +
+      "', '" +
+      this.policy +
+      "', '" +
+      this.detailPrice +
+      "', '" +
+      this.notes +
+      "', '" +
+      this.contacts +
       "') ",
     function(err, res) {
       if (err) {

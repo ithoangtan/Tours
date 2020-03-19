@@ -12,6 +12,11 @@ const Tour = function(tour) {
   this.address = tour.address;
   this.vocationTime = tour.vocationTime;
   this.idAccount = tour.idAccount;
+  this.tags = tour.tags;
+  this.services = tour.services;
+  this.views = tour.views;
+  this.votes = tour.votes;
+  this.reuse = tour.reuse;
 };
 
 const databaseLocal = "azmszdk4w6h5j1o6";
@@ -112,10 +117,15 @@ Tour.createTour = function(newTour, funcResult) {
   this.address = newTour.address;
   this.vocationTime = newTour.vocationTime;
   this.idAccount = newTour.idAccount;
+  this.tags = newTour.tags;
+  this.services = newTour.services;
+  this.views = newTour.views;
+  this.votes = newTour.votes;
+  this.reuse = newTour.reuse;
   mysql.query(
     "INSERT INTO " +
       databaseProduction +
-      ".tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`, `idAccount`) VALUES ('" +
+      ".tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`, `idAccount`, `tags`, `services`, `views`, `votes`, `reuse`) VALUES ('" +
       this.titleTour +
       "', '" +
       this.price +
@@ -131,6 +141,16 @@ Tour.createTour = function(newTour, funcResult) {
       this.vocationTime +
       "', '" +
       this.idAccount +
+      "', '" +
+      this.tags +
+      "', '" +
+      this.services +
+      "', '" +
+      this.views +
+      "', '" +
+      this.votes +
+      "', '" +
+      this.reuse +
       "') ",
     function(err, res) {
       if (err) {

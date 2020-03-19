@@ -15,6 +15,9 @@ const evaluate = require("../controllers/evaluate.controller");
 const post = require("../controllers/post.controller");
 const auth = require("../controllers/auth.controller");
 const favorite = require("../controllers/favorite.controller");
+const tag = require("../controllers/tag.controller");
+const timeline = require("../controllers/timeline.controller");
+const service = require("../controllers/service.controller");
 //authencation
 const authenticated = require("../middleware/auth.middleware");
 //report
@@ -91,7 +94,7 @@ router.put("/noticeTo", authenticated, noticeTo.update);
 router.delete("/noticeTo", authenticated, noticeTo.delete);
 
 //for evaluate
-router.get("/evaluate", authenticated, evaluate.read);
+router.get("/evaluate", evaluate.read);
 router.get("/evaluate/bytour", evaluate.readByIdTour);
 router.post("/evaluate", authenticated, evaluate.create);
 router.put("/evaluate", authenticated, evaluate.update);
@@ -112,5 +115,26 @@ router.get(
   authenticated,
   report.getDestinationByTime
 );
+
+//for tag
+router.get("/tag", authenticated, tag.read);
+router.post("/tag/search", authenticated, tag.listTagSearch);
+router.post("/tag", authenticated, tag.create);
+router.put("/tag", authenticated, tag.update);
+router.delete("/tag", authenticated, tag.delete);
+
+//for timeline
+router.get("/timeline", timeline.read);
+router.post("/timeline/search", authenticated, timeline.listTimelineSearch);
+router.post("/timeline", authenticated, timeline.create);
+router.put("/timeline", authenticated, timeline.update);
+router.delete("/timeline", authenticated, timeline.delete);
+
+//for service
+router.get("/service", service.read);
+router.post("/service/search", authenticated, service.listServiceSearch);
+router.post("/service", authenticated, service.create);
+router.put("/service", authenticated, service.update);
+router.delete("/service", authenticated, service.delete);
 
 module.exports = router;
