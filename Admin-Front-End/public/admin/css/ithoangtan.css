@@ -117,3 +117,46 @@
    bottom: 120px;
    right: 30px;
 }
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td,
+.ant-table-row-cell-break-word {
+   padding: 6px 6px !important;
+}
+
+.ant-table-footer {
+   padding: 6px 6px !important;
+}
+
+.anticon {
+   vertical-align: 0.05rem !important;
+}
+
+.ant-typography-expand {
+   color: #1da57a !important;
+   text-decoration: underline !important;
+}
+
+.ht-new-tour {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+
+.ht-new-tour-left,
+.ht-new-tour-right {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   flex-wrap: wrap;
+}
+
+.ht-form-footer {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   align-items: flex-end;
+   flex-wrap: wrap;
+}

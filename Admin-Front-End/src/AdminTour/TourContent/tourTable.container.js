@@ -21,8 +21,11 @@ import {
    Popconfirm,
    Form,
    Button,
-   Icon
+   Icon,
+   Modal
 } from "antd";
+
+import NumberFormat from "react-number-format";
 
 import TableGallery from "./tableGallery";
 import TableNewRow from "./tableNewTour";
@@ -108,13 +111,14 @@ const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Tạm thời không biết nên ghi gì";
 //Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 2000, y: 450 };
+const scroll = { x: 1740, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
+         rowsDescribe: 1,
          data: this.props.listTour,
          editingidTour: "",
          count: this.props.listTour.length,
@@ -122,7 +126,7 @@ class EditableTable extends React.Component {
          loading: false,
          size: "default",
          showHeader,
-         title,
+         // title,
          footer,
          // rowSelection: {},
          scroll: scroll,
@@ -281,10 +285,10 @@ class EditableTable extends React.Component {
          listTour.forEach(element => {
             //format date
             element.dateAdded = element.dateAdded = moment(element.dateAdded)
-               .utc()
+               // .utc()
                .format(dateFormat);
             element.departureDay = moment(element.departureDay)
-               .utc()
+               // .utc()
                .format(dateTimeFormat);
          });
          this.setState({
@@ -458,6 +462,30 @@ class EditableTable extends React.Component {
       );
    };
 
+   countDownPreview(recordTour) {
+      let secondsToGo = 5;
+      const modal = Modal.success({
+         title: <>This is a preview tour (đóng trong {secondsToGo})</>,
+         content: (
+            <>
+               Có idtour rồi, lấy component bên front-end để làm preview nữa là
+               xong,
+               <p>{recordTour.idTour}</p>
+            </>
+         )
+      });
+      const timer = setInterval(() => {
+         secondsToGo -= 1;
+         modal.update({
+            title: <>This is a preview tour (đóng trong {secondsToGo})</>
+         });
+      }, 1000);
+      setTimeout(() => {
+         clearInterval(timer);
+         modal.destroy();
+      }, secondsToGo * 1000);
+   }
+
    render() {
       const { state } = this;
       const { data } = this.state;
@@ -482,7 +510,7 @@ class EditableTable extends React.Component {
             title: "ID",
             dataIndex: "idTour",
             key: "idTour",
-            width: 80,
+            width: 50,
             // fixed: "left",
             ellipsis: true,
             editable: true
@@ -502,15 +530,26 @@ class EditableTable extends React.Component {
             // render: text => text
          },
          {
-            title: "Price($)",
+            title: "Price(vnđ)",
             dataIndex: "price",
             key: "price",
-            width: 120,
+            width: 130,
             ...this.getColumnSearchProps("price"),
             sorter: (a, b) => a.price - b.price,
             sortOrder: sortedInfo.columnKey === "price" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
+            render: text => {
+               return (
+                  <NumberFormat
+                     value={text}
+                     displayType={"text"}
+                     thousandSeparator={true}
+                     suffix={""}
+                     prefix={""}
+                  />
+               );
+            }
          },
          {
             title: "Address",
@@ -527,7 +566,7 @@ class EditableTable extends React.Component {
             title: "Sale(%)",
             dataIndex: "sale",
             key: "sale",
-            width: 120,
+            width: 110,
             filters: [
                { text: "10%", value: 9 },
                { text: "20%", value: 43 }
@@ -545,37 +584,46 @@ class EditableTable extends React.Component {
             title: "Added",
             dataIndex: "dateAdded",
             key: "dateAdded",
-            width: 150,
+            width: 100,
 
             ...this.getColumnSearchProps("dateAdded"),
             sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
             sortOrder: sortedInfo.columnKey === "dateAdded" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
+            render: text => {
+               return moment(text).format("l");
+            }
          },
          {
             title: "Departure",
             dataIndex: "departureDay",
             key: "departureDay",
-            width: 160,
+            width: 150,
             ...this.getColumnSearchProps("departureDay"),
             sorter: (a, b) => a.departureDay.length - b.departureDay.length,
             sortOrder:
                sortedInfo.columnKey === "departureDay" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
+            render: text => {
+               return moment(text).format("lll");
+            }
          },
          {
             title: "Time",
             dataIndex: "vocationTime",
             key: "vocationTime",
-            width: 120,
+            width: 90,
             ...this.getColumnSearchProps("vocationTime"),
             sorter: (a, b) => a.vocationTime - b.vocationTime,
             sortOrder:
                sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
+            render: text => {
+               return text.replace(" days", "N ").replace(" nights", "Đ");
+            }
          },
          {
             title: "Describe",
@@ -592,7 +640,7 @@ class EditableTable extends React.Component {
             title: "IDAcc",
             dataIndex: "idAccount",
             key: "idAccount",
-            width: 80,
+            width: 60,
             // fixed: "left",
             ellipsis: true,
             editable: true
@@ -601,7 +649,7 @@ class EditableTable extends React.Component {
          {
             title: "Edit",
             dataIndex: "edit",
-            width: 180,
+            width: 125,
             key: "edit",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
@@ -612,6 +660,7 @@ class EditableTable extends React.Component {
                      <EditableContext.Consumer>
                         {form => (
                            <Button
+                              size="small"
                               type="primary"
                               onClick={() => this.save(form, record.idTour)}
                               style={{ marginRight: 8 }}
@@ -624,24 +673,37 @@ class EditableTable extends React.Component {
                         title="Sure to cancel?"
                         onConfirm={() => this.cancel(record.idTour)}
                      >
-                        <Button type="dashed">Cancel</Button>
+                        <Button type="dashed" size="small">
+                           Cancel
+                        </Button>
                      </Popconfirm>
                   </span>
                ) : (
-                  <Button
-                     type="default"
-                     disabled={editingidTour !== ""}
-                     onClick={() => this.edit(record.idTour)}
-                  >
-                     Edit
-                  </Button>
+                  <>
+                     <Button
+                        type="default"
+                        size="small"
+                        disabled={editingidTour !== ""}
+                        onClick={() => this.edit(record.idTour)}
+                     >
+                        Edit
+                     </Button>
+                     <Button
+                        size="small"
+                        type="primary"
+                        onClick={() => this.countDownPreview(record)}
+                        style={{ marginLeft: 6 }}
+                     >
+                        Preview
+                     </Button>
+                  </>
                );
             }
          },
          {
             title: "Delete",
             dataIndex: "delete",
-            width: 110,
+            width: 70, //110
             key: "delete",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) =>
@@ -650,7 +712,9 @@ class EditableTable extends React.Component {
                      title="Sure to delete?"
                      onConfirm={() => this.handleDelete(record)}
                   >
-                     <Button type="danger">Delete</Button>
+                     <Button type="danger" size="small">
+                        Delete
+                     </Button>
                   </Popconfirm>
                ) : null
          }
@@ -684,7 +748,7 @@ class EditableTable extends React.Component {
       const { showAdd } = this.state;
 
       return (
-         <div className="container-fluid card shadow">
+         <div className="container-fluid card">
             {showAdd ? (
                <TableNewRow
                   onCancle={this.onCancle}

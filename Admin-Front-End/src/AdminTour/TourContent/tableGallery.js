@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import * as tourImageActions from "../../_actions/image.actions";
 import { API_ENDPOINT, APIImage } from "../../_constants/index.constants";
 
-import { Upload, Icon, Modal, message } from "antd";
+import { Upload, Icon, Modal, message, Button } from "antd";
 
 function getBase64(file) {
    return new Promise((resolve, reject) => {
@@ -113,7 +113,6 @@ class TableGallery extends Component {
       return (
          <div>
             <Link
-               className="button btn btn-primary ht-mb-1 ht-float-left"
                type="primary"
                to={{
                   pathname: `/admin/schedule-detail/${record.idTour}`,
@@ -122,7 +121,61 @@ class TableGallery extends Component {
                   }
                }}
             >
-               Go To Schedule
+               <Button type="default" size="small" className="mb-1 mr-2">
+                  Go To Schedule
+               </Button>
+            </Link>
+            <Link
+               type="primary"
+               to={{
+                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  state: {
+                     record: true
+                  }
+               }}
+            >
+               <Button type="default" size="small" className="mb-1 mr-2">
+                  Note
+               </Button>
+            </Link>
+            <Link
+               type="primary"
+               to={{
+                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  state: {
+                     record: true
+                  }
+               }}
+            >
+               <Button type="default" size="small" className="mb-1 mr-2">
+                  Policy
+               </Button>
+            </Link>
+            <Link
+               type="primary"
+               to={{
+                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  state: {
+                     record: true
+                  }
+               }}
+            >
+               <Button type="default" size="small" className="mb-1 mr-2">
+                  Detail Price
+               </Button>
+            </Link>
+            <Link
+               type="primary"
+               to={{
+                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  state: {
+                     record: true
+                  }
+               }}
+            >
+               <Button type="default" size="small" className="mb-1 mr-2">
+                  Contact
+               </Button>
             </Link>
             <div className="clearfix">
                <Upload

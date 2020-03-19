@@ -13,7 +13,7 @@ export default class SideBarContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         toggled: false
+         toggled: true
       };
    }
    componentDidMount() {
@@ -61,6 +61,14 @@ export default class SideBarContainer extends Component {
                   </Link>
                </Tooltip>
             </li>
+            <li className="nav-item">
+               <Tooltip placement="right" title={"Config general"}>
+                  <Link to="/admin/general" className="nav-link">
+                     <i className="fas fa-cogs"></i>
+                     <span> General</span>
+                  </Link>
+               </Tooltip>
+            </li>
             {/* Divider */}
             <hr className="sidebar-divider" />
             {/* Heading */}
@@ -89,8 +97,32 @@ export default class SideBarContainer extends Component {
                      <Link to="/admin/tour" className="collapse-item">
                         Tours and Details
                      </Link>
-                     <Link to="/admin/schedule" className="collapse-item">
-                        Schedule
+                     <Link to="/admin/schedules" className="collapse-item">
+                        Schedules
+                     </Link>
+                     <Link to="/admin/notes" className="collapse-item">
+                        Notes
+                     </Link>
+                     <Link to="/admin/policies" className="collapse-item">
+                        Policies
+                     </Link>
+                     <Link to="/admin/detail-price" className="collapse-item">
+                        Detail Price
+                     </Link>
+                     <Link to="/admin/timelines" className="collapse-item">
+                        Timelines
+                     </Link>
+                     <Link to="/admin/contact" className="collapse-item">
+                        Contact
+                     </Link>
+                  </div>
+                  <div className="bg-white py-2 collapse-inner rounded">
+                     <h6 className="collapse-header">Tags and Services</h6>
+                     <Link to="/admin/tags" className="collapse-item">
+                        Tags
+                     </Link>
+                     <Link to="/admin/services" className="collapse-item">
+                        Services
                      </Link>
                   </div>
                </div>
@@ -115,18 +147,15 @@ export default class SideBarContainer extends Component {
                   data-parent="#accordionSidebar"
                >
                   <div className="bg-white py-2 collapse-inner rounded">
-                     <h6 className="collapse-header">Blog</h6>
                      <Link to="/admin/posts" className="collapse-item">
                         Posts
                      </Link>
-                     <Link to="/admin/approved-post" className="collapse-item">
-                        Approved post
+                     <Link to="/admin/tags" className="collapse-item">
+                        Tags
                      </Link>
-                     <Link to="/admin/comments" className="collapse-item">
-                        Comments
-                     </Link>
-                     <Link to="/admin/other" className="collapse-item">
-                        Other
+                     {/* Tag này chỉ chung 1 trang và có radio chọn tag của tour và tag của post - blog */}
+                     <Link to="/admin/author-info" className="collapse-item">
+                        Author Info
                      </Link>
                   </div>
                </div>
@@ -155,13 +184,6 @@ export default class SideBarContainer extends Component {
                   data-parent="#accordionSidebar"
                >
                   <div className="bg-white py-2 collapse-inner rounded">
-                     <h6 className="collapse-header">Types</h6>
-                     <Link
-                        to="/admin/user-management"
-                        className="collapse-item"
-                     >
-                        User manager
-                     </Link>
                      <Link to="/admin/accounts" className="collapse-item">
                         Accounts
                      </Link>
@@ -174,17 +196,65 @@ export default class SideBarContainer extends Component {
             </li>
             {/* Nav Item - Charts */}
             <li className="nav-item">
-               <Link to="/admin/notification" className="nav-link">
-                  <i className="fas fa-bell"></i>
+               <Link
+                  to="#"
+                  className="nav-link collapsed"
+                  data-toggle="collapse"
+                  data-target="#collapseNotifications"
+                  aria-expanded="true"
+                  aria-controls="collapseNotifications"
+               >
+                  <i className="fas fa-user-circle"></i>
                   <span>Notifications</span>
                </Link>
+               <div
+                  id="collapseNotifications"
+                  className="collapse"
+                  aria-labelledby="headingPages"
+                  data-parent="#accordionSidebar"
+               >
+                  <div className="bg-white py-2 collapse-inner rounded">
+                     <Link to="/admin/notifications" className="collapse-item">
+                        Notifications
+                     </Link>
+                     <Link
+                        to="/admin/notifications-manager"
+                        className="collapse-item"
+                     >
+                        Notifications manager
+                     </Link>
+                     <div className="collapse-divider" />
+                  </div>
+               </div>
             </li>
-            {/* Nav Item - Tables */}
             <li className="nav-item">
-               <Link to="/admin/mails" className="nav-link">
-                  <i className="fas fa-envelope-square"></i>
+               <Link
+                  to="#"
+                  className="nav-link collapsed"
+                  data-toggle="collapse"
+                  data-target="#collapseMails"
+                  aria-expanded="true"
+                  aria-controls="collapseMails"
+               >
+                  <i className="fas fa-user-circle"></i>
                   <span>Mails</span>
                </Link>
+               <div
+                  id="collapseMails"
+                  className="collapse"
+                  aria-labelledby="headingPages"
+                  data-parent="#accordionSidebar"
+               >
+                  <div className="bg-white py-2 collapse-inner rounded">
+                     <Link to="/admin/mails" className="collapse-item">
+                        Mails
+                     </Link>
+                     <Link to="/admin/mail-manager" className="collapse-item">
+                        Mails manager
+                     </Link>
+                     <div className="collapse-divider" />
+                  </div>
+               </div>
             </li>
             {/* Divider */}
             {/* Divider */}
