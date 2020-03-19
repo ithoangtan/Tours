@@ -30,6 +30,7 @@ import NumberFormat from "react-number-format";
 import TableGallery from "./tableGallery";
 import TableNewRow from "./tableNewTour";
 import Cookies from "js-cookie";
+import TourPreview from "./tourPreview";
 
 function getCookie(name) {
    const token = Cookies.get(name);
@@ -137,7 +138,8 @@ class EditableTable extends React.Component {
          searchText: "",
          pagination,
          //add Show
-         showAdd: false
+         showAdd: false,
+         visiblePreview: false
       };
    }
 
@@ -462,29 +464,35 @@ class EditableTable extends React.Component {
       );
    };
 
-   countDownPreview(recordTour) {
-      let secondsToGo = 5;
-      const modal = Modal.success({
-         title: <>This is a preview tour (đóng trong {secondsToGo})</>,
+   showModalPreview(record) {
+      Modal.info({
+         width: 1000,
+         title: "This is a notification message",
+         wrapClassName: "",
          content: (
-            <>
-               Có idtour rồi, lấy component bên front-end để làm preview nữa là
-               xong,
-               <p>{recordTour.idTour}</p>
-            </>
-         )
+            <TourPreview
+               tour={record}
+               listImageTour={[
+                  {
+                     url:
+                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
+                  },
+                  {
+                     url:
+                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
+                  }
+               ]}
+            />
+         ),
+         onOk() {}
       });
-      const timer = setInterval(() => {
-         secondsToGo -= 1;
-         modal.update({
-            title: <>This is a preview tour (đóng trong {secondsToGo})</>
-         });
-      }, 1000);
-      setTimeout(() => {
-         clearInterval(timer);
-         modal.destroy();
-      }, secondsToGo * 1000);
    }
+
+   handleCancelPreview = e => {
+      this.setState({
+         visiblePreview: false
+      });
+   };
 
    render() {
       const { state } = this;
@@ -592,7 +600,7 @@ class EditableTable extends React.Component {
             ellipsis: true,
             editable: true,
             render: text => {
-               return moment(text).format("l");
+               return moment(text).format("DD/MM/YYYY");
             }
          },
          {
@@ -607,7 +615,7 @@ class EditableTable extends React.Component {
             ellipsis: true,
             editable: true,
             render: text => {
-               return moment(text).format("lll");
+               return moment(text).format("hh:mm A DD/MM/YYYY");
             }
          },
          {
@@ -691,11 +699,27 @@ class EditableTable extends React.Component {
                      <Button
                         size="small"
                         type="primary"
-                        onClick={() => this.countDownPreview(record)}
+                        onClick={() => this.showModalPreview(record)}
                         style={{ marginLeft: 6 }}
                      >
                         Preview
                      </Button>
+                     {/* <Modal
+                        title="Basic Modal"
+                        visible={this.state.visiblePreview}
+                        onCancel={this.handleCancelPreview}
+                     >
+                        <p>Some contents...</p>
+                        <TourPreview
+                           tour={record}
+                           listImageTour={[
+                              {
+                                 url:
+                                    "img/1576396566503_italian-landscape-mountains-nature.jpg"
+                              }
+                           ]}
+                        />
+                     </Modal> */}
                   </>
                );
             }
