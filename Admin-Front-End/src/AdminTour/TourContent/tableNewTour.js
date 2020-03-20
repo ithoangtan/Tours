@@ -405,10 +405,7 @@ class TableNewRow extends Component {
                            // Central Highlands, //Tây Nguyên
                            // Southeast, //Đông Nam Bộ, Miền Đông
                            // Mekong River Delta; //Đồng Bằng sông Cửu Long
-                           <Radio.Group
-                              defaultValue="VietNam"
-                              buttonStyle="solid"
-                           >
+                           <Radio.Group buttonStyle="solid">
                               <Radio.Button value="World" disabled>
                                  Thế giới:
                               </Radio.Button>

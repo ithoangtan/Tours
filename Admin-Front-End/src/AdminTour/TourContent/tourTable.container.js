@@ -39,9 +39,6 @@ function getCookie(name) {
 
 const EditableContext = React.createContext();
 
-const dateFormat = "YYYY-DD-MM";
-const dateTimeFormat = "YYYY-DD-MM HH:mm:ss";
-
 const ResizeableTitle = props => {
    const { onResize, width, ...restProps } = props;
 
@@ -230,7 +227,7 @@ class EditableTable extends React.Component {
       });
    };
 
-   handleSave = row => {
+   handleSaveOnChange = row => {
       const newData = [...this.state.data];
       const index = newData.findIndex(item => row.idTour === item.idTour);
       const item = newData[index];
@@ -283,16 +280,6 @@ class EditableTable extends React.Component {
          pagination.total = data.length;
          const { listTour } = this.props;
 
-         //Lọc lại ngày tháng cho nó đẹp
-         listTour.forEach(element => {
-            //format date
-            element.dateAdded = element.dateAdded = moment(element.dateAdded)
-               // .utc()
-               .format(dateFormat);
-            element.departureDay = moment(element.departureDay)
-               // .utc()
-               .format(dateTimeFormat);
-         });
          this.setState({
             loading: false,
             data: listTour,
@@ -704,22 +691,6 @@ class EditableTable extends React.Component {
                      >
                         Preview
                      </Button>
-                     {/* <Modal
-                        title="Basic Modal"
-                        visible={this.state.visiblePreview}
-                        onCancel={this.handleCancelPreview}
-                     >
-                        <p>Some contents...</p>
-                        <TourPreview
-                           tour={record}
-                           listImageTour={[
-                              {
-                                 url:
-                                    "img/1576396566503_italian-landscape-mountains-nature.jpg"
-                              }
-                           ]}
-                        />
-                     </Modal> */}
                   </>
                );
             }
@@ -759,11 +730,10 @@ class EditableTable extends React.Component {
             onCell: record => ({
                record,
                inputType: chooseType(col.dataIndex),
-               // inputType: col.dataIndex === "price" ? "number" : "text",
                dataIndex: col.dataIndex,
                title: col.title,
                editing: this.isEditing(record),
-               handleSave: this.handleSave
+               onChange: this.handleSaveOnChange
             })
          };
       });
