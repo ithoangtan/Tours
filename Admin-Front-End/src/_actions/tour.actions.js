@@ -35,7 +35,6 @@ export const fetchListTourError = error => {
  *
  */
 export const fetchListTourRequest = () => {
-   console.log("fetchListTourRequest");
    return dispatch => {
       dispatch(fetchListTour()); //reset state tours-->[]
       tourApis
@@ -220,7 +219,6 @@ export const fetchListTourImageError = error => {
 };
 
 export const fetchListTourImageRequest = () => {
-   console.log("fetchListTourImageRequest");
    return dispatch => {
       dispatch(fetchListTourImage()); //reset state Images-->[]
       tourApis

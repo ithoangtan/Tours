@@ -26,10 +26,10 @@ class ScheduleDetail extends Component {
       };
    }
 
-   componentDidMount() {
+   componentWillMount() {
       if (this.props.match !== null) {
          this.fetch();
-      } //end if
+      }
    }
    fetch = async () => {
       await funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
@@ -48,9 +48,7 @@ class ScheduleDetail extends Component {
 
    render() {
       const { tour, scheduleByIdTour } = this.props;
-      tour.departureDay = moment(tour.departureDay)
-         .utc()
-         .format(dateFormat);
+      tour.departureDay = moment(tour.departureDay).format(dateFormat);
       return (
          <div id="wrapper">
             {/* Sidebar */}

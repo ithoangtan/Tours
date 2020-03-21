@@ -7,7 +7,7 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
 export default class WrapperTableParentContainer extends Component {
-   componentDidMount() {
+   componentWillMount() {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
 
       // const { tourAllActions } = this.props;
