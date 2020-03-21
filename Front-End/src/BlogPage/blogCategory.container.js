@@ -10,7 +10,7 @@ import BlogRightContainer from "./blogRight.container";
 import BlogNavigationContainer from "./blogNavigation.container";
 
 export default class BlogCategoryContainer extends Component {
-   componentDidMount() {
+   componentWillMount() {
       window.scrollTo({
          top: 0,
          left: 0
@@ -25,7 +25,7 @@ export default class BlogCategoryContainer extends Component {
                <BlogNavigationContainer />{" "}
                <div className="row ht-blog-container-2">
                   <div className="ht-blog-left col-md-8">
-                     <div className="title mb-2">
+                     <div className="title mb-2 ftco-section">
                         <div className="ht-blog-title">
                            <div className="ht-title">{`category name`}</div>
                            <div className="ht-describe">
@@ -34,7 +34,7 @@ export default class BlogCategoryContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="content d-flex">
+                     <div className="content d-flex ftco-section">
                         <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                            <div className="blog-entry justify-content-end">
                               <Link
@@ -222,7 +222,7 @@ export default class BlogCategoryContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="content d-flex ht-posts-container">
+                     <div className="content d-flex ht-posts-container ftco-section">
                         <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                            <div className="blog-entry justify-content-end">
                               <Link
@@ -410,7 +410,7 @@ export default class BlogCategoryContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="content d-flex ht-posts-container">
+                     <div className="content d-flex ht-posts-container ftco-section">
                         <div className="col-12 col-sm-12 col-md-6 col-lg-4">
                            <div className="blog-entry justify-content-end">
                               <Link
@@ -608,7 +608,7 @@ export default class BlogCategoryContainer extends Component {
                         defaultCurrent={1}
                      />
                   </div>
-                  <div className="ht-blog-right col-md-4">
+                  <div className="ht-blog-right col-md-4 ftco-section">
                      <BlogRightContainer />
                   </div>
                </div>

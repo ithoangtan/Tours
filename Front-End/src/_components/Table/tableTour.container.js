@@ -220,7 +220,7 @@ class EditableTable extends React.Component {
 
    /**Preload */
    //    Preload
-   componentDidMount() {
+   componentWillMount() {
       const { tourAllActions } = this.props;
       const { fetchListTourImageRequest } = tourAllActions;
       fetchListTourImageRequest();

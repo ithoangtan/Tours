@@ -5,7 +5,7 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
 export default class RegisterPage extends Component {
-   componentDidMount() {
+   componentWillMount() {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
    render() {

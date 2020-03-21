@@ -54,7 +54,7 @@ export default class BlogSingleContainer extends Component {
 
                <div className="row">
                   <div className="col-lg-8 ftco-animate">
-                     <div className="ht-title-post-container">
+                     <div className="ht-title-post-container ftco-animate">
                         <div className="ht-title">
                            Thử Làm "Rich Kid" Một Lần Xem Chúng Bạn Có Trầm Trồ
                            Tại 3 Resort Sang Chảnh Bậc Nhất Đà Lạt
@@ -261,7 +261,7 @@ export default class BlogSingleContainer extends Component {
                      </div>
                   </div>
                   {/* .col-md-8 */}
-                  <div className="col-lg-4 sidebar ftco-animate col-md-4 ht-blog-right">
+                  <div className="col-lg-4 sidebar ftco-animate col-md-4 ht-blog-right ftco-animate">
                      <BlogRightContainer />
                   </div>
                </div>

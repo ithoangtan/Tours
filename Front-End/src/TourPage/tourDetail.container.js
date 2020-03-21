@@ -30,8 +30,6 @@ export default class TourDetailContainer extends Component {
 
    componentWillMount() {
       this.setState({ size: window.innerWidth < 768.01 ? "small" : "default" });
-   }
-   componentDidMount() {
       this.fetch();
       if (!this.props.bookTour) this.props.loaded();
    }

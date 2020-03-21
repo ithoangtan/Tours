@@ -236,7 +236,7 @@ export default class SearchEngineContainer extends Component {
       return current && current < moment().endOf("day");
    }
 
-   componentDidMount() {
+   componentWillMount() {
       this.setState({
          sizeWindow: window.innerWidth > 767.98 ? "large" : "small"
       });

@@ -10,7 +10,7 @@ import BlogRightContainer from "./blogRight.container";
 import BlogNavigationContainer from "./blogNavigation.container";
 
 export default class BlogContainer extends Component {
-   componentDidMount() {
+   componentWillMount() {
       window.scrollTo({
          top: 0,
          left: 0
@@ -21,12 +21,12 @@ export default class BlogContainer extends Component {
    render() {
       return (
          <section className="ftco-section mt-2">
-            <div className="container">
+            <div className="container ftco-animate">
                <BlogNavigationContainer />{" "}
                <div className="ht-blog-container-1">
-                  <div className="col-md-8">
+                  <div className="col-md-8 ftco-animate">
                      <Carousel autoplay dotPosition="right">
-                        <div className="ht-item-post-full-main">
+                        <div className="ht-item-post-full-main ftco-animate">
                            <img src="/images/blog-1.jpg" alt="not found" />
                            <div class="ht-item-post-full-main-info">
                               <div className="ht-tag-main">DU LỊCH SAPA</div>
@@ -44,7 +44,7 @@ export default class BlogContainer extends Component {
                               </Link>
                            </div>
                         </div>
-                        <div className="ht-item-post-full-main">
+                        <div className="ht-item-post-full-main ftco-animate">
                            <img src="/images/blog-1.jpg" alt="not found" />
                            <div class="ht-item-post-full-main-info">
                               <div className="ht-tag-main">DU LỊCH SAPA</div>
@@ -64,8 +64,8 @@ export default class BlogContainer extends Component {
                         </div>
                      </Carousel>
                   </div>
-                  <div className="col-md-4 ht-item-post-full-right">
-                     <div className="ht-item-post-full ht-mb-special">
+                  <div className="col-md-4 ht-item-post-full-right ftco-animate ">
+                     <div className="ht-item-post-full ht-mb-special ftco-animate ">
                         <img src="/images/blog-2.jpg" alt="not found" />
                         <div class="ht-item-post-full-info">
                            <div className="ht-tag-main">DU LỊCH VIỆT NAM</div>
@@ -78,7 +78,7 @@ export default class BlogContainer extends Component {
                            </Link>
                         </div>
                      </div>
-                     <div className="ht-item-post-full">
+                     <div className="ht-item-post-full ftco-animate ">
                         <img src="/images/blog-3.jpg" alt="not found" />
                         <div class="ht-item-post-full-info">
                            <div className="ht-tag-main">DU LỊCH QUỐC TẾ</div>
@@ -93,12 +93,12 @@ export default class BlogContainer extends Component {
                      </div>
                   </div>
                </div>
-               <div className="row ht-blog-container-2">
-                  <div className="ht-blog-left col-md-8">
+               <div className="row ht-blog-container-2 ftco-animate ">
+                  <div className="ht-blog-left col-md-8 ftco-animate ">
                      <div className="col-md">
                         <div className="ht-divide-special"></div>
                      </div>
-                     <div className="title mb-2">
+                     <div className="title mb-2 ftco-animate">
                         <div className="ht-blog-title">
                            <div className="ht-title">KHUYẾN MÃI</div>
                            <div className="ht-describe">
@@ -106,9 +106,9 @@ export default class BlogContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="content d-flex">
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
-                           <div className="blog-entry justify-content-end">
+                     <div className="content d-flex ftco-animate">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
+                           <div className="blog-entry justify-content-end ftco-animate">
                               <Link
                                  to="blog-single"
                                  className="block-20 ht-blog-image"
@@ -169,7 +169,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -231,7 +231,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>{" "}
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -294,10 +294,10 @@ export default class BlogContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="col-md ht-divide">
+                     <div className="col-md ht-divide ftco-animate">
                         <div className="ht-divide-special-1"></div>
                      </div>
-                     <div className="title mb-2">
+                     <div className="title mb-2 ftco-animate">
                         <div className="ht-blog-title">
                            <div className="ht-title">ĐIỂM ĐẾN</div>
                            <div className="ht-describe">
@@ -305,8 +305,8 @@ export default class BlogContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="content d-flex ht-posts-container">
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                     <div className="content d-flex ht-posts-container ftco-animate">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -368,7 +368,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -430,7 +430,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>{" "}
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -493,10 +493,10 @@ export default class BlogContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="col-md ht-divide">
+                     <div className="col-md ht-divide ftco-animate">
                         <div className="ht-divide-special-2"></div>
                      </div>
-                     <div className="title mb-2">
+                     <div className="title mb-2 ftco-animate">
                         <div className="ht-blog-title">
                            <div className="ht-title">ẨM THỰC</div>
                            <div className="ht-describe">
@@ -505,7 +505,7 @@ export default class BlogContainer extends Component {
                         </div>
                      </div>
                      <div className="content d-flex ht-posts-container">
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -567,7 +567,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -629,7 +629,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>{" "}
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -692,10 +692,10 @@ export default class BlogContainer extends Component {
                            </div>
                         </div>
                      </div>
-                     <div className="col-md ht-divide">
+                     <div className="col-md ht-divide ftco-animate">
                         <div className="ht-divide-special-3"></div>
                      </div>
-                     <div className="title mb-2">
+                     <div className="title mb-2 ftco-animate">
                         <div className="ht-blog-title">
                            <div className="ht-title">MẸO DU LỊCH</div>
                            <div className="ht-describe">
@@ -705,7 +705,7 @@ export default class BlogContainer extends Component {
                         </div>
                      </div>
                      <div className="content d-flex ht-posts-container">
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -767,7 +767,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -829,7 +829,7 @@ export default class BlogContainer extends Component {
                               </div>
                            </div>
                         </div>{" "}
-                        <div className="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-lg-4 ftco-animate">
                            <div className="blog-entry justify-content-end">
                               <Link
                                  to="blog-single"
@@ -893,7 +893,7 @@ export default class BlogContainer extends Component {
                         </div>
                      </div>
                      <Pagination
-                        className="ht-d-flex-center-center mb-5"
+                        className="ht-d-flex-center-center mb-5 ftco-animate"
                         total={85}
                         showTotal={(total, range) =>
                            `${range[0]}-${range[1]} of ${total} items`
@@ -902,7 +902,7 @@ export default class BlogContainer extends Component {
                         defaultCurrent={1}
                      />
                   </div>
-                  <div className="ht-blog-right col-md-4">
+                  <div className="ht-blog-right col-md-4 ftco-animate ">
                      <BlogRightContainer />
                   </div>
                </div>

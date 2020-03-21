@@ -139,7 +139,7 @@ class BookTourContainer extends Component {
       }
    }
 
-   componentDidMount() {
+   componentWillMount() {
       const mess = window.location.search;
       if (mess) {
          message.warning(

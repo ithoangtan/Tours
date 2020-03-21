@@ -19,7 +19,7 @@ class BookTourPage extends Component {
       };
    }
 
-   componentDidMount() {
+   componentWillMount() {
       window.scrollTo({
          top: 0,
          left: 0

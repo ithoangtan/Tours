@@ -440,7 +440,7 @@ export default class Navigation extends Component {
       }
    }
 
-   componentDidMount() {
+   componentWillMount() {
       this.setState({ size: window.innerWidth > 557.98 ? "large" : "small" });
    }
 

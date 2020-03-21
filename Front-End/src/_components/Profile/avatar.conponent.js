@@ -28,7 +28,7 @@ export default class AvatarConponent extends Component {
       action: `${API_ENDPOINT}/avatar`
    };
 
-   componentDidMount() {
+   componentWillMount() {
       this.setState({ imageUrl: this.props.avatar });
    }
 

@@ -9,8 +9,8 @@ const { Search } = Input;
 export default class BlogHeaderContainer extends Component {
    render() {
       return (
-         <div className="row ht-navigation-blog mb-2">
-            <nav className="navbar navbar-expand-lg navbar-light ht-width-100">
+         <div className="row ht-navigation-blog mb-2 ">
+            <nav className="navbar navbar-expand-lg navbar-light ht-width-100 ftco-animate">
                <button
                   className="navbar-toggler"
                   type="button"
