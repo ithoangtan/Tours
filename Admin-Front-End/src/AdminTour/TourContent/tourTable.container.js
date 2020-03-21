@@ -136,7 +136,8 @@ class EditableTable extends React.Component {
          pagination,
          //add Show
          showAdd: false,
-         visiblePreview: false
+         visiblePreview: false,
+         ellipsis: false
       };
    }
 
@@ -240,7 +241,7 @@ class EditableTable extends React.Component {
 
    /**Preload */
    //    Preload
-   componentDidMount() {
+   componentWillMount() {
       const { tourAllActions } = this.props;
       const { fetchListTourImageRequest } = tourAllActions;
       fetchListTourImageRequest();
@@ -454,7 +455,7 @@ class EditableTable extends React.Component {
    showModalPreview(record) {
       Modal.info({
          width: 1000,
-         title: "This is a notification message",
+         title: "This is a item tour at category tours",
          wrapClassName: "",
          content: (
             <TourPreview
@@ -755,7 +756,7 @@ class EditableTable extends React.Component {
                      type="primary"
                      style={{ margin: "12px 12px 0px" }}
                   >
-                     Add a row
+                     Add New Tour
                   </Button>
                   <Button
                      onClick={this.clearAll}

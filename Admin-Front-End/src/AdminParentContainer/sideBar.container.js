@@ -16,7 +16,7 @@ export default class SideBarContainer extends Component {
          toggled: true
       };
    }
-   componentDidMount() {
+   componentWillMount() {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
    }
 
@@ -97,27 +97,6 @@ export default class SideBarContainer extends Component {
                      <Link to="/admin/tour" className="collapse-item">
                         Tours and Details
                      </Link>
-                     <Link to="/admin/schedules" className="collapse-item">
-                        Schedules
-                     </Link>
-                     <Link to="/admin/notes" className="collapse-item">
-                        Notes
-                     </Link>
-                     <Link to="/admin/policies" className="collapse-item">
-                        Policies
-                     </Link>
-                     <Link to="/admin/detail-price" className="collapse-item">
-                        Detail Price
-                     </Link>
-                     <Link to="/admin/timelines" className="collapse-item">
-                        Timelines
-                     </Link>
-                     <Link to="/admin/contact" className="collapse-item">
-                        Contact
-                     </Link>
-                  </div>
-                  <div className="bg-white py-2 collapse-inner rounded">
-                     <h6 className="collapse-header">Tags and Services</h6>
                      <Link to="/admin/tags" className="collapse-item">
                         Tags
                      </Link>
@@ -204,7 +183,7 @@ export default class SideBarContainer extends Component {
                   aria-expanded="true"
                   aria-controls="collapseNotifications"
                >
-                  <i className="fas fa-user-circle"></i>
+                  <i className="far fa-bell"></i>
                   <span>Notifications</span>
                </Link>
                <div
@@ -236,7 +215,7 @@ export default class SideBarContainer extends Component {
                   aria-expanded="true"
                   aria-controls="collapseMails"
                >
-                  <i className="fas fa-user-circle"></i>
+                  <i className="far fa-envelope"></i>
                   <span>Mails</span>
                </Link>
                <div

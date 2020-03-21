@@ -28,8 +28,6 @@ export default class TourPreview extends Component {
       const { listImageTour } = this.props;
       let result = null;
       result = listImageTour.map((imageTour, index) => {
-         console.log(imageTour.url);
-
          return (
             <TourDetailImages
                {...this.props}

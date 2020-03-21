@@ -3,7 +3,7 @@ import React from "react";
 //Admin
 import AdminIndexPage from "./AdminIndex/Index.Page";
 import AdminTourPage from "./AdminTour/Tour.Page";
-import AdminScheduleDetailPage from "./AdminSchedule/ScheduleDetail.Page";
+import AdminTourScheduleDetailPage from "./AdminTourSchedule/ScheduleDetail.Page";
 //end Admin
 
 const routerPrivate = [
@@ -22,7 +22,49 @@ const routerPrivate = [
       path: "/admin/schedule-detail/:idTour",
       exact: true,
       component: (match, props) => (
-         <AdminScheduleDetailPage match={match} {...props} />
+         <AdminTourScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/timeline/:idTour",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/note/:idTour",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/detail-price/:idTour",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/contact/:idTour",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/policy/:idTour",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/timelines/:idTour",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourScheduleDetailPage match={match} {...props} />
       )
    }
 ];

@@ -9,7 +9,9 @@ import { bindActionCreators } from "redux";
 import * as tourImageActions from "../../_actions/image.actions";
 import { API_ENDPOINT, APIImage } from "../../_constants/index.constants";
 
-import { Upload, Icon, Modal, message, Button } from "antd";
+import { Upload, Icon, Modal, message, Button, Tooltip } from "antd";
+
+import TimelinesContainer from "./Timelines";
 
 function getBase64(file) {
    return new Promise((resolve, reject) => {
@@ -27,11 +29,32 @@ class TableGallery extends Component {
          previewVisible: false,
          previewImage: "",
          action: `${API_ENDPOINT}/image`,
-         fileList: []
+         fileList: [],
+         visibleTimelineModal: false
       };
    }
 
-   componentDidMount() {
+   showModalTimeline = () => {
+      this.setState({
+         visibleTimelineModal: true
+      });
+   };
+
+   handleOkTimeline = e => {
+      console.log(e);
+      this.setState({
+         visibleTimelineModal: false
+      });
+   };
+
+   handleCancelTimeline = e => {
+      console.log(e);
+      this.setState({
+         visibleTimelineModal: false
+      });
+   };
+
+   componentWillMount() {
       const { listImage, record } = this.props;
       const listImageFilterIdTour = listImage
          .filter(image => image.idTour === record.idTour)
@@ -120,10 +143,65 @@ class TableGallery extends Component {
                      record: true
                   }
                }}
+               target={"_blank"}
             >
-               <Button type="default" size="small" className="mb-1 mr-2">
-                  Go To Schedule
+               <Tooltip
+                  placement="bottom"
+                  title="Sửa lịch trình (trong tab mới)"
+               >
+                  <Button type="default" size="small" className="mb-1 mr-2">
+                     Go To Schedule
+                  </Button>
+               </Tooltip>
+            </Link>
+            {/* <Link
+               type="primary"
+               to={{
+                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  state: {
+                     record: true
+                  }
+               }}
+               target={"_blank"}
+            > */}
+            <Tooltip placement="bottom" title="Sửa timeline (modal)">
+               <Button
+                  type="default"
+                  size="small"
+                  className="mb-1 mr-2"
+                  onClick={this.showModalTimeline}
+               >
+                  Time lines
                </Button>
+               <Modal
+                  style={{ top: 70 }}
+                  width="90%"
+                  title="Chỉnh sửa mốc thời gian hiển thị"
+                  visible={this.state.visibleTimelineModal}
+                  onOk={this.handleOkTimeline}
+                  onCancel={this.handleCancelTimeline}
+               >
+                  <div className="ht-timeline-container-main container col-md-12">
+                     <TimelinesContainer />
+                  </div>
+               </Modal>
+            </Tooltip>
+            {/* </Link> */}
+            <Link
+               type="primary"
+               to={{
+                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  state: {
+                     record: true
+                  }
+               }}
+               target={"_blank"}
+            >
+               <Tooltip placement="bottom" title="Sửa lưu ý (trong tab mới)">
+                  <Button type="default" size="small" className="mb-1 mr-2">
+                     Note
+                  </Button>
+               </Tooltip>
             </Link>
             <Link
                type="primary"
@@ -133,10 +211,16 @@ class TableGallery extends Component {
                      record: true
                   }
                }}
+               target={"_blank"}
             >
-               <Button type="default" size="small" className="mb-1 mr-2">
-                  Note
-               </Button>
+               <Tooltip
+                  placement="bottom"
+                  title="Sửa chính sách và điều khoản (trong tab mới)"
+               >
+                  <Button type="default" size="small" className="mb-1 mr-2">
+                     Policy
+                  </Button>
+               </Tooltip>
             </Link>
             <Link
                type="primary"
@@ -146,11 +230,18 @@ class TableGallery extends Component {
                      record: true
                   }
                }}
+               target={"_blank"}
             >
-               <Button type="default" size="small" className="mb-1 mr-2">
-                  Policy
-               </Button>
+               <Tooltip
+                  placement="bottom"
+                  title="Sửa chi tiết giá tour (trong tab mới)"
+               >
+                  <Button type="default" size="small" className="mb-1 mr-2">
+                     Detail Price
+                  </Button>
+               </Tooltip>
             </Link>
+
             <Link
                type="primary"
                to={{
@@ -159,23 +250,13 @@ class TableGallery extends Component {
                      record: true
                   }
                }}
+               target={"_blank"}
             >
-               <Button type="default" size="small" className="mb-1 mr-2">
-                  Detail Price
-               </Button>
-            </Link>
-            <Link
-               type="primary"
-               to={{
-                  pathname: `/admin/schedule-detail/${record.idTour}`,
-                  state: {
-                     record: true
-                  }
-               }}
-            >
-               <Button type="default" size="small" className="mb-1 mr-2">
-                  Contact
-               </Button>
+               <Tooltip placement="bottom" title="Sửa liên hệ (trong tab mới)">
+                  <Button type="default" size="small" className="mb-1 mr-2">
+                     Contact
+                  </Button>
+               </Tooltip>
             </Link>
             <div className="clearfix">
                <Upload
