@@ -7,7 +7,7 @@ TLCN - CNPM - demo TLCN CNPM Khóa 2016-2020
 - [ReactJS] - HTML enhanced for web apps!
 - [CkEditor] - awesome web-based text editor
 - [markdown-it] - Markdown parser done right. Fast and easy to extend.
-- [Ant-Design] - great UI boilerplate for modern web apps
+- [Ant-Design] - great UI boilerplate for modern web apps ( v3.x - admin dev, v4.x user dev)
 - [node.js] - evented I/O for the backend
 - [Express] - fast node.js network app framework
 - [heroku] - hosting free
