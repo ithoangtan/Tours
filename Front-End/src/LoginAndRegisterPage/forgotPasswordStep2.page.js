@@ -5,7 +5,7 @@ import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
 class ForgotPasswordPage extends Component {
-   componentDidMount() {
+   componentWillMount() {
       window.scrollTo({
          top: 0,
          left: 0

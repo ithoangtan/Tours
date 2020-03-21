@@ -17,7 +17,7 @@ export default class HeaderContainer extends Component {
       };
    }
 
-   componentDidMount() {
+   componentWillMount() {
       this.setState({
          size: window.innerWidth > 767.98 ? "large" : "default"
       });

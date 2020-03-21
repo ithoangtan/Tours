@@ -35,7 +35,7 @@ class BestTourContainer extends Component {
       await fetchListTourImageRequest();
    };
 
-   componentDidMount() {
+   componentWillMount() {
       const { listTour } = this.props;
       this.fetch();
       this.setState({

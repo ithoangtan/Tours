@@ -42,13 +42,13 @@ class TourSinglePage extends Component {
       const { fetchScheduleByIdTourRequest } = scheduleAllActions;
       await fetchScheduleByIdTourRequest(idTour);
    };
-   componentDidMount() {
+   componentWillMount() {
+      this.fetch();
       window.scrollTo({
          top: 0,
          left: 0,
          behavior: "smooth"
       });
-      this.fetch();
 
       const { tourById, listImageByIdTour, scheduleByIdTour } = this.props;
       this.setState({

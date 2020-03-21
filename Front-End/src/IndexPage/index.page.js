@@ -18,7 +18,7 @@ class IndexPage extends Component {
    fetch = async () => {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    };
-   componentDidMount() {
+   componentWillMount() {
       window.scrollTo({
          top: 0,
          left: 0

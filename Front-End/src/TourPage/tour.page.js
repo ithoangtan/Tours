@@ -192,7 +192,7 @@ class TourContainer extends Component {
       await fetchListTourImageRequest();
    };
 
-   componentDidMount() {
+   componentWillMount() {
       window.scrollTo({
          top: 0,
          left: 0,
@@ -200,6 +200,7 @@ class TourContainer extends Component {
       });
       const { listTour } = this.props;
       this.fetch();
+      this.setState({ size: window.innerWidth > 757.98 ? "default" : "small" });
       this.setState({ listTour, haveData: true });
    }
    loaded = () => {
@@ -289,10 +290,6 @@ class TourContainer extends Component {
       return (Math.round(numberStar * 10) / 10).toFixed(1) >= numStar + 0.5
          ? numStar + 0.5
          : numStar;
-   }
-
-   componentWillMount() {
-      this.setState({ size: window.innerWidth > 757.98 ? "default" : "small" });
    }
 
    render() {
