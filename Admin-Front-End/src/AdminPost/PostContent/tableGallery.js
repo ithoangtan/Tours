@@ -11,8 +11,7 @@ import { API_ENDPOINT, APIImage } from "../../_constants/index.constants";
 
 import { Upload, Icon, Modal, message, Button, Tooltip } from "antd";
 
-import TimelinesContainer from "./Timelines";
-import TagsAndServicesContainer from "./TagsAndServies";
+import TagsContainer from "./Tags";
 
 function getBase64(file) {
    return new Promise((resolve, reject) => {
@@ -32,54 +31,34 @@ class TableGallery extends Component {
          action: `${API_ENDPOINT}/image`,
          fileList: [],
          visibleTimelineModal: false,
-         visibleTagsAndServicesModal: false
+         visibleTagsModal: false
       };
    }
 
-   showModalTagsAndServices = () => {
+   showModalTags = () => {
       this.setState({
-         visibleTagsAndServicesModal: true
+         visibleTagsModal: true
       });
    };
 
-   handleOkTagsAndServices = e => {
+   handleOkTags = e => {
       console.log(e);
       this.setState({
-         visibleTagsAndServicesModal: false
+         visibleTagsModal: false
       });
    };
 
-   handleCancelTagsAndServices = e => {
+   handleCancelTags = e => {
       console.log(e);
       this.setState({
-         visibleTagsAndServicesModal: false
-      });
-   };
-
-   showModalTimeline = () => {
-      this.setState({
-         visibleTimelineModal: true
-      });
-   };
-
-   handleOkTimeline = e => {
-      console.log(e);
-      this.setState({
-         visibleTimelineModal: false
-      });
-   };
-
-   handleCancelTimeline = e => {
-      console.log(e);
-      this.setState({
-         visibleTimelineModal: false
+         visibleTagsModal: false
       });
    };
 
    componentWillMount() {
       const { listImage, record } = this.props;
-      const listImageFilterIdTour = listImage
-         .filter(image => image.idTour === record.idTour)
+      const listImageFilterIdPost = listImage
+         .filter(image => image.idPost === record.idPost)
          .map(image => ({
             ...image,
             //APIImage is http://localhost:8000
@@ -87,7 +66,7 @@ class TableGallery extends Component {
             url: APIImage + image.url,
             uid: image.idImage
          }));
-      this.setState({ fileList: listImageFilterIdTour });
+      this.setState({ fileList: listImageFilterIdPost });
    }
 
    handleCancel = () => this.setState({ previewVisible: false });
@@ -119,7 +98,7 @@ class TableGallery extends Component {
       /**
        * If you return, action will call again
        * */
-      const actionUpload = `${action}?idTour=${record.idTour}`;
+      const actionUpload = `${action}?idPost=${record.idPost}`;
 
       const newListImage = [...this.state.fileList];
       this.setState({
@@ -138,8 +117,8 @@ class TableGallery extends Component {
 
    onRemove = async file => {
       const { tourImageAllActions } = this.props;
-      const { fetchDeleteTourImageRequest } = tourImageAllActions;
-      await fetchDeleteTourImageRequest(file);
+      const { fetchDeletePostImageRequest } = tourImageAllActions;
+      await fetchDeletePostImageRequest(file);
       message.warn(`${file.idImage}, ${file.name} deleted!`);
    };
 
@@ -161,47 +140,27 @@ class TableGallery extends Component {
                type="default"
                size="small"
                className="mb-1 mr-2"
-               onClick={this.showModalTimeline}
+               onClick={this.showModalTags}
             >
-               Time lines
+               Tags
             </Button>
             <Modal
                style={{ top: 70 }}
                width="90%"
-               title="Chỉnh sửa mốc thời gian hiển thị"
-               visible={this.state.visibleTimelineModal}
-               onOk={this.handleOkTimeline}
-               onCancel={this.handleCancelTimeline}
+               title="Chỉnh sửa các Tag của bài viết"
+               visible={this.state.visibleTagsModal}
+               onOk={this.handleOkTags}
+               onCancel={this.handleCancelTags}
             >
                <div className="ht-timeline-container-main container col-md-12">
-                  <TimelinesContainer />
-               </div>
-            </Modal>
-            <Button
-               type="default"
-               size="small"
-               className="mb-1 mr-2"
-               onClick={this.showModalTagsAndServices}
-            >
-               Tags and Services
-            </Button>
-            <Modal
-               style={{ top: 70 }}
-               width="90%"
-               title="Chỉnh sửa các Tag và Dịch vụ cung cấp trong Tour"
-               visible={this.state.visibleTagsAndServicesModal}
-               onOk={this.handleOkTagsAndServices}
-               onCancel={this.handleCancelTagsAndServices}
-            >
-               <div className="ht-timeline-container-main container col-md-12">
-                  <TagsAndServicesContainer />
+                  <TagsContainer />
                </div>
             </Modal>
 
             <Link
                type="primary"
                to={{
-                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  pathname: `/admin/post-content/${record.idPost}`,
                   state: {
                      record: true
                   }
@@ -210,85 +169,14 @@ class TableGallery extends Component {
             >
                <Tooltip
                   placement="bottom"
-                  title="Sửa lịch trình (trong tab mới)"
+                  title="Sửa nội dung bài viết (trong tab mới)"
                >
                   <Button type="default" size="small" className="mb-1 mr-2">
-                     Go To Schedule
-                  </Button>
-               </Tooltip>
-            </Link>
-            {/* </Link> */}
-            <Link
-               type="primary"
-               to={{
-                  pathname: `/admin/note/${record.idTour}`,
-                  state: {
-                     record: true
-                  }
-               }}
-               target={"_blank"}
-            >
-               <Tooltip placement="bottom" title="Sửa lưu ý (trong tab mới)">
-                  <Button type="default" size="small" className="mb-1 mr-2">
-                     Note
-                  </Button>
-               </Tooltip>
-            </Link>
-            <Link
-               type="primary"
-               to={{
-                  pathname: `/admin/policy/${record.idTour}`,
-                  state: {
-                     record: true
-                  }
-               }}
-               target={"_blank"}
-            >
-               <Tooltip
-                  placement="bottom"
-                  title="Sửa chính sách và điều khoản (trong tab mới)"
-               >
-                  <Button type="default" size="small" className="mb-1 mr-2">
-                     Policy
-                  </Button>
-               </Tooltip>
-            </Link>
-            <Link
-               type="primary"
-               to={{
-                  pathname: `/admin/detail-price/${record.idTour}`,
-                  state: {
-                     record: true
-                  }
-               }}
-               target={"_blank"}
-            >
-               <Tooltip
-                  placement="bottom"
-                  title="Sửa chi tiết giá tour (trong tab mới)"
-               >
-                  <Button type="default" size="small" className="mb-1 mr-2">
-                     Detail Price
+                     Go To Edit Content
                   </Button>
                </Tooltip>
             </Link>
 
-            <Link
-               type="primary"
-               to={{
-                  pathname: `/admin/contact/${record.idTour}`,
-                  state: {
-                     record: true
-                  }
-               }}
-               target={"_blank"}
-            >
-               <Tooltip placement="bottom" title="Sửa liên hệ (trong tab mới)">
-                  <Button type="default" size="small" className="mb-1 mr-2">
-                     Contact
-                  </Button>
-               </Tooltip>
-            </Link>
             <div className="clearfix">
                <Upload
                   name={"imgUploader"} //This is important similar backend name field
@@ -322,14 +210,14 @@ class TableGallery extends Component {
 
 TableGallery.propTypes = {
    tourImageAllActions: PropTypes.shape({
-      fetchDeleteTourImageRequest: PropTypes.func
+      fetchDeletePostImageRequest: PropTypes.func
    }),
-   listImageTour: PropTypes.array
+   listImagePost: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listImageTour: state.image.listImageTour
+      listImagePost: state.image.listImagePost
    };
 };
 const mapDispatchToProps = dispatch => {

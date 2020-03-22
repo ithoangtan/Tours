@@ -10,7 +10,7 @@ export default class Result404 extends Component {
             title="404"
             subTitle="Sorry, the page you visited does not exist."
             extra={
-               <Link to={{ pathname: `/tour` }}>
+               <Link to={{ pathname: `/admin` }}>
                   <Button type="primary">Back Home</Button>
                </Link>
             }

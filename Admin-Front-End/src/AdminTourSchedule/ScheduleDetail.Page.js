@@ -13,9 +13,6 @@ import ScheduleDetailWrapperContainer from "./ScheduleDetail/scheduleDetailWrapp
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
-import moment from "moment";
-const dateFormat = "YYYY-DD-MM HH:mm:ss";
-
 class ScheduleDetail extends Component {
    constructor(props) {
       super(props);
@@ -48,7 +45,6 @@ class ScheduleDetail extends Component {
 
    render() {
       const { tour, scheduleByIdTour } = this.props;
-      tour.departureDay = moment(tour.departureDay).format(dateFormat);
       return (
          <div id="wrapper">
             {/* Sidebar */}

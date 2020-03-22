@@ -42,7 +42,6 @@ class EditorContainer extends Component {
       const data = editor.getData();
       //this.state.handleWYSIWYGInput(this.props.id, data);
       this.setState({ content: data });
-      // console.log(this.state.content);
    };
 
    onChangeDate(value, dateString) {}
@@ -156,11 +155,7 @@ class EditorContainer extends Component {
       if (pageName === "timelines") {
       }
 
-      console.log(data);
-
       if (data !== null && data !== undefined) {
-         console.log(data);
-
          return (
             <CKEditor
                editor={this.state.editor}
@@ -186,16 +181,10 @@ class EditorContainer extends Component {
                onInit={editor => {
                   // You can store the "editor" and use when it is needed.
                   this.setState({ scheduleByIdTour });
-
-                  console.log("Editor is ready to use!", editor);
                }}
                onChange={(event, editor) => this.onChange(event, editor)}
-               onBlur={editor => {
-                  // console.log("Blur.", editor);
-               }}
-               onFocus={editor => {
-                  // console.log("Focus.", editor);
-               }}
+               onBlur={editor => {}}
+               onFocus={editor => {}}
             />
          );
       } else return <></>;

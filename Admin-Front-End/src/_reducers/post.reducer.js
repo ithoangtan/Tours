@@ -1,15 +1,14 @@
-import * as tourConstants from "../_constants/tour.module";
+import * as postConstants from "../_constants/post.module";
 import {
    toastError,
-   // toastSuccess,
    toastPatchSuccess,
    toastDeleteSuccess,
    toastCreateSuccess
 } from "../_helper/toastify.helper";
 const initialState = {
-   listTour: [],
-   listImageTour: [],
-   tourById: {},
+   listPost: [],
+   listImagePost: [],
+   postById: {},
    delete: [],
    patch: [],
    create: []
@@ -17,47 +16,46 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
    switch (action.type) {
-      case tourConstants.FETCH_TOUR:
+      case postConstants.FETCH_POST:
          return {
             ...state,
-            listTour: []
+            listPost: []
          };
-      case tourConstants.FETCH_TOUR_SUCCESS: {
+      case postConstants.FETCH_POST_SUCCESS: {
          const { data } = action.payload;
-         // toastSuccess(data);
          return {
             ...state,
-            listTour: data
+            listPost: data
          };
       }
-      case tourConstants.FETCH_TOUR_FAILED: {
+      case postConstants.FETCH_POST_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            listTour: error
+            listPost: error
          };
       }
 
-      //Get Schedule By  Id Tour
-      case tourConstants.FETCH_TOUR_GET_BYID_SUCCESS: {
+      //Get Schedule By  Id Post
+      case postConstants.FETCH_POST_GET_BYID_SUCCESS: {
          const { data } = action.payload;
          return {
             ...state,
-            tourById: data
+            postById: data[0]
          };
       }
-      case tourConstants.FETCH_TOUR_GET_BYID_FAILED: {
+      case postConstants.FETCH_POST_GET_BYID_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            tourById: error
+            postById: error
          };
       }
 
       //Post - Create
-      case tourConstants.FETCH_TOUR_CREATE_SUCCESS: {
+      case postConstants.FETCH_POST_CREATE_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
          toastCreateSuccess(newRecord);
@@ -66,7 +64,7 @@ const reducer = (state = initialState, action) => {
             create: data
          };
       }
-      case tourConstants.FETCH_TOUR_CREATE_FAILED: {
+      case postConstants.FETCH_POST_CREATE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
@@ -76,7 +74,7 @@ const reducer = (state = initialState, action) => {
       }
 
       //Delete
-      case tourConstants.FETCH_TOUR_DELETE_SUCCESS: {
+      case postConstants.FETCH_POST_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
          toastDeleteSuccess(record);
@@ -85,7 +83,7 @@ const reducer = (state = initialState, action) => {
             delete: data
          };
       }
-      case tourConstants.FETCH_TOUR_DELETE_FAILED: {
+      case postConstants.FETCH_POST_DELETE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
@@ -95,7 +93,7 @@ const reducer = (state = initialState, action) => {
       }
 
       //Patch - update
-      case tourConstants.FETCH_TOUR_PATCH_SUCCESS: {
+      case postConstants.FETCH_POST_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
          toastPatchSuccess(newRecord);
@@ -104,7 +102,7 @@ const reducer = (state = initialState, action) => {
             patch: data
          };
       }
-      case tourConstants.FETCH_TOUR_PATCH_FAILED: {
+      case postConstants.FETCH_POST_PATCH_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
@@ -113,26 +111,26 @@ const reducer = (state = initialState, action) => {
          };
       }
 
-      //Image Tour
-      case tourConstants.FETCH_TOUR_IMAGE:
+      //Image Post
+      case postConstants.FETCH_POST_IMAGE:
          return {
             ...state,
-            listImageTour: []
+            listImagePost: []
          };
-      case tourConstants.FETCH_TOUR_IMAGE_SUCCESS: {
+      case postConstants.FETCH_POST_IMAGE_SUCCESS: {
          const { data } = action.payload;
          // toastSuccess(data);
          return {
             ...state,
-            listImageTour: data
+            listImagePost: data
          };
       }
-      case tourConstants.FETCH_TOUR_IMAGE_FAILED: {
+      case postConstants.FETCH_POST_IMAGE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            listImageTour: error
+            listImagePost: error
          };
       }
       default:

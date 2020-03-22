@@ -3,7 +3,11 @@ import React from "react";
 //Admin
 import AdminIndexPage from "./AdminIndex/Index.Page";
 import AdminTourPage from "./AdminTour/Tour.Page";
+import AdminTourTagPsage from "./AdminTourTagAndService/TourTagAndService.Page";
 import AdminTourScheduleDetailPage from "./AdminTourSchedule/ScheduleDetail.Page";
+import AdminPostPage from "./AdminPost/Post.Page";
+import AdminPostContentPage from "./AdminPostContent/PostContent.Page";
+import AdminPostAuthorInfo from "./AdminPostAuthorInfo/PostAuthorInfo.Page";
 //end Admin
 
 const routerPrivate = [
@@ -17,6 +21,13 @@ const routerPrivate = [
       path: "/admin/tour",
       exact: true,
       component: (match, props) => <AdminTourPage match={match} {...props} />
+   },
+   {
+      path: "/admin/tour/tags-and-services",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourTagPsage match={match} {...props} />
+      )
    },
    {
       path: "/admin/schedule-detail/:idTour",
@@ -65,6 +76,25 @@ const routerPrivate = [
       exact: true,
       component: (match, props) => (
          <AdminTourScheduleDetailPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/posts",
+      exact: true,
+      component: (match, props) => <AdminPostPage match={match} {...props} />
+   },
+   {
+      path: "/admin/post-content/:idPost",
+      exact: true,
+      component: (match, props) => (
+         <AdminPostContentPage match={match} {...props} />
+      )
+   },
+   {
+      path: "/admin/author-info",
+      exact: true,
+      component: (match, props) => (
+         <AdminPostAuthorInfo match={match} {...props} />
       )
    }
 ];
