@@ -52,12 +52,13 @@ export default class HeaderContainer extends Component {
                      <div
                         className="hero-wrap js-fullheight"
                         style={{
-                           backgroundImage: 'url("images/bg_1.jpg")'
+                           backgroundImage:
+                              'linear-gradient(rgb(21, 21, 21, 0.8),rgba(255, 255, 255, 0)),url("images/bg_1.jpg")'
                         }}
                         data-stellar-background-ratio="0.5"
                      >
                         <div className="overlay" />
-                        <div className="container  ht-text-shadow">
+                        <div className="container">
                            <div
                               className="row no-gutters slider-text js-fullheight align-items-top justify-content-end"
                               data-scrollax-parent="true"
@@ -141,12 +142,13 @@ export default class HeaderContainer extends Component {
                      <div
                         className="hero-wrap js-fullheight"
                         style={{
-                           backgroundImage: 'url("images/bg_1.jpg")'
+                           backgroundImage:
+                              'linear-gradient(rgb(21, 21, 21, 0.8),rgba(255, 255, 255, 0)),url("images/bg_1.jpg")'
                         }}
                         data-stellar-background-ratio="0.5"
                      >
                         <div className="overlay" />
-                        <div className="container  ht-text-shadow">
+                        <div className="container">
                            <div
                               className="row no-gutters slider-text js-fullheight align-items-top justify-content-end"
                               data-scrollax-parent="true"
@@ -156,7 +158,7 @@ export default class HeaderContainer extends Component {
                                  data-scrollax=" properties: { translateY: '70%' }"
                               >
                                  <h1
-                                    className="mb-4 mt-5"
+                                    className="mb-4 mt-5 ht-text-shadow"
                                     data-scrollax="properties: { translateY: '0%', opacity: 1 }"
                                  >
                                     Các tour HOT phải hiển thị ở đây!!! Ở cấu

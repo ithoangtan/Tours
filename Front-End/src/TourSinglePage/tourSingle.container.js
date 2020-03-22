@@ -37,31 +37,8 @@ const { TabPane } = Tabs;
 const { TextArea } = Input;
 const { Option } = Select;
 
-const dataRating = [
-   {
-      title: "ithoangtan cá nhân",
-      icon: `fas fa-user`
-   },
-   {
-      title: "ithoangtan cặp đôi",
-      icon: "fas fa-heart"
-   },
-   {
-      title: "ithoangtan gia đình",
-      icon: "fas fa-users"
-   },
-   {
-      title: "ithoangtan bạn bè",
-      icon: "fas fa-user-friends"
-   },
-   {
-      title: "ithoangtan doanh nghiệp",
-      icon: "fas fa-briefcase"
-   }
-];
-
 const marksEvaluate = {
-   0: {
+   1: {
       style: {
          color: "#bfbfbf"
       },
@@ -71,25 +48,25 @@ const marksEvaluate = {
          </strong>
       )
    },
-   2.5: {
+   2: {
       style: {
          color: "#fa8c16"
       },
       label: "Tạm ổn"
    },
-   5: {
+   3: {
       style: {
          color: "#52c41a"
       },
       label: <strong>"Bình thường"</strong>
    },
-   7.5: {
+   4: {
       style: {
          color: "#eb2f96"
       },
       label: "Rất tổt"
    },
-   10: {
+   5: {
       style: {
          color: "#f5222d"
       },
@@ -193,7 +170,7 @@ export default class TourSingleContainer extends Component {
    }
    numberStarCal(numberStar) {
       let numStar = Math.floor(numberStar);
-      return (Math.round(numberStar * 10) / 10).toFixed(1) >= numStar + 0.5
+      return (Math.round(numberStar * 5) / 5).toFixed(1) >= numStar + 0.5
          ? numStar + 0.5
          : numStar;
    }
@@ -207,11 +184,22 @@ export default class TourSingleContainer extends Component {
    }
    render() {
       const { size, rows } = this.state;
-      const { tourById } = this.props;
-      const totalNumberStar = 4.48555555555555555555555555555555555555555555;
-      const departureDay = moment(tourById.departureDay).format("l");
+      const {
+         tourById,
+         scheduleByIdTour,
+         listTimelineByIdTour,
+         listEvaluateByIdTour
+      } = this.props;
+      const totalNumberStar = tourById.votes;
+      const departureDay = moment(tourById.departureDay).format(
+         INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE
+      );
       // const departureDay2 = moment(tourById.departureDay).format();
       const timeDeparture = moment(tourById.departureDay).format("LT");
+      const listTags = tourById.tags ? tourById.tags.split(",") : [];
+      const listServices = tourById.services
+         ? tourById.services.split(",")
+         : [];
       return (
          <section className="ftco-section">
             <div className="container">
@@ -267,17 +255,12 @@ export default class TourSingleContainer extends Component {
                         />
                      </div>
                      <div className="ht-tag">
-                        <Tag color="magenta">something</Tag>
-                        <Tag color="red">something</Tag>
-                        <Tag color="volcano">something</Tag>
-                        <Tag color="orange">something</Tag>
-                        <Tag color="gold">something</Tag>
-                        <Tag color="lime">something</Tag>
-                        <Tag color="green">omething</Tag>
-                        <Tag color="cyan">something</Tag>
-                        <Tag color="blue">something</Tag>
-                        <Tag color="geekblue">something</Tag>
-                        <Tag color="purple">something</Tag>
+                        {listTags &&
+                           listTags.map((tag, index) => (
+                              <Tag key={index} color="#1da57a">
+                                 # {tag}
+                              </Tag>
+                           ))}
                      </div>
                      <Carousel autoplay dotPosition="bottom">
                         {this.renderImage()}
@@ -302,19 +285,19 @@ export default class TourSingleContainer extends Component {
                               {`  `}
                               <strong>
                                  {" "}
-                                 {Math.round(totalNumberStar * 10) / 10}{" "}
+                                 {Math.round(totalNumberStar * 5) / 5}{" "}
                               </strong>
                               với <strong>{`xx00`} </strong>đánh giá
                            </p>
                         </div>
                         <div className="ht-views">
                            <p>
-                              <Tooltip title={`${335} luợt xem`}>
+                              <Tooltip title={`${tourById.views} luợt xem`}>
                                  <i
-                                    className="fas fa-star"
+                                    className="fas fa-eye"
                                     style={{ color: "#595959" }}
                                  ></i>{" "}
-                                 {335}
+                                 {tourById.views}
                               </Tooltip>
                            </p>
                            <p>
@@ -403,71 +386,18 @@ export default class TourSingleContainer extends Component {
                         <div className="m-1">
                            <i className="fab fa-buromobelexperte"></i> Dịch vụ:{" "}
                            {` `}
-                           <Tooltip title="Đưa đón tận nơi">
-                              <i className="fas fa-taxi"> </i> {` `}
-                           </Tooltip>
-                           {/* Mấy cái khác tự làm như trên */}
-                           <Tooltip title="Cho thuê xe máy">
-                              <i className="fas fa-motorcycle"> </i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Free Wifi">
-                              <i className="fas fa-wifi"> </i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Hỗ trợ người khuyết tật">
-                              <i className="fas fa-wheelchair"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Sẵn vé máy bay">
-                              <i className="fas fa-plane-departure"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Xe giường nằm">
-                              <i className="fas fa-bus-alt"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Bãi biển đẹp">
-                              <i className="fas fa-umbrella-beach"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Phòng ngủ tập thể">
-                              <i className="fas fa-bed"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Passport">
-                              <i className="fas fa-id-badge"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Tiệc sinh nhật đúng ngày">
-                              <i className="fas fa-birthday-cake"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Hướng dẫn viên">
-                              <i className="fas fa-flag"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Bảo hiểm">
-                              <i className="fas fa-user-shield"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Cho thuê xe đạp">
-                              <i className="fas fa-bicycle"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Tự do trong 1 ngày">
-                              <i className="fas fa-shoe-prints"></i> {` `}
-                              {/* Tự do 2 hoặc mấy ngày đấy */}
-                           </Tooltip>
-                           <Tooltip title="Phòng tập gym">
-                              <i className="fas fa-dumbbell"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Dịch vụ spa">
-                              <i className="fas fa-spa"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Có bể bơi">
-                              <i className="fas fa-swimmer"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Trượt tuyết">
-                              <i className="fas fa-skiing"></i> {` `}
-                           </Tooltip>{" "}
-                           <Tooltip title="Bao bữa sáng">
-                              <i className="fas fa-utensils"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Hỗ trợ visa">
-                              <i className="fab fa-cc-visa"></i> {` `}
-                           </Tooltip>
-                           <Tooltip title="Vé tham quan">
-                              <i className="fas fa-money-bill"></i> {` `}
-                           </Tooltip>
+                           {listServices &&
+                              listServices.map((service, index) => (
+                                 <Tooltip title={service}>
+                                    <i
+                                       className={
+                                          INDEX_CONSTANTS.SERVICE_TOUR_ICON[
+                                             service
+                                          ]
+                                       }
+                                    ></i>{" "}
+                                 </Tooltip>
+                              ))}
                         </div>
                      </div>
                      <div className="ht-divide"> {` `}</div>
@@ -648,138 +578,45 @@ export default class TourSingleContainer extends Component {
                               mode={"left"}
                               className="width-100 ht-schedule-timeline"
                            >
-                              <Timeline.Item
-                                 label={
-                                    <p className="ht-label">
-                                       {" "}
-                                       01/01/2019{" "}
-                                       <i className="far fa-calendar-alt"></i>
-                                    </p>
-                                 }
-                                 dot={<i className="fas fa-map-pin ht-dot"></i>}
-                                 color=""
-                              >
-                                 <div className="ht-time-line-content">
-                                    <div className="ht-location">
-                                       <i className="fas fa-location-arrow"></i>{" "}
-                                       TP. HỒ CHÍ MINH – SYDNEY
-                                    </div>
-                                    <div className="ht-describe">
-                                       <Paragraph
-                                          className="ht-text-justify"
-                                          ellipsis={{
-                                             rows,
-                                             expandable: true,
-                                             suffix: "--ithoangtan"
-                                          }}
-                                          title={`Hướng dẫn viên Vietravel
-                                          đón Quý khách tại điểm hẹn sân bay 
-                                          Tân Sơn Nhất đón chuyến bay thẳng đi
-                                          Sydney. Nghỉ đêm trên máy bay.Hướng 
-                                          dẫn viên Vietravel đón Quý khách tại 
-                                          điểm hẹn sân bay Tân Sơn Nhất đón 
-                                          chuyến bay thẳng đi Sydney. Nghỉ đêm 
-                                          trên máy bay.`}
-                                       >
-                                          Hướng dẫn viên Vietravel đón Quý khách
-                                          tại điểm hẹn sân bay Tân Sơn Nhất đón
-                                          chuyến bay thẳng đi Sydney. Nghỉ đêm
-                                          trên máy bay.Hướng dẫn viên Vietravel
-                                          đón Quý khách tại điểm hẹn sân bay Tân
-                                          Sơn Nhất đón chuyến bay thẳng đi
-                                          Sydney. Nghỉ đêm trên máy bay.
-                                       </Paragraph>
-                                    </div>
-                                 </div>
-                              </Timeline.Item>
-                              <Timeline.Item
-                                 label={
-                                    <p className="ht-label">
-                                       {" "}
-                                       01/01/2019{" "}
-                                       <i className="far fa-calendar-alt"></i>
-                                    </p>
-                                 }
-                                 dot={<i className="fas fa-map-pin ht-dot"></i>}
-                                 color=""
-                              >
-                                 <div className="ht-time-line-content">
-                                    <div className="ht-location">
-                                       <i className="fas fa-location-arrow"></i>{" "}
-                                       TP. HỒ CHÍ MINH – SYDNEY
-                                    </div>
-                                    <div className="ht-describe">
-                                       <Paragraph
-                                          className="ht-text-justify"
-                                          ellipsis={{
-                                             rows,
-                                             expandable: true,
-                                             suffix: "--ithoangtan"
-                                          }}
-                                          title={`Hướng dẫn viên Vietravel
-                                          đón Quý khách tại điểm hẹn sân bay 
-                                          Tân Sơn Nhất đón chuyến bay thẳng đi
-                                          Sydney. Nghỉ đêm trên máy bay.Hướng 
-                                          dẫn viên Vietravel đón Quý khách tại 
-                                          điểm hẹn sân bay Tân Sơn Nhất đón 
-                                          chuyến bay thẳng đi Sydney. Nghỉ đêm 
-                                          trên máy bay.`}
-                                       >
-                                          Hướng dẫn viên Vietravel đón Quý khách
-                                          tại điểm hẹn sân bay Tân Sơn Nhất đón
-                                          chuyến bay thẳng đi Sydney. Nghỉ đêm
-                                          trên máy bay.Hướng dẫn viên Vietravel
-                                          đón Quý khách tại điểm hẹn sân bay Tân
-                                          Sơn Nhất đón chuyến bay thẳng đi
-                                          Sydney. Nghỉ đêm trên máy bay.
-                                       </Paragraph>
-                                    </div>
-                                 </div>
-                              </Timeline.Item>
-                              <Timeline.Item
-                                 label={
-                                    <p className="ht-label">
-                                       {" "}
-                                       01/01/2019{" "}
-                                       <i className="far fa-calendar-alt"></i>
-                                    </p>
-                                 }
-                                 dot={<i className="fas fa-map-pin ht-dot"></i>}
-                                 color=""
-                              >
-                                 <div className="ht-time-line-content">
-                                    <div className="ht-location">
-                                       <i className="fas fa-location-arrow"></i>{" "}
-                                       TP. HỒ CHÍ MINH – SYDNEY
-                                    </div>
-                                    <div className="ht-describe">
-                                       <Paragraph
-                                          className="ht-text-justify"
-                                          ellipsis={{
-                                             rows,
-                                             expandable: true,
-                                             suffix: "--ithoangtan"
-                                          }}
-                                          title={`Hướng dẫn viên Vietravel
-                                          đón Quý khách tại điểm hẹn sân bay 
-                                          Tân Sơn Nhất đón chuyến bay thẳng đi
-                                          Sydney. Nghỉ đêm trên máy bay.Hướng 
-                                          dẫn viên Vietravel đón Quý khách tại 
-                                          điểm hẹn sân bay Tân Sơn Nhất đón 
-                                          chuyến bay thẳng đi Sydney. Nghỉ đêm 
-                                          trên máy bay.`}
-                                       >
-                                          Hướng dẫn viên Vietravel đón Quý khách
-                                          tại điểm hẹn sân bay Tân Sơn Nhất đón
-                                          chuyến bay thẳng đi Sydney. Nghỉ đêm
-                                          trên máy bay.Hướng dẫn viên Vietravel
-                                          đón Quý khách tại điểm hẹn sân bay Tân
-                                          Sơn Nhất đón chuyến bay thẳng đi
-                                          Sydney. Nghỉ đêm trên máy bay.
-                                       </Paragraph>
-                                    </div>
-                                 </div>
-                              </Timeline.Item>
+                              {listTimelineByIdTour &&
+                                 listTimelineByIdTour.map((timeline, index) => (
+                                    <Timeline.Item
+                                       label={
+                                          <p className="ht-label">
+                                             {" "}
+                                             {moment(timeline.date).format(
+                                                INDEX_CONSTANTS.DATE_TIME_FORMAT
+                                                   .DATE_SHORT_TIME
+                                             )}{" "}
+                                             <i className="far fa-calendar-alt"></i>
+                                          </p>
+                                       }
+                                       dot={
+                                          <i className="fas fa-map-pin ht-dot"></i>
+                                       }
+                                       color=""
+                                    >
+                                       <div className="ht-time-line-content">
+                                          <div className="ht-location">
+                                             <i className="fas fa-location-arrow"></i>{" "}
+                                             {timeline.title}
+                                          </div>
+                                          <div className="ht-describe">
+                                             <Paragraph
+                                                className="ht-text-justify"
+                                                ellipsis={{
+                                                   rows,
+                                                   expandable: true,
+                                                   suffix: ""
+                                                }}
+                                                title={timeline.description}
+                                             >
+                                                {timeline.description}
+                                             </Paragraph>
+                                          </div>
+                                       </div>
+                                    </Timeline.Item>
+                                 ))}
                            </Timeline>
                         </div>
                         <div
@@ -805,63 +642,16 @@ export default class TourSingleContainer extends Component {
                               className="ht-tabs-schedule"
                            >
                               <TabPane tab="Chi tiết giá tour" key="1">
-                                 Bao gồm Phí visa Úc (Lưu ý: visa Úc sẽ không
-                                 dán vào hộ chiếu) Vé máy bay khứ hồi, vé chặng
-                                 nội địa Úc (Hàng không Jetstar hành lý 30 kg/01
-                                 kiện, có phục vụ ăn trên máy bay chặng quốc tế,
-                                 lưu ý quý khách nhớ đem theo áo ấm trên máy bay
-                                 vì hàng không không phuc vụ phát mền). Thuế phi
-                                 trường hai nước, phụ phí xăng dầu và bảo hiểm
-                                 hàng không. Khách sạn tiêu chuẩn quốc tế 3 sao,
-                                 phòng đôi Nhà hàng, chi phí tham quan trong
-                                 chương trình. Xe máy lạnh đưa đón đoàn theo
-                                 chương trình. Hướng dẫn viên Vietravel suốt
-                                 tuyến. Đặc biệt, Vietravel tặng thêm cho tất cả
-                                 du khách (đến 80 tuổi) phí Bảo hiểm du lịch
-                                 toàn cầu với mức bồi thường tối đa là
-                                 1.400.000.000 VND. Không bao gồm: Phí phòng đơn
-                                 (dành cho khách yêu cầu ở phòng đơn): Nước uống
-                                 (bia rượu trong bữa ăn), điện thoại, giặt ủi,
-                                 hành lý quá cước theo quy định của hàng không.
-                                 Thuốc men, bệnh viện… và chi phí cá nhân của
-                                 khách ngoài chương trình. Chi phí dời ngày, đổi
-                                 chặng, nâng hạng vé máy bay. Trường hợp Quý
-                                 khách không sử dụng chặng đi của vé đoàn theo
-                                 tour, các chặng nội địa và quốc tế còn lại sẽ
-                                 bị hủy hoặc không sử dụng chặng về cũng không
-                                 được hoàn do điều kiện của hãng Hàng Không Tiền
-                                 bồi dưỡng cho hướng dẫn viên và tài xế địa
-                                 phương (150.000/khách/ngày). Quà tặng: Quà tặng
-                                 Vietravel. Thẻ thành viên với nhiều ưu đãi Giá
-                                 tour dành cho trẻ em: + Trẻ em dưới 2 tuổi: 30%
-                                 giá tour người lớn. + Trẻ em từ 2 tuổi đến dưới
-                                 12 tuổi: 100% giá tour người lớn (có chế độ
-                                 giường riêng). + Khi nộp hồ sơ quý khách đặt
-                                 cọc 20 triệu/ khách. Quy trình đăng ký & thanh
-                                 toán: - Đợt 1: Đặt cọc 20.000.000 VND/khách. -
-                                 Đợt 2: Thanh toán số tiền tour còn lại sau khi
-                                 được chấp thuận visa. Điều khoản hủy tour: +
-                                 Sau khi đặt cọc tour và trước khi Vietravel nộp
-                                 phí visa: không mất chi phí. + Trường hợp Quý
-                                 khách bị từ chối visa, chi phí không hoàn lại
-                                 là 5.000.000 VND - Nếu hủy hoặc chuyển sang các
-                                 chuyến du lịch khác khi đã nộp visa mất phí cọc
-                                 tour 30.000.000 vnd/khách - Nếu hủy hoặc chuyển
-                                 sang các chuyến du lịch khác khi đã có visa chi
-                                 phí hủy tour là 100% tiền tour. Lưu ý: Tour
-                                 khuyến mãi không hoàn tiền tour vì bất kỳ lí do
-                                 nào Trường hợp bất khả kháng: - Nếu chương
-                                 trình du lịch bị hủy bỏ hoặc thay đổi bởi một
-                                 trong hai bên vì lý do bất khả kháng (hỏa hoạn,
+                                 {scheduleByIdTour.policy &&
+                                    parseHtml(`${scheduleByIdTour.policy}`)}
                               </TabPane>
                               <TabPane tab="Lưu ý" key="2">
-                                 TRỤ SỞ CHÍNH Địa chỉ: 190 Pasteur, Phường 6,
-                                 Quận 3, Tp. Hồ Chí Minh Điện thoại: (84-28)
-                                 3822 8898 Fax: (84-28) 3829 9142 Email:
-                                 info@vietravel.com
+                                 {scheduleByIdTour.notes &&
+                                    parseHtml(`${scheduleByIdTour.notes}`)}
                               </TabPane>
                               <TabPane tab="Liên hệ" key="3">
-                                 Liên hệ
+                                 {scheduleByIdTour.contacts &&
+                                    parseHtml(`${scheduleByIdTour.contacts}`)}
                               </TabPane>
                            </Tabs>
                         </div>
@@ -903,6 +693,7 @@ export default class TourSingleContainer extends Component {
                                     <i className="fas fa-pen-square mr-2"></i>{" "}
                                     Viết Đánh Giá
                                  </Button>
+                                 {/* Modal write evaluate */}
                                  <Modal
                                     title="Đánh giá"
                                     visible={this.state.visible}
@@ -925,11 +716,11 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={10}
+                                                defaultValue={5}
                                                 marks={marksEvaluate}
-                                                step={0.5}
-                                                min={0}
-                                                max={10}
+                                                step={1}
+                                                min={1}
+                                                max={5}
                                              />
                                           </div>
                                           <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
@@ -942,11 +733,11 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={10}
+                                                defaultValue={5}
                                                 // marks={marksEvaluate}
-                                                step={0.5}
-                                                min={0}
-                                                max={10}
+                                                step={1}
+                                                min={1}
+                                                max={5}
                                              />
                                           </div>{" "}
                                           <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
@@ -959,11 +750,11 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={10}
-                                                step={0.5}
+                                                defaultValue={5}
+                                                step={1}
                                                 // marks={marksEvaluate}
-                                                min={0}
-                                                max={10}
+                                                min={1}
+                                                max={5}
                                              />
                                           </div>{" "}
                                           <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
@@ -976,11 +767,11 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={10}
-                                                step={0.5}
+                                                defaultValue={5}
+                                                step={1}
                                                 // marks={marksEvaluate}
-                                                min={0}
-                                                max={10}
+                                                min={1}
+                                                max={5}
                                              />
                                           </div>{" "}
                                           <div className="ht-slider-title d-flex col-md-12 pl-0 ml-0">
@@ -993,11 +784,11 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={10}
-                                                step={0.5}
+                                                defaultValue={5}
+                                                step={1}
                                                 marks={marksEvaluate}
-                                                min={0}
-                                                max={10}
+                                                min={1}
+                                                max={5}
                                              />
                                           </div>
                                        </div>
@@ -1067,20 +858,23 @@ export default class TourSingleContainer extends Component {
                                     tab={
                                        <>
                                           <i className="fas fa-th"></i> Tất cả (
-                                          {`5`})
+                                          {listEvaluateByIdTour.length})
                                        </>
                                     }
                                     key="1"
                                  >
                                     <List
                                        itemLayout="horizontal"
-                                       dataSource={dataRating}
+                                       dataSource={listEvaluateByIdTour}
                                        renderItem={item => (
                                           <div className="ht-rate-detail">
                                              <div className="ht-rate-avatar">
                                                 <Avatar
                                                    size="large"
-                                                   src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                                   src={
+                                                      INDEX_CONSTANTS.API_ENDPOINT +
+                                                      item.avatar
+                                                   }
                                                 />
                                              </div>
                                              <div className="ht-rate-content">
@@ -1089,51 +883,69 @@ export default class TourSingleContainer extends Component {
                                                       <i
                                                          className={item.icon}
                                                       ></i>{" "}
-                                                      {`${item.title}`}
+                                                      {`${item.name}`}
                                                    </div>
                                                    <div className="ht-date">
-                                                      {`01/01/2020`}
+                                                      {moment(
+                                                         item.dateAdded
+                                                      ).format(
+                                                         INDEX_CONSTANTS
+                                                            .DATE_TIME_FORMAT
+                                                            .DATE_TIME
+                                                      )}
                                                    </div>
                                                 </div>
                                                 <div className="ht-slider-container-mini col-md-12">
                                                    <div className="ht-rate-box">
-                                                      <div className="ht-name">{`Hoàn hảo`}</div>
-                                                      <div className="ht-rate">{`${9} điểm`}</div>
+                                                      <div className="ht-name">
+                                                         {item.rateTitle}
+                                                      </div>
+                                                      <div className="ht-rate">{`${item.rateAverage} điểm`}</div>
                                                    </div>
                                                    <div className="ht-mini-review">
                                                       <Tooltip
                                                          title={`Chỗ ở nghỉ ngơi`}
                                                       >
                                                          <i className="fas fa-hotel"></i>
-                                                         (9)
-                                                         {`  `}
+                                                         ({item.numberStarHotel}
+                                                         ){`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Ẩm thực`}
                                                       >
                                                          <i className="fas fa-utensils ml-2"></i>
-                                                         (9)
+                                                         ({item.numberStarFood})
                                                          {`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Phương tiện và đi lại`}
                                                       >
                                                          <i className="fas fa-shuttle-van ml-2"></i>
-                                                         (9)
-                                                         {`  `}
+                                                         (
+                                                         {
+                                                            item.numberStarVehicle
+                                                         }
+                                                         ){`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Hướng dẫn viên`}
                                                       >
                                                          <i className="fas fa-flag ml-2"></i>
-                                                         (9)
-                                                         {`  `}
+                                                         (
+                                                         {
+                                                            item.numberStarTourGuide
+                                                         }
+                                                         ){`  `}
                                                       </Tooltip>
                                                       <Tooltip
                                                          title={`Lịch trình tour`}
                                                       >
                                                          <i className="fas fa-calendar-check ml-2"></i>
-                                                         (9) {`  `}
+                                                         (
+                                                         {
+                                                            item.numberStarSchedule
+                                                         }
+                                                         ) {`  `}
                                                       </Tooltip>
                                                    </div>
                                                 </div>
@@ -1143,46 +955,13 @@ export default class TourSingleContainer extends Component {
                                                       ellipsis={{
                                                          rows,
                                                          expandable: true,
-                                                         suffix: `${`--ithoangtan`}`
+                                                         suffix: ``
                                                       }}
-                                                      title={`Vừa qua thì tôi có đặt tour du
-                                                lịch Hà Nội - SaPa - Hạ Long -
-                                                Ninh Bình 6 ngày 5 đêm thông qua
-                                                hệ thống của công ty mytour. Về
-                                                tổng quan thì tôi khá là hài
-                                                lòng về tour du lịch mà tôi vừa
-                                                đi nên tôi cho được 9,5 điểm.
-                                                Tôi rất ấn tượng về những địa
-                                                điểm mà tôi đã đi qua và mỗi nơi
-                                                đều để lại một dấu ấn khó quên
-                                                trong lòng tôi. Hướng dẫn viên
-                                                của đoàn khá là vui vẻ, thân
-                                                thiện với mọi người. Chỗ nghỉ
-                                                ngơi cũng như là ăn uống khá là
-                                                tốt. Nhìn chung thì tôi không có
-                                                gì phàn nàn hay góp ý về tour
-                                                này cả.`}
+                                                      title={
+                                                         item.contentEvaluate
+                                                      }
                                                    >
-                                                      Vừa qua thì tôi có đặt
-                                                      tour du lịch Hà Nội - SaPa
-                                                      - Hạ Long - Ninh Bình 6
-                                                      ngày 5 đêm thông qua hệ
-                                                      thống của công ty mytour.
-                                                      Về tổng quan thì tôi khá
-                                                      là hài lòng về tour du
-                                                      lịch mà tôi vừa đi nên tôi
-                                                      cho được 9,5 điểm. Tôi rất
-                                                      ấn tượng về những địa điểm
-                                                      mà tôi đã đi qua và mỗi
-                                                      nơi đều để lại một dấu ấn
-                                                      khó quên trong lòng tôi.
-                                                      Hướng dẫn viên của đoàn
-                                                      khá là vui vẻ, thân thiện
-                                                      với mọi người. Chỗ nghỉ
-                                                      ngơi cũng như là ăn uống
-                                                      khá là tốt. Nhìn chung thì
-                                                      tôi không có gì phàn nàn
-                                                      hay góp ý về tour này cả.
+                                                      {item.contentEvaluate}
                                                    </Paragraph>
                                                 </div>
                                              </div>

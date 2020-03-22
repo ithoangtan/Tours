@@ -1,5 +1,5 @@
-export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
-//export const API_ENDPOINT = "http://localhost:8000";
+// export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+export const API_ENDPOINT = "http://localhost:8000";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",
@@ -33,3 +33,33 @@ export const AdminArrayExternalScript = [
    "/admin/js/demo/chart-area-demo.js",
    "/admin/js/demo/chart-pie-demo.js"
 ];
+
+export const DATE_TIME_FORMAT = {
+   DATE: "DD/MM/YYYY",
+   DATE_TIME: "DD/MM/YYYY - hh:mm:ss",
+   DATE_SHORT_TIME: "DD/MM/YYYY - hh:mm"
+};
+
+export const SERVICE_TOUR_ICON = {
+   "Đưa đón tận nơi": "fas fa-taxi",
+   "Cho thuê xe máy": "fas fa-motorcycle",
+   "Free Wifi": "fas fa-wifi",
+   "Hỗ trợ người khuyết tật": "fas fa-wheelchair",
+   "Sẵn vé máy bay": "fas fa-plane-departure",
+   "Xe giường nằm": "fas fa-bus-alt",
+   "Bãi biển đẹp": "fas fa-umbrella-beach",
+   "Phòng ngủ tập thể": "fas fa-bed",
+   Passport: "fas fa-id-badge",
+   "Tiệc sinh nhật đúng ngày": "fas fa-birthday-cake",
+   "Hướng dẫn viên": "fas fa-flag",
+   "Bảo hiểm": "fas fa-user-shield",
+   "Cho thuê xe đạp": "fas fa-bicycle",
+   "Tự do trong 1 ngày": "fas fa-shoe-prints",
+   "Phòng tập gym": "fas fa-dumbbell",
+   "Dịch vụ spa": "fas fa-spa",
+   "Có bể bơi": "fas fa-swimmer",
+   "Trượt tuyết": "fas fa-skiing",
+   "Bao bữa sáng": "fas fa-utensils",
+   "Hỗ trợ visa": "fab fa-cc-visa",
+   "Vé tham quan": "fas fa-money-bill"
+};

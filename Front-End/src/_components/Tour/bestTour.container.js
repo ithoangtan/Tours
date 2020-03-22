@@ -77,7 +77,8 @@ class BestTourContainer extends Component {
                            <div className="sale">
                               <Countdown
                                  value={
-                                    Date.now() +
+                                    // Date.now() +
+                                    tour.departureDay +
                                     1000 * 60 * 60 * 24 * 2 +
                                     1000 * 3
                                  }
@@ -113,8 +114,8 @@ class BestTourContainer extends Component {
                                  }
                               }}
                            >
-                              <i className="fas fa-map-marker-alt"> </i> Hồ Chí
-                              Minh
+                              <i className="fas fa-map-marker-alt"> </i>
+                              {` ${tour.departureAddress}`}
                            </Link>
                            <h4 className="ht-name-tour">
                               <Link
@@ -133,7 +134,7 @@ class BestTourContainer extends Component {
                                  allowHalf
                                  tooltips={desc}
                                  disabled
-                                 defaultValue={4.5}
+                                 defaultValue={tour.votes}
                                  character={<Icon type="star" />}
                                  //Phải làm tròn số với đơn vị 0.5
                                  size="small"
@@ -141,14 +142,16 @@ class BestTourContainer extends Component {
                               ></Rate>{" "}
                               <div className="float-right ht-display-flex-start-center">
                                  <div className="rate">
-                                    <Link to="/tour"> (199 views)</Link>
+                                    <Link to="/tour">
+                                       ({tour.views ? tour.views : 0} views)
+                                    </Link>
                                  </div>
                               </div>
                            </div>
                         </div>
                         <div className="ht-best-tour-bottom">
                            <div className="ht-flex-center-col">
-                              <p className="ht-mr-0">{tour.timeVocation}</p>
+                              <p className="ht-mr-0">{tour.vocationTime}</p>
                               <p className="ht-mr-0">{tour.departureDay}</p>
                            </div>
                            <Link
