@@ -2,6 +2,18 @@ const { check, validationResult } = require("express-validator");
 
 const Tag = require("../models/tag.model");
 
+exports.listAll = async (req, res, next) => {
+  try {
+    tag = await Tag.getAllTag();
+    res.status(200).json(tag);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.listTagSearch = async function(req, res) {
   const searchs = {
     keySearch: req.body.keySearch,

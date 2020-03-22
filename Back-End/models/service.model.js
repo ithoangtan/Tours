@@ -12,6 +12,19 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
+Service.getAllService = function() {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "SELECT * FROM " +
+          databaseProduction +
+          ".services WHERE statusAction <> 'deleted'; "
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 Service.getServiceById = function(idServices) {
   return new Promise(function(resolve, reject) {
     database

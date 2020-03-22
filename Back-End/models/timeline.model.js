@@ -15,6 +15,19 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
+Timeline.getAllTimeline = function() {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "SELECT * FROM " +
+          databaseProduction +
+          ".timelines WHERE statusAction <> 'deleted'; "
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 Timeline.getTimelineById = function(idTimelines) {
   return new Promise(function(resolve, reject) {
     database
@@ -23,6 +36,17 @@ Timeline.getTimelineById = function(idTimelines) {
           databaseProduction +
           ".timelines where idTimelines = ? AND statusAction <> 'deleted'; ",
         [idTimelines]
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
+Timeline.getTimelineByIdTour = function(idTour) {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "call " + databaseProduction + `.spGetTimelineByIdTour( '${idTour}' ); `
       )
       .then(rows => resolve(rows))
       .catch(err => reject(err));

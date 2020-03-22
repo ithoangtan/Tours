@@ -12,6 +12,19 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
+Tag.getAllTag = function() {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "SELECT * FROM " +
+          databaseProduction +
+          ".tags WHERE statusAction <> 'deleted'; "
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 Tag.getTagById = function(idTag) {
   return new Promise(function(resolve, reject) {
     database
