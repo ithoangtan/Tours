@@ -118,6 +118,7 @@ router.get(
 
 //for tag
 router.get("/tag", authenticated, tag.read);
+router.get("/tags", authenticated, tag.listAll);
 router.post("/tag/search", authenticated, tag.listTagSearch);
 router.post("/tag", authenticated, tag.create);
 router.put("/tag", authenticated, tag.update);
@@ -125,6 +126,7 @@ router.delete("/tag", authenticated, tag.delete);
 
 //for timeline
 router.get("/timeline", timeline.read);
+router.get("/timelines", authenticated, timeline.listAll);
 router.post("/timeline/search", authenticated, timeline.listTimelineSearch);
 router.post("/timeline", authenticated, timeline.create);
 router.put("/timeline", authenticated, timeline.update);
@@ -132,6 +134,7 @@ router.delete("/timeline", authenticated, timeline.delete);
 
 //for service
 router.get("/service", service.read);
+router.get("/services", authenticated, service.listAll);
 router.post("/service/search", authenticated, service.listServiceSearch);
 router.post("/service", authenticated, service.create);
 router.put("/service", authenticated, service.update);

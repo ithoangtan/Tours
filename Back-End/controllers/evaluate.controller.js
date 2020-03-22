@@ -28,9 +28,39 @@ exports.readByIdTour = async (req, res, next) => {
   }
 };
 
+function calAverageRateEvaluate(evaluate) {
+  const rate = (
+    (evaluate.numberStarHotel +
+      evaluate.numberStarFood +
+      evaluate.numberStarVehicle +
+      evaluate.numberStarTourGuide +
+      evaluate.numberStarSchedule) /
+    5
+  ).toFixed(0);
+  let rateTitle = "Rất tệ";
+  switch (parseInt(rate)) {
+    case 5:
+      rateTitle = "Tuyệt vời";
+      break;
+    case 4:
+      rateTitle = "Rất ổn";
+      break;
+    case 3:
+      rateTitle = "Bình thường";
+      break;
+    case 2:
+      rateTitle = "Tạm ổn";
+      break;
+    default:
+      break;
+  }
+  return { rateAverage: rate, rateTitle };
+}
+
 exports.create = async (req, res, next) => {
   try {
-    const newEvaluate = new Evaluate(req.body);
+    const rateAverage = calAverageRateEvaluate(req.body);
+    const newEvaluate = new Evaluate({ ...req.body, ...rateAverage });
     resultCreate = await Evaluate.createEvaluate(newEvaluate);
     res.status(200).json(resultCreate);
   } catch (err) {
@@ -43,7 +73,8 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   try {
-    const updateEvaluate = new Evaluate(req.body);
+    const rateAverage = calAverageRateEvaluate(req.body);
+    const updateEvaluate = new Evaluate({ ...req.body, ...rateAverage });
     updateResult = await Evaluate.updateById(updateEvaluate);
     res.status(200).json(updateResult);
   } catch (err) {

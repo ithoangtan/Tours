@@ -2,6 +2,18 @@ const { check, validationResult } = require("express-validator");
 
 const Service = require("../models/service.model");
 
+exports.listAll = async function(req, res) {
+  try {
+    listService = await Service.getAllService();
+    res.status(200).json(listService);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.listServiceSearch = async function(req, res) {
   const searchs = {
     keySearch: req.body.keySearch,
