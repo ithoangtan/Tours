@@ -97,11 +97,11 @@ export default class SideBarContainer extends Component {
                      <Link to="/admin/tour" className="collapse-item">
                         Tours and Details
                      </Link>
-                     <Link to="/admin/tags" className="collapse-item">
-                        Tags
-                     </Link>
-                     <Link to="/admin/services" className="collapse-item">
-                        Services
+                     <Link
+                        to="/admin/tour/tags-and-services"
+                        className="collapse-item"
+                     >
+                        Tags and Services
                      </Link>
                   </div>
                </div>

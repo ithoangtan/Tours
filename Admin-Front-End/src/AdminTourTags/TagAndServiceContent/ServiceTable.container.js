@@ -1,12 +1,10 @@
 import React from "react";
 
-import moment from "moment";
-
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as tourActions from "../../_actions/tour.actions";
+import * as serviceActions from "../../_actions/service.actions";
 
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
@@ -21,16 +19,12 @@ import {
    Popconfirm,
    Form,
    Button,
-   Icon,
-   Modal
+   Icon
 } from "antd";
 
-import NumberFormat from "react-number-format";
+import TableNewService from "./TableNewService";
 
-import TableGallery from "./tableGallery";
-import TableNewRow from "./tableNewTour";
 import Cookies from "js-cookie";
-import TourPreview from "./tourPreview";
 
 function getCookie(name) {
    const token = Cookies.get(name);
@@ -107,9 +101,8 @@ class EditableCell extends React.Component {
 
 const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
-const footer = () => "Dùng tổ hợp Shift + con lăn chuột để cuộn ngang";
-//Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 1740, y: 400 };
+const footer = () => "Tạm thời không biết nên ghi gì";
+const scroll = { x: 0, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -117,46 +110,46 @@ class EditableTable extends React.Component {
       super(props);
       this.state = {
          rowsDescribe: 1,
-         data: this.props.listTour,
-         editingidTour: "",
-         count: this.props.listTour.length,
-         bordered: true,
-         loading: false,
          size: "default",
          showHeader,
-         // title,
          footer,
-         // rowSelection: {},
-         scroll: scroll,
-         hasData: true,
+         bordered: true,
          tableLayout: "auto",
-         filteredInfo: null,
+         // hasData: true,
+         data: null,
+         editingidService: "",
+         count: this.props.listService.length,
+         loading: false,
          sortedInfo: null,
+         filteredInfo: null,
          searchText: "",
          pagination,
-         //add Show
          showAdd: false,
-         visiblePreview: false,
-         ellipsis: false
+         // visiblePreviewService: false,
+         ellipsis: false,
+         // title,
+         // rowSelection: {},
+         scroll: scroll
+         //add Show
       };
    }
 
-   isEditing = record => record.idTour === this.state.editingidTour;
+   isEditing = record => record.idService === this.state.editingidService;
 
    cancel = () => {
-      this.setState({ editingidTour: "" });
+      this.setState({ editingidService: "" });
    };
 
-   save(form, idTour) {
-      const { tourAllActions } = this.props;
-      const { fetchPatchTourRequest } = tourAllActions;
+   save(form, idService) {
+      const { serviceAllActions } = this.props;
+      const { fetchPatchServiceRequest } = serviceAllActions;
 
       form.validateFields((error, row) => {
          if (error) {
             return;
          }
          const newData = [...this.state.data];
-         const index = newData.findIndex(item => idTour === item.idTour);
+         const index = newData.findIndex(item => idService === item.idService);
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
@@ -164,62 +157,51 @@ class EditableTable extends React.Component {
                ...row
             });
             //Gọi API update dưới CSDL
-            fetchPatchTourRequest(row);
+            fetchPatchServiceRequest(row);
 
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidTour: "" });
+            this.setState({ data: newData, editingidService: "" });
          } else {
             newData.push(row);
             //Gọi API update dưới CSDL
-            fetchPatchTourRequest(row);
+            fetchPatchServiceRequest(row);
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidTour: "" });
+            this.setState({ data: newData, editingidService: "" });
          }
       });
    }
 
-   edit(idTour) {
-      this.setState({ editingidTour: idTour });
+   edit(idService) {
+      this.setState({ editingidService: idService });
    }
    handleDelete = record => {
       const data = [...this.state.data];
       //Gọi API xóa dưới CSDL
-      const { tourAllActions } = this.props;
-      const { fetchDeleteTourRequest } = tourAllActions;
-      fetchDeleteTourRequest(record);
+      const { serviceAllActions } = this.props;
+      const { fetchDeleteServiceRequest } = serviceAllActions;
+      fetchDeleteServiceRequest(record);
       //Kết thúc gọi API xóa dươi CSDL
       this.setState({
-         data: data.filter(item => item.idTour !== record.idTour)
+         data: data.filter(item => item.idService !== record.idService)
       });
    };
 
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = newTour => {
+   handleAdd = newService => {
       const { count, data } = this.state;
       const newData = {
-         idTour:
-            newTour.idTour | (data.length !== 0)
-               ? data[data.length - 1].idTour + 1
+         idService:
+            newService.idService | (data.length !== 0)
+               ? data[data.length - 1].idService + 1
                : 0,
-         titleTour: newTour.titleTour,
-         price: newTour.price,
-         sale: newTour.sale,
-         dateAdded: new Date()
-            .toJSON()
-            .slice(0, 10)
-            .replace(/-/g, "-"),
-         departureDay: newTour.departureDay,
-         describe: newTour.describe,
-         address: newTour.address,
-         vocationTime: newTour.vocationTime,
-         idAccount: newTour.idAccount
+         nameService: newService.nameService
       };
       //Gọi API create dưới CSDL
-      const { tourAllActions } = this.props;
-      const { fetchPostTourRequest } = tourAllActions;
-      fetchPostTourRequest(newData);
+      const { serviceAllActions } = this.props;
+      const { fetchPostServiceRequest } = serviceAllActions;
+      fetchPostServiceRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
@@ -230,7 +212,7 @@ class EditableTable extends React.Component {
 
    handleSaveOnChange = row => {
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => row.idTour === item.idTour);
+      const index = newData.findIndex(item => row.idService === item.idService);
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
@@ -242,11 +224,9 @@ class EditableTable extends React.Component {
    /**Preload */
    //    Preload
    componentWillMount() {
-      const { tourAllActions } = this.props;
-      const { fetchListTourImageRequest } = tourAllActions;
-      fetchListTourImageRequest();
       this.fetch();
    }
+
    handleTableChange = (pagination, filters, sorter) => {
       const pager = { ...this.state.pagination };
       pager.current = pagination.current;
@@ -254,7 +234,7 @@ class EditableTable extends React.Component {
          pagination: pager
       });
       this.fetch({
-         tours: pagination.pageSize,
+         services: pagination.pageSize,
          page: pagination.current,
          sortField: sorter.field,
          sortOrder: sorter.order,
@@ -264,11 +244,8 @@ class EditableTable extends React.Component {
 
    fetch = async (params = {}) => {
       this.setState({ loading: true });
-      // const { tourAllActions } = this.props;
-      // const { fetchListTourRequest } = tourAllActions;
-      // await fetchListTourRequest();
       await reqwest({
-         url: `${API_ENDPOINT}/tours`,
+         url: `${API_ENDPOINT}/services`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
@@ -279,12 +256,11 @@ class EditableTable extends React.Component {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
-         // const { listTour } = this.props;
+         // const { listService } = this.props;
 
          this.setState({
             loading: false,
             data: data,
-            //data: listTour
             pagination
          });
       });
@@ -400,9 +376,9 @@ class EditableTable extends React.Component {
       this.setState({ scroll: enable ? scroll : undefined });
    };
 
-   handleDataChange = hasData => {
-      this.setState({ hasData });
-   };
+   // handleDataChange = hasData => {
+   //    this.setState({ hasData });
+   // };
 
    handleChange = (pagination, filters, sorter, extra) => {
       this.setState({
@@ -442,50 +418,35 @@ class EditableTable extends React.Component {
    //end Add
 
    //Expanded Row Render
-   expandedRowRender = record => {
-      const { listImageTour } = this.props;
-      return (
-         <TableGallery
-            record={record}
-            listImage={listImageTour}
-            {...this.props}
-         />
-      );
-   };
+   // expandedRowRender = record => {
+   //    const { listImageService } = this.props;
+   //    return (
+   //       <TableGallery
+   //          record={record}
+   //          listImage={listImageService}
+   //          {...this.props}
+   //       />
+   //    );
+   // };
 
-   showModalPreview(record) {
-      Modal.info({
-         width: 1000,
-         title: "This is a item tour at category tours",
-         wrapClassName: "",
-         content: (
-            <TourPreview
-               tour={record}
-               listImageTour={[
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  },
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  }
-               ]}
-            />
-         ),
-         onOk() {}
-      });
-   }
+   // showModalPreviewService(record) {
+   //    Modal.info({
+   //       width: 1000,
+   //       title: "This is a item service at category services",
+   //       wrapClassName: "",
+   //       content: <ServicePreview service={record} />,
+   //       onOk() {}
+   //    });
+   // }
 
-   handleCancelPreview = e => {
-      this.setState({
-         visiblePreview: false
-      });
-   };
+   // handleCancelPreviewService = e => {
+   //    this.setState({
+   //       visiblePreviewService: false
+   //    });
+   // };
 
    render() {
       const { state } = this;
-      const { data } = this.state;
       const components = {
          body: {
             cell: EditableCell
@@ -496,7 +457,7 @@ class EditableTable extends React.Component {
       };
 
       let { sortedInfo } = this.state;
-      // let { sortedInfo, filteredInfo } = this.state;
+      // let { filteredInfo } = this.state;
       sortedInfo = sortedInfo || {};
       // filteredInfo = filteredInfo || {};
 
@@ -505,143 +466,22 @@ class EditableTable extends React.Component {
       this.columns = [
          {
             title: "ID",
-            dataIndex: "idTour",
-            key: "idTour",
+            dataIndex: "idServices",
+            key: "idService",
             width: 50,
-            // fixed: "left",
-            ellipsis: true,
-            editable: true
-            // render: text => text
-         },
-         {
-            title: "Title",
-            dataIndex: "titleTour",
-            key: "titleTour",
-            width: 200,
-            // fixed: "left",
-            ...this.getColumnSearchProps("titleTour"),
-            sorter: (a, b) => a.titleTour.length - b.titleTour.length,
-            sortOrder: sortedInfo.columnKey === "titleTour" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
-            // render: text => text
-         },
-         {
-            title: "Price(vnđ)",
-            dataIndex: "price",
-            key: "price",
-            width: 130,
-            ...this.getColumnSearchProps("price"),
-            sorter: (a, b) => a.price - b.price,
-            sortOrder: sortedInfo.columnKey === "price" && sortedInfo.order,
-            ellipsis: true,
-            editable: true,
-            render: text => {
-               return (
-                  <NumberFormat
-                     value={text}
-                     displayType={"text"}
-                     thousandSeparator={true}
-                     suffix={""}
-                     prefix={""}
-                  />
-               );
-            }
-         },
-         {
-            title: "Address",
-            dataIndex: "address",
-            key: "address",
-            width: 200,
-            ...this.getColumnSearchProps("address"),
-            sorter: (a, b) => a.address.length - b.address.length,
-            sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
-            title: "Sale(%)",
-            dataIndex: "sale",
-            key: "sale",
-            width: 110,
-            filters: [
-               { text: "10%", value: 9 },
-               { text: "20%", value: 43 }
-            ],
-            // filteredValue: filteredInfo.sale || null,
-            // filterMultiple: false,
-            // onFilter: (value, record) => record.sale.indexOf(value) === 0,
-            ...this.getColumnSearchProps("sale"),
-            sorter: (a, b) => a.sale.length - b.sale.length,
-            sortOrder: sortedInfo.columnKey === "sale" && sortedInfo.order,
-            editable: true,
-            ellipsis: true
-         },
-         {
-            title: "Added",
-            dataIndex: "dateAdded",
-            key: "dateAdded",
-            width: 100,
-
-            ...this.getColumnSearchProps("dateAdded"),
-            sorter: (a, b) => a.dateAdded.length - b.dateAdded.length,
-            sortOrder: sortedInfo.columnKey === "dateAdded" && sortedInfo.order,
-            ellipsis: true,
-            editable: true,
-            render: text => {
-               return moment(text).format("DD/MM/YYYY");
-            }
-         },
-         {
-            title: "Departure",
-            dataIndex: "departureDay",
-            key: "departureDay",
-            width: 150,
-            ...this.getColumnSearchProps("departureDay"),
-            sorter: (a, b) => a.departureDay.length - b.departureDay.length,
-            sortOrder:
-               sortedInfo.columnKey === "departureDay" && sortedInfo.order,
-            ellipsis: true,
-            editable: true,
-            render: text => {
-               return moment(text).format("hh:mm A DD/MM/YYYY");
-            }
-         },
-         {
-            title: "Time",
-            dataIndex: "vocationTime",
-            key: "vocationTime",
-            width: 90,
-            ...this.getColumnSearchProps("vocationTime"),
-            sorter: (a, b) => a.vocationTime - b.vocationTime,
-            sortOrder:
-               sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
-            ellipsis: true,
-            editable: true,
-            render: text => {
-               return text.replace(" days", "N ").replace(" nights", "Đ");
-            }
-         },
-         {
-            title: "Describe",
-            dataIndex: "describe",
-            key: "describe",
-            width: 400,
-            ...this.getColumnSearchProps("describe"),
-            sorter: (a, b) => a.describe.length - b.describe.length,
-            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
+            title: "Name Service",
+            dataIndex: "name",
+            key: "name",
+            // width: 350,
+            ...this.getColumnSearchProps("name"),
+            sorter: (a, b) => a.name.length - b.name.length,
+            sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
             ellipsis: true,
             editable: true
-         },
-         {
-            title: "IDAcc",
-            dataIndex: "idAccount",
-            key: "idAccount",
-            width: 60,
-            // fixed: "left",
-            ellipsis: true,
-            editable: true
-            // render: text => text
          },
          {
             title: "Edit",
@@ -650,7 +490,7 @@ class EditableTable extends React.Component {
             key: "edit",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
-               const { editingidTour } = this.state;
+               const { editingidService } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
@@ -659,7 +499,7 @@ class EditableTable extends React.Component {
                            <Button
                               size="small"
                               type="primary"
-                              onClick={() => this.save(form, record.idTour)}
+                              onClick={() => this.save(form, record.idService)}
                               style={{ marginRight: 8 }}
                            >
                               Save
@@ -668,7 +508,7 @@ class EditableTable extends React.Component {
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
-                        onConfirm={() => this.cancel(record.idTour)}
+                        onConfirm={() => this.cancel(record.idService)}
                      >
                         <Button type="dashed" size="small">
                            Cancel
@@ -680,19 +520,19 @@ class EditableTable extends React.Component {
                      <Button
                         type="default"
                         size="small"
-                        disabled={editingidTour !== ""}
-                        onClick={() => this.edit(record.idTour)}
+                        disabled={editingidService !== ""}
+                        onClick={() => this.edit(record.idService)}
                      >
                         Edit
                      </Button>
-                     <Button
+                     {/* <Button
                         size="small"
                         type="primary"
-                        onClick={() => this.showModalPreview(record)}
+                        onClick={() => this.showModalPreviewService(record)}
                         style={{ marginLeft: 6 }}
                      >
                         Preview
-                     </Button>
+                     </Button> */}
                   </>
                );
             }
@@ -700,7 +540,7 @@ class EditableTable extends React.Component {
          {
             title: "Delete",
             dataIndex: "delete",
-            width: 70, //110
+            width: 70,
             key: "delete",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) =>
@@ -741,12 +581,12 @@ class EditableTable extends React.Component {
       });
 
       //Show ADD
-      const { showAdd } = this.state;
+      const { showAdd, data } = this.state;
 
       return (
-         <div className="container-fluid card">
+         <div className="container-fluid card m-2">
             {showAdd ? (
-               <TableNewRow
+               <TableNewService
                   onCancle={this.onCancle}
                   handleAdd={this.handleAdd}
                />
@@ -757,7 +597,7 @@ class EditableTable extends React.Component {
                      type="primary"
                      style={{ margin: "12px 12px 0px" }}
                   >
-                     Add New Tour
+                     Add New Service
                   </Button>
                   <Button
                      onClick={this.clearAll}
@@ -769,13 +609,13 @@ class EditableTable extends React.Component {
             )}
             <EditableContext.Provider value={this.props.form}>
                <Table
-                  rowKey={"idTour"}
+                  rowKey={"idServices"}
                   components={components}
                   pagination={{
                      onChange: this.cancel
                   }}
-                  // dataSource={data}
-                  dataSource={state.hasData ? data : null}
+                  dataSource={data}
+                  // dataSource={state.hasData ? data : null}
                   columns={columns.map((item, index) => ({
                      ...item,
                      ellipsis: state.ellipsis,
@@ -789,7 +629,7 @@ class EditableTable extends React.Component {
                   onChange={this.handleChange}
                   {...this.state}
                   //Expanded Row Render
-                  expandedRowRender={this.expandedRowRender}
+                  // expandedRowRender={this.expandedRowRender}
                />
             </EditableContext.Provider>
          </div>
@@ -797,30 +637,31 @@ class EditableTable extends React.Component {
    }
 }
 
-const TablesContainer = Form.create()(EditableTable);
+const ServiceTablesContainer = Form.create()(EditableTable);
 
-TablesContainer.propTypes = {
+ServiceTablesContainer.propTypes = {
    classes: PropTypes.object,
-   tourAllActions: PropTypes.shape({
-      fetchListTourRequest: PropTypes.func,
-      fetchPostTourRequest: PropTypes.func,
-      fetchDeleteTourRequest: PropTypes.func,
-      fetchPatchTourRequest: PropTypes.func,
-      fetchListTourImageRequest: PropTypes.func
+   serviceAllActions: PropTypes.shape({
+      fetchListServicesRequest: PropTypes.func,
+      fetchPostServicesRequest: PropTypes.func,
+      fetchDeleteServicesRequest: PropTypes.func,
+      fetchPatchServicesRequest: PropTypes.func
    }),
-   listTour: PropTypes.array
+   listService: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listTour: state.tour.listTour,
-      listImageTour: state.tour.listImageTour
+      listService: state.service.listService
    };
 };
 const mapDispatchToProps = dispatch => {
    return {
-      tourAllActions: bindActionCreators(tourActions, dispatch)
-      //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
+      serviceAllActions: bindActionCreators(serviceActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là serviceActions ở bên service.action.js
    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TablesContainer);
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(ServiceTablesContainer);

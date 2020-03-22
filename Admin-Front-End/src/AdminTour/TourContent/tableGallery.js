@@ -12,6 +12,7 @@ import { API_ENDPOINT, APIImage } from "../../_constants/index.constants";
 import { Upload, Icon, Modal, message, Button, Tooltip } from "antd";
 
 import TimelinesContainer from "./Timelines";
+import TagsAndServicesContainer from "./TagsAndServies";
 
 function getBase64(file) {
    return new Promise((resolve, reject) => {
@@ -30,9 +31,30 @@ class TableGallery extends Component {
          previewImage: "",
          action: `${API_ENDPOINT}/image`,
          fileList: [],
-         visibleTimelineModal: false
+         visibleTimelineModal: false,
+         visibleTagsAndServicesModal: false
       };
    }
+
+   showModalTagsAndServices = () => {
+      this.setState({
+         visibleTagsAndServicesModal: true
+      });
+   };
+
+   handleOkTagsAndServices = e => {
+      console.log(e);
+      this.setState({
+         visibleTagsAndServicesModal: false
+      });
+   };
+
+   handleCancelTagsAndServices = e => {
+      console.log(e);
+      this.setState({
+         visibleTagsAndServicesModal: false
+      });
+   };
 
    showModalTimeline = () => {
       this.setState({
@@ -134,7 +156,48 @@ class TableGallery extends Component {
       );
 
       return (
-         <div>
+         <>
+            <Button
+               type="default"
+               size="small"
+               className="mb-1 mr-2"
+               onClick={this.showModalTimeline}
+            >
+               Time lines
+            </Button>
+            <Modal
+               style={{ top: 70 }}
+               width="90%"
+               title="Chỉnh sửa mốc thời gian hiển thị"
+               visible={this.state.visibleTimelineModal}
+               onOk={this.handleOkTimeline}
+               onCancel={this.handleCancelTimeline}
+            >
+               <div className="ht-timeline-container-main container col-md-12">
+                  <TimelinesContainer />
+               </div>
+            </Modal>
+            <Button
+               type="default"
+               size="small"
+               className="mb-1 mr-2"
+               onClick={this.showModalTagsAndServices}
+            >
+               Tags and Services
+            </Button>
+            <Modal
+               style={{ top: 70 }}
+               width="90%"
+               title="Chỉnh sửa các Tag và Dịch vụ cung cấp trong Tour"
+               visible={this.state.visibleTagsAndServicesModal}
+               onOk={this.handleOkTagsAndServices}
+               onCancel={this.handleCancelTagsAndServices}
+            >
+               <div className="ht-timeline-container-main container col-md-12">
+                  <TagsAndServicesContainer />
+               </div>
+            </Modal>
+
             <Link
                type="primary"
                to={{
@@ -154,43 +217,11 @@ class TableGallery extends Component {
                   </Button>
                </Tooltip>
             </Link>
-            {/* <Link
-               type="primary"
-               to={{
-                  pathname: `/admin/schedule-detail/${record.idTour}`,
-                  state: {
-                     record: true
-                  }
-               }}
-               target={"_blank"}
-            > */}
-            <Tooltip placement="bottom" title="Sửa timeline (modal)">
-               <Button
-                  type="default"
-                  size="small"
-                  className="mb-1 mr-2"
-                  onClick={this.showModalTimeline}
-               >
-                  Time lines
-               </Button>
-               <Modal
-                  style={{ top: 70 }}
-                  width="90%"
-                  title="Chỉnh sửa mốc thời gian hiển thị"
-                  visible={this.state.visibleTimelineModal}
-                  onOk={this.handleOkTimeline}
-                  onCancel={this.handleCancelTimeline}
-               >
-                  <div className="ht-timeline-container-main container col-md-12">
-                     <TimelinesContainer />
-                  </div>
-               </Modal>
-            </Tooltip>
             {/* </Link> */}
             <Link
                type="primary"
                to={{
-                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  pathname: `/admin/note/${record.idTour}`,
                   state: {
                      record: true
                   }
@@ -206,7 +237,7 @@ class TableGallery extends Component {
             <Link
                type="primary"
                to={{
-                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  pathname: `/admin/policy/${record.idTour}`,
                   state: {
                      record: true
                   }
@@ -225,7 +256,7 @@ class TableGallery extends Component {
             <Link
                type="primary"
                to={{
-                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  pathname: `/admin/detail-price/${record.idTour}`,
                   state: {
                      record: true
                   }
@@ -245,7 +276,7 @@ class TableGallery extends Component {
             <Link
                type="primary"
                to={{
-                  pathname: `/admin/schedule-detail/${record.idTour}`,
+                  pathname: `/admin/contact/${record.idTour}`,
                   state: {
                      record: true
                   }
@@ -284,7 +315,7 @@ class TableGallery extends Component {
                   />
                </Modal>
             </div>
-         </div>
+         </>
       );
    }
 }

@@ -4,6 +4,7 @@ import React from "react";
 import AdminIndexPage from "./AdminIndex/Index.Page";
 import AdminTourPage from "./AdminTour/Tour.Page";
 import AdminTourScheduleDetailPage from "./AdminTourSchedule/ScheduleDetail.Page";
+import AdminTourTagPsage from "./AdminTourTags/TourTagAndService.Page";
 //end Admin
 
 const routerPrivate = [
@@ -17,6 +18,13 @@ const routerPrivate = [
       path: "/admin/tour",
       exact: true,
       component: (match, props) => <AdminTourPage match={match} {...props} />
+   },
+   {
+      path: "/admin/tour/tags-and-services",
+      exact: true,
+      component: (match, props) => (
+         <AdminTourTagPsage match={match} {...props} />
+      )
    },
    {
       path: "/admin/schedule-detail/:idTour",

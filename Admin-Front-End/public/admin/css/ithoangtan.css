@@ -626,6 +626,13 @@
    align-items: center;
 }
 
+.ht-d-flex-row-end-end {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   align-items: flex-end;
+}
+
 .ht-d-flex-row-start-center {
    display: flex;
    flex-direction: row;
