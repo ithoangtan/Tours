@@ -7,6 +7,7 @@ import orderReducer from "./order.reducer";
 import reportReducer from "./report.reducer";
 import tagReducer from "./tag.reducer";
 import serviceReducer from "./service.reducer";
+import postReducer from "./post.reducer";
 const rootReducer = combineReducers({
    tour: tourReducer,
    image: imageReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
    order: orderReducer,
    report: reportReducer,
    tag: tagReducer,
-   service: serviceReducer
+   service: serviceReducer,
+   post: postReducer
 });
 
 export default rootReducer;

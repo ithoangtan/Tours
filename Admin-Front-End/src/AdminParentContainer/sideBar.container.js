@@ -129,8 +129,11 @@ export default class SideBarContainer extends Component {
                      <Link to="/admin/posts" className="collapse-item">
                         Posts
                      </Link>
-                     <Link to="/admin/tags" className="collapse-item">
-                        Tags
+                     <Link
+                        to="/admin/tour/tags-and-services"
+                        className="collapse-item"
+                     >
+                        Tags And Services
                      </Link>
                      {/* Tag này chỉ chung 1 trang và có radio chọn tag của tour và tag của post - blog */}
                      <Link to="/admin/author-info" className="collapse-item">

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as tagActions from "../../_actions/tag.actions";
+import * as serviceActions from "../../_actions/service.actions";
 
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
@@ -22,7 +22,7 @@ import {
    Icon
 } from "antd";
 
-import TableNewTag from "./TableNewTag";
+import TableNewService from "./TableNewService";
 
 import Cookies from "js-cookie";
 
@@ -101,7 +101,7 @@ class EditableCell extends React.Component {
 
 const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
-const footer = () => "Tạm thời không biết nên ghi gì";
+const footer = () => "Services cho những tour";
 const scroll = { x: 0, y: 400 };
 const pagination = { position: "both" };
 
@@ -115,41 +115,41 @@ class EditableTable extends React.Component {
          footer,
          bordered: true,
          tableLayout: "auto",
-         hasData: true,
-         data: this.props.listTag,
-         editingidTag: "",
-         count: this.props.listTag.length,
+         // hasData: true,
+         data: null,
+         editingidService: "",
+         count: this.props.listService.length,
          loading: false,
          sortedInfo: null,
          filteredInfo: null,
          searchText: "",
          pagination,
          showAdd: false,
-         // visiblePreviewTag: false,
+         // visiblePreviewService: false,
          ellipsis: false,
-         scroll: scroll
          // title,
          // rowSelection: {},
+         scroll: scroll
          //add Show
       };
    }
 
-   isEditing = record => record.idTag === this.state.editingidTag;
+   isEditing = record => record.idService === this.state.editingidService;
 
    cancel = () => {
-      this.setState({ editingidTag: "" });
+      this.setState({ editingidService: "" });
    };
 
-   save(form, idTag) {
-      const { tagAllActions } = this.props;
-      const { fetchPatchTagRequest } = tagAllActions;
+   save(form, idService) {
+      const { serviceAllActions } = this.props;
+      const { fetchPatchServiceRequest } = serviceAllActions;
 
       form.validateFields((error, row) => {
          if (error) {
             return;
          }
          const newData = [...this.state.data];
-         const index = newData.findIndex(item => idTag === item.idTag);
+         const index = newData.findIndex(item => idService === item.idService);
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
@@ -157,62 +157,51 @@ class EditableTable extends React.Component {
                ...row
             });
             //Gọi API update dưới CSDL
-            fetchPatchTagRequest(row);
+            fetchPatchServiceRequest(row);
 
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidTag: "" });
+            this.setState({ data: newData, editingidService: "" });
          } else {
             newData.push(row);
             //Gọi API update dưới CSDL
-            fetchPatchTagRequest(row);
+            fetchPatchServiceRequest(row);
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidTag: "" });
+            this.setState({ data: newData, editingidService: "" });
          }
       });
    }
 
-   edit(idTag) {
-      this.setState({ editingidTag: idTag });
+   edit(idService) {
+      this.setState({ editingidService: idService });
    }
    handleDelete = record => {
       const data = [...this.state.data];
       //Gọi API xóa dưới CSDL
-      const { tagAllActions } = this.props;
-      const { fetchDeleteTagRequest } = tagAllActions;
-      fetchDeleteTagRequest(record);
+      const { serviceAllActions } = this.props;
+      const { fetchDeleteServiceRequest } = serviceAllActions;
+      fetchDeleteServiceRequest(record);
       //Kết thúc gọi API xóa dươi CSDL
       this.setState({
-         data: data.filter(item => item.idTag !== record.idTag)
+         data: data.filter(item => item.idService !== record.idService)
       });
    };
 
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = newTag => {
+   handleAdd = newService => {
       const { count, data } = this.state;
       const newData = {
-         idTag:
-            newTag.idTag | (data.length !== 0)
-               ? data[data.length - 1].idTag + 1
+         idService:
+            newService.idService | (data.length !== 0)
+               ? data[data.length - 1].idService + 1
                : 0,
-         titleTag: newTag.titleTag,
-         price: newTag.price,
-         sale: newTag.sale,
-         dateAdded: new Date()
-            .toJSON()
-            .slice(0, 10)
-            .replace(/-/g, "-"),
-         departureDay: newTag.departureDay,
-         describe: newTag.describe,
-         address: newTag.address,
-         vocationTime: newTag.vocationTime,
-         idAccount: newTag.idAccount
+         nameService: newService.nameService
       };
       //Gọi API create dưới CSDL
-      const { tagAllActions } = this.props;
-      const { fetchPostTagRequest } = tagAllActions;
-      fetchPostTagRequest(newData);
+      const { serviceAllActions } = this.props;
+      const { fetchPostServiceRequest } = serviceAllActions;
+      fetchPostServiceRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
@@ -223,7 +212,7 @@ class EditableTable extends React.Component {
 
    handleSaveOnChange = row => {
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => row.idTag === item.idTag);
+      const index = newData.findIndex(item => row.idService === item.idService);
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
@@ -245,7 +234,7 @@ class EditableTable extends React.Component {
          pagination: pager
       });
       this.fetch({
-         tags: pagination.pageSize,
+         services: pagination.pageSize,
          page: pagination.current,
          sortField: sorter.field,
          sortOrder: sorter.order,
@@ -256,7 +245,7 @@ class EditableTable extends React.Component {
    fetch = async (params = {}) => {
       this.setState({ loading: true });
       await reqwest({
-         url: `${API_ENDPOINT}/tags`,
+         url: `${API_ENDPOINT}/services`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
@@ -265,7 +254,9 @@ class EditableTable extends React.Component {
          type: "json"
       }).then(data => {
          const pagination = { ...this.state.pagination };
+         // Read total count from server
          pagination.total = data.length;
+         // const { listService } = this.props;
 
          this.setState({
             loading: false,
@@ -338,7 +329,9 @@ class EditableTable extends React.Component {
             highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
             searchWords={[this.state.searchText]}
             autoEscape
-            textToHighlight={text.toString()}
+            textToHighlight={
+               text === null || text === undefined ? " " : text.toString()
+            }
          />
       )
    });
@@ -385,9 +378,9 @@ class EditableTable extends React.Component {
       this.setState({ scroll: enable ? scroll : undefined });
    };
 
-   handleDataChange = hasData => {
-      this.setState({ hasData });
-   };
+   // handleDataChange = hasData => {
+   //    this.setState({ hasData });
+   // };
 
    handleChange = (pagination, filters, sorter, extra) => {
       this.setState({
@@ -428,35 +421,34 @@ class EditableTable extends React.Component {
 
    //Expanded Row Render
    // expandedRowRender = record => {
-   //    const { listImageTag } = this.props;
+   //    const { listImageService } = this.props;
    //    return (
    //       <TableGallery
    //          record={record}
-   //          listImage={listImageTag}
+   //          listImage={listImageService}
    //          {...this.props}
    //       />
    //    );
    // };
 
-   // showModalPreviewTag(record) {
+   // showModalPreviewService(record) {
    //    Modal.info({
    //       width: 1000,
-   //       title: "This is a item tag at category tags",
+   //       title: "This is a item service at category services",
    //       wrapClassName: "",
-   //       content: <TagPreview tag={record} />,
+   //       content: <ServicePreview service={record} />,
    //       onOk() {}
    //    });
    // }
 
-   // handleCancelPreviewTag = e => {
+   // handleCancelPreviewService = e => {
    //    this.setState({
-   //       visiblePreviewTag: false
+   //       visiblePreviewService: false
    //    });
    // };
 
    render() {
       const { state } = this;
-      const { data } = this.state;
       const components = {
          body: {
             cell: EditableCell
@@ -476,17 +468,17 @@ class EditableTable extends React.Component {
       this.columns = [
          {
             title: "ID",
-            dataIndex: "idTag",
-            key: "idTag",
+            dataIndex: "idServices",
+            key: "idService",
             width: 50,
             ellipsis: true,
             editable: true
          },
          {
-            title: "Name Tag",
+            title: "Name Service",
             dataIndex: "name",
             key: "name",
-            // width: 30,
+            // width: 350,
             ...this.getColumnSearchProps("name"),
             sorter: (a, b) => a.name.length - b.name.length,
             sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
@@ -500,7 +492,7 @@ class EditableTable extends React.Component {
             key: "edit",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
-               const { editingidTag } = this.state;
+               const { editingidService } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
@@ -509,7 +501,7 @@ class EditableTable extends React.Component {
                            <Button
                               size="small"
                               type="primary"
-                              onClick={() => this.save(form, record.idTag)}
+                              onClick={() => this.save(form, record.idService)}
                               style={{ marginRight: 8 }}
                            >
                               Save
@@ -518,7 +510,7 @@ class EditableTable extends React.Component {
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
-                        onConfirm={() => this.cancel(record.idTag)}
+                        onConfirm={() => this.cancel(record.idService)}
                      >
                         <Button type="dashed" size="small">
                            Cancel
@@ -526,24 +518,24 @@ class EditableTable extends React.Component {
                      </Popconfirm>
                   </span>
                ) : (
-                  <>
+                  <div className="ht-d-flex-row-center-center">
                      <Button
                         type="default"
                         size="small"
-                        disabled={editingidTag !== ""}
-                        onClick={() => this.edit(record.idTag)}
+                        disabled={editingidService !== ""}
+                        onClick={() => this.edit(record.idService)}
                      >
                         Edit
                      </Button>
                      {/* <Button
                         size="small"
                         type="primary"
-                        onClick={() => this.showModalPreviewTag(record)}
+                        onClick={() => this.showModalPreviewService(record)}
                         style={{ marginLeft: 6 }}
                      >
                         Preview
                      </Button> */}
-                  </>
+                  </div>
                );
             }
          },
@@ -591,12 +583,12 @@ class EditableTable extends React.Component {
       });
 
       //Show ADD
-      const { showAdd } = this.state;
+      const { showAdd, data } = this.state;
 
       return (
          <div className="container-fluid card m-2">
             {showAdd ? (
-               <TableNewTag
+               <TableNewService
                   onCancle={this.onCancle}
                   handleAdd={this.handleAdd}
                />
@@ -607,7 +599,7 @@ class EditableTable extends React.Component {
                      type="primary"
                      style={{ margin: "12px 12px 0px" }}
                   >
-                     Add New Tag
+                     Add New Service
                   </Button>
                   <Button
                      onClick={this.clearAll}
@@ -619,15 +611,13 @@ class EditableTable extends React.Component {
             )}
             <EditableContext.Provider value={this.props.form}>
                <Table
-                  size="small"
-                  pageSize={10}
-                  rowKey={"idTag"}
+                  rowKey={"idServices"}
                   components={components}
                   pagination={{
                      onChange: this.cancel
                   }}
-                  // dataSource={data}
-                  dataSource={state.hasData ? data : null}
+                  dataSource={data}
+                  // dataSource={state.hasData ? data : null}
                   columns={columns.map((item, index) => ({
                      ...item,
                      ellipsis: state.ellipsis,
@@ -649,28 +639,31 @@ class EditableTable extends React.Component {
    }
 }
 
-const TagTablesContainer = Form.create()(EditableTable);
+const ServiceTablesContainer = Form.create()(EditableTable);
 
-TagTablesContainer.propTypes = {
+ServiceTablesContainer.propTypes = {
    classes: PropTypes.object,
-   tagAllActions: PropTypes.shape({
-      fetchListTagRequest: PropTypes.func,
-      fetchPostTagRequest: PropTypes.func,
-      fetchDeleteTagRequest: PropTypes.func,
-      fetchPatchTagRequest: PropTypes.func
+   serviceAllActions: PropTypes.shape({
+      fetchListServicesRequest: PropTypes.func,
+      fetchPostServicesRequest: PropTypes.func,
+      fetchDeleteServicesRequest: PropTypes.func,
+      fetchPatchServicesRequest: PropTypes.func
    }),
-   listTag: PropTypes.array
+   listService: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listTag: state.tag.listTag
+      listService: state.service.listService
    };
 };
 const mapDispatchToProps = dispatch => {
    return {
-      tagAllActions: bindActionCreators(tagActions, dispatch)
-      //Bên trái chỉ là đặt tên thôi, bên phải là tagActions ở bên tag.action.js
+      serviceAllActions: bindActionCreators(serviceActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là serviceActions ở bên service.action.js
    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TagTablesContainer);
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(ServiceTablesContainer);
