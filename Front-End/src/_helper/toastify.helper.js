@@ -9,6 +9,14 @@ export const toastError = error => {
    }
 };
 
+export const toastInfo = data => {
+   let message = null;
+   if (typeof data === "object" && data.message) ({ message } = data);
+   if (message !== null && typeof message !== "undefined" && message !== "") {
+      toast.info(data.message);
+   }
+};
+
 // FOR TOUR
 export const toastSuccess = data => {
    if (data !== null && data !== "") {

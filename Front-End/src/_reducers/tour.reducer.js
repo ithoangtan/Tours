@@ -9,6 +9,7 @@ import {
 const initialState = {
    listTour: [],
    listTourSearch: [],
+   listTourByTime: [],
    listImageTour: [],
    tourById: {},
    delete: [],
@@ -72,6 +73,23 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             tourById: error
+         };
+      }
+
+      //Get Tour By Time
+      case tourConstants.FETCH_TOUR_GET_BYTIME_SUCCESS: {
+         const { data } = action.payload;
+         return {
+            ...state,
+            listTourByTime: data[0]
+         };
+      }
+      case tourConstants.FETCH_TOUR_GET_BYTIME_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            listTourByTime: error
          };
       }
 

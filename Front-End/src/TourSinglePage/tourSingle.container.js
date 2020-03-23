@@ -23,7 +23,7 @@ import {
    Slider
 } from "antd";
 import { Icon } from "@ant-design/compatible";
-
+import Cookies from "js-cookie";
 // import MoreTourSingle from "./moreTourSingle.container";
 import TourDetailImg from "../TourPage/tourDetailImages";
 
@@ -37,6 +37,7 @@ const { TabPane } = Tabs;
 const { TextArea } = Input;
 const { Option } = Select;
 
+const priceSaleMomo = 1000000;
 const marksEvaluate = {
    1: {
       style: {
@@ -95,12 +96,30 @@ export default class TourSingleContainer extends Component {
       // console.log(`checked = ${e.target.checked}`);
    }
 
+   checkLogin = () => {
+      const token = Cookies.get("token");
+      const name = sessionStorage.getItem("name");
+      const avatar = sessionStorage.getItem("avatar");
+
+      return token && name && avatar;
+   };
+
    state = {
       value: 3,
       size: "small",
       rows: 2,
       valueRatingSort: 1,
-      visible: false
+      visible: false,
+      isLogin: this.checkLogin(),
+      numberStarHotel: 5,
+      numberStarFood: 5,
+      numberStarVehicle: 5,
+      numberStarTourGuide: 5,
+      numberStarSchedule: 5,
+      nameEvaluate: "",
+      titleEveluate: "",
+      contentEvaluate: "",
+      typeTourEvaluate: ""
    };
 
    showModal = () => {
@@ -110,9 +129,10 @@ export default class TourSingleContainer extends Component {
    };
 
    // Select
-   onChangeTypeTour(value) {
+   onChangeTypeTour = value => {
       console.log(`selected ${value}`);
-   }
+      this.setState({ typeTourEvaluate: value });
+   };
 
    onBlurTypeTour() {
       console.log("blur");
@@ -126,10 +146,46 @@ export default class TourSingleContainer extends Component {
       console.log("search:", val);
    }
 
+   onChangeInputEvaluate = event => {
+      const { name, value } = event.target;
+      this.setState({ [name]: value });
+   };
+
    handleOk = e => {
       console.log(e);
+      // TODO: call api create evaluate
+      const {
+         numberStarHotel,
+         numberStarFood,
+         numberStarVehicle,
+         numberStarTourGuide,
+         numberStarSchedule,
+         titleEveluate,
+         contentEvaluate,
+         typeTourEvaluate
+      } = this.state;
+      this.props.handleSubmitEvaluate({
+         numberStarHotel,
+         numberStarFood,
+         numberStarVehicle,
+         numberStarTourGuide,
+         numberStarSchedule,
+         type: typeTourEvaluate,
+         title: titleEveluate,
+         contentEvaluate: contentEvaluate,
+         idTour: this.props.tourById.idTour
+      });
       this.setState({
-         visible: false
+         visible: false,
+         numberStarHotel: 5,
+         numberStarFood: 5,
+         numberStarVehicle: 5,
+         numberStarTourGuide: 5,
+         numberStarSchedule: 5,
+         nameEvaluate: "",
+         titleEveluate: "",
+         contentEvaluate: "",
+         typeTourEvaluate: ""
       });
    };
 
@@ -146,6 +202,7 @@ export default class TourSingleContainer extends Component {
          valueRatingSort: e.target.value
       });
    };
+
    handleChange = value => {
       this.setState({ value });
    };
@@ -183,18 +240,31 @@ export default class TourSingleContainer extends Component {
       console.log(value, mode);
    }
    render() {
-      const { size, rows } = this.state;
+      const {
+         size,
+         rows,
+         isLogin,
+         numberStarHotel,
+         numberStarFood,
+         numberStarVehicle,
+         numberStarTourGuide,
+         numberStarSchedule,
+         nameEvaluate,
+         titleEveluate,
+         contentEvaluate
+      } = this.state;
       const {
          tourById,
          scheduleByIdTour,
          listTimelineByIdTour,
          listEvaluateByIdTour
       } = this.props;
+      const tourPriceSale =
+         tourById.price - (tourById.price * tourById.sale * 0.01).toFixed(1);
       const totalNumberStar = tourById.votes;
       const departureDay = moment(tourById.departureDay).format(
          INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE
       );
-      // const departureDay2 = moment(tourById.departureDay).format();
       const timeDeparture = moment(tourById.departureDay).format("LT");
       const listTags = tourById.tags ? tourById.tags.split(",") : [];
       const listServices = tourById.services
@@ -245,8 +315,17 @@ export default class TourSingleContainer extends Component {
                         https://www.npmjs.com/package/qrcode.react  */}
                      </div>
                      <div className="ht-sale-info">
-                        Giảm ngay <strong>1,000,000 / khách </strong> khi thanh
-                        toán bằng bất kỳ hình thức online nào
+                        Giảm ngay{" "}
+                        <strong>
+                           <NumberFormat
+                              value={priceSaleMomo}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              suffix={" VNĐ"}
+                           />{" "}
+                           / khách{" "}
+                        </strong>{" "}
+                        khi thanh toán bằng ví Momo
                      </div>
                      <div className="ht-qr-img-over">
                         <img
@@ -272,10 +351,9 @@ export default class TourSingleContainer extends Component {
                      <div className="ht-info-container-1 ftco-animate">
                         <div className="ht-rates">
                            <Rate
-                              allowHalf
                               tooltips={desc}
                               disabled
-                              defaultValue={this.numberStarCal(totalNumberStar)}
+                              value={totalNumberStar}
                               character={<Icon type="star" />}
                               //Phải làm tròn số với đơn vị 0.5
                               size="small"
@@ -283,11 +361,10 @@ export default class TourSingleContainer extends Component {
                            ></Rate>{" "}
                            <p className="ht-no-p-m">
                               {`  `}
-                              <strong>
-                                 {" "}
-                                 {Math.round(totalNumberStar * 5) / 5}{" "}
-                              </strong>
-                              với <strong>{`xx00`} </strong>đánh giá
+                              <strong> {totalNumberStar} </strong>
+                              với{" "}
+                              <strong>{listEvaluateByIdTour.length} </strong>
+                              đánh giá
                            </p>
                         </div>
                         <div className="ht-views">
@@ -301,32 +378,18 @@ export default class TourSingleContainer extends Component {
                               </Tooltip>
                            </p>
                            <p>
-                              <Tooltip title={`${155} lượt thích`}>
+                              <Tooltip
+                                 title={`${listEvaluateByIdTour.length} bình luận`}
+                              >
                                  <i
-                                    className="fas fa-thumbs-up"
-                                    style={{ color: "#91d5ff" }}
+                                    className="fas fa-comment"
+                                    style={{ color: "#419ed0" }}
                                  ></i>{" "}
-                                 {155}
+                                 {listEvaluateByIdTour.length}
                               </Tooltip>
                            </p>
                            <p>
-                              <Tooltip title={`${58} thêm vào yêu thích`}>
-                                 <i
-                                    className="fas fa-heart"
-                                    style={{ color: "#ffa39e" }}
-                                 ></i>{" "}
-                                 {58}
-                              </Tooltip>
-                           </p>
-                           <p>
-                              <Tooltip title={`${335} bình luận`}>
-                                 <Link to={`tour-single/comment`}>
-                                    <i className="fas fa-comment"></i> {335}
-                                 </Link>
-                              </Tooltip>
-                           </p>
-                           <p>
-                              <Tooltip title={`${123} đã đặt`}>
+                              <Tooltip title={`${123} đã đặt - developing`}>
                                  <i
                                     className="fas fa-cart-arrow-down"
                                     style={{ color: "#ffd591" }}
@@ -407,9 +470,7 @@ export default class TourSingleContainer extends Component {
                               <Tooltip
                                  title={
                                     <NumberFormat
-                                       value={
-                                          tourById.price * tourById.sale * 0.01
-                                       }
+                                       value={tourById.price - tourPriceSale}
                                        displayType={"text"}
                                        thousandSeparator={true}
                                        prefix={"Tiết kiệm "}
@@ -420,10 +481,7 @@ export default class TourSingleContainer extends Component {
                               >
                                  <i className="fas fa-donate"></i> {` `}
                                  <NumberFormat
-                                    value={
-                                       tourById.price -
-                                       tourById.price * tourById.sale * 0.01
-                                    }
+                                    value={tourPriceSale}
                                     displayType={"text"}
                                     thousandSeparator={true}
                                     suffix={" VNĐ"}
@@ -475,10 +533,9 @@ export default class TourSingleContainer extends Component {
                                  title={
                                     <NumberFormat
                                        value={
-                                          tourById.price *
-                                             tourById.sale *
-                                             0.01 +
-                                          1000000
+                                          tourPriceSale > priceSaleMomo
+                                             ? priceSaleMomo
+                                             : tourPriceSale
                                        }
                                        displayType={"text"}
                                        thousandSeparator={true}
@@ -491,9 +548,9 @@ export default class TourSingleContainer extends Component {
                                  <i className="fas fa-donate"></i> {` `}
                                  <NumberFormat
                                     value={
-                                       tourById.price -
-                                       tourById.price * tourById.sale * 0.01 -
-                                       1000000
+                                       tourPriceSale > priceSaleMomo
+                                          ? tourPriceSale - priceSaleMomo
+                                          : 0
                                     }
                                     displayType={"text"}
                                     thousandSeparator={true}
@@ -518,7 +575,7 @@ export default class TourSingleContainer extends Component {
                               <Tooltip
                                  title={
                                     <p className="ht-no-p-m">
-                                       {` Giảm ngay 1,000,000 với Ví Momo`}
+                                       {` Giảm ngay với Ví Momo`}
                                     </p>
                                  }
                                  placement="bottomRight"
@@ -689,10 +746,12 @@ export default class TourSingleContainer extends Component {
                                        </Radio>
                                     </Radio.Group>
                                  </div>
-                                 <Button onClick={this.showModal}>
-                                    <i className="fas fa-pen-square mr-2"></i>{" "}
-                                    Viết Đánh Giá
-                                 </Button>
+                                 {isLogin && (
+                                    <Button onClick={this.showModal}>
+                                       <i className="fas fa-pen-square mr-2"></i>{" "}
+                                       Viết Đánh Giá
+                                    </Button>
+                                 )}
                                  {/* Modal write evaluate */}
                                  <Modal
                                     title="Đánh giá"
@@ -716,7 +775,12 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={5}
+                                                value={numberStarHotel}
+                                                onChange={e =>
+                                                   this.setState({
+                                                      numberStarHotel: e
+                                                   })
+                                                }
                                                 marks={marksEvaluate}
                                                 step={1}
                                                 min={1}
@@ -733,7 +797,12 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={5}
+                                                value={numberStarFood}
+                                                onChange={e =>
+                                                   this.setState({
+                                                      numberStarFood: e
+                                                   })
+                                                }
                                                 // marks={marksEvaluate}
                                                 step={1}
                                                 min={1}
@@ -750,7 +819,12 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={5}
+                                                value={numberStarVehicle}
+                                                onChange={e =>
+                                                   this.setState({
+                                                      numberStarVehicle: e
+                                                   })
+                                                }
                                                 step={1}
                                                 // marks={marksEvaluate}
                                                 min={1}
@@ -767,7 +841,12 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={5}
+                                                value={numberStarTourGuide}
+                                                onChange={e =>
+                                                   this.setState({
+                                                      numberStarTourGuide: e
+                                                   })
+                                                }
                                                 step={1}
                                                 // marks={marksEvaluate}
                                                 min={1}
@@ -784,7 +863,12 @@ export default class TourSingleContainer extends Component {
                                              </Tooltip>
                                              <Slider
                                                 className="col-md-9"
-                                                defaultValue={5}
+                                                value={numberStarSchedule}
+                                                onChange={e =>
+                                                   this.setState({
+                                                      numberStarSchedule: e
+                                                   })
+                                                }
                                                 step={1}
                                                 marks={marksEvaluate}
                                                 min={1}
@@ -796,10 +880,20 @@ export default class TourSingleContainer extends Component {
                                           <Input
                                              className="mb-2"
                                              placeholder="Họ và tên hoặc email"
+                                             name="nameEvaluate"
+                                             value={nameEvaluate}
+                                             onChange={
+                                                this.onChangeInputEvaluate
+                                             }
                                           />
                                           <Input
                                              className="mb-2"
                                              placeholder="Tiêu đề"
+                                             name="titleEveluate"
+                                             value={titleEveluate}
+                                             onChange={
+                                                this.onChangeInputEvaluate
+                                             }
                                           />
                                           <Select
                                              className="mb-2"
@@ -840,6 +934,11 @@ export default class TourSingleContainer extends Component {
                                           <TextArea
                                              rows={4}
                                              placeholder="Nội dung chi tiết"
+                                             name="contentEvaluate"
+                                             value={contentEvaluate}
+                                             onChange={
+                                                this.onChangeInputEvaluate
+                                             }
                                           />
                                        </div>
                                     </div>
@@ -848,9 +947,11 @@ export default class TourSingleContainer extends Component {
                               <Tabs
                                  tabPosition={"left"}
                                  tabBarExtraContent={
-                                    <Button onClick={this.showModal}>
-                                       Viết Đánh Giá
-                                    </Button>
+                                    isLogin && (
+                                       <Button onClick={this.showModal}>
+                                          Viết Đánh Giá
+                                       </Button>
+                                    )
                                  }
                                  className="ht-tabs-rating col-md-12"
                               >

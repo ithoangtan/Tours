@@ -1,5 +1,5 @@
-// export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
-export const API_ENDPOINT = "http://localhost:8000";
+export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+// export const API_ENDPOINT = "http://localhost:8000";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",
@@ -37,7 +37,8 @@ export const AdminArrayExternalScript = [
 export const DATE_TIME_FORMAT = {
    DATE: "DD/MM/YYYY",
    DATE_TIME: "DD/MM/YYYY - hh:mm:ss",
-   DATE_SHORT_TIME: "DD/MM/YYYY - hh:mm"
+   DATE_SHORT_TIME: "DD/MM/YYYY - hh:mm",
+   YEAR_MONTH_DATE: "YYYY/MM/DD"
 };
 
 export const SERVICE_TOUR_ICON = {

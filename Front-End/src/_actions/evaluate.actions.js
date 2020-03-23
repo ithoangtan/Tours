@@ -34,3 +34,37 @@ export const fetchListEvaluateByIdTourRequest = idTour => {
    };
 };
 //end Get Tour By ID
+
+//POST Evaluate
+export const fetchPostEvaluateSuccess = data => {
+   return {
+      type: evaluateConstants.FETCH_POST_EVALUATE_SUCCESS,
+      payload: {
+         data
+      }
+   };
+};
+
+export const fetchPostEvaluateError = error => {
+   return {
+      type: evaluateConstants.FETCH_POST_EVALUATE_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchPostEvaluateRequest = data => {
+   return dispatch => {
+      evaluateApis
+         .postEvaluate(data)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchPostEvaluateSuccess(data));
+         })
+         .catch(error => {
+            dispatch(fetchPostEvaluateError(error));
+         });
+   };
+};
+//end Create Evaluate

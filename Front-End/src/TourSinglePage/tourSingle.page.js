@@ -79,6 +79,10 @@ class TourSinglePage extends Component {
       });
    }
 
+   onSubmitEvaluate = data => {
+      this.props.evaluateAllActions.fetchPostEvaluateRequest(data);
+   };
+
    render() {
       const {
          tourById,
@@ -94,6 +98,7 @@ class TourSinglePage extends Component {
             listImageByIdTour={listImageByIdTour}
             listTimelineByIdTour={listTimelineByIdTour}
             listEvaluateByIdTour={listEvaluateByIdTour}
+            handleSubmitEvaluate={this.onSubmitEvaluate}
             {...this.props}
          />
       );
@@ -114,7 +119,8 @@ TourSinglePage.propTypes = {
       fetchListTimelineByIdTourRequest: PropTypes.func
    }),
    evaluateAllActions: PropTypes.shape({
-      fetchListEvaluateByIdTourRequest: PropTypes.func
+      fetchListEvaluateByIdTourRequest: PropTypes.func,
+      fetchPostEvaluateRequest: PropTypes.func
    }),
    tourById: PropTypes.object,
    listImageByIdTour: PropTypes.array,

@@ -297,6 +297,7 @@ class TourContainer extends Component {
 
    render() {
       const { valueStar, rows } = this.state;
+      const listTourRender = this.renderTours();
       const radioStyle = {
          display: "block",
          height: "30px",
@@ -518,11 +519,11 @@ class TourContainer extends Component {
                            </h4>
                            <div className="ht-d-flex-start-center">
                               <p className="ht-info-title-tour-page">
-                                 Có <strong>{`xx00`}</strong> tour khởi hành
-                                 theo ngày đã chọn
+                                 Có <strong>{listTourRender.length}</strong>{" "}
+                                 tour khởi hành theo ngày đã chọn
                               </p>
                            </div>
-                           <div className="ht-info-rate-tour-page ht-d-flex-start-center">
+                           {/* <div className="ht-info-rate-tour-page ht-d-flex-start-center">
                               <Rate
                                  allowHalf
                                  tooltips={desc}
@@ -539,12 +540,11 @@ class TourContainer extends Component {
                                  {`  `}
                                  <strong>
                                     {" "}
-                                    {Math.round(totalNumberStar * 100) /
-                                       100}{" "}
+                                    {Math.round(totalNumberStar * 5) / 5}{" "}
                                  </strong>
                                  với <strong>{`xx00`} </strong>đánh giá
                               </p>
-                           </div>
+                           </div> */}
                         </div>
                      </div>
                      <div className="row justify-content-center pb-1 ml-2 mr-2">
@@ -649,7 +649,7 @@ class TourContainer extends Component {
                            tip="loading... data"
                            spinning={this.state.loading}
                         >
-                           {this.renderTours()}
+                           {listTourRender}
                         </Spin>
                      </div>
                      {/* end Render Tours */}

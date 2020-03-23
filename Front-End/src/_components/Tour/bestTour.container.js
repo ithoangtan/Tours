@@ -12,7 +12,10 @@ import { Rate, Button, Statistic, Tooltip } from "antd";
 
 import { Icon } from "@ant-design/compatible";
 
-import { API_ENDPOINT } from "../../_constants/index.constants";
+import {
+   API_ENDPOINT,
+   DATE_TIME_FORMAT
+} from "../../_constants/index.constants";
 
 import moment from "moment";
 import NumberFormat from "react-number-format";
@@ -28,11 +31,14 @@ class BestTourContainer extends Component {
       const { tourAllActions } = this.props;
       const {
          fetchListTourRequest,
-         fetchListTourImageRequest
+         fetchListTourImageRequest,
+         fetchTourByTimeRequest
       } = tourAllActions;
-
-      await fetchListTourRequest();
       await fetchListTourImageRequest();
+      await fetchTourByTimeRequest(
+         moment().format(DATE_TIME_FORMAT.YEAR_MONTH_DATE)
+      );
+      await fetchListTourRequest();
    };
 
    componentDidMount() {
@@ -76,12 +82,7 @@ class BestTourContainer extends Component {
                            />
                            <div className="sale">
                               <Countdown
-                                 value={
-                                    // Date.now() +
-                                    tour.departureDay +
-                                    1000 * 60 * 60 * 24 * 2 +
-                                    1000 * 3
-                                 }
+                                 value={tour.departureDay}
                                  valueStyle={
                                     this.state.size === "default"
                                        ? { fontSize: "1.1rem" }
@@ -260,7 +261,8 @@ BestTourContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
       fetchListTourRequest: PropTypes.func,
-      fetchListTourImageRequest: PropTypes.func
+      fetchListTourImageRequest: PropTypes.func,
+      fetchTourByTimeRequest: PropTypes.func
    }),
    listTour: PropTypes.array,
    listImageTour: PropTypes.array
