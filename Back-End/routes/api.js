@@ -110,11 +110,7 @@ router.delete("/post", authenticated, post.delete);
 
 //report
 router.get("/report", authenticated, report.getReport);
-router.get(
-  "/report/destination-by-time",
-  authenticated,
-  report.getDestinationByTime
-);
+router.get("/report/destination-by-time", report.getDestinationByTime);
 
 //for tag
 router.get("/tag", authenticated, tag.read);
