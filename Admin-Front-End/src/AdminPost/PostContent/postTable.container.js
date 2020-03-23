@@ -454,7 +454,8 @@ class EditableTable extends React.Component {
 
    showModalPreview(record) {
       Modal.info({
-         width: 1000,
+         style: { top: "30px" },
+         width: 400,
          title: "This is a item post at category posts",
          wrapClassName: "",
          content: (
