@@ -7,11 +7,6 @@ const Post = function(post) {
   this.contentPost = post.contentPost;
   this.status = post.status;
   this.vote = post.vote;
-  this.titlePost = post.titlePost;
-  this.describe = post.describe;
-  this.type = post.type;
-  this.tags = post.tags;
-  this.views = post.views;
   // this.dateTime = post.dateTime.slice(0, 10).replace(/-/g, "/");
 };
 
@@ -66,7 +61,7 @@ Post.createPost = function(newPost) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".posts (`idAccount`, `contentPost`, `status`, `vote`, `titlePost`, `describe`, `type`, `tags`, `views` ) VALUES ('" +
+          ".posts (`idAccount`, `contentPost`, `status`, `vote`) VALUES ('" +
           newPost.idAccount +
           "', '" +
           newPost.contentPost +
@@ -74,16 +69,6 @@ Post.createPost = function(newPost) {
           newPost.status +
           "', '" +
           newPost.vote +
-          "', '" +
-          newPost.titlePost +
-          "', '" +
-          newPost.describe +
-          "', '" +
-          newPost.type +
-          "', '" +
-          newPost.tags +
-          "', '" +
-          newPost.views +
           // "', '" +
           // newPost.dateTime +
           "') "

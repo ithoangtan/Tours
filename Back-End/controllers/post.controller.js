@@ -62,6 +62,7 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   const updatePost = removeBlankAttributes.remove(new Post(req.body));
+  console.log(updatePost);
   try {
     // const updatePost = removeBlankAttributes.remove(new Post(req.body));
     updateResult = await Post.updateById(updatePost);
