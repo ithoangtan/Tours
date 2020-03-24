@@ -70,6 +70,7 @@ class TourContainer extends Component {
       this.state = {
          valueStar: 0,
          value2: 1,
+         valueSearch: null,
          checkedListFilterCostOption: defaultCheckedListCostOption,
          checkedListFilterTourTypeOption: defaultCheckedListTourTypeOption,
          checkedListFilterServiceMore: defaultCheckedListServiceMore,
@@ -137,6 +138,10 @@ class TourContainer extends Component {
       this.setState({
          value2: e.target.value
       });
+   };
+
+   onSearch = value => {
+      this.setState({ valueSearch: value });
    };
 
    onChangeExpand = rows => {
@@ -232,18 +237,85 @@ class TourContainer extends Component {
       };
    }
 
+   handleSearchListTourWithValue = (listTours, valueSearch) => {
+      switch (valueSearch.conditional) {
+         case "name":
+            listTours = listTours.filter(
+               e =>
+                  e.titleTour
+                     .toLowerCase()
+                     .includes(valueSearch.keySearch.toLowerCase()) &&
+                  e.departureDay <= valueSearch.dayEnd &&
+                  e.departureDay >= valueSearch.dayStart
+            );
+            break;
+         case "landmark" || "address":
+            listTours = listTours.filter(
+               e =>
+                  e.address
+                     .toLowerCase()
+                     .includes(valueSearch.keySearch.toLowerCase()) &&
+                  e.departureDay <= valueSearch.dayEnd &&
+                  e.departureDay >= valueSearch.dayStart
+            );
+            break;
+         case "type":
+            listTours = listTours.filter(
+               e =>
+                  e.type
+                     .toLowerCase()
+                     .includes(valueSearch.keySearch.toLowerCase()) &&
+                  e.departureDay <= valueSearch.dayEnd &&
+                  e.departureDay >= valueSearch.dayStart
+            );
+            break;
+         default:
+            listTours = listTours.filter(
+               e =>
+                  (e.titleTour
+                     .toLowerCase()
+                     .includes(valueSearch.keySearch.toLowerCase()) ||
+                     e.describe
+                        .toLowerCase()
+                        .includes(valueSearch.keySearch.toLowerCase()) ||
+                     e.address
+                        .toLowerCase()
+                        .includes(valueSearch.keySearch.toLowerCase()) ||
+                     e.vocationTime
+                        .toLowerCase()
+                        .includes(valueSearch.keySearch.toLowerCase())) &&
+                  e.departureDay <= valueSearch.dayEnd &&
+                  e.departureDay >= valueSearch.dayStart
+            );
+            break;
+      }
+      return listTours;
+   };
+
    renderTours = () => {
       let result = null;
       const data = this.props.match.params;
       const { listTourSearch, listImageTour } = this.props;
       const { listTour } = this.props;
+      const { valueSearch, valueStar } = this.state;
       let listTours = [];
       if (data.keySearch !== null && data.keySearch !== undefined) {
          listTours = [...listTourSearch];
       } else {
          listTours = [...listTour];
       }
-
+      if (
+         valueSearch &&
+         (valueSearch.keySearch ||
+            valueSearch.dayStart ||
+            valueSearch.dayEnd ||
+            valueSearch.conditional)
+      ) {
+         listTours = this.handleSearchListTourWithValue(listTours, valueSearch);
+      }
+      if (valueStar > 0) {
+         listTours = listTours.filter(e => e.votes === valueStar);
+      }
       if (this.state.value2 === 1)
          listTours.sort(this.compareValues("titleTour", "asc"));
       if (this.state.value2 === 2)
@@ -305,7 +377,7 @@ class TourContainer extends Component {
       };
 
       //Tổng số sao đánh giá của tất cả các tour tìm kiếm được
-      const totalNumberStar = 4.48555555555555555555555555555555555555555555;
+      // const totalNumberStar = 4.48555555555555555555555555555555555555555555;
       const article =
          "Du lịch trong nước luôn là lựa chọn tuyệt vời. Đường bờ biển dài hơn 3260km, những khu bảo tồn thiên nhiên tuyệt vời, những thành phố nhộn nhịp, những di tích lịch sử hào hùng, nền văn hóa độc đáo và hấp dẫn, cùng một danh sách dài những món ăn ngon nhất thế giới, Việt Nam có tất cả những điều đó. Với lịch trình dày, khởi hành đúng thời gian cam kết, Vietravel là công ty lữ hành uy tín nhất hiện nay tại Việt Nam, luôn sẵn sàng phục vụ du khách mọi lúc, mọi nơi, đảm bảo tính chuyên nghiệp và chất lượng dịch vụ tốt nhất thị trường";
       return (
@@ -314,7 +386,7 @@ class TourContainer extends Component {
                <div className="row ftco-animate">
                   <div className="col-md-12 col-lg-3 left-tour-page">
                      {/* Search component */}
-                     <SearchEngineTourPage />
+                     <SearchEngineTourPage handleSearch={this.onSearch} />
                      {/* end Search */}
 
                      <div className="ht-filter-tour">
@@ -462,7 +534,7 @@ class TourContainer extends Component {
                                  />
                                  {valueStar ? (
                                     <span className="ant-rate-text">
-                                       {desc[valueStar - 1]}
+                                       {desc[valueStar]}
                                     </span>
                                  ) : (
                                     ""
@@ -519,7 +591,12 @@ class TourContainer extends Component {
                            </h4>
                            <div className="ht-d-flex-start-center">
                               <p className="ht-info-title-tour-page">
-                                 Có <strong>{listTourRender.length}</strong>{" "}
+                                 Có{" "}
+                                 <strong>
+                                    {listTourRender.length
+                                       ? listTourRender.length
+                                       : 0}
+                                 </strong>{" "}
                                  tour khởi hành theo ngày đã chọn
                               </p>
                            </div>

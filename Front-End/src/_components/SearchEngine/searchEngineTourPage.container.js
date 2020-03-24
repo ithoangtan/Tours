@@ -12,7 +12,6 @@ import {
    message
 } from "antd";
 import moment from "moment";
-import "./searchEngineTourPage.container.css";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const { OptGroup } = AutoComplete;
@@ -162,20 +161,14 @@ export default class SearchEngineContainer extends Component {
    onSearch = event => {
       event.preventDefault();
       this.setState({ onSearch: true });
+      const { keySearch, dayStart, dayEnd, conditional } = this.state;
+      this.props.handleSearch({
+         keySearch: keySearch,
+         dayStart,
+         dayEnd,
+         conditional
+      });
    };
-
-   haveRedirect() {
-      const { onSearch, keySearch, dayEnd, dayStart, conditional } = this.state;
-      if (onSearch === true) {
-         message.loading(`"${keySearch}" searching...`, 1);
-         this.setState({ onSearch: false });
-         return (
-            <Redirect
-               to={`/tour/search/${keySearch}/${dayStart}/${dayEnd}/${conditional}`}
-            />
-         );
-      }
-   }
 
    renderTitle(title) {
       return (
@@ -318,12 +311,12 @@ export default class SearchEngineContainer extends Component {
                         <div className="form-field">
                            <Button
                               type="primary"
-                              icon="search"
+                              icon={<i className="fas fa-search" />}
                               size={sizeWindow}
                               block
                               onClick={this.onSearch}
                            >
-                              Tìm kiếm Tour
+                              {"Tìm kiếm Tour"}
                            </Button>
                         </div>
                      </div>

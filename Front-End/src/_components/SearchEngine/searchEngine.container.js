@@ -12,6 +12,7 @@ import {
    message
 } from "antd";
 import moment from "moment";
+import "./searchEngine.container.css";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 const { OptGroup } = AutoComplete;
