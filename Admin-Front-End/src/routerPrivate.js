@@ -8,6 +8,7 @@ import AdminTourScheduleDetailPage from "./AdminTourSchedule/ScheduleDetail.Page
 import AdminPostPage from "./AdminPost/Post.Page";
 import AdminPostContentPage from "./AdminPostContent/PostContent.Page";
 import AdminPostAuthorInfo from "./AdminPostAuthorInfo/PostAuthorInfo.Page";
+import AdminAccountPage from "./AdminAccount/Account.Page";
 //end Admin
 
 const routerPrivate = [
@@ -96,6 +97,11 @@ const routerPrivate = [
       component: (match, props) => (
          <AdminPostAuthorInfo match={match} {...props} />
       )
+   },
+   {
+      path: "/admin/account",
+      exact: true,
+      component: (match, props) => <AdminAccountPage match={match} {...props} />
    }
 ];
 export default routerPrivate;

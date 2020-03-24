@@ -166,12 +166,12 @@ export default class SideBarContainer extends Component {
                   data-parent="#accordionSidebar"
                >
                   <div className="bg-white py-2 collapse-inner rounded">
-                     <Link to="/admin/accounts" className="collapse-item">
+                     <Link to="/admin/account" className="collapse-item">
                         Accounts
                      </Link>
-                     <Link to="/admin/guests" className="collapse-item">
+                     {/* <Link to="/admin/guest" className="collapse-item">
                         Guests
-                     </Link>
+                     </Link> */}
                      <div className="collapse-divider" />
                   </div>
                </div>
