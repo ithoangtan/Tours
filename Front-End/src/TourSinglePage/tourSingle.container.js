@@ -152,8 +152,6 @@ export default class TourSingleContainer extends Component {
    };
 
    handleOk = e => {
-      console.log(e);
-      // TODO: call api create evaluate
       const {
          numberStarHotel,
          numberStarFood,
@@ -239,6 +237,67 @@ export default class TourSingleContainer extends Component {
    onPanelChange(value, mode) {
       console.log(value, mode);
    }
+
+   compareValues(key, order = "asc") {
+      return function(a, b) {
+         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            // không tồn tại tính chất trên cả hai object
+            return 0;
+         }
+
+         const varA =
+            typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+         const varB =
+            typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+
+         let comparison = 0;
+         if (varA > varB) {
+            comparison = 1;
+         } else if (varA < varB) {
+            comparison = -1;
+         }
+         return order === "desc" ? comparison * -1 : comparison;
+      };
+   }
+
+   renderEvaluates = () => {
+      const { valueRatingSort } = this.state;
+      let evaluates = [...this.props.listEvaluateByIdTour];
+      switch (valueRatingSort) {
+         case 1:
+            evaluates.sort(this.compareValues("dateAdded", "desc"));
+            break;
+         case 2:
+            evaluates.sort(this.compareValues("dateAdded", "asc"));
+            break;
+         case 3:
+            evaluates.sort(this.compareValues("rateAverage", "asc"));
+            break;
+         case 4:
+            evaluates.sort(this.compareValues("rateAverage", "desc"));
+            break;
+         default:
+            break;
+      }
+      const evaluatePersonal = evaluates.filter(
+         e => e.typeEvaluate === "personal"
+      );
+      const evaluateHeart = evaluates.filter(e => e.typeEvaluate === "heart");
+      const evaluateFamily = evaluates.filter(e => e.typeEvaluate === "family");
+      const evaluateFriend = evaluates.filter(e => e.typeEvaluate === "friend");
+      const evaluateBusiness = evaluates.filter(
+         e => e.typeEvaluate === "business"
+      );
+      evaluates = [
+         evaluates,
+         evaluatePersonal,
+         evaluateHeart,
+         evaluateFamily,
+         evaluateFriend,
+         evaluateBusiness
+      ];
+      return evaluates;
+   };
    render() {
       const {
          size,
@@ -253,12 +312,8 @@ export default class TourSingleContainer extends Component {
          titleEveluate,
          contentEvaluate
       } = this.state;
-      const {
-         tourById,
-         scheduleByIdTour,
-         listTimelineByIdTour,
-         listEvaluateByIdTour
-      } = this.props;
+      const { tourById, scheduleByIdTour, listTimelineByIdTour } = this.props;
+      const listEvaluateByIdTour = this.renderEvaluates();
       const tourPriceSale =
          tourById.price - (tourById.price * tourById.sale * 0.01).toFixed(1);
       const totalNumberStar = tourById.votes;
@@ -363,7 +418,7 @@ export default class TourSingleContainer extends Component {
                               {`  `}
                               <strong> {totalNumberStar} </strong>
                               với{" "}
-                              <strong>{listEvaluateByIdTour.length} </strong>
+                              <strong>{listEvaluateByIdTour[0].length} </strong>
                               đánh giá
                            </p>
                         </div>
@@ -379,13 +434,13 @@ export default class TourSingleContainer extends Component {
                            </p>
                            <p>
                               <Tooltip
-                                 title={`${listEvaluateByIdTour.length} bình luận`}
+                                 title={`${listEvaluateByIdTour[0].length} bình luận`}
                               >
                                  <i
                                     className="fas fa-comment"
                                     style={{ color: "#419ed0" }}
                                  ></i>{" "}
-                                 {listEvaluateByIdTour.length}
+                                 {listEvaluateByIdTour[0].length}
                               </Tooltip>
                            </p>
                            <p>
@@ -955,176 +1010,142 @@ export default class TourSingleContainer extends Component {
                                  }
                                  className="ht-tabs-rating col-md-12"
                               >
-                                 <TabPane
-                                    tab={
-                                       <>
-                                          <i className="fas fa-th"></i> Tất cả (
-                                          {listEvaluateByIdTour.length})
-                                       </>
-                                    }
-                                    key="1"
-                                 >
-                                    <List
-                                       itemLayout="horizontal"
-                                       dataSource={listEvaluateByIdTour}
-                                       renderItem={item => (
-                                          <div className="ht-rate-detail">
-                                             <div className="ht-rate-avatar">
-                                                <Avatar
-                                                   size="large"
-                                                   src={
-                                                      INDEX_CONSTANTS.API_ENDPOINT +
-                                                      item.avatar
-                                                   }
-                                                />
-                                             </div>
-                                             <div className="ht-rate-content">
-                                                <div className="ht-rate-detail-name-and-date col-md-12">
-                                                   <div className="ht-name">
-                                                      <i
-                                                         className={item.icon}
-                                                      ></i>{" "}
-                                                      {`${item.name}`}
+                                 {INDEX_CONSTANTS.LIST_TAG_EVALUATE.map(
+                                    (tag, index) => (
+                                       <TabPane
+                                          tab={
+                                             <>
+                                                <i className={tag.icon}></i>{" "}
+                                                {tag.title} (
+                                                {
+                                                   listEvaluateByIdTour[index]
+                                                      .length
+                                                }
+                                                )
+                                             </>
+                                          }
+                                          key={index}
+                                       >
+                                          <List
+                                             itemLayout="horizontal"
+                                             dataSource={
+                                                listEvaluateByIdTour[index]
+                                             }
+                                             renderItem={item => (
+                                                <div className="ht-rate-detail">
+                                                   <div className="ht-rate-avatar">
+                                                      <Avatar
+                                                         size="large"
+                                                         src={
+                                                            INDEX_CONSTANTS.API_ENDPOINT +
+                                                            item.avatar
+                                                         }
+                                                      />
                                                    </div>
-                                                   <div className="ht-date">
-                                                      {moment(
-                                                         item.dateAdded
-                                                      ).format(
-                                                         INDEX_CONSTANTS
-                                                            .DATE_TIME_FORMAT
-                                                            .DATE_TIME
-                                                      )}
-                                                   </div>
-                                                </div>
-                                                <div className="ht-slider-container-mini col-md-12">
-                                                   <div className="ht-rate-box">
-                                                      <div className="ht-name">
-                                                         {item.rateTitle}
+                                                   <div className="ht-rate-content">
+                                                      <div className="ht-rate-detail-name-and-date col-md-12">
+                                                         <div className="ht-name">
+                                                            <i
+                                                               className={
+                                                                  item.icon
+                                                               }
+                                                            ></i>{" "}
+                                                            {`${item.name}`}
+                                                         </div>
+                                                         <div className="ht-date">
+                                                            {moment(
+                                                               item.dateAdded
+                                                            ).format(
+                                                               INDEX_CONSTANTS
+                                                                  .DATE_TIME_FORMAT
+                                                                  .DATE_TIME
+                                                            )}
+                                                         </div>
                                                       </div>
-                                                      <div className="ht-rate">{`${item.rateAverage} điểm`}</div>
-                                                   </div>
-                                                   <div className="ht-mini-review">
-                                                      <Tooltip
-                                                         title={`Chỗ ở nghỉ ngơi`}
-                                                      >
-                                                         <i className="fas fa-hotel"></i>
-                                                         ({item.numberStarHotel}
-                                                         ){`  `}
-                                                      </Tooltip>
-                                                      <Tooltip
-                                                         title={`Ẩm thực`}
-                                                      >
-                                                         <i className="fas fa-utensils ml-2"></i>
-                                                         ({item.numberStarFood})
-                                                         {`  `}
-                                                      </Tooltip>
-                                                      <Tooltip
-                                                         title={`Phương tiện và đi lại`}
-                                                      >
-                                                         <i className="fas fa-shuttle-van ml-2"></i>
-                                                         (
-                                                         {
-                                                            item.numberStarVehicle
-                                                         }
-                                                         ){`  `}
-                                                      </Tooltip>
-                                                      <Tooltip
-                                                         title={`Hướng dẫn viên`}
-                                                      >
-                                                         <i className="fas fa-flag ml-2"></i>
-                                                         (
-                                                         {
-                                                            item.numberStarTourGuide
-                                                         }
-                                                         ){`  `}
-                                                      </Tooltip>
-                                                      <Tooltip
-                                                         title={`Lịch trình tour`}
-                                                      >
-                                                         <i className="fas fa-calendar-check ml-2"></i>
-                                                         (
-                                                         {
-                                                            item.numberStarSchedule
-                                                         }
-                                                         ) {`  `}
-                                                      </Tooltip>
+                                                      <div className="ht-slider-container-mini col-md-12">
+                                                         <div className="ht-rate-box">
+                                                            <div className="ht-name">
+                                                               {item.rateTitle}
+                                                            </div>
+                                                            <div className="ht-rate">{`${item.rateAverage} điểm`}</div>
+                                                         </div>
+                                                         <div className="ht-mini-review">
+                                                            <Tooltip
+                                                               title={`Chỗ ở nghỉ ngơi`}
+                                                            >
+                                                               <i className="fas fa-hotel"></i>
+                                                               (
+                                                               {
+                                                                  item.numberStarHotel
+                                                               }
+                                                               ){`  `}
+                                                            </Tooltip>
+                                                            <Tooltip
+                                                               title={`Ẩm thực`}
+                                                            >
+                                                               <i className="fas fa-utensils ml-2"></i>
+                                                               (
+                                                               {
+                                                                  item.numberStarFood
+                                                               }
+                                                               ){`  `}
+                                                            </Tooltip>
+                                                            <Tooltip
+                                                               title={`Phương tiện và đi lại`}
+                                                            >
+                                                               <i className="fas fa-shuttle-van ml-2"></i>
+                                                               (
+                                                               {
+                                                                  item.numberStarVehicle
+                                                               }
+                                                               ){`  `}
+                                                            </Tooltip>
+                                                            <Tooltip
+                                                               title={`Hướng dẫn viên`}
+                                                            >
+                                                               <i className="fas fa-flag ml-2"></i>
+                                                               (
+                                                               {
+                                                                  item.numberStarTourGuide
+                                                               }
+                                                               ){`  `}
+                                                            </Tooltip>
+                                                            <Tooltip
+                                                               title={`Lịch trình tour`}
+                                                            >
+                                                               <i className="fas fa-calendar-check ml-2"></i>
+                                                               (
+                                                               {
+                                                                  item.numberStarSchedule
+                                                               }
+                                                               ) {`  `}
+                                                            </Tooltip>
+                                                         </div>
+                                                      </div>
+                                                      <div className="ht-rate-description col-md-12">
+                                                         <Paragraph
+                                                            className="ht-text-justify"
+                                                            ellipsis={{
+                                                               rows,
+                                                               expandable: true,
+                                                               suffix: ``
+                                                            }}
+                                                            title={
+                                                               item.contentEvaluate
+                                                            }
+                                                         >
+                                                            {
+                                                               item.contentEvaluate
+                                                            }
+                                                         </Paragraph>
+                                                      </div>
                                                    </div>
                                                 </div>
-                                                <div className="ht-rate-description col-md-12">
-                                                   <Paragraph
-                                                      className="ht-text-justify"
-                                                      ellipsis={{
-                                                         rows,
-                                                         expandable: true,
-                                                         suffix: ``
-                                                      }}
-                                                      title={
-                                                         item.contentEvaluate
-                                                      }
-                                                   >
-                                                      {item.contentEvaluate}
-                                                   </Paragraph>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       )}
-                                    />
-                                 </TabPane>
-                                 <TabPane
-                                    tab={
-                                       <>
-                                          <i className="fas fa-user"></i> Cá
-                                          nhân ({`1`})
-                                       </>
-                                    }
-                                    key="2"
-                                 >
-                                    ádasdasd
-                                 </TabPane>
-                                 <TabPane
-                                    tab={
-                                       <>
-                                          <i className="fas fa-heart"></i> Cặp
-                                          đôi ({`1`})
-                                       </>
-                                    }
-                                    key="3"
-                                 >
-                                    ádasdasd
-                                 </TabPane>
-                                 <TabPane
-                                    tab={
-                                       <>
-                                          <i className="fas fa-users"></i> Gia
-                                          đình ({`1`})
-                                       </>
-                                    }
-                                    key="4"
-                                 >
-                                    ádasd
-                                 </TabPane>
-                                 <TabPane
-                                    tab={
-                                       <>
-                                          <i className="fas fa-user-friends"></i>{" "}
-                                          Bạn bè ({`1`})
-                                       </>
-                                    }
-                                    key="5"
-                                 >
-                                    ádasdasd
-                                 </TabPane>
-                                 <TabPane
-                                    tab={
-                                       <>
-                                          <i className="fas fa-briefcase"></i>{" "}
-                                          Doanh nghiệp ({`1`})
-                                       </>
-                                    }
-                                    key="6"
-                                 >
-                                    ádasd
-                                 </TabPane>
+                                             )}
+                                          />
+                                       </TabPane>
+                                    )
+                                 )}
                               </Tabs>
                            </div>
                         </div>

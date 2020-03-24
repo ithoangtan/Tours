@@ -64,3 +64,30 @@ export const SERVICE_TOUR_ICON = {
    "Hỗ trợ visa": "fab fa-cc-visa",
    "Vé tham quan": "fas fa-money-bill"
 };
+
+export const LIST_TAG_EVALUATE = [
+   {
+      title: "Tất cả",
+      icon: "fas fa-th"
+   },
+   {
+      title: "Cá nhân",
+      icon: "fas fa-user"
+   },
+   {
+      title: "Cặp đôi",
+      icon: "fas fa-heart"
+   },
+   {
+      title: "Gia đình",
+      icon: "fas fa-users"
+   },
+   {
+      title: "Bạn bè",
+      icon: "fas fa-user-friends"
+   },
+   {
+      title: "Doanh nghiệp",
+      icon: "fas fa-briefcase"
+   }
+];
