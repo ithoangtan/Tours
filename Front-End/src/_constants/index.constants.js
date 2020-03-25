@@ -35,10 +35,13 @@ export const AdminArrayExternalScript = [
 ];
 
 export const DATE_TIME_FORMAT = {
-   DATE: "DD/MM/YYYY",
+   DATE_MONTH_YEAR: "DD/MM/YYYY",
    DATE_TIME: "DD/MM/YYYY - hh:mm:ss",
    DATE_SHORT_TIME: "DD/MM/YYYY - hh:mm",
-   YEAR_MONTH_DATE: "YYYY/MM/DD"
+   YEAR_MONTH_DATE: "YYYY/MM/DD",
+   MONTH_NAME: "MMMM",
+   YEAR: "YYYY",
+   DATE: "DD"
 };
 
 export const SERVICE_TOUR_ICON = {
@@ -90,4 +93,23 @@ export const LIST_TAG_EVALUATE = [
       title: "Doanh nghiệp",
       icon: "fas fa-briefcase"
    }
+];
+
+export const DESC_RATE = ["terrible", "bad", "normal", "good", "wonderful"];
+
+export const COLOR_TAG_BLOG = [
+   "#fff2e8",
+   "#fff7e6",
+   "#ffccc7",
+   "#ffd8bf",
+   "#ffe7ba",
+   "#fffbe6",
+   "#feffe6",
+   "#fcffe6",
+   "#fff1b8",
+   "#ffffb8",
+   "#f4ffb8",
+   "#f6ffed",
+   "#e6fffb",
+   "#e6f7ff"
 ];

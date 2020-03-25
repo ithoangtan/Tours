@@ -7,6 +7,7 @@ import orderReducer from "./order.reducer";
 import accountReducer from "./account.reducer";
 import timelineReducer from "./timeline.reducer";
 import evaluateReducer from "./evaluate.reducer";
+import postReducer from "./post.reducer";
 const rootReducer = combineReducers({
    tour: tourReducer,
    image: imageReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
    order: orderReducer,
    account: accountReducer,
    timeline: timelineReducer,
-   evaluate: evaluateReducer
+   evaluate: evaluateReducer,
+   post: postReducer
 });
 
 export default rootReducer;

@@ -68,7 +68,7 @@ class HeaderContainer extends Component {
                            <div
                               className="hero-wrap js-fullheight"
                               style={{
-                                 backgroundImage: `linear-gradient(rgb(21, 21, 21, 0.8),rgba(255, 255, 255, 0)),url(${API_ENDPOINT +
+                                 backgroundImage: `linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)),url(${API_ENDPOINT +
                                     tour.images[0]})`
                               }}
                               data-stellar-background-ratio="0.5"

@@ -1,41 +1,45 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
-
+import parseHtml from "html-react-parser";
 import BlogRightContainer from "../BlogPage/blogRight.container";
 import BlogNavigationContainer from "../BlogPage/blogNavigation.container";
 
 import { Rate } from "antd";
-
-const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+import moment from "moment";
 
 export default class BlogSingleContainer extends Component {
    componentDidMount() {
-      window.scrollTo({
-         top: 0,
-         left: 0
-      });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
 
-   renderContentPost() {
-      return <></>;
+   componentWillReceiveProps(nextProps) {
+      if (this.state.valueRate === undefined) {
+         this.setState({ valueRate: nextProps.postById.vote });
+      }
    }
+
+   renderContentPost = contentPost => {
+      if (contentPost) {
+         return parseHtml(`${contentPost}`);
+      }
+      return null;
+   };
 
    constructor(props) {
       super(props);
       this.state = {
          vote: false,
          numVote: 131,
-         valueRate: 3
+         valueRate: undefined
       };
    }
 
    handleChange = value => {
       this.setState({ valueRate: value });
+      this.props.handleVoteBlog(value);
    };
    onChangeVote = () => {
       this.setState({
@@ -47,6 +51,11 @@ export default class BlogSingleContainer extends Component {
    };
    render() {
       const { vote, numVote, valueRate } = this.state;
+      const { postById, listPostNew, listPostViews } = this.props;
+      const postDate = postById.dateEdited
+         ? postById.dateEdited
+         : postById.dateAdded;
+      const postTags = postById.tags ? postById.tags.split(",") : [];
       return (
          <section className="ftco-section">
             <div className="container">
@@ -55,39 +64,59 @@ export default class BlogSingleContainer extends Component {
                <div className="row">
                   <div className="col-lg-8 ftco-animate">
                      <div className="ht-title-post-container">
-                        <div className="ht-title">
-                           Thử Làm "Rich Kid" Một Lần Xem Chúng Bạn Có Trầm Trồ
-                           Tại 3 Resort Sang Chảnh Bậc Nhất Đà Lạt
-                        </div>
+                        <div className="ht-title">{postById.titlePost}</div>
                         <div className="ht-date-view-vote">
                            <div className="ht-date-view">
-                              <i className="far fa-calendar-alt"></i> 03/03/2020
-                              <i className="far fa-eye ml-3"></i> 1244
-                              <i className="far fa-comment ml-3"></i> 115
+                              <i className="far fa-calendar-alt"></i>
+                              {` `}
+                              {moment(postDate).format(
+                                 INDEX_CONSTANTS.DATE_TIME_FORMAT
+                                    .DATE_MONTH_YEAR
+                              )}
+                              <i className="far fa-eye ml-3"></i>
+                              {` `}
+                              {postById.views}
+                              <i className="far fa-star ml-3"></i>
+                              {` `}
+                              {postById.vote}
                            </div>
-                           <div
+                           {/* <div
                               className={vote ? "ht-vote-up" : "ht-vote"}
                               onClick={this.onChangeVote}
                            >
                               {" "}
                               <i className="far fa-thumbs-up"></i> {numVote}
+                           </div> */}
+                           <div className="ht-rating">
+                              {"ĐÁNH GIÁ "}
+                              <span>
+                                 <Rate
+                                    allowClear={false}
+                                    tooltips={INDEX_CONSTANTS.DESC_RATE}
+                                    onChange={this.handleChange}
+                                    // defaultValue={postById.vote}
+                                    value={valueRate}
+                                 />
+                                 {valueRate ? (
+                                    <span className="ant-rate-text">
+                                       {
+                                          INDEX_CONSTANTS.DESC_RATE[
+                                             valueRate - 1
+                                          ]
+                                       }
+                                    </span>
+                                 ) : (
+                                    ""
+                                 )}
+                              </span>
                            </div>
                         </div>
                      </div>
-                     {this.renderContentPost()}
-                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Reiciendis, eius mollitia suscipit, quisquam
-                        doloremque distinctio perferendis et doloribus unde
-                        architecto optio laboriosam porro adipisci sapiente
-                        officiis nemo accusamus ad praesentium? Esse minima nisi
-                        et. Dolore perferendis, enim praesentium omnis, iste
-                        doloremque quia officia optio deserunt molestiae
-                        voluptates soluta architecto tempora.
-                     </p>
+                     <p>{postById.describe}</p>
+                     {this.renderContentPost(postById.contentPost)}
                      <p>
                         <img
-                           src="images/image_6.jpg"
+                           src="/images/image_6.jpg"
                            alt="#"
                            className="img-fluid"
                         />
@@ -116,7 +145,7 @@ export default class BlogSingleContainer extends Component {
                      </p>
                      <p>
                         <img
-                           src="images/image_4.jpg"
+                           src="/images/image_4.jpg"
                            alt="#"
                            className="img-fluid"
                         />
@@ -162,62 +191,18 @@ export default class BlogSingleContainer extends Component {
                      <div className="tag-widget post-tag-container mb-2 mt-2">
                         <div className="tagcloud">
                            <div className="ht-tag-container-beautiful">
-                              <i className="far fa-folder-open"></i> Category
-                           </div>
-                           <Link to="#" className="tag-cloud-link">
-                              Life
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Sport
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Tech
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel
-                           </Link>
-                        </div>
-
-                        <div className="tagcloud">
-                           <div className="ht-tag-container-beautiful">
                               <i className="fas fa-tags"></i> Tags
                            </div>
-                           <Link to="#" className="tag-cloud-link">
-                              Life
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Sport
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Tech
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel kakakakakak
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel kakakakakak
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel kakakakakak
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel kakakakakak
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel
-                           </Link>
-                           <Link to="#" className="tag-cloud-link">
-                              Travel
-                           </Link>
+                           {postTags &&
+                              postTags.map((tag, index) => (
+                                 <Link
+                                    to="#"
+                                    className="tag-cloud-link"
+                                    key={index}
+                                 >
+                                    {tag}
+                                 </Link>
+                              ))}
                         </div>
                      </div>
                      <div className="pt-2 mt-2 mb-4 ht-rating-post">
@@ -226,13 +211,18 @@ export default class BlogSingleContainer extends Component {
                            <span>
                               <Rate
                                  allowClear={false}
-                                 tooltips={desc}
+                                 tooltips={INDEX_CONSTANTS.DESC_RATE}
                                  onChange={this.handleChange}
+                                 defaultValue={postById.vote}
                                  value={valueRate}
                               />
-                              {valueRate ? (
+                              {postById.vote ? (
                                  <span className="ant-rate-text">
-                                    {desc[valueRate - 1]}
+                                    {
+                                       INDEX_CONSTANTS.DESC_RATE[
+                                          postById.vote - 1
+                                       ]
+                                    }
                                  </span>
                               ) : (
                                  ""
@@ -244,7 +234,7 @@ export default class BlogSingleContainer extends Component {
                      <div className="about-author d-flex p-4 bg-light">
                         <div className="bio mr-5">
                            <img
-                              src="images/person_1.jpg"
+                              src="/images/person_1.jpg"
                               alt="#"
                               className="img-fluid mb-4"
                            />
@@ -262,7 +252,11 @@ export default class BlogSingleContainer extends Component {
                   </div>
                   {/* .col-md-8 */}
                   <div className="col-lg-4 sidebar ftco-animate col-md-4 ht-blog-right">
-                     <BlogRightContainer />
+                     <BlogRightContainer
+                        listPostNew={listPostNew}
+                        listPostViews={listPostViews}
+                        postTags={postTags}
+                     />
                   </div>
                </div>
             </div>
@@ -270,3 +264,9 @@ export default class BlogSingleContainer extends Component {
       );
    }
 }
+BlogSingleContainer.propTypes = {
+   handleVoteBlog: PropTypes.func,
+   postById: PropTypes.object,
+   listPostNew: PropTypes.array,
+   listPostViews: PropTypes.array
+};
