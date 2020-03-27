@@ -148,95 +148,23 @@ export default class SideBarContainer extends Component {
             <div className="sidebar-heading">Account Management</div>
             {/* Nav Item - Pages Collapse Menu */}
             <li className="nav-item">
-               <Link
-                  to="#"
-                  className="nav-link collapsed"
-                  data-toggle="collapse"
-                  data-target="#collapsePages"
-                  aria-expanded="true"
-                  aria-controls="collapsePages"
-               >
+               <Link to="/admin/account" className="nav-link collapsed">
                   <i className="fas fa-user-circle"></i>
                   <span>Accounts</span>
                </Link>
-               <div
-                  id="collapsePages"
-                  className="collapse"
-                  aria-labelledby="headingPages"
-                  data-parent="#accordionSidebar"
-               >
-                  <div className="bg-white py-2 collapse-inner rounded">
-                     <Link to="/admin/account" className="collapse-item">
-                        Accounts
-                     </Link>
-                     {/* <Link to="/admin/guest" className="collapse-item">
-                        Guests
-                     </Link> */}
-                     <div className="collapse-divider" />
-                  </div>
-               </div>
             </li>
             {/* Nav Item - Charts */}
             <li className="nav-item">
-               <Link
-                  to="#"
-                  className="nav-link collapsed"
-                  data-toggle="collapse"
-                  data-target="#collapseNotifications"
-                  aria-expanded="true"
-                  aria-controls="collapseNotifications"
-               >
+               <Link to="/admin/notifications" className="nav-link collapsed">
                   <i className="far fa-bell"></i>
                   <span>Notifications</span>
                </Link>
-               <div
-                  id="collapseNotifications"
-                  className="collapse"
-                  aria-labelledby="headingPages"
-                  data-parent="#accordionSidebar"
-               >
-                  <div className="bg-white py-2 collapse-inner rounded">
-                     <Link to="/admin/notifications" className="collapse-item">
-                        Notifications
-                     </Link>
-                     <Link
-                        to="/admin/notifications-manager"
-                        className="collapse-item"
-                     >
-                        Notifications manager
-                     </Link>
-                     <div className="collapse-divider" />
-                  </div>
-               </div>
             </li>
             <li className="nav-item">
-               <Link
-                  to="#"
-                  className="nav-link collapsed"
-                  data-toggle="collapse"
-                  data-target="#collapseMails"
-                  aria-expanded="true"
-                  aria-controls="collapseMails"
-               >
+               <Link to="/admin/mails" className="nav-link collapsed">
                   <i className="far fa-envelope"></i>
                   <span>Mails</span>
                </Link>
-               <div
-                  id="collapseMails"
-                  className="collapse"
-                  aria-labelledby="headingPages"
-                  data-parent="#accordionSidebar"
-               >
-                  <div className="bg-white py-2 collapse-inner rounded">
-                     <Link to="/admin/mails" className="collapse-item">
-                        Mails
-                     </Link>
-                     <Link to="/admin/mail-manager" className="collapse-item">
-                        Mails manager
-                     </Link>
-                     <div className="collapse-divider" />
-                  </div>
-               </div>
             </li>
             {/* Divider */}
             {/* Divider */}

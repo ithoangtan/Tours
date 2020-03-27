@@ -10,6 +10,8 @@ import serviceReducer from "./service.reducer";
 import postReducer from "./post.reducer";
 import generalReducer from "./general.reducer";
 import accountReducer from "./account.reducer";
+import notificationsReducer from "./notifications.reducer";
+
 const rootReducer = combineReducers({
    tour: tourReducer,
    image: imageReducer,
@@ -21,7 +23,8 @@ const rootReducer = combineReducers({
    service: serviceReducer,
    post: postReducer,
    general: generalReducer,
-   account: accountReducer
+   account: accountReducer,
+   notifications: notificationsReducer
 });
 
 export default rootReducer;
