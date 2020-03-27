@@ -15,7 +15,8 @@ class HeaderContainer extends Component {
    constructor(params) {
       super(params);
       this.state = {
-         size: 0
+         size: 0,
+         carouselTours: []
       };
    }
 
@@ -25,22 +26,27 @@ class HeaderContainer extends Component {
       });
    }
 
-   // Get list tour by time to show on carousel
-   getListTourByTime = () => {
-      const { listTour, listTourByTime, listImageTour } = this.props;
-      let tours = listTourByTime.length ? listTourByTime : listTour.slice(0, 3);
-      tours = tours.map(tour => {
-         let listImageTourDetail = listImageTour.filter(
-            imageTour => imageTour.idTour === tour.idTour
-         );
-         return { ...tour, images: listImageTourDetail };
-      });
-      return tours;
-   };
+   componentWillReceiveProps(nextProps) {
+      if (this.state.carouselTours.length === 0) {
+         // Get list tour by time to show on carousel
+         const { listTour, listTourByTime, listImageTour } = nextProps;
+         let tours =
+            listTourByTime && listTourByTime.length
+               ? listTourByTime
+               : listTour.slice(0, 3);
+         tours = tours.map(tour => {
+            let listImageTourDetail = listImageTour.filter(
+               imageTour => imageTour.idTour === tour.idTour
+            );
+            return { ...tour, images: listImageTourDetail };
+         });
+         console.log(tours);
+         this.setState({ carouselTours: tours });
+      }
+   }
 
    render() {
-      const { size } = this.state;
-      const carouselTours = this.getListTourByTime();
+      const { size, carouselTours } = this.state;
       return (
          <div className="ht-header">
             <div
@@ -68,8 +74,10 @@ class HeaderContainer extends Component {
                            <div
                               className="hero-wrap js-fullheight"
                               style={{
-                                 backgroundImage: `linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)),url(${API_ENDPOINT +
-                                    tour.images[0]})`
+                                 backgroundImage: tour.images[0]
+                                    ? `linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)), url('${API_ENDPOINT +
+                                         tour.images[0].url}')`
+                                    : "linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)"
                               }}
                               data-stellar-background-ratio="0.5"
                            >
@@ -80,7 +88,7 @@ class HeaderContainer extends Component {
                                     data-scrollax-parent="true"
                                  >
                                     <div
-                                       className="col-md-12 ftco-animate mt-5"
+                                       className="col-md-12 mt-5"
                                        data-scrollax=" properties: { translateY: '70%' }"
                                     >
                                        <h1
@@ -99,7 +107,7 @@ class HeaderContainer extends Component {
                                              to={`/tour-single/${tour.idTour}`}
                                              className="ht-slider-link"
                                           >
-                                             xem thêm!
+                                             {" xem thêm!"}
                                           </Link>
                                        </p>
                                        <div className="ht-display-flex-space-between-center ht-pd-t-2">

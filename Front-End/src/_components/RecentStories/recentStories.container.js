@@ -20,7 +20,9 @@ class RecentStoriesContainer extends Component {
    }
 
    render() {
-      const listPost = this.props.listPost.slice(0, 9);
+      const { listPost } = this.props;
+      const listPostRecent =
+         listPost && listPost.length ? listPost.slice(0, 9) : [];
       return (
          <section className="ftco-section bg-light">
             <div className="container">
@@ -44,8 +46,8 @@ class RecentStoriesContainer extends Component {
                      role="listbox"
                   >
                      {/* item slide */}
-                     {listPost &&
-                        listPost.map((post, index) => {
+                     {listPostRecent &&
+                        listPostRecent.map((post, index) => {
                            const postDate = post.dateEdited
                               ? post.dateEdited
                               : post.dateAdd;

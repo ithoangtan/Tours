@@ -1500,6 +1500,17 @@ html {
    );
 }
 
+/* Multiple Line Ellipsis */
+.block-ellipsis-2 {
+   display: block;
+   display: -webkit-box;
+   max-width: 100%;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
 /* Happy Traveler Say */
 .ht-traveler-say {
    height: 500px !important ;

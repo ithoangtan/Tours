@@ -18,7 +18,7 @@ class BlogSinglePage extends Component {
       //load Post byId
       const { fetchPostByIdRequest, fetchListPostRequest } = postAllActions;
       await fetchPostByIdRequest(idPost);
-      if (!listPostNew.length && !listPostViews.length) {
+      if (!listPostNew.length || !listPostViews.length) {
          await fetchListPostRequest();
       }
    };

@@ -187,7 +187,7 @@ export default class TourDetailContainer extends Component {
                            <div className="">
                               {listServices &&
                                  listServices.map((service, index) => (
-                                    <Tooltip title={service}>
+                                    <Tooltip title={service} key={index}>
                                        <i
                                           className={
                                              INDEX_CONSTANTS.SERVICE_TOUR_ICON[
