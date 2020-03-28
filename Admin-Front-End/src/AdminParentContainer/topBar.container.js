@@ -1,31 +1,26 @@
 import React, { Component } from "react";
 
-// import { Link } from "react-router-dom";
 import TopBarSearchVisibleXS from "./topBarSearchVisibleXS";
 import TopBarNotice from "./topBarNotice";
 import TopBarMail from "./topBarMail";
 import TopBarUserActions from "./topBarUserActions";
 
+import { Input } from "antd";
+
+const { Search } = Input;
+
 export default class TopBarContainer extends Component {
    render() {
       return (
-         <nav className="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+         <nav className="navbar navbar-expand navbar-light bg-white topbar static-top shadow mb-3">
             {/* Topbar Search */}
-            <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-               <div className="input-group">
-                  <input
-                     type="text"
-                     className="form-control bg-light border-0 small"
-                     placeholder="Search for..."
-                     aria-label="Search"
-                     aria-describedby="basic-addon2"
-                  />
-                  <div className="input-group-append">
-                     <button className="btn btn-primary" type="button">
-                        <i className="fas fa-search fa-sm" />
-                     </button>
-                  </div>
-               </div>
+            <form className="">
+               <Search
+                  placeholder="input search"
+                  enterButton="Search"
+                  onSearch={value => console.log(value)}
+                  className="ml-2"
+               />
             </form>
             {/* Topbar Navbar */}
             <ul className="navbar-nav ml-auto">
