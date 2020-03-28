@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as postActions from "../../_actions/post.actions";
+import * as accountActions from "../../_actions/account.actions";
 
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
@@ -21,14 +21,12 @@ import {
    Popconfirm,
    Form,
    Button,
-   Icon,
-   Modal
+   Icon
 } from "antd";
 
-import TableGallery from "./tableGallery";
-import TableNewRow from "./tableNewPost";
+import TableNewRow from "./tableNewAccount";
 import Cookies from "js-cookie";
-import PostPreview from "./postPreview";
+import AvatarChange from "./AvartarChange";
 
 function getCookie(name) {
    const token = Cookies.get(name);
@@ -107,7 +105,7 @@ const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Dùng tổ hợp Shift + con lăn chuột để cuộn ngang";
 //Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 1530, y: 400 };
+const scroll = { x: 2200, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -116,8 +114,8 @@ class EditableTable extends React.Component {
       this.state = {
          rowsDescribe: 1,
          data: null,
-         editingidPost: "",
-         count: this.props.listPost.length,
+         editingIdAccount: "",
+         count: this.props.listAccount.length,
          bordered: true,
          loading: false,
          size: "default",
@@ -139,22 +137,22 @@ class EditableTable extends React.Component {
       };
    }
 
-   isEditing = record => record.idPost === this.state.editingidPost;
+   isEditing = record => record.idAccount === this.state.editingIdAccount;
 
    cancel = () => {
-      this.setState({ editingidPost: "" });
+      this.setState({ editingIdAccount: "" });
    };
 
-   save(form, idPost) {
-      const { postAllActions } = this.props;
-      const { fetchPatchPostRequest } = postAllActions;
+   save(form, idAccount) {
+      const { accountAllActions } = this.props;
+      const { fetchPatchAccountRequest } = accountAllActions;
 
       form.validateFields((error, row) => {
          if (error) {
             return;
          }
          const newData = [...this.state.data];
-         const index = newData.findIndex(item => idPost === item.idPost);
+         const index = newData.findIndex(item => idAccount === item.idAccount);
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
@@ -162,62 +160,63 @@ class EditableTable extends React.Component {
                ...row
             });
             //Gọi API update dưới CSDL
-            fetchPatchPostRequest(row);
+            fetchPatchAccountRequest(row);
 
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidPost: "" });
+            this.setState({ data: newData, editingIdAccount: "" });
          } else {
             newData.push(row);
             //Gọi API update dưới CSDL
-            fetchPatchPostRequest(row);
+            fetchPatchAccountRequest(row);
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidPost: "" });
+            this.setState({ data: newData, editingIdAccount: "" });
          }
       });
    }
 
-   edit(idPost) {
-      this.setState({ editingidPost: idPost });
+   edit(idAccount) {
+      this.setState({ editingIdAccount: idAccount });
    }
    handleDelete = record => {
       const data = [...this.state.data];
       //Gọi API xóa dưới CSDL
-      const { postAllActions } = this.props;
-      const { fetchDeletePostRequest } = postAllActions;
-      fetchDeletePostRequest(record);
+      const { accountAllActions } = this.props;
+      const { fetchDeleteAccountRequest } = accountAllActions;
+      fetchDeleteAccountRequest(record);
       //Kết thúc gọi API xóa dươi CSDL
       this.setState({
-         data: data.filter(item => item.idPost !== record.idPost)
+         data: data.filter(item => item.idAccount !== record.idAccount)
       });
    };
 
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = newPost => {
+   handleAdd = newAccount => {
       const { count, data } = this.state;
       const newData = {
-         idPost:
-            newPost.idPost | (data.length !== 0)
-               ? data[data.length - 1].idPost + 1
+         idAccount:
+            newAccount.idAccount | (data.length !== 0)
+               ? data[data.length - 1].idAccount + 1
                : 0,
-         titlePost: newPost.titlePost,
-         price: newPost.price,
-         sale: newPost.sale,
+         name: newAccount.name,
+         email: newAccount.email,
+         phone: newAccount.phone,
+         role: newAccount.role,
+         username: newAccount.username,
+         website: newAccount.website,
+         birthdate: newAccount.birthdate,
+         verify: newAccount.verify,
+         gender: newAccount.gender,
          dateAdded: new Date()
             .toJSON()
             .slice(0, 10)
-            .replace(/-/g, "-"),
-         departureDay: newPost.departureDay,
-         describe: newPost.describe,
-         address: newPost.address,
-         vocationTime: newPost.vocationTime,
-         idAccount: newPost.idAccount
+            .replace(/-/g, "-")
       };
       //Gọi API create dưới CSDL
-      const { postAllActions } = this.props;
-      const { fetchPostPostRequest } = postAllActions;
-      fetchPostPostRequest(newData);
+      const { accountAllActions } = this.props;
+      const { fetchPostAccountRequest } = accountAllActions;
+      fetchPostAccountRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
@@ -228,7 +227,7 @@ class EditableTable extends React.Component {
 
    handleSaveOnChange = row => {
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => row.idPost === item.idPost);
+      const index = newData.findIndex(item => row.idAccount === item.idAccount);
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
@@ -240,9 +239,9 @@ class EditableTable extends React.Component {
    /**Preload */
    //    Preload
    componentWillMount() {
-      const { postAllActions } = this.props;
-      const { fetchListPostImageRequest } = postAllActions;
-      fetchListPostImageRequest();
+      const { accountAllActions } = this.props;
+      const { fetchListAccountImageRequest } = accountAllActions;
+      fetchListAccountImageRequest();
       this.fetch();
    }
    handleTableChange = (pagination, filters, sorter) => {
@@ -252,7 +251,7 @@ class EditableTable extends React.Component {
          pagination: pager
       });
       this.fetch({
-         posts: pagination.pageSize,
+         accounts: pagination.pageSize,
          page: pagination.current,
          sortField: sorter.field,
          sortOrder: sorter.order,
@@ -262,11 +261,8 @@ class EditableTable extends React.Component {
 
    fetch = async (params = {}) => {
       this.setState({ loading: true });
-      // const { postAllActions } = this.props;
-      // const { fetchListPostRequest } = postAllActions;
-      // await fetchListPostRequest();
       await reqwest({
-         url: `${API_ENDPOINT}/posts`,
+         url: `${API_ENDPOINT}/accounts`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
@@ -275,13 +271,11 @@ class EditableTable extends React.Component {
          type: "json"
       }).then(data => {
          const pagination = { ...this.state.pagination };
-         // Read total count from server
          pagination.total = data.length;
-         // const { listPost } = this.props;
          this.setState({
             loading: false,
             data: data,
-            //data: listPost
+            //data: listAccount
             pagination
          });
       });
@@ -442,40 +436,8 @@ class EditableTable extends React.Component {
 
    //Expanded Row Render
    expandedRowRender = record => {
-      const { listImagePost } = this.props;
-      return (
-         <TableGallery
-            record={record}
-            listImage={listImagePost}
-            {...this.props}
-         />
-      );
+      return <AvatarChange record={record} {...this.props} />;
    };
-
-   showModalPreview(record) {
-      Modal.info({
-         style: { top: "30px" },
-         width: 400,
-         title: "This is a item post at category posts",
-         wrapClassName: "",
-         content: (
-            <PostPreview
-               post={record}
-               listImagePost={[
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  },
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  }
-               ]}
-            />
-         ),
-         onOk() {}
-      });
-   }
 
    handleCancelPreview = e => {
       this.setState({
@@ -505,8 +467,8 @@ class EditableTable extends React.Component {
       this.columns = [
          {
             title: "ID",
-            dataIndex: "idPost",
-            key: "idPost",
+            dataIndex: "idAccount",
+            key: "idAccount",
             width: 50,
             // fixed: "left",
             ellipsis: true,
@@ -514,37 +476,97 @@ class EditableTable extends React.Component {
             // render: text => text
          },
          {
-            title: "Title",
-            dataIndex: "titlePost",
-            key: "titlePost",
-            width: 300,
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+            width: 200,
             // fixed: "left",
-            ...this.getColumnSearchProps("titlePost"),
-            sorter: (a, b) => a.titlePost.length - b.titlePost.length,
-            sortOrder: sortedInfo.columnKey === "titlePost" && sortedInfo.order,
+            ...this.getColumnSearchProps("name"),
+            sorter: (a, b) => a.name.length - b.name.length,
+            sortOrder: sortedInfo.columnKey === "name" && sortedInfo.order,
             ellipsis: true,
             editable: true
             // render: text => text
          },
          {
-            title: "Describe",
-            dataIndex: "describe",
-            key: "describe",
-            width: 400,
-            ...this.getColumnSearchProps("describe"),
-            sorter: (a, b) => a.describe.length - b.describe.length,
-            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
+            title: "Email",
+            dataIndex: "email",
+            key: "email",
+            width: 250,
+            ...this.getColumnSearchProps("email"),
+            sorter: (a, b) => a.email - b.email,
+            sortOrder: sortedInfo.columnKey === "email" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
-            title: "Status",
-            dataIndex: "status",
-            key: "status",
+            title: "Phone",
+            dataIndex: "phone",
+            key: "phone",
+            width: 120,
+            ...this.getColumnSearchProps("phone"),
+            sorter: (a, b) => a.phone.length - b.phone.length,
+            sortOrder: sortedInfo.columnKey === "phone" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+         {
+            title: "Role",
+            dataIndex: "role",
+            key: "role",
             width: 100,
-            ...this.getColumnSearchProps("status"),
-            sorter: (a, b) => a.status.length - b.status.length,
-            sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
+            ...this.getColumnSearchProps("role"),
+            sorter: (a, b) => a.role.length - b.role.length,
+            sortOrder: sortedInfo.columnKey === "role" && sortedInfo.order,
+            editable: true,
+            ellipsis: true
+         },
+
+         {
+            title: "Birthdate",
+            dataIndex: "birthdate",
+            key: "birthdate",
+            width: 120,
+            ...this.getColumnSearchProps("birthdate"),
+            sorter: (a, b) => a.birthdate.length - b.birthdate.length,
+            sortOrder: sortedInfo.columnKey === "birthdate" && sortedInfo.order,
+            ellipsis: true,
+            editable: true,
+            render: text => {
+               return moment(text).format("DD/MM/YYYY");
+            }
+         },
+         {
+            title: "Username",
+            dataIndex: "username",
+            key: "username",
+            width: 200,
+            ...this.getColumnSearchProps("username"),
+            sorter: (a, b) => a.username - b.username,
+            sortOrder: sortedInfo.columnKey === "username" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+
+         {
+            title: "Gender",
+            dataIndex: "gender",
+            key: "gender",
+            width: 110,
+            ...this.getColumnSearchProps("gender"),
+            sorter: (a, b) => a.gender.length - b.gender.length,
+            sortOrder: sortedInfo.columnKey === "gender" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+         {
+            title: "Vefiry",
+            dataIndex: "verify",
+            key: "verify",
+            width: 100,
+            ...this.getColumnSearchProps("verify"),
+            sorter: (a, b) => a.verify.length - b.verify.length,
+            sortOrder: sortedInfo.columnKey === "verify" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -556,28 +578,6 @@ class EditableTable extends React.Component {
             ...this.getColumnSearchProps("type"),
             sorter: (a, b) => a.type.length - b.type.length,
             sortOrder: sortedInfo.columnKey === "type" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
-         },
-         {
-            title: "View",
-            dataIndex: "views",
-            key: "views",
-            width: 90,
-            ...this.getColumnSearchProps("views"),
-            sorter: (a, b) => a.views.length - b.views.length,
-            sortOrder: sortedInfo.columnKey === "views" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
-         },
-         {
-            title: "Vote",
-            dataIndex: "vote",
-            key: "vote",
-            width: 90,
-            ...this.getColumnSearchProps("vote"),
-            sorter: (a, b) => a.vote.length - b.vote.length,
-            sortOrder: sortedInfo.columnKey === "vote" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -596,17 +596,29 @@ class EditableTable extends React.Component {
                return moment(text).format("DD/MM/YYYY");
             }
          },
-
          {
-            title: "IDAcc",
-            dataIndex: "idAccount",
-            key: "idAccount",
-            width: 60,
-            // fixed: "left",
+            title: "Website",
+            dataIndex: "website",
+            key: "website",
+            width: 200,
+            ...this.getColumnSearchProps("website"),
+            sorter: (a, b) => a.website.length - b.website.length,
+            sortOrder: sortedInfo.columnKey === "website" && sortedInfo.order,
             ellipsis: true,
             editable: true
-            // render: text => text
          },
+         {
+            title: "Address",
+            dataIndex: "address",
+            key: "address",
+            width: 300,
+            ...this.getColumnSearchProps("address"),
+            sorter: (a, b) => a.address.length - b.address.length,
+            sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+
          {
             title: "Edit",
             dataIndex: "edit",
@@ -614,7 +626,7 @@ class EditableTable extends React.Component {
             key: "edit",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
-               const { editingidPost } = this.state;
+               const { editingIdAccount } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
@@ -623,7 +635,7 @@ class EditableTable extends React.Component {
                            <Button
                               size="small"
                               type="primary"
-                              onClick={() => this.save(form, record.idPost)}
+                              onClick={() => this.save(form, record.idAccount)}
                               style={{ marginRight: 8 }}
                            >
                               Save
@@ -632,7 +644,7 @@ class EditableTable extends React.Component {
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
-                        onConfirm={() => this.cancel(record.idPost)}
+                        onConfirm={() => this.cancel(record.idAccount)}
                      >
                         <Button type="dashed" size="small">
                            Cancel
@@ -644,18 +656,10 @@ class EditableTable extends React.Component {
                      <Button
                         type="default"
                         size="small"
-                        disabled={editingidPost !== ""}
-                        onClick={() => this.edit(record.idPost)}
+                        disabled={editingIdAccount !== ""}
+                        onClick={() => this.edit(record.idAccount)}
                      >
                         Edit
-                     </Button>
-                     <Button
-                        size="small"
-                        type="primary"
-                        onClick={() => this.showModalPreview(record)}
-                        style={{ marginLeft: 6 }}
-                     >
-                        Preview
                      </Button>
                   </>
                );
@@ -685,10 +689,6 @@ class EditableTable extends React.Component {
          if (type === "price") return "number";
          else if (type === "depatureDay") return "date";
          else if (type === "dateAdd") return "disable";
-         else if (type === "views") return "number";
-         else if (type === "vote") return "number";
-         else if (type === "status") return "select";
-         else return "text";
       }
 
       const columns = this.columns.map(col => {
@@ -725,7 +725,7 @@ class EditableTable extends React.Component {
                      type="primary"
                      style={{ margin: "12px 12px 0px" }}
                   >
-                     Add New Post
+                     Add New Admin Account (not support user account)
                   </Button>
                   <Button
                      onClick={this.clearAll}
@@ -737,7 +737,7 @@ class EditableTable extends React.Component {
             )}
             <EditableContext.Provider value={this.props.form}>
                <Table
-                  rowKey={"idPost"}
+                  rowKey={"idAccount"}
                   components={components}
                   pagination={{
                      onChange: this.cancel
@@ -765,30 +765,31 @@ class EditableTable extends React.Component {
    }
 }
 
-const TablesContainer = Form.create()(EditableTable);
+const AccountTablesContainer = Form.create()(EditableTable);
 
-TablesContainer.propTypes = {
+AccountTablesContainer.propTypes = {
    classes: PropTypes.object,
-   postAllActions: PropTypes.shape({
-      fetchListPostRequest: PropTypes.func,
-      fetchPostPostRequest: PropTypes.func,
-      fetchDeletePostRequest: PropTypes.func,
-      fetchPatchPostRequest: PropTypes.func,
-      fetchListPostImageRequest: PropTypes.func
+   accountAllActions: PropTypes.shape({
+      fetchListAccountRequest: PropTypes.func,
+      fetchPostAccountRequest: PropTypes.func,
+      fetchDeleteAccountRequest: PropTypes.func,
+      fetchPatchAccountRequest: PropTypes.func
    }),
-   listPost: PropTypes.array
+   listAccount: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listPost: state.post.listPost,
-      listImagePost: state.post.listImagePost
+      listAccount: state.account.listAccount
    };
 };
 const mapDispatchToProps = dispatch => {
    return {
-      postAllActions: bindActionCreators(postActions, dispatch)
-      //Bên trái chỉ là đặt tên thôi, bên phải là postActions ở bên post.action.js
+      accountAllActions: bindActionCreators(accountActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là accountActions ở bên account.action.js
    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TablesContainer);
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(AccountTablesContainer);

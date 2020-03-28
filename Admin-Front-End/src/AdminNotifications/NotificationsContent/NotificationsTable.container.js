@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as postActions from "../../_actions/post.actions";
+import * as notificationsActions from "../../_actions/notifications.actions";
 
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
@@ -22,13 +22,11 @@ import {
    Form,
    Button,
    Icon,
-   Modal
+   notification
 } from "antd";
 
-import TableGallery from "./tableGallery";
-import TableNewRow from "./tableNewPost";
+import TableNewRow from "./tableNewNotifications";
 import Cookies from "js-cookie";
-import PostPreview from "./postPreview";
 
 function getCookie(name) {
    const token = Cookies.get(name);
@@ -107,7 +105,7 @@ const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Dùng tổ hợp Shift + con lăn chuột để cuộn ngang";
 //Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 1530, y: 400 };
+const scroll = { x: 1170, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -116,8 +114,8 @@ class EditableTable extends React.Component {
       this.state = {
          rowsDescribe: 1,
          data: null,
-         editingidPost: "",
-         count: this.props.listPost.length,
+         editingidNotification: "",
+         count: this.props.listNotifications.length,
          bordered: true,
          loading: false,
          size: "default",
@@ -139,22 +137,25 @@ class EditableTable extends React.Component {
       };
    }
 
-   isEditing = record => record.idPost === this.state.editingidPost;
+   isEditing = record =>
+      record.idNotification === this.state.editingidNotification;
 
    cancel = () => {
-      this.setState({ editingidPost: "" });
+      this.setState({ editingidNotification: "" });
    };
 
-   save(form, idPost) {
-      const { postAllActions } = this.props;
-      const { fetchPatchPostRequest } = postAllActions;
+   save(form, idNotification) {
+      const { notificationsAllActions } = this.props;
+      const { fetchPatchNotificationsRequest } = notificationsAllActions;
 
       form.validateFields((error, row) => {
          if (error) {
             return;
          }
          const newData = [...this.state.data];
-         const index = newData.findIndex(item => idPost === item.idPost);
+         const index = newData.findIndex(
+            item => idNotification === item.idNotification
+         );
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
@@ -162,62 +163,64 @@ class EditableTable extends React.Component {
                ...row
             });
             //Gọi API update dưới CSDL
-            fetchPatchPostRequest(row);
+            fetchPatchNotificationsRequest(row);
 
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidPost: "" });
+            this.setState({ data: newData, editingidNotification: "" });
          } else {
             newData.push(row);
             //Gọi API update dưới CSDL
-            fetchPatchPostRequest(row);
+            fetchPatchNotificationsRequest(row);
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidPost: "" });
+            this.setState({ data: newData, editingidNotification: "" });
          }
       });
    }
 
-   edit(idPost) {
-      this.setState({ editingidPost: idPost });
+   edit(idNotification) {
+      this.setState({ editingidNotification: idNotification });
    }
    handleDelete = record => {
       const data = [...this.state.data];
       //Gọi API xóa dưới CSDL
-      const { postAllActions } = this.props;
-      const { fetchDeletePostRequest } = postAllActions;
-      fetchDeletePostRequest(record);
+      const { notificationsAllActions } = this.props;
+      const { fetchDeleteNotificationsRequest } = notificationsAllActions;
+      fetchDeleteNotificationsRequest(record);
       //Kết thúc gọi API xóa dươi CSDL
       this.setState({
-         data: data.filter(item => item.idPost !== record.idPost)
+         data: data.filter(
+            item => item.idNotification !== record.idNotification
+         )
       });
    };
 
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = newPost => {
+   handleAdd = newNotifications => {
       const { count, data } = this.state;
       const newData = {
-         idPost:
-            newPost.idPost | (data.length !== 0)
-               ? data[data.length - 1].idPost + 1
+         idNotification:
+            newNotifications.idNotification | (data.length !== 0)
+               ? data[data.length - 1].idNotification + 1
                : 0,
-         titlePost: newPost.titlePost,
-         price: newPost.price,
-         sale: newPost.sale,
+         titleNotifications: newNotifications.titleNotifications,
+         price: newNotifications.price,
+         sale: newNotifications.sale,
          dateAdded: new Date()
             .toJSON()
             .slice(0, 10)
             .replace(/-/g, "-"),
-         departureDay: newPost.departureDay,
-         describe: newPost.describe,
-         address: newPost.address,
-         vocationTime: newPost.vocationTime,
-         idAccount: newPost.idAccount
+         departureDay: newNotifications.departureDay,
+         describe: newNotifications.describe,
+         address: newNotifications.address,
+         vocationTime: newNotifications.vocationTime,
+         idAccount: newNotifications.idAccount
       };
       //Gọi API create dưới CSDL
-      const { postAllActions } = this.props;
-      const { fetchPostPostRequest } = postAllActions;
-      fetchPostPostRequest(newData);
+      const { notificationsAllActions } = this.props;
+      const { fetchPostNotificationsRequest } = notificationsAllActions;
+      fetchPostNotificationsRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
@@ -228,7 +231,9 @@ class EditableTable extends React.Component {
 
    handleSaveOnChange = row => {
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => row.idPost === item.idPost);
+      const index = newData.findIndex(
+         item => row.idNotification === item.idNotification
+      );
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
@@ -240,9 +245,9 @@ class EditableTable extends React.Component {
    /**Preload */
    //    Preload
    componentWillMount() {
-      const { postAllActions } = this.props;
-      const { fetchListPostImageRequest } = postAllActions;
-      fetchListPostImageRequest();
+      const { notificationsAllActions } = this.props;
+      const { fetchListNotificationsImageRequest } = notificationsAllActions;
+      fetchListNotificationsImageRequest();
       this.fetch();
    }
    handleTableChange = (pagination, filters, sorter) => {
@@ -252,7 +257,7 @@ class EditableTable extends React.Component {
          pagination: pager
       });
       this.fetch({
-         posts: pagination.pageSize,
+         notifications: pagination.pageSize,
          page: pagination.current,
          sortField: sorter.field,
          sortOrder: sorter.order,
@@ -262,11 +267,8 @@ class EditableTable extends React.Component {
 
    fetch = async (params = {}) => {
       this.setState({ loading: true });
-      // const { postAllActions } = this.props;
-      // const { fetchListPostRequest } = postAllActions;
-      // await fetchListPostRequest();
       await reqwest({
-         url: `${API_ENDPOINT}/posts`,
+         url: `${API_ENDPOINT}/notifications`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
@@ -277,11 +279,10 @@ class EditableTable extends React.Component {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
-         // const { listPost } = this.props;
          this.setState({
             loading: false,
             data: data,
-            //data: listPost
+            //data: listNotifications
             pagination
          });
       });
@@ -440,47 +441,28 @@ class EditableTable extends React.Component {
    };
    //end Add
 
-   //Expanded Row Render
-   expandedRowRender = record => {
-      const { listImagePost } = this.props;
-      return (
-         <TableGallery
-            record={record}
-            listImage={listImagePost}
-            {...this.props}
-         />
-      );
-   };
-
-   showModalPreview(record) {
-      Modal.info({
-         style: { top: "30px" },
-         width: 400,
-         title: "This is a item post at category posts",
-         wrapClassName: "",
-         content: (
-            <PostPreview
-               post={record}
-               listImagePost={[
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  },
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  }
-               ]}
-            />
-         ),
-         onOk() {}
-      });
-   }
-
-   handleCancelPreview = e => {
-      this.setState({
-         visiblePreview: false
-      });
+   openNotificationPreview = record => {
+      if (record.type === "info") {
+         notification.info({
+            message: record.title,
+            description: record.contentNotification,
+            style: {
+               width: 400,
+               marginLeft: -20
+            }
+         });
+      }
+      // Tùy theo record.type là gì để notice
+      else {
+         notification.open({
+            message: record.title,
+            description: record.contentNotification,
+            style: {
+               width: 400,
+               marginLeft: -20
+            }
+         });
+      }
    };
 
    render() {
@@ -505,8 +487,8 @@ class EditableTable extends React.Component {
       this.columns = [
          {
             title: "ID",
-            dataIndex: "idPost",
-            key: "idPost",
+            dataIndex: "idNotification",
+            key: "idNotification",
             width: 50,
             // fixed: "left",
             ellipsis: true,
@@ -514,28 +496,17 @@ class EditableTable extends React.Component {
             // render: text => text
          },
          {
-            title: "Title",
-            dataIndex: "titlePost",
-            key: "titlePost",
-            width: 300,
+            title: "Type",
+            dataIndex: "type",
+            key: "type",
+            width: 90,
             // fixed: "left",
-            ...this.getColumnSearchProps("titlePost"),
-            sorter: (a, b) => a.titlePost.length - b.titlePost.length,
-            sortOrder: sortedInfo.columnKey === "titlePost" && sortedInfo.order,
+            ...this.getColumnSearchProps("type"),
+            sorter: (a, b) => a.type.length - b.type.length,
+            sortOrder: sortedInfo.columnKey === "type" && sortedInfo.order,
             ellipsis: true,
             editable: true
             // render: text => text
-         },
-         {
-            title: "Describe",
-            dataIndex: "describe",
-            key: "describe",
-            width: 400,
-            ...this.getColumnSearchProps("describe"),
-            sorter: (a, b) => a.describe.length - b.describe.length,
-            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
          },
          {
             title: "Status",
@@ -543,43 +514,57 @@ class EditableTable extends React.Component {
             key: "status",
             width: 100,
             ...this.getColumnSearchProps("status"),
-            sorter: (a, b) => a.status.length - b.status.length,
+            sorter: (a, b) => a.status - b.status,
             sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
-            title: "Type",
-            dataIndex: "type",
-            key: "type",
-            width: 100,
-            ...this.getColumnSearchProps("type"),
-            sorter: (a, b) => a.type.length - b.type.length,
-            sortOrder: sortedInfo.columnKey === "type" && sortedInfo.order,
+            title: "Title",
+            dataIndex: "title",
+            key: "title",
+            width: 180,
+            ...this.getColumnSearchProps("title"),
+            sorter: (a, b) => a.title.length - b.title.length,
+            sortOrder: sortedInfo.columnKey === "title" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
          {
-            title: "View",
-            dataIndex: "views",
-            key: "views",
-            width: 90,
-            ...this.getColumnSearchProps("views"),
-            sorter: (a, b) => a.views.length - b.views.length,
-            sortOrder: sortedInfo.columnKey === "views" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
+            title: "Content Notification",
+            dataIndex: "contentNotification",
+            key: "contentNotification",
+            width: 250,
+            filters: [
+               { text: "10%", value: 9 },
+               { text: "20%", value: 43 }
+            ],
+            // filteredValue: filteredInfo.contentNotification || null,
+            // filterMultiple: false,
+            // onFilter: (value, record) => record.contentNotification.indexOf(value) === 0,
+            ...this.getColumnSearchProps("contentNotification"),
+            sorter: (a, b) =>
+               a.contentNotification.length - b.contentNotification.length,
+            sortOrder:
+               sortedInfo.columnKey === "contentNotification" &&
+               sortedInfo.order,
+            editable: true,
+            ellipsis: true
          },
+
          {
-            title: "Vote",
-            dataIndex: "vote",
-            key: "vote",
-            width: 90,
-            ...this.getColumnSearchProps("vote"),
-            sorter: (a, b) => a.vote.length - b.vote.length,
-            sortOrder: sortedInfo.columnKey === "vote" && sortedInfo.order,
+            title: "Datetime",
+            dataIndex: "datetime",
+            key: "datetime",
+            width: 150,
+            ...this.getColumnSearchProps("datetime"),
+            sorter: (a, b) => a.datetime.length - b.datetime.length,
+            sortOrder: sortedInfo.columnKey === "datetime" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
+            render: text => {
+               return moment(text).format("hh:mm A DD/MM/YYYY");
+            }
          },
          {
             title: "Added",
@@ -596,7 +581,6 @@ class EditableTable extends React.Component {
                return moment(text).format("DD/MM/YYYY");
             }
          },
-
          {
             title: "IDAcc",
             dataIndex: "idAccount",
@@ -614,7 +598,7 @@ class EditableTable extends React.Component {
             key: "edit",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
-               const { editingidPost } = this.state;
+               const { editingidNotification } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
@@ -623,7 +607,9 @@ class EditableTable extends React.Component {
                            <Button
                               size="small"
                               type="primary"
-                              onClick={() => this.save(form, record.idPost)}
+                              onClick={() =>
+                                 this.save(form, record.idNotification)
+                              }
                               style={{ marginRight: 8 }}
                            >
                               Save
@@ -632,7 +618,7 @@ class EditableTable extends React.Component {
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
-                        onConfirm={() => this.cancel(record.idPost)}
+                        onConfirm={() => this.cancel(record.idNotification)}
                      >
                         <Button type="dashed" size="small">
                            Cancel
@@ -644,15 +630,15 @@ class EditableTable extends React.Component {
                      <Button
                         type="default"
                         size="small"
-                        disabled={editingidPost !== ""}
-                        onClick={() => this.edit(record.idPost)}
+                        disabled={editingidNotification !== ""}
+                        onClick={() => this.edit(record.idNotification)}
                      >
                         Edit
                      </Button>
                      <Button
                         size="small"
                         type="primary"
-                        onClick={() => this.showModalPreview(record)}
+                        onClick={() => this.openNotificationPreview(record)}
                         style={{ marginLeft: 6 }}
                      >
                         Preview
@@ -685,10 +671,6 @@ class EditableTable extends React.Component {
          if (type === "price") return "number";
          else if (type === "depatureDay") return "date";
          else if (type === "dateAdd") return "disable";
-         else if (type === "views") return "number";
-         else if (type === "vote") return "number";
-         else if (type === "status") return "select";
-         else return "text";
       }
 
       const columns = this.columns.map(col => {
@@ -725,7 +707,7 @@ class EditableTable extends React.Component {
                      type="primary"
                      style={{ margin: "12px 12px 0px" }}
                   >
-                     Add New Post
+                     Add New Notifications
                   </Button>
                   <Button
                      onClick={this.clearAll}
@@ -737,7 +719,7 @@ class EditableTable extends React.Component {
             )}
             <EditableContext.Provider value={this.props.form}>
                <Table
-                  rowKey={"idPost"}
+                  rowKey={"idNotification"}
                   components={components}
                   pagination={{
                      onChange: this.cancel
@@ -757,7 +739,6 @@ class EditableTable extends React.Component {
                   onChange={this.handleChange}
                   {...this.state}
                   //Expanded Row Render
-                  expandedRowRender={this.expandedRowRender}
                />
             </EditableContext.Provider>
          </div>
@@ -765,30 +746,36 @@ class EditableTable extends React.Component {
    }
 }
 
-const TablesContainer = Form.create()(EditableTable);
+const NotificationsTablesContainer = Form.create()(EditableTable);
 
-TablesContainer.propTypes = {
+NotificationsTablesContainer.propTypes = {
    classes: PropTypes.object,
-   postAllActions: PropTypes.shape({
-      fetchListPostRequest: PropTypes.func,
-      fetchPostPostRequest: PropTypes.func,
-      fetchDeletePostRequest: PropTypes.func,
-      fetchPatchPostRequest: PropTypes.func,
-      fetchListPostImageRequest: PropTypes.func
+   notificationsAllActions: PropTypes.shape({
+      fetchListNotificationsRequest: PropTypes.func,
+      fetchPostNotificationsRequest: PropTypes.func,
+      fetchDeleteNotificationsRequest: PropTypes.func,
+      fetchPatchNotificationsRequest: PropTypes.func,
+      fetchListNotificationsImageRequest: PropTypes.func
    }),
-   listPost: PropTypes.array
+   listNotifications: PropTypes.array
 };
 
 const mapStateToProps = state => {
    return {
-      listPost: state.post.listPost,
-      listImagePost: state.post.listImagePost
+      listNotifications: state.notifications.listNotifications,
+      listImageNotifications: state.notifications.listImageNotifications
    };
 };
 const mapDispatchToProps = dispatch => {
    return {
-      postAllActions: bindActionCreators(postActions, dispatch)
-      //Bên trái chỉ là đặt tên thôi, bên phải là postActions ở bên post.action.js
+      notificationsAllActions: bindActionCreators(
+         notificationsActions,
+         dispatch
+      )
+      //Bên trái chỉ là đặt tên thôi, bên phải là notificationsActions ở bên notifications.action.js
    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TablesContainer);
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(NotificationsTablesContainer);

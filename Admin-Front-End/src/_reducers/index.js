@@ -9,6 +9,9 @@ import tagReducer from "./tag.reducer";
 import serviceReducer from "./service.reducer";
 import postReducer from "./post.reducer";
 import generalReducer from "./general.reducer";
+import accountReducer from "./account.reducer";
+import notificationsReducer from "./notifications.reducer";
+
 const rootReducer = combineReducers({
    tour: tourReducer,
    image: imageReducer,
@@ -19,7 +22,9 @@ const rootReducer = combineReducers({
    tag: tagReducer,
    service: serviceReducer,
    post: postReducer,
-   general: generalReducer
+   general: generalReducer,
+   account: accountReducer,
+   notifications: notificationsReducer
 });
 
 export default rootReducer;
