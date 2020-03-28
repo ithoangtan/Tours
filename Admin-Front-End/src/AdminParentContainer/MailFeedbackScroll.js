@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const fakeDataUrl =
    "https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo";
 
-export default class NoticeScroll extends React.Component {
+export default class MailsScroll extends React.Component {
    state = {
       data: [],
       loading: false,
