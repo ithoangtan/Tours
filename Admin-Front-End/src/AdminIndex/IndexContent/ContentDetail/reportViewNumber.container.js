@@ -48,7 +48,7 @@ class ReportViewNumberContainer extends Component {
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
                               <NumberFormat
-                                 value={report2[1].total}
+                                 value={report2.total}
                                  displayType={"text"}
                                  thousandSeparator={true}
                                  prefix={""}
@@ -73,7 +73,8 @@ class ReportViewNumberContainer extends Component {
                               Số Tours (chưa đến lịch)
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              {report2[0].tourNumber} Tours
+                              {report2.tourNumber} / {report2.tourTotalNumber}{" "}
+                              Tours
                            </div>
                         </div>
                         <div className="col-auto">
@@ -93,7 +94,7 @@ class ReportViewNumberContainer extends Component {
                               Tổng số người dùng đăng ký
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              {report2[2].verifyAccount} Người
+                              {report2.verifyAccount} Người
                            </div>
                         </div>
                         <div className="col-auto">
@@ -113,7 +114,9 @@ class ReportViewNumberContainer extends Component {
                               Yêu cầu đang chờ xử lý
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              8 Request
+                              {report2.totalRequestNotification +
+                                 report2.totalRequestMail}{" "}
+                              Request
                            </div>
                         </div>
                         <div className="col-auto">
