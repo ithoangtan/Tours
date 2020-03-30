@@ -2,124 +2,107 @@ import React from "react";
 import { Chart, Axis, Tooltip, Geom, Legend } from "bizcharts";
 import DataSet from "@antv/data-set";
 
-const data = [
-   {
-      label: "Tháng 1",
-      VietNam: 1000,
-      Asia: 800,
-      Europe: 1260,
-      America: 200, //Châu Mỹ
-      Average: 122
-      //Chi tiết các tỉnh xem tại trang web:
-      // https://en.wikipedia.org/wiki/List_of_regions_of_Vietnam
-   },
-   {
-      label: " 2",
-      VietNam: 800,
-      Asia: 1200,
-      Europe: 1300,
-      America: 300,
-      Average: 177
-   },
-   {
-      label: " 3",
-      VietNam: 950,
-      Asia: 950,
-      Europe: 900,
-      America: 500,
-      Average: 500
-   },
-   {
-      label: " 4",
-      VietNam: 500,
-      Asia: 500,
-      Europe: 390,
-      America: 100,
-      Average: 322
-   },
-   {
-      label: " 5",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 100,
-      America: 300,
-      Average: 666
-   },
-   {
-      label: "Tháng 6",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 100,
-      America: 300,
-      Average: 877
-   },
-   {
-      label: "Tháng 7",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 10,
-      America: 300,
-      Average: 500
-   },
-   {
-      label: " 8",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 100,
-      America: 300,
-      Average: 411
-   },
-   {
-      label: " 9",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 100,
-      America: 300,
-      Average: 311
-   },
-   {
-      label: " 10",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 100,
-      America: 300,
-      Average: 211
-   },
-   {
-      label: " 11",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 100,
-      America: 300,
-      Average: 611
-   },
-   {
-      label: "Tháng 12",
-      VietNam: 170,
-      Asia: 170,
-      Europe: 100,
-      America: 300,
-      Average: 877
-   }
-];
+// const data = [
+//    {
+//       label: "Tháng 1",
+//       VietNam: 1000,
+//       Asia: 800,
+//       Europe: 1260,
+//       America: 200, //Châu Mỹ
+//       Average: 122
+//       //Chi tiết các tỉnh xem tại trang web:
+//       // https://en.wikipedia.org/wiki/List_of_regions_of_Vietnam
+//    },
+//    {
+//       label: " 2",
+//       VietNam: 800,
+//       Asia: 1200,
+//       Europe: 1300,
+//       America: 300,
+//       Average: 177
+//    },
+//    {
+//       label: " 3",
+//       VietNam: 950,
+//       Asia: 950,
+//       Europe: 900,
+//       America: 500,
+//       Average: 500
+//    },
+//    {
+//       label: " 4",
+//       VietNam: 500,
+//       Asia: 500,
+//       Europe: 390,
+//       America: 100,
+//       Average: 322
+//    },
+//    {
+//       label: " 5",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 100,
+//       America: 300,
+//       Average: 666
+//    },
+//    {
+//       label: "Tháng 6",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 100,
+//       America: 300,
+//       Average: 877
+//    },
+//    {
+//       label: "Tháng 7",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 10,
+//       America: 300,
+//       Average: 500
+//    },
+//    {
+//       label: " 8",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 100,
+//       America: 300,
+//       Average: 411
+//    },
+//    {
+//       label: " 9",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 100,
+//       America: 300,
+//       Average: 311
+//    },
+//    {
+//       label: " 10",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 100,
+//       America: 300,
+//       Average: 211
+//    },
+//    {
+//       label: " 11",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 100,
+//       America: 300,
+//       Average: 611
+//    },
+//    {
+//       label: "Tháng 12",
+//       VietNam: 170,
+//       Asia: 170,
+//       Europe: 100,
+//       America: 300,
+//       Average: 877
+//    }
+// ];
 const ds = new DataSet();
-const dv = ds.createView().source(data);
-dv.transform({
-   type: "fold",
-   fields: ["VietNam", "Asia", "Europe", "America"], //Độ rộng tường
-   key: "type", // key lĩnh vực
-   value: "value" // value lĩnh vực
-});
-
-const scale = {
-   Average: {
-      type: "linear",
-      min: 0, //right info at line
-      max: 1400 //right info at line
-      //2 thông số này cần phải tính toán cho tương ứng với đơn vị cột bên phải
-      // Tính như nào thì phải có số liệu thực mới tính được
-   }
-};
 
 let chartIns = null;
 
@@ -129,6 +112,31 @@ const getG2Instance = chart => {
 
 export default class ColumnChartAll extends React.Component {
    render() {
+      const { data, year, max } = this.props;
+      let dv = null;
+      for (let i = 0; i < data.length; i++) {
+         if (data[i].year === year) {
+            dv = ds.createView().source(data[i].data);
+            break;
+         }
+      }
+
+      dv.transform({
+         type: "fold",
+         fields: ["VietNam", "Asia", "Europe", "America"], //Độ rộng tường
+         key: "type", // key lĩnh vực
+         value: "value" // value lĩnh vực
+      });
+
+      const scale = {
+         Average: {
+            type: "linear",
+            min: 0, //right info at line
+            max: max //right info at line
+            //2 thông số này cần phải tính toán cho tương ứng với đơn vị cột bên phải
+            // Tính như nào thì phải có số liệu thực mới tính được
+         }
+      };
       return (
          <Chart
             height={400}

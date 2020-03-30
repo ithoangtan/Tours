@@ -34,6 +34,7 @@ export default class topBarNotice extends Component {
                trigger={["click"]}
             >
                <Link
+                  to="#"
                   className="nav-link ant-dropdown-link"
                   onClick={e => e.preventDefault()}
                >

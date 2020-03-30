@@ -13,27 +13,17 @@ class ReportViewNumberContainer extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
    }
+
+   fetch = async () => {};
+
    componentWillMount() {
       const { reportAllActions } = this.props;
       const { fetchReportRequest } = reportAllActions;
       fetchReportRequest();
    }
-   analyticReport() {
-      const { report } = this.props;
-      let report2 = [];
-      if (report !== undefined || report !== [] || report !== null) {
-         for (let index = 0; index < report.length - 1; index++) {
-            report[index].forEach(element => {
-               report2.push(element);
-            });
-         }
-      }
-      return report2;
-   }
    render() {
-      let report = this.analyticReport();
-      let report2 = [{ tourNumber: 0 }, { total: 0 }, { verifyAccount: 0 }];
-      if (report.length !== 0) report2 = [...report];
+      let report = this.props.report;
+      if (report.total === undefined) return <div></div>;
 
       return (
          <div className="row">
@@ -48,7 +38,7 @@ class ReportViewNumberContainer extends Component {
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
                               <NumberFormat
-                                 value={report2.total}
+                                 value={report.total}
                                  displayType={"text"}
                                  thousandSeparator={true}
                                  prefix={""}
@@ -73,7 +63,7 @@ class ReportViewNumberContainer extends Component {
                               Số Tours (chưa đến lịch)
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              {report2.tourNumber} / {report2.tourTotalNumber}{" "}
+                              {report.tourNumber} / {report.tourTotalNumber}{" "}
                               Tours
                            </div>
                         </div>
@@ -94,7 +84,7 @@ class ReportViewNumberContainer extends Component {
                               Tổng số người dùng đăng ký
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              {report2.verifyAccount} Người
+                              {report.verifyAccount} Người
                            </div>
                         </div>
                         <div className="col-auto">
@@ -114,8 +104,8 @@ class ReportViewNumberContainer extends Component {
                               Yêu cầu đang chờ xử lý
                            </div>
                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              {report2.totalRequestNotification +
-                                 report2.totalRequestMail}{" "}
+                              {report.totalRequestNotification +
+                                 report.totalRequestMail}{" "}
                               Request
                            </div>
                         </div>
@@ -135,7 +125,7 @@ ReportViewNumberContainer.propTypes = {
    reportAllActions: PropTypes.shape({
       fetchReportRequest: PropTypes.func
    }),
-   report: PropTypes.array
+   report: PropTypes.object
 };
 
 const mapStateToProps = state => {

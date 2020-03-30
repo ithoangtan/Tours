@@ -3,12 +3,40 @@ import { Chart, Geom, Axis, Tooltip, Coord, Legend } from "bizcharts";
 
 export default class CircleChart extends Component {
    render() {
+      const { dataCount } = this.props;
+
+      let sumDataCount =
+         dataCount.personal +
+         dataCount.couple +
+         dataCount.family +
+         dataCount.friend +
+         dataCount.business;
+
+      let personalPercent =
+         Math.round((dataCount.personal / sumDataCount) * 100) / 100;
+      let couplePercent =
+         Math.round((dataCount.couple / sumDataCount) * 100) / 100;
+      let familyPercent =
+         Math.round((dataCount.family / sumDataCount) * 100) / 100;
+      let friendPercent =
+         Math.round((dataCount.friend / sumDataCount) * 100) / 100;
+      let businessPercent =
+         Math.round((dataCount.business / sumDataCount) * 100) / 100;
+
       const data = [
-         { item: "Cá Nhân", count: 4000, percent: 0.4 },
-         { item: "Cặp Đôi", count: 2100, percent: 0.21 },
-         { item: "Gia Đình", count: 1700, percent: 0.17 },
-         { item: "Bạn Bè", count: 1300, percent: 0.13 },
-         { item: "Doanh Nghiệp", count: 900, percent: 0.09 }
+         {
+            item: "Cá Nhân",
+            count: dataCount.personal,
+            percent: personalPercent
+         },
+         { item: "Cặp Đôi", count: dataCount.couple, percent: couplePercent },
+         { item: "Gia Đình", count: dataCount.family, percent: familyPercent },
+         { item: "Bạn Bè", count: dataCount.friend, percent: friendPercent },
+         {
+            item: "Doanh Nghiệp",
+            count: dataCount.business,
+            percent: businessPercent
+         }
       ];
 
       const cols = {
@@ -58,7 +86,7 @@ export default class CircleChart extends Component {
                      "item*count*percent",
                      (item, count, percent) => {
                         console.log(count, percent);
-                        count = `${count} người`;
+                        count = `${count} lượt`;
                         percent = `   ${percent * 100}%`;
                         return {
                            name: item,

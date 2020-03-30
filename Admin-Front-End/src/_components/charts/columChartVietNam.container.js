@@ -2,158 +2,131 @@ import React from "react";
 import { Chart, Axis, Tooltip, Geom, Legend } from "bizcharts";
 import DataSet from "@antv/data-set";
 
-const data = [
-   {
-      label: "Tháng 1",
-      "Northern Vietnam": 100, //Bắc Bộ
-      "North Central": 180, //Bắc Trung Bộ
-      "South Central Coast": 150, //Duyên Hải Nam Trung Bộ
-      "Central Highlands": 320, //Tây Nguyên
-      Southeast: 200, //Đông Nam Bộ, Miền Đông
-      "Mekong River Delta": 300, //Đồng Bằng sông Cửu Long
-      Average: 251
-      //Chi tiết các tỉnh xem tại trang web:
-      // https://en.wikipedia.org/wiki/List_of_regions_of_Vietnam
-   },
-   {
-      label: "2",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 211
-   },
-   {
-      label: "3",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 271
-   },
-   {
-      label: "4",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 251
-   },
-   {
-      label: "5",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 211
-   },
-   {
-      label: "Tháng 6",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 251
-   },
-   {
-      label: "Tháng 7",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 221
-   },
-   {
-      label: "8",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 251
-   },
-   {
-      label: "9",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 231
-   },
-   {
-      label: "10",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 251
-   },
-   {
-      label: "11",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 251
-   },
-   {
-      label: "Tháng 12",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 330
-   },
-   {
-      label: "Trung bình",
-      "Northern Vietnam": 100,
-      "North Central": 180,
-      "South Central Coast": 150,
-      "Central Highlands": 320,
-      Southeast: 200,
-      "Mekong River Delta": 300,
-      Average: 152
-   }
-];
+// const dataTemplate = [
+//    {
+//       label: "Tháng 1",
+//       "Northern Vietnam": 100, //Bắc Bộ
+//       "North Central": 180, //Bắc Trung Bộ
+//       "South Central Coast": 150, //Duyên Hải Nam Trung Bộ
+//       "Central Highlands": 320, //Tây Nguyên
+//       Southeast: 200, //Đông Nam Bộ, Miền Đông
+//       "Mekong River Delta": 300, //Đồng Bằng sông Cửu Long
+//       Average: 251
+//       //Chi tiết các tỉnh xem tại trang web:
+//       // https://en.wikipedia.org/wiki/List_of_regions_of_Vietnam
+//    },
+//    {
+//       label: "2",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 211
+//    },
+//    {
+//       label: "3",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 271
+//    },
+//    {
+//       label: "4",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 251
+//    },
+//    {
+//       label: "5",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 211
+//    },
+//    {
+//       label: "Tháng 6",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 251
+//    },
+//    {
+//       label: "Tháng 7",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 221
+//    },
+//    {
+//       label: "8",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 251
+//    },
+//    {
+//       label: "9",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 231
+//    },
+//    {
+//       label: "10",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 251
+//    },
+//    {
+//       label: "11",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 251
+//    },
+//    {
+//       label: "Tháng 12",
+//       "Northern Vietnam": 100,
+//       "North Central": 180,
+//       "South Central Coast": 150,
+//       "Central Highlands": 320,
+//       Southeast: 200,
+//       "Mekong River Delta": 300,
+//       Average: 330
+//    }
+// ];
 const ds = new DataSet();
-const dv = ds.createView().source(data);
-dv.transform({
-   type: "fold",
-   fields: [
-      "Northern Vietnam", //Bắc Bộ
-      "North Central", //Bắc Trung Bộ
-      "South Central Coast", //Duyên Hải Nam Trung Bộ
-      "Central Highlands", //Tây Nguyên
-      "Southeast", //Đông Nam Bộ, Miền Đông
-      "Mekong River Delta" //Đồng Bằng sông Cửu Long
-   ], //Độ rộng tường
-   key: "type", // key lĩnh vực
-   value: "value" // value lĩnh vực
-});
-const scale = {
-   Average: { type: "linear", min: 0, max: 350 }
-};
 
 let chartIns = null;
 
@@ -163,6 +136,30 @@ const getG2Instance = chart => {
 
 export default class ColumnChartVietNam extends React.Component {
    render() {
+      const { data, year, max } = this.props;
+      let dv = null;
+      for (let i = 0; i < data.length; i++) {
+         if (data[i].year === year) {
+            dv = ds.createView().source(data[i].data);
+            break;
+         }
+      }
+      dv.transform({
+         type: "fold",
+         fields: [
+            "Northern Vietnam", //Bắc Bộ
+            "North Central", //Bắc Trung Bộ
+            "South Central Coast", //Duyên Hải Nam Trung Bộ
+            "Central Highlands", //Tây Nguyên
+            "Southeast", //Đông Nam Bộ, Miền Đông
+            "Mekong River Delta" //Đồng Bằng sông Cửu Long
+         ], //Độ rộng tường
+         key: "type", // key lĩnh vực
+         value: "value" // value lĩnh vực
+      });
+      const scale = {
+         Average: { type: "linear", min: 0, max: max }
+      };
       return (
          <Chart
             height={400}
