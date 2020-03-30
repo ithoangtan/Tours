@@ -148,11 +148,7 @@ exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
           Southeast[i].numbersChildren = 0;
         if (Southeast[i].numbersBaby === null) Southeast[i].numbersBaby = 0;
       }
-      MekongRiverDelta = [
-        "MekongRiverDelta",
-        ...listReport[5 + 8 * index],
-        this.getAverage(MekongRiverDelta)
-      ];
+      MekongRiverDelta = ["MekongRiverDelta", ...listReport[5 + 8 * index]];
       for (let i = 1; i < MekongRiverDelta.length; i++) {
         if (MekongRiverDelta[i].numbersPeople === null)
           MekongRiverDelta[i].numbersPeople = 0;
@@ -172,6 +168,27 @@ exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
         Southeast,
         MekongRiverDelta
       ];
+      // Tính sum của VietNam
+      let VietNamSum = ["VietNamSum"];
+      for (let i = 1; i < 13; i++) {
+        //Chạy từ 1 bởi vì phần tử đầu tiên là tên ý nghĩa của mảng
+        let sum = {
+          numbersPeople: 0,
+          numbersYoung: 0,
+          numbersChildren: 0,
+          numbersBaby: 0
+        };
+        for (let j = 1; j < VietNam.length; j++) {
+          //Chạy từ 1 bởi vì phần tử đầu tiên là tên ý nghĩa của mảng
+          sum.numbersPeople += VietNam[j][i].numbersPeople;
+          sum.numbersYoung += VietNam[j][i].numbersYoung;
+          sum.numbersChildren += VietNam[j][i].numbersChildren;
+          sum.numbersBaby += VietNam[j][i].numbersBaby;
+        }
+        VietNamSum.push(sum);
+      }
+      VietNam.push(VietNamSum);
+
       Asian = ["Asian", ...listReport[6 + 8 * index]];
       for (let i = 1; i < Asian.length; i++) {
         if (Asian[i].numbersPeople === null) Asian[i].numbersPeople = 0;
@@ -193,9 +210,37 @@ exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
         if (America[i].numbersChildren === null) America[i].numbersChildren = 0;
         if (America[i].numbersBaby === null) America[i].numbersBaby = 0;
       }
-
       report.push(arrYears[index], VietNam, Asian, Europe, America);
 
+      // Tính sum của VietNam
+      let allSum = ["AllSum"];
+      for (let i = 1; i < 13; i++) {
+        //Chạy từ 1 bởi vì phần tử đầu tiên là tên ý nghĩa của mảng
+        let sum = {
+          numbersPeople: 0,
+          numbersYoung: 0,
+          numbersChildren: 0,
+          numbersBaby: 0
+        };
+        for (let j = 1; j < report.length; j++) {
+          if (j === 1) {
+            sum.numbersPeople +=
+              report[j][report[j].length - 1][i].numbersPeople;
+            sum.numbersYoung += report[j][report[j].length - 1][i].numbersYoung;
+            sum.numbersChildren +=
+              report[j][report[j].length - 1][i].numbersChildren;
+            sum.numbersBaby += report[j][report[j].length - 1][i].numbersBaby;
+          } else {
+            //Chạy từ 1 bởi vì phần tử đầu tiên là tên ý nghĩa của mảng
+            sum.numbersPeople += report[j][i].numbersPeople;
+            sum.numbersYoung += report[j][i].numbersYoung;
+            sum.numbersChildren += report[j][i].numbersChildren;
+            sum.numbersBaby += report[j][i].numbersBaby;
+          }
+        }
+        allSum.push(sum);
+      }
+      report.push(allSum);
       reports.push(report);
     }
     res.status(200).json(reports);
