@@ -65,10 +65,5 @@ if (process.env.NODE_ENV === "production") {
 app.use("/", require("./routes/api"));
 
 app.listen(app.get("port"), function() {
-  console.log(`server on port ${app.get("port")}`);
-});
-
-//Test upload img
-app.get("/load", function(req, res) {
-  res.sendFile(__dirname + "\\index.html");
+  console.log(`Server on port ${app.get("port")}`);
 });

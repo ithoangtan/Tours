@@ -21,6 +21,60 @@ Report.getReport = function() {
   });
 };
 
+Report.getReportNumberOfTourists = function() {
+  return new Promise(function(resolve, reject) {
+    database
+      .query("call " + databaseProduction + `.spReportNumberOfTourists(); `)
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
+Report.getYearFirstNewTour = function() {
+  return new Promise(function(resolve, reject) {
+    database
+      .query("call " + databaseProduction + `.spGetYearFirstNewTour(); `)
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+Report.getYearFirstNewOrder = function() {
+  return new Promise(function(resolve, reject) {
+    database
+      .query("call " + databaseProduction + `.spGetYearFirstNewOrder(); `)
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+Report.getReportNumberPeopleFollowDestinationAll = function(
+  yearOldest,
+  yearLatest
+) {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spReportNumberPeopleFollowDestinationAll(${yearOldest}, ${yearLatest}); `
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
+Report.getReportRevenueFollowMonthAll = function(dateOldest, dateLatest) {
+  return new Promise(function(resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spReportRevenueFollowMonthAll('${dateOldest}', '${dateLatest}' ); `
+      )
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
+};
+
 /**
  * Hàm này trả về các điểm đến theo thời gian
  */

@@ -3,22 +3,281 @@ import React, { Component } from "react";
 import LineChart from "../../../_components/charts/lineChart.container";
 import ColumnChartAll from "../../../_components/charts/columChartAll.container";
 import ColumnChartVietNam from "../../../_components/charts/columChartVietNam.container";
-import { Radio } from "antd";
+import { Radio, Spin, Select } from "antd";
+
 import CircleChart from "../../../_components/charts/circleChart.container";
 
-export default class ReportViewChartContainer extends Component {
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as reportActions from "../../../_actions/report.actions";
+
+const { Option } = Select;
+
+class ReportViewChartContainer extends Component {
    state = {
-      where: "all"
+      where: "all",
+      year: 2019
    };
 
    onChangeWhereReport = e => {
-      console.log("radio checked", e.target.value);
+      // console.log("radio checked", e.target.value);
       this.setState({
          where: e.target.value
       });
    };
+
+   componentWillMount() {
+      const { reportAllActions } = this.props;
+      const {
+         fetchReportNumberOfTouristsRequest,
+         fetchReportNumberPeopleFollowDestinationRequest,
+         fetchReportRevenueFollowMonthAllRequest
+      } = reportAllActions;
+      fetchReportNumberOfTouristsRequest();
+      fetchReportNumberPeopleFollowDestinationRequest();
+      fetchReportRevenueFollowMonthAllRequest();
+   }
+
+   handleChangeYear = value => {
+      this.setState({ year: value.key });
+   };
+
+   renderOptionYear() {
+      const { reportNumberPeopleFollowDestination } = this.props;
+
+      let result = reportNumberPeopleFollowDestination.map((item, index) => {
+         return (
+            <Option value={item[0]} key={index}>
+               {item[0]}
+            </Option>
+         );
+      });
+
+      return result;
+   }
+
+   dataYear(data) {
+      for (let index = 0; index < data.length; index++) {
+         if (data[index][0] === this.state.year) return data[index].data;
+         else return data[1].data;
+      }
+   }
+
    render() {
       const { where } = this.state;
+      const {
+         reportRevenueFollowMonthAll,
+         reportNumberOfTourists,
+         reportNumberPeopleFollowDestination
+      } = this.props;
+
+      if (
+         reportRevenueFollowMonthAll.length === 0 ||
+         reportNumberPeopleFollowDestination.length === 0 ||
+         reportNumberOfTourists.personal === undefined
+      )
+         return (
+            <div
+               className="container col-md-12 ht-d-flex-col-center-center"
+               style={{ width: "100%", height: "20vh" }}
+            >
+               <Spin size="large" tip="Caculating..." />
+            </div>
+         );
+
+      // Map data for LineChart
+      let dataReportRevenueFollowMonthAll = [];
+      for (let i = 0; i < reportRevenueFollowMonthAll.length; i++) {
+         for (
+            let j = 0;
+            j < reportRevenueFollowMonthAll[i][1].totalMonth.length;
+            j++
+         ) {
+            dataReportRevenueFollowMonthAll.push({
+               type: `${reportRevenueFollowMonthAll[i][0]}`,
+               month: `${j + 1}`,
+               value: reportRevenueFollowMonthAll[i][1].totalMonth[j]
+            });
+         }
+      }
+
+      //Viet Nam
+      let dataReportNumberPeopleFollowDestinationVietNam = [];
+      let maxVietNam = 0;
+      for (let i = 0; i < reportNumberPeopleFollowDestination.length; i++) {
+         let data = [];
+         for (let k = 1; k <= 12; k++) {
+            let dataMonth = {};
+            let temp = 0;
+            dataMonth = { ...dataMonth, label: `${k}` };
+            for (
+               let j = 1;
+               j < reportNumberPeopleFollowDestination[i][1].length;
+               j++
+            ) {
+               // 0: VietNam, 7: VietNamSum
+               temp =
+                  reportNumberPeopleFollowDestination[i][1][j][k]
+                     .numbersPeople +
+                  reportNumberPeopleFollowDestination[i][1][j][k].numbersYoung +
+                  reportNumberPeopleFollowDestination[i][1][j][k]
+                     .numbersChildren +
+                  reportNumberPeopleFollowDestination[i][1][j][k].numbersBaby;
+               if (
+                  reportNumberPeopleFollowDestination[i][1][j][0] ===
+                  "NorthernVietnam"
+               )
+                  dataMonth = {
+                     ...dataMonth,
+                     "Northern Vietnam": temp
+                  };
+               if (
+                  reportNumberPeopleFollowDestination[i][1][j][0] ===
+                  "NorthCentral"
+               )
+                  dataMonth = {
+                     ...dataMonth,
+                     "North Central": temp
+                  };
+               if (
+                  reportNumberPeopleFollowDestination[i][1][j][0] ===
+                  "SouthCentralCoast"
+               )
+                  dataMonth = {
+                     ...dataMonth,
+                     "South Central Coast": temp
+                  };
+               if (
+                  reportNumberPeopleFollowDestination[i][1][j][0] ===
+                  "CentralHighlands"
+               )
+                  dataMonth = {
+                     ...dataMonth,
+                     "Central Highlands": temp
+                  };
+               if (
+                  reportNumberPeopleFollowDestination[i][1][j][0] ===
+                  "Southeast"
+               )
+                  dataMonth = {
+                     ...dataMonth,
+                     Southeast: temp
+                  };
+               if (
+                  reportNumberPeopleFollowDestination[i][1][j][0] ===
+                  "MekongRiverDelta"
+               )
+                  dataMonth = {
+                     ...dataMonth,
+                     "Mekong River Delta": temp
+                  };
+               if (
+                  reportNumberPeopleFollowDestination[i][1][j][0] ===
+                  "VietNamSum"
+               )
+                  dataMonth = {
+                     ...dataMonth,
+                     Average: Math.ceil(temp / 6)
+                  };
+
+               if (temp > maxVietNam) maxVietNam = temp;
+            }
+            data.push({ ...dataMonth });
+         }
+
+         dataReportNumberPeopleFollowDestinationVietNam.push({
+            year: reportNumberPeopleFollowDestination[i][0],
+            data
+         });
+      }
+
+      // reportNumberPeopleFollowDestination[0] : [2019]
+      // reportNumberPeopleFollowDestination[0][0] : 2019;
+      // reportNumberPeopleFollowDestination[0][1] : [VietNam];
+      // reportNumberPeopleFollowDestination[0][1][0] : "VietNam";
+      // reportNumberPeopleFollowDestination[0][1][1] : [NorthernVietNam];
+      // reportNumberPeopleFollowDestination[0][1][7] : [VietNamSum];
+      // reportNumberPeopleFollowDestination[0][2] : [Asian];
+      // reportNumberPeopleFollowDestination[0][2][0] : "Asian";
+      // reportNumberPeopleFollowDestination[0][2][1] : {numbersPeople, numbersYoung, numbersChildren, numbersBaby};
+      // reportNumberPeopleFollowDestination[0][2][12] : {numbersPeople, numbersYoung, numbersChildren, numbersBaby};
+      // reportNumberPeopleFollowDestination[0][3] : [Europe];
+      // reportNumberPeopleFollowDestination[0][4] : [America];
+      // reportNumberPeopleFollowDestination[0][5] : [AllSum];
+      // reportNumberPeopleFollowDestination[1][0] : 2020;
+      // reportNumberPeopleFollowDestination[1] : [2020];
+      // All
+      let dataReportNumberPeopleFollowDestinationAll = [];
+      let maxAll = 0;
+      for (let i = 0; i < reportNumberPeopleFollowDestination.length; i++) {
+         let data = [];
+         for (let k = 1; k <= 12; k++) {
+            let dataMonth = {};
+            let temp = 0;
+            dataMonth = { ...dataMonth, label: `${k}` };
+            for (
+               let j = 1;
+               j < reportNumberPeopleFollowDestination[i].length;
+               j++
+            ) {
+               if (j === 1) {
+                  temp =
+                     reportNumberPeopleFollowDestination[i][j][7][k]
+                        .numbersPeople +
+                     reportNumberPeopleFollowDestination[i][j][7][k]
+                        .numbersYoung +
+                     reportNumberPeopleFollowDestination[i][j][7][k]
+                        .numbersChildren +
+                     reportNumberPeopleFollowDestination[i][j][7][k]
+                        .numbersBaby;
+                  if (temp > maxAll) maxAll = temp;
+                  dataMonth = {
+                     ...dataMonth,
+                     VietNam: temp
+                  };
+               } else if (
+                  j ===
+                  reportNumberPeopleFollowDestination[i].length - 1
+               ) {
+                  temp =
+                     (reportNumberPeopleFollowDestination[i][j][k]
+                        .numbersPeople +
+                        reportNumberPeopleFollowDestination[i][j][k]
+                           .numbersYoung +
+                        reportNumberPeopleFollowDestination[i][j][k]
+                           .numbersChildren +
+                        reportNumberPeopleFollowDestination[i][j][k]
+                           .numbersBaby) /
+                     4;
+                  if (temp > maxAll) maxAll = temp;
+                  dataMonth = {
+                     ...dataMonth,
+                     Average: temp
+                  };
+               } else {
+                  temp =
+                     reportNumberPeopleFollowDestination[i][j][k]
+                        .numbersPeople +
+                     reportNumberPeopleFollowDestination[i][j][k].numbersYoung +
+                     reportNumberPeopleFollowDestination[i][j][k]
+                        .numbersChildren +
+                     reportNumberPeopleFollowDestination[i][j][k].numbersBaby;
+                  if (temp > maxAll) maxAll = temp;
+                  dataMonth = {
+                     ...dataMonth,
+                     [reportNumberPeopleFollowDestination[i][j][0]]: temp
+                  };
+               }
+            }
+            data.push({ ...dataMonth });
+         }
+
+         dataReportNumberPeopleFollowDestinationAll.push({
+            year: reportNumberPeopleFollowDestination[i][0],
+            data
+         });
+      }
       return (
          <>
             <div className="row">
@@ -66,7 +325,14 @@ export default class ReportViewChartContainer extends Component {
                      {/* Card Body */}
                      <div className="card-body">
                         {/* <div className="chart-area"> */}
-                        <LineChart />
+                        <LineChart
+                           data={dataReportRevenueFollowMonthAll}
+                           yearDefault={`${
+                              reportRevenueFollowMonthAll[
+                                 reportRevenueFollowMonthAll.length - 1
+                              ][0]
+                           }`}
+                        />
                         {/* </div> */}
                      </div>
                   </div>
@@ -113,7 +379,7 @@ export default class ReportViewChartContainer extends Component {
                      </div>
                      {/* Card Body */}
                      <div className="card-body">
-                        <CircleChart />
+                        <CircleChart dataCount={reportNumberOfTourists} />
                      </div>
                   </div>
                </div>
@@ -135,6 +401,15 @@ export default class ReportViewChartContainer extends Component {
                               <Radio.Button value="all">Tất cả</Radio.Button>
                               <Radio.Button value="vn">Việt Nam</Radio.Button>
                            </Radio.Group>
+
+                           <Select
+                              labelInValue={true}
+                              style={{ marginLeft: 8, width: "80px" }}
+                              placeholder={`${reportNumberPeopleFollowDestination[0][0]}`}
+                              onChange={this.handleChangeYear}
+                           >
+                              {this.renderOptionYear()}
+                           </Select>
                         </div>
                         <div className="dropdown no-arrow">
                            <a
@@ -172,9 +447,19 @@ export default class ReportViewChartContainer extends Component {
                      <div className="card-body">
                         {/* <div className="chart-area"> */}
                         {where === "all" ? (
-                           <ColumnChartAll />
+                           <ColumnChartAll
+                              data={dataReportNumberPeopleFollowDestinationAll}
+                              year={this.state.year}
+                              max={maxAll}
+                           />
                         ) : (
-                           <ColumnChartVietNam />
+                           <ColumnChartVietNam
+                              data={
+                                 dataReportNumberPeopleFollowDestinationVietNam
+                              }
+                              year={this.state.year}
+                              max={maxVietNam}
+                           />
                         )}
 
                         {/* </div> */}
@@ -186,3 +471,33 @@ export default class ReportViewChartContainer extends Component {
       );
    }
 }
+ReportViewChartContainer.propTypes = {
+   classes: PropTypes.object,
+   reportAllActions: PropTypes.shape({
+      fetchReportNumberOfTouristsRequest: PropTypes.func,
+      fetchReportNumberPeopleFollowDestinationRequest: PropTypes.func,
+      fetchReportRevenueFollowMonthAllRequest: PropTypes.func
+   }),
+   reportNumberOfTourists: PropTypes.object,
+   reportNumberPeopleFollowDestination: PropTypes.array,
+   reportRevenueFollowMonthAll: PropTypes.array
+};
+
+const mapStateToProps = state => {
+   return {
+      reportRevenueFollowMonthAll: state.report.reportRevenueFollowMonthAll,
+      reportNumberOfTourists: state.report.reportNumberOfTourists,
+      reportNumberPeopleFollowDestination:
+         state.report.reportNumberPeopleFollowDestination
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      reportAllActions: bindActionCreators(reportActions, dispatch)
+      //Bên trái chỉ là đặt tên thôi, bên phải là reportActions ở bên report.action.js
+   };
+};
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(ReportViewChartContainer);
