@@ -43,7 +43,6 @@ class TableGallery extends Component {
    };
 
    handleOkTagsAndServices = e => {
-      console.log(e);
       this.setState({
          visibleTagsAndServicesModal: false
       });
@@ -190,11 +189,16 @@ class TableGallery extends Component {
                width="90%"
                title="Chỉnh sửa các Tag và Dịch vụ cung cấp trong Tour"
                visible={this.state.visibleTagsAndServicesModal}
-               onOk={this.handleOkTagsAndServices}
+               // onOk={this.handleOkTagsAndServices}
                onCancel={this.handleCancelTagsAndServices}
+               footer={null}
             >
                <div className="ht-timeline-container-main container col-md-12">
-                  <TagsAndServicesContainer />
+                  <TagsAndServicesContainer
+                     idTour={record.idTour}
+                     checkTags={record.tags}
+                     checkServices={record.services}
+                  />
                </div>
             </Modal>
 
