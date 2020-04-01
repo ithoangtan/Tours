@@ -26,7 +26,7 @@ export const patchTour = data => {
 
 const urlPutTagsAndServices = "tour/tags-and-services";
 export const putTagsAndServices = data => {
-   return axiosService.put(`${API_ENDPOINT}/${urlPutTagsAndServices}`, data);
+   return axiosService.patch(`${API_ENDPOINT}/${urlPutTagsAndServices}`, data);
 };
 
 const urlImages = "images";

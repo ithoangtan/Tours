@@ -5,6 +5,7 @@ import {
    toastDeleteSuccess,
    toastCreateSuccess
 } from "../_helper/toastify.helper";
+import { message } from "antd";
 const initialState = {
    listTour: [],
    listImageTour: [],
@@ -136,6 +137,8 @@ const reducer = (state = initialState, action) => {
       // Put - tags and services
       case tourConstants.FETCH_TAGS_AND_SERVICES_SUCCESS: {
          const { data } = action.payload;
+         const { newRecord } = action.newRecord;
+         message.success(newRecord.titleTour + " --- saved!");
          return {
             ...state,
             putTagsAndServices: data

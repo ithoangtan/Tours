@@ -34,7 +34,7 @@ class TagsAndServices extends Component {
    };
 
    fetch = async (params = {}) => {
-      await reqwest({
+      reqwest({
          url: `${API_ENDPOINT}/tags`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
@@ -51,7 +51,7 @@ class TagsAndServices extends Component {
             tags
          });
       });
-      await reqwest({
+      reqwest({
          url: `${API_ENDPOINT}/services`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
@@ -73,11 +73,15 @@ class TagsAndServices extends Component {
    componentWillMount() {
       this.fetch();
       const { checkTags, checkServices } = this.props;
+      if (checkTags?.length !== 0)
+         this.setState({
+            checkedListTags: JSON.parse(checkTags)
+         });
 
-      this.setState({
-         checkedListTags: JSON.parse(checkTags),
-         checkedListServices: JSON.parse(checkServices)
-      });
+      if (checkServices?.length !== 0)
+         this.setState({
+            checkedListServices: JSON.parse(checkServices)
+         });
    }
 
    onChangeTags = checkedListTags => {
@@ -119,13 +123,13 @@ class TagsAndServices extends Component {
 
    handleSubmit = e => {
       e.preventDefault();
-      const { idTour } = this.props;
+      const { idTour, titleTour } = this.props;
       // Call API save data
-
       let newTagsAndServicesTour = {
          idTour,
-         tags: JSON.stringify(this.state.checkedListTags),
-         services: JSON.stringify(this.state.checkedListServices)
+         titleTour,
+         tags: this.state.checkedListTags,
+         services: this.state.checkedListServices
       };
       const { tourAllActions } = this.props;
       const { fetchPutTagsAndServicesRequest } = tourAllActions;

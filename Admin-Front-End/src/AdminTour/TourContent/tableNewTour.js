@@ -54,7 +54,7 @@ class TableNewRow extends Component {
    };
 
    fetch = async (params = {}) => {
-      await reqwest({
+      reqwest({
          url: `${API_ENDPOINT}/tags`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
@@ -71,7 +71,7 @@ class TableNewRow extends Component {
             tags
          });
       });
-      await reqwest({
+      reqwest({
          url: `${API_ENDPOINT}/services`,
          method: "GET",
          headers: { Authentication: getCookie("token") },

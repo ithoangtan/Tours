@@ -372,7 +372,7 @@ class EditableTable extends React.Component {
 
    fetch = async (params = {}) => {
       this.setState({ loading: true });
-      await reqwest({
+      reqwest({
          url: `${API_ENDPOINT}/tours`,
          method: "GET",
          headers: { Authentication: getCookie("token") },

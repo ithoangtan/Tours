@@ -28,7 +28,7 @@ router.get("/tours", tour.listAll);
 router.post("/tours/search", tour.listTourSearch);
 router.post("/tour", authenticated, tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
 router.patch("/tour", authenticated, tour.update);
-router.put("/tour/tags-and-services", authenticated, tour.putTagsAndServices);
+router.patch("/tour/tags-and-services", authenticated, tour.putTagsAndServices);
 router.delete("/tour", authenticated, tour.delete);
 
 //for schedule

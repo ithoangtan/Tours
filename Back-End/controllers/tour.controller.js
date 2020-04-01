@@ -133,6 +133,9 @@ exports.putTagsAndServices = function(req, res) {
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   // Phải truyền vào như v kh thì dăn lỗi ...
   updateTour = req.body;
+  updateTour.tags = JSON.stringify(req.body.tags);
+  updateTour.services = JSON.stringify(req.body.services);
+
   Tour.updateById(updateTour, function(err, tour) {
     if (err) res.send(err);
     res.send(tour);
