@@ -8,7 +8,7 @@ exports.listAll = function(req, res) {
   //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Schedule.getAllSchedule(function(err, schedule) {
     if (err) res.send(err);
-    res.json(schedule);
+    else res.json(schedule);
   });
 };
 
@@ -21,7 +21,7 @@ exports.create = function(req, res) {
   var newSchedule = new Schedule(req.body);
   Schedule.createSchedule(newSchedule, function(err, schedule) {
     if (err) res.send(err);
-    res.json(schedule);
+    else res.json(schedule);
   });
 };
 
@@ -35,14 +35,14 @@ exports.read = function(req, res) {
     //Get follow idSchedule
     Schedule.getScheduleById(req.query.idSchedule, function(err, schedule) {
       if (err) res.send(err);
-      res.json(schedule[0]); //Đã là API thì trả về phải chuẩn
+      else res.json(schedule[0]); //Đã là API thì trả về phải chuẩn
       //Chỉ có một phần tử thì không lý do gì phải res về một mảng
     });
   } else if (req.query.idTour !== null && req.query.idTour !== undefined) {
     //Get follow idTour
     Schedule.getScheduleByIdTour(req.query.idTour, function(err, schedule) {
       if (err) res.send(err);
-      res.json(schedule[0]);
+      else res.json(schedule[0]);
     });
   }
 };
@@ -53,11 +53,12 @@ exports.update = function(req, res) {
   //https://express-validator.github.io/docs/
 
   //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  // updateSchedule = new Schedule(req.body);
 
-  updateSchedule = new Schedule(req.body);
+  updateSchedule = req.body;
   Schedule.updateById(updateSchedule, function(err, schedule) {
     if (err) res.send(err);
-    res.send(schedule);
+    else res.json(schedule);
   });
 };
 
@@ -69,6 +70,6 @@ exports.delete = function(req, res) {
   //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Schedule.remove(req.query.idSchedule, function(err, idSchedule) {
     if (err) res.send(err);
-    res.send(idSchedule);
+    else res.json(idSchedule);
   });
 };
