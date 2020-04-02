@@ -12,12 +12,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as reportActions from "../../../_actions/report.actions";
 
+import moment from "moment";
+
 const { Option } = Select;
 
 class ReportViewChartContainer extends Component {
    state = {
       where: "all",
-      year: 2019
+      year: parseInt(moment(Date.now()).format("YYYY"), 10)
    };
 
    onChangeWhereReport = e => {
@@ -57,13 +59,6 @@ class ReportViewChartContainer extends Component {
       return result;
    }
 
-   dataYear(data) {
-      for (let index = 0; index < data.length; index++) {
-         if (data[index][0] === this.state.year) return data[index].data;
-         else return data[1].data;
-      }
-   }
-
    render() {
       const { where } = this.state;
       const {
@@ -72,19 +67,18 @@ class ReportViewChartContainer extends Component {
          reportNumberPeopleFollowDestination
       } = this.props;
 
-      if (
-         reportRevenueFollowMonthAll.length === 0 ||
-         reportNumberPeopleFollowDestination.length === 0 ||
-         reportNumberOfTourists.personal === undefined
-      )
-         return (
-            <div
-               className="container col-md-12 ht-d-flex-col-center-center"
-               style={{ width: "100%", height: "20vh" }}
-            >
-               <Spin size="large" tip="Caculating..." />
-            </div>
-         );
+      const xhtml = (
+         <div
+            className="container col-md-12 ht-d-flex-col-center-center"
+            style={{ width: "100%", height: "20vh" }}
+         >
+            <Spin size="large" tip="Caculating..." />
+         </div>
+      );
+
+      if (reportRevenueFollowMonthAll.length === 0) return xhtml;
+      if (reportNumberPeopleFollowDestination.length === 0) return xhtml;
+      if (reportNumberOfTourists.personal === undefined) return xhtml;
 
       // Map data for LineChart
       let dataReportRevenueFollowMonthAll = [];
@@ -278,6 +272,7 @@ class ReportViewChartContainer extends Component {
             data
          });
       }
+
       return (
          <>
             <div className="row">
@@ -327,11 +322,7 @@ class ReportViewChartContainer extends Component {
                         {/* <div className="chart-area"> */}
                         <LineChart
                            data={dataReportRevenueFollowMonthAll}
-                           yearDefault={`${
-                              reportRevenueFollowMonthAll[
-                                 reportRevenueFollowMonthAll.length - 1
-                              ][0]
-                           }`}
+                           yearDefault={`${this.state.year}`}
                         />
                         {/* </div> */}
                      </div>
@@ -405,7 +396,7 @@ class ReportViewChartContainer extends Component {
                            <Select
                               labelInValue={true}
                               style={{ marginLeft: 8, width: "80px" }}
-                              placeholder={`${reportNumberPeopleFollowDestination[0][0]}`}
+                              placeholder={`${this.state.year}`}
                               onChange={this.handleChangeYear}
                            >
                               {this.renderOptionYear()}

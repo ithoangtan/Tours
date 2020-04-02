@@ -232,3 +232,37 @@ export const fetchListTourImageRequest = () => {
          });
    };
 };
+
+//PUT Tags And Services
+export const fetchPutTagsAndServicesSuccess = (newRecord, data) => {
+   return {
+      type: tourConstants.FETCH_TAGS_AND_SERVICES_SUCCESS,
+      payload: {
+         data
+      },
+      newRecord: { newRecord }
+   };
+};
+
+export const fetchPutTagsAndServicesError = error => {
+   return {
+      type: tourConstants.FETCH_TAGS_AND_SERVICES_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchPutTagsAndServicesRequest = newRecord => {
+   return dispatch => {
+      tourApis
+         .putTagsAndServices(newRecord)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchPutTagsAndServicesSuccess(newRecord, data));
+         })
+         .catch(error => {
+            dispatch(fetchPutTagsAndServicesError(error));
+         });
+   };
+};

@@ -43,14 +43,12 @@ class TableGallery extends Component {
    };
 
    handleOkTagsAndServices = e => {
-      console.log(e);
       this.setState({
          visibleTagsAndServicesModal: false
       });
    };
 
    handleCancelTagsAndServices = e => {
-      console.log(e);
       this.setState({
          visibleTagsAndServicesModal: false
       });
@@ -63,14 +61,12 @@ class TableGallery extends Component {
    };
 
    handleOkTimeline = e => {
-      console.log(e);
       this.setState({
          visibleTimelineModal: false
       });
    };
 
    handleCancelTimeline = e => {
-      console.log(e);
       this.setState({
          visibleTimelineModal: false
       });
@@ -139,7 +135,7 @@ class TableGallery extends Component {
    onRemove = async file => {
       const { tourImageAllActions } = this.props;
       const { fetchDeleteTourImageRequest } = tourImageAllActions;
-      await fetchDeleteTourImageRequest(file);
+      fetchDeleteTourImageRequest(file);
       message.warn(`${file.idImage}, ${file.name} deleted!`);
    };
 
@@ -170,11 +166,15 @@ class TableGallery extends Component {
                width="90%"
                title="Chỉnh sửa mốc thời gian hiển thị"
                visible={this.state.visibleTimelineModal}
-               onOk={this.handleOkTimeline}
                onCancel={this.handleCancelTimeline}
+               footer={null}
             >
                <div className="ht-timeline-container-main container col-md-12">
-                  <TimelinesContainer />
+                  <TimelinesContainer
+                     idTour={record.idTour}
+                     titleTour={record.titleTour}
+                     onCancel={this.handleCancelTimeline}
+                  />
                </div>
             </Modal>
             <Button
@@ -190,11 +190,17 @@ class TableGallery extends Component {
                width="90%"
                title="Chỉnh sửa các Tag và Dịch vụ cung cấp trong Tour"
                visible={this.state.visibleTagsAndServicesModal}
-               onOk={this.handleOkTagsAndServices}
+               // onOk={this.handleOkTagsAndServices}
                onCancel={this.handleCancelTagsAndServices}
+               footer={null}
             >
                <div className="ht-timeline-container-main container col-md-12">
-                  <TagsAndServicesContainer />
+                  <TagsAndServicesContainer
+                     idTour={record.idTour}
+                     titleTour={record.titleTour}
+                     checkTags={record.tags}
+                     checkServices={record.services}
+                  />
                </div>
             </Modal>
 

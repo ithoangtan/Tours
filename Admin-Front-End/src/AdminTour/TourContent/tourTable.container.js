@@ -22,7 +22,10 @@ import {
    Form,
    Button,
    Icon,
-   Modal
+   Modal,
+   DatePicker,
+   Select,
+   Tooltip
 } from "antd";
 
 import NumberFormat from "react-number-format";
@@ -31,6 +34,9 @@ import TableGallery from "./tableGallery";
 import TableNewRow from "./tableNewTour";
 import Cookies from "js-cookie";
 import TourPreview from "./tourPreview";
+import TextArea from "antd/lib/input/TextArea";
+
+const { Option } = Select;
 
 function getCookie(name) {
    const token = Cookies.get(name);
@@ -60,10 +66,69 @@ const ResizeableTitle = props => {
 
 class EditableCell extends React.Component {
    getInput = () => {
-      if (this.props.inputType === "number") {
-         return <InputNumber />;
-      }
-      return <Input />;
+      if (this.props.inputType === "disabled") return <Input disabled />;
+      else if (this.props.inputType === "reuseSelect")
+         return (
+            <Select
+               showSearch
+               style={{ width: "100%" }}
+               optionFilterProp="children"
+               filterOption={(input, option) =>
+                  option.props.children
+                     .toLowerCase()
+                     .indexOf(input.toLowerCase()) >= 0
+               }
+            >
+               <Option value={0}>0 ngày</Option>
+               <Option value={1}>1 ngày</Option>
+               <Option value={2}>2 ngày</Option>
+               <Option value={3}>3 ngày</Option>
+               <Option value={4}>4 ngày</Option>
+               <Option value={5}>5 ngày</Option>
+               <Option value={6}>6 ngày</Option>
+               <Option value={7}>1 tuần</Option>
+               <Option value={14}>2 tuần</Option>
+               <Option value={21}>3 tuần</Option>
+               <Option value={30}>1 tháng</Option>
+            </Select>
+         );
+      else if (this.props.inputType === "priceNumber")
+         return <InputNumber min={0} step={10000} />;
+      else if (this.props.inputType === "timeSelect")
+         return (
+            <Select
+               showSearch
+               style={{ width: "100%" }}
+               optionFilterProp="children"
+               filterOption={(input, option) =>
+                  option.props.children
+                     .toLowerCase()
+                     .indexOf(input.toLowerCase()) >= 0
+               }
+            >
+               <Option value="1N 0Đ">1N 0Đ</Option>
+               <Option value="2N 1Đ">2N 1Đ</Option>
+               <Option value="3N 2Đ">3N 2Đ</Option>
+               <Option value="4N 3Đ">4N 3Đ</Option>
+               <Option value="5N 4Đ">5N 4Đ</Option>
+               <Option value="6N 5Đ">6N 5Đ</Option>
+               <Option value="7N 6Đ">7N 6Đ</Option>
+               <Option value="8N 7Đ">8N 7Đ</Option>
+               <Option value="9N 8Đ">9N 8Đ</Option>
+               <Option value="10N 9Đ">10N 9Đ</Option>
+            </Select>
+         );
+      else if (this.props.inputType === "datetime")
+         return <DatePicker showTime />;
+      else if (this.props.inputType === "describe") return <TextArea row={1} />;
+      else if (this.props.inputType === "saleNumber")
+         return <InputNumber min={0} max={100} />;
+      else return <Input />;
+   };
+
+   initialValueEditForm = (record, index) => {
+      if (index === "departureDay") return moment(record[index]);
+      else return record[index];
    };
 
    renderCell = ({ getFieldDecorator }) => {
@@ -85,10 +150,10 @@ class EditableCell extends React.Component {
                      rules: [
                         {
                            required: true,
-                           message: `Please Input ${title}!`
+                           message: `Pls input ${title}!`
                         }
                      ],
-                     initialValue: record[dataIndex]
+                     initialValue: this.initialValueEditForm(record, dataIndex)
                   })(this.getInput())}
                </Form.Item>
             ) : (
@@ -105,42 +170,47 @@ class EditableCell extends React.Component {
    }
 }
 
-const title = () => "Tạm thời không biết phải ghi gì";
-const showHeader = true;
-const footer = () => "Dùng tổ hợp Shift + con lăn chuột để cuộn ngang";
-//Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 1740, y: 400 };
 const pagination = { position: "both" };
+const scroll = { x: 1840, y: 400 };
+const showHeader = true;
+const title = () => "Tạm thời không biết phải ghi gì";
+const footer = () => "Dùng tổ hợp Shift + con lăn chuột để cuộn ngang";
 
 class EditableTable extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
          rowsDescribe: 1,
+         hasData: true,
          data: null,
-         editingidTour: "",
          count: this.props.listTour.length,
          bordered: true,
          loading: false,
          size: "default",
-         showHeader,
+         ellipsis: false,
+
          // title,
+         showHeader,
          footer,
+         editingidTour: "",
+
          // rowSelection: {},
          scroll: scroll,
-         hasData: true,
          tableLayout: "auto",
+
+         //sort and filter
          filteredInfo: null,
          sortedInfo: null,
          searchText: "",
          pagination,
-         //add Show
+
+         //add show form
          showAdd: false,
-         visiblePreview: false,
-         ellipsis: false
+         visiblePreview: false
       };
    }
 
+   /** Editting */
    isEditing = record => record.idTour === this.state.editingidTour;
 
    cancel = () => {
@@ -181,6 +251,7 @@ class EditableTable extends React.Component {
    edit(idTour) {
       this.setState({ editingidTour: idTour });
    }
+
    handleDelete = record => {
       const data = [...this.state.data];
       //Gọi API xóa dưới CSDL
@@ -196,7 +267,8 @@ class EditableTable extends React.Component {
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = newTour => {
+
+   handleEditTour = newTour => {
       const { count, data } = this.state;
       const newData = {
          idTour:
@@ -211,6 +283,42 @@ class EditableTable extends React.Component {
             .slice(0, 10)
             .replace(/-/g, "-"),
          departureDay: newTour.departureDay,
+         reuse: newTour.reuse,
+         describe: newTour.describe,
+         address: newTour.address,
+         vocationTime: newTour.vocationTime,
+         idAccount: newTour.idAccount
+      };
+      //Gọi API create dưới CSDL
+      const { tourAllActions } = this.props;
+      const { fetchPostTourRequest } = tourAllActions;
+      fetchPostTourRequest(newData);
+      //Kết thúc gọi API create dươi CSDL
+      this.setState({
+         data: [newData, ...data],
+         count: count + 1,
+         pagination: { total: data.length }
+      });
+   };
+
+   handleAddNew = newTour => {
+      const { count, data } = this.state;
+      const newData = {
+         idTour:
+            newTour.idTour | (data.length !== 0)
+               ? data[data.length - 1].idTour + 1
+               : 0,
+         titleTour: newTour.titleTour,
+         price: newTour.price,
+         sale: newTour.sale,
+         dateAdded: new Date()
+            .toJSON()
+            .slice(0, 10)
+            .replace(/-/g, "-"),
+         departureDay: newTour.departureDay,
+         reuse: newTour.reuse,
+         tags: JSON.stringify(newTour.checkedListTags),
+         services: JSON.stringify(newTour.checkedListServices),
          describe: newTour.describe,
          address: newTour.address,
          vocationTime: newTour.vocationTime,
@@ -240,13 +348,13 @@ class EditableTable extends React.Component {
    };
 
    /**Preload */
-   //    Preload
    componentWillMount() {
       const { tourAllActions } = this.props;
       const { fetchListTourImageRequest } = tourAllActions;
       fetchListTourImageRequest();
       this.fetch();
    }
+
    handleTableChange = (pagination, filters, sorter) => {
       const pager = { ...this.state.pagination };
       pager.current = pagination.current;
@@ -264,10 +372,7 @@ class EditableTable extends React.Component {
 
    fetch = async (params = {}) => {
       this.setState({ loading: true });
-      // const { tourAllActions } = this.props;
-      // const { fetchListTourRequest } = tourAllActions;
-      // await fetchListTourRequest();
-      await reqwest({
+      reqwest({
          url: `${API_ENDPOINT}/tours`,
          method: "GET",
          headers: { Authentication: getCookie("token") },
@@ -279,21 +384,19 @@ class EditableTable extends React.Component {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
-         // const { listTour } = this.props;
+
+         // map data
 
          this.setState({
             loading: false,
             data: data,
-            //data: listTour
             pagination
          });
       });
    };
    //    EndPreload
 
-   /**Search */
-
-   //Search
+   /** Search */
    getColumnSearchProps = dataIndex => ({
       filterDropdown: ({
          setSelectedKeys,
@@ -434,16 +537,15 @@ class EditableTable extends React.Component {
       return { columns: nextColumns };
    };
 
-   //Add
+   /** Add */
    handleShowAdd = () => {
       this.setState({ showAdd: !this.state.showAdd });
    };
    onCancle = () => {
       this.setState({ showAdd: false });
    };
-   //end Add
 
-   //Expanded Row Render
+   /** Expanded Row Render */
    expandedRowRender = record => {
       const { listImageTour } = this.props;
       return (
@@ -455,6 +557,7 @@ class EditableTable extends React.Component {
       );
    };
 
+   /** Show Preivew */
    showModalPreview(record) {
       Modal.info({
          width: 1000,
@@ -486,6 +589,17 @@ class EditableTable extends React.Component {
    };
 
    render() {
+      function chooseType(type) {
+         if (type === "idTour" || type === "idAccount" || type === "dateAdded")
+            return "disabled";
+         else if (type === "reuse") return "reuseSelect";
+         else if (type === "price") return "priceNumber";
+         else if (type === "vocationTime") return "timeSelect";
+         else if (type === "departureDay") return "datetime";
+         else if (type === "describe") return "textarea";
+         else if (type === "sale") return "saleNumber";
+      }
+
       const { state } = this;
       const { data } = this.state;
       const components = {
@@ -506,28 +620,39 @@ class EditableTable extends React.Component {
 
       this.columns = [
          {
-            title: "ID",
-            dataIndex: "idTour",
-            key: "idTour",
-            width: 50,
-            // fixed: "left",
-            ellipsis: true,
-            editable: true
-            // render: text => text
-         },
-         {
             title: "Title",
             dataIndex: "titleTour",
             key: "titleTour",
             width: 200,
-            // fixed: "left",
             ...this.getColumnSearchProps("titleTour"),
             sorter: (a, b) => a.titleTour.length - b.titleTour.length,
             sortOrder: sortedInfo.columnKey === "titleTour" && sortedInfo.order,
             ellipsis: true,
             editable: true
-            // render: text => text
          },
+         {
+            title: "ID",
+            dataIndex: "idTour",
+            key: "idTour",
+            width: 50,
+            ellipsis: true,
+            editable: true
+         },
+         {
+            title: "Reuse",
+            dataIndex: "reuse",
+            key: "reuse",
+            width: 100,
+            // filteredValue: filteredInfo.reuse || null,
+            // filterMultiple: false,
+            // onFilter: (value, record) => record.reuse.indexOf(value) === 0,
+            ...this.getColumnSearchProps("reuse"),
+            sorter: (a, b) => a.reuse.length - b.reuse.length,
+            sortOrder: sortedInfo.columnKey === "reuse" && sortedInfo.order,
+            editable: true,
+            ellipsis: true
+         },
+
          {
             title: "Price(vnđ)",
             dataIndex: "price",
@@ -558,6 +683,49 @@ class EditableTable extends React.Component {
             ...this.getColumnSearchProps("address"),
             sorter: (a, b) => a.address.length - b.address.length,
             sortOrder: sortedInfo.columnKey === "address" && sortedInfo.order,
+            ellipsis: true,
+            editable: true
+         },
+
+         {
+            title: "Time",
+            dataIndex: "vocationTime",
+            key: "vocationTime",
+            width: 90,
+            ...this.getColumnSearchProps("vocationTime"),
+            sorter: (a, b) => a.vocationTime - b.vocationTime,
+            sortOrder:
+               sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
+            ellipsis: true,
+            editable: true,
+            render: text => {
+               return text.replace(" days", "N ").replace(" nights", "Đ");
+            }
+         },
+         {
+            title: "Departure",
+            dataIndex: "departureDay",
+            key: "departureDay",
+            width: 150,
+            ...this.getColumnSearchProps("departureDay"),
+            sorter: (a, b) => a.departureDay.length - b.departureDay.length,
+            sortOrder:
+               sortedInfo.columnKey === "departureDay" && sortedInfo.order,
+            ellipsis: true,
+            editable: true,
+            render: text => {
+               return moment(text).format("hh:mm A DD/MM/YYYY");
+            }
+         },
+
+         {
+            title: "Describe",
+            dataIndex: "describe",
+            key: "describe",
+            width: 400,
+            ...this.getColumnSearchProps("describe"),
+            sorter: (a, b) => a.describe.length - b.describe.length,
+            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
             ellipsis: true,
             editable: true
          },
@@ -595,47 +763,6 @@ class EditableTable extends React.Component {
             }
          },
          {
-            title: "Departure",
-            dataIndex: "departureDay",
-            key: "departureDay",
-            width: 150,
-            ...this.getColumnSearchProps("departureDay"),
-            sorter: (a, b) => a.departureDay.length - b.departureDay.length,
-            sortOrder:
-               sortedInfo.columnKey === "departureDay" && sortedInfo.order,
-            ellipsis: true,
-            editable: true,
-            render: text => {
-               return moment(text).format("hh:mm A DD/MM/YYYY");
-            }
-         },
-         {
-            title: "Time",
-            dataIndex: "vocationTime",
-            key: "vocationTime",
-            width: 90,
-            ...this.getColumnSearchProps("vocationTime"),
-            sorter: (a, b) => a.vocationTime - b.vocationTime,
-            sortOrder:
-               sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
-            ellipsis: true,
-            editable: true,
-            render: text => {
-               return text.replace(" days", "N ").replace(" nights", "Đ");
-            }
-         },
-         {
-            title: "Describe",
-            dataIndex: "describe",
-            key: "describe",
-            width: 400,
-            ...this.getColumnSearchProps("describe"),
-            sorter: (a, b) => a.describe.length - b.describe.length,
-            sortOrder: sortedInfo.columnKey === "describe" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
-         },
-         {
             title: "IDAcc",
             dataIndex: "idAccount",
             key: "idAccount",
@@ -643,7 +770,6 @@ class EditableTable extends React.Component {
             // fixed: "left",
             ellipsis: true,
             editable: true
-            // render: text => text
          },
          {
             title: "Edit",
@@ -687,14 +813,26 @@ class EditableTable extends React.Component {
                      >
                         Edit
                      </Button>
-                     <Button
-                        size="small"
-                        type="primary"
-                        onClick={() => this.showModalPreview(record)}
-                        style={{ marginLeft: 6 }}
-                     >
-                        Preview
-                     </Button>
+                     <Tooltip title="Preview">
+                        <Button
+                           size="small"
+                           type="primary"
+                           onClick={() => this.showModalPreview(record)}
+                           style={{ marginLeft: 6 }}
+                        >
+                           <i className="fas fa-search"></i>
+                        </Button>
+                     </Tooltip>
+                     <Tooltip title="Duplicate (Clone)">
+                        <Button
+                           size="small"
+                           type="default"
+                           onClick={() => this.handleEditTour(record)}
+                           style={{ marginLeft: 6 }}
+                        >
+                           <i className="far fa-clone"></i>
+                        </Button>
+                     </Tooltip>
                   </>
                );
             }
@@ -718,12 +856,6 @@ class EditableTable extends React.Component {
                ) : null
          }
       ];
-
-      function chooseType(type) {
-         if (type === "price") return "number";
-         else if (type === "depatureDay") return "date";
-         else if (type === "dateAdd") return "disable";
-      }
 
       const columns = this.columns.map(col => {
          if (!col.editable) {
@@ -750,7 +882,7 @@ class EditableTable extends React.Component {
             {showAdd ? (
                <TableNewRow
                   onCancle={this.onCancle}
-                  handleAdd={this.handleAdd}
+                  handleAddNew={this.handleAddNew}
                />
             ) : (
                <div className="row">

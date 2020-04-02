@@ -13,27 +13,25 @@ import {
 
 import { getParamTokenWithName } from "../../_commons/auth.service";
 
+import reqwest from "reqwest";
+import { API_ENDPOINT } from "../../_constants/index.constants";
+
+import Cookies from "js-cookie";
+
 const idAccount = getParamTokenWithName("idAccount");
 const { TextArea } = Input;
+const { Option } = Select;
 
-const plainOptionsTags = [
-   "Cảnh đẹp",
-   "Ẩm thực ngon",
-   "Khám phá",
-   "... load ở database"
-];
-const defaultCheckedListTags = ["Cảnh đẹp"];
-const plainOptionsServices = [
-   "Đưa đón tận nơi",
-   "Cho thuê xe máy",
-   "Hỗ trợ người khuyết tât",
-   "... load ở database"
-];
-const defaultCheckedListServices = ["Đưa đón tận nơi"];
+function getCookie(name) {
+   const token = Cookies.get(name);
+   return token;
+}
 
 class TableNewRow extends Component {
    state = {
       expand: false,
+      tags: [],
+      services: [],
       value: "",
       titleTour: "",
       price: 10,
@@ -47,27 +45,69 @@ class TableNewRow extends Component {
       describe: "",
       idAccount: idAccount,
       reuse: 0,
-      checkedListTags: defaultCheckedListTags,
+      checkedListTags: [],
       indeterminateTags: true,
       checkAllTags: false,
-      checkedListServices: defaultCheckedListServices,
+      checkedListServices: [],
       indeterminateServices: true,
       checkAllServices: false
    };
+
+   fetch = async (params = {}) => {
+      reqwest({
+         url: `${API_ENDPOINT}/tags`,
+         method: "GET",
+         headers: { Authentication: getCookie("token") },
+         data: {
+            ...params
+         },
+         type: "json"
+      }).then(data => {
+         let tags = [];
+         for (let i = 0; i < data.length; i++) {
+            tags.push(data[i].name);
+         }
+         this.setState({
+            tags
+         });
+      });
+      reqwest({
+         url: `${API_ENDPOINT}/services`,
+         method: "GET",
+         headers: { Authentication: getCookie("token") },
+         data: {
+            ...params
+         },
+         type: "json"
+      }).then(data => {
+         let services = [];
+         for (let i = 0; i < data.length; i++) {
+            services.push(data[i].name);
+         }
+
+         this.setState({
+            services
+         });
+      });
+   };
+
+   componentWillMount() {
+      this.fetch();
+   }
 
    onChangeTags = checkedListTags => {
       this.setState({
          checkedListTags,
          indeterminateTags:
             !!checkedListTags.length &&
-            checkedListTags.length < plainOptionsTags.length,
-         checkAllTags: checkedListTags.length === plainOptionsTags.length
+            checkedListTags.length < this.state.tags.length,
+         checkAllTags: checkedListTags.length === this.state.tags.length
       });
    };
 
    onCheckAllChangeTags = e => {
       this.setState({
-         checkedListTags: e.target.checked ? plainOptionsTags : [],
+         checkedListTags: e.target.checked ? this.state.tags : [],
          indeterminateTags: false,
          checkAllTags: e.target.checked
       });
@@ -78,15 +118,15 @@ class TableNewRow extends Component {
          checkedListServices,
          indeterminateServices:
             !!checkedListServices.length &&
-            checkedListServices.length < plainOptionsServices.length,
+            checkedListServices.length < this.state.services.length,
          checkAllServices:
-            checkedListServices.length === plainOptionsServices.length
+            checkedListServices.length === this.state.services.length
       });
    };
 
    onCheckAllChangeServices = e => {
       this.setState({
-         checkedListServices: e.target.checked ? plainOptionsServices : [],
+         checkedListServices: e.target.checked ? this.state.services : [],
          indeterminateServices: false,
          checkAllServices: e.target.checked
       });
@@ -112,9 +152,7 @@ class TableNewRow extends Component {
    onChangeSale = value => {
       this.setState({ sale: value });
    };
-   onChangeReuse = value => {
-      this.setState({ reuse: value });
-   };
+
    onChangePrice = value => {
       this.setState({ price: value });
    };
@@ -137,14 +175,20 @@ class TableNewRow extends Component {
 
       const { titleTour, describe, address } = this.state;
       if (titleTour !== "" && describe !== "" && address !== "") {
-         const { handleAdd, onCancle } = this.props;
-         handleAdd(this.state);
+         const { handleAddNew, onCancle } = this.props;
+         handleAddNew(this.state);
          onCancle();
       }
    };
 
    handleChange = target => {
       this.setState({ vocationTime: target.label });
+   };
+
+   onChangeReuse = target => {
+      console.log(target.label);
+
+      this.setState({ reuse: target.label });
    };
 
    render() {
@@ -245,28 +289,7 @@ class TableNewRow extends Component {
                            />
                         )}
                      </Form.Item>
-                     <Form.Item
-                        label={`Reuse: `}
-                        className="ant-form-item-control-wrapper col-md-12 mb-1"
-                     >
-                        {getFieldDecorator(`reuse`, {
-                           initialValue: 0,
-                           rules: [
-                              {
-                                 required: true,
-                                 message: "use is 0?"
-                              }
-                           ]
-                        })(
-                           <InputNumber
-                              style={{ width: "50%" }}
-                              name="reuse"
-                              min={0}
-                              step={1}
-                              onChange={this.onChangeReuse}
-                           />
-                        )}
-                     </Form.Item>
+
                      <Form.Item
                         label={`Address: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
@@ -337,6 +360,68 @@ class TableNewRow extends Component {
                                  10 days 9 nights
                               </Select.Option>
                            </Select>
+                        )}
+                     </Form.Item>
+                     <Form.Item
+                        label={`Reuse:`}
+                        className="ant-form-item-control-wrapper col-md-12 mb-1"
+                     >
+                        {getFieldDecorator(`reuse`, {
+                           initialValue: { key: "1 ngày" },
+                           rules: [
+                              {
+                                 required: true,
+                                 message: "select same days!"
+                              }
+                           ]
+                        })(
+                           <Select
+                              name="reuse"
+                              labelInValue
+                              onChange={this.handleChange}
+                           >
+                              <Option value={0}>0 ngày</Option>
+                              <Option value={1}>1 ngày</Option>
+                              <Option value={2}>2 ngày</Option>
+                              <Option value={3}>3 ngày</Option>
+                              <Option value={4}>4 ngày</Option>
+                              <Option value={5}>5 ngày</Option>
+                              <Option value={6}>6 ngày</Option>
+                              <Option value={7}>1 tuần</Option>
+                              <Option value={14}>2 tuần</Option>
+                              <Option value={21}>3 tuần</Option>
+                              <Option value={30}>1 tháng</Option>
+                           </Select>
+                        )}
+                     </Form.Item>
+                     <Form.Item
+                        label={`Tags: `}
+                        className="ant-form-item-control-wrapper col-md-12 mb-0"
+                     >
+                        {getFieldDecorator(`tags`, {
+                           rules: [
+                              {
+                                 //  required: true,
+                                 //   message: "Select tags!"
+                              }
+                           ]
+                        })(
+                           <>
+                              <div className="ht-d-flex">
+                                 <Checkbox
+                                    indeterminate={this.state.indeterminateTags}
+                                    onChange={this.onCheckAllChangeTags}
+                                    checked={this.state.checkAllTags}
+                                 >
+                                    <strong>Chọn tất cả</strong>
+                                 </Checkbox>
+                                 <Checkbox.Group
+                                    options={this.state.tags}
+                                    value={this.state.checkedListTags}
+                                    onChange={this.onChangeTags}
+                                 />
+                              </div>
+                           </>
                         )}
                      </Form.Item>
                   </div>
@@ -440,36 +525,7 @@ class TableNewRow extends Component {
                            </Radio.Group>
                         )}
                      </Form.Item>
-                     <Form.Item
-                        label={`Tags: `}
-                        className="ant-form-item-control-wrapper col-md-12 mb-0"
-                     >
-                        {getFieldDecorator(`tags`, {
-                           rules: [
-                              {
-                                 //  required: true,
-                                 //   message: "Select tags!"
-                              }
-                           ]
-                        })(
-                           <>
-                              <div className="ht-d-flex">
-                                 <Checkbox
-                                    indeterminate={this.state.indeterminateTags}
-                                    onChange={this.onCheckAllChangeTags}
-                                    checked={this.state.checkAllTags}
-                                 >
-                                    <strong>Chọn tất cả</strong>
-                                 </Checkbox>
-                                 <Checkbox.Group
-                                    options={plainOptionsTags}
-                                    value={this.state.checkedListTags}
-                                    onChange={this.onChangeTags}
-                                 />
-                              </div>
-                           </>
-                        )}
-                     </Form.Item>
+
                      <Form.Item
                         label={`Services: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-0"
@@ -494,7 +550,7 @@ class TableNewRow extends Component {
                                     <strong>Chọn tất cả</strong>
                                  </Checkbox>
                                  <Checkbox.Group
-                                    options={plainOptionsServices}
+                                    options={this.state.services}
                                     value={this.state.checkedListServices}
                                     onChange={this.onChangeServices}
                                  />

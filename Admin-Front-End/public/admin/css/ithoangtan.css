@@ -1292,3 +1292,9 @@
 
 .ht-was-read .ht-unread {
 }
+
+.ht-hidden {
+   visibility: hidden;
+   opacity: 0;
+   display: none;
+}

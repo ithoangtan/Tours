@@ -1,18 +1,19 @@
 import * as tourConstants from "../_constants/tour.module";
 import {
    toastError,
-   // toastSuccess,
    toastPatchSuccess,
    toastDeleteSuccess,
    toastCreateSuccess
 } from "../_helper/toastify.helper";
+import { message } from "antd";
 const initialState = {
    listTour: [],
    listImageTour: [],
    tourById: {},
    delete: [],
    patch: [],
-   create: []
+   create: [],
+   putTagsAndServices: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,7 +25,6 @@ const reducer = (state = initialState, action) => {
          };
       case tourConstants.FETCH_TOUR_SUCCESS: {
          const { data } = action.payload;
-         // toastSuccess(data);
          return {
             ...state,
             listTour: data
@@ -121,7 +121,6 @@ const reducer = (state = initialState, action) => {
          };
       case tourConstants.FETCH_TOUR_IMAGE_SUCCESS: {
          const { data } = action.payload;
-         // toastSuccess(data);
          return {
             ...state,
             listImageTour: data
@@ -133,6 +132,24 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             listImageTour: error
+         };
+      }
+      // Put - tags and services
+      case tourConstants.FETCH_TAGS_AND_SERVICES_SUCCESS: {
+         const { data } = action.payload;
+         const { newRecord } = action.newRecord;
+         message.success(newRecord.titleTour + " --- saved!");
+         return {
+            ...state,
+            putTagsAndServices: data
+         };
+      }
+      case tourConstants.FETCH_TAGS_AND_SERVICES_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            putTagsAndServices: error
          };
       }
       default:
