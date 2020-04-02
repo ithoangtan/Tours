@@ -132,6 +132,8 @@ router.get(
   report.getDestinationByTime
 );
 
+router.get("/report/destination-by-time", report.getDestinationByTime);
+
 //for tag
 router.get("/tag", authenticated, tag.read);
 router.get("/tags", authenticated, tag.listAll);
