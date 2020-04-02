@@ -15,3 +15,5 @@ export const APIImage = "https://api-kinhdoanhtourdulich.herokuapp.com";
 
 export const LinkUserPage = "https://kinhdoanhtourdulich.herokuapp.com";
 // export const LinkUserPage = process.env.LinkUserPage;
+
+export const MULTIPLIER_ID_TIMELINE = 10;

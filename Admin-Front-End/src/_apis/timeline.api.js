@@ -15,12 +15,12 @@ export const postTimeline = data => {
    return axiosService.post(`${API_ENDPOINT}/${url}`, data);
 };
 
-export const deleteTimeline = idTimeline => {
+export const deleteTimeline = idTimelines => {
    return axiosService.delete(
-      `${API_ENDPOINT}/${url}?idTimeline=${idTimeline}`
+      `${API_ENDPOINT}/${url}?idTimelines=${idTimelines}`
    );
 };
 
 export const patchTimeline = data => {
-   return axiosService.patch(`${API_ENDPOINT}/${url}`, data);
+   return axiosService.put(`${API_ENDPOINT}/${url}`, data);
 };

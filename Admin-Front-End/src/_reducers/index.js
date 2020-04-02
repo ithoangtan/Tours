@@ -11,6 +11,7 @@ import postReducer from "./post.reducer";
 import generalReducer from "./general.reducer";
 import accountReducer from "./account.reducer";
 import notificationsReducer from "./notifications.reducer";
+import timelineReducer from "./timeline.reducer";
 
 const rootReducer = combineReducers({
    tour: tourReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
    post: postReducer,
    general: generalReducer,
    account: accountReducer,
-   notifications: notificationsReducer
+   notifications: notificationsReducer,
+   timeline: timelineReducer
 });
 
 export default rootReducer;

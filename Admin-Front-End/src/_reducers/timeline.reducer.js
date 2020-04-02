@@ -1,17 +1,13 @@
 import * as timelineConstants from "../_constants/timeline.module";
-import {
-   toastError,
-   toastPatchSuccess,
-   toastDeleteSuccess,
-   toastCreateSuccess
-} from "../_helper/toastify.helper";
+import { toastError } from "../_helper/toastify.helper";
+import { message } from "antd";
 const initialState = {
    listdTimeline: [],
    listImagedTimeline: [],
    timelineById: {},
    delete: [],
    patch: [],
-   create: []
+   post: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -58,10 +54,10 @@ const reducer = (state = initialState, action) => {
       case timelineConstants.FETCH_TIMELINE_CREATE_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
-         toastCreateSuccess(newRecord);
+         message.success(`${newRecord.title} -- postd!`);
          return {
             ...state,
-            create: data
+            post: data
          };
       }
       case timelineConstants.FETCH_TIMELINE_CREATE_FAILED: {
@@ -69,7 +65,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            create: error
+            post: error
          };
       }
 
@@ -77,7 +73,7 @@ const reducer = (state = initialState, action) => {
       case timelineConstants.FETCH_TIMELINE_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
-         toastDeleteSuccess(record);
+         message.warning(`${record.title} -- deleted!`);
          return {
             ...state,
             delete: data
@@ -96,7 +92,7 @@ const reducer = (state = initialState, action) => {
       case timelineConstants.FETCH_TIMELINE_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
-         toastPatchSuccess(newRecord);
+         message.info(`${newRecord.title} -- updated!`);
          return {
             ...state,
             patch: data

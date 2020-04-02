@@ -37,8 +37,8 @@ class AxiosService {
          headers: { Authentication: getCookie("token") }
       });
    }
-   put(url) {
-      return this.instance.put(url, {
+   put(url, data) {
+      return this.instance.put(url, data, {
          headers: { Authentication: getCookie("token") }
       });
    }

@@ -66,10 +66,10 @@ export const fetchTimelineByIdError = error => {
    };
 };
 
-export const fetchTimelineByIdRequest = idTimeline => {
+export const fetchTimelineByIdRequest = idTimelines => {
    return dispatch => {
       timelineApis
-         .getTimelineById(idTimeline)
+         .getTimelineById(idTimelines)
          .then(resp => {
             const { data } = resp;
             dispatch(fetchTimelineByIdSuccess(data));
@@ -139,7 +139,7 @@ export const fetchDeleteTimelineError = error => {
 export const fetchDeleteTimelineRequest = record => {
    return dispatch => {
       timelineApis
-         .deleteTimeline(record.idTimeline)
+         .deleteTimeline(record.idTimelines)
          .then(resp => {
             const { data } = resp;
             dispatch(fetchDeleteTimelineSuccess(record, data));
@@ -170,13 +170,13 @@ export const fetchPatchTimelineError = error => {
    };
 };
 
-export const fetchPatchTimelineRequest = newRecord => {
+export const fetchPatchTimelineRequest = updateRecord => {
    return dispatch => {
       timelineApis
-         .patchTimeline(newRecord)
+         .patchTimeline(updateRecord)
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchPatchTimelineSuccess(newRecord, data));
+            dispatch(fetchPatchTimelineSuccess(updateRecord, data));
          })
          .catch(error => {
             dispatch(fetchPatchTimelineError(error));
