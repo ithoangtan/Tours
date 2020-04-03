@@ -214,13 +214,13 @@ const router = [
    },
 
    {
-      path: "/blog-category",
+      path: "/blog-category/:keySearch/:conditional",
       exact: true,
-      component: () => (
+      component: ({ match }, props) => (
          <>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <BlogCategoryPage />
+            <NavigationContainer {...props} />
+            <HeaderBreadcrumbContainer {...props} />
+            <BlogCategoryPage match={match} {...props} />
             <FooterContainer />
             <Loaded />
             <BackToTop />

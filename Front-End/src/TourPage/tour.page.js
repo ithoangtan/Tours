@@ -544,7 +544,7 @@ class TourContainer extends Component {
                         </div>
 
                         <Title level={4} className="pt-3">
-                           Bộ Lọc
+                           Sắp xếp
                         </Title>
                         <div className="ht-filter-tour-2">
                            <div className="mb-3">

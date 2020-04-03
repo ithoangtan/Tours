@@ -40,6 +40,40 @@ export const fetchListPostRequest = () => {
    };
 };
 
+// Get list posts search
+
+export const fetchListPostSearchSuccess = data => {
+   return {
+      type: postConstants.FETCH_POST_SEARCH_SUCCESS,
+      payload: {
+         data
+      }
+   };
+};
+
+export const fetchListPostSearchError = error => {
+   return {
+      type: postConstants.FETCH_POST_SEARCH_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchListPostSearchRequest = data => {
+   return dispatch => {
+      postApis
+         .getListPostSearch(data)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchListPostSearchSuccess(data));
+         })
+         .catch(error => {
+            dispatch(fetchListPostSearchError(error));
+         });
+   };
+};
+
 //GET Post By Id
 export const fetchPostByIdSuccess = data => {
    return {

@@ -8,6 +8,10 @@ export const getListPost = () => {
    return axiosService.get(`${API_ENDPOINT}/${urls}`);
 };
 
+export const getListPostSearch = data => {
+   return axiosService.post(`${API_ENDPOINT}/${urls}/search`, data);
+};
+
 export const getPostById = idPost => {
    return axiosService.get(`${API_ENDPOINT}/${url}?idPost=${idPost}`);
 };

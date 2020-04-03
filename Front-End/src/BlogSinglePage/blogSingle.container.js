@@ -6,7 +6,7 @@ import funcLoadJs from "../_constants/loadJs.constants";
 import parseHtml from "html-react-parser";
 import BlogRightContainer from "../BlogPage/blogRight.container";
 import BlogNavigationContainer from "../BlogPage/blogNavigation.container";
-
+import Cookies from "js-cookie";
 import { Rate } from "antd";
 import moment from "moment";
 
@@ -28,12 +28,21 @@ export default class BlogSingleContainer extends Component {
       return null;
    };
 
+   checkLogin = () => {
+      const token = Cookies.get("token");
+      const name = sessionStorage.getItem("name");
+      const avatar = sessionStorage.getItem("avatar");
+
+      return token && name && avatar;
+   };
+
    constructor(props) {
       super(props);
       this.state = {
          vote: false,
          numVote: 131,
-         valueRate: undefined
+         valueRate: undefined,
+         isLogin: this.checkLogin()
       };
    }
 
@@ -50,7 +59,7 @@ export default class BlogSingleContainer extends Component {
       });
    };
    render() {
-      const { vote, numVote, valueRate } = this.state;
+      const { vote, numVote, valueRate, isLogin } = this.state;
       const { postById, listPostNew, listPostViews } = this.props;
       const postDate = postById.dateEdited
          ? postById.dateEdited
@@ -93,8 +102,8 @@ export default class BlogSingleContainer extends Component {
                                  <Rate
                                     allowClear={false}
                                     tooltips={INDEX_CONSTANTS.DESC_RATE}
+                                    disabled={!isLogin}
                                     onChange={this.handleChange}
-                                    // defaultValue={postById.vote}
                                     value={valueRate}
                                  />
                                  {valueRate ? (

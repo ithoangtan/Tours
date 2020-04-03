@@ -40,7 +40,6 @@ class HeaderContainer extends Component {
             );
             return { ...tour, images: listImageTourDetail };
          });
-         console.log(tours);
          this.setState({ carouselTours: tours });
       }
    }

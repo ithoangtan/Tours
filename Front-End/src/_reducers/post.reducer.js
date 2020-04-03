@@ -3,6 +3,7 @@ import { toastError, toastInfo } from "../_helper/toastify.helper";
 import { compareValues } from "../_helper/compareValue.helper";
 const initialState = {
    listPost: [],
+   listPostSearch: [],
    listPostNew: [],
    listPostViews: [],
    postById: {}
@@ -28,6 +29,22 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             listPost: error
+         };
+      }
+      //Load List Post Search
+      case postConstants.FETCH_POST_SEARCH_SUCCESS: {
+         const { data } = action.payload;
+         return {
+            ...state,
+            listPostSearch: data[0]
+         };
+      }
+      case postConstants.FETCH_POST_SEARCH_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            listPostSearch: error
          };
       }
       //Load Post by Id
