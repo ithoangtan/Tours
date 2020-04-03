@@ -39,7 +39,8 @@ router.patch("/schedule", authenticated, schedule.update);
 router.delete("/schedule", authenticated, schedule.delete);
 
 //for img
-router.get("/images", image.listAllImageTour);
+router.get("/imagesTour", image.listAllImageTour);
+router.get("/imagesPost", image.listAllImagePost);
 router.get("/image", image.listAllImageTourById);
 router.delete("/image", authenticated, image.delete);
 router.post("/image", image.create);
@@ -107,6 +108,7 @@ router.get("/posts", post.listAll);
 router.post("/posts/search", post.listPostSearch);
 router.post("/post", authenticated, post.create);
 router.put("/post", authenticated, post.update);
+router.put("/post/tags", authenticated, post.putTags);
 router.delete("/post", authenticated, post.delete);
 
 //report

@@ -46,10 +46,10 @@ class TableNewRow extends Component {
       idAccount: idAccount,
       reuse: 0,
       checkedListTags: [],
-      indeterminateTags: true,
+      indeterminateTags: false,
       checkAllTags: false,
       checkedListServices: [],
-      indeterminateServices: true,
+      indeterminateServices: false,
       checkAllServices: false
    };
 

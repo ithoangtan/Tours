@@ -21,13 +21,13 @@ export const deletePost = idPost => {
 };
 
 export const patchPost = data => {
-   return axiosService.patch(`${API_ENDPOINT}/${url}`, data);
+   return axiosService.put(`${API_ENDPOINT}/${url}`, data);
 };
 
-const urlImages = "images";
+const urlImagesPost = "imagesPost";
 
 export const getListImagePost = () => {
-   return axiosService.get(`${API_ENDPOINT}/${urlImages}`);
+   return axiosService.get(`${API_ENDPOINT}/${urlImagesPost}`);
 };
 
 export const deleteImagePost = (idImage, name) => {

@@ -17,3 +17,5 @@ export const LinkUserPage = "https://kinhdoanhtourdulich.herokuapp.com";
 // export const LinkUserPage = process.env.LinkUserPage;
 
 export const MULTIPLIER_ID_TIMELINE = 10;
+
+export const DEFAULT_IMAGE_URL = "/img/imgdefault.gif";

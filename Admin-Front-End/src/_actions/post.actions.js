@@ -94,7 +94,7 @@ export const fetchPostPostSuccess = (newRecord, data) => {
          //data gửi kèm trong actions là payload ở vị trí này
          data
       },
-      newRecord: { newRecord }
+      newRecord: newRecord
    };
 };
 
@@ -131,7 +131,7 @@ export const fetchDeletePostSuccess = (record, data) => {
          //data gửi kèm trong actions là payload ở vị trí này
          data
       },
-      record: { record }
+      record: record
    };
 };
 

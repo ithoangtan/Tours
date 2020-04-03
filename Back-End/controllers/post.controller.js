@@ -21,7 +21,7 @@ exports.listPostSearch = async function(req, res) {
   const searchs = {
     keySearch: req.body.keySearch,
     vote: req.body.vote,
-    conditional: req.body.conditional,
+    conditional: req.body.conditional
   };
   try {
     listPost = await Post.getAllPostSearch(searchs);
@@ -64,6 +64,22 @@ exports.update = async (req, res, next) => {
   const updatePost = removeBlankAttributes.remove(new Post(req.body));
   try {
     // const updatePost = removeBlankAttributes.remove(new Post(req.body));
+    updateResult = await Post.updateById(updatePost);
+    res.status(200).json(updateResult);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
+exports.putTags = async (req, res, next) => {
+  let updatePost = removeBlankAttributes.remove(new Post(req.body));
+  updatePost.tags = JSON.stringify(req.body.tags);
+  console.log(updatePost);
+
+  try {
     updateResult = await Post.updateById(updatePost);
     res.status(200).json(updateResult);
   } catch (err) {

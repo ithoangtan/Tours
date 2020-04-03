@@ -38,6 +38,8 @@ import TextArea from "antd/lib/input/TextArea";
 
 const { Option } = Select;
 
+let idTourNew = 0;
+
 function getCookie(name) {
    const token = Cookies.get(name);
    return token;
@@ -270,11 +272,10 @@ class EditableTable extends React.Component {
 
    handleEditTour = newTour => {
       const { count, data } = this.state;
+      if (idTourNew === 0) idTourNew = data[data.length - 1].idPost;
+      idTourNew++;
       const newData = {
-         idTour:
-            newTour.idTour | (data.length !== 0)
-               ? data[data.length - 1].idTour + 1
-               : 0,
+         idTour: idTourNew,
          titleTour: newTour.titleTour,
          price: newTour.price,
          sale: newTour.sale,

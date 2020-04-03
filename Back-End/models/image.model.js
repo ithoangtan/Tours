@@ -20,7 +20,22 @@ Image.getAllImageTour = function(fncResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
-      ".images WHERE statusAction <> 'deleted';",
+      ".images WHERE statusAction <> 'deleted' AND idTour > 0;",
+    function(err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+
+Image.getAllImagePost = function(fncResult) {
+  mysql.query(
+    "SELECT * FROM " +
+      databaseProduction +
+      ".images WHERE statusAction <> 'deleted' AND idPost > 0;",
     function(err, res) {
       if (err) {
         fncResult(err, null);
@@ -85,6 +100,22 @@ Image.createImageTour = function(idTour, name, fncResult) {
     }
   );
 };
+
+Image.createImagePost = function(idPost, name, fncResult) {
+  var url = `/img/${name}`;
+  var status = "done";
+  mysql.query(
+    `INSERT INTO ${databaseProduction}.images (url, status, name, idPost) VALUES ('${url}', '${status}', ' ${name}' , '${idPost}')`,
+    function(err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+
 Image.updateAvatar = function(idAccount, name, fncResult) {
   var url = `/img/${name}`;
   mysql.query(

@@ -35,6 +35,8 @@ function getCookie(name) {
    return token;
 }
 
+let idPostNew = 0;
+
 const EditableContext = React.createContext();
 
 const ResizeableTitle = props => {
@@ -107,7 +109,7 @@ const title = () => "Tạm thời không biết phải ghi gì";
 const showHeader = true;
 const footer = () => "Dùng tổ hợp Shift + con lăn chuột để cuộn ngang";
 //Tùy chọn scroll bằng tổng các chiệu rộng
-const scroll = { x: 1530, y: 400 };
+const scroll = { x: 1400, y: 400 };
 const pagination = { position: "both" };
 
 class EditableTable extends React.Component {
@@ -163,12 +165,14 @@ class EditableTable extends React.Component {
             });
             //Gọi API update dưới CSDL
             fetchPatchPostRequest(row);
-
+            console.log(row);
             //Kết thúc gọi API update dươi CSDL
             this.setState({ data: newData, editingidPost: "" });
          } else {
             newData.push(row);
             //Gọi API update dưới CSDL
+            console.log(row);
+
             fetchPatchPostRequest(row);
             //Kết thúc gọi API update dươi CSDL
             this.setState({ data: newData, editingidPost: "" });
@@ -196,19 +200,18 @@ class EditableTable extends React.Component {
    };
    handleAdd = newPost => {
       const { count, data } = this.state;
+      if (idPostNew === 0) idPostNew = data[data.length - 1].idPost;
+      idPostNew++;
+
       const newData = {
-         idPost:
-            newPost.idPost | (data.length !== 0)
-               ? data[data.length - 1].idPost + 1
-               : 0,
+         idPost: idPostNew,
          titlePost: newPost.titlePost,
-         price: newPost.price,
-         sale: newPost.sale,
+         views: newPost.views,
+         vote: newPost.vote,
          dateAdded: new Date()
             .toJSON()
             .slice(0, 10)
             .replace(/-/g, "-"),
-         departureDay: newPost.departureDay,
          describe: newPost.describe,
          address: newPost.address,
          vocationTime: newPost.vocationTime,
@@ -262,9 +265,6 @@ class EditableTable extends React.Component {
 
    fetch = async (params = {}) => {
       this.setState({ loading: true });
-      // const { postAllActions } = this.props;
-      // const { fetchListPostRequest } = postAllActions;
-      // await fetchListPostRequest();
       await reqwest({
          url: `${API_ENDPOINT}/posts`,
          method: "GET",
@@ -275,13 +275,10 @@ class EditableTable extends React.Component {
          type: "json"
       }).then(data => {
          const pagination = { ...this.state.pagination };
-         // Read total count from server
          pagination.total = data.length;
-         // const { listPost } = this.props;
          this.setState({
             loading: false,
             data: data,
-            //data: listPost
             pagination
          });
       });
@@ -453,27 +450,24 @@ class EditableTable extends React.Component {
    };
 
    showModalPreview(record) {
+      console.log(record);
+
+      const { listImagePost } = this.props;
+
+      const listImageFilterIdPost = listImagePost.filter(
+         image => image.idPost === record.idPost
+      );
+
+      console.log(listImageFilterIdPost);
+
       Modal.info({
          style: { top: "30px" },
          width: 400,
          title: "This is a item post at category posts",
          wrapClassName: "",
          content: (
-            <PostPreview
-               post={record}
-               listImagePost={[
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  },
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  }
-               ]}
-            />
-         ),
-         onOk() {}
+            <PostPreview post={record} listImagePost={listImageFilterIdPost} />
+         )
       });
    }
 
@@ -537,28 +531,28 @@ class EditableTable extends React.Component {
             ellipsis: true,
             editable: true
          },
-         {
-            title: "Status",
-            dataIndex: "status",
-            key: "status",
-            width: 100,
-            ...this.getColumnSearchProps("status"),
-            sorter: (a, b) => a.status.length - b.status.length,
-            sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
-         },
-         {
-            title: "Type",
-            dataIndex: "type",
-            key: "type",
-            width: 100,
-            ...this.getColumnSearchProps("type"),
-            sorter: (a, b) => a.type.length - b.type.length,
-            sortOrder: sortedInfo.columnKey === "type" && sortedInfo.order,
-            ellipsis: true,
-            editable: true
-         },
+         // {
+         //    title: "Status",
+         //    dataIndex: "status",
+         //    key: "status",
+         //    width: 100,
+         //    ...this.getColumnSearchProps("status"),
+         //    sorter: (a, b) => a.status.length - b.status.length,
+         //    sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
+         //    ellipsis: true,
+         //    editable: true
+         // },
+         // {
+         //    title: "Type",
+         //    dataIndex: "type",
+         //    key: "type",
+         //    width: 100,
+         //    ...this.getColumnSearchProps("type"),
+         //    sorter: (a, b) => a.type.length - b.type.length,
+         //    sortOrder: sortedInfo.columnKey === "type" && sortedInfo.order,
+         //    ellipsis: true,
+         //    editable: true
+         // },
          {
             title: "View",
             dataIndex: "views",
@@ -597,16 +591,16 @@ class EditableTable extends React.Component {
             }
          },
 
-         {
-            title: "IDAcc",
-            dataIndex: "idAccount",
-            key: "idAccount",
-            width: 60,
-            // fixed: "left",
-            ellipsis: true,
-            editable: true
-            // render: text => text
-         },
+         // {
+         //    title: "IDAcc",
+         //    dataIndex: "idAccount",
+         //    key: "idAccount",
+         //    width: 60,
+         //    // fixed: "left",
+         //    ellipsis: true,
+         //    editable: true
+         //    // render: text => text
+         // },
          {
             title: "Edit",
             dataIndex: "edit",

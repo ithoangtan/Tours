@@ -31,17 +31,29 @@ exports.create = function(req, res) {
     if (err) {
       return res.send(err);
     } else {
-      Image.createImageTour(req.query.idTour, nameFile, function(err, resp) {
-        if (err) res.send(err);
-        else
-          res.send({
-            idTour: req.query.idTour,
-            nameFile: nameFile
-          });
-      });
+      if (req.query.idTour) {
+        Image.createImageTour(req.query.idTour, nameFile, function(err, resp) {
+          if (err) res.send(err);
+          else
+            res.send({
+              idTour: req.query.idTour,
+              nameFile: nameFile
+            });
+        });
+      } else if (req.query.idPost) {
+        Image.createImagePost(req.query.idPost, nameFile, function(err, resp) {
+          if (err) res.send(err);
+          else
+            res.send({
+              idPost: req.query.idPost,
+              nameFile: nameFile
+            });
+        });
+      }
     }
   });
 };
+
 exports.avatar = function(req, res) {
   dateNow = Date.now();
   upload(req, res, function(err) {
@@ -82,6 +94,18 @@ exports.listAllImageTour = function(req, res) {
   Image.getAllImageTour(function(err, tourImage) {
     if (err) res.send(err);
     res.json(tourImage);
+  });
+};
+
+exports.listAllImagePost = function(req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+  Image.getAllImagePost(function(err, postImage) {
+    if (err) res.send(err);
+    res.json(postImage);
   });
 };
 

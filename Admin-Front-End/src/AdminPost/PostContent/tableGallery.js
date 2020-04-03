@@ -189,7 +189,7 @@ class TableGallery extends Component {
                   beforeUpload={this.beforeUpload}
                   onRemove={this.onRemove}
                >
-                  {fileList.length >= 8 ? null : uploadButton}
+                  {fileList.length >= 1 ? null : uploadButton}
                </Upload>
                <Modal
                   visible={previewVisible}
