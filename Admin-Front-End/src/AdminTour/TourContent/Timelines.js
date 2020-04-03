@@ -214,8 +214,6 @@ class Timeline extends React.Component {
    render() {
       if (this.state.hasData === false) return xhtml;
 
-      console.log("render", this.state.timelinesByIdTour);
-
       const { getFieldDecorator, getFieldValue } = this.props.form;
 
       getFieldDecorator("keys", {

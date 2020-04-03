@@ -1,14 +1,14 @@
 import * as serviceApis from "../_apis/service.api";
 import * as serviceConstants from "../_constants/service.module";
 
-export const fetchListService = () => {
+export const fetchListServices = () => {
    return {
       type: serviceConstants.FETCH_SERVICE
    };
 };
 
-//List Service
-export const fetchListServiceSuccess = data => {
+//List Services
+export const fetchListServicesSuccess = data => {
    return {
       type: serviceConstants.FETCH_SERVICE_SUCCESS,
       payload: {
@@ -17,7 +17,7 @@ export const fetchListServiceSuccess = data => {
    };
 };
 
-export const fetchListServiceError = error => {
+export const fetchListServicesError = error => {
    return {
       type: serviceConstants.FETCH_SERVICE_FAILED,
       payload: {
@@ -26,29 +26,29 @@ export const fetchListServiceError = error => {
    };
 };
 /**
- * B1: fetch isServiceRequest()
+ * B1: fetch isServicesRequest()
  * B2: ResetL state services --> []
  * B3: Khi API thành công thì vào then:
- * fetchListServiceSucces (data response)
+ * fetchListServicesSucces (data response)
  *
  */
-export const fetchListServiceRequest = () => {
+export const fetchListServicesRequest = () => {
    return dispatch => {
-      dispatch(fetchListService()); //reset state services-->[]
+      dispatch(fetchListServices()); //reset state services-->[]
       serviceApis
-         .getListService()
+         .getListServices()
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchListServiceSuccess(data));
+            dispatch(fetchListServicesSuccess(data));
          })
          .catch(error => {
-            dispatch(fetchListServiceError(error));
+            dispatch(fetchListServicesError(error));
          });
    };
 };
 
 //GET SERVICE BY ID
-export const fetchServiceByIdSuccess = data => {
+export const fetchServicesByIdSuccess = data => {
    return {
       type: serviceConstants.FETCH_SERVICE_GET_BYID_SUCCESS,
       payload: {
@@ -57,7 +57,7 @@ export const fetchServiceByIdSuccess = data => {
    };
 };
 
-export const fetchServiceByIdError = error => {
+export const fetchServicesByIdError = error => {
    return {
       type: serviceConstants.FETCH_SERVICE_GET_BYID_FAILED,
       payload: {
@@ -66,23 +66,23 @@ export const fetchServiceByIdError = error => {
    };
 };
 
-export const fetchServiceByIdRequest = idService => {
+export const fetchServicesByIdRequest = idServices => {
    return dispatch => {
       serviceApis
-         .getServiceById(idService)
+         .getServicesById(idServices)
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchServiceByIdSuccess(data));
+            dispatch(fetchServicesByIdSuccess(data));
          })
          .catch(error => {
-            dispatch(fetchServiceByIdError(error));
+            dispatch(fetchServicesByIdError(error));
          });
    };
 };
-//end Get Service By ID
+//end Get Services By ID
 
-//POST Service - create
-export const fetchPostServiceSuccess = (newRecord, data) => {
+//POST Services - create
+export const fetchPostServicesSuccess = (newRecord, data) => {
    return {
       type: serviceConstants.FETCH_SERVICE_CREATE_SUCCESS,
       payload: {
@@ -92,7 +92,7 @@ export const fetchPostServiceSuccess = (newRecord, data) => {
    };
 };
 
-export const fetchPostServiceError = error => {
+export const fetchPostServicesError = error => {
    return {
       type: serviceConstants.FETCH_SERVICE_CREATE_FAILED,
       payload: {
@@ -101,23 +101,23 @@ export const fetchPostServiceError = error => {
    };
 };
 
-export const fetchPostServiceRequest = newRecord => {
+export const fetchPostServicesRequest = newRecord => {
    return dispatch => {
       serviceApis
-         .postService(newRecord)
+         .postServices(newRecord)
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchPostServiceSuccess(newRecord, data));
+            dispatch(fetchPostServicesSuccess(newRecord, data));
          })
          .catch(error => {
-            dispatch(fetchPostServiceError(error));
+            dispatch(fetchPostServicesError(error));
          });
    };
 };
-//end Create Service
+//end Create Services
 
-//Delete Service
-export const fetchDeleteServiceSuccess = (record, data) => {
+//Delete Services
+export const fetchDeleteServicesSuccess = (record, data) => {
    return {
       type: serviceConstants.FETCH_SERVICE_DELETE_SUCCESS,
       payload: {
@@ -127,7 +127,7 @@ export const fetchDeleteServiceSuccess = (record, data) => {
    };
 };
 
-export const fetchDeleteServiceError = error => {
+export const fetchDeleteServicesError = error => {
    return {
       type: serviceConstants.FETCH_SERVICE_DELETE_FAILED,
       payload: {
@@ -136,22 +136,22 @@ export const fetchDeleteServiceError = error => {
    };
 };
 
-export const fetchDeleteServiceRequest = record => {
+export const fetchDeleteServicesRequest = record => {
    return dispatch => {
       serviceApis
-         .deleteService(record.idService)
+         .deleteServices(record.idServices)
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchDeleteServiceSuccess(record, data));
+            dispatch(fetchDeleteServicesSuccess(record, data));
          })
          .catch(error => {
-            dispatch(fetchDeleteServiceError(error));
+            dispatch(fetchDeleteServicesError(error));
          });
    };
 };
 
-//PATCH Service
-export const fetchPatchServiceSuccess = (newRecord, data) => {
+//PATCH Services
+export const fetchPatchServicesSuccess = (newRecord, data) => {
    return {
       type: serviceConstants.FETCH_SERVICE_PATCH_SUCCESS,
       payload: {
@@ -161,7 +161,7 @@ export const fetchPatchServiceSuccess = (newRecord, data) => {
    };
 };
 
-export const fetchPatchServiceError = error => {
+export const fetchPatchServicesError = error => {
    return {
       type: serviceConstants.FETCH_SERVICE_PATCH_FAILED,
       payload: {
@@ -170,16 +170,16 @@ export const fetchPatchServiceError = error => {
    };
 };
 
-export const fetchPatchServiceRequest = newRecord => {
+export const fetchPatchServicesRequest = newRecord => {
    return dispatch => {
       serviceApis
-         .patchService(newRecord)
+         .patchServices(newRecord)
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchPatchServiceSuccess(newRecord, data));
+            dispatch(fetchPatchServicesSuccess(newRecord, data));
          })
          .catch(error => {
-            dispatch(fetchPatchServiceError(error));
+            dispatch(fetchPatchServicesError(error));
          });
    };
 };

@@ -55,9 +55,9 @@ const ResizeableTitle = props => {
 class EditableCell extends React.Component {
    getInput = () => {
       if (this.props.inputType === "number") {
-         return <InputNumber />;
+         return <InputNumber size="small" />;
       }
-      return <Input />;
+      return <Input size="small" />;
    };
 
    renderCell = ({ getFieldDecorator }) => {
@@ -196,18 +196,7 @@ class EditableTable extends React.Component {
             newTag.idTag | (data.length !== 0)
                ? data[data.length - 1].idTag + 1
                : 0,
-         titleTag: newTag.titleTag,
-         price: newTag.price,
-         sale: newTag.sale,
-         dateAdded: new Date()
-            .toJSON()
-            .slice(0, 10)
-            .replace(/-/g, "-"),
-         departureDay: newTag.departureDay,
-         describe: newTag.describe,
-         address: newTag.address,
-         vocationTime: newTag.vocationTime,
-         idAccount: newTag.idAccount
+         name: newTag.name
       };
       //Gọi API create dưới CSDL
       const { tagAllActions } = this.props;

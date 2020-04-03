@@ -559,26 +559,17 @@ class EditableTable extends React.Component {
 
    /** Show Preivew */
    showModalPreview(record) {
+      const { listImageTour } = this.props;
+      const listImageFilterIdTour = listImageTour.filter(
+         image => image.idTour === record.idTour
+      );
       Modal.info({
          width: 1000,
          title: "This is a item tour at category tours",
          wrapClassName: "",
          content: (
-            <TourPreview
-               tour={record}
-               listImageTour={[
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  },
-                  {
-                     url:
-                        "/img/1576396566503_italian-landscape-mountains-nature.jpg"
-                  }
-               ]}
-            />
-         ),
-         onOk() {}
+            <TourPreview tour={record} listImageTour={listImageFilterIdTour} />
+         )
       });
    }
 
