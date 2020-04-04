@@ -29,10 +29,10 @@ export const putTagsAndServices = data => {
    return axiosService.patch(`${API_ENDPOINT}/${urlPutTagsAndServices}`, data);
 };
 
-const urlImages = "images";
+const urlImagesTour = "imagesTour";
 
 export const getListImageTour = () => {
-   return axiosService.get(`${API_ENDPOINT}/${urlImages}`);
+   return axiosService.get(`${API_ENDPOINT}/${urlImagesTour}`);
 };
 
 export const deleteImageTour = (idImage, name) => {

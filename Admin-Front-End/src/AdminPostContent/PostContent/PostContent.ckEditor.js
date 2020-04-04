@@ -12,7 +12,7 @@ import * as postActions from "../../_actions/post.actions";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import { Button, Tooltip, message } from "antd";
+import { Button, Tooltip } from "antd";
 
 import moment from "moment";
 
@@ -27,7 +27,7 @@ class PostContentEditor extends Component {
          handleWYSIWYGInput: props.handleWYSIWYGInput,
          editor: ClassicEditor,
          post: null,
-         previewsInData: true
+         previewsInData: true,
       };
    }
 
@@ -49,7 +49,7 @@ class PostContentEditor extends Component {
       // The substituted value will be contained in the result variable
       const resultPage = str.replace(regex, subst);
       this.setState({
-         pageName: resultPage
+         pageName: resultPage,
       });
    }
 
@@ -58,18 +58,18 @@ class PostContentEditor extends Component {
    }
 
    onSave = () => {
-      message.loading("Đang lưu", 2);
       let dataContent = {};
-      // Kiểm tra xem là pageName nào mà fetch cho phù hợp
-      //note, policy, detail-price, contact, post-detail, timelines
+
       dataContent = {
-         data: this.state.content,
-         idPost: this.props.post.idPost
+         idPost: this.props.post.idPost,
+         titlePost: this.props.post.titlePost,
+         contentPost: this.state.content,
       };
-      //Save data post by id tour
+
+      //Save data post by id Post
       const { postAllActions } = this.props;
-      const { fetchPatchdPostRequest } = postAllActions;
-      fetchPatchdPostRequest(dataContent);
+      const { fetchPatchPostRequest } = postAllActions;
+      fetchPatchPostRequest(dataContent);
    };
 
    renderCkEditor() {
@@ -93,21 +93,21 @@ class PostContentEditor extends Component {
                   //    uploadUrl: "https://43967.cke-cs.com/easyimage/upload/"
                   // },
                   mediaEmbed: {
-                     previewsInData: true
-                  }
+                     previewsInData: true,
+                  },
                }}
                // extraPlugins={"easyimage"}
-               onInit={editor => {
+               onInit={(editor) => {
                   // You can store the "editor" and use when it is needed.
                   this.setState({ post });
 
                   console.log("Editor is ready to use!", editor);
                }}
                onChange={(event, editor) => this.onChange(event, editor)}
-               onBlur={editor => {
+               onBlur={(editor) => {
                   // console.log("Blur.", editor);
                }}
-               onFocus={editor => {
+               onFocus={(editor) => {
                   // console.log("Focus.", editor);
                }}
             />
@@ -196,15 +196,14 @@ class PostContentEditor extends Component {
 PostContentEditor.propTypes = {
    classes: PropTypes.object,
    postAllActions: PropTypes.shape({
-      fetchPatchdPostRequest: PropTypes.func
+      fetchPatchPostRequest: PropTypes.func,
    }),
-   post: PropTypes.object
+   post: PropTypes.object,
 };
 
-const mapStateToProps = state => {};
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      postAllActions: bindActionCreators(postActions, dispatch)
+      postAllActions: bindActionCreators(postActions, dispatch),
    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(PostContentEditor);
+export default connect(null, mapDispatchToProps)(PostContentEditor);

@@ -73,9 +73,9 @@ export const toastDeleteScheduleSuccess = record => {
    }
 };
 
-export const toastPatchScheduleSuccess = newRecord => {
+export const toastPatchScheduleSuccess = (prefix, newRecord, suffix) => {
    if (newRecord !== null && newRecord !== "") {
-      toast.info(`ID: ${newRecord.idTour}, ${newRecord.titleTour} updated!`);
+      toast.info(`${prefix} | ID: ${newRecord.titleTour} ${suffix} updated!`);
    }
 };
 

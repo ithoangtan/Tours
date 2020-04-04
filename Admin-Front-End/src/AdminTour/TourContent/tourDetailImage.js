@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { APIImage } from "../../_constants/index.constants";
+import { API_ENDPOINT } from "../../_constants/index.constants";
 
 export default class TourDetailImages extends Component {
    render() {
@@ -9,7 +9,7 @@ export default class TourDetailImages extends Component {
          // <div className="ht-contain-img">
          <img
             alt="notFound"
-            src={`${APIImage + srcImage}`}
+            src={`${API_ENDPOINT + srcImage}`}
             className="ht-img-tour"
          />
          // </div>

@@ -64,6 +64,7 @@ class EditorContainer extends Component {
    }
 
    onSave = () => {
+      const { tour } = this.props;
       const { pageName } = this.state;
 
       message.loading("Đang lưu", 2);
@@ -72,34 +73,39 @@ class EditorContainer extends Component {
       //note, policy, detail-price, contact, schedule-detail, timelines
       if (pageName === "schedule-detail") {
          dataContent = {
-            data: this.state.content,
-            idTour: this.props.tour.idTour
+            idTour: tour.idTour,
+
+            data: this.state.content
          };
       }
       if (pageName === "note") {
          // Dựa vào database để làm tiếp
          // Sửa lại API để phù hợp với chỗ này
          dataContent = {
-            notes: this.state.content,
-            idTour: this.props.tour.idTour
+            idTour: tour.idTour,
+
+            notes: this.state.content
          };
       }
       if (pageName === "policy") {
          dataContent = {
-            policy: this.state.content,
-            idTour: this.props.tour.idTour
+            idTour: tour.idTour,
+
+            policy: this.state.content
          };
       }
       if (pageName === "detail-price") {
          dataContent = {
-            detailPrice: this.state.content,
-            idTour: this.props.tour.idTour
+            idTour: tour.idTour,
+
+            detailPrice: this.state.content
          };
       }
       if (pageName === "contact") {
          dataContent = {
-            contacts: this.state.content,
-            idTour: this.props.tour.idTour
+            idTour: tour.idTour,
+
+            contacts: this.state.content
          };
       }
       if (pageName === "timelines") {
@@ -108,7 +114,7 @@ class EditorContainer extends Component {
       //Save data schedule by id tour
       const { scheduleAllActions } = this.props;
       const { fetchPatchScheduleRequest } = scheduleAllActions;
-      fetchPatchScheduleRequest(dataContent);
+      fetchPatchScheduleRequest(dataContent, tour, pageName);
    };
 
    getNameSaveBtn() {
@@ -195,6 +201,7 @@ class EditorContainer extends Component {
    // };
 
    renderContentDetail() {
+      const { tour } = this.props;
       const { pageName } = this.state;
       if (
          pageName === "schedule-detail" ||
@@ -212,7 +219,10 @@ class EditorContainer extends Component {
       if (pageName === "timelines") {
          return (
             <div className="ht-timeline-container-main container col-md-12 mt-4 mb-4">
-               <TimelinesComponent />
+               <TimelinesComponent
+                  idTour={tour.idTour}
+                  titleTour={tour.titleTour}
+               />
             </div>
          );
       }

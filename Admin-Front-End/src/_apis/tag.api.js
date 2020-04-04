@@ -12,6 +12,8 @@ export const getTagById = idTag => {
 };
 
 export const postTag = data => {
+   console.log(data);
+
    return axiosService.post(`${API_ENDPOINT}/${url}`, data);
 };
 
@@ -20,5 +22,5 @@ export const deleteTag = idTag => {
 };
 
 export const patchTag = data => {
-   return axiosService.patch(`${API_ENDPOINT}/${url}`, data);
+   return axiosService.put(`${API_ENDPOINT}/${url}`, data);
 };

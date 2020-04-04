@@ -109,6 +109,7 @@ Schedule.updateById = function(updateTour, funcResult) {
     }
   );
 };
+
 /**
  * Do cơ sở dữ liệu là casade nên khi xóa tour, schedule cũng sẽ đi theo
  */

@@ -6,7 +6,7 @@ class TableNewRow extends Component {
    state = {
       expand: false,
       value: "",
-      nameService: ""
+      name: ""
    };
 
    onChange = event => {
@@ -26,8 +26,8 @@ class TableNewRow extends Component {
          }
       });
 
-      const { nameService, describe, address } = this.state;
-      if (nameService !== "" && describe !== "" && address !== "") {
+      const { name } = this.state;
+      if (name !== "") {
          const { handleAdd, onCancle } = this.props;
          handleAdd(this.state);
          onCancle();
@@ -71,7 +71,7 @@ class TableNewRow extends Component {
                         ]
                      })(
                         <Input
-                           name="nameService"
+                           name="name"
                            placeholder="Tên Service là"
                            className="ant-form-item"
                            onChange={this.onChange}

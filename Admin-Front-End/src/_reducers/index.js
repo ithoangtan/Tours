@@ -8,10 +8,10 @@ import reportReducer from "./report.reducer";
 import tagReducer from "./tag.reducer";
 import serviceReducer from "./service.reducer";
 import postReducer from "./post.reducer";
-import generalReducer from "./general.reducer";
 import accountReducer from "./account.reducer";
 import notificationsReducer from "./notifications.reducer";
 import timelineReducer from "./timeline.reducer";
+import configReducer from "./config.reducer";
 
 const rootReducer = combineReducers({
    tour: tourReducer,
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
    tag: tagReducer,
    service: serviceReducer,
    post: postReducer,
-   general: generalReducer,
+   config: configReducer,
    account: accountReducer,
    notifications: notificationsReducer,
    timeline: timelineReducer

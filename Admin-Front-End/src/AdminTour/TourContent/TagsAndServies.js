@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import { Form, Checkbox, Button, Spin } from "antd";
+import { Form, Checkbox, Button } from "antd";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
-import { API_ENDPOINT } from "../../_constants/index.constants";
+import { API_ENDPOINT, XHTML_LOADING } from "../../_constants/index.constants";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -30,7 +30,7 @@ class TagsAndServices extends Component {
       services: [],
       checkedListServices: [],
       indeterminateServices: true,
-      checkAllServices: false
+      checkAllServices: false,
    };
 
    fetch = async (params = {}) => {
@@ -39,16 +39,16 @@ class TagsAndServices extends Component {
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
-            ...params
+            ...params,
          },
-         type: "json"
-      }).then(data => {
+         type: "json",
+      }).then((data) => {
          let tags = [];
          for (let i = 0; i < data.length; i++) {
             tags.push(data[i].name);
          }
          this.setState({
-            tags
+            tags,
          });
       });
       reqwest({
@@ -56,16 +56,16 @@ class TagsAndServices extends Component {
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
-            ...params
+            ...params,
          },
-         type: "json"
-      }).then(data => {
+         type: "json",
+      }).then((data) => {
          let services = [];
          for (let i = 0; i < data.length; i++) {
             services.push(data[i].name);
          }
          this.setState({
-            services
+            services,
          });
       });
    };
@@ -75,53 +75,53 @@ class TagsAndServices extends Component {
       const { checkTags, checkServices } = this.props;
       if (checkTags?.length !== 0)
          this.setState({
-            checkedListTags: JSON.parse(checkTags)
+            checkedListTags: JSON.parse(checkTags),
          });
 
       if (checkServices?.length !== 0)
          this.setState({
-            checkedListServices: JSON.parse(checkServices)
+            checkedListServices: JSON.parse(checkServices),
          });
    }
 
-   onChangeTags = checkedListTags => {
+   onChangeTags = (checkedListTags) => {
       this.setState({
          checkedListTags,
          indeterminateTags:
             !!checkedListTags.length &&
             checkedListTags.length < this.state.tags.length,
-         checkAllTags: checkedListTags.length === this.state.tags.length
+         checkAllTags: checkedListTags.length === this.state.tags.length,
       });
    };
 
-   onCheckAllChangeTags = e => {
+   onCheckAllChangeTags = (e) => {
       this.setState({
          checkedListTags: e.target.checked ? this.state.tags : [],
          indeterminateTags: false,
-         checkAllTags: e.target.checked
+         checkAllTags: e.target.checked,
       });
    };
 
-   onChangeServices = checkedListServices => {
+   onChangeServices = (checkedListServices) => {
       this.setState({
          checkedListServices,
          indeterminateServices:
             !!checkedListServices.length &&
             checkedListServices.length < this.state.services.length,
          checkAllServices:
-            checkedListServices.length === this.state.services.length
+            checkedListServices.length === this.state.services.length,
       });
    };
 
-   onCheckAllChangeServices = e => {
+   onCheckAllChangeServices = (e) => {
       this.setState({
          checkedListServices: e.target.checked ? this.state.services : [],
          indeterminateServices: false,
-         checkAllServices: e.target.checked
+         checkAllServices: e.target.checked,
       });
    };
 
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       const { idTour, titleTour } = this.props;
       // Call API save data
@@ -129,7 +129,7 @@ class TagsAndServices extends Component {
          idTour,
          titleTour,
          tags: this.state.checkedListTags,
-         services: this.state.checkedListServices
+         services: this.state.checkedListServices,
       };
       const { tourAllActions } = this.props;
       const { fetchPutTagsAndServicesRequest } = tourAllActions;
@@ -137,29 +137,20 @@ class TagsAndServices extends Component {
    };
 
    render() {
-      const xhtml = (
-         <div
-            className="container col-md-12 ht-d-flex-col-center-center"
-            style={{ width: "100%", height: "20vh" }}
-         >
-            <Spin tip="Loading..." />
-         </div>
-      );
-
-      if (this.state.tags.length === 0) return xhtml;
-      if (this.state.services.length === 0) return xhtml;
+      if (this.state.tags.length === 0) return XHTML_LOADING;
+      if (this.state.services.length === 0) return XHTML_LOADING;
 
       const formItemLayout = {
          labelCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
+            md: { span: 4 },
          },
          wrapperCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
-         }
+            md: { span: 4 },
+         },
       };
       const { getFieldDecorator } = this.props.form;
 
@@ -181,8 +172,8 @@ class TagsAndServices extends Component {
                               {
                                  //  required: true,
                                  //   message: "Select tags!"
-                              }
-                           ]
+                              },
+                           ],
                         })(
                            <>
                               <div className="ht-d-flex">
@@ -211,8 +202,8 @@ class TagsAndServices extends Component {
                               {
                                  //   required: true,
                                  // message: "Select services!"
-                              }
-                           ]
+                              },
+                           ],
                         })(
                            <>
                               <div className="ht-d-flex">
@@ -241,7 +232,7 @@ class TagsAndServices extends Component {
                      <Button type="default"> Thêm Tags mới</Button>
                   </Link>
                   <Button type="primary" className="ml-2" htmlType="submit">
-                     Lưu Thẻ và Dịch vụ
+                     Lưu Các Thẻ và Dịch vụ
                   </Button>
                </div>
             </div>
@@ -257,13 +248,13 @@ const WrappedTagsAndServicesForm = Form.create({ name: "tags_and_services" })(
 WrappedTagsAndServicesForm.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
-      fetchPutTagsAndServicesRequest: PropTypes.func
-   })
+      fetchPutTagsAndServicesRequest: PropTypes.func,
+   }),
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      tourAllActions: bindActionCreators(tourActions, dispatch)
+      tourAllActions: bindActionCreators(tourActions, dispatch),
    };
 };
 export default connect(null, mapDispatchToProps)(WrappedTagsAndServicesForm);

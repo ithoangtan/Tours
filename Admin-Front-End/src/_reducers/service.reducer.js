@@ -1,10 +1,8 @@
 import * as serviceConstants from "../_constants/service.module";
-import {
-   toastError,
-   toastPatchSuccess,
-   toastDeleteSuccess,
-   toastCreateSuccess
-} from "../_helper/toastify.helper";
+import { toastError } from "../_helper/toastify.helper";
+
+import { message } from "antd";
+
 const initialState = {
    listService: [],
    listImageService: [],
@@ -58,7 +56,9 @@ const reducer = (state = initialState, action) => {
       case serviceConstants.FETCH_SERVICE_CREATE_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
-         toastCreateSuccess(newRecord);
+         message.success(
+            `ID: ${newRecord.idServices} | ${newRecord.name} created!`
+         );
          return {
             ...state,
             create: data
@@ -77,7 +77,9 @@ const reducer = (state = initialState, action) => {
       case serviceConstants.FETCH_SERVICE_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
-         toastDeleteSuccess(record);
+         message.warning(
+            `ID: ${record.idServices}  |  ${record.name} deleted!`
+         );
          return {
             ...state,
             delete: data
@@ -96,7 +98,9 @@ const reducer = (state = initialState, action) => {
       case serviceConstants.FETCH_SERVICE_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
-         toastPatchSuccess(newRecord);
+         message.info(
+            `ID: ${newRecord.idServices} | ${newRecord.name} updated!`
+         );
          return {
             ...state,
             patch: data

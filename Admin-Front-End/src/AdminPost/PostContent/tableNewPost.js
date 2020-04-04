@@ -1,54 +1,76 @@
 import React, { Component } from "react";
 
-import { Form, Input, Button, Select, Radio, Checkbox } from "antd";
+import { Form, Input, Button, Radio, Checkbox } from "antd";
 
 import { getParamTokenWithName } from "../../_commons/auth.service";
+
+import reqwest from "reqwest";
+import { API_ENDPOINT } from "../../_constants/index.constants";
+
+import Cookies from "js-cookie";
+
+function getCookie(name) {
+   const token = Cookies.get(name);
+   return token;
+}
 
 const idAccount = getParamTokenWithName("idAccount");
 const { TextArea } = Input;
 
-const plainOptionsTags = [
-   "Cảnh đẹp",
-   "Ẩm thực ngon",
-   "Khám phá",
-   "... load ở database"
-];
-const defaultCheckedListTags = ["Cảnh đẹp"];
-
 class TableNewRow extends Component {
    state = {
       expand: false,
+      tags: [],
       value: "",
-      titleTour: "",
-      price: 10,
-      sale: 0,
-      address: "",
-      vocationTime: "2 Ngày 1 Đêm",
+      titlePost: "",
       departureDay: new Date()
          .toJSON()
          .slice(0, 10)
          .replace(/-/g, "-"),
       describe: "",
+      type: "Asian",
+      views: 0,
+      vote: 0,
       idAccount: idAccount,
-      reuse: 0,
-      checkedListTags: defaultCheckedListTags,
-      indeterminateTags: true,
+      checkedListTags: [],
+      indeterminateTags: false,
       checkAllTags: false
    };
+
+   fetch = async () => {
+      reqwest({
+         url: `${API_ENDPOINT}/tags`,
+         method: "GET",
+         headers: { Authentication: getCookie("token") },
+         type: "json"
+      }).then(data => {
+         let tags = [];
+         for (let i = 0; i < data.length; i++) {
+            tags.push(data[i].name);
+         }
+         this.setState({
+            tags
+         });
+      });
+   };
+
+   componentWillMount() {
+      this.fetch();
+   }
 
    onChangeTags = checkedListTags => {
       this.setState({
          checkedListTags,
          indeterminateTags:
             !!checkedListTags.length &&
-            checkedListTags.length < plainOptionsTags.length,
-         checkAllTags: checkedListTags.length === plainOptionsTags.length
+            checkedListTags.length < this.state.tags.length,
+         checkAllTags: checkedListTags.length === this.state.tags.length
       });
    };
 
    onCheckAllChangeTags = e => {
       this.setState({
-         checkedListTags: e.target.checked ? plainOptionsTags : [],
+         checkedListTags: e.target.checked ? this.state.tags : [],
          indeterminateTags: false,
          checkAllTags: e.target.checked
       });
@@ -96,9 +118,8 @@ class TableNewRow extends Component {
             return;
          }
       });
-
-      const { titleTour, describe, address } = this.state;
-      if (titleTour !== "" && describe !== "" && address !== "") {
+      const { titlePost, describe } = this.state;
+      if (titlePost !== "" && describe !== "") {
          const { handleAdd, onCancle } = this.props;
          handleAdd(this.state);
          onCancle();
@@ -169,37 +190,8 @@ class TableNewRow extends Component {
                            <TextArea
                               name="describe"
                               placeholder="Description on your post pay"
-                              autoSize
                               onChange={this.onChange}
                            />
-                        )}
-                     </Form.Item>
-
-                     <Form.Item
-                        label={`Status:`}
-                        className="ant-form-item-control-wrapper col-md-12 mb-1"
-                     >
-                        {getFieldDecorator(`status`, {
-                           initialValue: { key: "not-verified" },
-                           rules: [
-                              {
-                                 required: true,
-                                 message: "select same day!"
-                              }
-                           ]
-                        })(
-                           <Select
-                              name="status"
-                              labelInValue
-                              onChange={this.handleChange}
-                           >
-                              <Select.Option value="verified">
-                                 verified
-                              </Select.Option>
-                              <Select.Option value="not-verified">
-                                 not-verified
-                              </Select.Option>
-                           </Select>
                         )}
                      </Form.Item>
                   </div>
@@ -265,14 +257,7 @@ class TableNewRow extends Component {
                         label={`Tags: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-0"
                      >
-                        {getFieldDecorator(`tags`, {
-                           rules: [
-                              {
-                                 //  required: true,
-                                 //   message: "Select tags!"
-                              }
-                           ]
-                        })(
+                        {getFieldDecorator(`tags`)(
                            <>
                               <div className="ht-d-flex">
                                  <Checkbox
@@ -283,7 +268,7 @@ class TableNewRow extends Component {
                                     <strong>Chọn tất cả</strong>
                                  </Checkbox>
                                  <Checkbox.Group
-                                    options={plainOptionsTags}
+                                    options={this.state.tags}
                                     value={this.state.checkedListTags}
                                     onChange={this.onChangeTags}
                                  />

@@ -1,10 +1,6 @@
 import * as postConstants from "../_constants/post.module";
-import {
-   toastError,
-   toastPatchSuccess,
-   toastDeleteSuccess,
-   toastCreateSuccess
-} from "../_helper/toastify.helper";
+import { toastError } from "../_helper/toastify.helper";
+import { message } from "antd";
 const initialState = {
    listPost: [],
    listImagePost: [],
@@ -57,8 +53,8 @@ const reducer = (state = initialState, action) => {
       //Post - Create
       case postConstants.FETCH_POST_CREATE_SUCCESS: {
          const { data } = action.payload;
-         const { newRecord } = action.newRecord;
-         toastCreateSuccess(newRecord);
+         const { newRecord } = action;
+         message.success(` ${newRecord.titlePost} --- created!`);
          return {
             ...state,
             create: data
@@ -76,8 +72,8 @@ const reducer = (state = initialState, action) => {
       //Delete
       case postConstants.FETCH_POST_DELETE_SUCCESS: {
          const { data } = action.payload;
-         const { record } = action.record;
-         toastDeleteSuccess(record);
+         const { record } = action;
+         message.warning(` ${record.titlePost} --- deleted!`);
          return {
             ...state,
             delete: data
@@ -96,7 +92,7 @@ const reducer = (state = initialState, action) => {
       case postConstants.FETCH_POST_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
-         toastPatchSuccess(newRecord);
+         message.info(` ${newRecord.titlePost} --- updated!`);
          return {
             ...state,
             patch: data

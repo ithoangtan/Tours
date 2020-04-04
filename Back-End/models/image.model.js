@@ -1,7 +1,7 @@
 const mysql = require("../dbconnection.js");
 const fs = require("fs");
 
-const Image = function(image) {
+const Image = function (image) {
   this.idImage = image.idImage | 0;
   this.link = image.link;
   this.dateAdded = image.dateAdded.slice(0, 10).replace(/-/g, "/"); //format date YYYY-MM-DD
@@ -16,12 +16,14 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
-Image.getAllImageTour = function(fncResult) {
+Image.getImageById = function (idImage, fncResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
-      ".images WHERE statusAction <> 'deleted';",
-    function(err, res) {
+      ".images WHERE idImage = " +
+      idImage +
+      " AND statusAction <> 'deleted';",
+    function (err, res) {
       if (err) {
         fncResult(err, null);
       } else {
@@ -31,14 +33,58 @@ Image.getAllImageTour = function(fncResult) {
   );
 };
 
-Image.getAllImageTourById = function(idTour, fncResult) {
+Image.getAllImageTour = function (fncResult) {
+  mysql.query(
+    "SELECT * FROM " +
+      databaseProduction +
+      ".images WHERE statusAction <> 'deleted' AND idTour > 0;",
+    function (err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+
+Image.getAllImagePost = function (fncResult) {
+  mysql.query(
+    "SELECT * FROM " +
+      databaseProduction +
+      ".images WHERE statusAction <> 'deleted' AND idPost > 0;",
+    function (err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+Image.getAllImageConfig = function (fncResult) {
+  mysql.query(
+    "SELECT * FROM " +
+      databaseProduction +
+      ".images WHERE statusAction <> 'deleted' AND idConfig > 0;",
+    function (err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+
+Image.getAllImageTourById = function (idTour, fncResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
       ".images WHERE idTour = " +
       idTour +
       " AND statusAction <> 'deleted';",
-    function(err, res) {
+    function (err, res) {
       if (err) {
         fncResult(err, null);
       } else {
@@ -48,19 +94,19 @@ Image.getAllImageTourById = function(idTour, fncResult) {
   );
 };
 
-Image.remove = function(idImage, name, fncResult) {
+Image.remove = function (idImage, name, fncResult) {
   mysql.query(
     "UPDATE " +
       databaseProduction +
       ".images SET `statusAction` = 'deleted' WHERE idImage = ?",
     [idImage],
-    function(err, res) {
+    function (err, res) {
       if (err) {
         fncResult(err, null);
       } else {
-        var path = `../Front-End/public/img/${name}`;
+        let path = `./public/img/${name}`;
         path = path.replace(" ", "");
-        fs.unlink(path, err => {
+        fs.unlink(path, (err) => {
           if (err) {
             console.log(err);
           }
@@ -71,12 +117,12 @@ Image.remove = function(idImage, name, fncResult) {
   );
 };
 
-Image.createImageTour = function(idTour, name, fncResult) {
-  var url = `/img/${name}`;
-  var status = "done";
+Image.createImageTour = function (idTour, name, fncResult) {
+  let url = `/img/${name}`;
+  let status = "done";
   mysql.query(
     `INSERT INTO ${databaseProduction}.images (url, status, name, idTour) VALUES ('${url}', '${status}', ' ${name}' , '${idTour}')`,
-    function(err, res) {
+    function (err, res) {
       if (err) {
         fncResult(err, null);
       } else {
@@ -85,12 +131,43 @@ Image.createImageTour = function(idTour, name, fncResult) {
     }
   );
 };
-Image.updateAvatar = function(idAccount, name, fncResult) {
-  var url = `/img/${name}`;
+
+Image.createImagePost = function (idPost, name, fncResult) {
+  let url = `/img/${name}`;
+  let status = "done";
+  mysql.query(
+    `INSERT INTO ${databaseProduction}.images (url, status, name, idPost) VALUES ('${url}', '${status}', ' ${name}' , '${idPost}')`,
+    function (err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+
+Image.createImageConfig = function (idConfig, name, fncResult) {
+  let url = `/img/${name}`;
+  mysql.query(
+    "UPDATE " + databaseProduction + ".configs SET ? WHERE (idConfig = ?);",
+    [{ image: url }, idConfig],
+    function (err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+
+Image.updateAvatar = function (idAccount, name, fncResult) {
+  let url = `/img/${name}`;
   mysql.query(
     "UPDATE " + databaseProduction + ".accounts SET ? WHERE (idAccount = ?);",
     [{ avatar: url }, idAccount],
-    function(err, res) {
+    function (err, res) {
       if (err) {
         fncResult(err, null);
       } else {

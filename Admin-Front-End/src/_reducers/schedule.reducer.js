@@ -96,8 +96,10 @@ const reducer = (state = initialState, action) => {
       //Patch - update
       case scheduleConstants.FETCH_SCHEDULE_PATCH_SUCCESS: {
          const { data } = action.payload;
-         const { schedule } = action.schedule;
-         toastPatchScheduleSuccess(schedule);
+         const { schedule, tour, pageName } = action;
+         let titleTour = tour.titleTour;
+         let scheduleHasTitleTour = { ...schedule, titleTour };
+         toastPatchScheduleSuccess(pageName, scheduleHasTitleTour, "");
          return {
             ...state,
             patch: data

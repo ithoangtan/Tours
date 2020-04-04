@@ -183,7 +183,7 @@ export const fetchDeleteScheduleRequest = record => {
 };
 
 //PATCH Schedule
-export const fetchPatchScheduleSuccess = (schedule, data) => {
+export const fetchPatchScheduleSuccess = (schedule, data, tour, pageName) => {
    return {
       type: scheduleConstants.FETCH_SCHEDULE_PATCH_SUCCESS,
       payload: {
@@ -191,7 +191,9 @@ export const fetchPatchScheduleSuccess = (schedule, data) => {
          //data gửi kèm trong actions là payload ở vị trí này
          data
       },
-      schedule: { schedule }
+      schedule: schedule,
+      tour: tour,
+      pageName: pageName
    };
 };
 
@@ -204,13 +206,13 @@ export const fetchPatchScheduleError = error => {
    };
 };
 
-export const fetchPatchScheduleRequest = schedule => {
+export const fetchPatchScheduleRequest = (schedule, tour, pageName) => {
    return dispatch => {
       scheduleApis
          .patchSchedule(schedule)
          .then(resp => {
             const { data } = resp;
-            dispatch(fetchPatchScheduleSuccess(schedule, data));
+            dispatch(fetchPatchScheduleSuccess(schedule, data, tour, pageName));
          })
          .catch(error => {
             dispatch(fetchPatchScheduleError(error));

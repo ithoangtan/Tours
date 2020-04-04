@@ -7,36 +7,41 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as generalActions from "../../_actions/general.actions";
+import * as configActions from "../../_actions/config.actions";
 
-import { Button, Tooltip, message, Typography } from "antd";
+import { Button, Tooltip, Typography } from "antd";
 import AvatarChange from "./AvartarChange";
+import {
+   DEFAULT_IMAGE_URL,
+   API_ENDPOINT,
+   XHTML_LOADING,
+} from "../../_constants/index.constants";
 
 const { Paragraph } = Typography;
 
-class GeneralContentEditor extends Component {
+class ConfigContentEditor extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         nameAuthor: "ithoangtan",
-         describeAuthor:
-            "Create a beautiful blog that fits your style. Choose from a selection of easy-to-use templates – all with flexible layouts and hundreds of background images – or design something new."
+         nameAuthor: "",
+         describeAuthor: "",
+         isNameAuthorEdited: false,
+         isDescribeAuthorEdited: false,
       };
    }
 
-   onChange = async (str, field) => {
-      // Using fetchUpdateGeneralRequest
+   onChange = (str, field) => {
+      const { configs } = this.props.config;
+
       if (field === "nameAuthor") {
-         //  const data = { ...account, name: str };
-         // await fetchUpdateGeneralRequest(data);
-         this.setState({
-            nameAuthor: str
-         });
+         this.setState({ nameAuthor: str, isNameAuthorEdited: true });
+         if (!this.state.isDescribeAuthorEdited)
+            this.setState({ describeAuthor: configs.describeAuthor });
       }
       if (field === "describeAuthor") {
-         // const data = { ...account, address: str };
-         // await fetchUpdateGeneralRequest(data);
-         this.setState({ describeAuthor: str });
+         this.setState({ describeAuthor: str, isDescribeAuthorEdited: true });
+         if (!this.state.isNameAuthorEdited)
+            this.setState({ nameAuthor: configs.nameAuthor });
       }
    };
 
@@ -45,122 +50,134 @@ class GeneralContentEditor extends Component {
    }
 
    onSave = () => {
-      message.loading("Đang lưu", 2);
+      const { config } = this.props;
+
       let dataContent = {};
       // Kiểm tra xem là pageName nào mà fetch cho phù hợp
-      //note, policy, detail-price, contact, general-detail, timelines
+      //note, policy, detail-price, contact, config-detail, timelines
       dataContent = {
-         data: this.state.content,
-         idGeneral: this.props.general.idGeneral
+         idConfig: config.idConfig,
+         infoType: config.infoType,
+         configs: this.state,
       };
-      //Save data general by id tour
-      const { generalAllActions } = this.props;
-      const { fetchPatchdGeneralRequest } = generalAllActions;
-      fetchPatchdGeneralRequest(dataContent);
+      //Save data config by id tour
+      const { configAllActions } = this.props;
+      const { fetchPatchConfigRequest } = configAllActions;
+      fetchPatchConfigRequest(dataContent);
    };
 
    render() {
-      return (
-         <div className=" card shadow ht-style-card">
-            <div className="container col-md-12">
-               <div className="box-shadow p-3 ht-d-flex-row-space-between-start bdr-2 bgr-gray pt-2">
-                  <Tooltip title="Quay về quản lý danh sách Bài Viết">
-                     <Link to="/admin/generals">
-                        <Button
-                           //note, policy, detail-price, contact, general-detail, timelines
-                           type="default"
-                        >
-                           <i className="fas fa-arrow-left mr-1"></i> Về danh
-                           sách Bài Viết
+      const { config } = this.props;
+      const { configs } = config;
+
+      if (config.idConfig === undefined) return XHTML_LOADING;
+      else {
+         return (
+            <div className=" card shadow ht-style-card">
+               <div className="container col-md-12">
+                  <div className="box-shadow p-3 ht-d-flex-row-space-between-start bdr-2 bgr-gray pt-2">
+                     <Tooltip title="Quay về quản lý danh sách Bài Viết">
+                        <Link to="/admin/configs">
+                           <Button
+                              //note, policy, detail-price, contact, config-detail, timelines
+                              type="default"
+                           >
+                              <i className="fas fa-arrow-left mr-1"></i> Về danh
+                              sách Bài Viết
+                           </Button>
+                        </Link>
+                     </Tooltip>
+                     <Tooltip title="Lưu nội dung Bài Viết">
+                        <Button type="primary" onClick={this.onSave}>
+                           <i className="far fa-save mr-2"></i> {` `}
+                           Lưu Thông tin Tác Giả
                         </Button>
-                     </Link>
-                  </Tooltip>
-                  <Tooltip title="Lưu nội dung Bài Viết">
-                     <Button type="primary" onClick={this.onSave}>
-                        <i className="far fa-save mr-2"></i> {` `}
-                        Lưu Thông tin Tác Giả
-                     </Button>
-                  </Tooltip>
+                     </Tooltip>
+                  </div>
                </div>
-            </div>
-            <div className="container col-md-12 mt-3 mb-3">
-               <div className="col-md-12 container card ht-d-flex-row-center-center ">
-                  Có thể sửa ngay trên preview:
-                  <div className="ht-d-flex-row-start-start col-md-8 card m-3 pt-3 pr-3 pl-3 bgrf8f8f8">
-                     <div className="">
-                        <AvatarChange
-                           idGeneral={1}
-                           imageAuthorInfo={"/images/person_1.jpg"}
-                           //"/images/person_1.jpg"
-                        />
-                     </div>
-                     <div className="ht-d-flex-col-start-start col-md ml-3">
-                        <div className="ht-width-100">
-                           <Paragraph
-                              className="ht-title-author-info mb-2"
-                              editable={{
-                                 onChange: str =>
-                                    this.onChange(str, "nameAuthor")
-                              }}
-                           >
-                              {this.state.nameAuthor}
-                           </Paragraph>
+               <div className="container col-md-12 mt-3 mb-3">
+                  <div className="col-md-12 container card ht-d-flex-row-center-center ">
+                     Có thể sửa ngay trên preview:
+                     <div className="ht-d-flex-row-start-start col-md-8 card m-3 pt-3 pr-3 pl-3 bgrf8f8f8">
+                        <div className="">
+                           <AvatarChange
+                              idConfig={config.idConfig}
+                              imageAuthorInfo={
+                                 config.image !== undefined
+                                    ? API_ENDPOINT + config.image
+                                    : API_ENDPOINT + DEFAULT_IMAGE_URL
+                              }
+                           />
                         </div>
-                        <div className="ht-describe ht-width-100">
-                           <Paragraph
-                              editable={{
-                                 onChange: str =>
-                                    this.onChange(str, "describeAuthor")
-                              }}
-                           >
-                              {this.state.describeAuthor}
-                           </Paragraph>
+                        <div className="ht-d-flex-col-start-start col-md ml-3">
+                           <div className="ht-width-100">
+                              <Paragraph
+                                 className="ht-title-author-info mb-2"
+                                 editable={{
+                                    onChange: (str) =>
+                                       this.onChange(str, "nameAuthor"),
+                                 }}
+                              >
+                                 {configs?.nameAuthor !== undefined &&
+                                 !this.state.isNameAuthorEdited
+                                    ? configs.nameAuthor
+                                    : this.state.nameAuthor}
+                              </Paragraph>
+                           </div>
+                           <div className="ht-describe ht-width-100">
+                              <Paragraph
+                                 editable={{
+                                    onChange: (str) =>
+                                       this.onChange(str, "describeAuthor"),
+                                 }}
+                              >
+                                 {configs?.describeAuthor !== undefined &&
+                                 !this.state.isDescribeAuthorEdited
+                                    ? configs.describeAuthor
+                                    : this.state.describeAuthor}
+                              </Paragraph>
+                           </div>
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
-            <div className="container col-md-12">
-               <div className="box-shadow p-3 ht-d-flex-row-space-between-start bdr-2 bgr-gray pt-2">
-                  <Tooltip title="Quay về quản lý danh sách Bài Viết">
-                     <Link to="/admin/generals">
-                        <Button
-                           //note, policy, detail-price, contact, general-detail, timelines
-                           type="default"
-                        >
-                           <i className="fas fa-arrow-left mr-1"></i> Về danh
-                           sách Bài Viết
+               <div className="container col-md-12">
+                  <div className="box-shadow p-3 ht-d-flex-row-space-between-start bdr-2 bgr-gray pt-2">
+                     <Tooltip title="Quay về quản lý danh sách Bài Viết">
+                        <Link to="/admin/configs">
+                           <Button
+                              //note, policy, detail-price, contact, config-detail, timelines
+                              type="default"
+                           >
+                              <i className="fas fa-arrow-left mr-1"></i> Về danh
+                              sách Bài Viết
+                           </Button>
+                        </Link>
+                     </Tooltip>
+                     <Tooltip title="Lưu lịch trình TOUR">
+                        <Button type="primary" onClick={this.onSave}>
+                           <i className="far fa-save mr-2"></i> {` `}
+                           Lưu Thông tin Tác Giả
                         </Button>
-                     </Link>
-                  </Tooltip>
-                  <Tooltip title="Lưu lịch trình TOUR">
-                     <Button type="primary" onClick={this.onSave}>
-                        <i className="far fa-save mr-2"></i> {` `}
-                        Lưu Thông tin Tác Giả
-                     </Button>
-                  </Tooltip>
+                     </Tooltip>
+                  </div>
                </div>
             </div>
-         </div>
-      );
+         );
+      }
    }
 }
 
-GeneralContentEditor.propTypes = {
+ConfigContentEditor.propTypes = {
    classes: PropTypes.object,
-   generalAllActions: PropTypes.shape({
-      fetchPatchdGeneralRequest: PropTypes.func
+   configAllActions: PropTypes.shape({
+      fetchPatchConfigRequest: PropTypes.func,
    }),
-   general: PropTypes.object
 };
 
-const mapStateToProps = state => {};
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      generalAllActions: bindActionCreators(generalActions, dispatch)
+      configAllActions: bindActionCreators(configActions, dispatch),
    };
 };
-export default connect(
-   mapStateToProps,
-   mapDispatchToProps
-)(GeneralContentEditor);
+export default connect(null, mapDispatchToProps)(ConfigContentEditor);

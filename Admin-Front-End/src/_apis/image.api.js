@@ -3,8 +3,11 @@ import { API_ENDPOINT } from "../_constants/index.constants";
 
 const url = "image";
 
-export const getListImageByIdTour = idTour => {
+export const getListImageByIdTour = (idTour) => {
    return axiosService.get(`${API_ENDPOINT}/${url}?idTour=${idTour}`);
+};
+export const getListImageByIdPost = (idPost) => {
+   return axiosService.get(`${API_ENDPOINT}/${url}?idPost=${idPost}`);
 };
 
 export const deleteImageTour = (idImage, name) => {
@@ -19,8 +22,8 @@ export const uploadImageTour = (file, idTour) => {
       { body: file },
       {
          headers: {
-            "Content-Type": "multipart/form-data"
-         }
+            "Content-Type": "multipart/form-data",
+         },
       }
    );
 };

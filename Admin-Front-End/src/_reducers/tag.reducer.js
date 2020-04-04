@@ -1,10 +1,6 @@
 import * as tagConstants from "../_constants/tag.module";
-import {
-   toastError,
-   toastPatchSuccess,
-   toastDeleteSuccess,
-   toastCreateSuccess
-} from "../_helper/toastify.helper";
+import { toastError } from "../_helper/toastify.helper";
+import { message } from "antd";
 const initialState = {
    listTag: [],
    listImageTag: [],
@@ -58,7 +54,7 @@ const reducer = (state = initialState, action) => {
       case tagConstants.FETCH_TAG_CREATE_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
-         toastCreateSuccess(newRecord);
+         message.success(`ID: ${newRecord.idTag} | ${newRecord.name} created!`);
          return {
             ...state,
             create: data
@@ -77,7 +73,7 @@ const reducer = (state = initialState, action) => {
       case tagConstants.FETCH_TAG_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
-         toastDeleteSuccess(record);
+         message.warning(`${record.idTag} | ${record.name} deleted!`);
          return {
             ...state,
             delete: data
@@ -96,7 +92,7 @@ const reducer = (state = initialState, action) => {
       case tagConstants.FETCH_TAG_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
-         toastPatchSuccess(newRecord);
+         message.info(`ID:  ${newRecord.idTag}  |  ${newRecord.name} updated!`);
          return {
             ...state,
             patch: data

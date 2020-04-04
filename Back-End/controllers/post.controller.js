@@ -14,7 +14,7 @@ exports.listAll = async (req, res, next) => {
   }
 };
 
-exports.listPostSearch = async function(req, res) {
+exports.listPostSearch = async function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
@@ -61,9 +61,26 @@ exports.create = async (req, res, next) => {
 };
 
 exports.update = async (req, res, next) => {
-  const updatePost = removeBlankAttributes.remove(new Post(req.body));
+  let updatePost = removeBlankAttributes.remove(req.body);
   try {
     // const updatePost = removeBlankAttributes.remove(new Post(req.body));
+    if (updatePost.tags) updatePost.tags = JSON.stringify(updatePost.tags);
+    updateResult = await Post.updateById(updatePost);
+    res.status(200).json(updateResult);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
+exports.putTags = async (req, res, next) => {
+  let updatePost = removeBlankAttributes.remove(new Post(req.body));
+  updatePost.tags = JSON.stringify(req.body.tags);
+  console.log(updatePost);
+
+  try {
     updateResult = await Post.updateById(updatePost);
     res.status(200).json(updateResult);
   } catch (err) {

@@ -25,53 +25,53 @@ export default class AvatarChange extends Component {
    state = {
       imageUrl: "",
       loading: false,
-      action: `${API_ENDPOINT}/image`
+      action: `${API_ENDPOINT}/image`,
    };
 
    componentWillMount() {
       this.setState({ imageUrl: this.props.imageAuthorInfo });
    }
 
-   handleChange = info => {
+   handleChange = (info) => {
       if (info.file.status === "uploading") {
          this.setState({ loading: true });
          return;
       }
       if (info.file.status === "done") {
          // Get this url from response in real world.
-         getBase64(info.file.originFileObj, imageUrl =>
+         getBase64(info.file.originFileObj, (imageUrl) =>
             this.setState({
                imageUrl,
-               loading: false
+               loading: false,
             })
          );
       }
    };
 
-   handleChange = info => {
+   handleChange = (info) => {
       if (info.file.status === "uploading") {
          this.setState({ loading: true });
          return;
       }
       if (info.file.status === "done") {
          // Get this url from response in real world.
-         getBase64(info.file.originFileObj, imageUrl =>
+         getBase64(info.file.originFileObj, (imageUrl) =>
             this.setState({
                imageUrl,
-               loading: false
+               loading: false,
             })
          );
       }
    };
 
    actionUploadImg = () => {
-      const { idGeneral } = this.props;
+      const { idConfig } = this.props;
       const { action } = this.state;
-      const url = `${action}?idGeneral=${idGeneral}`;
+      const urlAction = `${action}?idConfig=${idConfig}`;
       message.loading("Avatar đang được upload", 0.5, () => {
          message.success("OK! Avatar đã được upload");
       });
-      return url;
+      return urlAction;
    };
 
    render() {

@@ -18,10 +18,19 @@ const favorite = require("../controllers/favorite.controller");
 const tag = require("../controllers/tag.controller");
 const timeline = require("../controllers/timeline.controller");
 const service = require("../controllers/service.controller");
+const config = require("../controllers/config.controller");
 //authencation
 const authenticated = require("../middleware/auth.middleware");
 //report
 const report = require("../controllers/report.controller");
+
+// for config
+router.get("/config", config.read);
+router.get("/configs", config.listAll);
+router.post("/config", config.create);
+router.put("/config", authenticated, config.update);
+router.delete("/config", authenticated, config.delete);
+
 //for tour
 router.get("/tour", tour.read);
 router.get("/tours", tour.listAll);
@@ -39,7 +48,9 @@ router.patch("/schedule", authenticated, schedule.update);
 router.delete("/schedule", authenticated, schedule.delete);
 
 //for img
-router.get("/images", image.listAllImageTour);
+router.get("/imagesTour", image.listAllImageTour);
+router.get("/imagesPost", image.listAllImagePost);
+router.get("/imagesConfig", image.listAllImageConfig);
 router.get("/image", image.listAllImageTourById);
 router.delete("/image", authenticated, image.delete);
 router.post("/image", image.create);
@@ -107,6 +118,7 @@ router.get("/posts", post.listAll);
 router.post("/posts/search", post.listPostSearch);
 router.post("/post", authenticated, post.create);
 router.put("/post", authenticated, post.update);
+router.put("/post/tags", authenticated, post.putTags);
 router.delete("/post", authenticated, post.delete);
 
 //report

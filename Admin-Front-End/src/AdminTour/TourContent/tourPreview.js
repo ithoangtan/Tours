@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { a } from "react-router-dom";
-
 import { Typography, Rate, Tag, Button, Carousel, Tooltip, Icon } from "antd";
 import TourDetailImages from "./tourDetailImage";
 

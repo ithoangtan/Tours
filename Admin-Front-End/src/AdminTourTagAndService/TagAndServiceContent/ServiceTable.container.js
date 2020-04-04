@@ -55,9 +55,9 @@ const ResizeableTitle = props => {
 class EditableCell extends React.Component {
    getInput = () => {
       if (this.props.inputType === "number") {
-         return <InputNumber />;
+         return <InputNumber size="small" />;
       }
-      return <Input />;
+      return <Input size="small" />;
    };
 
    renderCell = ({ getFieldDecorator }) => {
@@ -117,7 +117,7 @@ class EditableTable extends React.Component {
          tableLayout: "auto",
          // hasData: true,
          data: null,
-         editingidService: "",
+         editingIdServices: "",
          count: this.props.listService.length,
          loading: false,
          sortedInfo: null,
@@ -134,22 +134,24 @@ class EditableTable extends React.Component {
       };
    }
 
-   isEditing = record => record.idService === this.state.editingidService;
+   isEditing = record => record.idServices === this.state.editingIdServices;
 
    cancel = () => {
-      this.setState({ editingidService: "" });
+      this.setState({ editingIdServices: "" });
    };
 
-   save(form, idService) {
+   save(form, idServices) {
       const { serviceAllActions } = this.props;
-      const { fetchPatchServiceRequest } = serviceAllActions;
+      const { fetchPatchServicesRequest } = serviceAllActions;
 
       form.validateFields((error, row) => {
          if (error) {
             return;
          }
          const newData = [...this.state.data];
-         const index = newData.findIndex(item => idService === item.idService);
+         const index = newData.findIndex(
+            item => idServices === item.idServices
+         );
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
@@ -157,32 +159,32 @@ class EditableTable extends React.Component {
                ...row
             });
             //Gọi API update dưới CSDL
-            fetchPatchServiceRequest(row);
+            fetchPatchServicesRequest(row);
 
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidService: "" });
+            this.setState({ data: newData, editingIdServices: "" });
          } else {
             newData.push(row);
             //Gọi API update dưới CSDL
-            fetchPatchServiceRequest(row);
+            fetchPatchServicesRequest(row);
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidService: "" });
+            this.setState({ data: newData, editingIdServices: "" });
          }
       });
    }
 
-   edit(idService) {
-      this.setState({ editingidService: idService });
+   edit(idServices) {
+      this.setState({ editingIdServices: idServices });
    }
    handleDelete = record => {
       const data = [...this.state.data];
       //Gọi API xóa dưới CSDL
       const { serviceAllActions } = this.props;
-      const { fetchDeleteServiceRequest } = serviceAllActions;
-      fetchDeleteServiceRequest(record);
+      const { fetchDeleteServicesRequest } = serviceAllActions;
+      fetchDeleteServicesRequest(record);
       //Kết thúc gọi API xóa dươi CSDL
       this.setState({
-         data: data.filter(item => item.idService !== record.idService)
+         data: data.filter(item => item.idServices !== record.idServices)
       });
    };
 
@@ -190,18 +192,20 @@ class EditableTable extends React.Component {
       this.setState({ showAdd: true });
    };
    handleAdd = newService => {
+      console.log(newService);
+
       const { count, data } = this.state;
       const newData = {
-         idService:
-            newService.idService | (data.length !== 0)
-               ? data[data.length - 1].idService + 1
+         idServices:
+            newService.idServices | (data.length !== 0)
+               ? data[data.length - 1].idServices + 1
                : 0,
-         nameService: newService.nameService
+         name: newService.name
       };
       //Gọi API create dưới CSDL
       const { serviceAllActions } = this.props;
-      const { fetchPostServiceRequest } = serviceAllActions;
-      fetchPostServiceRequest(newData);
+      const { fetchPostServicesRequest } = serviceAllActions;
+      fetchPostServicesRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
@@ -212,7 +216,9 @@ class EditableTable extends React.Component {
 
    handleSaveOnChange = row => {
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => row.idService === item.idService);
+      const index = newData.findIndex(
+         item => row.idServices === item.idServices
+      );
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
@@ -419,34 +425,6 @@ class EditableTable extends React.Component {
    };
    //end Add
 
-   //Expanded Row Render
-   // expandedRowRender = record => {
-   //    const { listImageService } = this.props;
-   //    return (
-   //       <TableGallery
-   //          record={record}
-   //          listImage={listImageService}
-   //          {...this.props}
-   //       />
-   //    );
-   // };
-
-   // showModalPreviewService(record) {
-   //    Modal.info({
-   //       width: 1000,
-   //       title: "This is a item service at category services",
-   //       wrapClassName: "",
-   //       content: <ServicePreview service={record} />,
-   //       onOk() {}
-   //    });
-   // }
-
-   // handleCancelPreviewService = e => {
-   //    this.setState({
-   //       visiblePreviewService: false
-   //    });
-   // };
-
    render() {
       const { state } = this;
       const components = {
@@ -469,7 +447,7 @@ class EditableTable extends React.Component {
          {
             title: "ID",
             dataIndex: "idServices",
-            key: "idService",
+            key: "idServices",
             width: 50,
             ellipsis: true,
             editable: true
@@ -492,7 +470,7 @@ class EditableTable extends React.Component {
             key: "edit",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
-               const { editingidService } = this.state;
+               const { editingIdServices } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
@@ -501,7 +479,7 @@ class EditableTable extends React.Component {
                            <Button
                               size="small"
                               type="primary"
-                              onClick={() => this.save(form, record.idService)}
+                              onClick={() => this.save(form, record.idServices)}
                               style={{ marginRight: 8 }}
                            >
                               Save
@@ -510,7 +488,7 @@ class EditableTable extends React.Component {
                      </EditableContext.Consumer>
                      <Popconfirm
                         title="Sure to cancel?"
-                        onConfirm={() => this.cancel(record.idService)}
+                        onConfirm={() => this.cancel(record.idServices)}
                      >
                         <Button type="dashed" size="small">
                            Cancel
@@ -522,8 +500,8 @@ class EditableTable extends React.Component {
                      <Button
                         type="default"
                         size="small"
-                        disabled={editingidService !== ""}
-                        onClick={() => this.edit(record.idService)}
+                        disabled={editingIdServices !== ""}
+                        onClick={() => this.edit(record.idServices)}
                      >
                         Edit
                      </Button>

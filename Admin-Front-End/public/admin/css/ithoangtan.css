@@ -103,6 +103,12 @@
    border-radius: 5px !important;
 }
 
+.ht-img-post {
+   max-height: 100%;
+   border-radius: 5px !important;
+   object-fit: cover;
+}
+
 .ht-boder-radius-1 {
    border-radius: 8px;
 }
