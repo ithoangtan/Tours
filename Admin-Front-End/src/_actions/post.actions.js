@@ -3,28 +3,28 @@ import * as postConstants from "../_constants/post.module";
 
 export const fetchListPost = () => {
    return {
-      type: postConstants.FETCH_POST
+      type: postConstants.FETCH_POST,
    };
 };
 
 //List Post
-export const fetchListPostSuccess = data => {
+export const fetchListPostSuccess = (data) => {
    return {
       type: postConstants.FETCH_POST_SUCCESS,
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchListPostError = error => {
+export const fetchListPostError = (error) => {
    return {
       type: postConstants.FETCH_POST_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 /**
@@ -35,50 +35,50 @@ export const fetchListPostError = error => {
  *
  */
 export const fetchListPostRequest = () => {
-   return dispatch => {
+   return (dispatch) => {
       dispatch(fetchListPost()); //reset state posts-->[]
       postApis
          .getListPost()
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             console.log(data);
 
             dispatch(fetchListPostSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchListPostError(error));
          });
    };
 };
 
 //GET POST BY ID
-export const fetchPostByIdSuccess = data => {
+export const fetchPostByIdSuccess = (data) => {
    return {
       type: postConstants.FETCH_POST_GET_BYID_SUCCESS,
       payload: {
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchPostByIdError = error => {
+export const fetchPostByIdError = (error) => {
    return {
       type: postConstants.FETCH_POST_GET_BYID_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchPostByIdRequest = idPost => {
-   return dispatch => {
+export const fetchPostByIdRequest = (idPost) => {
+   return (dispatch) => {
       postApis
          .getPostById(idPost)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchPostByIdSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchPostByIdError(error));
          });
    };
@@ -92,30 +92,30 @@ export const fetchPostPostSuccess = (newRecord, data) => {
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
+         data,
       },
-      newRecord: newRecord
+      newRecord: newRecord,
    };
 };
 
-export const fetchPostPostError = error => {
+export const fetchPostPostError = (error) => {
    return {
       type: postConstants.FETCH_POST_CREATE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchPostPostRequest = newRecord => {
-   return dispatch => {
+export const fetchPostPostRequest = (newRecord) => {
+   return (dispatch) => {
       postApis
          .postPost(newRecord)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchPostPostSuccess(newRecord, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchPostPostError(error));
          });
    };
@@ -129,30 +129,30 @@ export const fetchDeletePostSuccess = (record, data) => {
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
+         data,
       },
-      record: record
+      record: record,
    };
 };
 
-export const fetchDeletePostError = error => {
+export const fetchDeletePostError = (error) => {
    return {
       type: postConstants.FETCH_POST_DELETE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchDeletePostRequest = record => {
-   return dispatch => {
+export const fetchDeletePostRequest = (record) => {
+   return (dispatch) => {
       postApis
          .deletePost(record.idPost)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchDeletePostSuccess(record, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchDeletePostError(error));
          });
    };
@@ -165,30 +165,30 @@ export const fetchPatchPostSuccess = (newRecord, data) => {
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
+         data,
       },
-      newRecord: { newRecord }
+      newRecord: { newRecord },
    };
 };
 
-export const fetchPatchPostError = error => {
+export const fetchPatchPostError = (error) => {
    return {
       type: postConstants.FETCH_POST_PATCH_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchPatchPostRequest = newRecord => {
-   return dispatch => {
+export const fetchPatchPostRequest = (newRecord) => {
+   return (dispatch) => {
       postApis
          .patchPost(newRecord)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchPatchPostSuccess(newRecord, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchPatchPostError(error));
          });
    };
@@ -197,39 +197,39 @@ export const fetchPatchPostRequest = newRecord => {
 //Image Post
 export const fetchListPostImage = () => {
    return {
-      type: postConstants.FETCH_POST_IMAGE
+      type: postConstants.FETCH_POST_IMAGE,
    };
 };
 
 //List Post image
-export const fetchListPostImageSuccess = data => {
+export const fetchListPostImageSuccess = (data) => {
    return {
       type: postConstants.FETCH_POST_IMAGE_SUCCESS,
       payload: {
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchListPostImageError = error => {
+export const fetchListPostImageError = (error) => {
    return {
       type: postConstants.FETCH_POST_IMAGE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
 export const fetchListPostImageRequest = () => {
-   return dispatch => {
+   return (dispatch) => {
       dispatch(fetchListPostImage()); //reset state Images-->[]
       postApis
          .getListImagePost()
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchListPostImageSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchListPostImageError(error));
          });
    };

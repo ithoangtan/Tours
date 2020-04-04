@@ -3,56 +3,100 @@ import React, { Component } from "react";
 import { Form, Checkbox, Button } from "antd";
 import { Link } from "react-router-dom";
 
-const plainOptionsTags = [
-   "Cảnh đẹp",
-   "Ẩm thực ngon",
-   "Khám phá",
-   "... load ở database"
-];
-const defaultCheckedListTags = ["Cảnh đẹp"];
+import PropTypes from "prop-types";
 
-class Tags extends Component {
+import { API_ENDPOINT, XHTML_LOADING } from "../../_constants/index.constants";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import * as postActions from "../../_actions/post.actions";
+
+import reqwest from "reqwest";
+import Cookies from "js-cookie";
+
+function getCookie(name) {
+   const token = Cookies.get(name);
+   return token;
+}
+
+class TagsPost extends Component {
    state = {
-      checkedListTags: defaultCheckedListTags,
+      tags: [],
+      checkedListTags: [],
       indeterminateTags: true,
-      checkAllTags: false
+      checkAllTags: false,
    };
 
-   onChangeTags = checkedListTags => {
+   componentWillMount() {
+      reqwest({
+         url: `${API_ENDPOINT}/tags`,
+         method: "GET",
+         headers: { Authentication: getCookie("token") },
+         type: "json",
+      }).then((data) => {
+         let tags = [];
+         for (let i = 0; i < data.length; i++) {
+            tags.push(data[i].name);
+         }
+         this.setState({
+            tags,
+         });
+      });
+
+      const { checkTags } = this.props;
+      if (checkTags?.length !== 0)
+         this.setState({
+            checkedListTags: JSON.parse(checkTags),
+         });
+   }
+
+   onChangeTags = (checkedListTags) => {
       this.setState({
          checkedListTags,
          indeterminateTags:
             !!checkedListTags.length &&
-            checkedListTags.length < plainOptionsTags.length,
-         checkAllTags: checkedListTags.length === plainOptionsTags.length
+            checkedListTags.length < this.state.tags.length,
+         checkAllTags: checkedListTags.length === this.state.tags.length,
       });
    };
 
-   onCheckAllChangeTags = e => {
+   onCheckAllChangeTags = (e) => {
       this.setState({
-         checkedListTags: e.target.checked ? plainOptionsTags : [],
+         checkedListTags: e.target.checked ? this.state.tags : [],
          indeterminateTags: false,
-         checkAllTags: e.target.checked
+         checkAllTags: e.target.checked,
       });
    };
 
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       // call btn parent
+      const { idPost, titlePost } = this.props;
+      // Call API save data
+      let newTagsPost = {
+         idPost,
+         titlePost,
+         tags: this.state.checkedListTags,
+      };
+      const { postAllActions } = this.props;
+      const { fetchPatchPostRequest } = postAllActions;
+      fetchPatchPostRequest(newTagsPost);
    };
 
    render() {
+      if (this.state.tags.length === 0) return XHTML_LOADING;
       const formItemLayout = {
          labelCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
+            md: { span: 4 },
          },
          wrapperCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
-         }
+            md: { span: 4 },
+         },
       };
       const { getFieldDecorator } = this.props.form;
       return (
@@ -73,8 +117,8 @@ class Tags extends Component {
                               {
                                  //  required: true,
                                  //   message: "Select tags!"
-                              }
-                           ]
+                              },
+                           ],
                         })(
                            <>
                               <div className="ht-d-flex">
@@ -86,7 +130,7 @@ class Tags extends Component {
                                     <strong>Chọn tất cả</strong>
                                  </Checkbox>
                                  <Checkbox.Group
-                                    options={plainOptionsTags}
+                                    options={this.state.tags}
                                     value={this.state.checkedListTags}
                                     onChange={this.onChangeTags}
                                  />
@@ -100,6 +144,9 @@ class Tags extends Component {
                   <Link to="/admin/tour/tags-and-services">
                      <Button type="default"> Thêm Tags mới</Button>
                   </Link>
+                  <Button type="primary" className="ml-2" htmlType="submit">
+                     Lưu Các Thẻ
+                  </Button>
                </div>
             </div>
          </Form>
@@ -107,4 +154,18 @@ class Tags extends Component {
    }
 }
 
-export default Tags = Form.create({ name: "new_tour" })(Tags);
+const WrappedTagsPostForm = Form.create({ name: "tags_post" })(TagsPost);
+
+WrappedTagsPostForm.propTypes = {
+   classes: PropTypes.object,
+   postAllActions: PropTypes.shape({
+      fetchPatchPostRequest: PropTypes.func,
+   }),
+};
+
+const mapDispatchToProps = (dispatch) => {
+   return {
+      postAllActions: bindActionCreators(postActions, dispatch),
+   };
+};
+export default connect(null, mapDispatchToProps)(WrappedTagsPostForm);

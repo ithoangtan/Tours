@@ -1,7 +1,7 @@
 const database = require("../dbconnectMySql");
 
 //Task object constructor
-const Post = function(post) {
+const Post = function (post) {
   this.idPost = post.idPost | 0;
   this.idAccount = post.idAccount;
   this.contentPost = post.contentPost;
@@ -21,47 +21,47 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
-Post.getAllPost = function(funcResult) {
-  return new Promise(function(resolve, reject) {
+Post.getAllPost = function (funcResult) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "SELECT * FROM " +
           databaseProduction +
           ".posts WHERE statusAction <> 'deleted';"
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-Post.getAllPostSearch = function(searchs) {
+Post.getAllPostSearch = function (searchs) {
   if (searchs.conditional === "content") {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       database
         .query(
           "call " +
             databaseProduction +
             `.spsearchEnginePostByContent( '${searchs.keySearch}' ); `
         )
-        .then(rows => resolve(rows))
-        .catch(err => reject(err));
+        .then((rows) => resolve(rows))
+        .catch((err) => reject(err));
     });
   } else {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       database
         .query(
           "call " +
             databaseProduction +
             `.spsearchEnginePost( '${searchs.keySearch}', ${searchs.vote} ); `
         )
-        .then(rows => resolve(rows))
-        .catch(err => reject(err));
+        .then((rows) => resolve(rows))
+        .catch((err) => reject(err));
     });
   }
 };
 
-Post.createPost = function(newPost) {
-  return new Promise(function(resolve, reject) {
+Post.createPost = function (newPost) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "INSERT INTO " +
@@ -88,13 +88,13 @@ Post.createPost = function(newPost) {
           // newPost.dateTime +
           "') "
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-Post.getPostById = function(idPost) {
-  return new Promise(function(resolve, reject) {
+Post.getPostById = function (idPost) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "SELECT * FROM " +
@@ -102,26 +102,26 @@ Post.getPostById = function(idPost) {
           ".posts  WHERE idPost = ? AND statusAction <> 'deleted';",
         [idPost]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-Post.updateById = function(updatePost) {
+Post.updateById = function (updatePost) {
   updatePost = { ...updatePost, statusAction: "edited" };
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "UPDATE " + databaseProduction + ".posts SET ? WHERE (idPost = ?);",
         [updatePost, updatePost.idPost]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-Post.remove = function(idPost) {
-  return new Promise(function(resolve, reject) {
+Post.remove = function (idPost) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "UPDATE " +
@@ -129,8 +129,8 @@ Post.remove = function(idPost) {
           ".posts SET `statusAction` = 'deleted' WHERE idPost = ?",
         [idPost]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 

@@ -8,19 +8,19 @@ export const getListPost = () => {
    return axiosService.get(`${API_ENDPOINT}/${urls}`);
 };
 
-export const getPostById = idPost => {
+export const getPostById = (idPost) => {
    return axiosService.get(`${API_ENDPOINT}/${url}?idPost=${idPost}`);
 };
 
-export const postPost = data => {
+export const postPost = (data) => {
    return axiosService.post(`${API_ENDPOINT}/${url}`, data);
 };
 
-export const deletePost = idPost => {
+export const deletePost = (idPost) => {
    return axiosService.delete(`${API_ENDPOINT}/${url}?idPost=${idPost}`);
 };
 
-export const patchPost = data => {
+export const patchPost = (data) => {
    return axiosService.put(`${API_ENDPOINT}/${url}`, data);
 };
 
@@ -43,8 +43,8 @@ export const uploadImagePost = (file, idPost) => {
       {
          headers: {
             "Content-Type": "multipart/form-data",
-            Authentication: getCookie("token")
-         }
+            Authentication: getCookie("token"),
+         },
       }
    );
 };

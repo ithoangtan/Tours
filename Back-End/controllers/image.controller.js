@@ -144,14 +144,17 @@ exports.listAllImageTourById = function (req, res) {
   });
 };
 
-exports.delete = function (req, res) {
+exports.delete = async (req, res) => {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
-
-  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
-  Image.remove(req.query.idImage, req.query.name, function (err, idImage) {
+  await Image.getImageById(req.query.idImage, function (err, result) {
     if (err) res.send(err);
-    res.json(idImage);
+    //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+    let fileName = result[0].name;
+    Image.remove(req.query.idImage, fileName, function (err, idImage) {
+      if (err) res.send(err);
+      res.json(idImage);
+    });
   });
 };

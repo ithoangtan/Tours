@@ -42,14 +42,12 @@ class TableGallery extends Component {
    };
 
    handleOkTags = (e) => {
-      console.log(e);
       this.setState({
          visibleTagsModal: false,
       });
    };
 
    handleCancelTags = (e) => {
-      console.log(e);
       this.setState({
          visibleTagsModal: false,
       });
@@ -61,8 +59,6 @@ class TableGallery extends Component {
          .filter((image) => image.idPost === record.idPost)
          .map((image) => ({
             ...image,
-            //APIImage is http://localhost:8000
-            //image.url is /img/<name file image>.xxx
             url: API_ENDPOINT + image.url,
             uid: image.idImage,
          }));
@@ -92,12 +88,13 @@ class TableGallery extends Component {
 
    handleChange = ({ fileList }) => this.setState({ fileList });
 
-   actionUpload = (file) => {
+   actionUpload = async (file) => {
       const { record } = this.props;
       const { action } = this.state;
       /**
        * If you return, action will call again
        * */
+
       const actionUpload = `${action}?idPost=${record.idPost}`;
 
       const newListImage = [...this.state.fileList];
@@ -105,8 +102,9 @@ class TableGallery extends Component {
          fileList: newListImage,
       });
       const key = "updatable";
+
       return (
-         message.loading({
+         message.success({
             content: `${file.name} is uploading.....`,
             key,
             duration: 1,
@@ -117,9 +115,8 @@ class TableGallery extends Component {
 
    onRemove = async (file) => {
       const { tourImageAllActions } = this.props;
-      const { fetchDeletePostImageRequest } = tourImageAllActions;
-      await fetchDeletePostImageRequest(file);
-      message.warn(`${file.idImage}, ${file.name} deleted!`);
+      const { fetchDeleteTourImageRequest } = tourImageAllActions;
+      await fetchDeleteTourImageRequest(file);
    };
 
    render() {
@@ -149,11 +146,15 @@ class TableGallery extends Component {
                width="90%"
                title="Chỉnh sửa các Tag của bài viết"
                visible={this.state.visibleTagsModal}
-               onOk={this.handleOkTags}
                onCancel={this.handleCancelTags}
+               footer={null}
             >
                <div className="ht-timeline-container-main container col-md-12">
-                  <TagsContainer />
+                  <TagsContainer
+                     idPost={record.idPost}
+                     titlePost={record.titlePost}
+                     checkTags={record.tags}
+                  />
                </div>
             </Modal>
 

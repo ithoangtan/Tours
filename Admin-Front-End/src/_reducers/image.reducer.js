@@ -2,12 +2,13 @@ import * as imageConstants from "../_constants/image.module";
 import * as tourConstants from "../_constants/tour.module";
 import {
    toastError,
-   toastDeleteImageSuccess
+   toastDeleteImageSuccess,
 } from "../_helper/toastify.helper";
 const initialState = {
    listImageTour: [],
    delete: [],
-   uploadImage: []
+   listImageByIdPost: [],
+   uploadImage: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,7 +19,7 @@ const reducer = (state = initialState, action) => {
          // toastListImageGetByIdTourSuccess(data);
          return {
             ...state,
-            listImageByIdTour: data
+            listImageByIdTour: data,
          };
       }
       case imageConstants.FETCH_IMAGE_GET_BYID_TOUR_FAILED: {
@@ -26,9 +27,27 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            delete: error
+            delete: error,
          };
       }
+
+      //Load List Image ById Post
+      case imageConstants.FETCH_IMAGE_GET_BYID_POST_SUCCESS: {
+         const { data } = action.payload;
+         return {
+            ...state,
+            listImageByIdPost: data,
+         };
+      }
+      case imageConstants.FETCH_IMAGE_GET_BYID_POST_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            delete: error,
+         };
+      }
+
       //Delete
       case tourConstants.FETCH_TOUR_IMAGE_DELETE_SUCCESS: {
          const { data } = action.payload;
@@ -36,7 +55,7 @@ const reducer = (state = initialState, action) => {
          toastDeleteImageSuccess(file);
          return {
             ...state,
-            delete: data
+            delete: data,
          };
       }
       case tourConstants.FETCH_TOUR_IMAGE_DELETE_FAILED: {
@@ -44,7 +63,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            delete: error
+            delete: error,
          };
       }
       default:

@@ -14,14 +14,14 @@ exports.listAll = async (req, res, next) => {
   }
 };
 
-exports.listPostSearch = async function(req, res) {
+exports.listPostSearch = async function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
   const searchs = {
     keySearch: req.body.keySearch,
     vote: req.body.vote,
-    conditional: req.body.conditional
+    conditional: req.body.conditional,
   };
   try {
     listPost = await Post.getAllPostSearch(searchs);
@@ -61,9 +61,10 @@ exports.create = async (req, res, next) => {
 };
 
 exports.update = async (req, res, next) => {
-  const updatePost = removeBlankAttributes.remove(new Post(req.body));
+  let updatePost = removeBlankAttributes.remove(req.body);
   try {
     // const updatePost = removeBlankAttributes.remove(new Post(req.body));
+    if (updatePost.tags) updatePost.tags = JSON.stringify(updatePost.tags);
     updateResult = await Post.updateById(updatePost);
     res.status(200).json(updateResult);
   } catch (err) {

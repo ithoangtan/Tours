@@ -4,11 +4,12 @@ import { Tag, Tooltip } from "antd";
 import {
    API_ENDPOINT,
    DEFAULT_IMAGE_URL,
+   XHTML_LOADING,
 } from "../../_constants/index.constants";
 
 import moment from "moment";
 
-export default class PostPreview extends Component {
+class PostPreviewContainer extends Component {
    state = {
       rowsDescribe: 2,
       size: "default",
@@ -44,7 +45,9 @@ export default class PostPreview extends Component {
    }
 
    render() {
-      const { post, listImagePost } = this.props;
+      const { post, listImageByIdPost } = this.props;
+
+      if (listImageByIdPost?.length === 0) return XHTML_LOADING;
 
       const day = moment(post.dateAdded).format("DD");
       const month = moment(post.dateAdded).format("MMMM");
@@ -58,8 +61,8 @@ export default class PostPreview extends Component {
                   <img
                      className="ht-img-post ht-d-flex-center-center"
                      src={
-                        listImagePost.length > 0
-                           ? API_ENDPOINT + listImagePost[0].url
+                        listImageByIdPost.length > 0
+                           ? API_ENDPOINT + listImageByIdPost[0].url
                            : API_ENDPOINT + DEFAULT_IMAGE_URL
                      }
                      alt="no iamge"
@@ -103,3 +106,5 @@ export default class PostPreview extends Component {
       );
    }
 }
+
+export default PostPreviewContainer;

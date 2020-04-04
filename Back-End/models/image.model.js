@@ -16,6 +16,23 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
+Image.getImageById = function (idImage, fncResult) {
+  mysql.query(
+    "SELECT * FROM " +
+      databaseProduction +
+      ".images WHERE idImage = " +
+      idImage +
+      " AND statusAction <> 'deleted';",
+    function (err, res) {
+      if (err) {
+        fncResult(err, null);
+      } else {
+        fncResult(null, res);
+      }
+    }
+  );
+};
+
 Image.getAllImageTour = function (fncResult) {
   mysql.query(
     "SELECT * FROM " +
@@ -59,6 +76,7 @@ Image.getAllImageConfig = function (fncResult) {
     }
   );
 };
+
 Image.getAllImageTourById = function (idTour, fncResult) {
   mysql.query(
     "SELECT * FROM " +
@@ -86,7 +104,7 @@ Image.remove = function (idImage, name, fncResult) {
       if (err) {
         fncResult(err, null);
       } else {
-        var path = `../Front-End/public/img/${name}`;
+        let path = `./public/img/${name}`;
         path = path.replace(" ", "");
         fs.unlink(path, (err) => {
           if (err) {
@@ -100,8 +118,8 @@ Image.remove = function (idImage, name, fncResult) {
 };
 
 Image.createImageTour = function (idTour, name, fncResult) {
-  var url = `/img/${name}`;
-  var status = "done";
+  let url = `/img/${name}`;
+  let status = "done";
   mysql.query(
     `INSERT INTO ${databaseProduction}.images (url, status, name, idTour) VALUES ('${url}', '${status}', ' ${name}' , '${idTour}')`,
     function (err, res) {
@@ -115,8 +133,8 @@ Image.createImageTour = function (idTour, name, fncResult) {
 };
 
 Image.createImagePost = function (idPost, name, fncResult) {
-  var url = `/img/${name}`;
-  var status = "done";
+  let url = `/img/${name}`;
+  let status = "done";
   mysql.query(
     `INSERT INTO ${databaseProduction}.images (url, status, name, idPost) VALUES ('${url}', '${status}', ' ${name}' , '${idPost}')`,
     function (err, res) {
@@ -130,7 +148,7 @@ Image.createImagePost = function (idPost, name, fncResult) {
 };
 
 Image.createImageConfig = function (idConfig, name, fncResult) {
-  var url = `/img/${name}`;
+  let url = `/img/${name}`;
   mysql.query(
     "UPDATE " + databaseProduction + ".configs SET ? WHERE (idConfig = ?);",
     [{ image: url }, idConfig],
@@ -143,8 +161,9 @@ Image.createImageConfig = function (idConfig, name, fncResult) {
     }
   );
 };
+
 Image.updateAvatar = function (idAccount, name, fncResult) {
-  var url = `/img/${name}`;
+  let url = `/img/${name}`;
   mysql.query(
     "UPDATE " + databaseProduction + ".accounts SET ? WHERE (idAccount = ?);",
     [{ avatar: url }, idAccount],
