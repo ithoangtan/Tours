@@ -1,138 +1,156 @@
-import * as generalConstants from "../_constants/general.module";
+import * as configConstants from "../_constants/config.module";
 import {
    toastError,
-   // toastSuccess,
-   toastPatchSuccess,
    toastDeleteSuccess,
-   toastCreateSuccess
+   toastCreateSuccess,
 } from "../_helper/toastify.helper";
+import { message } from "antd";
 const initialState = {
-   listGeneral: [],
-   listImageGeneral: [],
-   generalById: {},
+   listConfig: [],
+   listImageConfig: [],
+   configById: {},
+   configByInfoType: {},
    delete: [],
    patch: [],
-   create: []
+   create: [],
 };
 
 const reducer = (state = initialState, action) => {
    switch (action.type) {
-      case generalConstants.FETCH_GENERAL:
+      case configConstants.FETCH_CONFIG:
          return {
             ...state,
-            listGeneral: []
+            listConfig: [],
          };
-      case generalConstants.FETCH_GENERAL_SUCCESS: {
+      case configConstants.FETCH_CONFIG_SUCCESS: {
          const { data } = action.payload;
          // toastSuccess(data);
          return {
             ...state,
-            listGeneral: data
+            listConfig: data,
          };
       }
-      case generalConstants.FETCH_GENERAL_FAILED: {
+      case configConstants.FETCH_CONFIG_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            listGeneral: error
+            listConfig: error,
          };
       }
 
-      //Get Schedule By  Id General
-      case generalConstants.FETCH_GENERAL_GET_BYID_SUCCESS: {
+      //Get Config By  Id Config
+      case configConstants.FETCH_CONFIG_GET_BYID_SUCCESS: {
          const { data } = action.payload;
          return {
             ...state,
-            generalById: data
+            configById: data,
          };
       }
-      case generalConstants.FETCH_GENERAL_GET_BYID_FAILED: {
+      case configConstants.FETCH_CONFIG_GET_BYID_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            generalById: error
+            configById: error,
+         };
+      }
+
+      //Get Config By  Id infoType
+      case configConstants.FETCH_CONFIG_GET_BY_INFOTYPE_SUCCESS: {
+         const { data } = action.payload;
+         return {
+            ...state,
+            configByInfoType: data,
+         };
+      }
+      case configConstants.FETCH_CONFIG_GET_BY_INFOTYPE_FAILED: {
+         const { error } = action.payload;
+         toastError(error);
+         return {
+            ...state,
+            configByInfoType: error,
          };
       }
 
       //Post - Create
-      case generalConstants.FETCH_GENERAL_CREATE_SUCCESS: {
+      case configConstants.FETCH_CONFIG_CREATE_SUCCESS: {
          const { data } = action.payload;
          const { newRecord } = action.newRecord;
          toastCreateSuccess(newRecord);
          return {
             ...state,
-            create: data
+            create: data,
          };
       }
-      case generalConstants.FETCH_GENERAL_CREATE_FAILED: {
+      case configConstants.FETCH_CONFIG_CREATE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            create: error
+            create: error,
          };
       }
 
       //Delete
-      case generalConstants.FETCH_GENERAL_DELETE_SUCCESS: {
+      case configConstants.FETCH_CONFIG_DELETE_SUCCESS: {
          const { data } = action.payload;
          const { record } = action.record;
          toastDeleteSuccess(record);
          return {
             ...state,
-            delete: data
+            delete: data,
          };
       }
-      case generalConstants.FETCH_GENERAL_DELETE_FAILED: {
+      case configConstants.FETCH_CONFIG_DELETE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            delete: error
+            delete: error,
          };
       }
 
       //Patch - update
-      case generalConstants.FETCH_GENERAL_PATCH_SUCCESS: {
+      case configConstants.FETCH_CONFIG_PATCH_SUCCESS: {
          const { data } = action.payload;
-         const { newRecord } = action.newRecord;
-         toastPatchSuccess(newRecord);
+         const { newRecord } = action;
+         message.info(` ${newRecord.infoType} --- saved!`);
+
          return {
             ...state,
-            patch: data
+            patch: data,
          };
       }
-      case generalConstants.FETCH_GENERAL_PATCH_FAILED: {
+      case configConstants.FETCH_CONFIG_PATCH_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            patch: error
+            patch: error,
          };
       }
 
-      //Image General
-      case generalConstants.FETCH_GENERAL_IMAGE:
+      //Image Config
+      case configConstants.FETCH_CONFIG_IMAGE:
          return {
             ...state,
-            listImageGeneral: []
+            listImageConfig: [],
          };
-      case generalConstants.FETCH_GENERAL_IMAGE_SUCCESS: {
+      case configConstants.FETCH_CONFIG_IMAGE_SUCCESS: {
          const { data } = action.payload;
          // toastSuccess(data);
          return {
             ...state,
-            listImageGeneral: data
+            listImageConfig: data,
          };
       }
-      case generalConstants.FETCH_GENERAL_IMAGE_FAILED: {
+      case configConstants.FETCH_CONFIG_IMAGE_FAILED: {
          const { error } = action.payload;
          toastError(error);
          return {
             ...state,
-            listImageGeneral: error
+            listImageConfig: error,
          };
       }
       default:

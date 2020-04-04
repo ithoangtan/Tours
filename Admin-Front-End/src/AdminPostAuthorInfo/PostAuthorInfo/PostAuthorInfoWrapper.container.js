@@ -9,33 +9,30 @@ export default class ContentTableWrapperContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         loading: true
+         loading: true,
       };
    }
 
    loaded = () => {
-      this.setState(props => {
+      this.setState((props) => {
          return {
-            loading: false
+            loading: false,
          };
       });
    };
 
    render() {
-      const { general } = this.props;
+      const { config } = this.props;
       return (
          <div id="content-wrapper" className="d-flex flex-column">
             {/* Topbar */}
             <TopBarContainer {...this.props} />
             {/* End of Topbar */}
             {/* Main Content */}
-            <Spin
-               tip="loading... author info post"
-               spinning={this.state.loading}
-            >
+            <Spin tip="Loading..." spinning={this.state.loading}>
                <CkEditorAuthorInfo
                   {...this.props}
-                  general={general}
+                  config={config}
                   loaded={this.loaded}
                />
             </Spin>

@@ -6,7 +6,7 @@ import reqwest from "reqwest";
 import Cookies from "js-cookie";
 import {
    API_ENDPOINT,
-   MULTIPLIER_ID_TIMELINE
+   MULTIPLIER_ID_TIMELINE,
 } from "../../_constants/index.constants";
 
 import PropTypes from "prop-types";
@@ -27,16 +27,16 @@ let id = 0;
 
 const formItemLayout = {
    labelCol: {
-      span: 24
+      span: 24,
    },
    wrapperCol: {
-      span: 24
-   }
+      span: 24,
+   },
 };
 const formItemLayoutWithOutLabel = {
    wrapperCol: {
-      span: 24
-   }
+      span: 24,
+   },
 };
 
 const xhtml = (
@@ -51,7 +51,7 @@ const xhtml = (
 class Timeline extends React.Component {
    state = {
       timelinesByIdTour: [],
-      hasData: false
+      hasData: false,
    };
 
    fetch = async (params = {}) => {
@@ -61,10 +61,10 @@ class Timeline extends React.Component {
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
-            ...params
+            ...params,
          },
-         type: "json"
-      }).then(data => {
+         type: "json",
+      }).then((data) => {
          this.setState({ timelinesByIdTour: data[0], hasData: true });
       });
    };
@@ -73,7 +73,7 @@ class Timeline extends React.Component {
       this.fetch();
    }
 
-   remove = k => {
+   remove = (k) => {
       const { form } = this.props;
 
       // can use data-binding to get
@@ -85,17 +85,17 @@ class Timeline extends React.Component {
 
       // can use data-binding to set
       form.setFieldsValue({
-         keys: keys.filter(key => key !== k)
+         keys: keys.filter((key) => key !== k),
       });
    };
 
    clearEmpty(arr) {
       let filtered = JSON.stringify(
          arr
-            .filter(obj => {
+            .filter((obj) => {
                return ![null, undefined, ""].includes(obj);
             })
-            .filter(el => {
+            .filter((el) => {
                return typeof el != "object" || Object.keys(el).length > 0;
             })
       );
@@ -119,17 +119,17 @@ class Timeline extends React.Component {
             idTour: idTour,
             title: "",
             description: "",
-            date: moment()
-         }
+            date: moment(),
+         },
       ];
 
       // important!  notify form to detect changes
       form.setFieldsValue({
-         keys: nextKeys
+         keys: nextKeys,
       });
    };
 
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields(async (err, values) => {
          let timelinesByIdTour = this.state.timelinesByIdTour;
@@ -148,7 +148,7 @@ class Timeline extends React.Component {
             for (let i = 0; i < values.keys.length; i++) {
                if (
                   (await timelinesByIdTour.find(
-                     element => arrIdTimelines[i] === element.idTimelines
+                     (element) => arrIdTimelines[i] === element.idTimelines
                   )) !== undefined
                ) {
                   await arrUpdateTimeline.push({
@@ -156,7 +156,7 @@ class Timeline extends React.Component {
                      date: arrDate[i],
                      title: arrTitle[i],
                      description: arrDescription[i],
-                     idTour
+                     idTour,
                   });
                } else {
                   await arrNewTimeline.push({
@@ -164,7 +164,7 @@ class Timeline extends React.Component {
                      date: arrDate[i],
                      title: arrTitle[i],
                      description: arrDescription[i],
-                     idTour
+                     idTour,
                   });
                }
             }
@@ -172,7 +172,7 @@ class Timeline extends React.Component {
             for (let j = 0; j < timelinesByIdTour.length; j++) {
                if (
                   (await arrIdTimelines.find(
-                     element => timelinesByIdTour[j].idTimelines === element
+                     (element) => timelinesByIdTour[j].idTimelines === element
                   )) === undefined
                )
                   await arrDeleteTimeline.push(timelinesByIdTour[j]);
@@ -183,31 +183,27 @@ class Timeline extends React.Component {
             const { fetchPatchTimelineRequest } = timelineAllActions;
             const { fetchDeleteTimelineRequest } = timelineAllActions;
 
-            await arrDeleteTimeline.forEach(async deleteTimeline => {
+            await arrDeleteTimeline.forEach(async (deleteTimeline) => {
                await fetchDeleteTimelineRequest(deleteTimeline);
                await timelinesByIdTour.splice(
                   timelinesByIdTour.findIndex(
-                     timeline => deleteTimeline.idTimelines === timeline
+                     (timeline) => deleteTimeline.idTimelines === timeline
                   ),
                   1
                );
             });
             arrDeleteTimeline = [];
-            await arrUpdateTimeline.forEach(async updateTimeline => {
+            await arrUpdateTimeline.forEach(async (updateTimeline) => {
                fetchPatchTimelineRequest(updateTimeline);
             });
             arrUpdateTimeline = [];
-            await arrNewTimeline.forEach(async newTimeline => {
+            await arrNewTimeline.forEach(async (newTimeline) => {
                await fetchPostTimelineRequest(newTimeline);
                await timelinesByIdTour.push(newTimeline);
             });
             arrNewTimeline = [];
             this.setState({ timelinesByIdTour });
-            console.log("new", arrNewTimeline);
-            console.log("update", arrUpdateTimeline);
-            console.log("delete", arrDeleteTimeline);
          }
-         console.log("submit", timelinesByIdTour);
       });
    };
 
@@ -217,7 +213,7 @@ class Timeline extends React.Component {
       const { getFieldDecorator, getFieldValue } = this.props.form;
 
       getFieldDecorator("keys", {
-         initialValue: this.state.timelinesByIdTour
+         initialValue: this.state.timelinesByIdTour,
       });
 
       const keys = getFieldValue("keys");
@@ -225,7 +221,7 @@ class Timeline extends React.Component {
       const formItemsHiddenIdTimelines = keys.map((k, index) => (
          <Form.Item required={true} key={k.idTimelines + k.idTimelines}>
             {getFieldDecorator(`idTimelines[${k.idTimelines}]`, {
-               initialValue: k.idTimelines
+               initialValue: k.idTimelines,
             })(<></>)}
          </Form.Item>
       ));
@@ -233,7 +229,7 @@ class Timeline extends React.Component {
       const formItemsHiddenIdTour = keys.map((k, index) => (
          <Form.Item required={true} key={k.idTour + k.idTimelines}>
             {getFieldDecorator(`idTour[${k.idTimelines}]`, {
-               initialValue: k.idTour
+               initialValue: k.idTour,
             })(<></>)}
          </Form.Item>
       ));
@@ -252,10 +248,10 @@ class Timeline extends React.Component {
                         type: "object",
                         required: true,
                         whitespace: true,
-                        message: "Vui lòng chọn mốc thời gian"
-                     }
+                        message: "Vui lòng chọn mốc thời gian",
+                     },
                   ],
-                  initialValue: moment(k.date)
+                  initialValue: moment(k.date),
                })(
                   <DatePicker
                      format="YYYY-MM-DD HH:mm:ss"
@@ -288,10 +284,10 @@ class Timeline extends React.Component {
                      {
                         required: true,
                         whitespace: true,
-                        message: "Vui lòng ghi tiêu đề"
-                     }
+                        message: "Vui lòng ghi tiêu đề",
+                     },
                   ],
-                  initialValue: k.title
+                  initialValue: k.title,
                })(
                   <Input
                      style={{ width: "92%", marginRight: 8 }}
@@ -323,10 +319,10 @@ class Timeline extends React.Component {
                      {
                         required: true,
                         whitespace: true,
-                        message: "Vui lòng viết thêm miêu tả."
-                     }
+                        message: "Vui lòng viết thêm miêu tả.",
+                     },
                   ],
-                  initialValue: k.description
+                  initialValue: k.description,
                })(
                   <TextArea
                      rows={1}
@@ -395,20 +391,20 @@ WrappedTimeline.propTypes = {
    timelineAllActions: PropTypes.shape({
       fetchPatchTimelineRequest: PropTypes.func,
       fetchPostTimelineRequest: PropTypes.func,
-      fetchDeleteTimelineRequest: PropTypes.func
-   })
+      fetchDeleteTimelineRequest: PropTypes.func,
+   }),
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       patch: state.timeline.patch,
       delete: state.timeline.delete,
-      post: state.timeline.post
+      post: state.timeline.post,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      timelineAllActions: bindActionCreators(timelineActions, dispatch)
+      timelineAllActions: bindActionCreators(timelineActions, dispatch),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedTimeline);

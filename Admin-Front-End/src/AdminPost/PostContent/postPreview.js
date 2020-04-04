@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 
 import { Tag, Tooltip } from "antd";
-import { APIImage, DEFAULT_IMAGE_URL } from "../../_constants/index.constants";
+import {
+   API_ENDPOINT,
+   DEFAULT_IMAGE_URL,
+} from "../../_constants/index.constants";
 
 import moment from "moment";
 
 export default class PostPreview extends Component {
    state = {
       rowsDescribe: 2,
-      size: "default"
+      size: "default",
    };
 
-   onChange = rowsDescribe => {
+   onChange = (rowsDescribe) => {
       this.setState({ rowsDescribe });
    };
 
@@ -56,8 +59,8 @@ export default class PostPreview extends Component {
                      className="ht-img-post ht-d-flex-center-center"
                      src={
                         listImagePost.length > 0
-                           ? APIImage + listImagePost[0].url
-                           : APIImage + DEFAULT_IMAGE_URL
+                           ? API_ENDPOINT + listImagePost[0].url
+                           : API_ENDPOINT + DEFAULT_IMAGE_URL
                      }
                      alt="no iamge"
                   />

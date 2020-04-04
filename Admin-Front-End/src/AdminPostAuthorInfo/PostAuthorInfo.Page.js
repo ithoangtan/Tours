@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
+import SideBarContainer from "../AdminParentContainer/sideBar.container";
+import PostAuthorInfoWrapperContainer from "./PostAuthorInfo/PostAuthorInfoWrapper.container";
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as generalActions from "../_actions/general.actions";
-
-import SideBarContainer from "../AdminParentContainer/sideBar.container";
-import PostAuthorInfoWrapperContainer from "./PostAuthorInfo/PostAuthorInfoWrapper.container";
+import * as configActions from "../_actions/config.actions";
 
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
@@ -21,23 +21,22 @@ class PostAuthorInfo extends Component {
    fetch = async () => {
       await funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
 
-      const { idGeneral } = this.props.match.params;
-
-      //Load data general by Id general
-      const { generalAllActions } = this.props;
-      const { fetchGeneralByIdRequest } = generalAllActions;
-      await fetchGeneralByIdRequest(idGeneral);
+      //Load data post by Id post
+      const { configAllActions } = this.props;
+      const { fetchConfigByInfoTypeRequest } = configAllActions;
+      await fetchConfigByInfoTypeRequest(INDEX_CONSTANTS.CONFIG_INFO_TYPE);
    };
-
    render() {
-      const { general } = this.props;
+      let { config } = this.props;
+      if (config.idConfig !== undefined)
+         config.configs = JSON.parse(config.configs);
       return (
          <div id="wrapper">
             {/* Sidebar */}
             <SideBarContainer {...this.props} />
             {/* End of Sidebar */}
             {/* Content Wrapper */}
-            <PostAuthorInfoWrapperContainer {...this.props} general={general} />
+            <PostAuthorInfoWrapperContainer {...this.props} config={config} />
             {/* End of Content Wrapper */}
             {/* Scroll to Top Button*/}
             <a className="scroll-to-top rounded ht-loaded" href="#page-top">
@@ -50,21 +49,21 @@ class PostAuthorInfo extends Component {
 
 PostAuthorInfo.propTypes = {
    classes: PropTypes.object,
-   generalAllActions: PropTypes.shape({
-      fetchGeneralByIdRequest: PropTypes.func
+   configAllActions: PropTypes.shape({
+      fetchConfigByInfoTypeRequest: PropTypes.func,
    }),
-   general: PropTypes.object
+   config: PropTypes.object,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      general: state.general.generalById
+      config: state.config.configByInfoType,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      generalAllActions: bindActionCreators(generalActions, dispatch)
-      //Bên trái chỉ là đặt tên thôi, bên phải là generalActions ở bên general.action.js
+      configAllActions: bindActionCreators(configActions, dispatch),
+      //Bên trái chỉ là đặt tên thôi, bên phải là configActions ở bên post.action.js
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PostAuthorInfo);

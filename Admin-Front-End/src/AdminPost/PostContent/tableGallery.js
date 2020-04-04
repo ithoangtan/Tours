@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as tourImageActions from "../../_actions/image.actions";
-import { API_ENDPOINT, APIImage } from "../../_constants/index.constants";
+import { API_ENDPOINT } from "../../_constants/index.constants";
 
 import { Upload, Icon, Modal, message, Button, Tooltip } from "antd";
 
@@ -18,7 +18,7 @@ function getBase64(file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
+      reader.onerror = (error) => reject(error);
    });
 }
 
@@ -31,47 +31,47 @@ class TableGallery extends Component {
          action: `${API_ENDPOINT}/image`,
          fileList: [],
          visibleTimelineModal: false,
-         visibleTagsModal: false
+         visibleTagsModal: false,
       };
    }
 
    showModalTags = () => {
       this.setState({
-         visibleTagsModal: true
+         visibleTagsModal: true,
       });
    };
 
-   handleOkTags = e => {
+   handleOkTags = (e) => {
       console.log(e);
       this.setState({
-         visibleTagsModal: false
+         visibleTagsModal: false,
       });
    };
 
-   handleCancelTags = e => {
+   handleCancelTags = (e) => {
       console.log(e);
       this.setState({
-         visibleTagsModal: false
+         visibleTagsModal: false,
       });
    };
 
    componentWillMount() {
       const { listImage, record } = this.props;
       const listImageFilterIdPost = listImage
-         .filter(image => image.idPost === record.idPost)
-         .map(image => ({
+         .filter((image) => image.idPost === record.idPost)
+         .map((image) => ({
             ...image,
             //APIImage is http://localhost:8000
             //image.url is /img/<name file image>.xxx
-            url: APIImage + image.url,
-            uid: image.idImage
+            url: API_ENDPOINT + image.url,
+            uid: image.idImage,
          }));
       this.setState({ fileList: listImageFilterIdPost });
    }
 
    handleCancel = () => this.setState({ previewVisible: false });
 
-   beforeUpload = file => {
+   beforeUpload = (file) => {
       const isJpgOrPng =
          file.type === "image/jpeg" || file.type === "image/png";
       if (!isJpgOrPng) {
@@ -80,19 +80,19 @@ class TableGallery extends Component {
       return isJpgOrPng;
    };
 
-   handlePreview = async file => {
+   handlePreview = async (file) => {
       if (!file.url && !file.preview) {
          file.preview = await getBase64(file.originFileObj);
       }
       this.setState({
          previewImage: file.url || file.preview,
-         previewVisible: true
+         previewVisible: true,
       });
    };
 
    handleChange = ({ fileList }) => this.setState({ fileList });
 
-   actionUpload = file => {
+   actionUpload = (file) => {
       const { record } = this.props;
       const { action } = this.state;
       /**
@@ -102,20 +102,20 @@ class TableGallery extends Component {
 
       const newListImage = [...this.state.fileList];
       this.setState({
-         fileList: newListImage
+         fileList: newListImage,
       });
       const key = "updatable";
       return (
          message.loading({
             content: `${file.name} is uploading.....`,
             key,
-            duration: 1
+            duration: 1,
          }),
          actionUpload
       );
    };
 
-   onRemove = async file => {
+   onRemove = async (file) => {
       const { tourImageAllActions } = this.props;
       const { fetchDeletePostImageRequest } = tourImageAllActions;
       await fetchDeletePostImageRequest(file);
@@ -162,8 +162,8 @@ class TableGallery extends Component {
                to={{
                   pathname: `/admin/post-content/${record.idPost}`,
                   state: {
-                     record: true
-                  }
+                     record: true,
+                  },
                }}
                target={"_blank"}
             >
@@ -210,19 +210,19 @@ class TableGallery extends Component {
 
 TableGallery.propTypes = {
    tourImageAllActions: PropTypes.shape({
-      fetchDeletePostImageRequest: PropTypes.func
+      fetchDeletePostImageRequest: PropTypes.func,
    }),
-   listImagePost: PropTypes.array
+   listImagePost: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      listImagePost: state.image.listImagePost
+      listImagePost: state.image.listImagePost,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      tourImageAllActions: bindActionCreators(tourImageActions, dispatch)
+      tourImageAllActions: bindActionCreators(tourImageActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Upload, Icon, message } from "antd";
 
-import { API_ENDPOINT, APIImage } from "../../_constants/index.constants";
+import { API_ENDPOINT } from "../../_constants/index.constants";
 
 function getBase64(img, callback) {
    const reader = new FileReader();
@@ -25,40 +25,40 @@ export default class AvatarChange extends Component {
    state = {
       imageUrl: "",
       loading: false,
-      action: `${API_ENDPOINT}/image`
+      action: `${API_ENDPOINT}/image`,
    };
 
    componentWillMount() {
       this.setState({ imageUrl: this.props.record.avatar });
    }
 
-   handleChange = info => {
+   handleChange = (info) => {
       if (info.file.status === "uploading") {
          this.setState({ loading: true });
          return;
       }
       if (info.file.status === "done") {
          // Get this url from response in real world.
-         getBase64(info.file.originFileObj, imageUrl =>
+         getBase64(info.file.originFileObj, (imageUrl) =>
             this.setState({
                imageUrl,
-               loading: false
+               loading: false,
             })
          );
       }
    };
 
-   handleChange = info => {
+   handleChange = (info) => {
       if (info.file.status === "uploading") {
          this.setState({ loading: true });
          return;
       }
       if (info.file.status === "done") {
          // Get this url from response in real world.
-         getBase64(info.file.originFileObj, imageUrl =>
+         getBase64(info.file.originFileObj, (imageUrl) =>
             this.setState({
                imageUrl,
-               loading: false
+               loading: false,
             })
          );
       }
@@ -95,7 +95,7 @@ export default class AvatarChange extends Component {
             >
                {imageUrl ? (
                   <img
-                     src={APIImage + imageUrl}
+                     src={API_ENDPOINT + imageUrl}
                      alt="avatar"
                      className="ht-image-square-100"
                   />
