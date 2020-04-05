@@ -53,7 +53,7 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   try {
-    const updateAccount = new Account(req.body);
+    const updateAccount = req.body;
     updateResult = await Account.updateById(updateAccount);
     res.status(200).json(updateResult);
   } catch (err) {

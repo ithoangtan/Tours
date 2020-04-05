@@ -117,7 +117,7 @@ exports.listAllImagePost = function (req, res) {
   //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
   Image.getAllImagePost(function (err, postImage) {
     if (err) res.send(err);
-    res.json(postImage);
+    else res.json(postImage);
   });
 };
 

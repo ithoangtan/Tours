@@ -2,34 +2,32 @@ import React, { Component } from "react";
 
 import { Form, Input, Button, DatePicker, Select, Radio } from "antd";
 
-import { getParamTokenWithName } from "../../_commons/auth.service";
+// import { getParamTokenWithName } from "../../_commons/auth.service";
 
-const idAccount = getParamTokenWithName("idAccount");
+// const idAccount = getParamTokenWithName("idAccount");
 
 class TableNewRow extends Component {
    state = {
       expand: false,
       value: "",
       titleTour: "",
-      price: 10,
-      sale: 0,
-      address: "",
-      vocationTime: "2 Ngày 1 Đêm",
-      departureDay: new Date()
-         .toJSON()
-         .slice(0, 10)
-         .replace(/-/g, "-"),
-      describe: "",
-      idAccount: idAccount,
-      reuse: 0
+      name: "",
+      email: "",
+      phone: "",
+      role: "",
+      username: "",
+      website: "",
+      birthdate: "",
+      verify: "",
+      gender: "",
    };
 
-   onChange = event => {
+   onChange = (event) => {
       var target = event.target;
       var name = target.name;
       var value = target.value;
       this.setState({
-         [name]: value
+         [name]: value,
       });
    };
 
@@ -37,17 +35,17 @@ class TableNewRow extends Component {
       this.setState({ departureDay: dateString });
    };
 
-   onOK = value => {
+   onOK = (value) => {
       this.setState({ departureDay: value });
    };
 
-   onChangeSale = value => {
+   onChangeSale = (value) => {
       this.setState({ sale: value });
    };
-   onChangeReuse = value => {
+   onChangeReuse = (value) => {
       this.setState({ reuse: value });
    };
-   onChangePrice = value => {
+   onChangePrice = (value) => {
       this.setState({ price: value });
    };
 
@@ -59,24 +57,29 @@ class TableNewRow extends Component {
       const { expand } = this.state;
       this.setState({ expand: !expand });
    };
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, fieldsValue) => {
          if (err) {
             return;
          }
       });
-
-      const { titleTour, describe, address } = this.state;
-      if (titleTour !== "" && describe !== "" && address !== "") {
+      const { name, username, address, email, phone } = this.state;
+      if (
+         name !== "" &&
+         username !== "" &&
+         address !== "" &&
+         phone !== "" &&
+         email !== ""
+      ) {
          const { handleAdd, onCancle } = this.props;
          handleAdd(this.state);
          onCancle();
       }
    };
 
-   handleChange = target => {
-      this.setState({ vocationTime: target.label });
+   handleChange = (target) => {
+      this.setState({ gender: target.label });
    };
 
    render() {
@@ -84,13 +87,13 @@ class TableNewRow extends Component {
          labelCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
+            md: { span: 4 },
          },
          wrapperCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
-         }
+            md: { span: 4 },
+         },
       };
       const { onCancle } = this.props;
       const { getFieldDecorator } = this.props.form;
@@ -111,9 +114,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Name input something!"
-                              }
-                           ]
+                                 message: "Name input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="name"
@@ -131,9 +134,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Email input something!"
-                              }
-                           ]
+                                 message: "Email input something!",
+                              },
+                           ],
                         })(
                            <Input
                               type="email"
@@ -152,9 +155,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Phone input something!"
-                              }
-                           ]
+                                 message: "Phone input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="phone"
@@ -172,9 +175,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Username input something!"
-                              }
-                           ]
+                                 message: "Username input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="username"
@@ -184,7 +187,6 @@ class TableNewRow extends Component {
                            />
                         )}
                      </Form.Item>
-
                      <Form.Item
                         label={`Gender:`}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
@@ -194,9 +196,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "select same day!"
-                              }
-                           ]
+                                 message: "select same day!",
+                              },
+                           ],
                         })(
                            <Select
                               name="gender"
@@ -220,9 +222,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Select date and time!"
-                              }
-                           ]
+                                 message: "Select date and time!",
+                              },
+                           ],
                         })(
                            <DatePicker
                               name="birthdate"
@@ -232,7 +234,6 @@ class TableNewRow extends Component {
                            />
                         )}
                      </Form.Item>
-
                      <Form.Item
                         label={`Address: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
@@ -241,9 +242,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Input something!"
-                              }
-                           ]
+                                 message: "Input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="address"
@@ -261,9 +262,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Input something!"
-                              }
-                           ]
+                                 message: "Input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="website"
@@ -281,9 +282,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Select type!"
-                              }
-                           ]
+                                 message: "Select type!",
+                              },
+                           ],
                         })(
                            <Radio.Group buttonStyle="solid">
                               <Radio.Button value="account">
@@ -303,9 +304,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Select role!"
-                              }
-                           ]
+                                 message: "Select role!",
+                              },
+                           ],
                         })(
                            <Radio.Group buttonStyle="solid">
                               <Radio.Button value="administrator">

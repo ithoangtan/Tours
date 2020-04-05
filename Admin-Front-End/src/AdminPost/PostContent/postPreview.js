@@ -4,7 +4,7 @@ import { Tag, Tooltip } from "antd";
 import {
    API_ENDPOINT,
    DEFAULT_IMAGE_URL,
-   XHTML_LOADING,
+   // XHTML_LOADING,
 } from "../../_constants/index.constants";
 
 import moment from "moment";
@@ -47,7 +47,7 @@ class PostPreviewContainer extends Component {
    render() {
       const { post, listImageByIdPost } = this.props;
 
-      if (listImageByIdPost?.length === 0) return XHTML_LOADING;
+      // if (listImageByIdPost?.length === 0) return XHTML_LOADING;
 
       const day = moment(post.dateAdded).format("DD");
       const month = moment(post.dateAdded).format("MMMM");

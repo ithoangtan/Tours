@@ -9,10 +9,6 @@ import funcLoadJs from "../_constants/loadJs.constants";
 export default class WrapperTableParentContainer extends Component {
    componentWillMount() {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
-
-      // const { tourAllActions } = this.props;
-      // const { fetchListAccountRequest } = tourAllActions;
-      // fetchListAccountRequest();
    }
    render() {
       return (
