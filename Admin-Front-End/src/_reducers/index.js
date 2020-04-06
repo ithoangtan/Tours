@@ -9,7 +9,7 @@ import tagReducer from "./tag.reducer";
 import serviceReducer from "./service.reducer";
 import postReducer from "./post.reducer";
 import accountReducer from "./account.reducer";
-import notificationsReducer from "./notifications.reducer";
+import notificationReducer from "./notification.reducer";
 import timelineReducer from "./timeline.reducer";
 import configReducer from "./config.reducer";
 
@@ -25,8 +25,8 @@ const rootReducer = combineReducers({
    post: postReducer,
    config: configReducer,
    account: accountReducer,
-   notifications: notificationsReducer,
-   timeline: timelineReducer
+   notification: notificationReducer,
+   timeline: timelineReducer,
 });
 
 export default rootReducer;

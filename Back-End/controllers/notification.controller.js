@@ -14,7 +14,7 @@ exports.listAll = async (req, res, next) => {
   }
 };
 
-exports.listNotificationSearch = async function(req, res) {
+exports.listNotificationSearch = async function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
@@ -62,7 +62,7 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   try {
-    const updateNotification = new Notification(req.body);
+    const updateNotification = req.body;
     updateResult = await Notification.updateById(updateNotification);
     res.status(200).json(updateResult);
   } catch (err) {

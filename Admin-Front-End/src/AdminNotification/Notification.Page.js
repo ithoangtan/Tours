@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import SideBarContainer from "../AdminParentContainer/sideBar.container";
-import NotificationsWrapperContainer from "./NotificationsContent/NotificationsWrapper.container";
+import NotificationWrapperContainer from "./NotificationContent/NotificationWrapper.container";
 
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
@@ -9,10 +9,6 @@ import funcLoadJs from "../_constants/loadJs.constants";
 export default class WrapperTableParentContainer extends Component {
    componentWillMount() {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
-
-      // const { tourAllActions } = this.props;
-      // const { fetchListNotificationsRequest } = tourAllActions;
-      // fetchListNotificationsRequest();
    }
    render() {
       return (
@@ -21,7 +17,7 @@ export default class WrapperTableParentContainer extends Component {
             <SideBarContainer />
             {/* End of Sidebar */}
             {/* Content Wrapper */}
-            <NotificationsWrapperContainer {...this.props} />
+            <NotificationWrapperContainer {...this.props} />
             {/* End of Content Wrapper */} {/* Scroll to Top Button*/}
             <a className="scroll-to-top rounded ht-loaded" href="#page-top">
                <i className="fas fa-angle-up" />

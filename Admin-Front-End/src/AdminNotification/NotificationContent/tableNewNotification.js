@@ -7,27 +7,41 @@ import { getParamTokenWithName } from "../../_commons/auth.service";
 const idAccount = getParamTokenWithName("idAccount");
 const { TextArea } = Input;
 
-class TableNewRow extends Component {
+class TableNewNotification extends Component {
    state = {
       expand: false,
       value: "",
-      type: 10,
+      type: "",
       status: "",
       title: "",
       contentNotification: "",
-      datetime: new Date()
-         .toJSON()
-         .slice(0, 10)
-         .replace(/-/g, "-"),
-      idAccount: idAccount
+      noticeTo: "",
+      datetime: {},
+      idAccount: idAccount,
    };
 
-   onChange = event => {
+   onChange = (event) => {
       var target = event.target;
       var name = target.name;
       var value = target.value;
       this.setState({
-         [name]: value
+         [name]: value,
+      });
+   };
+
+   onChangeType = (values) => {
+      this.setState({
+         type: values.target.value,
+      });
+   };
+   onChangeStatus = (values) => {
+      this.setState({
+         status: values.target.value,
+      });
+   };
+   onChangeNoticeTo = (values) => {
+      this.setState({
+         noticeTo: values.target.value,
       });
    };
 
@@ -35,18 +49,8 @@ class TableNewRow extends Component {
       this.setState({ datetime: dateString });
    };
 
-   onOK = value => {
+   onOK = (value) => {
       this.setState({ datetime: value });
-   };
-
-   onChangeSale = value => {
-      this.setState({ sale: value });
-   };
-   onChangeReuse = value => {
-      this.setState({ reuse: value });
-   };
-   onChangePrice = value => {
-      this.setState({ type: value });
    };
 
    handleReset = () => {
@@ -57,7 +61,7 @@ class TableNewRow extends Component {
       const { expand } = this.state;
       this.setState({ expand: !expand });
    };
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, fieldsValue) => {
          if (err) {
@@ -65,15 +69,15 @@ class TableNewRow extends Component {
          }
       });
 
-      const { title, contentNotification, status } = this.state;
-      if (title !== "" && contentNotification !== "" && status !== "") {
+      const { title, contentNotification } = this.state;
+      if (title !== "" && contentNotification !== "") {
          const { handleAdd, onCancle } = this.props;
          handleAdd(this.state);
          onCancle();
       }
    };
 
-   handleChange = target => {
+   handleChange = (target) => {
       this.setState({ vocationTime: target.label });
    };
 
@@ -82,13 +86,13 @@ class TableNewRow extends Component {
          labelCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 6 }
+            md: { span: 6 },
          },
          wrapperCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 6 }
-         }
+            md: { span: 6 },
+         },
       };
       const { onCancle } = this.props;
       const { getFieldDecorator } = this.props.form;
@@ -105,13 +109,13 @@ class TableNewRow extends Component {
                         label={`Title: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
                      >
-                        {getFieldDecorator(`title-tour`, {
+                        {getFieldDecorator(`title`, {
                            rules: [
                               {
                                  required: true,
-                                 message: "Title Notification input something!"
-                              }
-                           ]
+                                 message: "Title Notification input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="title"
@@ -125,17 +129,19 @@ class TableNewRow extends Component {
                         label={`Type: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
                      >
-                        {getFieldDecorator(`type`, {
-                           initialValue: "Open",
+                        {getFieldDecorator(`types`, {
+                           //initialValue: "Info",
                            rules: [
                               {
                                  required: true,
-                                 message: "Select type!"
-                              }
-                           ]
+                                 message: "Select type!",
+                              },
+                           ],
                         })(
-                           <Radio.Group buttonStyle="solid">
-                              <Radio.Button value="Open">Open</Radio.Button>
+                           <Radio.Group
+                              buttonStyle="solid"
+                              onChange={this.onChangeType}
+                           >
                               <Radio.Button value="Info">Info</Radio.Button>
                               <Radio.Button value="Success">
                                  Success
@@ -148,16 +154,19 @@ class TableNewRow extends Component {
                         label={`Status: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
                      >
-                        {getFieldDecorator(`status`, {
-                           initialValue: "Created",
+                        {getFieldDecorator(`statuses`, {
+                           //  initialValue: "Created",
                            rules: [
                               {
                                  required: true,
-                                 message: "Select status!"
-                              }
-                           ]
+                                 message: "Select status!",
+                              },
+                           ],
                         })(
-                           <Radio.Group buttonStyle="solid">
+                           <Radio.Group
+                              buttonStyle="solid"
+                              onChange={this.onChangeStatus}
+                           >
                               <Tooltip title="Tạo và đang chờ gửi">
                                  <Radio.Button value="Created">
                                     Created
@@ -187,9 +196,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Write something!"
-                              }
-                           ]
+                                 message: "Write something!",
+                              },
+                           ],
                         })(
                            <TextArea
                               name="contentNotification"
@@ -207,9 +216,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Select date and time!"
-                              }
-                           ]
+                                 message: "Select date and time!",
+                              },
+                           ],
                         })(
                            <DatePicker
                               name="datetime"
@@ -224,16 +233,19 @@ class TableNewRow extends Component {
                         label={`Notice To: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
                      >
-                        {getFieldDecorator(`noticeto`, {
-                           initialValue: "All",
+                        {getFieldDecorator(`noticeToes`, {
+                           //      initialValue: "All",
                            rules: [
                               {
                                  required: true,
-                                 message: "Select noticeto!"
-                              }
-                           ]
+                                 message: "Select noticeto!",
+                              },
+                           ],
                         })(
-                           <Radio.Group buttonStyle="solid">
+                           <Radio.Group
+                              buttonStyle="solid"
+                              onChange={this.onChangeNoticeTo}
+                           >
                               <Tooltip title="Tất cả người dùng">
                                  <Radio.Button value="All">All</Radio.Button>
                               </Tooltip>
@@ -278,4 +290,6 @@ class TableNewRow extends Component {
    }
 }
 
-export default TableNewRow = Form.create({ name: "new_tour" })(TableNewRow);
+export default TableNewNotification = Form.create({ name: "new_notification" })(
+   TableNewNotification
+);

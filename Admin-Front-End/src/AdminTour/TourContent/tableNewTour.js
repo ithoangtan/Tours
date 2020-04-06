@@ -8,7 +8,7 @@ import {
    DatePicker,
    Select,
    Radio,
-   Checkbox
+   Checkbox,
 } from "antd";
 
 import { getParamTokenWithName } from "../../_commons/auth.service";
@@ -36,12 +36,10 @@ class TableNewRow extends Component {
       titleTour: "",
       price: 10,
       sale: 0,
+      type: "",
       address: "",
       vocationTime: "2 Ngày 1 Đêm",
-      departureDay: new Date()
-         .toJSON()
-         .slice(0, 10)
-         .replace(/-/g, "-"),
+      departureDay: new Date().toJSON().slice(0, 10).replace(/-/g, "-"),
       describe: "",
       idAccount: idAccount,
       reuse: 0,
@@ -50,7 +48,7 @@ class TableNewRow extends Component {
       checkAllTags: false,
       checkedListServices: [],
       indeterminateServices: false,
-      checkAllServices: false
+      checkAllServices: false,
    };
 
    fetch = async (params = {}) => {
@@ -59,16 +57,16 @@ class TableNewRow extends Component {
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
-            ...params
+            ...params,
          },
-         type: "json"
-      }).then(data => {
+         type: "json",
+      }).then((data) => {
          let tags = [];
          for (let i = 0; i < data.length; i++) {
             tags.push(data[i].name);
          }
          this.setState({
-            tags
+            tags,
          });
       });
       reqwest({
@@ -76,17 +74,17 @@ class TableNewRow extends Component {
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
-            ...params
+            ...params,
          },
-         type: "json"
-      }).then(data => {
+         type: "json",
+      }).then((data) => {
          let services = [];
          for (let i = 0; i < data.length; i++) {
             services.push(data[i].name);
          }
 
          this.setState({
-            services
+            services,
          });
       });
    };
@@ -95,49 +93,55 @@ class TableNewRow extends Component {
       this.fetch();
    }
 
-   onChangeTags = checkedListTags => {
+   onChangeTags = (checkedListTags) => {
       this.setState({
          checkedListTags,
          indeterminateTags:
             !!checkedListTags.length &&
             checkedListTags.length < this.state.tags.length,
-         checkAllTags: checkedListTags.length === this.state.tags.length
+         checkAllTags: checkedListTags.length === this.state.tags.length,
       });
    };
 
-   onCheckAllChangeTags = e => {
+   onCheckAllChangeTags = (e) => {
       this.setState({
          checkedListTags: e.target.checked ? this.state.tags : [],
          indeterminateTags: false,
-         checkAllTags: e.target.checked
+         checkAllTags: e.target.checked,
       });
    };
 
-   onChangeServices = checkedListServices => {
+   onChangeServices = (checkedListServices) => {
       this.setState({
          checkedListServices,
          indeterminateServices:
             !!checkedListServices.length &&
             checkedListServices.length < this.state.services.length,
          checkAllServices:
-            checkedListServices.length === this.state.services.length
+            checkedListServices.length === this.state.services.length,
       });
    };
 
-   onCheckAllChangeServices = e => {
+   onCheckAllChangeServices = (e) => {
       this.setState({
          checkedListServices: e.target.checked ? this.state.services : [],
          indeterminateServices: false,
-         checkAllServices: e.target.checked
+         checkAllServices: e.target.checked,
       });
    };
 
-   onChange = event => {
+   onChange = (event) => {
       var target = event.target;
       var name = target.name;
       var value = target.value;
       this.setState({
-         [name]: value
+         [name]: value,
+      });
+   };
+
+   onChangeRadio = (values) => {
+      this.setState({
+         type: values.target.value,
       });
    };
 
@@ -145,15 +149,15 @@ class TableNewRow extends Component {
       this.setState({ departureDay: dateString });
    };
 
-   onOK = value => {
+   onOK = (value) => {
       this.setState({ departureDay: value });
    };
 
-   onChangeSale = value => {
+   onChangeSale = (value) => {
       this.setState({ sale: value });
    };
 
-   onChangePrice = value => {
+   onChangePrice = (value) => {
       this.setState({ price: value });
    };
 
@@ -165,7 +169,7 @@ class TableNewRow extends Component {
       const { expand } = this.state;
       this.setState({ expand: !expand });
    };
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, fieldsValue) => {
          if (err) {
@@ -181,11 +185,11 @@ class TableNewRow extends Component {
       }
    };
 
-   handleChange = target => {
+   handleChange = (target) => {
       this.setState({ vocationTime: target.label });
    };
 
-   onChangeReuse = target => {
+   onChangeReuse = (target) => {
       console.log(target.label);
 
       this.setState({ reuse: target.label });
@@ -196,13 +200,13 @@ class TableNewRow extends Component {
          labelCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
+            md: { span: 4 },
          },
          wrapperCol: {
             xs: { span: 24 },
             sm: { span: 24 },
-            md: { span: 4 }
-         }
+            md: { span: 4 },
+         },
       };
       const { onCancle } = this.props;
       const { getFieldDecorator } = this.props.form;
@@ -223,9 +227,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Title Tour input something!"
-                              }
-                           ]
+                                 message: "Title Tour input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="titleTour"
@@ -244,22 +248,24 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "price is 0?"
-                              }
-                           ]
+                                 message: "price is 0?",
+                              },
+                           ],
                         })(
                            <InputNumber
                               style={{ width: "50%" }}
                               name="price"
                               min={0}
                               step={1000}
-                              formatter={value =>
+                              formatter={(value) =>
                                  `${value}`.replace(
                                     /\B(?=(\d{3})+(?!\d))/g,
                                     ","
                                  )
                               }
-                              parser={value => value.replace(/\$\s?|(,*)/g, "")}
+                              parser={(value) =>
+                                 value.replace(/\$\s?|(,*)/g, "")
+                              }
                               onChange={this.onChangePrice}
                            />
                         )}
@@ -273,17 +279,17 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Input something!"
-                              }
-                           ]
+                                 message: "Input something!",
+                              },
+                           ],
                         })(
                            <InputNumber
                               name="sale"
                               style={{ width: "50%" }}
                               min={0}
                               max={100}
-                              formatter={value => `${value}%`}
-                              parser={value => value.replace("%", "")}
+                              formatter={(value) => `${value}%`}
+                              parser={(value) => value.replace("%", "")}
                               onChange={this.onChangeSale}
                               placeholder={"Sale"}
                            />
@@ -298,9 +304,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Input something!"
-                              }
-                           ]
+                                 message: "Input something!",
+                              },
+                           ],
                         })(
                            <Input
                               name="address"
@@ -319,9 +325,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "select same day!"
-                              }
-                           ]
+                                 message: "select same day!",
+                              },
+                           ],
                         })(
                            <Select
                               name="vocationTime"
@@ -371,9 +377,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "select same days!"
-                              }
-                           ]
+                                 message: "select same days!",
+                              },
+                           ],
                         })(
                            <Select
                               name="reuse"
@@ -403,8 +409,8 @@ class TableNewRow extends Component {
                               {
                                  //  required: true,
                                  //   message: "Select tags!"
-                              }
-                           ]
+                              },
+                           ],
                         })(
                            <>
                               <div className="ht-d-flex">
@@ -435,9 +441,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Write something!"
-                              }
-                           ]
+                                 message: "Write something!",
+                              },
+                           ],
                         })(
                            <TextArea
                               name="describe"
@@ -455,9 +461,9 @@ class TableNewRow extends Component {
                            rules: [
                               {
                                  required: true,
-                                 message: "Select date and time!"
-                              }
-                           ]
+                                 message: "Select date and time!",
+                              },
+                           ],
                         })(
                            <DatePicker
                               name="departureDay"
@@ -472,13 +478,13 @@ class TableNewRow extends Component {
                         label={`Type: `}
                         className="ant-form-item-control-wrapper col-md-12 mb-1"
                      >
-                        {getFieldDecorator(`type`, {
+                        {getFieldDecorator(`types`, {
                            rules: [
                               {
                                  required: true,
-                                 message: "Select type!"
-                              }
-                           ]
+                                 message: "Select type!",
+                              },
+                           ],
                         })(
                            // VietNam: 1000,
                            // Asia: 800,
@@ -490,7 +496,10 @@ class TableNewRow extends Component {
                            // Central Highlands, //Tây Nguyên
                            // Southeast, //Đông Nam Bộ, Miền Đông
                            // Mekong River Delta; //Đồng Bằng sông Cửu Long
-                           <Radio.Group buttonStyle="solid">
+                           <Radio.Group
+                              buttonStyle="solid"
+                              onChange={this.onChangeRadio}
+                           >
                               <Radio.Button value="World" disabled>
                                  Thế giới:
                               </Radio.Button>
@@ -535,8 +544,8 @@ class TableNewRow extends Component {
                               {
                                  //   required: true,
                                  // message: "Select services!"
-                              }
-                           ]
+                              },
+                           ],
                         })(
                            <>
                               <div className="ht-d-flex">

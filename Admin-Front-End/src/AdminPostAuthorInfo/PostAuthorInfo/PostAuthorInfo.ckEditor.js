@@ -97,7 +97,6 @@ class ConfigContentEditor extends Component {
                </div>
                <div className="container col-md-12 mt-3 mb-3">
                   <div className="col-md-12 container card ht-d-flex-row-center-center ">
-                     Có thể sửa ngay trên preview:
                      <div className="ht-d-flex-row-start-start col-md-8 card m-3 pt-3 pr-3 pl-3 bgrf8f8f8">
                         <div className="">
                            <AvatarChange

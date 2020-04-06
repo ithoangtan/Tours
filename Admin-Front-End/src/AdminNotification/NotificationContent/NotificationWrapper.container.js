@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import TopBarContainer from "../../AdminParentContainer/topBar.container";
-import NotificationsTableContainer from "./NotificationsTable.container";
+import NotificationTableContainer from "./NotificationTable.container";
 import FooterContainer from "../../AdminParentContainer/footer.Container";
 
 export default class ContentTableWrapperContainer extends Component {
@@ -12,7 +12,7 @@ export default class ContentTableWrapperContainer extends Component {
             <TopBarContainer />
             {/* End of Topbar */}
             {/* Main Content */}
-            <NotificationsTableContainer {...this.props} />
+            <NotificationTableContainer {...this.props} />
             {/* End of Main Content */}
             {/* Footer */}
             <FooterContainer />
