@@ -1,5 +1,5 @@
 import * as evaluateConstants from "../_constants/evaluate.module";
-import { toastError, toastInfo } from "../_helper/toastify.helper";
+import { toastError } from "../_helper/toastify.helper";
 import { messageSuccess } from "../_helper/message.helper";
 const initialState = {
    listEvaluateByIdTour: []

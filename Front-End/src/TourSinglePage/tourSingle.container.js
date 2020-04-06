@@ -168,7 +168,7 @@ export default class TourSingleContainer extends Component {
          numberStarVehicle,
          numberStarTourGuide,
          numberStarSchedule,
-         type: typeTourEvaluate,
+         typeEvaluate: typeTourEvaluate,
          title: titleEveluate,
          contentEvaluate: contentEvaluate,
          idTour: this.props.tourById.idTour

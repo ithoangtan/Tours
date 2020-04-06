@@ -1,6 +1,5 @@
 import * as evaluateApis from "../_apis/evaluate.api";
 import * as evaluateConstants from "../_constants/evaluate.module";
-import tourReducer from "../_reducers/tour.reducer";
 
 //GET Evaluate BY ID Tour
 export const fetchEvaluateByIdTourSuccess = data => {
@@ -62,9 +61,6 @@ export const fetchPostEvaluateRequest = data => {
          .then(resp => {
             const { data } = resp;
             dispatch(fetchPostEvaluateSuccess(data));
-            dispatch(
-               fetchListEvaluateByIdTourRequest(tourReducer.tourById.idTour)
-            );
          })
          .catch(error => {
             dispatch(fetchPostEvaluateError(error));
