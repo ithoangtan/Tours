@@ -59,8 +59,13 @@ function calAverageRateEvaluate(evaluate) {
 
 exports.create = async (req, res, next) => {
   try {
+    const { idAccount } = req;
     const rateAverage = calAverageRateEvaluate(req.body);
-    const newEvaluate = new Evaluate({ ...req.body, ...rateAverage });
+    const newEvaluate = new Evaluate({
+      ...req.body,
+      ...rateAverage,
+      idAccount,
+    });
     resultCreate = await Evaluate.createEvaluate(newEvaluate);
     res.status(200).json(resultCreate);
   } catch (err) {
@@ -74,12 +79,7 @@ exports.create = async (req, res, next) => {
 exports.update = async (req, res, next) => {
   try {
     const rateAverage = calAverageRateEvaluate(req.body);
-    const { idAccount } = req;
-    const updateEvaluate = new Evaluate({
-      ...req.body,
-      idAccount,
-      ...rateAverage,
-    });
+    const updateEvaluate = new Evaluate({ ...req.body, ...rateAverage });
     updateResult = await Evaluate.updateById(updateEvaluate);
     res.status(200).json(updateResult);
   } catch (err) {
