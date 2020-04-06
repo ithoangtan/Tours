@@ -1,5 +1,6 @@
 import * as postConstants from "../_constants/post.module";
-import { toastError, toastInfo } from "../_helper/toastify.helper";
+import { toastError } from "../_helper/toastify.helper";
+import { messageSuccess } from "../_helper/message.helper";
 import { compareValues } from "../_helper/compareValue.helper";
 const initialState = {
    listPost: [],
@@ -65,7 +66,7 @@ const reducer = (state = initialState, action) => {
       }
       //Vote Post
       case postConstants.VOTE_POST_SUCCESS: {
-         toastInfo("Cảm ơn bạn đã vote bài viết");
+         messageSuccess("Cảm ơn bạn đã vote bài viết", 3);
          return {
             ...state
          };

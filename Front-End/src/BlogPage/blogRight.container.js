@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Tag, Tabs } from "antd";
 import moment from "moment";
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
@@ -20,32 +21,34 @@ export default class BlogRightContainer extends Component {
                               ? post.dateEdited
                               : post.dateAdded;
                            return (
-                              <div className="ht-item-post-mini" key={index}>
-                                 <img
-                                    src="/images/blog-4.jpg"
-                                    alt="not found"
-                                 />
-                                 <div className="ht-item-post-mini-info">
-                                    <div className="ht-title">
-                                       {post.titlePost}
-                                    </div>
-                                    <div className="ht-date-view-vote">
-                                       <div className="ht-date">
-                                          {moment(postDate).format(
-                                             INDEX_CONSTANTS.DATE_TIME_FORMAT
-                                                .DATE_MONTH_YEAR
-                                          )}
+                              <Link to={`blog-single/${post.idPost}`}>
+                                 <div className="ht-item-post-mini" key={index}>
+                                    <img
+                                       src="/images/blog-4.jpg"
+                                       alt="not found"
+                                    />
+                                    <div className="ht-item-post-mini-info">
+                                       <div className="ht-title">
+                                          {post.titlePost}
                                        </div>
-                                       <div className="ht-view-vote">
-                                          <i className="far fa-eye"></i>{" "}
-                                          {post.views} {`    `}
-                                          <i className="far fa-star"></i>
-                                          {` `}
-                                          {post.vote}
+                                       <div className="ht-date-view-vote">
+                                          <div className="ht-date">
+                                             {moment(postDate).format(
+                                                INDEX_CONSTANTS.DATE_TIME_FORMAT
+                                                   .DATE_MONTH_YEAR
+                                             )}
+                                          </div>
+                                          <div className="ht-view-vote">
+                                             <i className="far fa-eye"></i>{" "}
+                                             {post.views} {`    `}
+                                             <i className="far fa-star"></i>
+                                             {` `}
+                                             {post.vote}
+                                          </div>
                                        </div>
                                     </div>
                                  </div>
-                              </div>
+                              </Link>
                            );
                         })}
                   </div>

@@ -140,7 +140,7 @@ class BlogContainer extends Component {
                                  >
                                     <div className="blog-entry justify-content-end">
                                        <Link
-                                          to="blog-single"
+                                          to={`blog-single/${post.idPost}`}
                                           className="block-20 ht-blog-image"
                                           style={{
                                              backgroundImage:

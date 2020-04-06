@@ -1,6 +1,6 @@
 import * as evaluateConstants from "../_constants/evaluate.module";
 import { toastError, toastInfo } from "../_helper/toastify.helper";
-
+import { messageSuccess } from "../_helper/message.helper";
 const initialState = {
    listEvaluateByIdTour: []
 };
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
       }
       //Post eveluate
       case evaluateConstants.FETCH_POST_EVALUATE_SUCCESS: {
-         toastInfo({ message: "Cảm ơn bạn đã viết đánh giá!" });
+         messageSuccess("Cảm ơn bạn đã viết đánh giá!", 3);
          return {
             ...state
          };
