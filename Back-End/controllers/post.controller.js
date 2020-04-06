@@ -74,6 +74,27 @@ exports.update = async (req, res, next) => {
   }
 };
 
+exports.votePost = async (req, res, next) => {
+  try {
+    const { idPost, vote } = req.body;
+    RowDataPacket = await Post.getPostById(idPost);
+    const oldVote = RowDataPacket[0].vote;
+    // calulate vote
+    const newVote = ((parseInt(vote) + parseInt(oldVote)) / 2).toFixed(0);
+    const updatePost = removeBlankAttributes.remove(
+      new Post({ ...req.body, vote: newVote })
+    );
+
+    updateResult = await Post.updateById(updatePost);
+    res.status(200).json(updateResult);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.delete = async (req, res, next) => {
   try {
     const { idPost } = req.query;

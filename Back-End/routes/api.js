@@ -104,6 +104,7 @@ router.delete("/evaluate", authenticated, evaluate.delete);
 router.get("/post", post.read);
 router.get("/posts", post.listAll);
 router.post("/posts/search", post.listPostSearch);
+router.post("/post/vote", authenticated, post.votePost);
 router.post("/post", authenticated, post.create);
 router.put("/post", authenticated, post.update);
 router.delete("/post", authenticated, post.delete);

@@ -74,7 +74,12 @@ exports.create = async (req, res, next) => {
 exports.update = async (req, res, next) => {
   try {
     const rateAverage = calAverageRateEvaluate(req.body);
-    const updateEvaluate = new Evaluate({ ...req.body, ...rateAverage });
+    const { idAccount } = req;
+    const updateEvaluate = new Evaluate({
+      ...req.body,
+      idAccount,
+      ...rateAverage,
+    });
     updateResult = await Evaluate.updateById(updateEvaluate);
     res.status(200).json(updateResult);
   } catch (err) {
