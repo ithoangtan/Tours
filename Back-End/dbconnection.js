@@ -27,7 +27,7 @@ const configProduction = {
 const connection =
   process.env.NODE_ENV === "production"
     ? mysql.createConnection(configProduction)
-    : mysql.createConnection(config);
+    : mysql.createConnection(configHerokuTest);
 // : mysql.createConnection(configHerokuTest);
 
 module.exports = connection;

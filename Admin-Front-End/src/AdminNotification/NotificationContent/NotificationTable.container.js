@@ -100,13 +100,13 @@ class EditableCell extends React.Component {
                </Option>
             </Select>
          );
-      else if (this.props.inputType === "datetime")
+      else if (this.props.inputType === "dateTime")
          return <DatePicker showTime />;
       else if (this.props.inputType === "input") return <Input />;
    };
 
    initialValueEditForm = (record, index) => {
-      if (index === "datetime") return moment(record[index]);
+      if (index === "dateTime") return moment(record[index]);
       else return record[index];
    };
 
@@ -256,7 +256,7 @@ class EditableTable extends React.Component {
                : 0,
          title: newNotification.title,
          contentNotification: newNotification.contentNotification,
-         datetime: moment(newNotification.datetime).format(),
+         dateTime: moment(newNotification.dateTime),
          dateAdded: new Date().toJSON().slice(0, 10).replace(/-/g, "-"),
          type: newNotification.type,
          status: newNotification.status,
@@ -325,7 +325,6 @@ class EditableTable extends React.Component {
          this.setState({
             loading: false,
             data: data,
-            //data: listNotification
             pagination,
          });
       });
@@ -585,16 +584,16 @@ class EditableTable extends React.Component {
 
          {
             title: "Datetime",
-            dataIndex: "datetime",
-            key: "datetime",
+            dataIndex: "dateTime",
+            key: "dateTime",
             width: 150,
-            ...this.getColumnSearchProps("datetime"),
-            sorter: (a, b) => a.datetime.length - b.datetime.length,
-            sortOrder: sortedInfo.columnKey === "datetime" && sortedInfo.order,
+            ...this.getColumnSearchProps("dateTime"),
+            sorter: (a, b) => moment(a.dateTime) - moment(b.dateTime),
+            sortOrder: sortedInfo.columnKey === "dateTime" && sortedInfo.order,
             ellipsis: true,
             editable: true,
             render: (text) => {
-               return moment(text).format("hh:mm A DD/MM/YYYY");
+               return moment(text).format("HH:mm A DD/MM/YYYY");
             },
          },
          {
@@ -707,7 +706,7 @@ class EditableTable extends React.Component {
             return "disabled";
          else if (type === "type") return "typeSelect";
          else if (type === "status") return "statusSelect";
-         else if (type === "datetime") return "datetime";
+         else if (type === "dateTime") return "dateTime";
          else return "input";
       }
       const columns = this.columns.map((col) => {

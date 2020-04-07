@@ -1,7 +1,7 @@
 const database = require("../dbconnectMySql");
 
 //Task object constructor
-const Notification = function(notification) {
+const Notification = function (notification) {
   this.idNotification = notification.idNotification | 0;
   this.title = notification.title;
   this.contentNotification = notification.contentNotification;
@@ -20,58 +20,70 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
-Notification.getAllNotification = function() {
-  return new Promise(function(resolve, reject) {
+Notification.getPaginationNotification = function (limit, offset) {
+  return new Promise(function (resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spPaginationNotification( '${limit}' , '${offset}' ); `
+      )
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
+  });
+};
+
+Notification.getAllNotification = function () {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "SELECT * FROM " +
           databaseProduction +
           ".notifications WHERE statusAction <> 'deleted';"
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
-
-Notification.getAllNotificationSearch = function(searchs) {
+Notification.getAllNotificationSearch = function (searchs) {
   if (searchs.conditional === "title") {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       database
         .query(
           "call " +
             databaseProduction +
             `.spsearchEngineNotificationByTitle( '${searchs.keySearch}' ); `
         )
-        .then(rows => resolve(rows))
-        .catch(err => reject(err));
+        .then((rows) => resolve(rows))
+        .catch((err) => reject(err));
     });
   } else if (searchs.conditional === "content") {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       database
         .query(
           "call " +
             databaseProduction +
             `.spsearchEngineNotificationByContent( '${searchs.keySearch}'); `
         )
-        .then(rows => resolve(rows))
-        .catch(err => reject(err));
+        .then((rows) => resolve(rows))
+        .catch((err) => reject(err));
     });
   } else {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       database
         .query(
           "call " +
             databaseProduction +
             `.spsearchEngineNotification( '${searchs.keySearch}', '${searchs.dayTime}' ); `
         )
-        .then(rows => resolve(rows))
-        .catch(err => reject(err));
+        .then((rows) => resolve(rows))
+        .catch((err) => reject(err));
     });
   }
 };
 
-Notification.createNotification = function(newNotification) {
-  return new Promise(function(resolve, reject) {
+Notification.createNotification = function (newNotification) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "INSERT INTO " +
@@ -90,13 +102,13 @@ Notification.createNotification = function(newNotification) {
           newNotification.idAccount +
           "') "
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-Notification.getNotificationById = function(idNotification) {
-  return new Promise(function(resolve, reject) {
+Notification.getNotificationById = function (idNotification) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "SELECT * FROM " +
@@ -104,14 +116,14 @@ Notification.getNotificationById = function(idNotification) {
           ".notifications  WHERE idNotification = ? AND statusAction <> 'deleted';",
         [idNotification]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-Notification.updateById = function(updateNotification) {
+Notification.updateById = function (updateNotification) {
   updateNotification = { ...updateNotification, statusAction: "edited" };
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "UPDATE " +
@@ -119,13 +131,13 @@ Notification.updateById = function(updateNotification) {
           ".notifications SET ? WHERE (idNotification = ?);",
         [updateNotification, updateNotification.idNotification]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-Notification.remove = function(idNotification) {
-  return new Promise(function(resolve, reject) {
+Notification.remove = function (idNotification) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "UPDATE " +
@@ -133,8 +145,8 @@ Notification.remove = function(idNotification) {
           ".notifications SET `statusAction` = 'deleted' WHERE idNotification = ?",
         [idNotification]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 

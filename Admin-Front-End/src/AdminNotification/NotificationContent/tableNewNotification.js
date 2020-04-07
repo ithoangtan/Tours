@@ -16,7 +16,7 @@ class TableNewNotification extends Component {
       title: "",
       contentNotification: "",
       noticeTo: "",
-      datetime: {},
+      dateTime: {},
       idAccount: idAccount,
    };
 
@@ -46,11 +46,11 @@ class TableNewNotification extends Component {
    };
 
    onChangeDate = (value, dateString) => {
-      this.setState({ datetime: dateString });
+      this.setState({ dateTime: dateString });
    };
 
    onOK = (value) => {
-      this.setState({ datetime: value });
+      this.setState({ dateTime: value });
    };
 
    handleReset = () => {
@@ -221,7 +221,7 @@ class TableNewNotification extends Component {
                            ],
                         })(
                            <DatePicker
-                              name="datetime"
+                              name="dateTime"
                               showTime
                               format="HH:mm DD-MM-YYYY"
                               onChange={this.onChangeDate}

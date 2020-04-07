@@ -1,12 +1,18 @@
-const { check, validationResult } = require("express-validator");
-
 const Notification = require("../models/notification.model");
 
 exports.listAll = async (req, res, next) => {
   try {
-    listNotification = await Notification.getAllNotification();
+    let listNotification = null;
+    if (req.query.limit !== undefined && req.query.offset !== undefined)
+      listNotification = await Notification.getPaginationNotification(
+        req.query.limit,
+        req.query.offset
+      );
+    else listNotification = await Notification.getAllNotification();
     res.status(200).json(listNotification);
   } catch (err) {
+    console.log(err);
+
     if (!err.statusCode) {
       err.statusCode = 500;
     }
