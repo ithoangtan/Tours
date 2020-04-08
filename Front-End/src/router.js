@@ -16,7 +16,7 @@ import IndexPage from "./IndexPage/index.page";
 import AboutPage from "./AboutPage/about.container";
 import BlogPage from "./BlogPage/blog.container";
 import BlogCategoryPage from "./BlogPage/blogCategory.container";
-import BlogSinglePage from "./BlogSinglePage/blogSingle.container";
+import BlogSinglePage from "./BlogSinglePage/blogSingle.page";
 import TourSinglePage from "./TourSinglePage/tourSingle.page";
 import TourBestPage from "./TourPage/tourBest.page";
 import TourPage from "./TourPage/tour.page";
@@ -214,13 +214,13 @@ const router = [
    },
 
    {
-      path: "/blog-category",
+      path: "/blog-category/:keySearch/:conditional",
       exact: true,
-      component: () => (
+      component: ({ match }, props) => (
          <>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <BlogCategoryPage />
+            <NavigationContainer {...props} />
+            <HeaderBreadcrumbContainer {...props} />
+            <BlogCategoryPage match={match} {...props} />
             <FooterContainer />
             <Loaded />
             <BackToTop />
@@ -228,13 +228,13 @@ const router = [
       )
    },
    {
-      path: "/blog-single",
+      path: "/blog-single/:idPost",
       exact: true,
-      component: () => (
+      component: ({ match }, props) => (
          <>
-            <NavigationContainer />
-            <HeaderBreadcrumbContainer />
-            <BlogSinglePage />
+            <NavigationContainer {...props} />
+            <HeaderBreadcrumbContainer {...props} />
+            <BlogSinglePage match={match} {...props} />
             <FooterContainer />
             <BackToTop />
          </>

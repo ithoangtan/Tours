@@ -1,16 +1,42 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-import { Input } from "antd";
+import { Input, message } from "antd";
 
 const { Search } = Input;
 
 export default class BlogHeaderContainer extends Component {
+   state = {
+      keySearch: "",
+      onSearch: false
+   };
+
+   onChangeInputSearch = e => {
+      const { name, value } = e.target;
+      this.setState({ [name]: value });
+   };
+
+   onSearch = keySearch => {
+      //Chuyển hướng đến bên trang blog
+      this.setState({ onSearch: true });
+   };
+
+   haveRedirect() {
+      const { onSearch, keySearch } = this.state;
+      if (onSearch === true) {
+         message.loading(`"${keySearch}" searching...`, 1);
+         this.setState({ onSearch: false });
+         return <Redirect to={`/blog-category/${keySearch}/content`} />;
+      }
+   }
+
    render() {
+      const { keySearch } = this.state;
       return (
-         <div className="row ht-navigation-blog mb-2 ">
-            <nav className="navbar navbar-expand-lg navbar-light ht-width-100 ftco-animate">
+         <div className="row ht-navigation-blog mb-2">
+            {this.haveRedirect()}
+            <nav className="navbar navbar-expand-lg navbar-light ht-width-100">
                <button
                   className="navbar-toggler"
                   type="button"
@@ -111,9 +137,12 @@ export default class BlogHeaderContainer extends Component {
                   </ul>
                   <Search
                      placeholder="input search text"
+                     name="keySearch"
+                     value={keySearch}
                      enterButton="Search"
                      size="default"
-                     onSearch={value => console.log(value)}
+                     onChange={this.onChangeInputSearch}
+                     onSearch={this.onSearch}
                      style={{ width: "25%" }}
                   />
                </div>

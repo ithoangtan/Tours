@@ -1,5 +1,5 @@
 export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
-//export const API_ENDPOINT = "http://localhost:8000";
+// export const API_ENDPOINT = "http://localhost:8000";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",
@@ -32,4 +32,84 @@ export const AdminArrayExternalScript = [
    "/admin/vendor/chart.js/Chart.min.js",
    "/admin/js/demo/chart-area-demo.js",
    "/admin/js/demo/chart-pie-demo.js"
+];
+
+export const DATE_TIME_FORMAT = {
+   DATE_MONTH_YEAR: "DD/MM/YYYY",
+   DATE_TIME: "DD/MM/YYYY - hh:mm:ss",
+   DATE_SHORT_TIME: "DD/MM/YYYY - hh:mm",
+   YEAR_MONTH_DATE: "YYYY/MM/DD",
+   MONTH_NAME: "MMMM",
+   YEAR: "YYYY",
+   DATE: "DD"
+};
+
+export const SERVICE_TOUR_ICON = {
+   "Đưa đón tận nơi": "fas fa-taxi",
+   "Cho thuê xe máy": "fas fa-motorcycle",
+   "Free Wifi": "fas fa-wifi",
+   "Hỗ trợ người khuyết tật": "fas fa-wheelchair",
+   "Sẵn vé máy bay": "fas fa-plane-departure",
+   "Xe giường nằm": "fas fa-bus-alt",
+   "Bãi biển đẹp": "fas fa-umbrella-beach",
+   "Phòng ngủ tập thể": "fas fa-bed",
+   Passport: "fas fa-id-badge",
+   "Tiệc sinh nhật đúng ngày": "fas fa-birthday-cake",
+   "Hướng dẫn viên": "fas fa-flag",
+   "Bảo hiểm": "fas fa-user-shield",
+   "Cho thuê xe đạp": "fas fa-bicycle",
+   "Tự do trong 1 ngày": "fas fa-shoe-prints",
+   "Phòng tập gym": "fas fa-dumbbell",
+   "Dịch vụ spa": "fas fa-spa",
+   "Có bể bơi": "fas fa-swimmer",
+   "Trượt tuyết": "fas fa-skiing",
+   "Bao bữa sáng": "fas fa-utensils",
+   "Hỗ trợ visa": "fab fa-cc-visa",
+   "Vé tham quan": "fas fa-money-bill"
+};
+
+export const LIST_TAG_EVALUATE = [
+   {
+      title: "Tất cả",
+      icon: "fas fa-th"
+   },
+   {
+      title: "Cá nhân",
+      icon: "fas fa-user"
+   },
+   {
+      title: "Cặp đôi",
+      icon: "fas fa-heart"
+   },
+   {
+      title: "Gia đình",
+      icon: "fas fa-users"
+   },
+   {
+      title: "Bạn bè",
+      icon: "fas fa-user-friends"
+   },
+   {
+      title: "Doanh nghiệp",
+      icon: "fas fa-briefcase"
+   }
+];
+
+export const DESC_RATE = ["terrible", "bad", "normal", "good", "wonderful"];
+
+export const COLOR_TAG_BLOG = [
+   "#fff2e8",
+   "#fff7e6",
+   "#ffccc7",
+   "#ffd8bf",
+   "#ffe7ba",
+   "#fffbe6",
+   "#feffe6",
+   "#fcffe6",
+   "#fff1b8",
+   "#ffffb8",
+   "#f4ffb8",
+   "#f6ffed",
+   "#e6fffb",
+   "#e6f7ff"
 ];

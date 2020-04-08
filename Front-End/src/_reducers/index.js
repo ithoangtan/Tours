@@ -5,13 +5,19 @@ import imageReducer from "./image.reducer";
 import authReducer from "./auth.reducer";
 import orderReducer from "./order.reducer";
 import accountReducer from "./account.reducer";
+import timelineReducer from "./timeline.reducer";
+import evaluateReducer from "./evaluate.reducer";
+import postReducer from "./post.reducer";
 const rootReducer = combineReducers({
    tour: tourReducer,
    image: imageReducer,
    schedule: scheduleReducer,
    auth: authReducer,
    order: orderReducer,
-   account: accountReducer
+   account: accountReducer,
+   timeline: timelineReducer,
+   evaluate: evaluateReducer,
+   post: postReducer
 });
 
 export default rootReducer;

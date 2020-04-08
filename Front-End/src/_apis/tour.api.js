@@ -13,6 +13,11 @@ export const getListTourSearch = data => {
 export const getTourById = idTour => {
    return axiosService.get(`${API_ENDPOINT}/${url}?idTour=${idTour}`);
 };
+export const getTourByTime = time => {
+   return axiosService.get(
+      `${API_ENDPOINT}/report/destination-by-time?month=${time}`
+   );
+};
 
 export const postTour = data => {
    return axiosService.post(`${API_ENDPOINT}/${url}`, data);

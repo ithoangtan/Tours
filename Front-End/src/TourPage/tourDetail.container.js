@@ -67,7 +67,8 @@ export default class TourDetailContainer extends Component {
       const month = dmy.substr(0, 2);
       const year = dmy.substr(dmy.length - 2, 2);
 
-      const totalNumberStar = 3.98987987987987987987987987987;
+      const totalNumberStar = tour.votes;
+      const listServices = tour.services ? tour.services.split(",") : [];
       return (
          <div className="right-tour-detail-page mb-4 ftco-animate ht-tour-detail-container">
             <div className="ht-day-scroll-auto">
@@ -123,7 +124,7 @@ export default class TourDetailContainer extends Component {
                         <Rate
                            allowHalf
                            disabled
-                           defaultValue={this.numberStarCal(totalNumberStar)}
+                           value={totalNumberStar}
                            size="small"
                            className="ht-no-p-m"
                            character={<Icon type="star" />}
@@ -131,41 +132,35 @@ export default class TourDetailContainer extends Component {
                         <p className="ht-rate-detail-tour pt-1">
                            {size === "small" ? (
                               <>
-                                 (
-                                 <strong>
-                                    {Math.round(totalNumberStar * 100) / 100}
-                                 </strong>
-                                 )
+                                 (<strong>{totalNumberStar}</strong>)
                               </>
                            ) : (
                               <>
-                                 <strong>
-                                    {" "}
-                                    {Math.round(totalNumberStar * 100) /
-                                       100}{" "}
-                                 </strong>
-                                 với <strong>{`xx00`} </strong>đánh giá{" "}
+                                 <strong> {totalNumberStar} </strong>
+                                 {/* với <strong>{`xx00`} </strong>đánh giá{" "} */}
                               </>
                            )}
                         </p>
                      </div>
-                     <div className="mt-1">
-                        <i className="fas fa-tags"> </i>{" "}
-                        {/* Tag color reference at https://ant.design/docs/spec/colors#header  */}
-                        <Tag color="#fff1f0" className="ht-tour-detail-tag">
-                           {tour.sale}% sale
-                        </Tag>
-                        <Tag color="#f6ffed" className="ht-tour-detail-tag">
-                           {tour.sale}% Lễ 8/3
-                        </Tag>
-                     </div>
+                     {tour.sale > 0 && (
+                        <div className="mt-1">
+                           <i className="fas fa-tags"> </i>{" "}
+                           {/* Tag color reference at https://ant.design/docs/spec/colors#header  */}
+                           <Tag color="#fff1f0" className="ht-tour-detail-tag">
+                              {tour.sale}% sale
+                           </Tag>
+                        </div>
+                     )}
                      <div className="mt-1">
                         <p className="ht-info-tour-detail">
                            <i className="far fa-calendar"></i> Số ngày:{" "}
                            {tour.vocationTime}
                         </p>
                         <p className="ht-info-tour-detail">
-                           <i className="far fa-clock"></i> Giờ: {timeDeparture}
+                           <i className="far fa-clock"></i> Khởi hành:{" "}
+                           {moment(tour.departureDay).format(
+                              INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE_TIME
+                           )}
                         </p>
                      </div>
                      <Paragraph
@@ -183,76 +178,28 @@ export default class TourDetailContainer extends Component {
                   <div className="col-xs-12 col-md-12 col-lg-3 pb-1 ht-info-tour-detail-container-3">
                      <div className="ht-info-tour-detail-special">
                         <div className="m-1 ht-tour-detail-info-departure">
-                           <i className="fas fa-map-marked-alt"></i> Từ: Hồ Chí
-                           Minh
+                           <i className="fas fa-map-marked-alt"></i> Từ:{" "}
+                           {tour.departureAddress}
                         </div>
                         <div className="m-1">
                            <div className="">
-                              <Tooltip title="Đưa đón tận nơi">
-                                 <i className="fas fa-taxi"> </i> {` `}
-                              </Tooltip>
-                              {/* Mấy cái khác tự làm như trên */}
-                              <Tooltip title="Cho thuê xe máy">
-                                 <i className="fas fa-motorcycle"> </i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Free Wifi">
-                                 <i className="fas fa-wifi"> </i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Hỗ trợ người khuyết tật">
-                                 <i className="fas fa-wheelchair"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Sẵn vé máy bay">
-                                 <i className="fas fa-plane-departure"></i>{" "}
-                                 {` `}
-                              </Tooltip>
-                              <Tooltip title="Phương tiện công cộng">
-                                 <i className="fas fa-bus-alt"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Bãi biển đẹp">
-                                 <i className="fas fa-umbrella-beach"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Phòng ngủ tập thể">
-                                 <i className="fas fa-bed"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Passport">
-                                 <i className="fas fa-id-badge"></i> {` `}
-                              </Tooltip>
-                           </div>
-                           <div className="">
-                              <Tooltip title="Tiệc sinh nhật đúng ngày">
-                                 <i className="fas fa-birthday-cake"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Hưỡng dẫn viên">
-                                 <i className="fas fa-user-check"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Bảo hiểm">
-                                 <i className="fas fa-user-shield"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Cho thuê xe đạp">
-                                 <i className="fas fa-bicycle"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Tự do trong 1 ngày">
-                                 <i className="fas fa-shoe-prints"></i> {` `}
-                                 {/* Tự do 2 hoặc mấy ngày đấy */}
-                              </Tooltip>
-
-                              <Tooltip title="Phòng tập gym">
-                                 <i className="fas fa-dumbbell"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Dịch vụ spa">
-                                 <i className="fas fa-spa"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Có bể bơi">
-                                 <i className="fas fa-swimmer"></i> {` `}
-                              </Tooltip>
-                              <Tooltip title="Trượt tuyết">
-                                 <i className="fas fa-skiing"></i> {` `}
-                              </Tooltip>
+                              {listServices &&
+                                 listServices.map((service, index) => (
+                                    <Tooltip title={service} key={index}>
+                                       <i
+                                          className={
+                                             INDEX_CONSTANTS.SERVICE_TOUR_ICON[
+                                                service
+                                             ]
+                                          }
+                                       ></i>{" "}
+                                    </Tooltip>
+                                 ))}
                            </div>
                         </div>
                      </div>
                      <div className="ht-info-tour-detail-price">
-                        {size === "small" ? (
+                        {size === "small" || tour.sale == 0 ? (
                            <></>
                         ) : (
                            <div className="mt-3 ht-text-price-tour-detail-root ml-1 mr-1">

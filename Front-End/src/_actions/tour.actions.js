@@ -265,3 +265,37 @@ export const fetchListTourImageRequest = () => {
          });
    };
 };
+
+//GET TOUR BY TIME
+export const fetchTourByTimeSuccess = data => {
+   return {
+      type: tourConstants.FETCH_TOUR_GET_BYTIME_SUCCESS,
+      payload: {
+         data
+      }
+   };
+};
+
+export const fetchTourByTimeError = error => {
+   return {
+      type: tourConstants.FETCH_TOUR_GET_BYTIME_FAILED,
+      payload: {
+         error
+      }
+   };
+};
+
+export const fetchTourByTimeRequest = time => {
+   return dispatch => {
+      tourApis
+         .getTourByTime(time)
+         .then(resp => {
+            const { data } = resp;
+            dispatch(fetchTourByTimeSuccess(data));
+         })
+         .catch(error => {
+            dispatch(fetchTourByTimeError(error));
+         });
+   };
+};
+//end Get Tour By Time

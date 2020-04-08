@@ -1,10 +1,28 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as postActions from "../../_actions/post.actions";
+import { DATE_TIME_FORMAT } from "../../_constants/index.constants";
 import { Tag, Tooltip, Button } from "antd";
+import moment from "moment";
 
-export default class RecentStoriesContainer extends Component {
+class RecentStoriesContainer extends Component {
+   fetch = async () => {
+      const { postAllActions } = this.props;
+      const { fetchListPostRequest } = postAllActions;
+      await fetchListPostRequest();
+   };
+
+   componentDidMount() {
+      this.fetch();
+   }
+
    render() {
+      const { listPost } = this.props;
+      const listPostRecent =
+         listPost && listPost.length ? listPost.slice(0, 9) : [];
       return (
          <section className="ftco-section bg-light">
             <div className="container">
@@ -28,295 +46,91 @@ export default class RecentStoriesContainer extends Component {
                      role="listbox"
                   >
                      {/* item slide */}
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
-                        <div className="blog-entry justify-content-end">
-                           <Link
-                              to="blog-single"
-                              className="block-20 ht-blog-image"
-                              style={{
-                                 backgroundImage: 'url("images/image_1.jpg")'
-                              }}
-                           >
-                              <div className="ht-over-image"></div>
-                           </Link>
+                     {listPostRecent &&
+                        listPostRecent.map((post, index) => {
+                           const postDate = post.dateEdited
+                              ? post.dateEdited
+                              : post.dateAdd;
+                           const postTag = post.tags
+                              ? post.tags.split(",")
+                              : [];
+                           return (
+                              <div
+                                 className={`carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ${
+                                    !index ? "active" : ""
+                                 }`}
+                                 key={index}
+                              >
+                                 <div className="blog-entry justify-content-end">
+                                    <Link
+                                       to={`blog-single/${post.idPost}`}
+                                       className="block-20 ht-blog-image"
+                                       style={{
+                                          backgroundImage: `url("images/image_1.jpg")`
+                                       }}
+                                    >
+                                       <div className="ht-over-image"></div>
+                                    </Link>
 
-                           <p className="ht-post-tag-container ht-no-p-m">
-                              {/* Random color á mà, cái này sẽ cho admin cấu hình color tag
+                                    <p className="ht-post-tag-container ht-no-p-m">
+                                       {/* Random color á mà, cái này sẽ cho admin cấu hình color tag
                            ví dụ như: Thực phẩm: đỏ, biển: màu lam,.... 
                            Tham khảo ở https://ant.design/docs/spec/colors*/}
-                              <Tag color={"#cf1322"}>tag one</Tag>
-                              <Tag color={"#1890ff"}>tag two</Tag>
-                              <Tag color={"#eb2f96"}>tag three</Tag>
-                              <Tag color={"#389e0d"}>tag four</Tag>
-                              <Tag color={"#faad14"}>tag five</Tag>
-                           </p>
-                           <Tooltip title={`Xem nhận xét`} placement="top">
-                              <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i className="fas fa-comment"> 100 </i>
-                              </Link>
-                           </Tooltip>
-                           <div className="text mt-3 float-right d-block">
-                              <Tooltip title={`Tính thời gian`} placement="top">
-                                 <div className="d-flex align-items-center mb-5 topp">
-                                    <div className="one">
-                                       <span className="day">12</span>
+                                       {postTag.map((tag, index) => (
+                                          <Tag color={"#faad14"} key={index}>
+                                             {tag}
+                                          </Tag>
+                                       ))}
+                                    </p>
+                                    <div className="ht-post-comment-container ht-no-p-m">
+                                       <i className="fas fa-star ht-mr-r-2">
+                                          {` `}
+                                          {post.vote}
+                                       </i>
+                                       <i className="fas fa-eye">
+                                          {` `}
+                                          {post.views}
+                                       </i>
                                     </div>
-                                    <div className="two">
-                                       <span className="yr">2019</span>
-                                       <span className="mos">February</span>
-                                    </div>
-                                 </div>
-                              </Tooltip>
-                              <h3 className="heading">
-                                 <Link to="blog-single">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </Link>
-                              </h3>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="blog-entry justify-content-end">
-                           <Link
-                              to="blog-single"
-                              className="block-20 ht-blog-image"
-                              style={{
-                                 backgroundImage: 'url("images/image_1.jpg")'
-                              }}
-                           >
-                              <div className="ht-over-image"></div>
-                           </Link>
-
-                           <p className="ht-post-tag-container ht-no-p-m">
-                              {/* Random color á mà, cái này sẽ cho admin cấu hình color tag
-                           ví dụ như: Thực phẩm: đỏ, biển: màu lam,.... 
-                           Tham khảo ở https://ant.design/docs/spec/colors*/}
-                              <Tag color={"#cf1322"}>tag one</Tag>
-                              <Tag color={"#1890ff"}>tag two</Tag>
-                              <Tag color={"#eb2f96"}>tag three</Tag>
-                              <Tag color={"#389e0d"}>tag four</Tag>
-                              <Tag color={"#faad14"}>tag five</Tag>
-                           </p>
-                           <Tooltip title={`Xem nhận xét`} placement="top">
-                              <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i className="fas fa-comment"> 100 </i>
-                                 <i className="far fa-comment"> 100 </i>
-                              </Link>
-                           </Tooltip>
-                           <div className="text mt-3 float-right d-block">
-                              <Tooltip title={`Tính thời gian`} placement="top">
-                                 <div className="d-flex align-items-center mb-5 topp">
-                                    <div className="one">
-                                       <span className="day">12</span>
-                                    </div>
-                                    <div className="two">
-                                       <span className="yr">2019</span>
-                                       <span className="mos">February</span>
+                                    <div className="text mt-3 float-right d-block">
+                                       <Tooltip
+                                          title={`Tính thời gian`}
+                                          placement="top"
+                                       >
+                                          <div className="d-flex align-items-center mb-5 topp">
+                                             <div className="one">
+                                                <span className="day">
+                                                   {moment(postDate).format(
+                                                      DATE_TIME_FORMAT.DATE
+                                                   )}
+                                                </span>
+                                             </div>
+                                             <div className="two">
+                                                <span className="yr">
+                                                   {moment(postDate).format(
+                                                      DATE_TIME_FORMAT.YEAR
+                                                   )}
+                                                </span>
+                                                <span className="mos">
+                                                   {moment(postDate).format(
+                                                      DATE_TIME_FORMAT.MONTH_NAME
+                                                   )}
+                                                </span>
+                                             </div>
+                                          </div>
+                                       </Tooltip>
+                                       <h3 className="heading">
+                                          <Link
+                                             to={`blog-single/${post.idPost}`}
+                                          >
+                                             {post.titlePost}
+                                          </Link>
+                                       </h3>
                                     </div>
                                  </div>
-                              </Tooltip>
-                              <h3 className="heading">
-                                 <Link to="blog-single">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </Link>
-                              </h3>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="blog-entry justify-content-end">
-                           <Link
-                              to="blog-single"
-                              className="block-20 ht-blog-image"
-                              style={{
-                                 backgroundImage: 'url("images/image_1.jpg")'
-                              }}
-                           >
-                              <div className="ht-over-image"></div>
-                           </Link>
-
-                           <p className="ht-post-tag-container ht-no-p-m">
-                              {/* Random color á mà, cái này sẽ cho admin cấu hình color tag
-                           ví dụ như: Thực phẩm: đỏ, biển: màu lam,.... 
-                           Tham khảo ở https://ant.design/docs/spec/colors*/}
-                              <Tag color={"#cf1322"}>tag one</Tag>
-                              <Tag color={"#1890ff"}>tag two</Tag>
-                              <Tag color={"#eb2f96"}>tag three</Tag>
-                              <Tag color={"#389e0d"}>tag four</Tag>
-                              <Tag color={"#faad14"}>tag five</Tag>
-                           </p>
-                           <Tooltip title={`Xem nhận xét`} placement="top">
-                              <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i className="fas fa-comment"> 100 </i>
-                              </Link>
-                           </Tooltip>
-                           <div className="text mt-3 float-right d-block">
-                              <Tooltip title={`Tính thời gian`} placement="top">
-                                 <div className="d-flex align-items-center mb-5 topp">
-                                    <div className="one">
-                                       <span className="day">12</span>
-                                    </div>
-                                    <div className="two">
-                                       <span className="yr">2019</span>
-                                       <span className="mos">February</span>
-                                    </div>
-                                 </div>
-                              </Tooltip>
-                              <h3 className="heading">
-                                 <Link to="blog-single">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </Link>
-                              </h3>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="blog-entry justify-content-end">
-                           <Link
-                              to="blog-single"
-                              className="block-20 ht-blog-image"
-                              style={{
-                                 backgroundImage: 'url("images/image_1.jpg")'
-                              }}
-                           >
-                              <div className="ht-over-image"></div>
-                           </Link>
-
-                           <p className="ht-post-tag-container ht-no-p-m">
-                              {/* Random color á mà, cái này sẽ cho admin cấu hình color tag
-                           ví dụ như: Thực phẩm: đỏ, biển: màu lam,.... 
-                           Tham khảo ở https://ant.design/docs/spec/colors*/}
-                              <Tag color={"#cf1322"}>tag one</Tag>
-                              <Tag color={"#1890ff"}>tag two</Tag>
-                              <Tag color={"#eb2f96"}>tag three</Tag>
-                              <Tag color={"#389e0d"}>tag four</Tag>
-                              <Tag color={"#faad14"}>tag five</Tag>
-                           </p>
-                           <Tooltip title={`Xem nhận xét`} placement="top">
-                              <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i className="fas fa-comment"> 100 </i>
-                              </Link>
-                           </Tooltip>
-                           <div className="text mt-3 float-right d-block">
-                              <Tooltip title={`Tính thời gian`} placement="top">
-                                 <div className="d-flex align-items-center mb-5 topp">
-                                    <div className="one">
-                                       <span className="day">12</span>
-                                    </div>
-                                    <div className="two">
-                                       <span className="yr">2019</span>
-                                       <span className="mos">February</span>
-                                    </div>
-                                 </div>
-                              </Tooltip>
-                              <h3 className="heading">
-                                 <Link to="blog-single">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </Link>
-                              </h3>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="blog-entry justify-content-end">
-                           <Link
-                              to="blog-single"
-                              className="block-20 ht-blog-image"
-                              style={{
-                                 backgroundImage: 'url("images/image_1.jpg")'
-                              }}
-                           >
-                              <div className="ht-over-image"></div>
-                           </Link>
-
-                           <p className="ht-post-tag-container ht-no-p-m">
-                              {/* Random color á mà, cái này sẽ cho admin cấu hình color tag
-                           ví dụ như: Thực phẩm: đỏ, biển: màu lam,.... 
-                           Tham khảo ở https://ant.design/docs/spec/colors*/}
-                              <Tag color={"#cf1322"}>tag one</Tag>
-                              <Tag color={"#1890ff"}>tag two</Tag>
-                              <Tag color={"#eb2f96"}>tag three</Tag>
-                              <Tag color={"#389e0d"}>tag four</Tag>
-                              <Tag color={"#faad14"}>tag five</Tag>
-                           </p>
-                           <Tooltip title={`Xem nhận xét`} placement="top">
-                              <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i className="fas fa-comment"> 100 </i>
-                              </Link>
-                           </Tooltip>
-                           <div className="text mt-3 float-right d-block">
-                              <Tooltip title={`Tính thời gian`} placement="top">
-                                 <div className="d-flex align-items-center mb-5 topp">
-                                    <div className="one">
-                                       <span className="day">12</span>
-                                    </div>
-                                    <div className="two">
-                                       <span className="yr">2019</span>
-                                       <span className="mos">February</span>
-                                    </div>
-                                 </div>
-                              </Tooltip>
-                              <h3 className="heading">
-                                 <Link to="blog-single">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </Link>
-                              </h3>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div className="blog-entry justify-content-end">
-                           <Link
-                              to="blog-single"
-                              className="block-20 ht-blog-image"
-                              style={{
-                                 backgroundImage: 'url("images/image_1.jpg")'
-                              }}
-                           >
-                              <div className="ht-over-image"></div>
-                           </Link>
-
-                           <p className="ht-post-tag-container ht-no-p-m">
-                              {/* Random color á mà, cái này sẽ cho admin cấu hình color tag
-                           ví dụ như: Thực phẩm: đỏ, biển: màu lam,.... 
-                           Tham khảo ở https://ant.design/docs/spec/colors*/}
-                              <Tag color={"#cf1322"}>tag one</Tag>
-                              <Tag color={"#1890ff"}>tag two</Tag>
-                              <Tag color={"#eb2f96"}>tag three</Tag>
-                              <Tag color={"#389e0d"}>tag four</Tag>
-                              <Tag color={"#faad14"}>tag five</Tag>
-                           </p>
-                           <Tooltip title={`Xem nhận xét`} placement="top">
-                              <Link className="ht-post-comment-container ht-no-p-m">
-                                 <i className="fas fa-comment"> 100 </i>
-                              </Link>
-                           </Tooltip>
-                           <div className="text mt-3 float-right d-block">
-                              <Tooltip title={`Tính thời gian`} placement="top">
-                                 <div className="d-flex align-items-center mb-5 topp">
-                                    <div className="one">
-                                       <span className="day">12</span>
-                                    </div>
-                                    <div className="two">
-                                       <span className="yr">2019</span>
-                                       <span className="mos">February</span>
-                                    </div>
-                                 </div>
-                              </Tooltip>
-                              <h3 className="heading">
-                                 <Link to="blog-single">
-                                    Why Lead Generation is Key for Business
-                                    Growth
-                                 </Link>
-                              </h3>
-                           </div>
-                        </div>
-                     </div>
+                              </div>
+                           );
+                        })}
                   </div>
                   <a
                      className="carousel-control-prev ht-w-70"
@@ -348,3 +162,23 @@ export default class RecentStoriesContainer extends Component {
       );
    }
 }
+RecentStoriesContainer.propTypes = {
+   postAllActions: PropTypes.shape({
+      fetchListPostRequest: PropTypes.func
+   }),
+   listPost: PropTypes.array
+};
+const mapStateToProps = state => {
+   return {
+      listPost: state.post.listPost
+   };
+};
+const mapDispatchToProps = dispatch => {
+   return {
+      postAllActions: bindActionCreators(postActions, dispatch)
+   };
+};
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(RecentStoriesContainer);

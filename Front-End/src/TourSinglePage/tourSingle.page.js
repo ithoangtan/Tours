@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 import * as tourActions from "../_actions/tour.actions";
 import * as imageActions from "../_actions/image.actions";
 import * as scheduleActions from "../_actions/schedule.actions";
+import * as timelineActions from "../_actions/timeline.actions";
+import * as evaluateActions from "../_actions/evaluate.actions";
 
 import TourSingleContainer from "./tourSingle.container";
 
@@ -27,7 +29,9 @@ class TourSinglePage extends Component {
       const {
          tourAllActions,
          imageAllActions,
-         scheduleAllActions
+         scheduleAllActions,
+         timelineAllActions,
+         evaluateAllActions
       } = this.props;
 
       //load Tour byId
@@ -41,6 +45,14 @@ class TourSinglePage extends Component {
       //Load schedule with idTour
       const { fetchScheduleByIdTourRequest } = scheduleAllActions;
       await fetchScheduleByIdTourRequest(idTour);
+
+      //Load timeline with idTour
+      const { fetchListTimelineByIdTourRequest } = timelineAllActions;
+      await fetchListTimelineByIdTourRequest(idTour);
+
+      //Load evaluate with idTour
+      const { fetchListEvaluateByIdTourRequest } = evaluateAllActions;
+      await fetchListEvaluateByIdTourRequest(idTour);
    };
    componentWillMount() {
       this.fetch();
@@ -50,22 +62,43 @@ class TourSinglePage extends Component {
          behavior: "smooth"
       });
 
-      const { tourById, listImageByIdTour, scheduleByIdTour } = this.props;
+      const {
+         tourById,
+         listImageByIdTour,
+         scheduleByIdTour,
+         listTimelineByIdTour,
+         listEvaluateByIdTour
+      } = this.props;
       this.setState({
          tourById,
          listImageByIdTour,
          scheduleByIdTour,
+         listTimelineByIdTour,
+         listEvaluateByIdTour,
          haveData: true
       });
    }
 
+   onSubmitEvaluate = data => {
+      this.props.evaluateAllActions.fetchPostEvaluateRequest(data);
+   };
+
    render() {
-      const { tourById, listImageByIdTour, scheduleByIdTour } = this.props;
+      const {
+         tourById,
+         listImageByIdTour,
+         scheduleByIdTour,
+         listTimelineByIdTour,
+         listEvaluateByIdTour
+      } = this.props;
       return (
          <TourSingleContainer
             tourById={tourById}
             scheduleByIdTour={scheduleByIdTour}
             listImageByIdTour={listImageByIdTour}
+            listTimelineByIdTour={listTimelineByIdTour}
+            listEvaluateByIdTour={listEvaluateByIdTour}
+            handleSubmitEvaluate={this.onSubmitEvaluate}
             {...this.props}
          />
       );
@@ -82,23 +115,36 @@ TourSinglePage.propTypes = {
    imageAllActions: PropTypes.shape({
       fetchListImageByIdTourRequest: PropTypes.func
    }),
+   timelineAllActions: PropTypes.shape({
+      fetchListTimelineByIdTourRequest: PropTypes.func
+   }),
+   evaluateAllActions: PropTypes.shape({
+      fetchListEvaluateByIdTourRequest: PropTypes.func,
+      fetchPostEvaluateRequest: PropTypes.func
+   }),
    tourById: PropTypes.object,
    listImageByIdTour: PropTypes.array,
-   scheduleByIdTour: PropTypes.object
+   scheduleByIdTour: PropTypes.object,
+   listTimelineByIdTour: PropTypes.object,
+   listEvaluateByIdTour: PropTypes.object
 };
 
 const mapStateToProps = state => {
    return {
       tourById: state.tour.tourById,
       listImageByIdTour: state.image.listImageByIdTour,
-      scheduleByIdTour: state.schedule.scheduleByIdTour
+      scheduleByIdTour: state.schedule.scheduleByIdTour,
+      listTimelineByIdTour: state.timeline.listTimelineByIdTour,
+      listEvaluateByIdTour: state.evaluate.listEvaluateByIdTour
    };
 };
 const mapDispatchToProps = dispatch => {
    return {
       tourAllActions: bindActionCreators(tourActions, dispatch),
       imageAllActions: bindActionCreators(imageActions, dispatch),
-      scheduleAllActions: bindActionCreators(scheduleActions, dispatch)
+      scheduleAllActions: bindActionCreators(scheduleActions, dispatch),
+      timelineAllActions: bindActionCreators(timelineActions, dispatch),
+      evaluateAllActions: bindActionCreators(evaluateActions, dispatch)
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

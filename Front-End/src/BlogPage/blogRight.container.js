@@ -1,210 +1,98 @@
 import React, { Component } from "react";
-
-import { Tag, Tooltip, Tabs } from "antd";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Tag, Tabs } from "antd";
+import moment from "moment";
+import * as INDEX_CONSTANTS from "../_constants/index.constants";
 
 const { TabPane } = Tabs;
-
 export default class BlogRightContainer extends Component {
    render() {
+      const { listPostNew, listPostViews, postTags } = this.props;
       return (
          <>
             <Tabs defaultActiveKey="1">
                <TabPane tab="Đọc nhiều" key="1">
                   <div className="ht-reads">
-                     <div className="ht-item-post-mini ftco-animate">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info ">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini ftco-animate">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini ftco-animate">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini ftco-animate">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini ftco-animate">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                     {listPostViews &&
+                        listPostViews.map((post, index) => {
+                           const postDate = post.dateEdited
+                              ? post.dateEdited
+                              : post.dateAdded;
+                           return (
+                              <Link
+                                 to={`/blog-single/${post.idPost}`}
+                                 key={index}
+                              >
+                                 <div className="ht-item-post-mini">
+                                    <img
+                                       src="/images/blog-4.jpg"
+                                       alt="not found"
+                                    />
+                                    <div className="ht-item-post-mini-info">
+                                       <div className="ht-title">
+                                          {post.titlePost}
+                                       </div>
+                                       <div className="ht-date-view-vote">
+                                          <div className="ht-date">
+                                             {moment(postDate).format(
+                                                INDEX_CONSTANTS.DATE_TIME_FORMAT
+                                                   .DATE_MONTH_YEAR
+                                             )}
+                                          </div>
+                                          <div className="ht-view-vote">
+                                             <i className="far fa-eye"></i>{" "}
+                                             {post.views} {`    `}
+                                             <i className="far fa-star"></i>
+                                             {` `}
+                                             {post.vote}
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </Link>
+                           );
+                        })}
                   </div>
                </TabPane>
                <TabPane tab="Bài mới" key="2">
                   <div className="ht-new">
-                     <div className="ht-item-post-mini">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className="ht-item-post-mini">
-                        <img src="/images/blog-4.jpg" alt="not found" />
-                        <div class="ht-item-post-mini-info">
-                           <div className="ht-title">
-                              Có gì bên trong khu nghỉ dưỡng đắt đỏ bậc nhất
-                              Maldives?
-                           </div>
-                           <div className="ht-date-view-vote">
-                              <div className="ht-date">13/03/2020</div>
-                              <div className="ht-view-vote">
-                                 <i class="far fa-eye"></i> 1000 {`    `}
-                                 <Tooltip title={`${123} lượt vote`}>
-                                    <i class="far fa-hand-point-up"></i>
-                                    {` `}123
-                                 </Tooltip>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                     {listPostNew &&
+                        listPostNew.map((post, index) => {
+                           const postDate = post.dateEdited
+                              ? post.dateEdited
+                              : post.dateAdded;
+                           return (
+                              <Link to={`/blog-single/${post.idPost}`}>
+                                 <div className="ht-item-post-mini" key={index}>
+                                    <img
+                                       src="/images/blog-4.jpg"
+                                       alt="not found"
+                                    />
+                                    <div className="ht-item-post-mini-info">
+                                       <div className="ht-title">
+                                          {post.titlePost}
+                                       </div>
+                                       <div className="ht-date-view-vote">
+                                          <div className="ht-date">
+                                             {moment(postDate).format(
+                                                INDEX_CONSTANTS.DATE_TIME_FORMAT
+                                                   .DATE_MONTH_YEAR
+                                             )}
+                                          </div>
+                                          <div className="ht-view-vote">
+                                             <i className="far fa-eye"></i>{" "}
+                                             {post.views} {`    `}
+                                             <i className="far fa-star"></i>
+                                             {` `}
+                                             {post.vote}
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </Link>
+                           );
+                        })}
                   </div>
                </TabPane>
             </Tabs>
@@ -212,176 +100,30 @@ export default class BlogRightContainer extends Component {
                <div className="ht-title-mini ht-width-100 mt-3 mb-1 ftco-animate">
                   Bạn quan tâm đến chủ đề gì?
                </div>
-               <Tag
-                  className="ftco-animate"
-                  color="#fff2e8"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px 6px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#fff7e6"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#ffccc7"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#ffd8bf"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#ffe7ba"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#fffbe6"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#feffe6"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing color
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#fcffe6"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing color
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#fff1b8"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing colorasdasdas
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#ffffb8"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing colorasdasdas
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#f4ffb8"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing colorasdasdas
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#f6ffed"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing colorasdasdas
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#e6fffb"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing color
-               </Tag>
-               <Tag
-                  className="ftco-animate"
-                  color="#e6f7ff"
-                  style={{
-                     color: "black",
-                     border: "1px solid rgba(0, 0, 0, 0.6)",
-                     padding: "3px",
-                     borderRadius: "3px"
-                  }}
-               >
-                  tag some thing asd ad s color
-               </Tag>
+               {postTags &&
+                  postTags.map((tag, index) => (
+                     <Tag
+                        key={index}
+                        color={INDEX_CONSTANTS.COLOR_TAG_BLOG[index]}
+                        style={{
+                           color: "black",
+                           border: "1px solid rgba(0, 0, 0, 0.3)",
+                           padding: "3px 6px",
+                           borderRadius: "3px"
+                        }}
+                     >
+                        {"#"}
+                        {tag}
+                     </Tag>
+                  ))}
             </div>
          </>
       );
    }
 }
+
+BlogRightContainer.propTypes = {
+   listPostNew: PropTypes.array,
+   listPostViews: PropTypes.array,
+   postTags: PropTypes.array
+};
