@@ -1,4 +1,6 @@
 const Notification = require("../models/notification.model");
+const Account = require("../models/account.model");
+const NoticeTo = require("../models/noticeTo.model");
 
 exports.listAll = async (req, res, next) => {
   try {
@@ -57,6 +59,17 @@ exports.create = async (req, res, next) => {
   try {
     const newNotification = new Notification(req.body);
     resultCreate = await Notification.createNotification(newNotification);
+    // lấy ID mới nhất
+    latestIdNotification = await Notification.getLatestId();
+    // lấy danh sách idAccount
+    arrAccount = await Account.getAll();
+    // insert to NoticeTo each idAccount from list Account
+    for (let i = 0; i < arrAccount.length; i++) {
+      NoticeTo.createNoticeTo({
+        idAccount: arrAccount[i].idAccount,
+        idNotification: latestIdNotification[0].idNotification,
+      });
+    }
     res.status(200).json(resultCreate);
   } catch (err) {
     if (!err.statusCode) {

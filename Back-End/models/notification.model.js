@@ -33,6 +33,19 @@ Notification.getPaginationNotification = function (limit, offset) {
   });
 };
 
+Notification.getLatestId = function () {
+  return new Promise(function (resolve, reject) {
+    database
+      .query(
+        "SELECT idNotification FROM " +
+          databaseProduction +
+          ".notifications order by idNotification desc limit 1;"
+      )
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
+  });
+};
+
 Notification.getAllNotification = function () {
   return new Promise(function (resolve, reject) {
     database
@@ -45,6 +58,7 @@ Notification.getAllNotification = function () {
       .catch((err) => reject(err));
   });
 };
+
 Notification.getAllNotificationSearch = function (searchs) {
   if (searchs.conditional === "title") {
     return new Promise(function (resolve, reject) {
