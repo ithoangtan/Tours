@@ -52,7 +52,7 @@ class RecentStoriesContainer extends Component {
                               ? post.dateEdited
                               : post.dateAdd;
                            const postTag = post.tags
-                              ? post.tags.split(",")
+                              ? JSON.parse(post.tags.replace(/'/g, '"'))
                               : [];
                            return (
                               <div

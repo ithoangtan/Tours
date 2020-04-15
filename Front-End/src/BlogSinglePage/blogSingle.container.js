@@ -64,7 +64,9 @@ export default class BlogSingleContainer extends Component {
       const postDate = postById.dateEdited
          ? postById.dateEdited
          : postById.dateAdded;
-      const postTags = postById.tags ? postById.tags.split(",") : [];
+      const postTags = postById.tags
+         ? JSON.parse(postById.tags.replace(/'/g, '"'))
+         : [];
       return (
          <section className="ftco-section">
             <div className="container">
@@ -146,6 +148,7 @@ export default class BlogSingleContainer extends Component {
                            <span>
                               <Rate
                                  allowClear={false}
+                                 disabled={!isLogin}
                                  tooltips={INDEX_CONSTANTS.DESC_RATE}
                                  onChange={this.handleChange}
                                  defaultValue={postById.vote}

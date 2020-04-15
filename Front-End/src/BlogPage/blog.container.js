@@ -131,7 +131,7 @@ class BlogContainer extends Component {
                                  ? post.dateEdited
                                  : post.dateAdd;
                               const postTags = post.tags
-                                 ? post.tags.split(",")
+                                 ? JSON.parse(post.tags.replace(/'/g, '"'))
                                  : [];
                               return (
                                  <div
@@ -205,7 +205,9 @@ class BlogContainer extends Component {
                                              </div>
                                           </Tooltip>
                                           <h3 className="heading">
-                                             <Link to="blog-single">
+                                             <Link
+                                                to={`blog-single/${post.idPost}`}
+                                             >
                                                 {post.titlePost}
                                              </Link>
                                           </h3>
