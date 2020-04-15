@@ -37,7 +37,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listTour: error
+            listTour: []
          };
       }
       // List tour search
@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listTourSearch: error
+            listTourSearch: []
          };
       }
 
@@ -72,7 +72,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            tourById: error
+            tourById: {}
          };
       }
 
@@ -89,7 +89,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listTourByTime: error
+            listTourByTime: {}
          };
       }
 
@@ -169,7 +169,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listImageTour: error
+            listImageTour: []
          };
       }
       default:
