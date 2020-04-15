@@ -3,28 +3,28 @@ import * as accountConstants from "../_constants/account.module";
 
 export const fetchListAccount = () => {
    return {
-      type: accountConstants.FETCH_ACCOUNT
+      type: accountConstants.FETCH_ACCOUNT,
    };
 };
 
 //List Account
-export const fetchListAccountSuccess = data => {
+export const fetchListAccountSuccess = (data) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_SUCCESS,
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchListAccountError = error => {
+export const fetchListAccountError = (error) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 /**
@@ -35,50 +35,50 @@ export const fetchListAccountError = error => {
  *
  */
 export const fetchListAccountRequest = () => {
-   return dispatch => {
+   return (dispatch) => {
       dispatch(fetchListAccount()); //reset state accounts-->[]
       accountApis
          .getListAccount()
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             console.log(data);
 
             dispatch(fetchListAccountSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchListAccountError(error));
          });
    };
 };
 
 //GET ACCOUNT BY ID
-export const fetchAccountByIdSuccess = data => {
+export const fetchAccountByIdSuccess = (data) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_GET_BYID_SUCCESS,
       payload: {
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchAccountByIdError = error => {
+export const fetchAccountByIdError = (error) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_GET_BYID_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchAccountByIdRequest = idAccount => {
-   return dispatch => {
+export const fetchAccountByIdRequest = (idAccount) => {
+   return (dispatch) => {
       accountApis
          .getAccountById(idAccount)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchAccountByIdSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchAccountByIdError(error));
          });
    };
@@ -92,30 +92,30 @@ export const fetchPostAccountSuccess = (newRecord, data) => {
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
+         data,
       },
-      newRecord: { newRecord }
+      newRecord: newRecord,
    };
 };
 
-export const fetchPostAccountError = error => {
+export const fetchPostAccountError = (error) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_CREATE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchPostAccountRequest = newRecord => {
-   return dispatch => {
+export const fetchPostAccountRequest = (newRecord) => {
+   return (dispatch) => {
       accountApis
          .postAccount(newRecord)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchPostAccountSuccess(newRecord, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchPostAccountError(error));
          });
    };
@@ -129,30 +129,30 @@ export const fetchDeleteAccountSuccess = (record, data) => {
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
+         data,
       },
-      record: { record }
+      record: record,
    };
 };
 
-export const fetchDeleteAccountError = error => {
+export const fetchDeleteAccountError = (error) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_DELETE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchDeleteAccountRequest = record => {
-   return dispatch => {
+export const fetchDeleteAccountRequest = (record) => {
+   return (dispatch) => {
       accountApis
          .deleteAccount(record.idAccount)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchDeleteAccountSuccess(record, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchDeleteAccountError(error));
          });
    };
@@ -165,30 +165,30 @@ export const fetchPatchAccountSuccess = (newRecord, data) => {
       payload: {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
-         data
+         data,
       },
-      newRecord: { newRecord }
+      newRecord: newRecord,
    };
 };
 
-export const fetchPatchAccountError = error => {
+export const fetchPatchAccountError = (error) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_PATCH_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchPatchAccountRequest = newRecord => {
-   return dispatch => {
+export const fetchPatchAccountRequest = (newRecord) => {
+   return (dispatch) => {
       accountApis
          .patchAccount(newRecord)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchPatchAccountSuccess(newRecord, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchPatchAccountError(error));
          });
    };
@@ -197,39 +197,39 @@ export const fetchPatchAccountRequest = newRecord => {
 //Image Account
 export const fetchListAccountImage = () => {
    return {
-      type: accountConstants.FETCH_ACCOUNT_IMAGE
+      type: accountConstants.FETCH_ACCOUNT_IMAGE,
    };
 };
 
 //List Account image
-export const fetchListAccountImageSuccess = data => {
+export const fetchListAccountImageSuccess = (data) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_IMAGE_SUCCESS,
       payload: {
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchListAccountImageError = error => {
+export const fetchListAccountImageError = (error) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_IMAGE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
 export const fetchListAccountImageRequest = () => {
-   return dispatch => {
+   return (dispatch) => {
       dispatch(fetchListAccountImage()); //reset state Images-->[]
       accountApis
          .getListImageAccount()
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchListAccountImageSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchListAccountImageError(error));
          });
    };

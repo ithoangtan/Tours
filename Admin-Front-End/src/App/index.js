@@ -4,7 +4,7 @@ import {
    Switch,
    Route,
    BrowserRouter as Router,
-   Redirect
+   Redirect,
 } from "react-router-dom";
 
 import routes from "../router";
@@ -21,6 +21,16 @@ import "antd/dist/antd.less"; //customize theme
 require("dotenv").config();
 //import components:
 class App extends Component {
+   componentWillMount() {
+      // Before: Check cookie auth. if exist -> return
+      // else
+      // Fetch IP with https://api.ipify.org?format=json
+      // Check exist IP (get idAccount latest - integer), if exist return { account },
+      // 0      -> else (not exist): Create a account with IP , type: guest
+      //
+      // Save account on cookie
+   }
+
    render() {
       return (
          <Router>
@@ -40,7 +50,7 @@ class App extends Component {
                   key={index}
                   path={route.path}
                   exact={route.exact}
-                  component={props => route.component(props)}
+                  component={(props) => route.component(props)}
                />
             );
          });
@@ -80,7 +90,7 @@ function PrivateRoute({ ...rest }) {
                   <Redirect
                      to={{
                         pathname: "/",
-                        state: { from: location }
+                        state: { from: location },
                      }}
                   />
                );

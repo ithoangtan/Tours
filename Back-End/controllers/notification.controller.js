@@ -1,12 +1,18 @@
-const { check, validationResult } = require("express-validator");
-
 const Notification = require("../models/notification.model");
 
 exports.listAll = async (req, res, next) => {
   try {
-    listNotification = await Notification.getAllNotification();
+    let listNotification = null;
+    if (req.query.limit !== undefined && req.query.offset !== undefined)
+      listNotification = await Notification.getPaginationNotification(
+        req.query.limit,
+        req.query.offset
+      );
+    else listNotification = await Notification.getAllNotification();
     res.status(200).json(listNotification);
   } catch (err) {
+    console.log(err);
+
     if (!err.statusCode) {
       err.statusCode = 500;
     }
@@ -14,7 +20,7 @@ exports.listAll = async (req, res, next) => {
   }
 };
 
-exports.listNotificationSearch = async function(req, res) {
+exports.listNotificationSearch = async function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
@@ -62,7 +68,7 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   try {
-    const updateNotification = new Notification(req.body);
+    const updateNotification = req.body;
     updateResult = await Notification.updateById(updateNotification);
     res.status(200).json(updateResult);
   } catch (err) {

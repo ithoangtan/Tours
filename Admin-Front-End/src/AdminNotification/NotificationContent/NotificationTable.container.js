@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as notificationsActions from "../../_actions/notifications.actions";
+import * as notificationActions from "../../_actions/notification.actions";
 
 import Highlighter from "react-highlight-words";
 import reqwest from "reqwest";
@@ -17,16 +17,21 @@ import { API_ENDPOINT } from "../../_constants/index.constants";
 import {
    Table,
    Input,
-   InputNumber,
    Popconfirm,
    Form,
    Button,
    Icon,
-   notification
+   Modal,
+   Select,
+   DatePicker,
 } from "antd";
 
-import TableNewRow from "./tableNewNotifications";
+import TableNewRow from "./tableNewNotification";
 import Cookies from "js-cookie";
+
+import NotificationPreview from "./NotificationPreview";
+
+const { Option } = Select;
 
 function getCookie(name) {
    const token = Cookies.get(name);
@@ -35,7 +40,7 @@ function getCookie(name) {
 
 const EditableContext = React.createContext();
 
-const ResizeableTitle = props => {
+const ResizeableTitle = (props) => {
    const { onResize, width, ...restProps } = props;
 
    if (!width) {
@@ -56,10 +61,53 @@ const ResizeableTitle = props => {
 
 class EditableCell extends React.Component {
    getInput = () => {
-      if (this.props.inputType === "number") {
-         return <InputNumber />;
-      }
-      return <Input />;
+      if (this.props.inputType === "disabled") return <Input disabled />;
+      else if (this.props.inputType === "typeSelect")
+         return (
+            <Select
+               showSearch
+               style={{ width: "100%" }}
+               optionFilterProp="children"
+               filterOption={(input, option) =>
+                  option.props.children
+                     .toLowerCase()
+                     .indexOf(input.toLowerCase()) >= 0
+               }
+            >
+               <Option value={"Info"}>Info</Option>
+               <Option value={"Sucess"}>Sucess</Option>
+               <Option value={"Warning"}>Warning</Option>
+               <Option value={"Error"}>Error</Option>
+            </Select>
+         );
+      else if (this.props.inputType === "statusSelect")
+         return (
+            <Select
+               showSearch
+               style={{ width: "100%" }}
+               optionFilterProp="children"
+               filterOption={(input, option) =>
+                  option.props.children
+                     .toLowerCase()
+                     .indexOf(input.toLowerCase()) >= 0
+               }
+            >
+               <Option value="Created">Created</Option>
+               <Option value="Stoped">Stoped</Option>
+               <Option value="Sending">Sending</Option>
+               <Option value="Sent" disabled>
+                  Sent
+               </Option>
+            </Select>
+         );
+      else if (this.props.inputType === "dateTime")
+         return <DatePicker showTime />;
+      else if (this.props.inputType === "input") return <Input />;
+   };
+
+   initialValueEditForm = (record, index) => {
+      if (index === "dateTime") return moment(record[index]);
+      else return record[index];
    };
 
    renderCell = ({ getFieldDecorator }) => {
@@ -81,10 +129,10 @@ class EditableCell extends React.Component {
                      rules: [
                         {
                            required: true,
-                           message: `Please Input ${title}!`
-                        }
+                           message: `Please Input ${title}!`,
+                        },
                      ],
-                     initialValue: record[dataIndex]
+                     initialValue: this.initialValueEditForm(record, dataIndex),
                   })(this.getInput())}
                </Form.Item>
             ) : (
@@ -114,8 +162,8 @@ class EditableTable extends React.Component {
       this.state = {
          rowsDescribe: 1,
          data: null,
-         editingidNotification: "",
-         count: this.props.listNotifications.length,
+         editingIdNotification: "",
+         count: this.props.listNotification.length,
          bordered: true,
          loading: false,
          size: "default",
@@ -132,21 +180,22 @@ class EditableTable extends React.Component {
          pagination,
          //add Show
          showAdd: false,
+         ellipsis: false,
+         // prevew visible
          visiblePreview: false,
-         ellipsis: false
       };
    }
 
-   isEditing = record =>
-      record.idNotification === this.state.editingidNotification;
+   isEditing = (record) =>
+      record.idNotification === this.state.editingIdNotification;
 
    cancel = () => {
-      this.setState({ editingidNotification: "" });
+      this.setState({ editingIdNotification: "" });
    };
 
    save(form, idNotification) {
-      const { notificationsAllActions } = this.props;
-      const { fetchPatchNotificationsRequest } = notificationsAllActions;
+      const { notificationAllActions } = this.props;
+      const { fetchPatchNotificationRequest } = notificationAllActions;
 
       form.validateFields((error, row) => {
          if (error) {
@@ -154,90 +203,86 @@ class EditableTable extends React.Component {
          }
          const newData = [...this.state.data];
          const index = newData.findIndex(
-            item => idNotification === item.idNotification
+            (item) => idNotification === item.idNotification
          );
          if (index > -1) {
             const item = newData[index];
             newData.splice(index, 1, {
                ...item,
-               ...row
+               ...row,
             });
             //Gọi API update dưới CSDL
-            fetchPatchNotificationsRequest(row);
+            fetchPatchNotificationRequest(row);
 
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidNotification: "" });
+            this.setState({ data: newData, editingIdNotification: "" });
          } else {
             newData.push(row);
             //Gọi API update dưới CSDL
-            fetchPatchNotificationsRequest(row);
+            fetchPatchNotificationRequest(row);
             //Kết thúc gọi API update dươi CSDL
-            this.setState({ data: newData, editingidNotification: "" });
+            this.setState({ data: newData, editingIdNotification: "" });
          }
       });
    }
 
    edit(idNotification) {
-      this.setState({ editingidNotification: idNotification });
+      this.setState({ editingIdNotification: idNotification });
    }
-   handleDelete = record => {
+
+   handleDelete = (record) => {
       const data = [...this.state.data];
       //Gọi API xóa dưới CSDL
-      const { notificationsAllActions } = this.props;
-      const { fetchDeleteNotificationsRequest } = notificationsAllActions;
-      fetchDeleteNotificationsRequest(record);
+      const { notificationAllActions } = this.props;
+      const { fetchDeleteNotificationRequest } = notificationAllActions;
+      fetchDeleteNotificationRequest(record);
       //Kết thúc gọi API xóa dươi CSDL
       this.setState({
          data: data.filter(
-            item => item.idNotification !== record.idNotification
-         )
+            (item) => item.idNotification !== record.idNotification
+         ),
       });
    };
 
    handleShowAdd = () => {
       this.setState({ showAdd: true });
    };
-   handleAdd = newNotifications => {
+   handleAdd = (newNotification) => {
       const { count, data } = this.state;
-      const newData = {
+      let newData = {
          idNotification:
-            newNotifications.idNotification | (data.length !== 0)
+            newNotification.idNotification | (data.length !== 0)
                ? data[data.length - 1].idNotification + 1
                : 0,
-         titleNotifications: newNotifications.titleNotifications,
-         price: newNotifications.price,
-         sale: newNotifications.sale,
-         dateAdded: new Date()
-            .toJSON()
-            .slice(0, 10)
-            .replace(/-/g, "-"),
-         departureDay: newNotifications.departureDay,
-         describe: newNotifications.describe,
-         address: newNotifications.address,
-         vocationTime: newNotifications.vocationTime,
-         idAccount: newNotifications.idAccount
+         title: newNotification.title,
+         contentNotification: newNotification.contentNotification,
+         dateTime: moment(newNotification.dateTime),
+         dateAdded: new Date().toJSON().slice(0, 10).replace(/-/g, "-"),
+         type: newNotification.type,
+         status: newNotification.status,
+         idAccount: newNotification.idAccount,
       };
       //Gọi API create dưới CSDL
-      const { notificationsAllActions } = this.props;
-      const { fetchPostNotificationsRequest } = notificationsAllActions;
-      fetchPostNotificationsRequest(newData);
+      const { notificationAllActions } = this.props;
+      const { fetchPostNotificationRequest } = notificationAllActions;
+      fetchPostNotificationRequest(newData);
       //Kết thúc gọi API create dươi CSDL
       this.setState({
          data: [newData, ...data],
          count: count + 1,
-         pagination: { total: data.length }
+         pagination: { total: data.length },
       });
    };
 
-   handleSaveOnChange = row => {
+   handleSaveOnChange = (row) => {
       const newData = [...this.state.data];
       const index = newData.findIndex(
-         item => row.idNotification === item.idNotification
+         (item) => row.idNotification === item.idNotification
       );
       const item = newData[index];
       newData.splice(index, 1, {
          ...item,
-         ...row
+         ...row,
       });
       this.setState({ data: newData });
    };
@@ -245,23 +290,21 @@ class EditableTable extends React.Component {
    /**Preload */
    //    Preload
    componentWillMount() {
-      const { notificationsAllActions } = this.props;
-      const { fetchListNotificationsImageRequest } = notificationsAllActions;
-      fetchListNotificationsImageRequest();
       this.fetch();
    }
+
    handleTableChange = (pagination, filters, sorter) => {
       const pager = { ...this.state.pagination };
       pager.current = pagination.current;
       this.setState({
-         pagination: pager
+         pagination: pager,
       });
       this.fetch({
-         notifications: pagination.pageSize,
+         notification: pagination.pageSize,
          page: pagination.current,
          sortField: sorter.field,
          sortOrder: sorter.order,
-         ...filters
+         ...filters,
       });
    };
 
@@ -272,18 +315,17 @@ class EditableTable extends React.Component {
          method: "GET",
          headers: { Authentication: getCookie("token") },
          data: {
-            ...params
+            ...params,
          },
-         type: "json"
-      }).then(data => {
+         type: "json",
+      }).then((data) => {
          const pagination = { ...this.state.pagination };
          // Read total count from server
          pagination.total = data.length;
          this.setState({
             loading: false,
             data: data,
-            //data: listNotifications
-            pagination
+            pagination,
          });
       });
    };
@@ -292,21 +334,21 @@ class EditableTable extends React.Component {
    /**Search */
 
    //Search
-   getColumnSearchProps = dataIndex => ({
+   getColumnSearchProps = (dataIndex) => ({
       filterDropdown: ({
          setSelectedKeys,
          selectedKeys,
          confirm,
-         clearFilters
+         clearFilters,
       }) => (
          <div style={{ padding: 8 }}>
             <Input
-               ref={node => {
+               ref={(node) => {
                   this.searchInput = node;
                }}
                placeholder={`Search ${dataIndex}`}
                value={selectedKeys[0]}
-               onChange={e =>
+               onChange={(e) =>
                   setSelectedKeys(e.target.value ? [e.target.value] : [])
                }
                onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
@@ -330,7 +372,7 @@ class EditableTable extends React.Component {
             </Button>
          </div>
       ),
-      filterIcon: filtered => (
+      filterIcon: (filtered) => (
          <Icon
             type="search"
             style={{ color: filtered ? "#1890ff" : undefined }}
@@ -341,12 +383,12 @@ class EditableTable extends React.Component {
             .toString()
             .toLowerCase()
             .includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: visible => {
+      onFilterDropdownVisibleChange: (visible) => {
          if (visible) {
             setTimeout(() => this.searchInput.select());
          }
       },
-      render: text => (
+      render: (text) => (
          <Highlighter
             highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
             searchWords={[this.state.searchText]}
@@ -355,59 +397,59 @@ class EditableTable extends React.Component {
                text === null || text === undefined ? " " : text.toString()
             }
          />
-      )
+      ),
    });
 
    handleSearch = (selectedKeys, confirm) => {
       confirm();
       this.setState({
          searchText: selectedKeys[0],
-         pagination: { total: this.state.data.length }
+         pagination: { total: this.state.data.length },
       });
    };
 
-   handleReset = clearFilters => {
+   handleReset = (clearFilters) => {
       clearFilters();
       this.setState({
          searchText: "",
-         pagination: { total: this.state.data.length }
+         pagination: { total: this.state.data.length },
       });
    };
    //EndSearch
 
    /**More function */
-   handleToggle = prop => enable => {
+   handleToggle = (prop) => (enable) => {
       this.setState({ [prop]: enable });
    };
 
-   handleSizeChange = e => {
+   handleSizeChange = (e) => {
       this.setState({ size: e.target.value });
    };
 
-   handleTableLayoutChange = e => {
+   handleTableLayoutChange = (e) => {
       this.setState({ tableLayout: e.target.value });
    };
 
-   handleTitleChange = enable => {
+   handleTitleChange = (enable) => {
       this.setState({ title: enable ? title : undefined });
    };
 
-   handleRowSelectionChange = enable => {
+   handleRowSelectionChange = (enable) => {
       this.setState({ rowSelection: enable ? {} : undefined });
    };
 
-   handleScollChange = enable => {
+   handleScollChange = (enable) => {
       this.setState({ scroll: enable ? scroll : undefined });
    };
 
-   handleDataChange = hasData => {
+   handleDataChange = (hasData) => {
       this.setState({ hasData });
    };
 
    handleChange = (pagination, filters, sorter, extra) => {
       this.setState({
          filteredInfo: filters,
-         sortedInfo: sorter
+         sortedInfo: sorter,
       });
    };
 
@@ -418,16 +460,16 @@ class EditableTable extends React.Component {
    clearAll = () => {
       this.setState({
          filteredInfo: null,
-         sortedInfo: null
+         sortedInfo: null,
       });
    };
 
    /** Resize */
-   handleResize = index => (e, { size }) => {
+   handleResize = (index) => (e, { size }) => {
       const nextColumns = [...this.columns];
       nextColumns[index] = {
          ...nextColumns[index],
-         width: size.width
+         width: size.width,
       };
       return { columns: nextColumns };
    };
@@ -441,40 +483,35 @@ class EditableTable extends React.Component {
    };
    //end Add
 
-   openNotificationPreview = record => {
-      if (record.type === "info") {
-         notification.info({
-            message: record.title,
-            description: record.contentNotification,
-            style: {
-               width: 400,
-               marginLeft: -20
-            }
-         });
-      }
-      // Tùy theo record.type là gì để notice
-      else {
-         notification.open({
-            message: record.title,
-            description: record.contentNotification,
-            style: {
-               width: 400,
-               marginLeft: -20
-            }
-         });
-      }
+   // Preivew
+
+   showModalPreview(record) {
+      Modal.success({
+         style: { top: "30px" },
+         width: 400,
+         title: "This is a item notification",
+         wrapClassName: "",
+         content: <NotificationPreview notification={record} />,
+      });
+   }
+
+   handleCancelPreview = (e) => {
+      this.setState({
+         visiblePreview: false,
+      });
    };
+   // end Preview
 
    render() {
       const { state } = this;
       const { data } = this.state;
       const components = {
          body: {
-            cell: EditableCell
+            cell: EditableCell,
          },
          header: {
-            cell: ResizeableTitle
-         }
+            cell: ResizeableTitle,
+         },
       };
 
       let { sortedInfo } = this.state;
@@ -492,7 +529,7 @@ class EditableTable extends React.Component {
             width: 50,
             // fixed: "left",
             ellipsis: true,
-            editable: true
+            editable: true,
             // render: text => text
          },
          {
@@ -505,7 +542,7 @@ class EditableTable extends React.Component {
             sorter: (a, b) => a.type.length - b.type.length,
             sortOrder: sortedInfo.columnKey === "type" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
             // render: text => text
          },
          {
@@ -517,7 +554,7 @@ class EditableTable extends React.Component {
             sorter: (a, b) => a.status - b.status,
             sortOrder: sortedInfo.columnKey === "status" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
          },
          {
             title: "Title",
@@ -528,20 +565,13 @@ class EditableTable extends React.Component {
             sorter: (a, b) => a.title.length - b.title.length,
             sortOrder: sortedInfo.columnKey === "title" && sortedInfo.order,
             ellipsis: true,
-            editable: true
+            editable: true,
          },
          {
             title: "Content Notification",
             dataIndex: "contentNotification",
             key: "contentNotification",
             width: 250,
-            filters: [
-               { text: "10%", value: 9 },
-               { text: "20%", value: 43 }
-            ],
-            // filteredValue: filteredInfo.contentNotification || null,
-            // filterMultiple: false,
-            // onFilter: (value, record) => record.contentNotification.indexOf(value) === 0,
             ...this.getColumnSearchProps("contentNotification"),
             sorter: (a, b) =>
                a.contentNotification.length - b.contentNotification.length,
@@ -549,22 +579,22 @@ class EditableTable extends React.Component {
                sortedInfo.columnKey === "contentNotification" &&
                sortedInfo.order,
             editable: true,
-            ellipsis: true
+            ellipsis: true,
          },
 
          {
             title: "Datetime",
-            dataIndex: "datetime",
-            key: "datetime",
+            dataIndex: "dateTime",
+            key: "dateTime",
             width: 150,
-            ...this.getColumnSearchProps("datetime"),
-            sorter: (a, b) => a.datetime.length - b.datetime.length,
-            sortOrder: sortedInfo.columnKey === "datetime" && sortedInfo.order,
+            ...this.getColumnSearchProps("dateTime"),
+            sorter: (a, b) => moment(a.dateTime) - moment(b.dateTime),
+            sortOrder: sortedInfo.columnKey === "dateTime" && sortedInfo.order,
             ellipsis: true,
             editable: true,
-            render: text => {
-               return moment(text).format("hh:mm A DD/MM/YYYY");
-            }
+            render: (text) => {
+               return moment(text).format("HH:mm A DD/MM/YYYY");
+            },
          },
          {
             title: "Added",
@@ -577,9 +607,9 @@ class EditableTable extends React.Component {
             sortOrder: sortedInfo.columnKey === "dateAdded" && sortedInfo.order,
             ellipsis: true,
             editable: true,
-            render: text => {
+            render: (text) => {
                return moment(text).format("DD/MM/YYYY");
-            }
+            },
          },
          {
             title: "IDAcc",
@@ -588,7 +618,7 @@ class EditableTable extends React.Component {
             width: 60,
             // fixed: "left",
             ellipsis: true,
-            editable: true
+            editable: true,
             // render: text => text
          },
          {
@@ -598,12 +628,12 @@ class EditableTable extends React.Component {
             key: "edit",
             fixed: widthClient > 768 ? "right" : "",
             render: (text, record) => {
-               const { editingidNotification } = this.state;
+               const { editingIdNotification } = this.state;
                const editable = this.isEditing(record);
                return editable ? (
                   <span>
                      <EditableContext.Consumer>
-                        {form => (
+                        {(form) => (
                            <Button
                               size="small"
                               type="primary"
@@ -630,7 +660,7 @@ class EditableTable extends React.Component {
                      <Button
                         type="default"
                         size="small"
-                        disabled={editingidNotification !== ""}
+                        disabled={editingIdNotification !== ""}
                         onClick={() => this.edit(record.idNotification)}
                      >
                         Edit
@@ -638,14 +668,14 @@ class EditableTable extends React.Component {
                      <Button
                         size="small"
                         type="primary"
-                        onClick={() => this.openNotificationPreview(record)}
+                        onClick={() => this.showModalPreview(record)}
                         style={{ marginLeft: 6 }}
                      >
                         Preview
                      </Button>
                   </>
                );
-            }
+            },
          },
          {
             title: "Delete",
@@ -663,30 +693,36 @@ class EditableTable extends React.Component {
                         Delete
                      </Button>
                   </Popconfirm>
-               ) : null
-         }
+               ) : null,
+         },
       ];
 
       function chooseType(type) {
-         if (type === "price") return "number";
-         else if (type === "depatureDay") return "date";
-         else if (type === "dateAdd") return "disable";
+         if (
+            type === "idNotification" ||
+            type === "idAccount" ||
+            type === "dateAdded"
+         )
+            return "disabled";
+         else if (type === "type") return "typeSelect";
+         else if (type === "status") return "statusSelect";
+         else if (type === "dateTime") return "dateTime";
+         else return "input";
       }
-
-      const columns = this.columns.map(col => {
+      const columns = this.columns.map((col) => {
          if (!col.editable) {
             return col;
          }
          return {
             ...col,
-            onCell: record => ({
+            onCell: (record) => ({
                record,
                inputType: chooseType(col.dataIndex),
                dataIndex: col.dataIndex,
                title: col.title,
                editing: this.isEditing(record),
-               onChange: this.handleSaveOnChange
-            })
+               onChange: this.handleSaveOnChange,
+            }),
          };
       });
 
@@ -707,7 +743,7 @@ class EditableTable extends React.Component {
                      type="primary"
                      style={{ margin: "12px 12px 0px" }}
                   >
-                     Add New Notifications
+                     Add New Notification
                   </Button>
                   <Button
                      onClick={this.clearAll}
@@ -722,18 +758,19 @@ class EditableTable extends React.Component {
                   rowKey={"idNotification"}
                   components={components}
                   pagination={{
-                     onChange: this.cancel
+                     onChange: this.cancel,
                   }}
                   // dataSource={data}
                   dataSource={state.hasData ? data : null}
                   columns={columns.map((item, index) => ({
                      ...item,
+                     key: index,
                      ellipsis: state.ellipsis,
-                     onHeaderCell: column => ({
+                     onHeaderCell: (column) => ({
                         //resize
                         width: column.width,
-                        onResize: this.handleResize(index)
-                     }) //end resize
+                        onResize: this.handleResize(index),
+                     }), //end resize
                   }))}
                   rowClassName={() => "editable-row"}
                   onChange={this.handleChange}
@@ -746,36 +783,31 @@ class EditableTable extends React.Component {
    }
 }
 
-const NotificationsTablesContainer = Form.create()(EditableTable);
+const NotificationTablesContainer = Form.create()(EditableTable);
 
-NotificationsTablesContainer.propTypes = {
+NotificationTablesContainer.propTypes = {
    classes: PropTypes.object,
-   notificationsAllActions: PropTypes.shape({
-      fetchListNotificationsRequest: PropTypes.func,
-      fetchPostNotificationsRequest: PropTypes.func,
-      fetchDeleteNotificationsRequest: PropTypes.func,
-      fetchPatchNotificationsRequest: PropTypes.func,
-      fetchListNotificationsImageRequest: PropTypes.func
+   notificationAllActions: PropTypes.shape({
+      fetchListNotificationRequest: PropTypes.func,
+      fetchPostNotificationRequest: PropTypes.func,
+      fetchDeleteNotificationRequest: PropTypes.func,
+      fetchPatchNotificationRequest: PropTypes.func,
    }),
-   listNotifications: PropTypes.array
+   listNotification: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      listNotifications: state.notifications.listNotifications,
-      listImageNotifications: state.notifications.listImageNotifications
+      listNotification: state.notification.listNotification,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      notificationsAllActions: bindActionCreators(
-         notificationsActions,
-         dispatch
-      )
-      //Bên trái chỉ là đặt tên thôi, bên phải là notificationsActions ở bên notifications.action.js
+      notificationAllActions: bindActionCreators(notificationActions, dispatch),
+      //Bên trái chỉ là đặt tên thôi, bên phải là notificationActions ở bên notification.action.js
    };
 };
 export default connect(
    mapStateToProps,
    mapDispatchToProps
-)(NotificationsTablesContainer);
+)(NotificationTablesContainer);

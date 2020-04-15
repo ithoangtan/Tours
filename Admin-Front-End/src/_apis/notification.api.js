@@ -4,51 +4,51 @@ import Cookies from "js-cookie";
 const url = "notification";
 const urls = "notifications";
 
-export const getListNotifications = () => {
+export const getListNotification = () => {
    return axiosService.get(`${API_ENDPOINT}/${urls}`);
 };
 
-export const getNotificationsById = idNotifications => {
+export const getNotificationById = (idNotification) => {
    return axiosService.get(
-      `${API_ENDPOINT}/${url}?idNotifications=${idNotifications}`
+      `${API_ENDPOINT}/${url}?idNotification=${idNotification}`
    );
 };
 
-export const postNotifications = data => {
+export const postNotification = (data) => {
    return axiosService.post(`${API_ENDPOINT}/${url}`, data);
 };
 
-export const deleteNotifications = idNotifications => {
+export const deleteNotification = (idNotification) => {
    return axiosService.delete(
-      `${API_ENDPOINT}/${url}?idNotifications=${idNotifications}`
+      `${API_ENDPOINT}/${url}?idNotification=${idNotification}`
    );
 };
 
-export const patchNotifications = data => {
-   return axiosService.patch(`${API_ENDPOINT}/${url}`, data);
+export const patchNotification = (data) => {
+   return axiosService.put(`${API_ENDPOINT}/${url}`, data);
 };
 
 const urlImages = "images";
 
-export const getListImageNotifications = () => {
+export const getListImageNotification = () => {
    return axiosService.get(`${API_ENDPOINT}/${urlImages}`);
 };
 
-export const deleteImageNotifications = (idImage, name) => {
+export const deleteImageNotification = (idImage, name) => {
    return axiosService.delete(
       `${API_ENDPOINT}/${url}/?idImage=${idImage}&name=${name}`
    );
 };
 
-export const uploadImageNotifications = (file, idNotifications) => {
+export const uploadImageNotification = (file, idNotification) => {
    return axiosService.post(
-      `${API_ENDPOINT}/${url}/?idNotifications=${idNotifications}`,
+      `${API_ENDPOINT}/${url}/?idNotification=${idNotification}`,
       { body: file },
       {
          headers: {
             "Content-Type": "multipart/form-data",
-            Authentication: getCookie("token")
-         }
+            Authentication: getCookie("token"),
+         },
       }
    );
 };

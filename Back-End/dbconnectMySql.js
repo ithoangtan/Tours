@@ -18,7 +18,7 @@ class Database {
   }
   close() {
     return new Promise((resolve, reject) => {
-      this.connection.end(err => {
+      this.connection.end((err) => {
         if (err) return reject(err);
         resolve();
       });
@@ -31,7 +31,7 @@ const config = {
   user: "root",
   port: "3306",
   password: "123456",
-  database: "kinhdoanhtourdulich"
+  database: "azmszdk4w6h5j1o6",
 };
 
 const configHerokuTest = {
@@ -39,7 +39,7 @@ const configHerokuTest = {
   user: "vke6ut5wnkjh7y47",
   port: "3306",
   password: "x18ifcnupo42ey8j",
-  database: "azmszdk4w6h5j1o6"
+  database: "azmszdk4w6h5j1o6",
 };
 
 const configProduction = {
@@ -47,7 +47,7 @@ const configProduction = {
   user: process.env.JAWSDB_USERNAME,
   port: process.env.JAWSDB_PORT,
   password: process.env.JAWSDB_PASSWORD,
-  database: process.env.JAWSDB_DATABASE
+  database: process.env.JAWSDB_DATABASE,
 };
 
 const database =

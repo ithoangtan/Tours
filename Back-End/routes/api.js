@@ -101,6 +101,7 @@ router.put("/notification", authenticated, notification.update);
 router.delete("/notification", authenticated, notification.delete);
 
 //for noticeTo
+router.get("/noticeTos", authenticated, noticeTo.listNoticeTos);
 router.post("/noticeTo", authenticated, noticeTo.create);
 router.put("/noticeTo", authenticated, noticeTo.update);
 router.delete("/noticeTo", authenticated, noticeTo.delete);

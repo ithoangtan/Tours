@@ -1,7 +1,7 @@
 const database = require("../dbconnectMySql");
 
 //Task object constructor
-const NoticeTo = function(noticeTo) {
+const NoticeTo = function (noticeTo) {
   this.idNoticeTo = noticeTo.idNoticeTo | 0;
   this.idNotification = noticeTo.idNotification;
   this.idAccount = noticeTo.idAccount;
@@ -14,8 +14,21 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
-NoticeTo.createNoticeTo = function(newNoticeTo) {
-  return new Promise(function(resolve, reject) {
+NoticeTo.listNoticeTos = function (idAccount) {
+  return new Promise(function (resolve, reject) {
+    database
+      .query(
+        "call " +
+          databaseProduction +
+          `.spGetNoticeToWithIdAccount(${idAccount}); `
+      )
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
+  });
+};
+
+NoticeTo.createNoticeTo = function (newNoticeTo) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "INSERT INTO " +
@@ -26,14 +39,14 @@ NoticeTo.createNoticeTo = function(newNoticeTo) {
           newNoticeTo.idAccount +
           "') "
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-NoticeTo.updateById = function(updateNoticeTo) {
+NoticeTo.updateById = function (updateNoticeTo) {
   updateNoticeTo = { ...updateNoticeTo, statusAction: "edited" };
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "UPDATE " +
@@ -41,13 +54,13 @@ NoticeTo.updateById = function(updateNoticeTo) {
           ".noticeto SET ? WHERE (idNoticeTo = ?);",
         [updateNoticeTo, updateNoticeTo.idNoticeTo]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 
-NoticeTo.remove = function(idNoticeTo) {
-  return new Promise(function(resolve, reject) {
+NoticeTo.remove = function (idNoticeTo) {
+  return new Promise(function (resolve, reject) {
     database
       .query(
         "UPDATE " +
@@ -55,8 +68,8 @@ NoticeTo.remove = function(idNoticeTo) {
           ".noticeto SET `statusAction` = 'deleted' WHERE idNoticeTo = ?",
         [idNoticeTo]
       )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
+      .then((rows) => resolve(rows))
+      .catch((err) => reject(err));
   });
 };
 

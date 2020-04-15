@@ -1,16 +1,12 @@
 import * as accountConstants from "../_constants/account.module";
-import {
-   toastError,
-   toastPatchSuccess,
-   toastDeleteSuccess,
-   toastCreateSuccess
-} from "../_helper/toastify.helper";
+import { toastError, toastOptions } from "../_helper/toastify.helper";
+import { message } from "antd";
 const initialState = {
    listAccount: [],
    accountById: {},
    delete: [],
    patch: [],
-   create: []
+   create: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,13 +14,13 @@ const reducer = (state = initialState, action) => {
       case accountConstants.FETCH_ACCOUNT:
          return {
             ...state,
-            listAccount: []
+            listAccount: [],
          };
       case accountConstants.FETCH_ACCOUNT_SUCCESS: {
          const { data } = action.payload;
          return {
             ...state,
-            listAccount: data
+            listAccount: data,
          };
       }
       case accountConstants.FETCH_ACCOUNT_FAILED: {
@@ -32,7 +28,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listAccount: error
+            listAccount: error,
          };
       }
 
@@ -41,7 +37,7 @@ const reducer = (state = initialState, action) => {
          const { data } = action.payload;
          return {
             ...state,
-            accountById: data
+            accountById: data,
          };
       }
       case accountConstants.FETCH_ACCOUNT_GET_BYID_FAILED: {
@@ -49,18 +45,18 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            accountById: error
+            accountById: error,
          };
       }
 
       //Post - Create
       case accountConstants.FETCH_ACCOUNT_CREATE_SUCCESS: {
          const { data } = action.payload;
-         const { newRecord } = action.newRecord;
-         toastCreateSuccess(newRecord);
+         const { newRecord } = action;
+         toastOptions("sucess", "", newRecord.username, " --- created!");
          return {
             ...state,
-            create: data
+            create: data,
          };
       }
       case accountConstants.FETCH_ACCOUNT_CREATE_FAILED: {
@@ -68,18 +64,18 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            create: error
+            create: error,
          };
       }
 
       //Delete
       case accountConstants.FETCH_ACCOUNT_DELETE_SUCCESS: {
          const { data } = action.payload;
-         const { record } = action.record;
-         toastDeleteSuccess(record);
+         const { record } = action;
+         message.warning(`[ ${record.username} ] --- deleted!`);
          return {
             ...state,
-            delete: data
+            delete: data,
          };
       }
       case accountConstants.FETCH_ACCOUNT_DELETE_FAILED: {
@@ -87,18 +83,18 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            delete: error
+            delete: error,
          };
       }
 
       //Patch - update
       case accountConstants.FETCH_ACCOUNT_PATCH_SUCCESS: {
          const { data } = action.payload;
-         const { newRecord } = action.newRecord;
-         toastPatchSuccess(newRecord);
+         const { newRecord } = action;
+         message.info(`[ ${newRecord.username} ]--- updated!`);
          return {
             ...state,
-            patch: data
+            patch: data,
          };
       }
       case accountConstants.FETCH_ACCOUNT_PATCH_FAILED: {
@@ -106,7 +102,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            patch: error
+            patch: error,
          };
       }
 

@@ -1,6 +1,16 @@
-const { check, validationResult } = require("express-validator");
-
 const NoticeTo = require("../models/noticeTo.model");
+
+exports.listNoticeTos = async (req, res, next) => {
+  try {
+    resultListNoticeTos = await NoticeTo.listNoticeTos(req.query.idAccount);
+    res.status(200).json(resultListNoticeTos);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
 
 exports.create = async (req, res, next) => {
   try {

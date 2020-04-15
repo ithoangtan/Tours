@@ -1289,10 +1289,6 @@
    font-size: 0.9rem;
 }
 
-.ht-title-and-date .ht-date {
-   color: rgb(27, 103, 218);
-}
-
 .ht-was-read .ht-read {
 }
 
@@ -1303,4 +1299,20 @@
    visibility: hidden;
    opacity: 0;
    display: none;
+}
+
+.ht-info-main-read {
+   color: rgb(160, 160, 160);
+}
+
+.ht-title-and-date .ht-date {
+   color: rgb(65, 128, 223);
+}
+
+.ht-title-and-date .ht-date-read {
+   color: rgb(160, 160, 160);
+}
+
+.ht-actions-read-and-unread {
+   cursor: pointer;
 }
