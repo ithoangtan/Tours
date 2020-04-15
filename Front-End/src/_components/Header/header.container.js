@@ -165,17 +165,17 @@ class HeaderContainer extends Component {
                                        </div>
                                        <div className="ht-header-tag-container ht-display-flex-start-center ht-mr-t-3">
                                           {tour.tags &&
-                                             tour.tags
-                                                .split(",")
-                                                .map((tag, index) => (
-                                                   <Tag
-                                                      color="#87d068"
-                                                      key={index}
-                                                   >
-                                                      {"# "}
-                                                      {tag}
-                                                   </Tag>
-                                                ))}
+                                             JSON.parse(
+                                                tour.tags.replace(/'/g, '"')
+                                             ).map((tag, index) => (
+                                                <Tag
+                                                   color="#87d068"
+                                                   key={index}
+                                                >
+                                                   {"# "}
+                                                   {tag}
+                                                </Tag>
+                                             ))}
                                        </div>
                                     </div>
                                  </div>

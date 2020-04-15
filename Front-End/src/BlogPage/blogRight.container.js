@@ -96,10 +96,12 @@ export default class BlogRightContainer extends Component {
                   </div>
                </TabPane>
             </Tabs>
-            <div className="ht-themes f-flex ftco-animate">
-               <div className="ht-title-mini ht-width-100 mt-3 mb-1 ftco-animate">
-                  Bạn quan tâm đến chủ đề gì?
-               </div>
+            <div className="ht-themes f-flex">
+               {postTags.length > 0 && (
+                  <div className="ht-title-mini ht-width-100 mt-3 mb-1">
+                     Bạn quan tâm đến chủ đề gì?
+                  </div>
+               )}
                {postTags &&
                   postTags.map((tag, index) => (
                      <Tag

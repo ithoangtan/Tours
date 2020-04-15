@@ -68,7 +68,9 @@ export default class TourDetailContainer extends Component {
       const year = dmy.substr(dmy.length - 2, 2);
 
       const totalNumberStar = tour.votes;
-      const listServices = tour.services ? tour.services.split(",") : [];
+      const listServices = tour.services
+         ? JSON.parse(tour.services.replace(/'/g, '"'))
+         : [];
       return (
          <div className="right-tour-detail-page mb-4 ftco-animate ht-tour-detail-container">
             <div className="ht-day-scroll-auto">

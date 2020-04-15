@@ -7,20 +7,16 @@ import parseHtml from "html-react-parser";
 import BlogRightContainer from "../BlogPage/blogRight.container";
 import BlogNavigationContainer from "../BlogPage/blogNavigation.container";
 import Cookies from "js-cookie";
-import { Rate, Spin, Typography } from "antd";
+import { Rate } from "antd";
 import moment from "moment";
-const { Title } = Typography;
+
 export default class BlogSingleContainer extends Component {
    componentDidMount() {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
 
    componentWillReceiveProps(nextProps) {
-      if (
-         this.state.valueRate === undefined &&
-         nextProps.postById &&
-         nextProps.postById.vote
-      ) {
+      if (this.state.valueRate === undefined) {
          this.setState({ valueRate: nextProps.postById.vote });
       }
    }
@@ -65,161 +61,141 @@ export default class BlogSingleContainer extends Component {
    render() {
       const { vote, numVote, valueRate, isLogin } = this.state;
       const { postById, listPostNew, listPostViews } = this.props;
-      const postDate = postById
+      const postDate = postById.dateEdited
          ? postById.dateEdited
-            ? postById.dateEdited
-            : postById.dateAdded
-         : "";
-      const postTags =
-         postById && postById.tags ? postById.tags.split(",") : [];
+         : postById.dateAdded;
+      const postTags = postById.tags
+         ? JSON.parse(postById.tags.replace(/'/g, '"'))
+         : [];
       return (
          <section className="ftco-section">
             <div className="container">
                <BlogNavigationContainer />
-               <Spin
-                  tip="loading... data"
-                  spinning={
-                     !((postById && postById.idPost) || postById === undefined)
-                  }
-               >
-                  <div className="row">
-                     <div className="col-lg-8 ftco-animate">
-                        {postById ? (
-                           <>
-                              <div className="ht-title-post-container">
-                                 <div className="ht-title">
-                                    {postById.titlePost}
-                                 </div>
-                                 <div className="ht-date-view-vote">
-                                    <div className="ht-date-view">
-                                       <i className="far fa-calendar-alt"></i>
-                                       {` `}
-                                       {moment(postDate).format(
-                                          INDEX_CONSTANTS.DATE_TIME_FORMAT
-                                             .DATE_MONTH_YEAR
-                                       )}
-                                       <i className="far fa-eye ml-3"></i>
-                                       {` `}
-                                       {postById.views}
-                                       <i className="far fa-star ml-3"></i>
-                                       {` `}
-                                       {postById.vote}
-                                    </div>
-                                    {/* <div
+
+               <div className="row">
+                  <div className="col-lg-8 ftco-animate">
+                     <div className="ht-title-post-container">
+                        <div className="ht-title">{postById.titlePost}</div>
+                        <div className="ht-date-view-vote">
+                           <div className="ht-date-view">
+                              <i className="far fa-calendar-alt"></i>
+                              {` `}
+                              {moment(postDate).format(
+                                 INDEX_CONSTANTS.DATE_TIME_FORMAT
+                                    .DATE_MONTH_YEAR
+                              )}
+                              <i className="far fa-eye ml-3"></i>
+                              {` `}
+                              {postById.views}
+                              <i className="far fa-star ml-3"></i>
+                              {` `}
+                              {postById.vote}
+                           </div>
+                           {/* <div
                               className={vote ? "ht-vote-up" : "ht-vote"}
                               onClick={this.onChangeVote}
                            >
                               {" "}
                               <i className="far fa-thumbs-up"></i> {numVote}
                            </div> */}
-                                    <div className="ht-rating">
-                                       {"ĐÁNH GIÁ "}
-                                       <span>
-                                          <Rate
-                                             allowClear={false}
-                                             tooltips={
-                                                INDEX_CONSTANTS.DESC_RATE
-                                             }
-                                             disabled={!isLogin}
-                                             onChange={this.handleChange}
-                                             value={valueRate}
-                                          />
-                                          {valueRate ? (
-                                             <span className="ant-rate-text">
-                                                {
-                                                   INDEX_CONSTANTS.DESC_RATE[
-                                                      valueRate - 1
-                                                   ]
-                                                }
-                                             </span>
-                                          ) : (
-                                             ""
-                                          )}
-                                       </span>
-                                    </div>
-                                 </div>
-                              </div>
-                              <p>{postById.describe}</p>
-                              {this.renderContentPost(postById.contentPost)}
-                              <div className="tag-widget post-tag-container mb-2 mt-2">
-                                 <div className="tagcloud">
-                                    <div className="ht-tag-container-beautiful">
-                                       <i className="fas fa-tags"></i> Tags
-                                    </div>
-                                    {postTags &&
-                                       postTags.map((tag, index) => (
-                                          <Link
-                                             to="#"
-                                             className="tag-cloud-link"
-                                             key={index}
-                                          >
-                                             {tag}
-                                          </Link>
-                                       ))}
-                                 </div>
-                              </div>
-                              <div className="pt-2 mt-2 mb-4 ht-rating-post">
-                                 ĐÁNH GIÁ BÀI VIẾT NÀY
-                                 <div className="ht-rating">
-                                    <span>
-                                       <Rate
-                                          allowClear={false}
-                                          tooltips={INDEX_CONSTANTS.DESC_RATE}
-                                          onChange={this.handleChange}
-                                          defaultValue={postById.vote}
-                                          value={valueRate}
-                                       />
-                                       {postById.vote ? (
-                                          <span className="ant-rate-text">
-                                             {
-                                                INDEX_CONSTANTS.DESC_RATE[
-                                                   postById.vote - 1
-                                                ]
-                                             }
-                                          </span>
-                                       ) : (
-                                          ""
-                                       )}
+                           <div className="ht-rating">
+                              {"ĐÁNH GIÁ "}
+                              <span>
+                                 <Rate
+                                    allowClear={false}
+                                    tooltips={INDEX_CONSTANTS.DESC_RATE}
+                                    disabled={!isLogin}
+                                    onChange={this.handleChange}
+                                    value={valueRate}
+                                 />
+                                 {valueRate ? (
+                                    <span className="ant-rate-text">
+                                       {
+                                          INDEX_CONSTANTS.DESC_RATE[
+                                             valueRate - 1
+                                          ]
+                                       }
                                     </span>
-                                 </div>
-                              </div>
-
-                              <div className="about-author d-flex p-4 bg-light">
-                                 <div className="bio mr-5">
-                                    <img
-                                       src="/images/person_1.jpg"
-                                       alt="#"
-                                       className="img-fluid mb-4"
-                                    />
-                                 </div>
-                                 <div className="desc">
-                                    <h3>ithoangtan</h3>
-                                    <p>
-                                       Create a beautiful blog that fits your
-                                       style. Choose from a selection of
-                                       easy-to-use templates – all with flexible
-                                       layouts and hundreds of background images
-                                       – or design something new.
-                                    </p>
-                                 </div>
-                              </div>
-                           </>
-                        ) : (
-                           <div className="ht-khong-tim-thay-du-lieu">
-                              <Title level={3}> Chưa có dữ liệu phù hợp</Title>
+                                 ) : (
+                                    ""
+                                 )}
+                              </span>
                            </div>
-                        )}
+                        </div>
                      </div>
-                     {/* .col-md-8 */}
-                     <div className="col-lg-4 sidebar ftco-animate col-md-4 ht-blog-right">
-                        <BlogRightContainer
-                           listPostNew={listPostNew}
-                           listPostViews={listPostViews}
-                           postTags={postTags}
-                        />
+                     <p>{postById.describe}</p>
+                     {this.renderContentPost(postById.contentPost)}
+                     <div className="tag-widget post-tag-container mb-2 mt-2">
+                        <div className="tagcloud">
+                           <div className="ht-tag-container-beautiful">
+                              <i className="fas fa-tags"></i> Tags
+                           </div>
+                           {postTags &&
+                              postTags.map((tag, index) => (
+                                 <Link
+                                    to="#"
+                                    className="tag-cloud-link"
+                                    key={index}
+                                 >
+                                    {tag}
+                                 </Link>
+                              ))}
+                        </div>
+                     </div>
+                     <div className="pt-2 mt-2 mb-4 ht-rating-post">
+                        ĐÁNH GIÁ BÀI VIẾT NÀY
+                        <div className="ht-rating">
+                           <span>
+                              <Rate
+                                 allowClear={false}
+                                 tooltips={INDEX_CONSTANTS.DESC_RATE}
+                                 onChange={this.handleChange}
+                                 defaultValue={postById.vote}
+                                 value={valueRate}
+                              />
+                              {postById.vote ? (
+                                 <span className="ant-rate-text">
+                                    {
+                                       INDEX_CONSTANTS.DESC_RATE[
+                                          postById.vote - 1
+                                       ]
+                                    }
+                                 </span>
+                              ) : (
+                                 ""
+                              )}
+                           </span>
+                        </div>
+                     </div>
+
+                     <div className="about-author d-flex p-4 bg-light">
+                        <div className="bio mr-5">
+                           <img
+                              src="/images/person_1.jpg"
+                              alt="#"
+                              className="img-fluid mb-4"
+                           />
+                        </div>
+                        <div className="desc">
+                           <h3>ithoangtan</h3>
+                           <p>
+                              Create a beautiful blog that fits your style.
+                              Choose from a selection of easy-to-use templates –
+                              all with flexible layouts and hundreds of
+                              background images – or design something new.
+                           </p>
+                        </div>
                      </div>
                   </div>
-               </Spin>
+                  {/* .col-md-8 */}
+                  <div className="col-lg-4 sidebar ftco-animate col-md-4 ht-blog-right">
+                     <BlogRightContainer
+                        listPostNew={listPostNew}
+                        listPostViews={listPostViews}
+                        postTags={postTags}
+                     />
+                  </div>
+               </div>
             </div>
          </section>
       );
