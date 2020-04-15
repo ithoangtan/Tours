@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listTimelineByIdTour: error
+            listTimelineByIdTour: []
          };
       }
       default:

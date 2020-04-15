@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listPost: error
+            listPost: []
          };
       }
       //Load List Post Search
@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listPostSearch: error
+            listPostSearch: []
          };
       }
       //Load Post by Id
@@ -61,7 +61,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            postById: error
+            postById: {}
          };
       }
       //Vote Post

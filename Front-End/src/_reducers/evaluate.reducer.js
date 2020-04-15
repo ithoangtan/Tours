@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
          toastError(error);
          return {
             ...state,
-            listEvaluateByIdTour: error
+            listEvaluateByIdTour: []
          };
       }
       //Post eveluate
