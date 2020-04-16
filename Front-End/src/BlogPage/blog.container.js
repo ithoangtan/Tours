@@ -74,7 +74,10 @@ class BlogContainer extends Component {
                                     <div className="ht-describe block-ellipsis-2">
                                        {post.describe}
                                     </div>
-                                    <Link to="more" className="ht-btn-more">
+                                    <Link
+                                       to={`blog-single/${post.idPost}`}
+                                       className="ht-btn-more"
+                                    >
                                        READ MORE
                                     </Link>
                                  </div>

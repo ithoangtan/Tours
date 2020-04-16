@@ -31,7 +31,7 @@ export const patchTour = data => {
    return axiosService.patch(`${API_ENDPOINT}/${url}`, data);
 };
 
-const urlImages = "images";
+const urlImages = "imagesTour";
 
 export const getListImageTour = () => {
    return axiosService.get(`${API_ENDPOINT}/${urlImages}`);
