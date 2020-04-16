@@ -93,7 +93,7 @@ export default class BlogRightContainer extends Component {
                </TabPane>
             </Tabs>
             <div className="ht-themes f-flex">
-               {postTags.length > 0 && (
+               {postTags && postTags.length > 0 && (
                   <div className="ht-title-mini ht-width-100 mt-3 mb-1">
                      Bạn quan tâm đến chủ đề gì?
                   </div>
