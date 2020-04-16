@@ -113,3 +113,8 @@ export const COLOR_TAG_BLOG = [
    "#e6fffb",
    "#e6f7ff"
 ];
+
+export const FACEBOOK_APP_ID = "226657805090590";
+
+export const GOOGLE_CLIENT_ID =
+   "1063852065052-lrq5sg5ujre7vmnbi9dhiac72d6pjio6.apps.googleusercontent.com";

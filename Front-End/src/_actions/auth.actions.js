@@ -44,6 +44,38 @@ export const fetchLoginRequest = data => {
    };
 };
 
+//Login FaceBook
+export const fetchLoginFaceBookRequest = data => {
+   return dispatch => {
+      dispatch(fetchLogin()); //reset state tours-->[]
+      authApis
+         .loginFaceBook(data)
+         .then(resp => {
+            const { data, status } = resp;
+            dispatch(fetchLoginSuccess(data, status));
+         })
+         .catch(error => {
+            dispatch(fetchLoginError(error));
+         });
+   };
+};
+
+//Login Google
+export const fetchLoginGoogleRequest = data => {
+   return dispatch => {
+      dispatch(fetchLogin()); //reset state tours-->[]
+      authApis
+         .loginGoogle(data)
+         .then(resp => {
+            const { data, status } = resp;
+            dispatch(fetchLoginSuccess(data, status));
+         })
+         .catch(error => {
+            dispatch(fetchLoginError(error));
+         });
+   };
+};
+
 //Register
 export const fetchRegisterSuccess = (data, status) => {
    return {
