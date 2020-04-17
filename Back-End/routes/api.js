@@ -3,7 +3,6 @@ const express = require("express");
 // const { check } = require("express-validator");
 
 const router = express.Router();
-
 const tour = require("../controllers/tour.controller");
 const schedule = require("../controllers/schedule.controller");
 const image = require("../controllers/image.controller");
@@ -20,6 +19,8 @@ const timeline = require("../controllers/timeline.controller");
 const service = require("../controllers/service.controller");
 //authencation
 const authenticated = require("../middleware/auth.middleware");
+//passport
+const passport = require("passport");
 //report
 const report = require("../controllers/report.controller");
 //for tour
@@ -71,6 +72,8 @@ router.get("/favoritesWithEmail", favorite.readByEmail);
 
 //for authencation
 router.post("/login", auth.login);
+router.post("/login/facebook", auth.loginByFacebook);
+router.post("/login/google", auth.loginByGoogle);
 router.post("/register", auth.register);
 router.get("/verify", auth.verify);
 router.post("/forgotPasswordStep1", auth.forgotPasswordStep1);

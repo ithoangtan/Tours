@@ -4,7 +4,10 @@ var cookieParser = require("cookie-parser");
 const path = require("path");
 var cors = require("cors");
 const app = express();
-
+const passport = require("passport");
+const GoogleTokenStrategy = require("passport-google-token").Strategy;
+const authConfig = require("./config/auth.config");
+const account = require("./controllers/account.controller");
 // settings
 app.set("port", process.env.PORT || 8000);
 app.use(express.static(path.join(__dirname, "public")));
@@ -40,7 +43,7 @@ const corsOptions = {
   origin: ["http://localhost:9000", "http://localhost:9999"], // reqexp will match all prefixes
   default: "http://localhost:9999",
   methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS",
-  credentials: true // required to pass
+  credentials: true, // required to pass
   // allowedHeaders:
   // "Content-Type, Authorization, Content-Language, Accept-Language, Last-Event-ID, X-Requested-With"
 };
@@ -52,10 +55,10 @@ if (process.env.NODE_ENV === "production") {
         process.env.FRONT_END,
         process.env.ADMIN_FRONT_END,
         "http://localhost:9000",
-        "http://localhost:9999"
+        "http://localhost:9999",
       ],
       methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS",
-      credentials: true // required to pass
+      credentials: true, // required to pass
     })
   );
 } else {
@@ -72,3 +75,13 @@ app.listen(app.get("port"), function() {
 app.get("/load", function(req, res) {
   res.sendFile(__dirname + "\\index.html");
 });
+
+passport.use(
+  new GoogleTokenStrategy(
+    {
+      clientID: authConfig.GOOGLE_CLIENT_ID,
+      clientSecret: authConfig.GOOGLE_CLIENT_SECRET,
+    },
+    (accessToken, refreshToken, profile, done) => done(null, profile._json)
+  )
+);
