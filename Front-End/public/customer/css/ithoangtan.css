@@ -37,6 +37,7 @@
 .login-form-button {
   width: 100%;
   font-weight: 450 !important;
+  justify-content: center;
 }
 
 .ht-login-fb {
