@@ -81,7 +81,8 @@ class LoginContainer extends Component {
          // TODO: call api request gg login with token
          const { authAllActions } = this.props;
          const { fetchLoginGoogleRequest } = authAllActions;
-         fetchLoginGoogleRequest({ accessToken });
+         message.loading("Login...", 3);
+         fetchLoginGoogleRequest({ access_token: accessToken, role: "user" });
       } else {
          message("Login Google failure!");
       }
