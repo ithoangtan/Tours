@@ -14,6 +14,7 @@ const Evaluate = function(evaluate) {
   this.idTour = evaluate.idTour;
   this.rateAverage = evaluate.rateAverage;
   this.rateTitle = evaluate.rateTitle;
+  this.typeEvaluate = evaluate.typeEvaluate;
 };
 
 const databaseLocal = "azmszdk4w6h5j1o6";
@@ -50,7 +51,7 @@ Evaluate.createEvaluate = function(newEvaluate) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".evaluates (`numberStarHotel`, `numberStarFood`, `numberStarVehicle`, `numberStarTourGuide`, `numberStarSchedule`, `title`, `contentEvaluate`, `idAccount`, `idTour`, `rateAverage`, `rateTitle`) VALUES ('" +
+          ".evaluates (`numberStarHotel`, `numberStarFood`, `numberStarVehicle`, `numberStarTourGuide`, `numberStarSchedule`, `title`, `contentEvaluate`, `idAccount`, `idTour`, `rateAverage`, `rateTitle`, `typeEvaluate`) VALUES ('" +
           newEvaluate.numberStarHotel +
           "', '" +
           newEvaluate.numberStarFood +
@@ -72,6 +73,8 @@ Evaluate.createEvaluate = function(newEvaluate) {
           newEvaluate.rateAverage +
           "', '" +
           newEvaluate.rateTitle +
+          "', '" +
+          newEvaluate.typeEvaluate +
           "') "
       )
       .then(rows => resolve(rows))

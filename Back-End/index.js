@@ -40,7 +40,7 @@ const corsOptions = {
   origin: ["http://localhost:9000", "http://localhost:9999"], // reqexp will match all prefixes
   default: "http://localhost:9999",
   methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS,PUT",
-  credentials: true // required to pass
+  credentials: true, // required to pass
   // allowedHeaders:
   // "Content-Type, Authorization, Content-Language, Accept-Language, Last-Event-ID, X-Requested-With"
 };
@@ -52,10 +52,10 @@ if (process.env.NODE_ENV === "production") {
         process.env.FRONT_END,
         process.env.ADMIN_FRONT_END,
         "http://localhost:9000",
-        "http://localhost:9999"
+        "http://localhost:9999",
       ],
       methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS,PUT",
-      credentials: true // required to pass
+      credentials: true, // required to pass
     })
   );
 } else {

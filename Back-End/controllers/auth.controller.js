@@ -2,6 +2,7 @@
 const bcrypt = require("bcryptjs"); //hash password
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 const randomstring = require("randomstring");
 const Accounts = require("../models/account.model");
 const mailer = require("../mics/mailer.mics");
@@ -79,7 +80,7 @@ exports.register = (req, res, next) => {
             result: result,
             idAccount: result.insertId,
             name: newAccount.name,
-            email: newAccount.email
+            email: newAccount.email,
           });
         })
         .catch(err => {
@@ -136,7 +137,7 @@ exports.verify = async (req, res, next) => {
             statusCode: 200,
             userId: account.idAccount,
             name: account.name,
-            email: account.email
+            email: account.email,
           });
         } else {
           if (account.verifyToken === "verified") {
@@ -144,7 +145,7 @@ exports.verify = async (req, res, next) => {
               statusCode: 200,
               userId: account.idAccount,
               name: account.name,
-              email: account.email
+              email: account.email,
             });
           }
           const error = new Error();
@@ -219,7 +220,7 @@ exports.forgotPasswordStep1 = (req, res, next) => {
       );
       res.status(200).json({
         statusCode: 200,
-        email: account.email
+        email: account.email,
       });
     })
 
@@ -277,7 +278,7 @@ exports.forgotPasswordStep2 = (req, res, next) => {
                 statusCode: 200,
                 idAccount: account.idAccount,
                 email: account.email,
-                result: result
+                result: result,
               });
             });
           });
@@ -342,7 +343,7 @@ exports.login = (req, res, next) => {
         {
           idAccount: loadAccount.idAccount,
           email: loadAccount.email,
-          role: loadAccount.role
+          role: loadAccount.role,
         },
         "ithoangtansecurity"
       );
@@ -350,7 +351,7 @@ exports.login = (req, res, next) => {
       let options = {
         maxAge: 60 * 60 * 24, // would expire after 24h
         httpOnly: true, // The cookie only accessible by the web server
-        signed: true // Indicates if the cookie should be signed
+        signed: true, // Indicates if the cookie should be signed
       };
 
       // no: set a new cookie
@@ -360,7 +361,7 @@ exports.login = (req, res, next) => {
           token: token,
           name: loadAccount.name,
           role: loadAccount.role,
-          avatar: loadAccount.avatar
+          avatar: loadAccount.avatar,
         })
         .status(200);
     })
@@ -374,112 +375,143 @@ exports.login = (req, res, next) => {
 };
 
 exports.loginByFacebook = async (req, res, next) => {
-  try {
-    const idFacebook = req.body.idFacebook;
-    const name = req.body.name;
-    const email = req.body.email;
-
-    let account = await Accounts.getByIdFacebook(idFacebook);
-    if (!account) {
-      account = new Account({
-        idFacebook: idFacebook,
-        name: name,
-        email: email
-      });
-      await Accounts.create(account);
-      const loadAccount = await Accounts.getByIdFaceboook(idFacebook);
-      const token = jwt.sign(
-        {
-          idAccount: loadAccount.idAccount,
-          idFacebook: loadAccount.idFacebook.toString(),
-          role: loadAccount.role,
-          email: loadAccount.email
-        },
-        "ithoangtansecurity"
-      );
-      res.status(200).json({
-        token: token,
-        idAccount: loadAccount.idAccount,
-        name: loadAccount.name
-      });
-    } else {
-      const token = jwt.sign(
-        {
-          idAccount: account.idAccount,
-          idFacebook: account.idFacebook.toString(),
-          role: account.role,
-          email: account.email
-        },
-        "ithoangtansecurity"
-      );
-
-      res.status(200).json({
-        token: token,
-        name: account.name,
-        role: account.role,
-        avartar: account.avartar
-      });
-    }
-  } catch (error) {
-    if (!error.statusCode) {
-      error.statusCode = 500;
-    }
-    res.status(500).json(error);
-    next(error);
-  }
+  // return passport.authenticate("google-token", async (err, googleUser) => {
+  //   try {
+  //     if (err) {
+  //       throw err;
+  //     }
+  //     let accountGoogle;
+  //     await Accounts.getByEmailAndRole(googleUser.email, req.role)
+  //       .then(async account => {
+  //         if (account) {
+  //           // account existed do not have idGoogle
+  //           if (!account.idGoogle) {
+  //             await Accounts.updateById({
+  //               ...account,
+  //               idGoogle: googleUser.id,
+  //             });
+  //           }
+  //           accountGoogle = account;
+  //         } else {
+  //           const newAccount = new Accounts({
+  //             idGoogle: googleUser.id,
+  //             name: googleUser.name,
+  //             email: googleUser.email,
+  //             avartar: googleUser.picture,
+  //           });
+  //           await Accounts.create(newAccount);
+  //           const loadAccount = await Accounts.getByIdGoogle(googleUser.id);
+  //           accountGoogle = loadAccount[0];
+  //         }
+  //         const token = jwt.sign(
+  //           {
+  //             idAccount: accountGoogle.idAccount,
+  //             email: accountGoogle.email,
+  //             role: accountGoogle.role,
+  //           },
+  //           "ithoangtansecurity"
+  //         );
+  //         let options = {
+  //           maxAge: 60 * 60 * 24, // would expire after 24h
+  //           httpOnly: true, // The cookie only accessible by the web server
+  //           signed: true, // Indicates if the cookie should be signed
+  //         };
+  //         // no: set a new cookie
+  //         res
+  //           .cookie("token", token, options) // options is optional
+  //           .json({
+  //             token: token,
+  //             name: accountGoogle.name,
+  //             role: accountGoogle.role,
+  //             avatar: accountGoogle.avatar,
+  //           })
+  //           .status(200);
+  //       })
+  //       .catch(error => {
+  //         if (!error.statusCode) {
+  //           error.statusCode = 500;
+  //         }
+  //         res.status(500).json(error);
+  //         next(error);
+  //       });
+  //   } catch (error) {
+  //     if (!error.statusCode) {
+  //       error.statusCode = 500;
+  //     }
+  //     res.status(500).json(error);
+  //     next(error);
+  //   }
+  // })(req, res, next);
 };
 
 exports.loginByGoogle = async (req, res, next) => {
-  try {
-    const idGoogle = req.body.idGoogle;
-    const name = req.body.name;
-    const email = req.body.email;
+  return passport.authenticate("google-token", async (err, googleUser) => {
+    try {
+      if (err) {
+        throw err;
+      }
+      let accountGoogle;
+      await Accounts.getByEmailAndRole(googleUser.email, req.role)
+        .then(async account => {
+          if (account) {
+            // account existed do not have idGoogle
+            if (!account.idGoogle) {
+              await Accounts.updateById({
+                ...account,
+                idGoogle: googleUser.id,
+              });
+            }
+            accountGoogle = account;
+          } else {
+            const newAccount = new Accounts({
+              idGoogle: googleUser.id,
+              name: googleUser.name,
+              email: googleUser.email,
+              avatar: googleUser.picture,
+            });
+            await Accounts.create(newAccount);
+            const loadAccount = await Accounts.getByIdGoogle(googleUser.id);
+            accountGoogle = loadAccount[0];
+          }
+          const token = jwt.sign(
+            {
+              idAccount: accountGoogle.idAccount,
+              email: accountGoogle.email,
+              role: accountGoogle.role,
+            },
+            "ithoangtansecurity"
+          );
 
-    let account = await Accounts.getByIdGoogle(idGoogle);
-    if (!account) {
-      account = new Account({
-        idGoogle: idGoogle,
-        name: name,
-        email: email
-      });
-      await Accounts.create(account);
-      const loadAccount = await Accounts.getByIdGoogle(idGoogle);
-      const token = jwt.sign(
-        {
-          idAccount: loadAccount.idAccount,
-          idGoogle: loadAccount.idGoogle.toString(),
-          role: loadAccount.role,
-          email: loadAccount.email
-        },
-        "ithoangtansecurity"
-      );
-      res.status(200).json({
-        token: token,
-        name: account.name,
-        role: account.role,
-        avartar: account.avartar
-      });
-    } else {
-      const token = jwt.sign(
-        {
-          idAccount: account.idAccount,
-          idGoogle: account.idGoogle.toString(),
-          role: account.role,
-          email: account.email
-        },
-        "ithoangtansecurity"
-      );
+          let options = {
+            maxAge: 60 * 60 * 24, // would expire after 24h
+            httpOnly: true, // The cookie only accessible by the web server
+            signed: true, // Indicates if the cookie should be signed
+          };
 
-      res.status(200).json({
-        token: token,
-        name: account.name
-      });
+          // no: set a new cookie
+          res
+            .cookie("token", token, options) // options is optional
+            .json({
+              token: token,
+              name: accountGoogle.name,
+              role: accountGoogle.role,
+              avatar: accountGoogle.avatar,
+            })
+            .status(200);
+        })
+        .catch(error => {
+          if (!error.statusCode) {
+            error.statusCode = 500;
+          }
+          res.status(500).json(error);
+          next(error);
+        });
+    } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 500;
+      }
+      res.status(500).json(error);
+      next(error);
     }
-  } catch (error) {
-    if (!error.statusCode) {
-      error.statusCode = 500;
-    }
-    res.status(500).json(error);
-    next(error);
-  }
+  })(req, res, next);
 };
