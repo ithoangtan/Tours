@@ -451,7 +451,7 @@ exports.loginByGoogle = async (req, res, next) => {
         throw err;
       }
       let accountGoogle;
-      await Accounts.getByEmailAndRole(googleUser.email, req.role)
+      await Accounts.getByEmailAndRole(googleUser.email, req.body.role)
         .then(async account => {
           if (account) {
             // account existed do not have idGoogle

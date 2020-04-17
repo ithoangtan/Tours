@@ -76,7 +76,6 @@ class LoginContainer extends Component {
 
    responseGoogle = response => {
       const { accessToken } = response;
-      console.log(accessToken);
       if (accessToken) {
          // TODO: call api request gg login with token
          const { authAllActions } = this.props;
@@ -90,7 +89,6 @@ class LoginContainer extends Component {
 
    responseFacebook = response => {
       const { accessToken } = response;
-      console.log(accessToken);
       if (accessToken) {
          // TODO: call api request gg login with token
          // const { authAllActions } = this.props;

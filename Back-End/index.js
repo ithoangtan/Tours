@@ -4,6 +4,9 @@ var cookieParser = require("cookie-parser");
 const path = require("path");
 var cors = require("cors");
 const app = express();
+const passport = require("passport");
+const GoogleTokenStrategy = require("passport-google-token").Strategy;
+const authConfig = require("./config/auth.config");
 
 // settings
 app.set("port", process.env.PORT || 8000);
@@ -67,3 +70,13 @@ app.use("/", require("./routes/api"));
 app.listen(app.get("port"), function() {
   console.log(`Server on port ${app.get("port")}`);
 });
+
+passport.use(
+  new GoogleTokenStrategy(
+    {
+      clientID: authConfig.GOOGLE_CLIENT_ID,
+      clientSecret: authConfig.GOOGLE_CLIENT_SECRET,
+    },
+    (accessToken, refreshToken, profile, done) => done(null, profile._json)
+  )
+);
