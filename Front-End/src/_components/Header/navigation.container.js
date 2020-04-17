@@ -401,7 +401,9 @@ export default class Navigation extends Component {
                            icon="user"
                            size="large"
                            src={
-                              token
+                              avatar.includes("https")
+                                 ? avatar
+                                 : token
                                  ? API_ENDPOINT + avatar
                                  : `${API_ENDPOINT}/img/avatarDefault.jpg`
                            }
