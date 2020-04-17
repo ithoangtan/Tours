@@ -467,7 +467,7 @@ exports.loginByGoogle = async (req, res, next) => {
               idGoogle: googleUser.id,
               name: googleUser.name,
               email: googleUser.email,
-              avartar: googleUser.picture,
+              avatar: googleUser.picture,
             });
             await Accounts.create(newAccount);
             const loadAccount = await Accounts.getByIdGoogle(googleUser.id);
