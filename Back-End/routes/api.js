@@ -84,7 +84,6 @@ router.get("/favoritesWithEmail", favorite.readByEmail);
 
 //for authencation
 router.post("/login", auth.login);
-router.post("/login/facebook", auth.loginByFacebook);
 router.post("/login/google", auth.loginByGoogle);
 router.post("/register", auth.register);
 router.get("/verify", auth.verify);
