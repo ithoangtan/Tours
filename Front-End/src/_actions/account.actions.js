@@ -3,7 +3,7 @@ import * as accountConstants from "../_constants/account.module";
 
 export const fetchAccount = () => {
    return {
-      type: accountConstants.FETCH_ACCOUNT
+      type: accountConstants.FETCH_ACCOUNT,
    };
 };
 
@@ -15,30 +15,30 @@ export const fetchAccountSuccess = (data, status) => {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
          data,
-         status
-      }
+         status,
+      },
    };
 };
 
-export const fetchAccountError = error => {
+export const fetchAccountError = (error) => {
    return {
       type: accountConstants.FETCH_ACCOUNT_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchAccountRequest = email => {
-   return dispatch => {
+export const fetchAccountRequest = (email) => {
+   return (dispatch) => {
       dispatch(fetchAccount()); //reset state tours-->[]
       accountApis
          .getProfileWithEmail(email)
-         .then(resp => {
+         .then((resp) => {
             const { data, status } = resp;
             dispatch(fetchAccountSuccess(data, status));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchAccountError(error));
          });
    };
@@ -52,29 +52,29 @@ export const fetchOrderOfAccountWithEmailSuccess = (data, status) => {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
          data,
-         status
-      }
+         status,
+      },
    };
 };
 
-export const fetchOrderOfAccountWithEmailError = error => {
+export const fetchOrderOfAccountWithEmailError = (error) => {
    return {
       type: accountConstants.FETCH_ORDER_OF_ACCOUNT_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchOrderOfAccountWithEmailRequest = email => {
-   return dispatch => {
+export const fetchOrderOfAccountWithEmailRequest = (email) => {
+   return (dispatch) => {
       accountApis
          .getOrderOfAccountWithEmail(email)
-         .then(resp => {
+         .then((resp) => {
             const { data, status } = resp;
             dispatch(fetchOrderOfAccountWithEmailSuccess(data, status));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchOrderOfAccountWithEmailError(error));
          });
    };
@@ -88,29 +88,29 @@ export const fetchFavoritesWithEmailSuccess = (data, status) => {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
          data,
-         status
-      }
+         status,
+      },
    };
 };
 
-export const fetchFavoritesWithEmailError = error => {
+export const fetchFavoritesWithEmailError = (error) => {
    return {
       type: accountConstants.FETCH_FAVORITES_OF_ACCOUNT_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchFavoritesWithEmailRequest = email => {
-   return dispatch => {
+export const fetchFavoritesWithEmailRequest = (email) => {
+   return (dispatch) => {
       accountApis
          .getFavoritesWithEmail(email)
-         .then(resp => {
+         .then((resp) => {
             const { data, status } = resp;
             dispatch(fetchFavoritesWithEmailSuccess(data, status));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchFavoritesWithEmailError(error));
          });
    };
@@ -124,29 +124,29 @@ export const fetchUpdateAccountSuccess = (data, status) => {
          // Thường đi làm thì người ta hay gọi là FETCH
          //data gửi kèm trong actions là payload ở vị trí này
          data,
-         status
-      }
+         status,
+      },
    };
 };
 
-export const fetchUpdateAccountError = error => {
+export const fetchUpdateAccountError = (error) => {
    return {
       type: accountConstants.FETCH_UPDATE_ACCOUNT_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchUpdateAccountRequest = account => {
-   return dispatch => {
+export const fetchUpdateAccountRequest = (account) => {
+   return (dispatch) => {
       accountApis
          .patchUpdateAccount(account)
-         .then(resp => {
+         .then((resp) => {
             const { data, status } = resp;
             dispatch(fetchUpdateAccountSuccess(data, status));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchUpdateAccountError(error));
          });
    };

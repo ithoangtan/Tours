@@ -6,9 +6,10 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { GoogleLogin } from "react-google-login";
 import * as authActions from "../../_actions/auth.actions";
-
+import * as INDEX_CONSTANTS from "../../_constants/index.constants";
 import { Icon, Input, Button, Checkbox, message } from "antd";
 import { Form } from "@ant-design/compatible";
 
@@ -71,6 +72,31 @@ class LoginContainer extends Component {
             throw err;
          }
       });
+   };
+
+   responseGoogle = response => {
+      const { accessToken } = response;
+      if (accessToken) {
+         // TODO: call api request gg login with token
+         const { authAllActions } = this.props;
+         const { fetchLoginGoogleRequest } = authAllActions;
+         message.loading("Login...", 3);
+         fetchLoginGoogleRequest({ access_token: accessToken, role: "user" });
+      } else {
+         message("Login Google failure!");
+      }
+   };
+
+   responseFacebook = response => {
+      const { accessToken } = response;
+      if (accessToken) {
+         // TODO: call api request gg login with token
+         // const { authAllActions } = this.props;
+         // const { fetchLoginGoogleRequest } = authAllActions;
+         // fetchLoginGoogleRequest({ accessToken });
+      } else {
+         message("Login Facebook failure!");
+      }
    };
 
    render() {
@@ -137,12 +163,35 @@ class LoginContainer extends Component {
                   Log in
                </Button>
                <div className="d-flex">
-                  <Button className="ht-login-fb">
-                     <i className="fab fa-facebook"></i> Facebook
-                  </Button>
-                  <Button className="ht-login-gg">
-                     <i className="fab fa-google"></i> Google
-                  </Button>
+                  <FacebookLogin
+                     appId={INDEX_CONSTANTS.FACEBOOK_APP_ID}
+                     autoLoad={false}
+                     fields="name,email,picture"
+                     callback={this.facebookResponse}
+                     render={renderProps => (
+                        <Button
+                           className="ht-login-fb"
+                           onClick={renderProps.onClick}
+                        >
+                           <i className="fab fa-facebook ht-mr-r-1"></i>
+                           Facebook
+                        </Button>
+                     )}
+                  />
+                  <GoogleLogin
+                     clientId={INDEX_CONSTANTS.GOOGLE_CLIENT_ID}
+                     render={renderProps => (
+                        <Button
+                           className="ht-login-gg"
+                           onClick={renderProps.onClick}
+                           disabled={renderProps.disabled}
+                        >
+                           <i className="fab fa-google ht-mr-r-1"></i> Google
+                        </Button>
+                     )}
+                     onSuccess={this.responseGoogle}
+                     onFailure={this.responseGoogle}
+                  />
                </div>
                Or <Link to="/register">register now!</Link>
             </Form.Item>
@@ -158,7 +207,8 @@ const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(
 WrappedNormalLoginForm.propTypes = {
    classes: PropTypes.object,
    authAllActions: PropTypes.shape({
-      fetchLoginRequest: PropTypes.func
+      fetchLoginRequest: PropTypes.func,
+      fetchLoginGoogleRequest: PropTypes.func
    }),
    auth: PropTypes.object
 };

@@ -10,6 +10,12 @@ const pathForgotPasswordStep2 = "forgotPasswordStep2";
 export const login = data => {
    return axiosService.post(`${API_ENDPOINT}/${pathLogin}`, data);
 };
+export const loginFaceBook = data => {
+   return axiosService.post(`${API_ENDPOINT}/${pathLogin}/facebook`, data);
+};
+export const loginGoogle = data => {
+   return axiosService.post(`${API_ENDPOINT}/${pathLogin}/google`, data);
+};
 export const register = data => {
    return axiosService.post(`${API_ENDPOINT}/${pathRegister}`, data);
 };
