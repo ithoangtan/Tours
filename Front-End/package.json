@@ -10,7 +10,7 @@
     "@ckeditor/ckeditor5-react": "^2.0.0",
     "@ckeditor/ckeditor5-real-time-collaboration": "^15.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^15.0.0",
-    "antd": "^3.25.0",
+    "antd": "3.25.0",
     "audit": "0.0.6",
     "axios": "^0.19.0",
     "express": "^4.17.1",

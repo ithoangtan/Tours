@@ -40,7 +40,12 @@ app.use((error, req, res, next) => {
 });
 
 const corsOptions = {
-  origin: ["http://localhost:9000", "http://localhost:9999"], // reqexp will match all prefixes
+  origin: [
+    "http://localhost:9000",
+    "http://localhost:9999",
+    "https://localhost:9000",
+    "https://localhost:9999",
+  ], // reqexp will match all prefixes
   default: "http://localhost:9999",
   methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS,PUT",
   credentials: true, // required to pass
@@ -56,6 +61,8 @@ if (process.env.NODE_ENV === "production") {
         process.env.ADMIN_FRONT_END,
         "http://localhost:9000",
         "http://localhost:9999",
+        "https://localhost:9000",
+        "https://localhost:9999",
       ],
       methods: "GET,HEAD,POST,PATCH,DELETE,OPTIONS,PUT",
       credentials: true, // required to pass
@@ -67,7 +74,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/", require("./routes/api"));
 
-app.listen(app.get("port"), function() {
+app.listen(app.get("port"), function () {
   console.log(`Server on port ${app.get("port")}`);
 });
 
