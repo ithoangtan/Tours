@@ -10,11 +10,9 @@ import { Link } from "react-router-dom";
 
 import { Rate, Button, Statistic, Tooltip } from "antd";
 
-import { Icon } from "@ant-design/compatible";
-
 import {
    API_ENDPOINT,
-   DATE_TIME_FORMAT
+   DATE_TIME_FORMAT,
 } from "../../_constants/index.constants";
 
 import moment from "moment";
@@ -32,7 +30,7 @@ class BestTourContainer extends Component {
       const {
          fetchListTourRequest,
          fetchListTourImageRequest,
-         fetchTourByTimeRequest
+         fetchTourByTimeRequest,
       } = tourAllActions;
       await fetchListTourImageRequest();
       await fetchTourByTimeRequest(
@@ -47,7 +45,7 @@ class BestTourContainer extends Component {
       this.setState({
          listTour,
          haveData: true,
-         size: window.innerWidth > 757.98 ? "default" : "small"
+         size: window.innerWidth > 757.98 ? "default" : "small",
       });
    }
 
@@ -57,7 +55,7 @@ class BestTourContainer extends Component {
       if (this.state.haveData === true) {
          result = listTour.map((tour, index) => {
             let listImageTourDetail = listImageTour.filter(
-               imageTour => imageTour.idTour === tour.idTour
+               (imageTour) => imageTour.idTour === tour.idTour
             );
             tour.departureDay = moment(tour.departureDay).format(dateFormat);
             if (index < 8)
@@ -73,8 +71,10 @@ class BestTourContainer extends Component {
                            <img
                               src={
                                  listImageTourDetail.length > 0
-                                    ? `${API_ENDPOINT +
-                                         listImageTourDetail[0].url}`
+                                    ? `${
+                                         API_ENDPOINT +
+                                         listImageTourDetail[0].url
+                                      }`
                                     : ``
                               }
                               className="img-fluid"
@@ -111,8 +111,8 @@ class BestTourContainer extends Component {
                               to={{
                                  pathname: `/tour/search/hcm`,
                                  state: {
-                                    tour: tour
-                                 }
+                                    tour: tour,
+                                 },
                               }}
                            >
                               <i className="fas fa-map-marker-alt"> </i>
@@ -123,8 +123,8 @@ class BestTourContainer extends Component {
                                  to={{
                                     pathname: `/tour-single/${tour.idTour}`,
                                     state: {
-                                       tour: tour
-                                    }
+                                       tour: tour,
+                                    },
                                  }}
                               >
                                  {tour.titleTour}
@@ -136,7 +136,7 @@ class BestTourContainer extends Component {
                                  tooltips={desc}
                                  disabled
                                  defaultValue={tour.votes}
-                                 character={<Icon type="star" />}
+                                 // character={<Icon type="star" />}
                                  //Phải làm tròn số với đơn vị 0.5
                                  size="small"
                                  className="mr-1 height-40"
@@ -153,14 +153,18 @@ class BestTourContainer extends Component {
                         <div className="ht-best-tour-bottom">
                            <div className="ht-flex-center-col">
                               <p className="ht-mr-0">{tour.vocationTime}</p>
-                              <p className="ht-mr-0">{tour.departureDay}</p>
+                              <p className="ht-mr-0">
+                                 {moment(tour.departureDay).format(
+                                    "hh:mm DD/MM/YYYY"
+                                 )}
+                              </p>
                            </div>
                            <Link
                               to={{
                                  pathname: `/book-tour/${tour.idTour}`,
                                  state: {
-                                    tour: tour
-                                 }
+                                    tour: tour,
+                                 },
                               }}
                            >
                               <Tooltip
@@ -181,8 +185,9 @@ class BestTourContainer extends Component {
                         <a
                            href={
                               listImageTourDetail.length > 0
-                                 ? `${API_ENDPOINT +
-                                      listImageTourDetail[0].url}`
+                                 ? `${
+                                      API_ENDPOINT + listImageTourDetail[0].url
+                                   }`
                                  : `${API_ENDPOINT + `/img/imgdefault.gif`}`
                            }
                            target="_blank"
@@ -262,21 +267,21 @@ BestTourContainer.propTypes = {
    tourAllActions: PropTypes.shape({
       fetchListTourRequest: PropTypes.func,
       fetchListTourImageRequest: PropTypes.func,
-      fetchTourByTimeRequest: PropTypes.func
+      fetchTourByTimeRequest: PropTypes.func,
    }),
    listTour: PropTypes.array,
-   listImageTour: PropTypes.array
+   listImageTour: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       listTour: state.tour.listTour,
-      listImageTour: state.tour.listImageTour
+      listImageTour: state.tour.listImageTour,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      tourAllActions: bindActionCreators(tourActions, dispatch)
+      tourAllActions: bindActionCreators(tourActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

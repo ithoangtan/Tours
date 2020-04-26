@@ -10,8 +10,7 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { GoogleLogin } from "react-google-login";
 import * as authActions from "../../_actions/auth.actions";
 import * as INDEX_CONSTANTS from "../../_constants/index.constants";
-import { Icon, Input, Button, Checkbox, message } from "antd";
-import { Form } from "@ant-design/compatible";
+import { Icon, Input, Button, Checkbox, message, Form } from "antd";
 
 class LoginContainer extends Component {
    constructor(props) {
@@ -20,7 +19,7 @@ class LoginContainer extends Component {
          email: "",
          password: "",
          redirect: false,
-         role: ""
+         role: "",
       };
    }
 
@@ -28,7 +27,7 @@ class LoginContainer extends Component {
       const name = sessionStorage.getItem("name");
       if (name !== "" && name !== undefined && name !== null) {
          this.setState({
-            redirect: true
+            redirect: true,
          });
       }
    }
@@ -41,7 +40,7 @@ class LoginContainer extends Component {
       ) {
          this.setState({
             redirect: true,
-            role: nextProps.auth.role
+            role: nextProps.auth.role,
          });
       }
    }
@@ -58,7 +57,7 @@ class LoginContainer extends Component {
       }
    }
 
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
          if (!err) {
@@ -74,7 +73,7 @@ class LoginContainer extends Component {
       });
    };
 
-   responseGoogle = response => {
+   responseGoogle = (response) => {
       const { accessToken } = response;
       if (accessToken) {
          // TODO: call api request gg login with token
@@ -87,7 +86,7 @@ class LoginContainer extends Component {
       }
    };
 
-   responseFacebook = response => {
+   responseFacebook = (response) => {
       const { accessToken } = response;
       if (accessToken) {
          // TODO: call api request gg login with token
@@ -112,8 +111,8 @@ class LoginContainer extends Component {
                         ? email
                         : "",
                   rules: [
-                     { required: true, message: "Please input your email!" }
-                  ]
+                     { required: true, message: "Please input your email!" },
+                  ],
                })(
                   <Input
                      name="email"
@@ -130,8 +129,8 @@ class LoginContainer extends Component {
             <Form.Item className="pb-2">
                {getFieldDecorator("password", {
                   rules: [
-                     { required: true, message: "Please input your password!" }
-                  ]
+                     { required: true, message: "Please input your password!" },
+                  ],
                })(
                   <Input.Password
                      name="password"
@@ -150,7 +149,7 @@ class LoginContainer extends Component {
             <Form.Item>
                {getFieldDecorator("remember", {
                   valuePropName: "checked",
-                  initialValue: true
+                  initialValue: true,
                })(<Checkbox>Remember me</Checkbox>)}
                <Link className="login-form-forgot" to="/forgot-password">
                   Forgot password
@@ -168,7 +167,7 @@ class LoginContainer extends Component {
                      autoLoad={false}
                      fields="name,email,picture"
                      callback={this.facebookResponse}
-                     render={renderProps => (
+                     render={(renderProps) => (
                         <Button
                            className="ht-login-fb"
                            onClick={renderProps.onClick}
@@ -180,7 +179,7 @@ class LoginContainer extends Component {
                   />
                   <GoogleLogin
                      clientId={INDEX_CONSTANTS.GOOGLE_CLIENT_ID}
-                     render={renderProps => (
+                     render={(renderProps) => (
                         <Button
                            className="ht-login-gg"
                            onClick={renderProps.onClick}
@@ -208,19 +207,19 @@ WrappedNormalLoginForm.propTypes = {
    classes: PropTypes.object,
    authAllActions: PropTypes.shape({
       fetchLoginRequest: PropTypes.func,
-      fetchLoginGoogleRequest: PropTypes.func
+      fetchLoginGoogleRequest: PropTypes.func,
    }),
-   auth: PropTypes.object
+   auth: PropTypes.object,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      auth: state.auth.auth
+      auth: state.auth.auth,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      authAllActions: bindActionCreators(authActions, dispatch)
+      authAllActions: bindActionCreators(authActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

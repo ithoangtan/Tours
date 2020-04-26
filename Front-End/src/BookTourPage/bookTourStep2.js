@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 
-import { Input, Tooltip, Cascader, InputNumber, Button, message } from "antd";
-
-import { Form, Icon } from "@ant-design/compatible";
+import {
+   Input,
+   Tooltip,
+   Cascader,
+   InputNumber,
+   Button,
+   message,
+   Form,
+   Icon,
+} from "antd";
 
 import { mapAddressToOptionAntd } from "./addressVN";
 import NumberFormat from "react-number-format";
@@ -11,16 +18,16 @@ class BookTourStep2 extends Component {
    state = {
       confirmDirty: false,
       autoCompleteResult: [],
-      sizeWindow: "large"
+      sizeWindow: "large",
    };
 
    componentWillMount() {
       this.setState({
-         sizeWindow: window.innerWidth > 757.98 ? "default" : "small"
+         sizeWindow: window.innerWidth > 757.98 ? "default" : "small",
       });
    }
 
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
          if (!err) {
@@ -33,10 +40,10 @@ class BookTourStep2 extends Component {
       });
    };
 
-   handleConfirmBlur = e => {
+   handleConfirmBlur = (e) => {
       const { value } = e.target;
       this.setState({
-         confirmDirty: this.state.confirmDirty || !!value
+         confirmDirty: this.state.confirmDirty || !!value,
       });
    };
 
@@ -67,7 +74,7 @@ class BookTourStep2 extends Component {
             md: { span: 8 },
             lg: { span: 7 },
             xl: { span: 7 },
-            xxl: { span: 7 }
+            xxl: { span: 7 },
          },
          wrapperCol: {
             flex: 4,
@@ -76,8 +83,8 @@ class BookTourStep2 extends Component {
             md: { span: 16 },
             lg: { span: 16 },
             xl: { span: 16 },
-            xxl: { span: 16 }
-         }
+            xxl: { span: 16 },
+         },
       };
       const { sizeWindow } = this.state;
       const priceTour = 5000000;
@@ -86,7 +93,7 @@ class BookTourStep2 extends Component {
             {...formItemLayout}
             layout="horizontal"
             initialValues={{
-               size: sizeWindow
+               size: sizeWindow,
             }}
             size={sizeWindow}
             onSubmit={this.handleSubmit}
@@ -111,9 +118,9 @@ class BookTourStep2 extends Component {
                               {
                                  required: true,
                                  message:
-                                    "Xin hãy cho chúng tôi biết tên của bạn!"
-                              }
-                           ]
+                                    "Xin hãy cho chúng tôi biết tên của bạn!",
+                              },
+                           ],
                         })(<Input placeholder="Họ và tên của bạn" />)}
                      </Form.Item>
                      <Form.Item label="E-mail" style={{ paddingBottom: 12 }}>
@@ -122,14 +129,14 @@ class BookTourStep2 extends Component {
                            rules: [
                               {
                                  type: "email",
-                                 message: "Hãy nhập một E-mail hợp lệ á nè!"
+                                 message: "Hãy nhập một E-mail hợp lệ á nè!",
                               },
                               {
                                  required: true,
                                  message:
-                                    "Xin hãy cho chúng tôi biết E-mail của bạn!"
-                              }
-                           ]
+                                    "Xin hãy cho chúng tôi biết E-mail của bạn!",
+                              },
+                           ],
                         })(<Input placeholder="Địa chỉ mail của bạn" />)}
                      </Form.Item>
                      <Form.Item
@@ -149,9 +156,9 @@ class BookTourStep2 extends Component {
                               {
                                  type: "array",
                                  required: true,
-                                 message: "Xin hãy chọn nơi cư trú của bạn!"
-                              }
-                           ]
+                                 message: "Xin hãy chọn nơi cư trú của bạn!",
+                              },
+                           ],
                         })(
                            <Cascader
                               style={{ width: "100%" }}
@@ -179,9 +186,9 @@ class BookTourStep2 extends Component {
                               {
                                  required: true,
                                  message:
-                                    "Có thể cho chúng tôi số điện thoại để liên hệ chứ!"
-                              }
-                           ]
+                                    "Có thể cho chúng tôi số điện thoại để liên hệ chứ!",
+                              },
+                           ],
                         })(
                            <Input
                               style={{ width: "100%" }}
@@ -201,7 +208,7 @@ class BookTourStep2 extends Component {
                         style={{ paddingBottom: 12 }}
                      >
                         {getFieldDecorator("numberPeople", {
-                           initialValue: this.initValue("numberPeople")
+                           initialValue: this.initValue("numberPeople"),
                         })(
                            <>
                               <Tooltip
@@ -275,7 +282,7 @@ class BookTourStep2 extends Component {
                         style={{ paddingBottom: 12 }}
                      >
                         {getFieldDecorator("numberChildren", {
-                           initialValue: this.initValue("numberChildren")
+                           initialValue: this.initValue("numberChildren"),
                         })(
                            <>
                               <Tooltip
@@ -351,7 +358,7 @@ class BookTourStep2 extends Component {
                   <Form.Item
                      style={{
                         paddingBottom: 12,
-                        paddingRight: "30px"
+                        paddingRight: "30px",
                      }}
                   >
                      <Tooltip

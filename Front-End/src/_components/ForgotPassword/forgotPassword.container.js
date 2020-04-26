@@ -9,12 +9,11 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Icon, Input, Button, message } from "antd";
-import { Form } from "@ant-design/compatible";
+import { Icon, Input, Button, message, Form } from "antd";
 import ResultDynamic from "../../ResultBoardPage/Result";
 
 class ForgotPasswordContainer extends Component {
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
          if (!err) {
@@ -45,9 +44,9 @@ class ForgotPasswordContainer extends Component {
                         rules: [
                            {
                               required: true,
-                              message: "Please input your email!"
-                           }
-                        ]
+                              message: "Please input your email!",
+                           },
+                        ],
                      })(
                         <Input
                            style={{ width: "350px" }}
@@ -110,19 +109,19 @@ const WrappedForgotPasswordForm = Form.create({ name: "forgot-password" })(
 WrappedForgotPasswordForm.propTypes = {
    classes: PropTypes.object,
    authAllActions: PropTypes.shape({
-      fetchForgotPasswordStep1Request: PropTypes.func
+      fetchForgotPasswordStep1Request: PropTypes.func,
    }),
-   auth: PropTypes.object
+   auth: PropTypes.object,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      auth: state.auth.auth
+      auth: state.auth.auth,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      authAllActions: bindActionCreators(authActions, dispatch)
+      authAllActions: bindActionCreators(authActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

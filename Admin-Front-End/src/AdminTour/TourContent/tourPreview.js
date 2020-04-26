@@ -11,10 +11,10 @@ const { Text, Paragraph } = Typography;
 export default class TourPreview extends Component {
    state = {
       rowsDescribe: 2,
-      size: "default"
+      size: "default",
    };
 
-   onChange = rowsDescribe => {
+   onChange = (rowsDescribe) => {
       this.setState({ rowsDescribe });
    };
 
@@ -100,7 +100,7 @@ export default class TourPreview extends Component {
                            defaultValue={this.numberStarCal(totalNumberStar)}
                            size="small"
                            className="ht-no-p-m"
-                           character={<Icon type="star" />}
+                           // character={<Icon type="star" />}
                         ></Rate>
                         <p className="ht-rate-detail-tour pt-1">
                            {size === "small" ? (
@@ -146,7 +146,7 @@ export default class TourPreview extends Component {
                         ellipsis={{
                            rows: this.state.rowsDescribe,
                            expandable: true,
-                           suffix: ""
+                           suffix: "",
                         }}
                         title={`${tour.describe}`}
                         className="ht-describe-info-tour-detail"
