@@ -3,7 +3,6 @@ const express = require("express");
 // const { check } = require("express-validator");
 
 const router = express.Router();
-
 const tour = require("../controllers/tour.controller");
 const schedule = require("../controllers/schedule.controller");
 const image = require("../controllers/image.controller");
@@ -21,6 +20,8 @@ const service = require("../controllers/service.controller");
 const config = require("../controllers/config.controller");
 //authencation
 const authenticated = require("../middleware/auth.middleware");
+//passport
+const passport = require("passport");
 //report
 const report = require("../controllers/report.controller");
 
@@ -83,6 +84,7 @@ router.get("/favoritesWithEmail", favorite.readByEmail);
 
 //for authencation
 router.post("/login", auth.login);
+router.post("/login/google", auth.loginByGoogle);
 router.post("/register", auth.register);
 router.get("/verify", auth.verify);
 router.post("/forgotPasswordStep1", auth.forgotPasswordStep1);
@@ -117,6 +119,7 @@ router.delete("/evaluate", authenticated, evaluate.delete);
 router.get("/post", post.read);
 router.get("/posts", post.listAll);
 router.post("/posts/search", post.listPostSearch);
+router.post("/post/vote", authenticated, post.votePost);
 router.post("/post", authenticated, post.create);
 router.put("/post", authenticated, post.update);
 router.put("/post/tags", authenticated, post.putTags);

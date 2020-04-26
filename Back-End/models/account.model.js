@@ -2,10 +2,13 @@ const database = require("../dbconnectMySql");
 
 const Account = function(account) {
   this.idAccount = account.idAccount || null;
+  this.idFacebook = account.idFacebook || null;
+  this.idGoogle = account.idGoogle || null;
   this.name = account.name;
   this.username = account.username || account.email;
   this.email = account.email;
   this.phone = account.phone;
+  this.avatar = account.avatar;
   this.role = account.role || "user"; //user(customer), admin(customer), administrator(full permission)
   this.password = account.password;
   this.verifyToken = account.verifyToken;
@@ -43,7 +46,7 @@ Account.create = function(newAccount) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".accounts (`name`, `username`, `email`, `phone`, `role`, `password`, `verify` , `verifyToken` ) VALUES ('" +
+          ".accounts (`name`, `username`, `email`, `phone`, `role`, `password`, `verify` , `verifyToken`,`avatar`,`idFacebook`,`idGoogle` ) VALUES ('" +
           newAccount.name +
           "', '" +
           newAccount.username +
@@ -59,6 +62,12 @@ Account.create = function(newAccount) {
           newAccount.verify +
           "', '" +
           newAccount.verifyToken +
+          "', '" +
+          newAccount.avatar +
+          "', '" +
+          newAccount.idFacebook +
+          "', '" +
+          newAccount.idGoogle +
           "') "
       )
       .then(rows => resolve(rows))
@@ -94,7 +103,7 @@ Account.getByEmailAndRole = function(email, role) {
   });
 };
 
-Account.getByIdFaceboook = function(idGoogle) {
+Account.getByIdGoogle = function(idGoogle) {
   return new Promise(function(resolve, reject) {
     database
       .query(
@@ -108,7 +117,7 @@ Account.getByIdFaceboook = function(idGoogle) {
   });
 };
 
-Account.getByIdGoogle = function(idFacebook) {
+Account.getByIdFacebook = function(idFacebook) {
   return new Promise(function(resolve, reject) {
     database
       .query(
