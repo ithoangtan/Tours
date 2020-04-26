@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import { Typography, Rate, Tag, Button, Carousel, Tooltip } from "antd";
-import { Icon } from "@ant-design/compatible";
 import TourDetailImages from "./tourDetailImages";
 
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
@@ -17,10 +16,10 @@ const { Text, Paragraph } = Typography;
 export default class TourDetailContainer extends Component {
    state = {
       rowsDescribe: 2,
-      size: "default"
+      size: "default",
    };
 
-   onChange = rowsDescribe => {
+   onChange = (rowsDescribe) => {
       this.setState({ rowsDescribe });
    };
 
@@ -60,7 +59,7 @@ export default class TourDetailContainer extends Component {
    render() {
       const { size } = this.state;
       const { tour, bookTour } = this.props;
-      const timeDeparture = moment(tour.departureDay).format("LT");
+      // const timeDeparture = moment(tour.departureDay).format("LT");
       const dmy = moment(tour.departureDay).format("L");
 
       const day = dmy.substr(3, 2);
@@ -89,8 +88,8 @@ export default class TourDetailContainer extends Component {
                         to={{
                            pathname: `/tour-single/${tour.idTour}`,
                            state: {
-                              tour: tour
-                           }
+                              tour: tour,
+                           },
                         }}
                      >
                         <Carousel
@@ -108,8 +107,8 @@ export default class TourDetailContainer extends Component {
                         to={{
                            pathname: `/tour-single/${tour.idTour}`,
                            state: {
-                              tour: tour
-                           }
+                              tour: tour,
+                           },
                         }}
                      >
                         {bookTour ? (
@@ -129,7 +128,7 @@ export default class TourDetailContainer extends Component {
                            value={totalNumberStar}
                            size="small"
                            className="ht-no-p-m"
-                           character={<Icon type="star" />}
+                           //   character={<Icon type="star" />}
                         ></Rate>
                         <p className="ht-rate-detail-tour pt-1">
                            {size === "small" ? (
@@ -169,7 +168,7 @@ export default class TourDetailContainer extends Component {
                         ellipsis={{
                            rows: this.state.rowsDescribe,
                            expandable: true,
-                           suffix: ""
+                           suffix: "",
                         }}
                         title={`${tour.describe}`}
                         className="ht-describe-info-tour-detail"
@@ -201,7 +200,7 @@ export default class TourDetailContainer extends Component {
                         </div>
                      </div>
                      <div className="ht-info-tour-detail-price">
-                        {size === "small" || tour.sale == 0 ? (
+                        {size === "small" || tour.sale === 0 ? (
                            <></>
                         ) : (
                            <div className="mt-3 ht-text-price-tour-detail-root ml-1 mr-1">
@@ -245,8 +244,8 @@ export default class TourDetailContainer extends Component {
                            to={{
                               pathname: `/book-tour/${tour.idTour}`,
                               state: {
-                                 tour: tour
-                              }
+                                 tour: tour,
+                              },
                            }}
                         >
                            {bookTour ? (

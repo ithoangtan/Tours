@@ -7,8 +7,7 @@ import { bindActionCreators } from "redux";
 
 import * as authActions from "../../_actions/auth.actions";
 
-import { Input, Button, message } from "antd";
-import { Form } from "@ant-design/compatible";
+import { Input, Button, message, Form } from "antd";
 import ResultDynamic from "../../ResultBoardPage/Result";
 import Text from "antd/lib/typography/Text";
 import { Link } from "react-router-dom";
@@ -18,10 +17,10 @@ class ForgotPasswordStep2Container extends Component {
       super(props);
       this.state = {
          password: "",
-         confirmDirty: false
+         confirmDirty: false,
       };
    }
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
          if (!err) {
@@ -37,7 +36,7 @@ class ForgotPasswordStep2Container extends Component {
       });
    };
 
-   handleConfirmBlur = e => {
+   handleConfirmBlur = (e) => {
       const { value } = e.target;
       this.setState({ confirmDirty: this.state.confirmDirty || !!value });
    };
@@ -73,12 +72,12 @@ class ForgotPasswordStep2Container extends Component {
                         rules: [
                            {
                               required: true,
-                              message: "Please input your password!"
+                              message: "Please input your password!",
                            },
                            {
-                              validator: this.validateToNextPassword
-                           }
-                        ]
+                              validator: this.validateToNextPassword,
+                           },
+                        ],
                      })(<Input.Password />)}
                   </Form.Item>
                   <Form.Item label="Confirm Password" hasFeedback>
@@ -86,12 +85,12 @@ class ForgotPasswordStep2Container extends Component {
                         rules: [
                            {
                               required: true,
-                              message: "Please confirm your password!"
+                              message: "Please confirm your password!",
                            },
                            {
-                              validator: this.compareToFirstPassword
-                           }
-                        ]
+                              validator: this.compareToFirstPassword,
+                           },
+                        ],
                      })(<Input.Password onBlur={this.handleConfirmBlur} />)}
                   </Form.Item>
                   <Form.Item>
@@ -138,19 +137,19 @@ const WrappedForgotPasswordStep2Form = Form.create({ name: "forgot-password" })(
 WrappedForgotPasswordStep2Form.propTypes = {
    classes: PropTypes.object,
    authAllActions: PropTypes.shape({
-      fetchForgotPasswordStep2Request: PropTypes.func
+      fetchForgotPasswordStep2Request: PropTypes.func,
    }),
-   auth: PropTypes.object
+   auth: PropTypes.object,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      auth: state.auth.auth
+      auth: state.auth.auth,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      authAllActions: bindActionCreators(authActions, dispatch)
+      authAllActions: bindActionCreators(authActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

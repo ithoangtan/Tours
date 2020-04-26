@@ -1,5 +1,7 @@
-export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+export const API_ENDPOINT =
+   "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
 // export const API_ENDPOINT = "http://localhost:8000";
+// export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",
@@ -19,7 +21,7 @@ export const CustomerArrayExternalScript = [
    // "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false",
    // "/customer/js/google-map.js",
    "/customer/js/ithoangtan2.js",
-   "/customer/js/ithoangtan.js"
+   "/customer/js/ithoangtan.js",
    // "http://cdn.iframe.ly/embed.js",
    // "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",,
 ];
@@ -31,7 +33,7 @@ export const AdminArrayExternalScript = [
    // "/admin/js/sb-admin-2.min.js",
    "/admin/vendor/chart.js/Chart.min.js",
    "/admin/js/demo/chart-area-demo.js",
-   "/admin/js/demo/chart-pie-demo.js"
+   "/admin/js/demo/chart-pie-demo.js",
 ];
 
 export const DATE_TIME_FORMAT = {
@@ -41,7 +43,7 @@ export const DATE_TIME_FORMAT = {
    YEAR_MONTH_DATE: "YYYY/MM/DD",
    MONTH_NAME: "MMMM",
    YEAR: "YYYY",
-   DATE: "DD"
+   DATE: "DD",
 };
 
 export const SERVICE_TOUR_ICON = {
@@ -65,34 +67,34 @@ export const SERVICE_TOUR_ICON = {
    "Trượt tuyết": "fas fa-skiing",
    "Bao bữa sáng": "fas fa-utensils",
    "Hỗ trợ visa": "fab fa-cc-visa",
-   "Vé tham quan": "fas fa-money-bill"
+   "Vé tham quan": "fas fa-money-bill",
 };
 
 export const LIST_TAG_EVALUATE = [
    {
       title: "Tất cả",
-      icon: "fas fa-th"
+      icon: "fas fa-th",
    },
    {
       title: "Cá nhân",
-      icon: "fas fa-user"
+      icon: "fas fa-user",
    },
    {
       title: "Cặp đôi",
-      icon: "fas fa-heart"
+      icon: "fas fa-heart",
    },
    {
       title: "Gia đình",
-      icon: "fas fa-users"
+      icon: "fas fa-users",
    },
    {
       title: "Bạn bè",
-      icon: "fas fa-user-friends"
+      icon: "fas fa-user-friends",
    },
    {
       title: "Doanh nghiệp",
-      icon: "fas fa-briefcase"
-   }
+      icon: "fas fa-briefcase",
+   },
 ];
 
 export const DESC_RATE = ["terrible", "bad", "normal", "good", "wonderful"];
@@ -111,7 +113,7 @@ export const COLOR_TAG_BLOG = [
    "#f4ffb8",
    "#f6ffed",
    "#e6fffb",
-   "#e6f7ff"
+   "#e6f7ff",
 ];
 
 export const FACEBOOK_APP_ID = "226657805090590";

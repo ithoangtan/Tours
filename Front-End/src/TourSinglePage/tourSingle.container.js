@@ -20,9 +20,8 @@ import {
    Modal,
    Input,
    Select,
-   Slider
+   Slider,
 } from "antd";
-import { Icon } from "@ant-design/compatible";
 import Cookies from "js-cookie";
 // import MoreTourSingle from "./moreTourSingle.container";
 import TourDetailImg from "../TourPage/tourDetailImages";
@@ -41,35 +40,35 @@ const priceSaleMomo = 1000000;
 const marksEvaluate = {
    1: {
       style: {
-         color: "#bfbfbf"
+         color: "#bfbfbf",
       },
       label: (
          <strong style={{ width: "70px", position: "absolute", left: "-25px" }}>
             "Rất tệ"
          </strong>
-      )
+      ),
    },
    2: {
       style: {
-         color: "#fa8c16"
+         color: "#fa8c16",
       },
-      label: "Tạm ổn"
+      label: "Tạm ổn",
    },
    3: {
       style: {
-         color: "#52c41a"
+         color: "#52c41a",
       },
-      label: <strong>"Bình thường"</strong>
+      label: <strong>"Bình thường"</strong>,
    },
    4: {
       style: {
-         color: "#eb2f96"
+         color: "#eb2f96",
       },
-      label: "Rất tổt"
+      label: "Rất tổt",
    },
    5: {
       style: {
-         color: "#f5222d"
+         color: "#f5222d",
       },
       label: (
          <strong
@@ -77,8 +76,8 @@ const marksEvaluate = {
          >
             "Tuyệt vời"{" "}
          </strong>
-      )
-   }
+      ),
+   },
 };
 
 export default class TourSingleContainer extends Component {
@@ -88,7 +87,7 @@ export default class TourSingleContainer extends Component {
 
    componentWillMount() {
       this.setState({
-         size: window.innerWidth > 757.98 ? "large" : "default"
+         size: window.innerWidth > 757.98 ? "large" : "default",
       });
    }
 
@@ -119,17 +118,17 @@ export default class TourSingleContainer extends Component {
       nameEvaluate: "",
       titleEveluate: "",
       contentEvaluate: "",
-      typeTourEvaluate: ""
+      typeTourEvaluate: "",
    };
 
    showModal = () => {
       this.setState({
-         visible: true
+         visible: true,
       });
    };
 
    // Select
-   onChangeTypeTour = value => {
+   onChangeTypeTour = (value) => {
       console.log(`selected ${value}`);
       this.setState({ typeTourEvaluate: value });
    };
@@ -146,12 +145,12 @@ export default class TourSingleContainer extends Component {
       console.log("search:", val);
    }
 
-   onChangeInputEvaluate = event => {
+   onChangeInputEvaluate = (event) => {
       const { name, value } = event.target;
       this.setState({ [name]: value });
    };
 
-   handleOk = e => {
+   handleOk = (e) => {
       const {
          numberStarHotel,
          numberStarFood,
@@ -160,7 +159,7 @@ export default class TourSingleContainer extends Component {
          numberStarSchedule,
          titleEveluate,
          contentEvaluate,
-         typeTourEvaluate
+         typeTourEvaluate,
       } = this.state;
       this.props.handleSubmitEvaluate({
          numberStarHotel,
@@ -171,7 +170,7 @@ export default class TourSingleContainer extends Component {
          typeEvaluate: typeTourEvaluate,
          title: titleEveluate,
          contentEvaluate: contentEvaluate,
-         idTour: this.props.tourById.idTour
+         idTour: this.props.tourById.idTour,
       });
       this.setState({
          visible: false,
@@ -183,25 +182,25 @@ export default class TourSingleContainer extends Component {
          nameEvaluate: "",
          titleEveluate: "",
          contentEvaluate: "",
-         typeTourEvaluate: ""
+         typeTourEvaluate: "",
       });
    };
 
-   handleCancel = e => {
+   handleCancel = (e) => {
       console.log(e);
       this.setState({
-         visible: false
+         visible: false,
       });
    };
 
-   onChangeRatingSortRadio = e => {
+   onChangeRatingSortRadio = (e) => {
       console.log("radio checked", e.target.value);
       this.setState({
-         valueRatingSort: e.target.value
+         valueRatingSort: e.target.value,
       });
    };
 
-   handleChange = value => {
+   handleChange = (value) => {
       this.setState({ value });
    };
 
@@ -230,7 +229,7 @@ export default class TourSingleContainer extends Component {
          : numStar;
    }
 
-   onChangeRows = rows => {
+   onChangeRows = (rows) => {
       this.setState({ rows });
    };
 
@@ -239,7 +238,7 @@ export default class TourSingleContainer extends Component {
    }
 
    compareValues(key, order = "asc") {
-      return function(a, b) {
+      return function (a, b) {
          if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
             // không tồn tại tính chất trên cả hai object
             return 0;
@@ -280,13 +279,17 @@ export default class TourSingleContainer extends Component {
             break;
       }
       const evaluatePersonal = evaluates.filter(
-         e => e.typeEvaluate === "personal"
+         (e) => e.typeEvaluate === "personal"
       );
-      const evaluateHeart = evaluates.filter(e => e.typeEvaluate === "heart");
-      const evaluateFamily = evaluates.filter(e => e.typeEvaluate === "family");
-      const evaluateFriend = evaluates.filter(e => e.typeEvaluate === "friend");
+      const evaluateHeart = evaluates.filter((e) => e.typeEvaluate === "heart");
+      const evaluateFamily = evaluates.filter(
+         (e) => e.typeEvaluate === "family"
+      );
+      const evaluateFriend = evaluates.filter(
+         (e) => e.typeEvaluate === "friend"
+      );
       const evaluateBusiness = evaluates.filter(
-         e => e.typeEvaluate === "business"
+         (e) => e.typeEvaluate === "business"
       );
       evaluates = [
          evaluates,
@@ -294,7 +297,7 @@ export default class TourSingleContainer extends Component {
          evaluateHeart,
          evaluateFamily,
          evaluateFriend,
-         evaluateBusiness
+         evaluateBusiness,
       ];
       return evaluates;
    };
@@ -310,7 +313,7 @@ export default class TourSingleContainer extends Component {
          numberStarSchedule,
          nameEvaluate,
          titleEveluate,
-         contentEvaluate
+         contentEvaluate,
       } = this.state;
       const { tourById, scheduleByIdTour, listTimelineByIdTour } = this.props;
       const listEvaluateByIdTour = this.renderEvaluates();
@@ -411,7 +414,7 @@ export default class TourSingleContainer extends Component {
                               tooltips={desc}
                               disabled
                               value={totalNumberStar}
-                              character={<Icon type="star" />}
+                              //      character={<Icon type="star" />}
                               //Phải làm tròn số với đơn vị 0.5
                               size="small"
                               className="mr-1 height-40"
@@ -467,7 +470,7 @@ export default class TourSingleContainer extends Component {
                            <DatePicker
                               size={"small"}
                               placeholder={"Chọn ngày khác"}
-                              dateRender={current => {
+                              dateRender={(current) => {
                                  const style = {};
                                  if (current.date() === 1) {
                                     style.border = "1px solid #1890ff";
@@ -555,8 +558,8 @@ export default class TourSingleContainer extends Component {
                               to={{
                                  pathname: `/book-tour/${tourById.idTour}`,
                                  state: {
-                                    tour: tourById
-                                 }
+                                    tour: tourById,
+                                 },
                               }}
                            >
                               <Tooltip
@@ -625,8 +628,8 @@ export default class TourSingleContainer extends Component {
                               to={{
                                  pathname: `/book-tour/${tourById.idTour}`,
                                  state: {
-                                    tour: tourById
-                                 }
+                                    tour: tourById,
+                                 },
                               }}
                            >
                               <Tooltip
@@ -721,7 +724,7 @@ export default class TourSingleContainer extends Component {
                                                 ellipsis={{
                                                    rows,
                                                    expandable: true,
-                                                   suffix: ""
+                                                   suffix: "",
                                                 }}
                                                 title={timeline.description}
                                              >
@@ -833,9 +836,9 @@ export default class TourSingleContainer extends Component {
                                              <Slider
                                                 className="col-md-9"
                                                 value={numberStarHotel}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                    this.setState({
-                                                      numberStarHotel: e
+                                                      numberStarHotel: e,
                                                    })
                                                 }
                                                 marks={marksEvaluate}
@@ -855,9 +858,9 @@ export default class TourSingleContainer extends Component {
                                              <Slider
                                                 className="col-md-9"
                                                 value={numberStarFood}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                    this.setState({
-                                                      numberStarFood: e
+                                                      numberStarFood: e,
                                                    })
                                                 }
                                                 // marks={marksEvaluate}
@@ -877,9 +880,9 @@ export default class TourSingleContainer extends Component {
                                              <Slider
                                                 className="col-md-9"
                                                 value={numberStarVehicle}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                    this.setState({
-                                                      numberStarVehicle: e
+                                                      numberStarVehicle: e,
                                                    })
                                                 }
                                                 step={1}
@@ -899,9 +902,9 @@ export default class TourSingleContainer extends Component {
                                              <Slider
                                                 className="col-md-9"
                                                 value={numberStarTourGuide}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                    this.setState({
-                                                      numberStarTourGuide: e
+                                                      numberStarTourGuide: e,
                                                    })
                                                 }
                                                 step={1}
@@ -921,9 +924,9 @@ export default class TourSingleContainer extends Component {
                                              <Slider
                                                 className="col-md-9"
                                                 value={numberStarSchedule}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                    this.setState({
-                                                      numberStarSchedule: e
+                                                      numberStarSchedule: e,
                                                    })
                                                 }
                                                 step={1}
@@ -956,7 +959,7 @@ export default class TourSingleContainer extends Component {
                                              className="mb-2"
                                              showSearch
                                              style={{
-                                                width: "100%"
+                                                width: "100%",
                                              }}
                                              placeholder="Kiểu du lịch"
                                              optionFilterProp="children"
@@ -1033,7 +1036,7 @@ export default class TourSingleContainer extends Component {
                                              dataSource={
                                                 listEvaluateByIdTour[index]
                                              }
-                                             renderItem={item => (
+                                             renderItem={(item) => (
                                                 <div className="ht-rate-detail">
                                                    <div className="ht-rate-avatar">
                                                       <Avatar
@@ -1130,7 +1133,7 @@ export default class TourSingleContainer extends Component {
                                                             ellipsis={{
                                                                rows,
                                                                expandable: true,
-                                                               suffix: ``
+                                                               suffix: ``,
                                                             }}
                                                             title={
                                                                item.contentEvaluate

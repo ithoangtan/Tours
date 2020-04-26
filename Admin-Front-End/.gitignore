@@ -7,6 +7,7 @@
 
 yarn.lock
 debug.log
+package-lock.json
 
 # testing
 /coverage

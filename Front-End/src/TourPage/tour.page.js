@@ -11,7 +11,6 @@ import TourDetailContainer from "./tourDetail.container";
 import SearchEngineTourPage from "../_components/SearchEngine/searchEngineTourPage.container";
 
 import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
-import { Icon } from "@ant-design/compatible";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -31,7 +30,7 @@ const costOption = [
    "< 1.000.000",
    "1 - 2.000.000",
    "2 - 4.000.000",
-   "> 4.000.000"
+   "> 4.000.000",
 ];
 
 const tourTypeOption = [
@@ -40,14 +39,14 @@ const tourTypeOption = [
    "Trọn gói",
    "Không vé máy bay",
    "Khởi hành mỗi ngày",
-   "Cho đoàn doanh nghiệp"
+   "Cho đoàn doanh nghiệp",
 ];
 const serviceMore = [
    //Dịch vụ đi kèm
    "Hướng dẫn viên",
    "Vé tham quan",
    "Xe đưa đón",
-   "Hỗ trợ người  khuyết tật "
+   "Hỗ trợ người  khuyết tật ",
 ];
 const tourTheme = [
    //Tour theo chủ đề
@@ -56,7 +55,7 @@ const tourTheme = [
    "Tuần trăng mật",
    "Giađình Nghĩ dưỡng",
    "Người cao tuổi",
-   "Liên tuyến, Xuyên Việt"
+   "Liên tuyến, Xuyên Việt",
 ];
 
 const defaultCheckedListCostOption = [];
@@ -87,97 +86,97 @@ class TourContainer extends Component {
          listTour: [],
          loading: true,
          rows: 1,
-         size: "large"
+         size: "large",
       };
    }
 
-   handleChange = value => {
+   handleChange = (value) => {
       this.setState({ valueStar: value });
    };
 
-   onChangeCostOption = checkedListFilterCostOption => {
+   onChangeCostOption = (checkedListFilterCostOption) => {
       this.setState({
          checkedListFilterCostOption,
          indeterminate:
             !!checkedListFilterCostOption.length &&
             checkedListFilterCostOption.length < costOption.length,
-         checkAll: checkedListFilterCostOption.length === costOption.length
+         checkAll: checkedListFilterCostOption.length === costOption.length,
       });
    };
 
-   onChangeTourTypeOption = checkedListFilterTourTypeOption => {
+   onChangeTourTypeOption = (checkedListFilterTourTypeOption) => {
       this.setState({
          checkedListFilterTourTypeOption,
          indeterminate:
             !!checkedListFilterTourTypeOption.length &&
             checkedListFilterTourTypeOption.length < tourTypeOption.length,
          checkAll:
-            checkedListFilterTourTypeOption.length === tourTypeOption.length
+            checkedListFilterTourTypeOption.length === tourTypeOption.length,
       });
    };
-   onChangeServiceMore = checkedListFilterServiceMore => {
+   onChangeServiceMore = (checkedListFilterServiceMore) => {
       this.setState({
          checkedListFilterServiceMore,
          indeterminate:
             !!checkedListFilterServiceMore.length &&
             checkedListFilterServiceMore.length < serviceMore.length,
-         checkAll: checkedListFilterServiceMore.length === serviceMore.length
+         checkAll: checkedListFilterServiceMore.length === serviceMore.length,
       });
    };
-   onChangeTourTheme = checkedListFilterTourTheme => {
+   onChangeTourTheme = (checkedListFilterTourTheme) => {
       this.setState({
          checkedListFilterTourTheme,
          indeterminate:
             !!checkedListFilterTourTheme.length &&
             checkedListFilterTourTheme.length < tourTheme.length,
-         checkAll: checkedListFilterTourTheme.length === tourTheme.length
+         checkAll: checkedListFilterTourTheme.length === tourTheme.length,
       });
    };
 
-   onChange2 = e => {
+   onChange2 = (e) => {
       this.setState({
-         value2: e.target.value
+         value2: e.target.value,
       });
    };
 
-   onSearch = value => {
+   onSearch = (value) => {
       this.setState({ valueSearch: value });
    };
 
-   onChangeExpand = rows => {
+   onChangeExpand = (rows) => {
       this.setState({ rows });
    };
 
-   onCheckAllChangeCostOption = e => {
+   onCheckAllChangeCostOption = (e) => {
       this.setState({
          checkedListFilterCostOption: e.target.checked ? costOption : [],
          indeterminateCostOption: false,
-         checkAllCostOption: e.target.checked
+         checkAllCostOption: e.target.checked,
       });
    };
 
-   onCheckAllChangeTourTypeOption = e => {
+   onCheckAllChangeTourTypeOption = (e) => {
       this.setState({
          checkedListFilterTourTypeOption: e.target.checked
             ? tourTypeOption
             : [],
          indeterminateTourTypeOption: false,
-         checkAllTourTypeOption: e.target.checked
+         checkAllTourTypeOption: e.target.checked,
       });
    };
 
-   onCheckAllChangeServiceMore = e => {
+   onCheckAllChangeServiceMore = (e) => {
       this.setState({
          checkedListFilterServiceMore: e.target.checked ? serviceMore : [],
          indeterminateServiceMore: false,
-         checkAllServiceMore: e.target.checked
+         checkAllServiceMore: e.target.checked,
       });
    };
-   onCheckAllChangeTourTheme = e => {
+   onCheckAllChangeTourTheme = (e) => {
       this.setState({
          checkedListFilterTourTheme: e.target.checked ? tourTheme : [],
          indeterminateTourTheme: false,
-         checkAllTourTheme: e.target.checked
+         checkAllTourTheme: e.target.checked,
       });
    };
 
@@ -187,7 +186,7 @@ class TourContainer extends Component {
       const {
          fetchListTourRequest,
          fetchListTourSearchRequest,
-         fetchListTourImageRequest
+         fetchListTourImageRequest,
       } = tourAllActions;
       if (data.keySearch !== null && data.keySearch !== undefined) {
          await fetchListTourSearchRequest(data);
@@ -201,7 +200,7 @@ class TourContainer extends Component {
       window.scrollTo({
          top: 0,
          left: 0,
-         behavior: "smooth"
+         behavior: "smooth",
       });
       const { listTour } = this.props;
       this.fetch();
@@ -209,15 +208,15 @@ class TourContainer extends Component {
       this.setState({ listTour, haveData: true });
    }
    loaded = () => {
-      this.setState(props => {
+      this.setState((props) => {
          return {
-            loading: false
+            loading: false,
          };
       });
    };
 
    compareValues(key, order = "asc") {
-      return function(a, b) {
+      return function (a, b) {
          if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
             // không tồn tại tính chất trên cả hai object
             return 0;
@@ -242,7 +241,7 @@ class TourContainer extends Component {
       switch (valueSearch.conditional) {
          case "name":
             listTours = listTours.filter(
-               e =>
+               (e) =>
                   e.titleTour
                      .toLowerCase()
                      .includes(valueSearch.keySearch.toLowerCase()) &&
@@ -252,7 +251,7 @@ class TourContainer extends Component {
             break;
          case "landmark" || "address":
             listTours = listTours.filter(
-               e =>
+               (e) =>
                   e.address
                      .toLowerCase()
                      .includes(valueSearch.keySearch.toLowerCase()) &&
@@ -262,7 +261,7 @@ class TourContainer extends Component {
             break;
          case "type":
             listTours = listTours.filter(
-               e =>
+               (e) =>
                   e.type
                      .toLowerCase()
                      .includes(valueSearch.keySearch.toLowerCase()) &&
@@ -272,7 +271,7 @@ class TourContainer extends Component {
             break;
          default:
             listTours = listTours.filter(
-               e =>
+               (e) =>
                   (e.titleTour
                      .toLowerCase()
                      .includes(valueSearch.keySearch.toLowerCase()) ||
@@ -315,7 +314,7 @@ class TourContainer extends Component {
          listTours = this.handleSearchListTourWithValue(listTours, valueSearch);
       }
       if (valueStar > 0) {
-         listTours = listTours.filter(e => e.votes === valueStar);
+         listTours = listTours.filter((e) => e.votes === valueStar);
       }
       if (this.state.value2 === 1)
          listTours.sort(this.compareValues("titleTour", "asc"));
@@ -337,7 +336,7 @@ class TourContainer extends Component {
                   key={index}
                   bookTour={false}
                   listImageTour={listImageTour.filter(
-                     imageTour => imageTour.idTour === tour.idTour
+                     (imageTour) => imageTour.idTour === tour.idTour
                   )}
                   loaded={this.loaded}
                />
@@ -370,7 +369,7 @@ class TourContainer extends Component {
       const radioStyle = {
          display: "block",
          height: "30px",
-         lineHeight: "30px"
+         lineHeight: "30px",
       };
 
       //Tổng số sao đánh giá của tất cả các tour tìm kiếm được
@@ -404,7 +403,7 @@ class TourContainer extends Component {
                                  />
                                  <div
                                     style={{
-                                       borderTop: "1px solid #E9E9E9"
+                                       borderTop: "1px solid #E9E9E9",
                                     }}
                                     className="mb-1 pb-1 mt-2"
                                  >
@@ -436,7 +435,7 @@ class TourContainer extends Component {
                                  />
                                  <div
                                     style={{
-                                       borderTop: "1px solid #E9E9E9"
+                                       borderTop: "1px solid #E9E9E9",
                                     }}
                                     className="mb-1 pb-1 mt-2"
                                  >
@@ -471,7 +470,7 @@ class TourContainer extends Component {
                                  />
                                  <div
                                     style={{
-                                       borderTop: "1px solid #E9E9E9"
+                                       borderTop: "1px solid #E9E9E9",
                                     }}
                                     className="mb-1 pb-1 mt-2"
                                  >
@@ -504,7 +503,7 @@ class TourContainer extends Component {
                                  />
                                  <div
                                     style={{
-                                       borderTop: "1px solid #E9E9E9"
+                                       borderTop: "1px solid #E9E9E9",
                                     }}
                                     className="mb-1 pb-1 mt-2"
                                  >
@@ -527,7 +526,7 @@ class TourContainer extends Component {
                                     tooltips={desc}
                                     onChange={this.handleChange}
                                     value={valueStar}
-                                    character={<Icon type="star" />}
+                                    // character={<Icon type="star" />}
                                  />
                                  {valueStar ? (
                                     <span className="ant-rate-text">
@@ -548,7 +547,7 @@ class TourContainer extends Component {
                               <Text
                                  style={{
                                     paddingBottom: "5px",
-                                    borderBottom: "1px solid #E9E9E9"
+                                    borderBottom: "1px solid #E9E9E9",
                                  }}
                               >
                                  Sắp xếp theo thứ tự:
@@ -605,7 +604,7 @@ class TourContainer extends Component {
                                  defaultValue={this.numberStarCal(
                                     totalNumberStar
                                  )}
-                                 character={<Icon type="star"></Icon>}
+                               //  character={<Icon type="star"></Icon>}
                                  //Phải làm tròn số với đơn vị 0.5
                                  size="small"
                                  className="mr-1 height-40"
@@ -626,7 +625,7 @@ class TourContainer extends Component {
                            ellipsis={{
                               rows,
                               expandable: true,
-                              suffix: "--ithoangtan"
+                              suffix: "--ithoangtan",
                            }}
                            title={`${article}--ithoangtan`}
                            className="ht-describe-info-tour-page"
@@ -742,23 +741,23 @@ TourContainer.propTypes = {
       fetchPostTourRequest: PropTypes.func,
       fetchDeleteTourRequest: PropTypes.func,
       fetchPatchTourRequest: PropTypes.func,
-      fetchListTourImageRequest: PropTypes.func
+      fetchListTourImageRequest: PropTypes.func,
    }),
    listTour: PropTypes.array,
    listTourSearch: PropTypes.array,
-   listImageTour: PropTypes.array
+   listImageTour: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       listTour: state.tour.listTour,
       listTourSearch: state.tour.listTourSearch,
-      listImageTour: state.tour.listImageTour
+      listImageTour: state.tour.listImageTour,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      tourAllActions: bindActionCreators(tourActions, dispatch)
+      tourAllActions: bindActionCreators(tourActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };

@@ -8,10 +8,11 @@ import {
    Checkbox,
    Button,
    AutoComplete,
-   message
+   message,
+   Form,
+   Icon,
    // Spin
 } from "antd";
-import { Form, Icon } from "@ant-design/compatible";
 
 import { mapAddressNotWardToOptionAntd } from "../../BookTourPage/addressVN";
 
@@ -36,11 +37,11 @@ class RegistrationContainer extends React.Component {
          redirect: false,
          confirmDirty: false,
          autoCompleteResult: [],
-         loading: false
+         loading: false,
       };
    }
 
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll(async (err, values) => {
          if (!err) {
@@ -51,7 +52,7 @@ class RegistrationContainer extends React.Component {
                ...values,
                role: "user",
                name: values.username,
-               phone: values.prefix + values.phone
+               phone: values.prefix + values.phone,
             };
             message.loading("Register...", 1);
             await fetchRegisterRequest(data);
@@ -69,7 +70,7 @@ class RegistrationContainer extends React.Component {
       ) {
          this.setState({
             redirect: true,
-            loading: false
+            loading: false,
          });
       }
    }
@@ -81,7 +82,7 @@ class RegistrationContainer extends React.Component {
       }
    }
 
-   handleConfirmBlur = e => {
+   handleConfirmBlur = (e) => {
       const { value } = e.target;
       this.setState({ confirmDirty: this.state.confirmDirty || !!value });
    };
@@ -103,13 +104,13 @@ class RegistrationContainer extends React.Component {
       callback();
    };
 
-   handleWebsiteChange = value => {
+   handleWebsiteChange = (value) => {
       let autoCompleteResult;
       if (!value) {
          autoCompleteResult = [];
       } else {
          autoCompleteResult = [".com", ".vn", ".org", ".net"].map(
-            domain => `${value}${domain}`
+            (domain) => `${value}${domain}`
          );
       }
       this.setState({ autoCompleteResult });
@@ -126,34 +127,34 @@ class RegistrationContainer extends React.Component {
       const formItemLayout = {
          labelCol: {
             xs: { span: 24 },
-            sm: { span: 8 }
+            sm: { span: 8 },
          },
          wrapperCol: {
             xs: { span: 24 },
-            sm: { span: 16 }
-         }
+            sm: { span: 16 },
+         },
       };
       const tailFormItemLayout = {
          wrapperCol: {
             xs: {
                span: 24,
-               offset: 0
+               offset: 0,
             },
             sm: {
                span: 16,
-               offset: 8
-            }
-         }
+               offset: 8,
+            },
+         },
       };
       const prefixSelector = getFieldDecorator("prefix", {
-         initialValue: "84"
+         initialValue: "84",
       })(
          <Select style={{ width: 70 }}>
             <Option value="84">+84</Option>
          </Select>
       );
 
-      const websiteOptions = autoCompleteResult.map(website => (
+      const websiteOptions = autoCompleteResult.map((website) => (
          <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
       ));
 
@@ -174,13 +175,13 @@ class RegistrationContainer extends React.Component {
                   rules: [
                      {
                         type: "email",
-                        message: "The input is not valid E-mail!"
+                        message: "The input is not valid E-mail!",
                      },
                      {
                         required: true,
-                        message: "Please input your E-mail!"
-                     }
-                  ]
+                        message: "Please input your E-mail!",
+                     },
+                  ],
                })(<Input />)}
             </Form.Item>
             <Form.Item className="mb-2" label="Password *" hasFeedback>
@@ -188,12 +189,12 @@ class RegistrationContainer extends React.Component {
                   rules: [
                      {
                         required: true,
-                        message: "Please input your password!"
+                        message: "Please input your password!",
                      },
                      {
-                        validator: this.validateToNextPassword
-                     }
-                  ]
+                        validator: this.validateToNextPassword,
+                     },
+                  ],
                })(<Input.Password />)}
             </Form.Item>
             <Form.Item className="mb-2" label="Confirm Password *" hasFeedback>
@@ -201,12 +202,12 @@ class RegistrationContainer extends React.Component {
                   rules: [
                      {
                         required: true,
-                        message: "Please confirm your password!"
+                        message: "Please confirm your password!",
                      },
                      {
-                        validator: this.compareToFirstPassword
-                     }
-                  ]
+                        validator: this.compareToFirstPassword,
+                     },
+                  ],
                })(<Input.Password onBlur={this.handleConfirmBlur} />)}
             </Form.Item>
             <Form.Item
@@ -225,9 +226,9 @@ class RegistrationContainer extends React.Component {
                      {
                         required: true,
                         message: "Please input your username!",
-                        whitespace: true
-                     }
-                  ]
+                        whitespace: true,
+                     },
+                  ],
                })(<Input />)}
             </Form.Item>
             <Form.Item className="mb-2" label="Habitual Residence">
@@ -237,9 +238,9 @@ class RegistrationContainer extends React.Component {
                      {
                         type: "array",
                         required: true,
-                        message: "Please select your habitual residence!"
-                     }
-                  ]
+                        message: "Please select your habitual residence!",
+                     },
+                  ],
                })(
                   <Cascader
                      options={mapAddressNotWardToOptionAntd()}
@@ -252,9 +253,9 @@ class RegistrationContainer extends React.Component {
                   rules: [
                      {
                         required: true,
-                        message: "Please input your phone number!"
-                     }
-                  ]
+                        message: "Please input your phone number!",
+                     },
+                  ],
                })(
                   <Input
                      addonBefore={prefixSelector}
@@ -296,7 +297,7 @@ class RegistrationContainer extends React.Component {
             </Form.Item> */}
             <Form.Item className="mb-2" {...tailFormItemLayout}>
                {getFieldDecorator("agreement", {
-                  valuePropName: "checked"
+                  valuePropName: "checked",
                })(
                   <Checkbox>
                      I have read the{" "}
@@ -334,19 +335,19 @@ const WrappedRegistrationContainer = Form.create({ name: "register" })(
 WrappedRegistrationContainer.propTypes = {
    classes: PropTypes.object,
    authAllActions: PropTypes.shape({
-      fetchRegisterRequest: PropTypes.func
+      fetchRegisterRequest: PropTypes.func,
    }),
-   auth: PropTypes.array
+   auth: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      auth: state.auth.auth
+      auth: state.auth.auth,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      authAllActions: bindActionCreators(authActions, dispatch)
+      authAllActions: bindActionCreators(authActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };
