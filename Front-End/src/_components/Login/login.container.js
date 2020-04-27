@@ -10,7 +10,9 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { GoogleLogin } from "react-google-login";
 import * as authActions from "../../_actions/auth.actions";
 import * as INDEX_CONSTANTS from "../../_constants/index.constants";
-import { Icon, Input, Button, Checkbox, message, Spin, Form } from "antd";
+
+import { Icon, Form, Input, Button, Checkbox, message, Spin } from "antd";
+
 
 class LoginContainer extends Component {
    constructor(props) {
