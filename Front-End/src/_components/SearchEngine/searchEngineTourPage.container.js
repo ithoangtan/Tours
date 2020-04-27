@@ -1,16 +1,8 @@
 import React, { Component } from "react";
 
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {
-   Input,
-   DatePicker,
-   Select,
-   Button,
-   Icon,
-   AutoComplete,
-   message
-} from "antd";
+import { Input, DatePicker, Select, Button, Icon, AutoComplete } from "antd";
 import moment from "moment";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -24,45 +16,45 @@ const dataSourceAll = [
       children: [
          {
             title: "Tết Nguyên Đán",
-            count: 100
+            count: 100,
          },
          {
             title: "Năm mới 2020",
-            count: 1060
+            count: 1060,
          },
          {
             title: "Mùa hoa anh đào nở",
-            count: 2
-         }
-      ]
+            count: 2,
+         },
+      ],
    },
    {
       title: "Địa danh",
       children: [
          {
             title: "Thung lũng tình yêu",
-            count: 601
+            count: 601,
          },
          {
             title: "Hạ Long bay",
-            count: 300
-         }
-      ]
+            count: 300,
+         },
+      ],
    },
    {
       title: "Địa chỉ",
       children: [
          {
             title: "Thành phố Đà Lạt",
-            count: 150
+            count: 150,
          },
 
          {
             title: "Tokyo",
-            count: 254
-         }
-      ]
-   }
+            count: 254,
+         },
+      ],
+   },
 ];
 
 export default class SearchEngineContainer extends Component {
@@ -77,15 +69,15 @@ export default class SearchEngineContainer extends Component {
          dataSourceAll: dataSourceAll,
          onSearch: false,
          // Responsize antd component
-         sizeWindow: ""
+         sizeWindow: "",
       };
    }
 
    //Auto complete search key
 
-   handleSearch = value => {
+   handleSearch = (value) => {
       this.setState({
-         dataSource: value ? this.searchResult(value) : []
+         dataSource: value ? this.searchResult(value) : [],
       });
    };
 
@@ -104,7 +96,7 @@ export default class SearchEngineContainer extends Component {
          .map((item, idx) => ({
             query,
             category: `${query}${idx}`,
-            count: this.getRandomInt(200, 100)
+            count: this.getRandomInt(200, 100),
          }));
    }
 
@@ -133,13 +125,13 @@ export default class SearchEngineContainer extends Component {
       return today;
    };
 
-   onChangeConditional = value => {
+   onChangeConditional = (value) => {
       this.setState({ conditional: value });
    };
-   onChangeKeySearch = value => {
+   onChangeKeySearch = (value) => {
       this.setState({ keySearch: value });
    };
-   onChangeDay = moment => {
+   onChangeDay = (moment) => {
       if (moment[0] !== undefined) {
          const dayStartTemp = moment[0].format("YYYY-MM-DD");
          const dayEndTemp = moment[1].format("YYYY-MM-DD");
@@ -158,7 +150,7 @@ export default class SearchEngineContainer extends Component {
       // console.log("focus");
    };
 
-   onSearch = event => {
+   onSearch = (event) => {
       event.preventDefault();
       this.setState({ onSearch: true });
       const { keySearch, dayStart, dayEnd, conditional } = this.state;
@@ -166,7 +158,7 @@ export default class SearchEngineContainer extends Component {
          keySearch: keySearch,
          dayStart,
          dayEnd,
-         conditional
+         conditional,
       });
    };
 
@@ -183,9 +175,9 @@ export default class SearchEngineContainer extends Component {
 
    options() {
       let options = this.state.dataSourceAll
-         .map(group => (
+         .map((group) => (
             <OptGroup key={group.title} label={this.renderTitle(group.title)}>
-               {group.children.map(opt => (
+               {group.children.map((opt) => (
                   <OptionComplete key={opt.title} value={opt.title}>
                      {opt.title}
                      <span className="certain-search-item-count">
@@ -198,7 +190,7 @@ export default class SearchEngineContainer extends Component {
          .concat([
             <Option disabled key="all" className="show-all">
                <Link to="/tour">View all results</Link>
-            </Option>
+            </Option>,
          ]);
       return options;
    }
@@ -210,7 +202,7 @@ export default class SearchEngineContainer extends Component {
 
    componentWillMount() {
       this.setState({
-         sizeWindow: window.innerWidth > 767.98 ? "default" : "small"
+         sizeWindow: window.innerWidth > 767.98 ? "default" : "small",
       });
    }
    l;
@@ -231,7 +223,7 @@ export default class SearchEngineContainer extends Component {
                               dropdownClassName="certain-category-search-dropdown"
                               size={sizeWindow}
                               style={{
-                                 width: "100%"
+                                 width: "100%",
                               }}
                               dataSource={
                                  this.state.keySearch === "" &&
@@ -269,7 +261,7 @@ export default class SearchEngineContainer extends Component {
                               disabledDate={this.disabledDate}
                               defaultValue={[
                                  moment(this.getCurrentDay(), dateFormat),
-                                 moment("12/12/2030", dateFormat)
+                                 moment("12/12/2030", dateFormat),
                               ]}
                               onChange={this.onChangeDay}
                               format={dateFormat}

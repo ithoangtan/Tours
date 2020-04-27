@@ -21,7 +21,7 @@ export default class BlogSingleContainer extends Component {
       }
    }
 
-   renderContentPost = contentPost => {
+   renderContentPost = (contentPost) => {
       if (contentPost) {
          return parseHtml(`${contentPost}`);
       }
@@ -42,11 +42,11 @@ export default class BlogSingleContainer extends Component {
          vote: false,
          numVote: 131,
          valueRate: undefined,
-         isLogin: this.checkLogin()
+         isLogin: this.checkLogin(),
       };
    }
 
-   handleChange = value => {
+   handleChange = (value) => {
       this.setState({ valueRate: value });
       this.props.handleVoteBlog(value);
    };
@@ -55,11 +55,11 @@ export default class BlogSingleContainer extends Component {
          vote: !this.state.vote,
          numVote: this.state.vote
             ? this.state.numVote - 1
-            : this.state.numVote + 1
+            : this.state.numVote + 1,
       });
    };
    render() {
-      const { vote, numVote, valueRate, isLogin } = this.state;
+      const { valueRate, isLogin } = this.state;
       const { postById, listPostNew, listPostViews } = this.props;
       const postDate = postById.dateEdited
          ? postById.dateEdited
@@ -205,5 +205,5 @@ BlogSingleContainer.propTypes = {
    handleVoteBlog: PropTypes.func,
    postById: PropTypes.object,
    listPostNew: PropTypes.array,
-   listPostViews: PropTypes.array
+   listPostViews: PropTypes.array,
 };
