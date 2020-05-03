@@ -11,11 +11,12 @@ TLCN - CNPM - demo TLCN CNPM Khóa 2016-2020
 - [node.js] - evented I/O for the backend
 - [Express] - fast node.js network app framework
 - [heroku] - hosting free
+- [aws-EC2] - AWS cloud service
 - [nganluong(sandbox), onepay, vnpay, sohapay] - payment gateway VietNam
 
 ### Installation and run
 
-Dillinger requires [Node.js](https://nodejs.org/) v6+ to run.
+Dillinger requires [Node.js](https://nodejs.org/) v9+ to run.
 
 Install the dependencies and devDependencies and start the server.
 
@@ -47,11 +48,13 @@ $ yarn start
 ```
 
 ### DEMO:
+
 - Link video: https://www.youtube.com/watch?v=uulm3fSYRwU
-- ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
+- ADMIN: http://admin-kinhdoanhtourdulich.herokuapp.com/
 - account test: ithoangtan@gmail.com; password: 123456a@
-- USER: https://kinhdoanhtourdulich.herokuapp.com/
+- USER: http://kinhdoanhtourdulich.herokuapp.com/
 - API: https://api-kinhdoanhtourdulich.herokuapp.com/
+- API: ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000
 
 ### Todos
 
