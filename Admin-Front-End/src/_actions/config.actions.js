@@ -12,8 +12,6 @@ export const fetchListConfigSuccess = (data) => {
    return {
       type: configConstants.FETCH_CONFIG_SUCCESS,
       payload: {
-         // Thường đi làm thì người ta hay gọi là FETCH
-         //data gửi kèm trong actions là payload ở vị trí này
          data,
       },
    };
@@ -27,13 +25,7 @@ export const fetchListConfigError = (error) => {
       },
    };
 };
-/**
- * B1: fetch isConfigRequest()
- * B2: ResetL state configs --> []
- * B3: Khi API thành công thì vào then:
- * fetchListConfigSucces (data response)
- *
- */
+
 export const fetchListConfigRequest = () => {
    return (dispatch) => {
       dispatch(fetchListConfig()); //reset state configs-->[]
@@ -122,8 +114,6 @@ export const fetchPostConfigSuccess = (newRecord, data) => {
    return {
       type: configConstants.FETCH_CONFIG_CREATE_SUCCESS,
       payload: {
-         // Thường đi làm thì người ta hay gọi là FETCH
-         //data gửi kèm trong actions là payload ở vị trí này
          data,
       },
       newRecord: { newRecord },
@@ -159,8 +149,6 @@ export const fetchDeleteConfigSuccess = (record, data) => {
    return {
       type: configConstants.FETCH_CONFIG_DELETE_SUCCESS,
       payload: {
-         // Thường đi làm thì người ta hay gọi là FETCH
-         //data gửi kèm trong actions là payload ở vị trí này
          data,
       },
       record: { record },
@@ -195,8 +183,6 @@ export const fetchPatchConfigSuccess = (newRecord, data) => {
    return {
       type: configConstants.FETCH_CONFIG_PATCH_SUCCESS,
       payload: {
-         // Thường đi làm thì người ta hay gọi là FETCH
-         //data gửi kèm trong actions là payload ở vị trí này
          data,
       },
       newRecord,

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import SideBarContainer from "../AdminParentContainer/sideBar.container";
-import PostAuthorInfoWrapperContainer from "./PostAuthorInfo/PostAuthorInfoWrapper.container";
+import ConfigWrapperContainer from "./Config/ConfigWrapper.container";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -23,22 +23,23 @@ class PostAuthorInfo extends Component {
 
       //Load data post by Id post
       const { configAllActions } = this.props;
-      const { fetchConfigByInfoTypeRequest } = configAllActions;
-      await fetchConfigByInfoTypeRequest(
-         INDEX_CONSTANTS.CONFIG_INFO_TYPE_AUTHOR_POST
-      );
+      const { fetchListConfigRequest } = configAllActions;
+      await fetchListConfigRequest();
    };
    render() {
-      let { config } = this.props;
-      if (config.idConfig !== undefined)
-         config.configs = JSON.parse(config.configs);
+      const { configs } = this.props;
+      if (configs.length !== 0) {
+         for (let i = 0; i < configs.length; i++) {
+            configs[i].configs = JSON.parse(configs[i].configs);
+         }
+      }
       return (
          <div id="wrapper">
             {/* Sidebar */}
             <SideBarContainer {...this.props} />
             {/* End of Sidebar */}
             {/* Content Wrapper */}
-            <PostAuthorInfoWrapperContainer {...this.props} config={config} />
+            <ConfigWrapperContainer {...this.props} configs={configs} />
             {/* End of Content Wrapper */}
             {/* Scroll to Top Button*/}
             <a className="scroll-to-top rounded ht-loaded" href="#page-top">
@@ -52,19 +53,19 @@ class PostAuthorInfo extends Component {
 PostAuthorInfo.propTypes = {
    classes: PropTypes.object,
    configAllActions: PropTypes.shape({
-      fetchConfigByInfoTypeRequest: PropTypes.func,
+      fetchListConfigRequest: PropTypes.func,
    }),
+   configs: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
    return {
-      config: state.config.configByInfoType,
+      configs: state.config.listConfig,
    };
 };
 const mapDispatchToProps = (dispatch) => {
    return {
       configAllActions: bindActionCreators(configActions, dispatch),
-      //Bên trái chỉ là đặt tên thôi, bên phải là configActions ở bên post.action.js
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PostAuthorInfo);

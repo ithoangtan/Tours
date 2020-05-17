@@ -24,7 +24,6 @@ const reducer = (state = initialState, action) => {
          };
       case configConstants.FETCH_CONFIG_SUCCESS: {
          const { data } = action.payload;
-         // toastSuccess(data);
          return {
             ...state,
             listConfig: data,
