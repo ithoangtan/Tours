@@ -25,6 +25,7 @@ import RegisterPage from "./LoginAndRegisterPage/register.page";
 import ForgotPasswordPage from "./LoginAndRegisterPage/forgotPassword.page";
 import ForgotPasswordPageStep2 from "./LoginAndRegisterPage/forgotPasswordStep2.page";
 import BookTourPage from "./BookTourPage/bookTour.page";
+import OrderPage from './OrderPage/order.page'
 
 //common Customer
 import FooterContainer from "./_components/Footer/footer.container";
@@ -69,6 +70,19 @@ const router = [
          <>
             <NavigationContainer />
             <RegisterPage />
+            <FooterContainer />
+            <Loaded />
+            <BackToTop />
+         </>
+      )
+   },
+   {
+      path: "/orders",
+      exact: true,
+      component: ({ match }, props) => (
+         <>
+            <NavigationContainer />
+            <OrderPage match={match} {...props} />
             <FooterContainer />
             <Loaded />
             <BackToTop />

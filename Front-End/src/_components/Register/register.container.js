@@ -337,7 +337,6 @@ WrappedRegistrationContainer.propTypes = {
    authAllActions: PropTypes.shape({
       fetchRegisterRequest: PropTypes.func,
    }),
-   auth: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
