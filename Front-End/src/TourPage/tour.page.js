@@ -10,6 +10,10 @@ import * as tourActions from "../_actions/tour.actions";
 import TourDetailContainer from "./tourDetail.container";
 import SearchEngineTourPage from "../_components/SearchEngine/searchEngineTourPage.container";
 
+
+import * as INDEX_CONSTANTS from "../_constants/index.constants";
+import funcLoadJs from "../_constants/loadJs.constants";
+
 import { Typography, Rate, Checkbox, Spin, Radio } from "antd";
 
 const { Title, Text, Paragraph } = Typography;
@@ -214,6 +218,10 @@ class TourContainer extends Component {
          };
       });
    };
+
+   componentDidUpdate() {
+      funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
+   }
 
    compareValues(key, order = "asc") {
       return function (a, b) {
@@ -526,15 +534,15 @@ class TourContainer extends Component {
                                     tooltips={desc}
                                     onChange={this.handleChange}
                                     value={valueStar}
-                                    // character={<Icon type="star" />}
+                                 // character={<Icon type="star" />}
                                  />
                                  {valueStar ? (
                                     <span className="ant-rate-text">
                                        {desc[valueStar]}
                                     </span>
                                  ) : (
-                                    ""
-                                 )}
+                                       ""
+                                    )}
                               </span>
                            </div>
                         </div>

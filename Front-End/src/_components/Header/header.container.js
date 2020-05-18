@@ -47,7 +47,7 @@ class HeaderContainer extends Component {
    render() {
       const { size, carouselTours } = this.state;
       return (
-         <div className="ht-header">
+         <div className="ht-header" style={{ height: window.innerHeight, maxHeight: "610px", }}>
             <div
                id="carousel-example-generic"
                className="carousel slide"
@@ -73,9 +73,11 @@ class HeaderContainer extends Component {
                            <div
                               className="hero-wrap js-fullheight"
                               style={{
+                                 maxHeight: "610px",
+                                 height: window.innerHeight,
                                  backgroundImage: tour.images[0]
                                     ? `linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)), url('${API_ENDPOINT +
-                                         tour.images[0].url}')`
+                                    tour.images[0].url}')`
                                     : "linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)"
                               }}
                               data-stellar-background-ratio="0.5"
