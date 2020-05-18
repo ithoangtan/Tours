@@ -13,7 +13,7 @@ export default class SideBarContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         toggled: true
+         toggled: true,
       };
    }
    componentWillMount() {
@@ -63,7 +63,7 @@ export default class SideBarContainer extends Component {
             </li>
             <li className="nav-item">
                <Tooltip placement="right" title={"Config general"}>
-                  <Link to="/admin/general" className="nav-link">
+                  <Link to="/admin/config" className="nav-link">
                      <i className="fas fa-cogs"></i>
                      <span> General</span>
                   </Link>

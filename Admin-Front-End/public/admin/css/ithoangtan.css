@@ -1316,3 +1316,21 @@
 .ht-actions-read-and-unread {
    cursor: pointer;
 }
+
+/* Config */
+.ht-config-title {
+   font-size: 1.5rem;
+   font-weight: 500;
+   color: rgb(0, 155, 82);
+   text-shadow: 1px 1px rbga(0, 0, 0, 0.2);
+}
+
+.ht-config-content-two {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: flex-start;
+}
+.ht-config-child-menu {
+   display: flex;
+}

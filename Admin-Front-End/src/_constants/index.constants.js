@@ -24,7 +24,7 @@ export const MULTIPLIER_ID_TIMELINE = 10;
 
 export const DEFAULT_IMAGE_URL = "/img/imgdefault.gif";
 
-export const CONFIG_INFO_TYPE = "AuthorInfo";
+export const CONFIG_INFO_TYPE_AUTHOR_POST = "AuthorInfo";
 
 export const XHTML_LOADING = (
    <div

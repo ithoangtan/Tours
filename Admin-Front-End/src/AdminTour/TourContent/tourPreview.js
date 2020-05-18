@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Typography, Rate, Tag, Button, Carousel, Tooltip, Icon } from "antd";
+import { Typography, Rate, Tag, Button, Carousel, Tooltip } from "antd";
 import TourDetailImages from "./tourDetailImage";
 
 import moment from "moment";
