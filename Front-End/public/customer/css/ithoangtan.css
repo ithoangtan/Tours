@@ -433,6 +433,10 @@
   width: 100%;
 }
 
+.ant-carousel.ant-carousel-vertical .slick-track {
+  height: auto !important;
+}
+
 .ht-header-slideshow {
   max-width: 100px !important;
 }

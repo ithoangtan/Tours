@@ -9,16 +9,28 @@ class BlogSinglePage extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         idPost: 0
+         idPost: 0,
       };
    }
 
    fetch = async () => {
       const { idPost } = this.props.match.params;
-      const { postAllActions, listPostNew, listPostViews } = this.props;
+      const {
+         postAllActions,
+         listPostNew,
+         listPostViews,
+         listPostImage,
+      } = this.props;
 
       //load Post byId
-      const { fetchPostByIdRequest, fetchListPostRequest } = postAllActions;
+      const {
+         fetchPostByIdRequest,
+         fetchListPostRequest,
+         fetchListPostImageRequest,
+      } = postAllActions;
+      if (!listPostImage.length) {
+         await fetchListPostImageRequest();
+      }
       await fetchPostByIdRequest(idPost);
       if (!listPostNew.length || !listPostViews.length) {
          await fetchListPostRequest();
@@ -30,11 +42,11 @@ class BlogSinglePage extends Component {
       this.fetch();
       window.scrollTo({
          top: 0,
-         left: 0
+         left: 0,
       });
    }
 
-   onVoteBlog = vote => {
+   onVoteBlog = (vote) => {
       const { postAllActions, postById } = this.props;
       const { votePostdRequest } = postAllActions;
       votePostdRequest({ idPost: postById.idPost, vote });
@@ -69,23 +81,26 @@ BlogSinglePage.propTypes = {
    postAllActions: PropTypes.shape({
       fetchPostByIdRequest: PropTypes.func,
       fetchListPostRequest: PropTypes.func,
-      votePostdRequest: PropTypes.func
+      votePostdRequest: PropTypes.func,
+      fetchListPostImageRequest: PropTypes.func,
    }),
    postById: PropTypes.object,
    listPostNew: PropTypes.array,
-   listPostViews: PropTypes.array
+   listPostViews: PropTypes.array,
+   listPostImage: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       postById: state.post.postById,
       listPostNew: state.post.listPostNew,
-      listPostViews: state.post.listPostViews
+      listPostViews: state.post.listPostViews,
+      listPostImage: state.post.listPostImage,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      postAllActions: bindActionCreators(postActions, dispatch)
+      postAllActions: bindActionCreators(postActions, dispatch),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BlogSinglePage);

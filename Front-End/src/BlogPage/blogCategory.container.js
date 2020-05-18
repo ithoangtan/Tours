@@ -20,12 +20,14 @@ class BlogCategoryContainer extends Component {
       const { postAllActions, listPost } = this.props;
       const {
          fetchListPostSearchRequest,
-         fetchListPostRequest
+         fetchListPostRequest,
+         fetchListPostImageRequest,
       } = postAllActions;
       if (data.keySearch !== null && data.keySearch !== undefined) {
          await fetchListPostSearchRequest(data);
       }
       if (!listPost.length) {
+         await fetchListPostImageRequest();
          await fetchListPostRequest();
       }
    };
@@ -33,7 +35,7 @@ class BlogCategoryContainer extends Component {
    componentDidMount() {
       window.scrollTo({
          top: 0,
-         left: 0
+         left: 0,
       });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
       this.fetch();
@@ -44,7 +46,7 @@ class BlogCategoryContainer extends Component {
       return (
          <section className="ftco-section mt-2">
             <div className="container">
-               <BlogNavigationContainer />{" "}
+               <BlogNavigationContainer />
                <div className="row ht-blog-container-2">
                   <div className="ht-blog-left col-md-8">
                      <div className="title mb-2 ftco-section">
@@ -76,7 +78,12 @@ class BlogCategoryContainer extends Component {
                                           className="block-20 ht-blog-image"
                                           style={{
                                              backgroundImage:
-                                                'url("images/image_1.jpg")'
+                                                post.image && post.image.url
+                                                   ? `url("${
+                                                        INDEX_CONSTANTS.API_ENDPOINT +
+                                                        post.image.url
+                                                     }")`
+                                                   : `url("images/image_1.jpg")`,
                                           }}
                                        >
                                           <div className="ht-over-image"></div>
@@ -88,7 +95,10 @@ class BlogCategoryContainer extends Component {
                            Tham khảo ở https://ant.design/docs/spec/colors*/}
                                           {postTags &&
                                              postTags.map((tag, index) => (
-                                                <Tag color={"#faad14"}>
+                                                <Tag
+                                                   color={"#faad14"}
+                                                   key={tag + index}
+                                                >
                                                    {tag}
                                                 </Tag>
                                              ))}
@@ -182,25 +192,28 @@ class BlogCategoryContainer extends Component {
 }
 BlogCategoryContainer.propTypes = {
    postAllActions: PropTypes.shape({
-      fetchListPostSearchRequest: PropTypes.func
+      fetchListPostSearchRequest: PropTypes.func,
+      fetchListPostRequest: PropTypes.func,
+      fetchListPostImageRequest: PropTypes.func,
    }),
    listPost: PropTypes.array,
    listPostSearch: PropTypes.array,
    listPostNew: PropTypes.array,
-   listPostViews: PropTypes.array
+   listPostViews: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       listPost: state.post.listPost,
+      listPostImage: state.listPostImage,
       listPostSearch: state.post.listPostSearch,
       listPostNew: state.post.listPostNew,
-      listPostViews: state.post.listPostViews
+      listPostViews: state.post.listPostViews,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      postAllActions: bindActionCreators(postActions, dispatch)
+      postAllActions: bindActionCreators(postActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };
