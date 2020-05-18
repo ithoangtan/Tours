@@ -1316,3 +1316,9 @@
 .ht-actions-read-and-unread {
    cursor: pointer;
 }
+
+/* Config */
+.ht-config-title {
+   font-size: 1.2rem;
+   font-weight: 500;
+}

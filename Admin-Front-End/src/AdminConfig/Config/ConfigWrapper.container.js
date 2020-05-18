@@ -12,29 +12,40 @@ import ConfigFooterEditor from "./ConfigFooter.editor";
 export default class ContentTableWrapperContainer extends Component {
    renderConfigEditors() {
       const { configs } = this.props;
-      let xhtml = null;
-      xhtml = configs.map((config, key) => {
+      let xhtml = configs.map((config, key) => {
          // menu:
          if (config.infoType === "menu")
             return (
-               <ConfigMenuEditor {...this.props} configs={configs} key={key} />
+               <ConfigMenuEditor
+                  {...this.props}
+                  configOfMenu={config}
+                  key={key}
+               />
             );
          // logo
          if (config.infoType === "logo")
             return (
-               <ConfigLogoEditor {...this.props} configs={configs} key={key} />
+               <ConfigLogoEditor
+                  {...this.props}
+                  configOfLogo={config}
+                  key={key}
+               />
             );
          // info
          if (config.infoType === "info")
             return (
-               <ConfigInfoEditor {...this.props} configs={configs} key={key} />
+               <ConfigInfoEditor
+                  {...this.props}
+                  configOfInfo={config}
+                  key={key}
+               />
             );
          // social
          if (config.infoType === "social")
             return (
                <ConfigSocialEditor
                   {...this.props}
-                  configs={configs}
+                  configOfSocial={config}
                   key={key}
                />
             );
@@ -43,10 +54,11 @@ export default class ContentTableWrapperContainer extends Component {
             return (
                <ConfigFooterEditor
                   {...this.props}
-                  configs={configs}
+                  configOfFooter={config}
                   key={key}
                />
             );
+         return <div></div>;
       });
       return xhtml;
    }
