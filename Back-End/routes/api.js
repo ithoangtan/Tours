@@ -142,11 +142,7 @@ router.get(
   authenticated,
   report.getReportRevenueFollowMonthAll
 );
-router.get(
-  "/report/destination-by-time",
-  authenticated,
-  report.getDestinationByTime
-);
+router.get("/report/destination-by-time", report.getDestinationByTime);
 
 router.get("/report/destination-by-time", report.getDestinationByTime);
 

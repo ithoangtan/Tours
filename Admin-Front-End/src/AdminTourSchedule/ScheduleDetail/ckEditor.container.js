@@ -33,7 +33,7 @@ class EditorContainer extends Component {
          scheduleByIdTour: props.scheduleByIdTour,
          tour: props.tour,
          previewsInData: true,
-         pageName: "schedule-detail" //defaul is schedule
+         pageName: "schedule-detail", //defaul is schedule
          //note, policy, detail-price, contact, schedule-detail, timelines
       };
    }
@@ -55,7 +55,7 @@ class EditorContainer extends Component {
       // The substituted value will be contained in the result variable
       const resultPage = str.replace(regex, subst);
       this.setState({
-         pageName: resultPage
+         pageName: resultPage,
       });
    }
 
@@ -75,7 +75,7 @@ class EditorContainer extends Component {
          dataContent = {
             idTour: tour.idTour,
 
-            data: this.state.content
+            data: this.state.content,
          };
       }
       if (pageName === "note") {
@@ -84,28 +84,28 @@ class EditorContainer extends Component {
          dataContent = {
             idTour: tour.idTour,
 
-            notes: this.state.content
+            notes: this.state.content,
          };
       }
       if (pageName === "policy") {
          dataContent = {
             idTour: tour.idTour,
 
-            policy: this.state.content
+            policy: this.state.content,
          };
       }
       if (pageName === "detail-price") {
          dataContent = {
             idTour: tour.idTour,
 
-            detailPrice: this.state.content
+            detailPrice: this.state.content,
          };
       }
       if (pageName === "contact") {
          dataContent = {
             idTour: tour.idTour,
 
-            contacts: this.state.content
+            contacts: this.state.content,
          };
       }
       if (pageName === "timelines") {
@@ -180,20 +180,39 @@ class EditorContainer extends Component {
                   //    uploadUrl: "https://43967.cke-cs.com/easyimage/upload/"
                   // },
                   mediaEmbed: {
-                     previewsInData: true
-                  }
+                     previewsInData: true,
+                  },
                }}
                // extraPlugins={"easyimage"}
-               onInit={editor => {
+               onInit={(editor) => {
                   // You can store the "editor" and use when it is needed.
                   this.setState({ scheduleByIdTour });
                }}
                onChange={(event, editor) => this.onChange(event, editor)}
-               onBlur={editor => {}}
-               onFocus={editor => {}}
+               onBlur={(editor) => {}}
+               onFocus={(editor) => {}}
             />
          );
-      } else return <></>;
+      } else
+         return (
+            <CKEditor
+               editor={this.state.editor}
+               data=""
+               config={{
+                  mediaEmbed: {
+                     previewsInData: true,
+                  },
+               }}
+               // extraPlugins={"easyimage"}
+               onInit={(editor) => {
+                  // You can store the "editor" and use when it is needed.
+                  this.setState({ scheduleByIdTour });
+               }}
+               onChange={(event, editor) => this.onChange(event, editor)}
+               onBlur={(editor) => {}}
+               onFocus={(editor) => {}}
+            />
+         );
    }
 
    // onRedirect = pathnameTo => {
@@ -453,22 +472,22 @@ class EditorContainer extends Component {
 EditorContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
-      fetchPatchScheduleRequest: PropTypes.func
+      fetchPatchScheduleRequest: PropTypes.func,
    }),
    scheduleByIdTour: PropTypes.object,
-   tour: PropTypes.object
+   tour: PropTypes.object,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       tour: state.tour.tourById,
-      scheduleByIdTour: state.schedule.scheduleByIdTour
+      scheduleByIdTour: state.schedule.scheduleByIdTour,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
       tourAllActions: bindActionCreators(tourActions, dispatch),
-      scheduleAllActions: bindActionCreators(scheduleActions, dispatch)
+      scheduleAllActions: bindActionCreators(scheduleActions, dispatch),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EditorContainer);

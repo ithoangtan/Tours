@@ -197,7 +197,8 @@ class EditableTable extends React.Component {
    };
    handleAdd = (newPost) => {
       const { count, data } = this.state;
-      if (idPostNew === 0) idPostNew = data[data.length - 1].idPost;
+      if (idPostNew === 0 && data.length !== 0)
+         idPostNew = data[data.length - 1].idPost;
       idPostNew++;
 
       const newData = {

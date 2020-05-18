@@ -684,9 +684,6 @@ class EditableTable extends React.Component {
                sortedInfo.columnKey === "vocationTime" && sortedInfo.order,
             ellipsis: true,
             editable: true,
-            render: (text) => {
-               return text.replace(" days", "N ").replace(" nights", "Đ");
-            },
          },
          {
             title: "Departure",
