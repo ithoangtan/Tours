@@ -1,7 +1,7 @@
-// export const API_ENDPOINT =
-// "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
+export const API_ENDPOINT =
+   "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
 // export const API_ENDPOINT = "http://localhost:8000";
-export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+// export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",

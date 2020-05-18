@@ -26,7 +26,12 @@ export default class BlogRightContainer extends Component {
                               >
                                  <div className="ht-item-post-mini">
                                     <img
-                                       src="/images/blog-4.jpg"
+                                       src={
+                                          post.image && post.image.url
+                                             ? INDEX_CONSTANTS.API_ENDPOINT +
+                                               post.image.url
+                                             : "/images/blog-4.jpg"
+                                       }
                                        alt="not found"
                                     />
                                     <div className="ht-item-post-mini-info">
@@ -66,7 +71,12 @@ export default class BlogRightContainer extends Component {
                               <Link to={`/blog-single/${post.idPost}`}>
                                  <div className="ht-item-post-mini" key={index}>
                                     <img
-                                       src="/images/blog-4.jpg"
+                                       src={
+                                          post.image && post.image.url
+                                             ? INDEX_CONSTANTS.API_ENDPOINT +
+                                               post.image.url
+                                             : "/images/blog-4.jpg"
+                                       }
                                        alt="not found"
                                     />
                                     <div className="ht-item-post-mini-info">
@@ -111,7 +121,7 @@ export default class BlogRightContainer extends Component {
                            color: "black",
                            border: "1px solid rgba(0, 0, 0, 0.3)",
                            padding: "3px 6px",
-                           borderRadius: "3px"
+                           borderRadius: "3px",
                         }}
                      >
                         {"#"}
@@ -127,5 +137,5 @@ export default class BlogRightContainer extends Component {
 BlogRightContainer.propTypes = {
    listPostNew: PropTypes.array,
    listPostViews: PropTypes.array,
-   postTags: PropTypes.array
+   postTags: PropTypes.array,
 };
