@@ -17,8 +17,12 @@ class BlogContainer extends Component {
    fetch = async () => {
       const { postAllActions, listPost } = this.props;
       //load list Post
-      const { fetchListPostRequest } = postAllActions;
+      const {
+         fetchListPostRequest,
+         fetchListPostImageRequest,
+      } = postAllActions;
       if (!listPost.length) {
+         await fetchListPostImageRequest();
          await fetchListPostRequest();
       }
    };
@@ -26,13 +30,13 @@ class BlogContainer extends Component {
    componentDidMount() {
       window.scrollTo({
          top: 0,
-         left: 0
+         left: 0,
       });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
       this.fetch();
    }
 
-   splitListPost = listPost => {
+   splitListPost = (listPost) => {
       // get the most important posts
       const listLatestPost = listPost.slice(0, 3);
       return listLatestPost;
@@ -44,7 +48,7 @@ class BlogContainer extends Component {
       return (
          <section className="ftco-section mt-2">
             <div className="container ftco-animate">
-               <BlogNavigationContainer />{" "}
+               <BlogNavigationContainer />
                <div className="ht-blog-container-1">
                   <div className="col-md-8 ftco-animate">
                      <Carousel autoplay dotPosition="right">
@@ -55,14 +59,19 @@ class BlogContainer extends Component {
                                  key={index}
                               >
                                  <img
-                                    src="/images/blog-1.jpg"
+                                    src={
+                                       post.image && post.image.url
+                                          ? INDEX_CONSTANTS.API_ENDPOINT +
+                                            post.image.url
+                                          : "/images/blog-1.jpg"
+                                    }
                                     alt="not found"
                                  />
                                  <div
                                     class="ht-item-post-full-main-info"
                                     style={{
                                        backgroundImage:
-                                          "linear-gradient(rgba(255, 255, 255, 0),rgba(21, 21, 21, 0.7),rgba(255, 255, 255, 0)"
+                                          "linear-gradient(rgba(255, 255, 255, 0),rgba(21, 21, 21, 0.7),rgba(255, 255, 255, 0)",
                                     }}
                                  >
                                     {/* <div className="ht-tag-main">
@@ -147,7 +156,12 @@ class BlogContainer extends Component {
                                           className="block-20 ht-blog-image"
                                           style={{
                                              backgroundImage:
-                                                'url("images/image_1.jpg")'
+                                                post.image && post.image.url
+                                                   ? `url("${
+                                                        INDEX_CONSTANTS.API_ENDPOINT +
+                                                        post.image.url
+                                                     }")`
+                                                   : `url("images/image_1.jpg")`,
                                           }}
                                        >
                                           <div className="ht-over-image"></div>
@@ -286,23 +300,24 @@ BlogContainer.propTypes = {
    postAllActions: PropTypes.shape({
       fetchPostByIdRequest: PropTypes.func,
       fetchListPostRequest: PropTypes.func,
-      votePostdRequest: PropTypes.func
+      fetchListPostImageRequest: PropTypes.func,
+      votePostdRequest: PropTypes.func,
    }),
    listPost: PropTypes.array,
    listPostNew: PropTypes.array,
-   listPostViews: PropTypes.array
+   listPostViews: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       listPost: state.post.listPost,
       listPostNew: state.post.listPostNew,
-      listPostViews: state.post.listPostViews
+      listPostViews: state.post.listPostViews,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      postAllActions: bindActionCreators(postActions, dispatch)
+      postAllActions: bindActionCreators(postActions, dispatch),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BlogContainer);

@@ -4,20 +4,42 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as postActions from "../../_actions/post.actions";
-import { DATE_TIME_FORMAT } from "../../_constants/index.constants";
+import {
+   DATE_TIME_FORMAT,
+   API_ENDPOINT,
+} from "../../_constants/index.constants";
 import { Tag, Tooltip, Button } from "antd";
 import moment from "moment";
 
 class RecentStoriesContainer extends Component {
    fetch = async () => {
       const { postAllActions } = this.props;
-      const { fetchListPostRequest } = postAllActions;
+      const {
+         fetchListPostRequest,
+         fetchListPostImageRequest,
+      } = postAllActions;
+      await fetchListPostImageRequest();
       await fetchListPostRequest();
    };
 
    componentDidMount() {
       this.fetch();
    }
+
+   getListPostWithImage = () => {
+      const { listPost, listPostImage } = this.props;
+      let listPostRecent =
+         listPost && listPost.length ? listPost.slice(0, 9) : [];
+      listPostRecent =
+         listPostRecent.length &&
+         listPostRecent.map((post, index) => {
+            let imagePost = listPostImage.filter(
+               (imagePost) => imagePost.idPost === post.idPost
+            );
+            return { ...post, image: imagePost[0] };
+         });
+      return listPostRecent;
+   };
 
    render() {
       const { listPost } = this.props;
@@ -58,7 +80,7 @@ class RecentStoriesContainer extends Component {
                               <div
                                  className={`carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ${
                                     !index ? "active" : ""
-                                 }`}
+                                    }`}
                                  key={index}
                               >
                                  <div className="blog-entry justify-content-end">
@@ -66,7 +88,13 @@ class RecentStoriesContainer extends Component {
                                        to={`blog-single/${post.idPost}`}
                                        className="block-20 ht-blog-image"
                                        style={{
-                                          backgroundImage: `url("images/image_1.jpg")`
+                                          backgroundImage:
+                                             post.image && post.image.url
+                                                ? `url("${
+                                                API_ENDPOINT +
+                                                post.image.url
+                                                }")`
+                                                : `url("images/image_1.jpg")`,
                                        }}
                                     >
                                        <div className="ht-over-image"></div>
@@ -164,18 +192,21 @@ class RecentStoriesContainer extends Component {
 }
 RecentStoriesContainer.propTypes = {
    postAllActions: PropTypes.shape({
-      fetchListPostRequest: PropTypes.func
+      fetchListPostRequest: PropTypes.func,
+      fetchListPostImageRequest: PropTypes.func,
    }),
-   listPost: PropTypes.array
+   listPost: PropTypes.array,
+   listPostImage: PropTypes.array,
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      listPost: state.post.listPost
+      listPost: state.post.listPost,
+      listPostImage: state.post.listPostImage,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      postAllActions: bindActionCreators(postActions, dispatch)
+      postAllActions: bindActionCreators(postActions, dispatch),
    };
 };
 export default connect(
