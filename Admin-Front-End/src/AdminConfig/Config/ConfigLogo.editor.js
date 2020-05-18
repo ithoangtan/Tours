@@ -27,7 +27,7 @@ class ConfigContentEditor extends Component {
          return (
             <div className=" card shadow ht-style-card">
                <div className="container col-md-12">
-                  <div className="ht-config-title">Logo Config</div>
+                  <div className="ht-config-title">Logo</div>
                   <div className="ht-config-content">
                      <LogoChange
                         idConfig={configOfLogo.idConfig}

@@ -58,7 +58,7 @@ export default class ContentTableWrapperContainer extends Component {
                   key={key}
                />
             );
-         return <div></div>;
+         return <div key={999}></div>;
       });
       return xhtml;
    }

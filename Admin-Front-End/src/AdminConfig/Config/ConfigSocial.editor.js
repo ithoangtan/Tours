@@ -34,7 +34,7 @@ class ConfigSocialEditor extends Component {
          return (
             <div className=" card shadow ht-style-card">
                <div className="container col-md-12">
-                  <div className="ht-config-title">Social Config</div>
+                  <div className="ht-config-title">Social</div>
                   <div className="ht-config-content">
                      Lại là một component mới!
                   </div>
