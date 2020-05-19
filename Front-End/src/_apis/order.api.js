@@ -5,35 +5,42 @@ const url = "order";
 const urlPIN = "resultPayment";
 const urls = "orders";
 const getLinkPaymentUrl = "getLinkPayment";
+const urlOrderWithEmail = "orderWithEmail";
 
 export const getListOrder = () => {
    return axiosService.get(`${API_ENDPOINT}/${urls}`);
 };
 
-export const getOrderById = idOrder => {
+export const getOrderById = (idOrder) => {
    return axiosService.get(`${API_ENDPOINT}/${url}?idOrder=${idOrder}`);
 };
 
-export const getOrderByIdTour = idTour => {
+export const getOrderByIdTour = (idTour) => {
    return axiosService.get(`${API_ENDPOINT}/${url}?idTour=${idTour}`);
 };
 
-export const postOrder = data => {
+export const postOrder = (data) => {
    return axiosService.post(`${API_ENDPOINT}/${url}`, data);
 };
 
-export const deleteOrder = idOrder => {
+export const deleteOrder = (idOrder) => {
    return axiosService.delete(`${API_ENDPOINT}/${url}?idOrder=${idOrder}`);
 };
 
-export const patchOrder = data => {
+export const patchOrder = (data) => {
    return axiosService.patch(`${API_ENDPOINT}/${url}`, data);
 };
 ///status, PIN
-export const patchSetStatusPaid = data => {
+export const patchSetStatusPaid = (data) => {
    return axiosService.post(`${API_ENDPOINT}/${urlPIN}`, data);
 };
 
-export const getLinkPayment = data => {
+export const getLinkPayment = (data) => {
    return axiosService.post(`${API_ENDPOINT}/${getLinkPaymentUrl}`, data);
+};
+
+export const getOrderByEmail = (email) => {
+   return axiosService.get(
+      `${API_ENDPOINT}/${urlOrderWithEmail}?email=${email}`
+   );
 };

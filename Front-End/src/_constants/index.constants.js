@@ -1,7 +1,7 @@
-export const API_ENDPOINT =
-   "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
+// export const API_ENDPOINT =
+//    "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
 // export const API_ENDPOINT = "http://localhost:8000";
-// export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
+export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
 
 export const CustomerArrayExternalScript = [
    // "/customer/js/jquery.min.js",
@@ -68,6 +68,7 @@ export const SERVICE_TOUR_ICON = {
    "Bao bữa sáng": "fas fa-utensils",
    "Hỗ trợ visa": "fab fa-cc-visa",
    "Vé tham quan": "fas fa-money-bill",
+   "Trang bị y tế": "fas fa-medkit",
 };
 
 export const LIST_TAG_EVALUATE = [

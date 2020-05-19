@@ -3,15 +3,17 @@ import {
    messageError,
    messageSuccess,
    // messageLoading,
-   messageWarning
+   messageWarning,
 } from "../_helper/message.helper";
+const orders = localStorage.getItem("orders");
 const initialState = {
    listOrder: [],
    orderByIdAccount: {},
    delete: [],
    patch: [],
    create: [],
-   data: []
+   data: [],
+   emailOrder: orders ? JSON.parse(orders).email : null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,13 +21,13 @@ const reducer = (state = initialState, action) => {
       case orderConstants.FETCH_ORDER:
          return {
             ...state,
-            listOrder: []
+            listOrder: [],
          };
       case orderConstants.FETCH_ORDER_SUCCESS: {
          const { data } = action.payload;
          return {
             ...state,
-            listOrder: data
+            listOrder: data,
          };
       }
       case orderConstants.FETCH_ORDER_FAILED: {
@@ -33,16 +35,31 @@ const reducer = (state = initialState, action) => {
          messageError(`${error}`, 1);
          return {
             ...state,
-            listOrder: error
+            listOrder: error,
          };
       }
-
+      // Get order by email
+      case orderConstants.FETCH_ORDER_BY_EMAIL_SUCCESS: {
+         const { data } = action.payload;
+         return {
+            ...state,
+            listOrder: data,
+         };
+      }
+      case orderConstants.FETCH_ORDER_BY_EMAIL_FAILED: {
+         const { error } = action.payload;
+         messageError(`${error}`, 1);
+         return {
+            ...state,
+            listOrder: error,
+         };
+      }
       //Order Get By Id Account
       case orderConstants.FETCH_ORDER_GET_BYID_ACCOUNT_SUCCESS: {
          const { data } = action.payload;
          return {
             ...state,
-            orderByIdAccount: data
+            orderByIdAccount: data,
          };
       }
       case orderConstants.FETCH_ORDER_GET_BYID_ACCOUNT_FAILED: {
@@ -50,7 +67,7 @@ const reducer = (state = initialState, action) => {
          messageError(`${error}`, 1);
          return {
             ...state,
-            orderByIdAccount: error
+            orderByIdAccount: error,
          };
       }
 
@@ -61,7 +78,7 @@ const reducer = (state = initialState, action) => {
          messageSuccess(`Đơn hàng ${order.PIN} tạo thành công!`, 3);
          return {
             ...state,
-            create: data
+            create: data,
          };
       }
       case orderConstants.FETCH_ORDER_CREATE_FAILED: {
@@ -69,7 +86,7 @@ const reducer = (state = initialState, action) => {
          messageError(`${error}`, 1);
          return {
             ...state,
-            create: error
+            create: error,
          };
       }
 
@@ -80,7 +97,7 @@ const reducer = (state = initialState, action) => {
          messageWarning(`Đơn hàng ${record.PIN} xóa thành công!`, 3);
          return {
             ...state,
-            delete: data
+            delete: data,
          };
       }
       case orderConstants.FETCH_ORDER_DELETE_FAILED: {
@@ -88,7 +105,7 @@ const reducer = (state = initialState, action) => {
          messageError(`${error}`, 1);
          return {
             ...state,
-            delete: error
+            delete: error,
          };
       }
 
@@ -99,7 +116,7 @@ const reducer = (state = initialState, action) => {
          messageSuccess(`Đơn hàng ${order.PIN} mua thành công!`, 3);
          return {
             ...state,
-            patch: data
+            patch: data,
          };
       }
       case orderConstants.FETCH_ORDER_PATCH_FAILED: {
@@ -107,7 +124,7 @@ const reducer = (state = initialState, action) => {
          messageError(`${error}`, 1);
          return {
             ...state,
-            patch: error
+            patch: error,
          };
       }
 
@@ -117,7 +134,7 @@ const reducer = (state = initialState, action) => {
          messageSuccess(`${data.message}!`, 3);
          return {
             ...state,
-            data: data
+            data: data,
          };
       }
       case orderConstants.FETCH_GET_LINK_PAYMENT_FAILED: {
@@ -125,7 +142,7 @@ const reducer = (state = initialState, action) => {
          messageError(`${error}`, 1);
          return {
             ...state,
-            data: error
+            data: error,
          };
       }
       default:

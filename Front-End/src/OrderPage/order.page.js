@@ -1,22 +1,27 @@
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as tourActions from "../_actions/tour.actions";
+import * as orderActions from "../_actions/order.actions";
 
 import TourDetailContainer from "./tourDetail.container";
+import TableFirstOrder from "./tableFirstOrder";
 
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
-import { Typography, Checkbox, Spin, } from "antd";
+import { Typography, Spin, Table, Tag } from "antd";
+import moment from "moment";
+import NumberFormat from "react-number-format";
 
+const { Column } = Table;
 const { Title } = Typography;
 
-class TourContainer extends Component {
+class OrderContainer extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -28,13 +33,29 @@ class TourContainer extends Component {
    }
 
    fetch = async () => {
-      const { tourAllActions } = this.props;
+      const {
+         tourAllActions,
+         orderAllActions,
+         listTour,
+         emailOrder,
+         auth,
+      } = this.props;
       const {
          fetchListTourRequest,
          fetchListTourImageRequest,
       } = tourAllActions;
-      await fetchListTourRequest();
-      await fetchListTourImageRequest();
+      const { fetchOrderByEmailRequest } = orderAllActions;
+      if (auth.email || emailOrder) {
+         if (auth.email) {
+            await fetchOrderByEmailRequest(auth.email);
+         } else {
+            await fetchOrderByEmailRequest(emailOrder);
+         }
+         if (!listTour.length) {
+            await fetchListTourImageRequest();
+            await fetchListTourRequest();
+         }
+      }
    };
 
    componentWillMount() {
@@ -60,38 +81,97 @@ class TourContainer extends Component {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
 
-   renderTours = () => {
+   renderOrders = () => {
       let result = null;
       const data = this.props.match.params;
       const { listTourSearch, listImageTour } = this.props;
-      const { listTour } = this.props;
+      const { listTour, listOrder } = this.props;
 
       let listTours = [];
+      let listOrders = [...listOrder];
       if (data.keySearch !== null && data.keySearch !== undefined) {
          listTours = [...listTourSearch];
       } else {
          listTours = [...listTour];
       }
 
-      if (this.state.haveData && listTours.length > 0) {
-         result = listTours.map((tour, index) => {
-            // Cái đầu tiên thì là cái này 
-            return (
+      if (
+         this.state.haveData &&
+         listTours.length > 0 &&
+         listOrders.length > 0
+      ) {
+         const firstTourOrder = listTours.find(
+            (tour) => tour.idTour === listOrders[0].idTour
+         );
+         listOrders.shift();
+         result = (
+            <>
+               <TableFirstOrder order={listOrder[0]} />
                <TourDetailContainer
                   {...this.props}
-                  tour={tour}
-                  key={index}
+                  tour={firstTourOrder}
                   bookTour={false}
                   listImageTour={listImageTour.filter(
-                     (imageTour) => imageTour.idTour === tour.idTour
+                     (imageTour) => imageTour.idTour === firstTourOrder.idTour
                   )}
+                  ordered={listOrder[0]}
                   loaded={this.loaded}
                />
-            );
-
-            // Những cái tiếp theo là cái khác như bảng đơn giản trong link:
-            // https://tiki.vn/sales/order/history?src=header_my_account 
-         });
+               <Table dataSource={listOrders} bordered>
+                  <Column
+                     title="ID Order"
+                     dataIndex="idOrder"
+                     key="idOrder"
+                     width={75}
+                  />
+                  <Column title="PIN" dataIndex="PIN" key="PIN" width={150} />
+                  <Column
+                     title="Tên tour"
+                     dataIndex="titleTour"
+                     key="titleTour"
+                     ellipsis
+                     render={(titleTour, row) => (
+                        <Link to={`/tour-single/${row.idTour}`}>
+                           {titleTour}
+                        </Link>
+                     )}
+                  />
+                  <Column
+                     title="Ngày mua"
+                     dataIndex="dateAdded"
+                     key="dateAdded"
+                     width={200}
+                     render={(dateAdded) =>
+                        moment(dateAdded).format(
+                           INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE_TIME
+                        )
+                     }
+                  />
+                  <Column
+                     title="Tổng tiền"
+                     dataIndex="totalPrice"
+                     key="totalPrice"
+                     width={150}
+                     render={(totalPrice) => (
+                        <NumberFormat
+                           value={totalPrice}
+                           displayType={"text"}
+                           thousandSeparator={true}
+                           suffix={" VNĐ"}
+                        />
+                     )}
+                  />
+                  <Column
+                     title="Trạng thái"
+                     dataIndex="status"
+                     key="status"
+                     align="center"
+                     width={80}
+                     render={(status) => <Tag color="green">{status}</Tag>}
+                  />
+               </Table>
+            </>
+         );
       } else {
          result = (
             <div className="ht-khong-tim-thay-du-lieu">
@@ -112,10 +192,7 @@ class TourContainer extends Component {
                      {/* Rendder TOURS */}
                      <div className="row justify-content-center pb-1">
                         <div className="col-md-12 ftco-animate d-flex ht-info-container-tour-page">
-                           <h4 className="mb-2 mt-2 ml-1">
-                              Tour đã đặt
-                           </h4>
-
+                           <h4 className="mb-2 mt-2 ml-1">Tour đã đặt</h4>
                         </div>
                      </div>
 
@@ -124,7 +201,7 @@ class TourContainer extends Component {
                            tip="loading... data"
                            spinning={this.state.loading}
                         >
-                           {this.renderTours()}
+                           {this.renderOrders()}
                         </Spin>
                      </div>
                      {/* end Render Tours */}
@@ -135,25 +212,35 @@ class TourContainer extends Component {
       );
    }
 }
-TourContainer.propTypes = {
+OrderContainer.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
       fetchListTourRequest: PropTypes.func,
       fetchListTourSearchRequest: PropTypes.func,
+      fetchListTourImageRequest: PropTypes.func,
+   }),
+   orderAllActions: PropTypes.shape({
+      fetchOrderByEmailRequest: PropTypes.func,
    }),
    listTour: PropTypes.array,
    listImageTour: PropTypes.array,
+   listOrder: PropTypes.array,
+   emailOrder: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
    return {
       listTour: state.tour.listTour,
       listImageTour: state.tour.listImageTour,
+      listOrder: state.order.listOrder,
+      emailOrder: state.order.emailOrder,
+      auth: state.auth,
    };
 };
 const mapDispatchToProps = (dispatch) => {
    return {
       tourAllActions: bindActionCreators(tourActions, dispatch),
+      orderAllActions: bindActionCreators(orderActions, dispatch),
    };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TourContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderContainer);
