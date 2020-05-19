@@ -50,11 +50,11 @@ $ yarn start
 ### DEMO:
 
 - Link video: https://www.youtube.com/watch?v=uulm3fSYRwU
-- ADMIN: http://admin-kinhdoanhtourdulich.herokuapp.com/
+- ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
 - account test: ithoangtan@gmail.com; password: 123456a@
-- USER: http://kinhdoanhtourdulich.herokuapp.com/
+- USER: https://kinhdoanhtourdulich.herokuapp.com/
 - API: https://api-kinhdoanhtourdulich.herokuapp.com/
-- API: ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000
+- API: ithoagtan.online (hihi, tên miền rẻ thì mình dùng thôi)
 
 ### Todos
 
