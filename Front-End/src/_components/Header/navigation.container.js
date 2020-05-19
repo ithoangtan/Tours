@@ -15,13 +15,13 @@ const arrayVietNamMobile = [
    { name: "Miền Bắc", key: "mien-bac" },
    { name: "Miền Trung", key: "mien-trung" },
    { name: "Miền Nam", key: "mien-nam" },
-   { name: "Tour Tốt nhất", key: "best-tour" }
+   { name: "Tour Tốt nhất", key: "best-tour" },
 ];
 const arrayWorldMobile = [
    { name: "Đông Nam Á", key: "dong-nam-a" },
    { name: "Châu Á", key: "chau-a" },
    { name: "Châu Âu", key: "chau-au" },
-   { name: "Châu lục khác", key: "chau-luc-khac" }
+   { name: "Châu lục khác", key: "chau-luc-khac" },
 ];
 
 const North = [
@@ -31,7 +31,7 @@ const North = [
    { name: "Ninh Bình", key: "ninh-binh" },
    { name: "Ninh Hòa", key: "ninh-hoa" },
    { name: "Hòa Bình", key: "hoa-binh" },
-   { name: "Thanh Hóa", key: "thanh-hoa" }
+   { name: "Thanh Hóa", key: "thanh-hoa" },
 ];
 const Central = [
    { name: "Phan Thiết", key: "phan-thiet" },
@@ -40,16 +40,16 @@ const Central = [
    { name: "Tây Nguyên", key: "tay-nguyen" },
    {
       name: "Tuy Hòa - Quy Nhơn - Quảng Ngãi",
-      key: "tuy-hoa-quy-nhon-quang-ngai"
+      key: "tuy-hoa-quy-nhon-quang-ngai",
    },
    { name: "Hội An - Đà Nẵng", key: "hoi-an-da-nang" },
-   { name: "Huế - Quảng Bình", key: "hue-quang-binh" }
+   { name: "Huế - Quảng Bình", key: "hue-quang-binh" },
 ];
 const South = [
    { name: "Phú Quốc", key: "phu-quoc}" },
    { name: "Miền Tây", key: "mien-tay" },
    { name: "Côn Đảo", key: "con-dao" },
-   { name: "Hồ Tràm", key: "ho-tram" }
+   { name: "Hồ Tràm", key: "ho-tram" },
 ];
 const bestTour = [
    { name: "Ưu đãi Tour Tết Nguyên Đán", key: "uu-dai-tet-nguyen-dan" },
@@ -58,7 +58,7 @@ const bestTour = [
    { name: "Tour tự do", key: "tour-tu-do" },
    { name: "Tour liên tuyến", key: "tour-lien-tuyen" },
    { name: "Tour mạo hiểm", key: "tour-mao-hiem" },
-   { name: "Tour hành hương", key: "tour-hanh-huong" }
+   { name: "Tour hành hương", key: "tour-hanh-huong" },
 ];
 
 const Asia1 = [
@@ -70,7 +70,7 @@ const Asia1 = [
    { name: "Campuchia", key: "campuchia" },
    { name: "Malaysia", key: "malaysia" },
    { name: "Myanmar", key: "myanmar" },
-   { name: "Indonesia", key: "indonesia" }
+   { name: "Indonesia", key: "indonesia" },
 ];
 
 const Asia2 = [
@@ -82,7 +82,7 @@ const Asia2 = [
    { name: "Ấn Độ", key: "an-do" },
    { name: "Philippines", key: "philippines" },
    { name: "Ả Rập", key: "a-rap" },
-   { name: "Brunei", key: "brunei" }
+   { name: "Brunei", key: "brunei" },
 ];
 const Euro = [
    { name: "Anh", key: "anh" },
@@ -90,7 +90,7 @@ const Euro = [
    { name: "Scotland", key: "scotland" },
    { name: "Thổ Nhĩ Kỳ", key: "tho-nhi-ky" },
    { name: "Ý", key: "y" },
-   { name: "Pháp", key: "phap" }
+   { name: "Pháp", key: "phap" },
 ];
 
 const otherContinents = [
@@ -100,13 +100,13 @@ const otherContinents = [
    { name: "Cuba", key: "cuba" },
    { name: "Ma-rốc", key: "ma-roc" },
    { name: "Nam Mỹ", key: "nam-my" },
-   { name: "Canada", key: "canada" }
+   { name: "Canada", key: "canada" },
 ];
 const vipTour = [
    { name: "Du thuyền cao cấp", key: "du-thuyen-cao-cap" },
    { name: "Mùa hòa anh đào", key: "mua-hoa-anh-dao" },
    { name: "Lặng biển", key: "lang-bien" },
-   { name: "Dubai", key: "dubai" }
+   { name: "Dubai", key: "dubai" },
 ];
 
 const menuVN = (
@@ -114,12 +114,12 @@ const menuVN = (
       <Menu>
          <Menu.ItemGroup title="Miền Bắc" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {North.map(provincial => {
+            {North.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -133,12 +133,12 @@ const menuVN = (
       <Menu>
          <Menu.ItemGroup title="Miền Nam" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {South.map(provincial => {
+            {South.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -152,12 +152,12 @@ const menuVN = (
       <Menu>
          <Menu.ItemGroup title="Miền Trung" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {Central.map(provincial => {
+            {Central.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -171,12 +171,12 @@ const menuVN = (
       <Menu>
          <Menu.ItemGroup title="Best Tours" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {bestTour.map(provincial => {
+            {bestTour.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -195,12 +195,12 @@ const menuWorld = (
       <Menu>
          <Menu.ItemGroup title="Châu Á" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {Asia1.map(provincial => {
+            {Asia1.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -214,12 +214,12 @@ const menuWorld = (
       <Menu>
          <Menu.ItemGroup title="Châu Á" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {Asia2.map(provincial => {
+            {Asia2.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -233,12 +233,12 @@ const menuWorld = (
       <Menu>
          <Menu.ItemGroup title="Châu Âu" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {Euro.map(provincial => {
+            {Euro.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -252,12 +252,12 @@ const menuWorld = (
       <Menu>
          <Menu.ItemGroup title="Châu lục khác" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {otherContinents.map(provincial => {
+            {otherContinents.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -271,12 +271,12 @@ const menuWorld = (
       <Menu>
          <Menu.ItemGroup title="Châu Mỹ" className="ht-hero-menu-title">
             <Menu.Divider></Menu.Divider>
-            {vipTour.map(provincial => {
+            {vipTour.map((provincial) => {
                return (
                   <Menu.Item key={provincial.key} className="ht-hero-menu-item">
                      <Link
                         to={{
-                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`
+                           pathname: `/tour/search/${provincial.key}/2019-1-1/2028-8-8/address`,
                         }}
                      >
                         {provincial.name}
@@ -296,18 +296,18 @@ export default class Navigation extends Component {
       this.state = {
          logout: false,
          visibleProfile: false,
-         size: "default"
+         size: "default",
       };
    }
 
    showDrawer = () => {
       this.setState({
-         visibleProfile: true
+         visibleProfile: true,
       });
    };
    onClose = () => {
       this.setState({
-         visibleProfile: false
+         visibleProfile: false,
       });
    };
 
@@ -339,28 +339,21 @@ export default class Navigation extends Component {
                </Link>
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item
-               disabled={
-                  role.role === "admin" || role.role === "administrator"
-                     ? false
-                     : true
-               }
-            >
-               <Link
-                  className="mr-2"
-                  rel="noopener noreferrer"
-                  to="/admin"
-                  disabled={
-                     role.role === "admin" || role.role === "administrator"
-                        ? false
-                        : true
-                  }
-               >
-                  <i className="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-600" />
-                  Tour Manage (Admin)
-               </Link>
-            </Menu.Item>
-            <Menu.Divider />
+            {(role.role === "admin" || role.role === "administrator") && (
+               <>
+                  <Menu.Item>
+                     <Link
+                        className="mr-2"
+                        rel="noopener noreferrer"
+                        to="/admin"
+                     >
+                        <i className="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-600" />
+                        Tour Manage (Admin)
+                     </Link>
+                  </Menu.Item>
+                  <Menu.Divider />
+               </>
+            )}
             <Menu.Item>
                <Link
                   to="#"
@@ -477,6 +470,9 @@ export default class Navigation extends Component {
 
    render() {
       const { size } = this.state;
+      const orders = localStorage.getItem("orders");
+      const userName = sessionStorage.getItem("name");
+      const showCart = orders || userName;
       return (
          <nav
             className="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light container ht-nav-container"
@@ -589,6 +585,13 @@ export default class Navigation extends Component {
                         <i className="fas fa-users-cog"></i> About
                      </Link>
                   </li>
+                  {showCart && (
+                     <li className="nav-item ht-nav-item">
+                        <Link to="/orders" className="nav-link ht-nav-link">
+                           <i className="fas fa-shopping-cart"></i> Đơn hàng
+                        </Link>
+                     </li>
+                  )}
                   {this.renderAvartar()}
                </ul>
             </div>

@@ -58,7 +58,7 @@ export default class TourDetailContainer extends Component {
    //Dữ liệu từ ngoài truyền vô ở đây chỉ có việc load lên thôi
    render() {
       const { size } = this.state;
-      const { tour, bookTour } = this.props;
+      const { tour, bookTour, ordered } = this.props;
       // const timeDeparture = moment(tour.departureDay).format("LT");
       const dmy = moment(tour.departureDay).format("L");
 
@@ -214,62 +214,68 @@ export default class TourDetailContainer extends Component {
                               </Text>
                            </div>
                         )}
+                        {ordered ? null : (
+                           <>
+                              <div className="ht-text-price-tour-detail m-1">
+                                 <Tooltip
+                                    title={
+                                       <NumberFormat
+                                          value={tour.price * tour.sale * 0.01}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          prefix={"Tiết kiệm "}
+                                          suffix={" VNĐ"}
+                                       />
+                                    }
+                                    placement="left"
+                                 >
+                                    <i className="fas fa-donate"></i> {` `}
+                                    <NumberFormat
+                                       value={
+                                          tour.price -
+                                          tour.price * tour.sale * 0.01
+                                       }
+                                       displayType={"text"}
+                                       thousandSeparator={true}
+                                       suffix={" VNĐ"}
+                                    />
+                                 </Tooltip>
+                              </div>
 
-                        <div className="ht-text-price-tour-detail m-1">
-                           <Tooltip
-                              title={
-                                 <NumberFormat
-                                    value={tour.price * tour.sale * 0.01}
-                                    displayType={"text"}
-                                    thousandSeparator={true}
-                                    prefix={"Tiết kiệm "}
-                                    suffix={" VNĐ"}
-                                 />
-                              }
-                              placement="left"
-                           >
-                              <i className="fas fa-donate"></i> {` `}
-                              <NumberFormat
-                                 value={
-                                    tour.price - tour.price * tour.sale * 0.01
-                                 }
-                                 displayType={"text"}
-                                 thousandSeparator={true}
-                                 suffix={" VNĐ"}
-                              />
-                           </Tooltip>
-                        </div>
-
-                        <Link
-                           to={{
-                              pathname: `/book-tour/${tour.idTour}`,
-                              state: {
-                                 tour: tour,
-                              },
-                           }}
-                        >
-                           {bookTour ? (
-                              <></>
-                           ) : (
-                              <Tooltip
-                                 title={
-                                    <p className="ht-no-p-m">
-                                       <i className="fas fa-couch"></i>
-                                       {` Còn ${5} chỗ `}
-                                    </p>
-                                 }
-                                 placement="right"
+                              <Link
+                                 to={{
+                                    pathname: `/book-tour/${tour.idTour}`,
+                                    state: {
+                                       tour: tour,
+                                    },
+                                 }}
                               >
-                                 {size === "small" ? (
-                                    <Button type="primary">
-                                       <i className="fas fa-shopping-cart"></i>
-                                    </Button>
+                                 {bookTour ? (
+                                    <></>
                                  ) : (
-                                    <Button type="primary">ĐẶT NGAY</Button>
+                                    <Tooltip
+                                       title={
+                                          <p className="ht-no-p-m">
+                                             <i className="fas fa-couch"></i>
+                                             {` Còn ${5} chỗ `}
+                                          </p>
+                                       }
+                                       placement="right"
+                                    >
+                                       {size === "small" ? (
+                                          <Button type="primary">
+                                             <i className="fas fa-shopping-cart"></i>
+                                          </Button>
+                                       ) : (
+                                          <Button type="primary">
+                                             ĐẶT NGAY
+                                          </Button>
+                                       )}
+                                    </Tooltip>
                                  )}
-                              </Tooltip>
-                           )}
-                        </Link>
+                              </Link>
+                           </>
+                        )}
                      </div>
                   </div>
                </div>
