@@ -11,8 +11,8 @@ TLCN - CNPM - demo TLCN CNPM Khóa 2016-2020
 - [node.js] - evented I/O for the backend
 - [Express] - fast node.js network app framework
 - [heroku] - hosting free
-- [aws-EC2] - AWS cloud service
-- [nganluong(sandbox), onepay, vnpay, sohapay] - payment gateway VietNam
+- [aws-EC2, Router 53] - AWS cloud service
+- [nganluong(sandbox), MoMo] - payment gateway VietNam
 
 ### Installation and run
 
@@ -46,6 +46,8 @@ $ yarn
 $ yarn start
 ...port 9000
 ```
+
+! You need check API in index.contants.js;
 
 ### DEMO:
 
