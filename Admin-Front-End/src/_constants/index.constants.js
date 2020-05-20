@@ -2,12 +2,10 @@ import React from "react";
 import { Spin } from "antd";
 
 require("dotenv").config();
-// export const API_ENDPOINT =
-//    "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
+export const API_ENDPOINT = "https://ithoangtan.online";
 // export const API_ENDPOINT = process.env.API_ENDPOINT;
 // export const API_ENDPOINT = "http://localhost:8000";
 // export const API_ENDPOINT = "https://api-kinhdoanhtourdulich.herokuapp.com";
-export const API_ENDPOINT = "https://ithoangtan.online";
 
 export const AdminArrayExternalScript = [
    "/admin/vendor/jquery/jquery.min.js",
@@ -16,10 +14,10 @@ export const AdminArrayExternalScript = [
    // "/admin/js/sb-admin-2.min.js",
 ];
 
-// export const LinkUserPage =
-// "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
+export const LinkUserPage =
+   "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
 // export const LinkUserPage = process.env.LinkUserPage;
-export const LinkUserPage = "https://kinhdoanhtourdulich.herokuapp.com";
+// export const LinkUserPage = "https://kinhdoanhtourdulich.herokuapp.com";
 
 export const MULTIPLIER_ID_TIMELINE = 10;
 

@@ -19,6 +19,11 @@ class BookTourStep2 extends Component {
       confirmDirty: false,
       autoCompleteResult: [],
       sizeWindow: "large",
+      numAdult: 1,
+      numChild: 0,
+      numChild2To6Age: 0,
+      numChildYounger2Age: 0,
+      totalPrice: 0,
    };
 
    componentWillMount() {
@@ -27,13 +32,24 @@ class BookTourStep2 extends Component {
       });
    }
 
+   componentDidMount() {
+      this.calTotalPrice();
+   }
+
    handleSubmit = (e) => {
       e.preventDefault();
+      const { numAdult, numChild, totalPrice } = this.state;
       this.props.form.validateFieldsAndScroll((err, values) => {
+         const newValues = {
+            ...values,
+            numberPeople: numAdult,
+            numberChildren: numChild,
+            totalPrice,
+         };
          if (!err) {
             message.success("OK! Bây giờ bạn có thể đến bước tiếp theo rồi");
             //Lưu thông tin vào storage
-            localStorage.setItem("orders", JSON.stringify(values));
+            localStorage.setItem("orders", JSON.stringify(newValues));
             //Đến khi người dùng ấn done mới tiến hành lưu xuống CSDL
             this.props.step2OK();
          }
@@ -45,6 +61,34 @@ class BookTourStep2 extends Component {
       this.setState({
          confirmDirty: this.state.confirmDirty || !!value,
       });
+   };
+
+   calTotalPrice = () => {
+      const { numAdult, numChild } = this.state;
+      const { tourById } = this.props;
+      const officalPrice = tourById.price * (1 - tourById.sale * 0.01);
+      const newTotalPrice = officalPrice * (numAdult + numChild * 0.5);
+      this.setState({ totalPrice: newTotalPrice });
+   };
+
+   onChangeNumAdult = async (value) => {
+      await this.setState({ numAdult: value });
+      this.calTotalPrice();
+   };
+
+   onChangeNumChild = async (value) => {
+      await this.setState({ numChild: value });
+      this.calTotalPrice();
+   };
+
+   onChangeNumChild2To6Age = async (value) => {
+      await this.setState({ numChild2To6Age: value });
+      this.calTotalPrice();
+   };
+
+   onChangeNumChildYounger2Age = async (value) => {
+      await this.setState({ numChildYounger2Age: value });
+      this.calTotalPrice();
    };
 
    initValue(name) {
@@ -65,7 +109,14 @@ class BookTourStep2 extends Component {
 
    render() {
       const { getFieldDecorator } = this.props.form;
-
+      const { tourById } = this.props;
+      const {
+         numAdult,
+         numChild,
+         numChild2To6Age,
+         numChildYounger2Age,
+         totalPrice,
+      } = this.state;
       const formItemLayout = {
          labelCol: {
             offset: 1,
@@ -86,8 +137,8 @@ class BookTourStep2 extends Component {
             xxl: { span: 16 },
          },
       };
+      const officalPrice = tourById.price * (1 - tourById.sale * 0.01);
       const { sizeWindow } = this.state;
-      const priceTour = 5000000;
       return (
          <Form
             {...formItemLayout}
@@ -217,7 +268,7 @@ class BookTourStep2 extends Component {
                                     <>
                                        trên 1,2m là
                                        <NumberFormat
-                                          value={priceTour}
+                                          value={officalPrice}
                                           displayType={"text"}
                                           thousandSeparator={true}
                                           prefix=" "
@@ -227,7 +278,7 @@ class BookTourStep2 extends Component {
                                  }
                               >
                                  <i
-                                    class="fas fa-user-tie pr-1"
+                                    className="fas fa-user-tie pr-1"
                                     style={{ width: "10%", textAlign: "right" }}
                                  ></i>
                                  <InputNumber
@@ -235,6 +286,9 @@ class BookTourStep2 extends Component {
                                     style={{ width: "40%" }}
                                     min={0}
                                     max={100}
+                                    name="numAdult"
+                                    value={numAdult}
+                                    onChange={this.onChangeNumAdult}
                                  />
                               </Tooltip>
                               <Tooltip
@@ -243,7 +297,7 @@ class BookTourStep2 extends Component {
                                     <>
                                        dưới 1,2m là
                                        <NumberFormat
-                                          value={priceTour * 0.9}
+                                          value={officalPrice * 0.5}
                                           displayType={"text"}
                                           thousandSeparator={true}
                                           prefix=" "
@@ -253,7 +307,7 @@ class BookTourStep2 extends Component {
                                  }
                               >
                                  <i
-                                    class="fas fa-male pl-2 pr-1"
+                                    className="fas fa-male pl-2 pr-1"
                                     style={{ width: "10%", textAlign: "right" }}
                                  ></i>
                                  <InputNumber
@@ -261,6 +315,9 @@ class BookTourStep2 extends Component {
                                     style={{ width: "40%" }}
                                     min={0}
                                     max={100}
+                                    name="numChild"
+                                    value={numChild}
+                                    onChange={this.onChangeNumChild}
                                  />
                               </Tooltip>
                            </>
@@ -292,7 +349,7 @@ class BookTourStep2 extends Component {
                                     <>
                                        từ 2 - 6 tuổi là
                                        <NumberFormat
-                                          value={priceTour * 0.6}
+                                          value={officalPrice * 0}
                                           displayType={"text"}
                                           thousandSeparator={true}
                                           prefix=" "
@@ -302,7 +359,7 @@ class BookTourStep2 extends Component {
                                  }
                               >
                                  <i
-                                    class="fas fa-child pr-1 pl-1"
+                                    className="fas fa-child pr-1 pl-1"
                                     style={{ width: "10%", textAlign: "right" }}
                                  ></i>
                                  <InputNumber
@@ -310,6 +367,9 @@ class BookTourStep2 extends Component {
                                     style={{ width: "40%" }}
                                     min={0}
                                     max={100}
+                                    name="numChild2To6Age"
+                                    value={numChild2To6Age}
+                                    onChange={this.onChangeNumChild2To6Age}
                                  />
                               </Tooltip>
                               <Tooltip
@@ -320,7 +380,7 @@ class BookTourStep2 extends Component {
                                        {" "}
                                        dưới 2 tuổi là
                                        <NumberFormat
-                                          value={priceTour * 0.1}
+                                          value={officalPrice * 0}
                                           displayType={"text"}
                                           thousandSeparator={true}
                                           prefix=" "
@@ -330,7 +390,7 @@ class BookTourStep2 extends Component {
                                  }
                               >
                                  <i
-                                    class="fas fa-baby pr-1 pl-1"
+                                    className="fas fa-baby pr-1 pl-1"
                                     style={{ width: "10%", textAlign: "right" }}
                                  ></i>
                                  <InputNumber
@@ -338,6 +398,9 @@ class BookTourStep2 extends Component {
                                     style={{ width: "40%" }}
                                     min={0}
                                     max={100}
+                                    name="numChildYounger2Age"
+                                    value={numChildYounger2Age}
+                                    onChange={this.onChangeNumChildYounger2Age}
                                  />
                               </Tooltip>
                            </>
@@ -349,7 +412,7 @@ class BookTourStep2 extends Component {
                   <p className="ht-price-total">
                      Tổng giá:{" "}
                      <NumberFormat
-                        value={priceTour * 5}
+                        value={totalPrice}
                         displayType={"text"}
                         thousandSeparator={true}
                         suffix={" VNĐ"}

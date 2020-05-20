@@ -112,9 +112,10 @@ exports.getLinkPayment = function (req, res) {
   // Tạo order
   let newOrder = new Order(req.body.order);
   let tour = req.body.tour;
+  const officalPrice = tour.price * (1 - tour.sale * 0.01); // tính giá tiền đã sale
   newOrder.totalPrice =
-    newOrder.numberPeople * newOrder.totalPrice +
-    newOrder.numberChildren * newOrder.totalPrice * 0.6;
+    newOrder.numberPeople * officalPrice +
+    newOrder.numberChildren * officalPrice * 0.5;
   console.log(newOrder);
 
   Order.createOrder(newOrder, function (err, order) {
@@ -175,7 +176,7 @@ exports.getLinkPayment = function (req, res) {
       order: { ...newOrder },
       tour: { ...tour },
       link: link,
-      message: message
+      message: message,
     };
     res.json(infoPayment);
   });
