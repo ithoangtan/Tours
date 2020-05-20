@@ -25,7 +25,8 @@ import RegisterPage from "./LoginAndRegisterPage/register.page";
 import ForgotPasswordPage from "./LoginAndRegisterPage/forgotPassword.page";
 import ForgotPasswordPageStep2 from "./LoginAndRegisterPage/forgotPasswordStep2.page";
 import BookTourPage from "./BookTourPage/bookTour.page";
-import OrderPage from './OrderPage/order.page'
+import OrderPage from "./OrderPage/order.page";
+import PaymentMomoPage from "./PaymentMomoPage/paymentMomo.page";
 
 //common Customer
 import FooterContainer from "./_components/Footer/footer.container";
@@ -40,7 +41,7 @@ const router = [
    {
       path: "/",
       exact: true,
-      component: props => (
+      component: (props) => (
          <>
             <NavigationContainer {...props} />
             <IndexPage {...props} />
@@ -48,7 +49,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/login",
@@ -61,7 +62,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/register",
@@ -74,7 +75,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/orders",
@@ -87,7 +88,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/forgot-password",
@@ -100,7 +101,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/forgotPassword",
@@ -113,7 +114,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/verify",
@@ -126,7 +127,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/tour",
@@ -140,7 +141,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/tour/search/:keySearch/:dayStart/:dayEnd/:conditional",
@@ -154,7 +155,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/book-tour/:idTour",
@@ -168,7 +169,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/tour-best",
@@ -182,7 +183,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/tour-single/:idTour",
@@ -195,7 +196,7 @@ const router = [
             <FooterContainer />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/about",
@@ -209,7 +210,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
 
    {
@@ -224,7 +225,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
 
    {
@@ -239,7 +240,7 @@ const router = [
             <Loaded />
             <BackToTop />
          </>
-      )
+      ),
    },
    {
       path: "/blog-single/:idPost",
@@ -252,7 +253,18 @@ const router = [
             <FooterContainer />
             <BackToTop />
          </>
-      )
+      ),
+   },
+   {
+      path: "/success-momo",
+      exact: true,
+      component: ({ match }, props) => (
+         <>
+            <NavigationContainer {...props} />
+            <PaymentMomoPage />
+            <FooterContainer />
+         </>
+      ),
    },
    //end for customer
 
@@ -260,59 +272,59 @@ const router = [
    {
       path: "/notAuthorized",
       exact: true,
-      component: () => <Result403 />
+      component: () => <Result403 />,
    },
 
    {
       path: "/serverIsWrong",
       exact: true,
-      component: () => <Result500 />
+      component: () => <Result500 />,
    },
    {
       path: "/doneResult",
       exact: true,
-      component: () => <ResultDone />
+      component: () => <ResultDone />,
    },
    {
       path: "/processingResult",
       exact: true,
-      component: () => <ResultProcessing />
+      component: () => <ResultProcessing />,
    },
    {
       path: "/complexError",
       exact: true,
-      component: () => <ResultSubmissionFailed />
+      component: () => <ResultSubmissionFailed />,
    },
    {
       path: "/successfulResult/:idOrder",
       exact: true,
       component: ({ match }, props) => (
          <ResultSuccessful match={match} {...props} />
-      )
+      ),
    },
    {
       path: "/successfulResult",
       exact: true,
       component: ({ match }, props) => (
          <ResultSuccessfulPayment match={match} {...props} />
-      )
+      ),
    },
    {
       path: "/warningResult",
       exact: true,
       component: () => (
          <ResultWarning status="warning" title="Warning something!" />
-      )
+      ),
    },
    {
       path: "/all",
       exact: true,
-      component: () => <All />
+      component: () => <All />,
    },
    {
       path: "/",
       exact: false,
-      component: () => <Result404 />
-   }
+      component: () => <Result404 />,
+   },
 ];
 export default router;

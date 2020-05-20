@@ -12,11 +12,11 @@ export default class BookTourStep3 extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         size: "large"
+         size: "large",
       };
    }
 
-   onChange = e => {
+   onChange = (e) => {
       this.setState({ size: e.target.value });
    };
 
@@ -57,7 +57,7 @@ export default class BookTourStep3 extends Component {
                                     className="btn btn-default"
                                     role="button"
                                  >
-                                    Developing...
+                                    Thanh toán ngay
                                  </Link>{" "}
                               </p>
                            </div>
@@ -185,7 +185,7 @@ export default class BookTourStep3 extends Component {
                               Chuyển Khoản{" "}
                               <Paragraph
                                  copyable={{
-                                    text: `${orders.phone} ${orders.name}`
+                                    text: `${orders.phone} ${orders.name}`,
                                  }}
                                  style={{ display: "inline" }}
                               >

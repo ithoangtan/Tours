@@ -2908,3 +2908,10 @@ html {
   border-radius: 6px;
   padding: 6px;
 }
+
+/* custom icon fa */
+.check-circle-momo {
+  color: green;
+  font-size: 30px;
+  margin-left: 10px;
+}
