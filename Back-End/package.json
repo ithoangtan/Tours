@@ -16,6 +16,7 @@
     "connect": "^3.6.6",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "csurf": "^1.10.0",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
@@ -32,6 +33,8 @@
     "passport-google-token": "^0.1.2",
     "randomstring": "^1.1.5",
     "request-json": "^0.6.4",
+    "reqwest": "^2.0.5",
+    "xhr2": "^0.2.0",
     "xoauth2": "^1.2.0"
   },
   "devDependencies": {
