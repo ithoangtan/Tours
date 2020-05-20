@@ -4,6 +4,9 @@
       var idx = $e.index();
       var itemsPerSlide = 4;
       var totalItems = $("#bestTourCarousel .carousel-item").length;
+      if (totalItems <= 4) {
+         return;
+      }
       if (idx >= totalItems - (itemsPerSlide - 1)) {
          var it = itemsPerSlide - (totalItems - idx);
          for (var i = 0; i < it; i++) {
@@ -25,6 +28,9 @@
       var idx = $e.index();
       var itemsPerSlide = 4;
       var totalItems = $("#recentStoriesCarousel .carousel-item").length;
+      if (totalItems <= 4) {
+         return;
+      }
       if (idx >= totalItems - (itemsPerSlide - 1)) {
          var it = itemsPerSlide - (totalItems - idx);
          for (var i = 0; i < it; i++) {

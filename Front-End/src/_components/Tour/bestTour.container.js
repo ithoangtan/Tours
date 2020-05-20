@@ -142,11 +142,11 @@ class BestTourContainer extends Component {
                                  className="mr-1 height-40"
                               ></Rate>{" "}
                               <div className="float-right ht-display-flex-start-center">
-                                 <div className="rate">
+                                 {/* <div className="rate">
                                     <Link to="/tour">
                                        ({tour.views ? tour.views : 0} views)
                                     </Link>
-                                 </div>
+                                 </div> */}
                               </div>
                            </div>
                         </div>

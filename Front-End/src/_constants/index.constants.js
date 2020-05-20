@@ -37,6 +37,10 @@ export const AdminArrayExternalScript = [
    "/admin/js/demo/chart-pie-demo.js",
 ];
 
+export const STRING = {
+   GOOGLE_USER: "googleuser",
+};
+
 export const DATE_TIME_FORMAT = {
    DATE_MONTH_YEAR: "DD/MM/YYYY",
    DATE_TIME: "DD/MM/YYYY - hh:mm:ss",

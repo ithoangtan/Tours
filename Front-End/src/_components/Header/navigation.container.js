@@ -8,7 +8,7 @@ import { Menu, Dropdown, Icon, Avatar, Badge, Tooltip } from "antd";
 
 import { getSignCookie } from "../../_commons/auth.service";
 
-import { API_ENDPOINT } from "../../_constants/index.constants";
+import { API_ENDPOINT, STRING } from "../../_constants/index.constants";
 import ProfileComponent from "../Profile/profile.component";
 
 const arrayVietNamMobile = [
@@ -394,7 +394,7 @@ export default class Navigation extends Component {
                            icon="user"
                            size="large"
                            src={
-                              avatar.includes("https")
+                              avatar.includes(STRING.GOOGLE_USER)
                                  ? avatar
                                  : token
                                  ? API_ENDPOINT + avatar

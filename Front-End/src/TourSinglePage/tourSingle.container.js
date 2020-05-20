@@ -709,13 +709,29 @@ export default class TourSingleContainer extends Component {
                                           </p>
                                        }
                                        dot={
-                                          <i className="fas fa-map-pin ht-dot"></i>
+                                          // <i className="fas fa-map-pin ht-dot"></i>
+                                          <i
+                                             class="fas fa-map-marker-alt"
+                                             style={{
+                                                color: "#e60023",
+                                                fontSize: 22,
+                                             }}
+                                          ></i>
                                        }
                                        color=""
+                                       key={"timeline-item" + index}
                                     >
                                        <div className="ht-time-line-content">
                                           <div className="ht-location">
-                                             <i className="fas fa-location-arrow"></i>{" "}
+                                             {/* <i className="far fa-calendar-alt"></i>{" "} */}
+                                             <Tag>
+                                                {moment(timeline.date).format(
+                                                   INDEX_CONSTANTS
+                                                      .DATE_TIME_FORMAT
+                                                      .DATE_SHORT_TIME
+                                                )}
+                                             </Tag>
+                                             <i className="fas fa-location-arrow ml-3"></i>{" "}
                                              {timeline.title}
                                           </div>
                                           <div className="ht-describe">
@@ -1042,8 +1058,16 @@ export default class TourSingleContainer extends Component {
                                                       <Avatar
                                                          size="large"
                                                          src={
-                                                            INDEX_CONSTANTS.API_ENDPOINT +
                                                             item.avatar
+                                                               ? item.avatar.includes(
+                                                                    INDEX_CONSTANTS
+                                                                       .STRING
+                                                                       .GOOGLE_USER
+                                                                 )
+                                                                  ? item.avatar
+                                                                  : INDEX_CONSTANTS.API_ENDPOINT +
+                                                                    item.avatar
+                                                               : `${INDEX_CONSTANTS.API_ENDPOINT}/img/avatarDefault.jpg`
                                                          }
                                                       />
                                                    </div>
