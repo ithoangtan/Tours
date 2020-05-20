@@ -1,6 +1,7 @@
 const MD5 = require("md5");
-
+const crypto = require("crypto");
 const Order = require("../models/order.model");
+const reqwest = require("reqwest");
 
 exports.listAll = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
@@ -111,7 +112,7 @@ exports.getLinkPayment = function (req, res) {
   // Thông tin tour req.body.tour
   // Thông tin khách hàng: req.body.order
   // Tạo order
-  let newOrder = new Order(req.body.order);
+  let newOrder = req.body.order;
   let tour = req.body.tour;
   const officalPrice = tour.price * (1 - tour.sale * 0.01); // tính giá tiền đã sale
   newOrder.totalPrice =
@@ -206,4 +207,87 @@ exports.cancelPayment = function (req, res) {
 
 exports.notifyPayment = function (req, res) {
   // thông báo cho admin, gửi mail cho admin,.....
+};
+
+exports.getLinkMoMo = function (req, res) {
+  // Nhận các tham số:
+  // Thông tin tour req.body.tour
+  // Thông tin khách hàng: req.body.order
+  // Tạo order
+  let newOrder = req.body.order;
+  let tour = req.body.tour;
+
+  const officalPrice = tour.price * (1 - tour.sale * 0.01); // tính giá tiền đã sale
+  newOrder.totalPrice =
+    newOrder.numberPeople * officalPrice +
+    newOrder.numberChildren * officalPrice * 0.5;
+
+  let MoMoRequest = {
+    partnerCode: "MOMONGVH20200520", //need env
+    accessKey: "fPse3OVp3vTOgwaZ", //need env
+    requestId: newOrder.PIN.toString(),
+    amount: newOrder.totalPrice.toString(),
+    orderId: newOrder.PIN.toString(),
+    orderInfo: newOrder.email.toString(),
+    returnUrl: "https://kinhdoanhtourdulich.herokuapp.com/success-momo/", //need env
+    notifyUrl: "https://kinhdoanhtourdulich.herokuapp.com/notify-momo/", //need env
+    extraData: "",
+    requestType: "captureMoMoWallet", //need env
+    signature: "",
+  };
+
+  var rawSignature =
+    "partnerCode=" +
+    MoMoRequest.partnerCode +
+    "&accessKey=" +
+    MoMoRequest.accessKey +
+    "&requestId=" +
+    MoMoRequest.requestId +
+    "&amount=" +
+    MoMoRequest.amount +
+    "&orderId=" +
+    MoMoRequest.orderId +
+    "&orderInfo=" +
+    MoMoRequest.orderInfo +
+    "&returnUrl=" +
+    MoMoRequest.returnUrl +
+    "&notifyUrl=" +
+    MoMoRequest.notifyUrl +
+    "&extraData=" +
+    MoMoRequest.extraData;
+  var signature = crypto
+    .createHmac("sha256", "ywKiWRKcHYGwMoNhtjCtrJpiUXZ68hv7") // ywKiWRKcHYGwMoNhtjCtrJpiUXZ68hv7 = secret key nên là biến môi trường (env)
+    .update(rawSignature)
+    .digest("hex");
+  MoMoRequest.signature = signature;
+
+  const API_ENDPOINT_MOMO =
+    "https://test-payment.momo.vn/gw_payment/transactionProcessor"; //need env
+
+  reqwest({
+    url: API_ENDPOINT_MOMO,
+    method: "POST",
+    data: JSON.stringify(MoMoRequest),
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+  }).then((data) => {
+    // Order.createOrder(newOrder, function (err, order) {
+    // if (err) res.send(err);
+    // Tính tổng price dựa trên số người lớn và trẻ nhỏ (giá bằng 60% người lớn)
+
+    // Trả về: tour, order(gồm mã PIN và tổng tiền, người mua tour), link(theo format đã cho trước),
+    //  message đã sẵn sàng thanh toán!!!!
+    const message = "Hóa đơn đã sẵn sàng để thanh toán!";
+    const infoPayment = {
+      order: { ...newOrder },
+      tour: { ...tour },
+      // link: link,
+      message: message,
+      data,
+    };
+    res.json(infoPayment);
+    // });
+    // });
+  });
 };
