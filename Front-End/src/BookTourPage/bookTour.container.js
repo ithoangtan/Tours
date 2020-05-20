@@ -21,7 +21,7 @@ const { Step } = Steps;
 
 const stepStyle = {
    marginBottom: 18,
-   boxShadow: "0px -1px 0 0 #e8e8e8 inset"
+   boxShadow: "0px -1px 0 0 #e8e8e8 inset",
 };
 
 let PIN = Date.now();
@@ -31,7 +31,7 @@ class BookTourContainer extends Component {
       this.state = {
          current: 0,
          step2OK: false,
-         redirectResult: false
+         redirectResult: false,
       };
    }
 
@@ -62,10 +62,10 @@ class BookTourContainer extends Component {
          status: "verify",
          PIN: PIN,
          notes: " ",
-         totalPrice: tourById.price,
+         totalPrice: newOrder.totalPrice,
          idAccount: 8, //test account,
          buyer: newOrder.name,
-         idTour: tourById.idTour
+         idTour: tourById.idTour,
       };
       const { orderAllActions } = this.props;
       const { fetchGetLinkPaymentRequest } = orderAllActions;
@@ -78,7 +78,7 @@ class BookTourContainer extends Component {
       this.setState({ current });
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
-   onChange = current => {
+   onChange = (current) => {
       if (!this.state.step2OK && this.state.current === 1) {
          message.error(
             "Vui lòng nhập đầy đủ thông tin và xác nhận trước khi đến bước tiếp theo!"
@@ -102,15 +102,17 @@ class BookTourContainer extends Component {
    };
 
    //Step 2: Your information
-   orderInfo = () => {
-      return <BookTourStep2 step2OK={() => this.step2OK()} />;
+   orderInfo = (tourById) => {
+      return (
+         <BookTourStep2 tourById={tourById} step2OK={() => this.step2OK()} />
+      );
    };
 
    orderFinish = () => {
       return <BookTourStep3 data={this.props.data} payment={true} />;
    };
 
-   statusOrder = current => {
+   statusOrder = (current) => {
       let status = "";
       if (current === 1) status = "";
       if (current === 2) status = "";
@@ -132,7 +134,7 @@ class BookTourContainer extends Component {
                to={{
                   pathname: `/successfulResult/${PIN}`,
                   // search: `?idOrder=${PIN}`,
-                  state: { done: true }
+                  state: { done: true },
                }}
             />
          );
@@ -152,27 +154,27 @@ class BookTourContainer extends Component {
 
    render() {
       const { current } = this.state;
-
+      const { tourById } = this.props;
       const steps = [
          {
             title: "Check Your Order",
             status: this.statusOrder(current),
             description: "Estimaed: 00:00:10",
-            content: this.orderList()
+            content: this.orderList(),
          },
          {
             title: "Your Information",
             status: this.statusOrder(current),
             description: "Estimaed: 00:02:00",
-            content: this.orderInfo()
+            content: this.orderInfo(tourById),
          },
          {
             title: "Payments Method",
             // subTitle: "00:05:00",
             status: this.statusOrder(current),
             description: "Estimaed: 00:02:00",
-            content: this.orderFinish()
-         }
+            content: this.orderFinish(),
+         },
       ];
 
       return (
@@ -185,7 +187,7 @@ class BookTourContainer extends Component {
                onChange={this.onChange}
                style={stepStyle}
             >
-               {steps.map(item => (
+               {steps.map((item) => (
                   <Step
                      key={item.title}
                      title={item.title}
@@ -237,21 +239,21 @@ class BookTourContainer extends Component {
 BookTourContainer.propTypes = {
    classes: PropTypes.object,
    orderAllActions: PropTypes.shape({
-      fetchGetLinkPaymentRequest: PropTypes.func
+      fetchGetLinkPaymentRequest: PropTypes.func,
    }),
-   listOrder: PropTypes.array
+   listOrder: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       listTour: state.order.listOrder,
-      data: state.order.data
+      data: state.order.data,
       //data: .link, .message, .order, .tour
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      orderAllActions: bindActionCreators(orderActions, dispatch)
+      orderAllActions: bindActionCreators(orderActions, dispatch),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BookTourContainer);
