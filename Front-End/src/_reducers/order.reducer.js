@@ -6,6 +6,7 @@ import {
    messageWarning,
 } from "../_helper/message.helper";
 const orders = localStorage.getItem("orders");
+const email = sessionStorage.getItem("email");
 const initialState = {
    listOrder: [],
    orderByIdAccount: {},
@@ -13,7 +14,7 @@ const initialState = {
    patch: [],
    create: [],
    data: [],
-   emailOrder: orders ? JSON.parse(orders).email : null,
+   emailOrder: email ? email : orders ? JSON.parse(orders).email : null,
 };
 
 const reducer = (state = initialState, action) => {

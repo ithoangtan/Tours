@@ -14,7 +14,7 @@ import TableFirstOrder from "./tableFirstOrder";
 import * as INDEX_CONSTANTS from "../_constants/index.constants";
 import funcLoadJs from "../_constants/loadJs.constants";
 
-import { Typography, Spin, Table, Tag } from "antd";
+import { Typography, Spin, Table, Tag, Button } from "antd";
 import moment from "moment";
 import NumberFormat from "react-number-format";
 
@@ -38,19 +38,14 @@ class OrderContainer extends Component {
          orderAllActions,
          listTour,
          emailOrder,
-         auth,
       } = this.props;
       const {
          fetchListTourRequest,
          fetchListTourImageRequest,
       } = tourAllActions;
       const { fetchOrderByEmailRequest } = orderAllActions;
-      if (auth.email || emailOrder) {
-         if (auth.email) {
-            await fetchOrderByEmailRequest(auth.email);
-         } else {
-            await fetchOrderByEmailRequest(emailOrder);
-         }
+      if (emailOrder) {
+         await fetchOrderByEmailRequest(emailOrder);
          if (!listTour.length) {
             await fetchListTourImageRequest();
             await fetchListTourRequest();
@@ -69,6 +64,7 @@ class OrderContainer extends Component {
       this.setState({ size: window.innerWidth > 757.98 ? "default" : "small" });
       this.setState({ listTour, haveData: true });
    }
+
    loaded = () => {
       this.setState((props) => {
          return {
@@ -173,8 +169,14 @@ class OrderContainer extends Component {
             </>
          );
       } else {
+         if (this.state.loading) {
+            this.setState({ loading: false });
+         }
          result = (
             <div className="ht-khong-tim-thay-du-lieu">
+               <Button type="primary" size="large">
+                  <Link to="/">Xem tour mới</Link>
+               </Button>
                <Title level={3}> Chưa có dữ liệu phù hợp</Title>
             </div>
          );

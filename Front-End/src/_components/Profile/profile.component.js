@@ -21,7 +21,7 @@ const pStyle = {
    color: "rgba(0,0,0,0.85)",
    lineHeight: "24px",
    display: "block",
-   marginBottom: 16
+   marginBottom: 16,
 };
 
 const DescriptionItem = ({ title, content, editable }) => (
@@ -30,14 +30,14 @@ const DescriptionItem = ({ title, content, editable }) => (
          fontSize: 14,
          lineHeight: "22px",
          marginBottom: 7,
-         color: "rgba(0,0,0,0.65)"
+         color: "rgba(0,0,0,0.65)",
       }}
    >
       <p
          style={{
             marginRight: 8,
             display: "inline-block",
-            color: "rgba(0,0,0,0.85)"
+            color: "rgba(0,0,0,0.85)",
          }}
       >
          {title}:
@@ -56,7 +56,7 @@ class ProfileContainer extends Component {
          birthdate: "",
          website: "",
          avatar: "",
-         myAccount: {}
+         myAccount: {},
       };
    }
    onClose = () => {
@@ -67,11 +67,11 @@ class ProfileContainer extends Component {
       const { accountAllActions } = this.props;
       const {
          fetchAccountRequest,
-         fetchOrderOfAccountWithEmailRequest
+         // fetchOrderOfAccountWithEmailRequest,
       } = accountAllActions;
       const email = sessionStorage.getItem("email");
       fetchAccountRequest(email);
-      fetchOrderOfAccountWithEmailRequest(email);
+      // fetchOrderOfAccountWithEmailRequest(email);
    }
 
    componentWillReceiveProps() {
@@ -88,7 +88,7 @@ class ProfileContainer extends Component {
             birthdate: moment(account.birthdate).format("L"),
             website: account.website,
             avatar: account.avatar,
-            myAccount: account
+            myAccount: account,
          });
       }
    }
@@ -125,12 +125,12 @@ class ProfileContainer extends Component {
 
    renderOrder = () => {
       const { order, account } = this.props;
-      sessionStorage.setItem("avatar", account.avatar);
+      // sessionStorage.setItem("avatar", account.avatar);
       return (
          <List
             itemLayout="horizontal"
             dataSource={order}
-            renderItem={item => (
+            renderItem={(item) => (
                <List.Item>
                   <List.Item.Meta
                      title={
@@ -170,7 +170,7 @@ class ProfileContainer extends Component {
          birthdate,
          website,
          avatar,
-         myAccount
+         myAccount,
       } = this.state;
       return (
          <Drawer
@@ -206,21 +206,21 @@ class ProfileContainer extends Component {
                         fontSize: 14,
                         lineHeight: "22px",
                         marginBottom: 7,
-                        color: "rgba(0,0,0,0.65)"
+                        color: "rgba(0,0,0,0.65)",
                      }}
                   >
                      <p
                         style={{
                            marginRight: 8,
                            display: "inline-block",
-                           color: "rgba(0,0,0,0.85)"
+                           color: "rgba(0,0,0,0.85)",
                         }}
                      >
                         Full name:
                      </p>
                      <Paragraph
                         editable={{
-                           onChange: str => this.onChange(str, "name")
+                           onChange: (str) => this.onChange(str, "name"),
                         }}
                      >
                         {name}
@@ -238,21 +238,21 @@ class ProfileContainer extends Component {
                         fontSize: 14,
                         lineHeight: "22px",
                         marginBottom: 7,
-                        color: "rgba(0,0,0,0.65)"
+                        color: "rgba(0,0,0,0.65)",
                      }}
                   >
                      <p
                         style={{
                            marginRight: 8,
                            display: "inline-block",
-                           color: "rgba(0,0,0,0.85)"
+                           color: "rgba(0,0,0,0.85)",
                         }}
                      >
                         Address:
                      </p>
                      <Paragraph
                         editable={{
-                           onChange: str => this.onChange(str, "address")
+                           onChange: (str) => this.onChange(str, "address"),
                         }}
                      >
                         {address === undefined ? " " : address}
@@ -270,21 +270,21 @@ class ProfileContainer extends Component {
                         fontSize: 14,
                         lineHeight: "22px",
                         marginBottom: 7,
-                        color: "rgba(0,0,0,0.65)"
+                        color: "rgba(0,0,0,0.65)",
                      }}
                   >
                      <p
                         style={{
                            marginRight: 8,
                            display: "inline-block",
-                           color: "rgba(0,0,0,0.85)"
+                           color: "rgba(0,0,0,0.85)",
                         }}
                      >
                         Birthdate:
                      </p>
                      <Paragraph
                         editable={{
-                           onChange: str => this.onChange(str, "birthdate")
+                           onChange: (str) => this.onChange(str, "birthdate"),
                         }}
                      >
                         {birthdate === undefined ? " " : birthdate}
@@ -297,21 +297,21 @@ class ProfileContainer extends Component {
                         fontSize: 14,
                         lineHeight: "22px",
                         marginBottom: 7,
-                        color: "rgba(0,0,0,0.65)"
+                        color: "rgba(0,0,0,0.65)",
                      }}
                   >
                      <p
                         style={{
                            marginRight: 8,
                            display: "inline-block",
-                           color: "rgba(0,0,0,0.85)"
+                           color: "rgba(0,0,0,0.85)",
                         }}
                      >
                         Website:
                      </p>
                      <Paragraph
                         editable={{
-                           onChange: str => this.onChange(str, "website")
+                           onChange: (str) => this.onChange(str, "website"),
                         }}
                      >
                         {website}
@@ -326,21 +326,21 @@ class ProfileContainer extends Component {
                         fontSize: 14,
                         lineHeight: "22px",
                         marginBottom: 7,
-                        color: "rgba(0,0,0,0.65)"
+                        color: "rgba(0,0,0,0.65)",
                      }}
                   >
                      <p
                         style={{
                            marginRight: 8,
                            display: "inline-block",
-                           color: "rgba(0,0,0,0.85)"
+                           color: "rgba(0,0,0,0.85)",
                         }}
                      >
                         Phone:
                      </p>
                      <Paragraph
                         editable={{
-                           onChange: str => this.onChange(str, "phone")
+                           onChange: (str) => this.onChange(str, "phone"),
                         }}
                      >
                         {phone}
@@ -430,21 +430,21 @@ ProfileContainer.propTypes = {
    accountAllActions: PropTypes.shape({
       fetchAccountRequest: PropTypes.func,
       fetchUpdateAccountRequest: PropTypes.func,
-      fetchOrderOfAccountWithEmailRequest: PropTypes.func
+      fetchOrderOfAccountWithEmailRequest: PropTypes.func,
    }),
    account: PropTypes.array,
-   order: PropTypes.array
+   order: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       account: state.account.account,
-      order: state.account.order
+      order: state.account.order,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      accountAllActions: bindActionCreators(accountActions, dispatch)
+      accountAllActions: bindActionCreators(accountActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là accountActions ở bên account.action.js
    };
 };

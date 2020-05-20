@@ -73,6 +73,7 @@ router.post("/resultPayment", order.resultPayment);
 router.post("/cancelPayment", order.cancelPayment);
 //for order`
 router.get("/order", order.read);
+router.get("/orderWithEmail", authenticated, order.readByEmail);
 router.get("/orderWithEmail", order.readByEmail);
 router.get("/orders", order.listAll);
 router.post("/order", order.create);
