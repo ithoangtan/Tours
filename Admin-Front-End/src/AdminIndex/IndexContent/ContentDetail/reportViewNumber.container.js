@@ -14,7 +14,7 @@ class ReportViewNumberContainer extends Component {
       funcLoadJs(INDEX_CONSTANTS.AdminArrayExternalScript);
    }
 
-   fetch = async () => {};
+   fetch = async () => { };
 
    componentWillMount() {
       const { reportAllActions } = this.props;
@@ -24,7 +24,7 @@ class ReportViewNumberContainer extends Component {
    render() {
       let report = this.props.report;
       if (report.total === undefined) return <div></div>;
-
+      if (report.total === null) report.total = 0;
       return (
          <div className="row">
             {/* Earnings (Monthly) Card Example */}

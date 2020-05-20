@@ -444,14 +444,14 @@ class ReportViewChartContainer extends Component {
                               max={maxAll}
                            />
                         ) : (
-                           <ColumnChartVietNam
-                              data={
-                                 dataReportNumberPeopleFollowDestinationVietNam
-                              }
-                              year={this.state.year}
-                              max={maxVietNam}
-                           />
-                        )}
+                              <ColumnChartVietNam
+                                 data={
+                                    dataReportNumberPeopleFollowDestinationVietNam
+                                 }
+                                 year={this.state.year}
+                                 max={maxVietNam}
+                              />
+                           )}
 
                         {/* </div> */}
                      </div>

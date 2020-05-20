@@ -47,13 +47,14 @@ import { Chart, Axis, Tooltip, Geom, Legend } from "bizcharts";
 // ];
 
 const cols = {
-   value: { min: 2 },
+   value: { min: 0 },
    month: { range: [0, 1] }
 };
 
 export default class LineChart extends Component {
    render() {
       const { data, yearDefault } = this.props;
+
       return (
          <Chart
             filter={[
