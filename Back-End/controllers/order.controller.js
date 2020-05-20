@@ -67,10 +67,11 @@ exports.read = function (req, res) {
   }
 };
 exports.readByEmail = function (req, res) {
+  const email = req.email ? req.email : req.query.email;
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
-  Order.getOrderByEmail(req.query.email, function (err, order) {
+  Order.getOrderByEmail(email, function (err, order) {
     if (err) res.send(err);
     res.json(order); //Đã là API thì trả về phải chuẩn
     //Chỉ có một phần tử thì không lý do gì phải res về một mảng

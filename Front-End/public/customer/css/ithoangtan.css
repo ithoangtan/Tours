@@ -874,8 +874,9 @@
 
 .ht-khong-tim-thay-du-lieu {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   height: 150px;
   max-width: 100%;
   min-width: 100%;
