@@ -5,6 +5,7 @@ const url = "order";
 const urlPIN = "resultPayment";
 const urls = "orders";
 const getLinkPaymentUrl = "getLinkPayment";
+const getLinkPaymentMomoUrl = "getLinkMoMo";
 const urlOrderWithEmail = "orderWithEmail";
 
 export const getListOrder = () => {
@@ -37,6 +38,10 @@ export const patchSetStatusPaid = (data) => {
 
 export const getLinkPayment = (data) => {
    return axiosService.post(`${API_ENDPOINT}/${getLinkPaymentUrl}`, data);
+};
+
+export const getLinkPaymentMomo = (data) => {
+   return axiosService.post(`${API_ENDPOINT}/${getLinkPaymentMomoUrl}`, data);
 };
 
 export const getOrderByEmail = (email) => {

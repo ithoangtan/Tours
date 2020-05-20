@@ -68,9 +68,13 @@ class BookTourContainer extends Component {
          idTour: tourById.idTour,
       };
       const { orderAllActions } = this.props;
-      const { fetchGetLinkPaymentRequest } = orderAllActions;
+      const {
+         fetchGetLinkPaymentRequest,
+         fetchGetLinkPaymentMomoRequest,
+      } = orderAllActions;
       const data = { order: { ...order }, tour: { ...tourById } };
       fetchGetLinkPaymentRequest(data);
+      fetchGetLinkPaymentMomoRequest(data);
    }
 
    prev() {
@@ -109,7 +113,13 @@ class BookTourContainer extends Component {
    };
 
    orderFinish = () => {
-      return <BookTourStep3 data={this.props.data} payment={true} />;
+      return (
+         <BookTourStep3
+            data={this.props.data}
+            dataMomo={this.props.dataMomo}
+            payment={true}
+         />
+      );
    };
 
    statusOrder = (current) => {
@@ -248,6 +258,7 @@ const mapStateToProps = (state) => {
    return {
       listTour: state.order.listOrder,
       data: state.order.data,
+      dataMomo: state.order.dataMomo,
       //data: .link, .message, .order, .tour
    };
 };

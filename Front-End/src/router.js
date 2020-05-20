@@ -26,7 +26,6 @@ import ForgotPasswordPage from "./LoginAndRegisterPage/forgotPassword.page";
 import ForgotPasswordPageStep2 from "./LoginAndRegisterPage/forgotPasswordStep2.page";
 import BookTourPage from "./BookTourPage/bookTour.page";
 import OrderPage from "./OrderPage/order.page";
-import PaymentMomoPage from "./PaymentMomoPage/paymentMomo.page";
 
 //common Customer
 import FooterContainer from "./_components/Footer/footer.container";
@@ -261,7 +260,7 @@ const router = [
       component: ({ match }, props) => (
          <>
             <NavigationContainer {...props} />
-            <PaymentMomoPage />
+            <ResultSuccessfulPayment match={match} {...props} />
             <FooterContainer />
          </>
       ),

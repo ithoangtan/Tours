@@ -14,6 +14,7 @@ const initialState = {
    patch: [],
    create: [],
    data: [],
+   dataMomo: [],
    emailOrder: email ? email : orders ? JSON.parse(orders).email : null,
 };
 
@@ -144,6 +145,23 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             data: error,
+         };
+      }
+      //Get Link Payment Momo
+      case orderConstants.FETCH_GET_LINK_PAYMENT_MOMO_SUCCESS: {
+         const { data } = action.payload;
+         messageSuccess(`${data.message}!`, 3);
+         return {
+            ...state,
+            dataMomo: data,
+         };
+      }
+      case orderConstants.FETCH_GET_LINK_PAYMENT_MOMO_FAILED: {
+         const { error } = action.payload;
+         messageError(`${error}`, 1);
+         return {
+            ...state,
+            dataMomo: error,
          };
       }
       default:

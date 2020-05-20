@@ -300,3 +300,39 @@ export const fetchGetLinkPaymentRequest = (infoPayment) => {
          });
    };
 };
+
+//Get Link Payment momo
+export const fetchGetLinkPaymentMomoSuccess = (infoPayment, data) => {
+   return {
+      type: orderConstants.FETCH_GET_LINK_PAYMENT_MOMO_SUCCESS,
+      payload: {
+         // Thường đi làm thì người ta hay gọi là FETCH
+         //data gửi kèm trong actions là payload ở vị trí này
+         data,
+      },
+      infoPayment: { infoPayment },
+   };
+};
+
+export const fetchGetLinkPaymentMomoError = (error) => {
+   return {
+      type: orderConstants.FETCH_GET_LINK_PAYMENT_MOMO_FAILED,
+      payload: {
+         error,
+      },
+   };
+};
+
+export const fetchGetLinkPaymentMomoRequest = (infoPayment) => {
+   return (dispatch) => {
+      orderApis
+         .getLinkPaymentMomo(infoPayment)
+         .then((resp) => {
+            const { data } = resp;
+            dispatch(fetchGetLinkPaymentMomoSuccess(infoPayment, data));
+         })
+         .catch((error) => {
+            dispatch(fetchGetLinkPaymentMomoError(error));
+         });
+   };
+};

@@ -22,7 +22,7 @@ export default class BookTourStep3 extends Component {
 
    render() {
       const { size } = this.state;
-      const { data } = this.props;
+      const { data, dataMomo } = this.props;
       const orders = JSON.parse(localStorage.getItem("orders"));
       return (
          <div className="ht-book-finish">
@@ -50,15 +50,13 @@ export default class BookTourStep3 extends Component {
                                  </Link>
                               </p>
                               <p>
-                                 <Link
-                                    style={{ border: "1px solid black" }}
-                                    disabled
-                                    to="#"
-                                    className="btn btn-default"
+                                 <a
+                                    href={dataMomo.data.payUrl}
+                                    className="btn btn-primary"
                                     role="button"
                                  >
                                     Thanh toán ngay
-                                 </Link>{" "}
+                                 </a>{" "}
                               </p>
                            </div>
                         </div>
