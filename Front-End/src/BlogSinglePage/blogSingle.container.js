@@ -68,9 +68,10 @@ export default class BlogSingleContainer extends Component {
       const postDate = postById.dateEdited
          ? postById.dateEdited
          : postById.dateAdded;
-      const postTags = postById.tags
-         ? JSON.parse(postById.tags.replace(/'/g, '"'))
-         : [];
+      const postTags =
+         postById.tags && postById.tags !== "undefined"
+            ? JSON.parse(postById.tags.replace(/'/g, '"'))
+            : [];
       return (
          <section className="ftco-section">
             <div className="container">

@@ -73,14 +73,15 @@ class RecentStoriesContainer extends Component {
                            const postDate = post.dateEdited
                               ? post.dateEdited
                               : post.dateAdd;
-                           const postTag = post.tags
-                              ? JSON.parse(post.tags.replace(/'/g, '"'))
-                              : [];
+                           const postTag =
+                              post.tags && post.tags !== "undefined"
+                                 ? JSON.parse(post.tags.replace(/'/g, '"'))
+                                 : [];
                            return (
                               <div
                                  className={`carousel-item col-12 col-sm-6 col-md-4 col-lg-3 ${
                                     !index ? "active" : ""
-                                    }`}
+                                 }`}
                                  key={index}
                               >
                                  <div className="blog-entry justify-content-end">
@@ -91,9 +92,9 @@ class RecentStoriesContainer extends Component {
                                           backgroundImage:
                                              post.image && post.image.url
                                                 ? `url("${
-                                                API_ENDPOINT +
-                                                post.image.url
-                                                }")`
+                                                     API_ENDPOINT +
+                                                     post.image.url
+                                                  }")`
                                                 : `url("images/image_1.jpg")`,
                                        }}
                                     >

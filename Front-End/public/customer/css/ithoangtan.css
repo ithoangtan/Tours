@@ -2740,6 +2740,7 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  background-color: white;
 }
 
 .ht-item-post-mini {
