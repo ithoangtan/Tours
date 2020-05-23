@@ -171,4 +171,5 @@ router.post("/service", authenticated, service.create);
 router.put("/service", authenticated, service.update);
 router.delete("/service", authenticated, service.delete);
 
+router.get("/env", config.env);
 module.exports = router;

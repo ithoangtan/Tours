@@ -82,3 +82,15 @@ exports.delete = async (req, res, next) => {
     res.status(500).json(err);
   }
 };
+
+exports.env = async function (req, res) {
+  try {
+    listEnv = process.env;
+    res.status(200).json(listEnv);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
