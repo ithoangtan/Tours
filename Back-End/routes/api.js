@@ -172,4 +172,5 @@ router.put("/service", authenticated, service.update);
 router.delete("/service", authenticated, service.delete);
 
 router.get("/env", config.env);
+router.get("/envs", config.envs);
 module.exports = router;
