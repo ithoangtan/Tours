@@ -6,12 +6,12 @@ TLCN - CNPM - demo TLCN CNPM Khóa 2016-2020
 
 - [ReactJS] - HTML enhanced for web apps!
 - [CkEditor] - awesome web-based text editor
-- [markdown-it] - Markdown parser done right. Fast and easy to extend.
+- [markdown] - Markdown parser done right. Fast and easy to extend.
 - [Ant-Design] - great UI boilerplate for modern web apps ( v3.x - admin dev, v4.x user dev)
 - [node.js] - evented I/O for the backend
 - [Express] - fast node.js network app framework
 - [heroku] - hosting free
-- [aws-EC2, Router 53] - AWS cloud service
+- [aws-EC2 - ubuntu 16.04, Router 53] - AWS cloud service
 - [nganluong(sandbox), MoMo] - payment gateway VietNam
 
 ### Installation and run
@@ -53,18 +53,14 @@ $ yarn start
 
 - Link video: https://www.youtube.com/watch?v=uulm3fSYRwU
 - ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
-- account test: ithoangtan@gmail.com; password: 123456a@
 - USER: https://kinhdoanhtourdulich.herokuapp.com/
 - API: https://api-kinhdoanhtourdulich.herokuapp.com/
-- API: ithoagtan.online (hihi, tên miền rẻ thì mình dùng thôi)
+- API: https://ithoagtan.online (hihi, tên miền rẻ thì mình dùng thôi)
 
 ### Todos
 
-- Lib Chart.js with React: https://www.createwithdata.com/react-chartjs-dashboard/
 
 ### Issue
-
 - heroku upload file: https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted
-- trong nhan xet cua thay
 
 ## License
