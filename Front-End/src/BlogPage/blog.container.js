@@ -51,7 +51,7 @@ class BlogContainer extends Component {
                <BlogNavigationContainer />
                <div className="ht-blog-container-1">
                   <div className="col-md-8 ftco-animate">
-                     <Carousel autoplay dotPosition="right">
+                     <Carousel autoplay>
                         {listLatestPost &&
                            listLatestPost.map((post, index) => (
                               <div
@@ -66,6 +66,7 @@ class BlogContainer extends Component {
                                           : "/images/blog-1.jpg"
                                     }
                                     alt="not found"
+                                    className="item-post-img"
                                  />
                                  <div
                                     class="ht-item-post-full-main-info"
@@ -142,9 +143,10 @@ class BlogContainer extends Component {
                               const postDate = post.dateEdited
                                  ? post.dateEdited
                                  : post.dateAdd;
-                              const postTags = post.tags
-                                 ? JSON.parse(post.tags.replace(/'/g, '"'))
-                                 : [];
+                              const postTags =
+                                 post.tags && post.tags !== "undefined"
+                                    ? JSON.parse(post.tags.replace(/'/g, '"'))
+                                    : [];
                               return (
                                  <div
                                     className="col-12 col-sm-12 col-md-6 col-lg-4"

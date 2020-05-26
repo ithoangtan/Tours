@@ -64,9 +64,10 @@ class BlogCategoryContainer extends Component {
                               const postDate = post.dateEdited
                                  ? post.dateEdited
                                  : post.dateAdd;
-                              const postTags = post.tags
-                                 ? JSON.parse(post.tags.replace(/'/g, '"'))
-                                 : [];
+                              const postTags =
+                                 post.tags && post.tags !== "undefined"
+                                    ? JSON.parse(post.tags.replace(/'/g, '"'))
+                                    : [];
                               return (
                                  <div
                                     className="col-12 col-sm-12 col-md-6 col-lg-4"

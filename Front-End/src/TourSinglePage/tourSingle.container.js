@@ -324,9 +324,10 @@ export default class TourSingleContainer extends Component {
          INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE
       );
       const timeDeparture = moment(tourById.departureDay).format("LT");
-      const listTags = tourById.tags
-         ? JSON.parse(tourById.tags.replace(/'/g, '"'))
-         : [];
+      const listTags =
+         tourById.tags && tourById.tags !== "undefined"
+            ? JSON.parse(tourById.tags.replace(/'/g, '"'))
+            : [];
       const listServices = tourById.services
          ? JSON.parse(tourById.services.replace(/'/g, '"'))
          : [];

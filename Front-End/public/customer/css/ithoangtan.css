@@ -437,6 +437,11 @@
   height: auto !important;
 }
 
+.ant-carousel .slick-slide .item-post-img {
+  height: 400px;
+  object-fit: cover;
+}
+
 .ht-header-slideshow {
   max-width: 100px !important;
 }

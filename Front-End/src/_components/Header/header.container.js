@@ -16,13 +16,13 @@ class HeaderContainer extends Component {
       super(params);
       this.state = {
          size: 0,
-         carouselTours: []
+         carouselTours: [],
       };
    }
 
    componentWillMount() {
       this.setState({
-         size: window.innerWidth > 767.98 ? "large" : "default"
+         size: window.innerWidth > 767.98 ? "large" : "default",
       });
    }
 
@@ -34,9 +34,9 @@ class HeaderContainer extends Component {
             listTourByTime && listTourByTime.length
                ? listTourByTime
                : listTour.slice(0, 3);
-         tours = tours.map(tour => {
+         tours = tours.map((tour) => {
             let listImageTourDetail = listImageTour.filter(
-               imageTour => imageTour.idTour === tour.idTour
+               (imageTour) => imageTour.idTour === tour.idTour
             );
             return { ...tour, images: listImageTourDetail };
          });
@@ -47,7 +47,10 @@ class HeaderContainer extends Component {
    render() {
       const { size, carouselTours } = this.state;
       return (
-         <div className="ht-header" style={{ height: window.innerHeight, maxHeight: "610px", }}>
+         <div
+            className="ht-header"
+            style={{ height: window.innerHeight, maxHeight: "610px" }}
+         >
             <div
                id="carousel-example-generic"
                className="carousel slide"
@@ -76,9 +79,10 @@ class HeaderContainer extends Component {
                                  maxHeight: "610px",
                                  height: window.innerHeight,
                                  backgroundImage: tour.images[0]
-                                    ? `linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)), url('${API_ENDPOINT +
-                                    tour.images[0].url}')`
-                                    : "linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)"
+                                    ? `linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)), url('${
+                                         API_ENDPOINT + tour.images[0].url
+                                      }')`
+                                    : "linear-gradient(rgba(21, 21, 21, 0.8),rgba(255, 255, 255, 0)",
                               }}
                               data-stellar-background-ratio="0.5"
                            >
@@ -167,6 +171,7 @@ class HeaderContainer extends Component {
                                        </div>
                                        <div className="ht-header-tag-container ht-display-flex-start-center ht-mr-t-3">
                                           {tour.tags &&
+                                             tour.tags !== "undefined" &&
                                              JSON.parse(
                                                 tour.tags.replace(/'/g, '"')
                                              ).map((tag, index) => (
@@ -221,23 +226,23 @@ HeaderContainer.propTypes = {
    tourAllActions: PropTypes.shape({
       fetchListTourRequest: PropTypes.func,
       fetchListTourImageRequest: PropTypes.func,
-      fetchTourByTimeRequest: PropTypes.func
+      fetchTourByTimeRequest: PropTypes.func,
    }),
    listTour: PropTypes.array,
    listTourByTime: PropTypes.array,
-   listImageTour: PropTypes.array
+   listImageTour: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       listTour: state.tour.listTour,
       listTourByTime: state.tour.listTourByTime,
-      listImageTour: state.tour.listImageTour
+      listImageTour: state.tour.listImageTour,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      tourAllActions: bindActionCreators(tourActions, dispatch)
+      tourAllActions: bindActionCreators(tourActions, dispatch),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
