@@ -92,6 +92,20 @@ exports.update = function (req, res) {
   });
 };
 
+exports.updateStatus = function (req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
+  // Phải truyền vào như v kh thì dăn lỗi ...
+  updateOrder = req.body;
+  Order.updateByPIN(updateOrder, function (err, updateOrder) {
+    if (err) res.send(err);
+    res.send(updateOrder);
+  });
+};
+
 exports.delete = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm

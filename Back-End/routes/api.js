@@ -78,6 +78,7 @@ router.get("/orderWithEmail", order.readByEmail);
 router.get("/orders", order.listAll);
 router.post("/order", order.create);
 router.patch("/order", order.update);
+router.patch("/orderUpdateStatus", order.updateStatus);
 router.delete("/order", authenticated, order.delete);
 
 //favorites
