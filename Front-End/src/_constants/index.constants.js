@@ -127,6 +127,13 @@ export const MOMO_ERROR_CODE = {
    FAIL: "-1",
 };
 
+export const ORDER_STATUS = {
+   PAID: "paid",
+   CLOSED: "closed",
+   NEW: "new",
+   VERIFY: "verify",
+};
+
 export const FACEBOOK_APP_ID = "226657805090590";
 
 export const GOOGLE_CLIENT_ID =

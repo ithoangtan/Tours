@@ -1,4 +1,5 @@
 import * as orderConstants from "../_constants/order.module";
+import { ORDER_STATUS } from "../_constants/index.constants";
 import {
    messageError,
    messageSuccess,
@@ -115,7 +116,14 @@ const reducer = (state = initialState, action) => {
       case orderConstants.FETCH_ORDER_PATCH_SUCCESS: {
          const { data } = action.payload;
          const { order } = action.order;
-         messageSuccess(`Đơn hàng ${order.PIN} mua thành công!`, 3);
+         if (
+            data.updateOrder &&
+            data.updateOrder.status === ORDER_STATUS.PAID
+         ) {
+            messageSuccess(`Đơn hàng ${order.PIN} mua thành công!`, 3);
+         } else {
+            messageError(`Đơn hàng ${order.PIN} mua thất bại!`, 3);
+         }
          return {
             ...state,
             patch: data,

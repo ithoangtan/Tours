@@ -203,9 +203,9 @@ exports.resultPayment = function (req, res) {
   //updateByPIN
   updateOrder = { PIN: req.body.PIN, status: "paid" };
 
-  Order.updateByPIN(updateOrder, function (err, updateOrder) {
+  Order.updateByPIN(updateOrder, function (err, results) {
     if (err) res.send(err);
-    res.send(updateOrder);
+    res.send({ updateOrder });
   });
 };
 
@@ -213,9 +213,9 @@ exports.cancelPayment = function (req, res) {
   //Cancel thì status: verify , đơn hàng ở trạng thái chờ thanh toán paying
   //updateByPIN
   updateOrder = { PIN: req.body.PIN, status: "closed" };
-  Order.updateByPIN(updateOrder, function (err, updateOrder) {
+  Order.updateByPIN(updateOrder, function (err, results) {
     if (err) res.send(err);
-    res.send(updateOrder);
+    res.send({ updateOrder });
   });
 };
 
