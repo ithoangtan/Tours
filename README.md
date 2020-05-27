@@ -1,6 +1,6 @@
-# ithoangtan
+# ithoangtan(key) + lvyNguyenn
 
-TLCN - CNPM - demo TLCN CNPM Khóa 2016-2020
+KLTN - CNPM - demo KLTN CNPM Khóa 2016-2020
 
 ### Tech
 
@@ -59,8 +59,8 @@ $ yarn start
 
 ### Todos
 
-
 ### Issue
+
 - heroku upload file: https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted
 
 ## License

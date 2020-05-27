@@ -92,6 +92,20 @@ exports.update = function (req, res) {
   });
 };
 
+exports.updateStatus = function (req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
+  // Phải truyền vào như v kh thì dăn lỗi ...
+  updateOrder = req.body;
+  Order.updateByPIN(updateOrder, function (err, updateOrder) {
+    if (err) res.send(err);
+    res.send(updateOrder);
+  });
+};
+
 exports.delete = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
@@ -198,7 +212,7 @@ exports.resultPayment = function (req, res) {
 exports.cancelPayment = function (req, res) {
   //Cancel thì status: verify , đơn hàng ở trạng thái chờ thanh toán paying
   //updateByPIN
-  updateOrder = { PIN: req.body.PIN, status: "paying" };
+  updateOrder = { PIN: req.body.PIN, status: "closed" };
   Order.updateByPIN(updateOrder, function (err, updateOrder) {
     if (err) res.send(err);
     res.send(updateOrder);
@@ -223,16 +237,16 @@ exports.getLinkMoMo = function (req, res) {
     newOrder.numberChildren * officalPrice * 0.5;
 
   let MoMoRequest = {
-    partnerCode: "MOMONGVH20200520", //need env
-    accessKey: "fPse3OVp3vTOgwaZ", //need env
+    partnerCode: process.env.MOMO_PARTNER_CODE, //need env
+    accessKey: process.env.MOMO_ACCESS_KEY, //need env
     requestId: newOrder.PIN.toString(),
     amount: newOrder.totalPrice.toString(),
     orderId: newOrder.PIN.toString(),
     orderInfo: newOrder.email.toString(),
-    returnUrl: "https://kinhdoanhtourdulich.herokuapp.com/success-momo/", //need env
-    notifyUrl: "https://kinhdoanhtourdulich.herokuapp.com/notify-momo/", //need env
+    returnUrl: process.env.MOMO_RETURN_URL, //need env
+    notifyUrl: process.env.MOMO_NOTIFY_URL, //need env
     extraData: "",
-    requestType: "captureMoMoWallet", //need env
+    requestType: process.env.MOMO_REQUEST_TYPE, //need env
     signature: "",
   };
 
@@ -256,13 +270,12 @@ exports.getLinkMoMo = function (req, res) {
     "&extraData=" +
     MoMoRequest.extraData;
   var signature = crypto
-    .createHmac("sha256", "ywKiWRKcHYGwMoNhtjCtrJpiUXZ68hv7") // ywKiWRKcHYGwMoNhtjCtrJpiUXZ68hv7 = secret key nên là biến môi trường (env)
+    .createHmac("sha256", process.env.MOMO_SECRET_KEY) // ywKiWRKcHYGwMoNhtjCtrJpiUXZ68hv7 = secret key nên là biến môi trường (env)
     .update(rawSignature)
     .digest("hex");
   MoMoRequest.signature = signature;
 
-  const API_ENDPOINT_MOMO =
-    "https://test-payment.momo.vn/gw_payment/transactionProcessor"; //need env
+  const API_ENDPOINT_MOMO = process.env.MOMO_API_ENDPOINT; //need env
 
   reqwest({
     url: API_ENDPOINT_MOMO,
