@@ -122,6 +122,11 @@ export const COLOR_TAG_BLOG = [
    "#e6f7ff",
 ];
 
+export const MOMO_ERROR_CODE = {
+   SUCCESS: "0",
+   FAIL: "-1",
+};
+
 export const FACEBOOK_APP_ID = "226657805090590";
 
 export const GOOGLE_CLIENT_ID =

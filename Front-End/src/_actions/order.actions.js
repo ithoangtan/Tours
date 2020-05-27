@@ -265,6 +265,20 @@ export const fetchSetStatusPaidRequest = (order) => {
    };
 };
 
+export const fetchSetStatusFailedRequest = (order) => {
+   return (dispatch) => {
+      orderApis
+         .patchSetStatusFailed(order)
+         .then((resp) => {
+            const { data } = resp;
+            dispatch(fetchPatchOrderSuccess(order, data));
+         })
+         .catch((error) => {
+            dispatch(fetchPatchOrderError(error));
+         });
+   };
+};
+
 //Get Link Payment
 export const fetchGetLinkPaymentSuccess = (infoPayment, data) => {
    return {

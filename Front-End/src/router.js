@@ -7,6 +7,7 @@ import ResultProcessing from "./ResultBoardPage/ResultProcessing";
 import ResultSubmissionFailed from "./ResultBoardPage/ResultSubmissionFailed";
 import ResultSuccessful from "./ResultBoardPage/ResultSuccessful";
 import ResultSuccessfulPayment from "./ResultBoardPage/ResultSuccessfulPayment";
+import ResultSuccessfulPaymentMomo from "./ResultBoardPage/ResultSuccessfulPaymentMomo";
 import ResultSuccessfulVerify from "./ResultBoardPage/ResultSuccessfulVerify";
 import ResultWarning from "./ResultBoardPage/ResultWarning";
 import NavigationContainer from "./_components/Header/navigation.container";
@@ -255,12 +256,12 @@ const router = [
       ),
    },
    {
-      path: "/success-momo",
+      path: "/result-momo",
       exact: true,
       component: ({ match }, props) => (
          <>
             <NavigationContainer {...props} />
-            <ResultSuccessfulPayment match={match} {...props} />
+            <ResultSuccessfulPaymentMomo match={match} {...props} />
             <FooterContainer />
          </>
       ),

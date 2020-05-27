@@ -16,7 +16,7 @@ class ResultSuccessful extends Component {
       const search = window.location.search;
       const params = new URLSearchParams(search);
       const PIN = params.get("order_code");
-      const data = { PIN: PIN, status: "paid" };
+      const data = { PIN: PIN };
       fetchSetStatusPaidRequest(data);
    }
    render() {
@@ -39,7 +39,7 @@ class ResultSuccessful extends Component {
                   <Button type="dashed" key="console">
                      Đi đến trang chủ
                   </Button>
-               </Link>
+               </Link>,
             ]}
          />
       );
@@ -48,18 +48,18 @@ class ResultSuccessful extends Component {
 ResultSuccessful.propTypes = {
    classes: PropTypes.object,
    orderAllActions: PropTypes.shape({
-      fetchSetStatusPaidRequest: PropTypes.func
-   })
+      fetchSetStatusPaidRequest: PropTypes.func,
+   }),
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
-      patch: state.order.patch
+      patch: state.order.patch,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      orderAllActions: bindActionCreators(orderActions, dispatch)
+      orderAllActions: bindActionCreators(orderActions, dispatch),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ResultSuccessful);

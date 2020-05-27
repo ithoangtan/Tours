@@ -2,7 +2,8 @@ import axiosService from "../_commons/axios.service";
 import { API_ENDPOINT } from "../_constants/index.constants";
 
 const url = "order";
-const urlPIN = "resultPayment";
+const urlPINSuccess = "resultPayment";
+const urlPINFailed = "cancelPayment";
 const urls = "orders";
 const getLinkPaymentUrl = "getLinkPayment";
 const getLinkPaymentMomoUrl = "getLinkMoMo";
@@ -33,7 +34,11 @@ export const patchOrder = (data) => {
 };
 ///status, PIN
 export const patchSetStatusPaid = (data) => {
-   return axiosService.post(`${API_ENDPOINT}/${urlPIN}`, data);
+   return axiosService.post(`${API_ENDPOINT}/${urlPINSuccess}`, data);
+};
+
+export const patchSetStatusFailed = (data) => {
+   return axiosService.post(`${API_ENDPOINT}/${urlPINFailed}`, data);
 };
 
 export const getLinkPayment = (data) => {
