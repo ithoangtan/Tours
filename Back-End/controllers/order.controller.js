@@ -212,7 +212,7 @@ exports.resultPayment = function (req, res) {
 exports.cancelPayment = function (req, res) {
   //Cancel thì status: verify , đơn hàng ở trạng thái chờ thanh toán paying
   //updateByPIN
-  updateOrder = { PIN: req.body.PIN, status: "paying" };
+  updateOrder = { PIN: req.body.PIN, status: "closed" };
   Order.updateByPIN(updateOrder, function (err, updateOrder) {
     if (err) res.send(err);
     res.send(updateOrder);
