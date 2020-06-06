@@ -35,7 +35,7 @@ const Tour = require("../models/tour.model");
 //     }
 //   });
 // };
-exports.listTourSearch = function(req, res) {
+exports.listTourSearch = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
@@ -43,48 +43,48 @@ exports.listTourSearch = function(req, res) {
     keySearch: req.body.keySearch,
     dayStart: req.body.dayStart,
     dayEnd: req.body.dayEnd,
-    conditional: req.body.conditional
+    conditional: req.body.conditional,
   };
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
-  Tour.getAllTourSearch(searchs, function(err, tour) {
+  Tour.getAllTourSearch(searchs, function (err, tour) {
     if (err) res.send(err);
     res.json(tour);
   });
 };
 
-exports.listAll = function(req, res) {
+exports.listAll = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
   const idAccount = req.query.idAccount;
   if (idAccount !== null && idAccount !== undefined && idAccount !== "") {
     //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
-    Tour.getAllTourForUser(req.query.idAccount, function(err, tour) {
+    Tour.getAllTourForUser(req.query.idAccount, function (err, tour) {
       if (err) res.send(err);
       res.json(tour);
     });
   } else {
     //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
-    Tour.getAllTour(function(err, tour) {
+    Tour.getAllTour(function (err, tour) {
       if (err) res.send(err);
       res.json(tour);
     });
   }
 };
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   let newTour = new Tour(req.body);
-  Tour.createTour(newTour, function(err, tour) {
+  Tour.createTour(newTour, function (err, tour) {
     if (err) res.send(err);
     res.json(tour);
   });
 };
 
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
@@ -95,7 +95,7 @@ exports.read = function(req, res) {
     Tour.getTourByIdWithIdAccount(
       req.query.idTour,
       req.query.idAccount,
-      function(err, tour) {
+      function (err, tour) {
         if (err) res.send(err);
         res.json(tour[0]); //Đã là API thì trả về phải chuẩn
         //Chỉ có một phần tử thì không lý do gì phải res về một mảng
@@ -103,7 +103,7 @@ exports.read = function(req, res) {
     );
   } else {
     //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
-    Tour.getTourById(req.query.idTour, function(err, tour) {
+    Tour.getTourById(req.query.idTour, function (err, tour) {
       if (err) res.send(err);
       res.json(tour[0]); //Đã là API thì trả về phải chuẩn
       //Chỉ có một phần tử thì không lý do gì phải res về một mảng
@@ -111,21 +111,21 @@ exports.read = function(req, res) {
   }
 };
 
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
   // Phải truyền vào như v kh thì dăn lỗi ...
-  updateTour = new Tour(req.body);
-  Tour.updateById(updateTour, function(err, tour) {
+  updateTour = req.body;
+  Tour.updateById(updateTour, function (err, tour) {
     if (err) res.send(err);
     res.send(tour);
   });
 };
 
-exports.putTagsAndServices = function(req, res) {
+exports.putTagsAndServices = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
@@ -136,19 +136,19 @@ exports.putTagsAndServices = function(req, res) {
   updateTour.tags = JSON.stringify(req.body.tags);
   updateTour.services = JSON.stringify(req.body.services);
 
-  Tour.updateById(updateTour, function(err, tour) {
+  Tour.updateById(updateTour, function (err, tour) {
     if (err) res.send(err);
     res.send(tour);
   });
 };
 
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
   //https://express-validator.github.io/docs/
 
   //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
-  Tour.remove(req.query.idTour, function(err, idTour) {
+  Tour.remove(req.query.idTour, function (err, idTour) {
     if (err) res.send(err);
     res.send(idTour);
   });

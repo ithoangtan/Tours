@@ -1,7 +1,7 @@
 const mysql = require("../dbconnection.js");
 
 //Task object constructor
-const Tour = function(tour) {
+const Tour = function (tour) {
   this.idTour = tour.idTour | 0;
   this.titleTour = tour.titleTour;
   this.price = tour.price;
@@ -17,6 +17,7 @@ const Tour = function(tour) {
   this.views = tour.views;
   this.votes = tour.votes;
   this.reuse = tour.reuse;
+  this.type = tour.type;
 };
 
 const databaseLocal = "azmszdk4w6h5j1o6";
@@ -25,12 +26,12 @@ const databaseProduction =
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
 
-Tour.getAllTour = function(funcResult) {
+Tour.getAllTour = function (funcResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
       ".tours WHERE statusAction <> 'deleted';",
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
@@ -40,13 +41,13 @@ Tour.getAllTour = function(funcResult) {
   );
 };
 
-Tour.getAllTourForUser = function(idAccount, funcResult) {
+Tour.getAllTourForUser = function (idAccount, funcResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
       ".tours where idAccount = ? AND statusAction <> 'deleted'; ",
     [idAccount],
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
@@ -56,7 +57,7 @@ Tour.getAllTourForUser = function(idAccount, funcResult) {
   );
 };
 
-Tour.getAllTourSearch = function(searchs, funcResult) {
+Tour.getAllTourSearch = function (searchs, funcResult) {
   if (searchs.conditional === "name") {
     mysql.query(
       "call " +
@@ -64,7 +65,7 @@ Tour.getAllTourSearch = function(searchs, funcResult) {
         `.spsearchEngineTourByName( '${searchs.keySearch}', '${
           searchs.dayStart
         }', '${searchs.dayEnd}', ${10000000000} ); `,
-      function(err, res) {
+      function (err, res) {
         if (err) {
           funcResult(err, null);
         } else {
@@ -82,7 +83,7 @@ Tour.getAllTourSearch = function(searchs, funcResult) {
         `.spsearchEngineTourByAddress( '${searchs.keySearch}', '${
           searchs.dayStart
         }', '${searchs.dayEnd}', ${10000000000} ); `,
-      function(err, res) {
+      function (err, res) {
         if (err) {
           funcResult(err, null);
         } else {
@@ -97,7 +98,7 @@ Tour.getAllTourSearch = function(searchs, funcResult) {
         `.spsearchEngineTour( '${searchs.keySearch}', '${searchs.dayStart}', '${
           searchs.dayEnd
         }', ${10000000000} ); `,
-      function(err, res) {
+      function (err, res) {
         if (err) {
           funcResult(err, null);
         } else {
@@ -108,7 +109,7 @@ Tour.getAllTourSearch = function(searchs, funcResult) {
   }
 };
 
-Tour.createTour = function(newTour, funcResult) {
+Tour.createTour = function (newTour, funcResult) {
   this.titleTour = newTour.titleTour;
   this.price = newTour.price;
   this.sale = newTour.sale;
@@ -152,7 +153,7 @@ Tour.createTour = function(newTour, funcResult) {
       "', '" +
       this.reuse +
       "') ",
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
@@ -162,13 +163,13 @@ Tour.createTour = function(newTour, funcResult) {
   );
 };
 
-Tour.getTourById = function(idTour, funcResult) {
+Tour.getTourById = function (idTour, funcResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
       ".tours  WHERE idTour = ? AND statusAction <> 'deleted';",
     [idTour],
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
@@ -178,13 +179,13 @@ Tour.getTourById = function(idTour, funcResult) {
   );
 };
 
-Tour.getTourByIdWithIdAccount = function(idTour, idAccount, funcResult) {
+Tour.getTourByIdWithIdAccount = function (idTour, idAccount, funcResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
       ".tours  WHERE idTour = ? AND idAccount = ? AND statusAction <> 'deleted' ;",
     [idTour, idAccount],
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
@@ -193,12 +194,12 @@ Tour.getTourByIdWithIdAccount = function(idTour, idAccount, funcResult) {
     }
   );
 };
-Tour.updateById = function(updateTour, funcResult) {
+Tour.updateById = function (updateTour, funcResult) {
   updateTour = { ...updateTour, statusAction: "edited" };
   mysql.query(
     "UPDATE " + databaseProduction + ".tours SET ? WHERE (idTour = ?);",
     [updateTour, updateTour.idTour],
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
@@ -207,13 +208,13 @@ Tour.updateById = function(updateTour, funcResult) {
     }
   );
 };
-Tour.remove = function(idTour, funcResult) {
+Tour.remove = function (idTour, funcResult) {
   mysql.query(
     "UPDATE " +
       databaseProduction +
       ".tours SET `statusAction` = 'deleted' WHERE idTour = ?",
     [idTour],
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
@@ -223,12 +224,12 @@ Tour.remove = function(idTour, funcResult) {
   );
 };
 
-Tour.createImageTour = function(idTour, name, funcResult) {
+Tour.createImageTour = function (idTour, name, funcResult) {
   var link = `/img/${name}`;
   var status = "done";
   mysql.query(
     `INSERT INTO ${databaseProduction}.images (link, status, name, idTour) VALUES ('${link}', '${status}', ' ${name}' , '${idTour}')`,
-    function(err, res) {
+    function (err, res) {
       if (err) {
         funcResult(err, null);
       } else {
