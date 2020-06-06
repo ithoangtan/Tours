@@ -125,6 +125,39 @@ class EditableCell extends React.Component {
       else if (this.props.inputType === "describe") return <TextArea row={1} />;
       else if (this.props.inputType === "saleNumber")
          return <InputNumber min={0} max={100} />;
+      else if (this.props.inputType === "type")
+         return (
+            <Select
+               showSearch
+               style={{ width: "100%" }}
+               optionFilterProp="children"
+               filterOption={(input, option) =>
+                  option.props.children
+                     .toLowerCase()
+                     .indexOf(input.toLowerCase()) >= 0
+               }
+            >
+               <Option value={"World"} disabled>
+                  Thế Giới:
+               </Option>
+               <Option value={"Asian"}>Châu Á</Option>
+               <Option value={"Euro"}>Châu Âu</Option>
+               <Option value={"America"}>Châu Mỹ</Option>
+               <Option value={"VietNam"} disabled>
+                  Việt Nam:
+               </Option>
+               <Option value={"NorthernVietnam"}>Bắc Bộ</Option>
+               <Option value={"NorthCentral"}>Bắc Trung Bộ</Option>
+               <Option value={"SouthCentralCoast"}>
+                  Duyên Hải Nam Trung Bộ
+               </Option>
+               <Option value={"CentralHighlands"}>Tây Nguyên</Option>
+               <Option value={"Southeast"}>Đông Nam Bộ</Option>
+               <Option value={"MekongRiverDelta"}>
+                  Đồng Bằng Sông Cửu Long
+               </Option>
+            </Select>
+         );
       else return <Input />;
    };
 
@@ -173,7 +206,7 @@ class EditableCell extends React.Component {
 }
 
 const pagination = { position: "both" };
-const scroll = { x: 1840, y: 400 };
+const scroll = { x: 1840 + 150, y: 400 };
 const showHeader = true;
 const title = () => "Tạm thời không biết phải ghi gì";
 const footer = () => "Dùng tổ hợp Shift + con lăn chuột để cuộn ngang";
@@ -285,6 +318,7 @@ class EditableTable extends React.Component {
          describe: newTour.describe,
          address: newTour.address,
          vocationTime: newTour.vocationTime,
+         type: newTour.type,
          idAccount: newTour.idAccount,
       };
       //Gọi API create dưới CSDL
@@ -317,6 +351,7 @@ class EditableTable extends React.Component {
          describe: newTour.describe,
          address: newTour.address,
          vocationTime: newTour.vocationTime,
+         type: newTour.type,
          idAccount: newTour.idAccount,
       };
       //Gọi API create dưới CSDL
@@ -584,6 +619,7 @@ class EditableTable extends React.Component {
          else if (type === "departureDay") return "datetime";
          else if (type === "describe") return "textarea";
          else if (type === "sale") return "saleNumber";
+         else if (type === "type") return "type";
       }
 
       const { state } = this;
@@ -638,7 +674,31 @@ class EditableTable extends React.Component {
             editable: true,
             ellipsis: true,
          },
+         {
+            title: "Type",
+            dataIndex: "type",
+            key: "type",
+            width: 150,
+            ...this.getColumnSearchProps("type"),
+            sorter: (a, b) => a.type.length - b.type.length,
+            sortOrder: sortedInfo.columnKey === "type" && sortedInfo.order,
+            editable: true,
+            ellipsis: true,
+            render: (text) => {
+               if (text === "Asian") return "Châu Á";
+               if (text === "Euro") return "Châu Âu";
+               if (text === "America") return "Châu Mỹ";
+               if (text === "NorthernVietnam") return "Bắc Bộ";
+               if (text === "NorthCentral") return "Bắc Trung Bộ";
+               if (text === "SouthCentralCoast")
+                  return "Duyên Hải Nam Trung Bộ";
 
+               if (text === "CentralHighlands") return "Tây Nguyên";
+               if (text === "Southeast") return "Đông Nam Bộ";
+               if (text === "MekongRiverDelta")
+                  return "Đồng Bằng Sông Cửu Long";
+            },
+         },
          {
             title: "Price(vnđ)",
             dataIndex: "price",

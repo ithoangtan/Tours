@@ -14,10 +14,8 @@ export const AdminArrayExternalScript = [
    // "/admin/js/sb-admin-2.min.js",
 ];
 
-export const LinkUserPage =
-   "http://ec2-3-1-103-217.ap-southeast-1.compute.amazonaws.com:8000";
 // export const LinkUserPage = process.env.LinkUserPage;
-// export const LinkUserPage = "https://kinhdoanhtourdulich.herokuapp.com";
+export const LinkUserPage = "https://kinhdoanhtourdulich.herokuapp.com";
 
 export const MULTIPLIER_ID_TIMELINE = 10;
 
