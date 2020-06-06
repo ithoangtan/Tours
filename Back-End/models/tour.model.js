@@ -123,10 +123,11 @@ Tour.createTour = function (newTour, funcResult) {
   this.views = newTour.views;
   this.votes = newTour.votes;
   this.reuse = newTour.reuse;
+  this.type = newTour.type;
   mysql.query(
     "INSERT INTO " +
       databaseProduction +
-      ".tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`, `idAccount`, `tags`, `services`, `views`, `votes`, `reuse`) VALUES ('" +
+      ".tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`, `idAccount`, `tags`, `services`, `views`, `votes`, `reuse`, `type`) VALUES ('" +
       this.titleTour +
       "', '" +
       this.price +
@@ -152,6 +153,8 @@ Tour.createTour = function (newTour, funcResult) {
       this.votes +
       "', '" +
       this.reuse +
+      "', '" +
+      this.type +
       "') ",
     function (err, res) {
       if (err) {
