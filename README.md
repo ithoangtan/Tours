@@ -54,8 +54,8 @@ $ yarn start
 - Link video: https://www.youtube.com/watch?v=uulm3fSYRwU
 - ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
 - USER: https://kinhdoanhtourdulich.herokuapp.com/
-- API: https://api-kinhdoanhtourdulich.herokuapp.com/
-- API: https://ithoagtan.online (hihi, tên miền rẻ thì mình dùng thôi)
+- API (old): https://api-kinhdoanhtourdulich.herokuapp.com/
+- API (new): https://ithoangtan.online (hihi, tên miền rẻ thì mình dùng thôi)
 
 ### Todos
 
