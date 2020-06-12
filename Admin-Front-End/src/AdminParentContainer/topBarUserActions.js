@@ -43,7 +43,7 @@ export default class topBarUserActions extends Component {
                </span>
                <img
                   className="img-profile rounded-circle"
-                  src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/p960x960/71271983_1008712472794144_9121213280486948864_o.jpg?_nc_cat=107&_nc_oc=AQnFmInfydKQlqJMLyQDpfF6O1EnXv9TNXmLwV6jx2IblIuImYWlsMbFoW2quRU4UlQ&_nc_ht=scontent.fsgn5-2.fna&oh=4b4477b8eba19763e5e22b44c114c3fd&oe=5E40FCAB"
+                  src="../profile.png"
                   alt="error"
                />
             </Link>
