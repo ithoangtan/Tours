@@ -55,7 +55,7 @@ $ yarn start
 - ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/
 - USER: https://kinhdoanhtourdulich.herokuapp.com/
 - API (old): https://api-kinhdoanhtourdulich.herokuapp.com/
-- API (new): https://ithoangtan.online (hihi, tên miền rẻ thì mình dùng thôi)
+- API (new): https://ithoangtan.online/tours (hihi, tên miền rẻ thì mình dùng thôi)
 
 ### Todos
 
