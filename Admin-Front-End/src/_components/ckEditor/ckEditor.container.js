@@ -11,7 +11,7 @@ class EditorComponent extends Component {
          content: props.content,
          handleWYSIWYGInput: props.handleWYSIWYGInput,
          editor: ClassicEditor,
-         schedule: {}
+         schedule: {},
       };
    }
 
@@ -36,20 +36,20 @@ class EditorComponent extends Component {
                   // },
                   cloudServices: {
                      tokenUrl:
-                        "https://43967.cke-cs.com/token/dev/PLTDrOf3tlrbQxO14HqGZdCdWnqVWTV991y772AEWgYmoonLkUTIHZbiiEa2",
-                     uploadUrl: "https://43967.cke-cs.com/easyimage/upload/"
-                  }
+                        "https://73518.cke-cs.com/token/dev/2dad7ccb3477f4b1b9d755ba77913bc88ddd67680f09b7c0701765ac003a",
+                     uploadUrl: "https://73518.cke-cs.com/easyimage/upload/",
+                  },
                }}
                // extraPlugins={"easyimage"}
-               onInit={editor => {
+               onInit={(editor) => {
                   // You can store the "editor" and use when it is needed.
                   console.log("Editor is ready to use!", editor);
                }}
                onChange={(event, editor) => this.onChange(event, editor)}
-               onBlur={editor => {
+               onBlur={(editor) => {
                   console.log("Blur.", editor);
                }}
-               onFocus={editor => {
+               onFocus={(editor) => {
                   console.log("Focus.", editor);
                }}
             />
