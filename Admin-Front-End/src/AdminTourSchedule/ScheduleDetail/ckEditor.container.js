@@ -167,18 +167,13 @@ class EditorContainer extends Component {
                editor={this.state.editor}
                data={data}
                config={{
-                  // ckfinder: {
-                  //    // eslint-disable-next-line max-len
-                  //    uploadUrl:
-                  //       "https://cksource.com/weuy2g4ryt278ywiue/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json"
-                  // },
-                  // cloudServices: {
-                  //    // tokenUrl: process.env.TOKEN_URL_CKEDITOR,
-                  //    // uploadUrl: process.env.UPLOAD_URL_CKEDITOR
-                  //    tokenUrl:
-                  //       "https://43967.cke-cs.com/token/dev/l7cxsIIm0SUdMOgNLARTMvdnWOZonc1bVbB741He69AfWvRSQd1o9NKKwwCo",
-                  //    uploadUrl: "https://43967.cke-cs.com/easyimage/upload/"
-                  // },
+                  cloudServices: {
+                     // tokenUrl: process.env.TOKEN_URL_CKEDITOR,
+                     // uploadUrl: process.env.UPLOAD_URL_CKEDITOR
+                     tokenUrl:
+                        "https://73518.cke-cs.com/token/dev/2dad7ccb3477f4b1b9d755ba77913bc88ddd67680f09b7c0701765ac003a",
+                     uploadUrl: "https://73518.cke-cs.com/easyimage/upload/",
+                  },
                   mediaEmbed: {
                      previewsInData: true,
                   },
