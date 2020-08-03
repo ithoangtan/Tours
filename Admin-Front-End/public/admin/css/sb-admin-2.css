@@ -10586,19 +10586,22 @@ a:focus {
 .bg-login-image {
   background: url("../../logo512.png");
   background-position: center;
-  background-size: cover;
+  background-size: 300px 300px;
+  background-repeat: no-repeat;
 }
 
 .bg-register-image {
   background: url("../../logo512.png");
   background-position: center;
-  background-size: cover;
+  background-size: 300px 300px;
+  background-repeat: no-repeat;
 }
 
 .bg-password-image {
   background: url("../../logo512.png");
   background-position: center;
-  background-size: cover;
+  background-size: 300px 300px;
+  background-repeat: no-repeat;
 }
 
 form.user .custom-checkbox.small label {
