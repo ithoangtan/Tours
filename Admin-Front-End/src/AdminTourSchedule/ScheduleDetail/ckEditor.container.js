@@ -40,7 +40,6 @@ class EditorContainer extends Component {
 
    onChange = (event, editor) => {
       const data = editor.getData();
-      //this.state.handleWYSIWYGInput(this.props.id, data);
       this.setState({ content: data });
    };
 
@@ -168,24 +167,25 @@ class EditorContainer extends Component {
                data={data}
                config={{
                   cloudServices: {
-                     // tokenUrl: process.env.TOKEN_URL_CKEDITOR,
-                     // uploadUrl: process.env.UPLOAD_URL_CKEDITOR
+                     uploadUrl: "https://73518.cke-cs.com/easyimage/upload/",
                      tokenUrl:
                         "https://73518.cke-cs.com/token/dev/2dad7ccb3477f4b1b9d755ba77913bc88ddd67680f09b7c0701765ac003a",
-                     uploadUrl: "https://73518.cke-cs.com/easyimage/upload/",
                   },
                   mediaEmbed: {
                      previewsInData: true,
                   },
                }}
-               // extraPlugins={"easyimage"}
                onInit={(editor) => {
                   // You can store the "editor" and use when it is needed.
                   this.setState({ scheduleByIdTour });
                }}
                onChange={(event, editor) => this.onChange(event, editor)}
-               onBlur={(editor) => {}}
-               onFocus={(editor) => {}}
+               onBlur={(event, editor) => {
+                  console.log("Blur.", editor);
+               }}
+               onFocus={(event, editor) => {
+                  console.log("Focus.", editor);
+               }}
             />
          );
       } else
