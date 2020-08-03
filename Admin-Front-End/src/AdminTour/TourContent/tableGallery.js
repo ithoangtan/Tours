@@ -212,7 +212,7 @@ class TableGallery extends Component {
                      record: true,
                   },
                }}
-               target={"_blank"}
+               // target={"_blank"}
             >
                <Tooltip
                   placement="bottom"
@@ -232,7 +232,7 @@ class TableGallery extends Component {
                      record: true,
                   },
                }}
-               target={"_blank"}
+               // target={"_blank"}
             >
                <Tooltip placement="bottom" title="Sửa lưu ý (trong tab mới)">
                   <Button type="default" size="small" className="mb-1 mr-2">
@@ -248,7 +248,7 @@ class TableGallery extends Component {
                      record: true,
                   },
                }}
-               target={"_blank"}
+               // target={"_blank"}
             >
                <Tooltip
                   placement="bottom"
@@ -267,7 +267,7 @@ class TableGallery extends Component {
                      record: true,
                   },
                }}
-               target={"_blank"}
+               // target={"_blank"}
             >
                <Tooltip
                   placement="bottom"
@@ -287,7 +287,7 @@ class TableGallery extends Component {
                      record: true,
                   },
                }}
-               target={"_blank"}
+               // target={"_blank"}
             >
                <Tooltip placement="bottom" title="Sửa liên hệ (trong tab mới)">
                   <Button type="default" size="small" className="mb-1 mr-2">

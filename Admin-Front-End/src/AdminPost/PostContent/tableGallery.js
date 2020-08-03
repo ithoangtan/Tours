@@ -166,7 +166,7 @@ class TableGallery extends Component {
                      record: true,
                   },
                }}
-               target={"_blank"}
+               // target={"_blank"}
             >
                <Tooltip
                   placement="bottom"
