@@ -51,7 +51,10 @@ $ yarn start
 
 ### DEMO:
 
-- Link video: https://www.youtube.com/watch?v=uulm3fSYRwU
+- Link video DEMO: 
++ User: https://www.youtube.com/watch?v=tbcag1U2tVI
++ Admin: https://www.youtube.com/watch?v=X4arkZUxkAE
+
 - ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/ gọi để biết username - password (nếu anh/chị xem CV của em)
 - USER: https://kinhdoanhtourdulich.herokuapp.com/
 - API (old): https://api-kinhdoanhtourdulich.herokuapp.com/
