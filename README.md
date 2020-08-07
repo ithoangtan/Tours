@@ -55,8 +55,8 @@ $ yarn start
 + User: https://www.youtube.com/watch?v=tbcag1U2tVI
 + Admin: https://www.youtube.com/watch?v=X4arkZUxkAE
 
-- ADMIN: https://admin-kinhdoanhtourdulich.herokuapp.com/ gọi để biết username - password (nếu anh/chị xem CV của em)
-- USER: https://kinhdoanhtourdulich.herokuapp.com/
+- ADMIN: http://admin-kinhdoanhtourdulich.herokuapp.com/ gọi để biết username - password (nếu anh/chị xem CV của em)
+- USER: http://kinhdoanhtourdulich.herokuapp.com/
 - API (old): https://api-kinhdoanhtourdulich.herokuapp.com/
 - API (new): https://ithoangtan.online/tours (hihi, tên miền rẻ thì mình dùng thôi)
 
