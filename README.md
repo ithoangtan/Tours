@@ -52,6 +52,7 @@ $ yarn start
 ### DEMO:
 
 - Link video DEMO: 
++ version 1: https://www.youtube.com/watch?v=uulm3fSYRwU
 + User: https://www.youtube.com/watch?v=tbcag1U2tVI
 + Admin: https://www.youtube.com/watch?v=X4arkZUxkAE
 
