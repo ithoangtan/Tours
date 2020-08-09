@@ -55,6 +55,7 @@ $ yarn start
 + version 1: https://www.youtube.com/watch?v=uulm3fSYRwU
 + User: https://www.youtube.com/watch?v=tbcag1U2tVI
 + Admin: https://www.youtube.com/watch?v=X4arkZUxkAE
++ All: https://youtu.be/lXPkHhFlihY (not full)
 
 - ADMIN: http://admin-kinhdoanhtourdulich.herokuapp.com/ gọi để biết username - password (nếu anh/chị xem CV của em)
 - USER: http://kinhdoanhtourdulich.herokuapp.com/
