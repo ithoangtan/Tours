@@ -44,7 +44,8 @@ export const STRING = {
 export const DATE_TIME_FORMAT = {
    DATE_MONTH_YEAR: "DD/MM/YYYY",
    DATE_TIME: "DD/MM/YYYY - hh:mm:ss",
-   DATE_SHORT_TIME: "DD/MM/YYYY - hh:mm",
+   DATE_SHORT_TIME: "DD/MM/YYYY - HH:mm",
+   DATE_TIME_24H: "YYYY-MM-DD HH:mm:ss",
    YEAR_MONTH_DATE: "YYYY/MM/DD",
    MONTH_NAME: "MMMM",
    YEAR: "YYYY",

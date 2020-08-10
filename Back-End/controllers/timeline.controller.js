@@ -2,7 +2,7 @@ const { check, validationResult } = require("express-validator");
 
 const Timeline = require("../models/timeline.model");
 
-exports.listAll = async function(req, res) {
+exports.listAll = async function (req, res) {
   try {
     listTimeline = await Timeline.getAllTimeline();
     res.status(200).json(listTimeline);
@@ -14,7 +14,7 @@ exports.listAll = async function(req, res) {
   }
 };
 
-exports.listTimelineSearch = async function(req, res) {
+exports.listTimelineSearch = async function (req, res) {
   const searchs = {
     keySearch: req.body.keySearch,
     date: req.body.date,
@@ -61,7 +61,7 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   try {
-    const updateTimeline = new Timeline(req.body);
+    const updateTimeline = req.body;
     updateResult = await Timeline.updateById(updateTimeline);
     res.status(200).json(updateResult);
   } catch (err) {

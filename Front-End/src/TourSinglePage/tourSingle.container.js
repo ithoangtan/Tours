@@ -703,8 +703,7 @@ export default class TourSingleContainer extends Component {
                                           <p className="ht-label">
                                              {" "}
                                              {moment(timeline.date).format(
-                                                INDEX_CONSTANTS.DATE_TIME_FORMAT
-                                                   .DATE_SHORT_TIME
+                                                "YYYY-MM-DD HH:mm"
                                              )}{" "}
                                              <i className="far fa-calendar-alt"></i>
                                           </p>
@@ -727,9 +726,7 @@ export default class TourSingleContainer extends Component {
                                              {/* <i className="far fa-calendar-alt"></i>{" "} */}
                                              <Tag>
                                                 {moment(timeline.date).format(
-                                                   INDEX_CONSTANTS
-                                                      .DATE_TIME_FORMAT
-                                                      .DATE_SHORT_TIME
+                                                   "YYYY-MM-DD HH:mm"
                                                 )}
                                              </Tag>
                                              <i className="fas fa-location-arrow ml-3"></i>{" "}

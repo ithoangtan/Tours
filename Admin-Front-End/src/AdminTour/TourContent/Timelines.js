@@ -75,7 +75,6 @@ class Timeline extends React.Component {
 
    remove = (k) => {
       const { form } = this.props;
-
       // can use data-binding to get
       const keys = form.getFieldValue("keys");
       // We need at least one passenger
@@ -119,7 +118,7 @@ class Timeline extends React.Component {
             idTour: idTour,
             title: "",
             description: "",
-            date: moment(),
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
          },
       ];
 
@@ -153,7 +152,7 @@ class Timeline extends React.Component {
                ) {
                   await arrUpdateTimeline.push({
                      idTimelines: arrIdTimelines[i],
-                     date: arrDate[i],
+                     date: moment(arrDate[i]).format("YYYY-MM-DD HH:mm:ss"),
                      title: arrTitle[i],
                      description: arrDescription[i],
                      idTour,
@@ -161,7 +160,7 @@ class Timeline extends React.Component {
                } else {
                   await arrNewTimeline.push({
                      idTimelines: arrIdTimelines[i],
-                     date: arrDate[i],
+                     date: moment(arrDate[i]).format("YYYY-MM-DD HH:mm:ss"),
                      title: arrTitle[i],
                      description: arrDescription[i],
                      idTour,
@@ -194,7 +193,9 @@ class Timeline extends React.Component {
             });
             arrDeleteTimeline = [];
             await arrUpdateTimeline.forEach(async (updateTimeline) => {
-               fetchPatchTimelineRequest(updateTimeline);
+               console.log("handleSubmit -> updateTimeline", updateTimeline);
+
+               await fetchPatchTimelineRequest(updateTimeline);
             });
             arrUpdateTimeline = [];
             await arrNewTimeline.forEach(async (newTimeline) => {
@@ -254,7 +255,6 @@ class Timeline extends React.Component {
                   initialValue: moment(k.date),
                })(
                   <DatePicker
-                     format="YYYY-MM-DD HH:mm:ss"
                      showTime
                      placeholder="Mốc thời gian"
                      style={{ width: "90%", marginRight: 8 }}

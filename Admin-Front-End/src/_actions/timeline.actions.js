@@ -3,26 +3,26 @@ import * as timelineConstants from "../_constants/timeline.module";
 
 export const fetchListTimeline = () => {
    return {
-      type: timelineConstants.FETCH_TIMELINE
+      type: timelineConstants.FETCH_TIMELINE,
    };
 };
 
 //List Timeline
-export const fetchListTimelineSuccess = data => {
+export const fetchListTimelineSuccess = (data) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_SUCCESS,
       payload: {
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchListTimelineError = error => {
+export const fetchListTimelineError = (error) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 /**
@@ -33,48 +33,48 @@ export const fetchListTimelineError = error => {
  *
  */
 export const fetchListTimelineRequest = () => {
-   return dispatch => {
+   return (dispatch) => {
       dispatch(fetchListTimeline()); //reset state timelines-->[]
       timelineApis
          .getListTimeline()
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchListTimelineSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchListTimelineError(error));
          });
    };
 };
 
 //GET TIMELINE BY ID
-export const fetchTimelineByIdSuccess = data => {
+export const fetchTimelineByIdSuccess = (data) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_GET_BYID_SUCCESS,
       payload: {
-         data
-      }
+         data,
+      },
    };
 };
 
-export const fetchTimelineByIdError = error => {
+export const fetchTimelineByIdError = (error) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_GET_BYID_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchTimelineByIdRequest = idTimelines => {
-   return dispatch => {
+export const fetchTimelineByIdRequest = (idTimelines) => {
+   return (dispatch) => {
       timelineApis
          .getTimelineById(idTimelines)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchTimelineByIdSuccess(data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchTimelineByIdError(error));
          });
    };
@@ -86,30 +86,30 @@ export const fetchPostTimelineSuccess = (newRecord, data) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_CREATE_SUCCESS,
       payload: {
-         data
+         data,
       },
-      newRecord: { newRecord }
+      newRecord: { newRecord },
    };
 };
 
-export const fetchPostTimelineError = error => {
+export const fetchPostTimelineError = (error) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_CREATE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchPostTimelineRequest = newRecord => {
-   return dispatch => {
+export const fetchPostTimelineRequest = (newRecord) => {
+   return (dispatch) => {
       timelineApis
          .postTimeline(newRecord)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchPostTimelineSuccess(newRecord, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchPostTimelineError(error));
          });
    };
@@ -121,30 +121,30 @@ export const fetchDeleteTimelineSuccess = (record, data) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_DELETE_SUCCESS,
       payload: {
-         data
+         data,
       },
-      record: { record }
+      record: { record },
    };
 };
 
-export const fetchDeleteTimelineError = error => {
+export const fetchDeleteTimelineError = (error) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_DELETE_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchDeleteTimelineRequest = record => {
-   return dispatch => {
+export const fetchDeleteTimelineRequest = (record) => {
+   return (dispatch) => {
       timelineApis
          .deleteTimeline(record.idTimelines)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchDeleteTimelineSuccess(record, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchDeleteTimelineError(error));
          });
    };
@@ -155,30 +155,30 @@ export const fetchPatchTimelineSuccess = (newRecord, data) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_PATCH_SUCCESS,
       payload: {
-         data
+         data,
       },
-      newRecord: { newRecord }
+      newRecord: { newRecord },
    };
 };
 
-export const fetchPatchTimelineError = error => {
+export const fetchPatchTimelineError = (error) => {
    return {
       type: timelineConstants.FETCH_TIMELINE_PATCH_FAILED,
       payload: {
-         error
-      }
+         error,
+      },
    };
 };
 
-export const fetchPatchTimelineRequest = updateRecord => {
-   return dispatch => {
+export const fetchPatchTimelineRequest = (updateRecord) => {
+   return (dispatch) => {
       timelineApis
          .patchTimeline(updateRecord)
-         .then(resp => {
+         .then((resp) => {
             const { data } = resp;
             dispatch(fetchPatchTimelineSuccess(updateRecord, data));
          })
-         .catch(error => {
+         .catch((error) => {
             dispatch(fetchPatchTimelineError(error));
          });
    };
