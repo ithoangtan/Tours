@@ -13,7 +13,6 @@ import {
    Timeline,
    Typography,
    Tabs,
-   DatePicker,
    Radio,
    Avatar,
    List,
@@ -21,6 +20,8 @@ import {
    Input,
    Select,
    Slider,
+   Menu,
+   Dropdown,
 } from "antd";
 import Cookies from "js-cookie";
 // import MoreTourSingle from "./moreTourSingle.container";
@@ -119,6 +120,7 @@ export default class TourSingleContainer extends Component {
       titleEveluate: "",
       contentEvaluate: "",
       typeTourEvaluate: "",
+      departureDayState: "",
    };
 
    showModal = () => {
@@ -301,6 +303,44 @@ export default class TourSingleContainer extends Component {
       ];
       return evaluates;
    };
+
+   onChangeDepartureDay = (e) => {
+      try {
+         this.setState({ departureDayState: e.item.props.children });
+      } catch (e) {
+         console.log(e);
+      }
+   };
+
+   renderMenuDepartureDay = (tourById) => {
+      if (tourById.reuse <= 0) {
+         return (
+            <Menu>
+               <Menu.Item>
+                  Chưa có ngày khởi hành nào khác, hoặc
+                  <br />
+                  Liên hệ ngay với chúng tôi: +84 983 982 933
+               </Menu.Item>
+            </Menu>
+         );
+      }
+      let reuseTime = [1, 2, 3, 4, 5];
+      reuseTime = reuseTime.map((reuse) =>
+         moment(tourById.departureDay)
+            .add(tourById.reuse * reuse, "days")
+            .format(INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE_MONTH_YEAR)
+      );
+      return (
+         <Menu>
+            {reuseTime.map((reuse, index) => (
+               <Menu.Item key={index} onClick={this.onChangeDepartureDay}>
+                  {reuse}
+               </Menu.Item>
+            ))}
+         </Menu>
+      );
+   };
+
    render() {
       const {
          size,
@@ -314,15 +354,18 @@ export default class TourSingleContainer extends Component {
          nameEvaluate,
          titleEveluate,
          contentEvaluate,
+         departureDayState,
       } = this.state;
       const { tourById, scheduleByIdTour, listTimelineByIdTour } = this.props;
       const listEvaluateByIdTour = this.renderEvaluates();
       const tourPriceSale =
          tourById.price - (tourById.price * tourById.sale * 0.01).toFixed(1);
       const totalNumberStar = tourById.votes;
-      const departureDay = moment(tourById.departureDay).format(
-         INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE
-      );
+      const departureDay = departureDayState
+         ? departureDayState
+         : moment(tourById.departureDay).format(
+              INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE_MONTH_YEAR
+           );
       const timeDeparture = moment(tourById.departureDay).format("LT");
       const listTags =
          tourById.tags && tourById.tags !== "undefined"
@@ -468,25 +511,14 @@ export default class TourSingleContainer extends Component {
                            <p>
                               <strong>{departureDay}</strong>
                            </p>
-                           <DatePicker
-                              size={"small"}
-                              placeholder={"Chọn ngày khác"}
-                              dateRender={(current) => {
-                                 const style = {};
-                                 if (current.date() === 1) {
-                                    style.border = "1px solid #1890ff";
-                                    style.borderRadius = "50%";
-                                 }
-                                 return (
-                                    <div
-                                       className="ant-picker-cell-inner"
-                                       style={style}
-                                    >
-                                       {current.date()}
-                                    </div>
-                                 );
-                              }}
-                           />
+                           <Dropdown
+                              overlay={this.renderMenuDepartureDay(tourById)}
+                           >
+                              <Button size="small">
+                                 {"Chọn ngày khác"}
+                                 <i className="ht-mr-l-1 fas fa-angle-down"></i>
+                              </Button>
+                           </Dropdown>
                         </div>
                         <div className="ht-time-location">
                            <p>
@@ -560,6 +592,7 @@ export default class TourSingleContainer extends Component {
                                  pathname: `/book-tour/${tourById.idTour}`,
                                  state: {
                                     tour: tourById,
+                                    departureDay: departureDayState,
                                  },
                               }}
                            >
@@ -630,6 +663,7 @@ export default class TourSingleContainer extends Component {
                                  pathname: `/book-tour/${tourById.idTour}`,
                                  state: {
                                     tour: tourById,
+                                    departureDay: departureDayState,
                                  },
                               }}
                            >
@@ -667,9 +701,9 @@ export default class TourSingleContainer extends Component {
                            Gọi cho chúng tôi ngay bây giờ: 0983 982 933
                         </div>
                         <div className="ht-banner-ad">
+                           {/* Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
                            Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
-                           Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
-                           Chứa banner quảng cáo của tour 2 cây dừa ở đây <br />
+                           Chứa banner quảng cáo của tour 2 cây dừa ở đây <br /> */}
                         </div>
                         {/* maybe describe or link trong trang xem chương trình tour... */}
                      </div>
@@ -703,8 +737,7 @@ export default class TourSingleContainer extends Component {
                                           <p className="ht-label">
                                              {" "}
                                              {moment(timeline.date).format(
-                                                INDEX_CONSTANTS.DATE_TIME_FORMAT
-                                                   .DATE_SHORT_TIME
+                                                "YYYY-MM-DD HH:mm"
                                              )}{" "}
                                              <i className="far fa-calendar-alt"></i>
                                           </p>
@@ -712,7 +745,7 @@ export default class TourSingleContainer extends Component {
                                        dot={
                                           // <i className="fas fa-map-pin ht-dot"></i>
                                           <i
-                                             class="fas fa-map-marker-alt"
+                                             className="fas fa-map-marker-alt"
                                              style={{
                                                 color: "#e60023",
                                                 fontSize: 22,
@@ -727,9 +760,7 @@ export default class TourSingleContainer extends Component {
                                              {/* <i className="far fa-calendar-alt"></i>{" "} */}
                                              <Tag>
                                                 {moment(timeline.date).format(
-                                                   INDEX_CONSTANTS
-                                                      .DATE_TIME_FORMAT
-                                                      .DATE_SHORT_TIME
+                                                   "YYYY-MM-DD HH:mm"
                                                 )}
                                              </Tag>
                                              <i className="fas fa-location-arrow ml-3"></i>{" "}

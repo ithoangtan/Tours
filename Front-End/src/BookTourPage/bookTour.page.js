@@ -15,16 +15,18 @@ class BookTourPage extends Component {
       this.state = {
          tourById: {},
          listImageByIdTour: [],
-         haveData: false
+         haveData: false,
+         departureDay: "",
       };
    }
 
    componentWillMount() {
       window.scrollTo({
          top: 0,
-         left: 0
+         left: 0,
       });
       const { idTour } = this.props.match.match.params;
+      const { departureDay } = this.props.match.location.state;
 
       const { tourAllActions, imageAllActions } = this.props;
 
@@ -41,17 +43,20 @@ class BookTourPage extends Component {
          tourById,
          listImageByIdTour,
          scheduleByIdTour,
-         haveData: true
+         haveData: true,
+         departureDay,
       });
    }
 
    render() {
       const { tourById, listImageByIdTour } = this.props;
+      const { departureDay } = this.state;
       return (
          <BookTourContainer
             {...this.props}
             tourById={tourById}
             listImageByIdTour={listImageByIdTour}
+            departureDay={departureDay}
          />
       );
    }
@@ -59,25 +64,25 @@ class BookTourPage extends Component {
 BookTourPage.propTypes = {
    classes: PropTypes.object,
    tourAllActions: PropTypes.shape({
-      fetchTourByIdRequest: PropTypes.func
+      fetchTourByIdRequest: PropTypes.func,
    }),
    imageAllActions: PropTypes.shape({
-      fetchListImageByIdTourRequest: PropTypes.func
+      fetchListImageByIdTourRequest: PropTypes.func,
    }),
    tourById: PropTypes.object,
-   listImageByIdTour: PropTypes.array
+   listImageByIdTour: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       tourById: state.tour.tourById,
-      listImageByIdTour: state.image.listImageByIdTour
+      listImageByIdTour: state.image.listImageByIdTour,
    };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
       tourAllActions: bindActionCreators(tourActions, dispatch),
-      imageAllActions: bindActionCreators(imageActions, dispatch)
+      imageAllActions: bindActionCreators(imageActions, dispatch),
       //Bên trái chỉ là đặt tên thôi, bên phải là tourActions ở bên tour.action.js
    };
 };
