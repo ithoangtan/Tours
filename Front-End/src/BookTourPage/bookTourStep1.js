@@ -12,12 +12,13 @@ export default class bookTourStep1 extends Component {
       funcLoadJs(INDEX_CONSTANTS.CustomerArrayExternalScript);
    }
    render() {
-      const { tourById, listImageByIdTour } = this.props;
+      const { tourById, listImageByIdTour, departureDay } = this.props;
       return (
          <TourDetailContainer
             tour={tourById}
             listImageTour={listImageByIdTour}
             bookTour={true}
+            departureDay={departureDay}
          />
       );
    }

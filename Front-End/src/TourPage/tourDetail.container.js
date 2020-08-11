@@ -58,8 +58,13 @@ export default class TourDetailContainer extends Component {
    //Dữ liệu từ ngoài truyền vô ở đây chỉ có việc load lên thôi
    render() {
       const { size } = this.state;
-      const { tour, bookTour } = this.props;
+      const { tour, bookTour, departureDay } = this.props;
       // const timeDeparture = moment(tour.departureDay).format("LT");
+      const timeDeparture = departureDay
+         ? departureDay
+         : moment(tour.departureDay).format(
+              INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE_TIME
+           );
       const dmy = moment(tour.departureDay).format("L");
 
       const day = dmy.substr(3, 2);
@@ -67,9 +72,10 @@ export default class TourDetailContainer extends Component {
       const year = dmy.substr(dmy.length - 2, 2);
 
       const totalNumberStar = tour.votes;
-      const listServices = tour.services
-         ? JSON.parse(tour.services.replace(/'/g, '"'))
-         : [];
+      const listServices =
+         tour.services && tour.services != "undefined"
+            ? JSON.parse(tour.services.replace(/'/g, '"'))
+            : [];
       return (
          <div className="right-tour-detail-page mb-4 ftco-animate ht-tour-detail-container">
             <div className="ht-day-scroll-auto">
@@ -159,9 +165,7 @@ export default class TourDetailContainer extends Component {
                         </p>
                         <p className="ht-info-tour-detail">
                            <i className="far fa-clock"></i> Khởi hành:{" "}
-                           {moment(tour.departureDay).format(
-                              INDEX_CONSTANTS.DATE_TIME_FORMAT.DATE_TIME
-                           )}
+                           {timeDeparture}
                         </p>
                      </div>
                      <Paragraph

@@ -112,6 +112,7 @@ class OrderContainer extends Component {
                   )}
                   ordered={listOrder[0]}
                   loaded={this.loaded}
+                  departureDay={listOrder[0].departureDay}
                />
                <Table dataSource={listOrders} bordered>
                   <Column
