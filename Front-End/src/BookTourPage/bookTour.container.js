@@ -53,7 +53,7 @@ class BookTourContainer extends Component {
    step2OK() {
       this.setState({ step2OK: true });
       //Lưu xuống data base nữa nha
-      const { tourById } = this.props;
+      const { tourById, departureDay } = this.props;
       let newOrder = JSON.parse(localStorage.getItem("orders"));
       newOrder.address = JSON.stringify(newOrder.address);
       PIN = Date.now();
@@ -66,6 +66,7 @@ class BookTourContainer extends Component {
          idAccount: 8, //test account,
          buyer: newOrder.name,
          idTour: tourById.idTour,
+         departureDay,
       };
       const { orderAllActions } = this.props;
       const {
@@ -96,11 +97,12 @@ class BookTourContainer extends Component {
    //end step container
 
    orderList = () => {
-      const { tourById, listImageByIdTour } = this.props;
+      const { tourById, listImageByIdTour, departureDay } = this.props;
       return (
          <BookTourStep1
             tourById={tourById}
             listImageByIdTour={listImageByIdTour}
+            departureDay={departureDay}
          />
       );
    };
