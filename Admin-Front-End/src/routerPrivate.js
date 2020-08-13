@@ -12,6 +12,8 @@ import AdminAccountPage from "./AdminAccount/Account.Page";
 import AdminNotificationPage from "./AdminNotification/Notification.Page";
 import AdminMailsFeedbackPage from "./AdminMailsFeedback/MailsFeedback.Page";
 import AdminConfigPage from "./AdminConfig/Config.Page";
+import AdminOrderPage from "./AdminOrder/Order.Page";
+
 //end Admin
 
 const routerPrivate = [
@@ -98,6 +100,11 @@ const routerPrivate = [
       component: (match, props) => (
          <AdminPostContentPage match={match} {...props} />
       ),
+   },
+   {
+      path: "/admin/order",
+      exact: true,
+      component: (match, props) => <AdminOrderPage match={match} {...props} />,
    },
    {
       path: "/admin/author-info",

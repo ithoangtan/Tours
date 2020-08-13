@@ -142,6 +142,12 @@ export default class SideBarContainer extends Component {
                   </div>
                </div>
             </li>
+            <li className="nav-item">
+               <Link to="/admin/order" className="nav-link collapsed">
+                  <i className="fas fa-shopping-cart"></i>
+                  <span>Orders</span>
+               </Link>
+            </li>
             {/* Divider */}
             <hr className="sidebar-divider" />
             {/* Heading */}
